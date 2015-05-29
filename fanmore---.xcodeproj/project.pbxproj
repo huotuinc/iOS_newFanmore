@@ -24,7 +24,6 @@
 		83E21DA11B18112F0011516B /* DiscipleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E21DA01B18112F0011516B /* DiscipleViewController.m */; };
 		EF35542F1B15C3AA00324D89 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = EF35542E1B15C3AA00324D89 /* Foundation+Log.m */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
-		EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF31B0D81A40038A203 /* AppDelegate.m */; };
 		EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF61B0D81A40038A203 /* ViewController.m */; };
 		EF49ECFA1B0D81A40038A203 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF49ECF81B0D81A40038A203 /* Main.storyboard */; };
 		EF49ECFC1B0D81A40038A203 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF49ECFB1B0D81A40038A203 /* Images.xcassets */; };
@@ -63,6 +62,8 @@
 		EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */; };
 		EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */; };
 		EFA2F9111B146688006FE2CC /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA2F90F1B146688006FE2CC /* detailViewController.m */; };
+		EFBB57781B1868910018DEB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFBB57771B1868910018DEB9 /* AppDelegate.m */; };
+		EFBB577B1B1868E40018DEB9 /* NSDictionary+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = EFBB577A1B1868E40018DEB9 /* NSDictionary+EXTERN.m */; };
 		EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */; };
 		EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AD1B12D6E400C015A7 /* MJArgument.m */; };
 		EFCCA4C41B12D6E400C015A7 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AF1B12D6E400C015A7 /* MJConst.m */; };
@@ -142,8 +143,6 @@
 		EF49ECEB1B0D81A40038A203 /* fanmore---.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fanmore---.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF49ECEF1B0D81A40038A203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF49ECF01B0D81A40038A203 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		EF49ECF21B0D81A40038A203 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		EF49ECF31B0D81A40038A203 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EF49ECF51B0D81A40038A203 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EF49ECF61B0D81A40038A203 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EF49ECF91B0D81A40038A203 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -209,9 +208,14 @@
 		EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		EF8D67321B0DD07E008B6909 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		EF8D673A1B0DE436008B6909 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		EFA2F90E1B146688006FE2CC /* detailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = detailViewController.h; path = "classes/home(主页)/controller/detailViewController.h"; sourceTree = "<group>"; };
 		EFA2F90F1B146688006FE2CC /* detailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = detailViewController.m; path = "classes/home(主页)/controller/detailViewController.m"; sourceTree = "<group>"; };
+		EFBB57761B1868910018DEB9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EFBB57771B1868910018DEB9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EFBB57791B1868E40018DEB9 /* NSDictionary+EXTERN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+EXTERN.h"; sourceTree = "<group>"; };
+		EFBB577A1B1868E40018DEB9 /* NSDictionary+EXTERN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+EXTERN.m"; sourceTree = "<group>"; };
+		EFBB577C1B1869E90018DEB9 /* GlobalUICommont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalUICommont.h; sourceTree = "<group>"; };
+		EFBB577D1B1869E90018DEB9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		EFCCA4981B12C53700C015A7 /* PersonMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageTableViewController.h; sourceTree = "<group>"; };
 		EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMessageTableViewController.m; sourceTree = "<group>"; };
 		EFCCA4AC1B12D6E400C015A7 /* MJArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJArgument.h; sourceTree = "<group>"; };
@@ -267,7 +271,6 @@
 		EFD02B411B155CDA00D11D6D /* MJSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJSettingCell.m; sourceTree = "<group>"; };
 		EFD02B491B155D1E00D11D6D /* settingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingViewController.h; sourceTree = "<group>"; };
 		EFD02B4A1B155D1E00D11D6D /* settingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingViewController.m; sourceTree = "<group>"; };
-		EFD9316C1B0EBC8E0058F525 /* GlobalUICommont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalUICommont.h; sourceTree = "<group>"; };
 		EFD931781B0EF93D0058F525 /* Base64Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Util.h; sourceTree = "<group>"; };
 		EFD931791B0EF93D0058F525 /* Base64Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Util.m; sourceTree = "<group>"; };
 		EFD9317A1B0EF93D0058F525 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -367,6 +370,8 @@
 		83D495411B15998C00935889 /* 扩展 */ = {
 			isa = PBXGroup;
 			children = (
+				EFBB57791B1868E40018DEB9 /* NSDictionary+EXTERN.h */,
+				EFBB577A1B1868E40018DEB9 /* NSDictionary+EXTERN.m */,
 				83D495451B159AC300935889 /* UIViewController+FM.h */,
 				83D495461B159AC300935889 /* UIViewController+FM.m */,
 				EF565D1F1B16E7C500FC2D6B /* UITextField+HT.h */,
@@ -538,8 +543,8 @@
 			isa = PBXGroup;
 			children = (
 				EF1EA5FF1B0DA2D600C1F60D /* Classes */,
-				EF49ECF21B0D81A40038A203 /* AppDelegate.h */,
-				EF49ECF31B0D81A40038A203 /* AppDelegate.m */,
+				EFBB57761B1868910018DEB9 /* AppDelegate.h */,
+				EFBB57771B1868910018DEB9 /* AppDelegate.m */,
 				EF49ECF51B0D81A40038A203 /* ViewController.h */,
 				EF49ECF61B0D81A40038A203 /* ViewController.m */,
 				EF49ECF81B0D81A40038A203 /* Main.storyboard */,
@@ -553,8 +558,8 @@
 		EF49ECEE1B0D81A40038A203 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EF8D673A1B0DE436008B6909 /* PrefixHeader.pch */,
-				EFD9316C1B0EBC8E0058F525 /* GlobalUICommont.h */,
+				EFBB577C1B1869E90018DEB9 /* GlobalUICommont.h */,
+				EFBB577D1B1869E90018DEB9 /* PrefixHeader.pch */,
 				EF49ECEF1B0D81A40038A203 /* Info.plist */,
 				EF49ECF01B0D81A40038A203 /* main.m */,
 			);
@@ -1184,7 +1189,6 @@
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
 				EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */,
 				83D495471B159AC300935889 /* UIViewController+FM.m in Sources */,
-				EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */,
 				EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */,
 				EFCCA4C81B12D6E400C015A7 /* MJMethod.m in Sources */,
 				EFCCA4C61B12D6E400C015A7 /* MJIvar.m in Sources */,
@@ -1193,6 +1197,7 @@
 				83DBD8EB1B13059700B62830 /* MMExampleDrawerVisualStateManager.m in Sources */,
 				EF565D091B16AA6000FC2D6B /* MJRefreshHeaderView.m in Sources */,
 				EF565D481B17091F00FC2D6B /* UserLoginTool.m in Sources */,
+				EFBB57781B1868910018DEB9 /* AppDelegate.m in Sources */,
 				EF565D101B16B7AB00FC2D6B /* AccountSettingViewController.m in Sources */,
 				EFCCA4D91B12EA9F00C015A7 /* Message.m in Sources */,
 				EF565D511B170AF600FC2D6B /* LoginResultData.m in Sources */,
@@ -1243,6 +1248,7 @@
 				EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */,
 				EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */,
 				EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */,
+				EFBB577B1B1868E40018DEB9 /* NSDictionary+EXTERN.m in Sources */,
 				EF4A333F1B15915600A55D50 /* FeedBackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
