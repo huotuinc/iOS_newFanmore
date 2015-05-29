@@ -1,0 +1,54 @@
+//
+//  PrefixHeader.pch
+//  fanmore---
+//
+//  Created by lhb on 15/5/21.
+//  Copyright (c) 2015年 HT. All rights reserved.
+//
+
+#ifndef fanmore____PrefixHeader_pch
+#define fanmore____PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+
+#ifdef __OBJC__
+
+#import "GlobalUICommont.h"
+#import "MBProgressHUD+MJ.h"
+#import "MJExtension.h"
+#import "AFNetworking.h"
+#import "MD5Encryption.h"    //数据加密
+
+
+/**登录注册界面*/
+#import "LoginViewController.h"
+//账号注册界面
+#import "UserRegisterViewController.h"
+//账号找回密码界面
+#import "findBackPwViewController.h"
+//账号获取的网络请求
+#import "UserLoginTool.h"
+//绑定手机
+#import "BoundPhoneViewController.h"
+//第一个进入页面
+#import "RootViewController.h"
+//关闭和打开滑动手势
+#import <UIViewController+MMDrawerController.h>
+//5.9 账号管理
+#import "AccountSettingViewController.h"
+//账号信息
+#import "PersonMessageTableViewController.h"
+
+//barButton
+#import <UIBarButtonItem+BlocksKit.h>
+
+
+
+#import "UIViewController+FM.h"
+#import "MJRefresh.h" 
+#import "NSDictionary+EXTERN.h" //计算网络请求加密
+
+#endif
