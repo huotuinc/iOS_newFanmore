@@ -25,8 +25,8 @@
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
     paramsOption[@"appKey"] = APPKEY;
-    params[@"lat"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
-    params[@"lng"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
+    params[@"lat"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude]?[[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude]:@(1);
+    params[@"lng"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude]?[[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude]:@(2);
     paramsOption[@"timestamp"] = @(1234567890);
     paramsOption[@"operation"] = OPERATION_parame;
     paramsOption[@"version"] = @(APPLICATIONVERSION_parame);

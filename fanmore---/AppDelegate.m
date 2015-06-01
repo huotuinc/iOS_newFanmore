@@ -53,8 +53,8 @@
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"appKey"] = APPKEY;
-    params[@"lat"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
-    params[@"lng"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
+    params[@"lat"] = @(120.2);
+    params[@"lng"] = @(13.3);
     params[@"timestamp"] = @(1234567890);
     params[@"operation"] = OPERATION_parame;
     params[@"version"] = @(APPLICATIONVERSION_parame);
@@ -73,10 +73,18 @@
 //        NSLog(@"xxxxxxx=%@",error.description);
     }];
     
-    
-    LoginViewController * login = [[LoginViewController alloc] init];
-    UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-    self.window.rootViewController = loginNav;
+    //用户名和数据有数据
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
+        
+        RootViewController * roots = [[RootViewController alloc] init];
+       
+        self.window.rootViewController = roots;
+    }else{
+        LoginViewController * login = [[LoginViewController alloc] init];
+        UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+        self.window.rootViewController = loginNav;
+        
+    }
     [self.window makeKeyAndVisible];
     return YES;
 }

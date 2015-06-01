@@ -40,7 +40,7 @@
     //2、设置键盘弹出的监听
     [self registerForKeyboardNotifications];
     //3、设置键盘弹出
-    [self.userNameTextFiled becomeFirstResponder] ;
+    [self.userNameTextFiled becomeFirstResponder];
 }
 
 /**
@@ -124,7 +124,11 @@
     NSLog(@"url==%@",params);
     //发送网络请求
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-        
+  
+#warning 账号保存
+        //保存用户名
+        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginUserName];
+        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginPassword];
         if(![self checkTel:self.userNameTextFiled.text]){
             NSLog(@"不是手机号");
             BoundPhoneViewController * bound = [[BoundPhoneViewController alloc] init];
