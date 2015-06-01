@@ -38,7 +38,7 @@
 //关闭和打开滑动手势
 #import <UIViewController+MMDrawerController.h>
 //5.9 账号管理
-#import "accountViewController.h"
+#import "AccountSettingViewController.h"
 //账号信息
 #import "PersonMessageTableViewController.h"
 

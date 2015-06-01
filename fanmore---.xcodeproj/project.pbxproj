@@ -22,7 +22,8 @@
 		83DBD92D1B13128800B62830 /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBD92B1B13128800B62830 /* HomeCell.m */; };
 		83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DBD92C1B13128800B62830 /* HomeCell.xib */; };
 		83E21DA11B18112F0011516B /* DiscipleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E21DA01B18112F0011516B /* DiscipleViewController.m */; };
-		EF35542F1B15C3AA00324D89 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = EF35542E1B15C3AA00324D89 /* Foundation+Log.m */; };
+		EF43C0741B186CDE00EFB641 /* UserLoginTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EF43C0731B186CDE00EFB641 /* UserLoginTool.m */; };
+		EF43C0771B186D6A00EFB641 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF43C0761B186D6A00EFB641 /* LoginViewController.m */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
 		EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF61B0D81A40038A203 /* ViewController.m */; };
 		EF49ECFA1B0D81A40038A203 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF49ECF81B0D81A40038A203 /* Main.storyboard */; };
@@ -47,11 +48,9 @@
 		EF565D401B17091F00FC2D6B /* BoundPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF565D2E1B17091F00FC2D6B /* BoundPhoneViewController.xib */; };
 		EF565D411B17091F00FC2D6B /* findBackPwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D301B17091F00FC2D6B /* findBackPwViewController.m */; };
 		EF565D421B17091F00FC2D6B /* findBackPwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF565D311B17091F00FC2D6B /* findBackPwViewController.xib */; };
-		EF565D431B17091F00FC2D6B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D331B17091F00FC2D6B /* LoginViewController.m */; };
 		EF565D441B17091F00FC2D6B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF565D341B17091F00FC2D6B /* LoginViewController.xib */; };
 		EF565D451B17091F00FC2D6B /* UserRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D361B17091F00FC2D6B /* UserRegisterViewController.m */; };
 		EF565D461B17091F00FC2D6B /* UserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF565D371B17091F00FC2D6B /* UserRegisterViewController.xib */; };
-		EF565D481B17091F00FC2D6B /* UserLoginTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D3D1B17091F00FC2D6B /* UserLoginTool.m */; };
 		EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D4A1B1709AE00FC2D6B /* GlobalData.m */; };
 		EF565D4E1B170A5E00FC2D6B /* updateData.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D4D1B170A5E00FC2D6B /* updateData.m */; };
 		EF565D511B170AF600FC2D6B /* LoginResultData.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D501B170AF600FC2D6B /* LoginResultData.m */; };
@@ -139,7 +138,10 @@
 		83E21DA01B18112F0011516B /* DiscipleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscipleViewController.m; sourceTree = "<group>"; };
 		83ED0B46534249FDED1AB9A4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		EF35542E1B15C3AA00324D89 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		EF43C0721B186CDE00EFB641 /* UserLoginTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginTool.h; sourceTree = "<group>"; };
+		EF43C0731B186CDE00EFB641 /* UserLoginTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginTool.m; sourceTree = "<group>"; };
+		EF43C0751B186D6A00EFB641 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		EF43C0761B186D6A00EFB641 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		EF49ECEB1B0D81A40038A203 /* fanmore---.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fanmore---.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF49ECEF1B0D81A40038A203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF49ECF01B0D81A40038A203 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -183,14 +185,10 @@
 		EF565D2F1B17091F00FC2D6B /* findBackPwViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findBackPwViewController.h; sourceTree = "<group>"; };
 		EF565D301B17091F00FC2D6B /* findBackPwViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findBackPwViewController.m; sourceTree = "<group>"; };
 		EF565D311B17091F00FC2D6B /* findBackPwViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = findBackPwViewController.xib; sourceTree = "<group>"; };
-		EF565D321B17091F00FC2D6B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		EF565D331B17091F00FC2D6B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		EF565D341B17091F00FC2D6B /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		EF565D351B17091F00FC2D6B /* UserRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRegisterViewController.h; sourceTree = "<group>"; };
 		EF565D361B17091F00FC2D6B /* UserRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRegisterViewController.m; sourceTree = "<group>"; };
 		EF565D371B17091F00FC2D6B /* UserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserRegisterViewController.xib; sourceTree = "<group>"; };
-		EF565D3C1B17091F00FC2D6B /* UserLoginTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginTool.h; sourceTree = "<group>"; };
-		EF565D3D1B17091F00FC2D6B /* UserLoginTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginTool.m; sourceTree = "<group>"; };
 		EF565D491B1709AE00FC2D6B /* GlobalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalData.h; sourceTree = "<group>"; };
 		EF565D4A1B1709AE00FC2D6B /* GlobalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalData.m; sourceTree = "<group>"; };
 		EF565D4C1B170A5E00FC2D6B /* updateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updateData.h; sourceTree = "<group>"; };
@@ -514,7 +512,6 @@
 		EF35542D1B15C3AA00324D89 /* other */ = {
 			isa = PBXGroup;
 			children = (
-				EF35542E1B15C3AA00324D89 /* Foundation+Log.m */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -656,15 +653,15 @@
 		EF565D2B1B17091F00FC2D6B /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				EF43C0751B186D6A00EFB641 /* LoginViewController.h */,
+				EF43C0761B186D6A00EFB641 /* LoginViewController.m */,
+				EF565D341B17091F00FC2D6B /* LoginViewController.xib */,
 				EF565D2C1B17091F00FC2D6B /* BoundPhoneViewController.h */,
 				EF565D2D1B17091F00FC2D6B /* BoundPhoneViewController.m */,
 				EF565D2E1B17091F00FC2D6B /* BoundPhoneViewController.xib */,
 				EF565D2F1B17091F00FC2D6B /* findBackPwViewController.h */,
 				EF565D301B17091F00FC2D6B /* findBackPwViewController.m */,
 				EF565D311B17091F00FC2D6B /* findBackPwViewController.xib */,
-				EF565D321B17091F00FC2D6B /* LoginViewController.h */,
-				EF565D331B17091F00FC2D6B /* LoginViewController.m */,
-				EF565D341B17091F00FC2D6B /* LoginViewController.xib */,
 				EF565D351B17091F00FC2D6B /* UserRegisterViewController.h */,
 				EF565D361B17091F00FC2D6B /* UserRegisterViewController.m */,
 				EF565D371B17091F00FC2D6B /* UserRegisterViewController.xib */,
@@ -698,8 +695,8 @@
 		EF565D3B1B17091F00FC2D6B /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				EF565D3C1B17091F00FC2D6B /* UserLoginTool.h */,
-				EF565D3D1B17091F00FC2D6B /* UserLoginTool.m */,
+				EF43C0721B186CDE00EFB641 /* UserLoginTool.h */,
+				EF43C0731B186CDE00EFB641 /* UserLoginTool.m */,
 			);
 			name = Tool;
 			path = "classes/Login(登录)/Tool";
@@ -1180,6 +1177,7 @@
 				EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */,
 				EF565D1A1B16DD9900FC2D6B /* ForeshowTableViewCell.m in Sources */,
 				EFCCA4C51B12D6E400C015A7 /* MJFoundation.m in Sources */,
+				EF43C0771B186D6A00EFB641 /* LoginViewController.m in Sources */,
 				EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */,
 				83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */,
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
@@ -1192,11 +1190,10 @@
 				EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */,
 				EFCCA4C81B12D6E400C015A7 /* MJMethod.m in Sources */,
 				EFCCA4C61B12D6E400C015A7 /* MJIvar.m in Sources */,
-				EF35542F1B15C3AA00324D89 /* Foundation+Log.m in Sources */,
+				EF43C0741B186CDE00EFB641 /* UserLoginTool.m in Sources */,
 				EFCCA4CC1B12D6E400C015A7 /* NSObject+MJKeyValue.m in Sources */,
 				83DBD8EB1B13059700B62830 /* MMExampleDrawerVisualStateManager.m in Sources */,
 				EF565D091B16AA6000FC2D6B /* MJRefreshHeaderView.m in Sources */,
-				EF565D481B17091F00FC2D6B /* UserLoginTool.m in Sources */,
 				EFBB57781B1868910018DEB9 /* AppDelegate.m in Sources */,
 				EF565D101B16B7AB00FC2D6B /* AccountSettingViewController.m in Sources */,
 				EFCCA4D91B12EA9F00C015A7 /* Message.m in Sources */,
@@ -1219,7 +1216,6 @@
 				EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */,
 				EF565D0C1B16AA6000FC2D6B /* UIView+MJExtension.m in Sources */,
 				8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */,
-				EF565D431B17091F00FC2D6B /* LoginViewController.m in Sources */,
 				EFCCA4C71B12D6E400C015A7 /* MJMember.m in Sources */,
 				EF565D451B17091F00FC2D6B /* UserRegisterViewController.m in Sources */,
 				EFD02B441B155CDA00D11D6D /* MJSettingArrowItem.m in Sources */,

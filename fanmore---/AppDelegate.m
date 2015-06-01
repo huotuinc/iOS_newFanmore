@@ -61,13 +61,15 @@
     params[@"imei"] = @"201505280940";
     params[@"cityCode"] = @"1372";
     params[@"sign"] = [NSDictionary asignWithMutableDictionary:params];
+    params[@"cpaCode"] = @"default";
     //网络请求借口
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
 //        NSLog(@"success====%@",responseObject);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"xxxxxxx=%@",error.description);
+//        NSLog(@"xxxxxxx=%@",error.description);
     }];
     LoginViewController * login = [[LoginViewController alloc] init];
     UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];

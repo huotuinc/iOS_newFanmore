@@ -8,8 +8,6 @@
 
 #import "LoginViewController.h"
 #import "RootViewController.h"
-#import "Result.h"
-#import "LoginResultData.h"
 
 @interface LoginViewController ()
 /**用户名*/
@@ -69,7 +67,6 @@
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGFloat sizesss = CGRectGetMaxY(self.loginBtn.frame) - (ScreenHeight - kbSize.height);
-    
     if (sizesss > 0) {
         
         [UIView animateWithDuration:0.15 animations:^{
@@ -95,7 +92,7 @@
  */
 - (void) setweigtAttribute
 {
-    self.title = @"粉猫登陆";
+    self.title = @"用户登录";
 //    self.loginBtn.backgroundColor = LWColor(18, 18, 127);
 }
 
@@ -124,12 +121,11 @@
     params[@"username"] = self.userNameTextFiled.text;
     params[@"password"] = [MD5Encryption md5by32:self.passwdTextField.text];
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"login"];
+    NSLog(@"url==%@",params);
     //发送网络请求
-    [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary* json) {
+    [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
         
-        NSLog(@"xxxxxx==%@",json);
-        LoginResultData * login = [LoginResultData objectWithKeyValues:json[@"resultData"]];
-        NSLog(@"xxxxxx====%@",login.global.helpURL);
+        NSLog(@"%@",json);
         if(![self checkTel:self.userNameTextFiled.text]){
             NSLog(@"不是手机号");
             BoundPhoneViewController * bound = [[BoundPhoneViewController alloc] init];
@@ -141,13 +137,14 @@
         }
     } failure:^(NSError *error) {
         NSLog(@"登录失败%@",[error localizedDescription]);
-        
     }];
+    
+    NSLog(@"登录被点击了");
 }
 
 - (void)dealloc{
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotification description] removeObserver:self forKeyPath:nil];
     NSLog(@"登录窗口销毁了");
 }
 /**

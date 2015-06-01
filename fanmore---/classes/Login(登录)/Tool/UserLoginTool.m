@@ -20,7 +20,7 @@
 
 
 
-+ (void)loginRequestGet:(NSString *)urlStr parame:(NSDictionary *)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure{
++ (void)loginRequestGet:(NSString *)urlStr parame:(NSMutableDictionary *)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure{
     
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
@@ -33,22 +33,25 @@
     paramsOption[@"token"] = @"12321312321";
     paramsOption[@"imei"] = @"201505280940";
     paramsOption[@"cityCode"] = @"1372";
+    paramsOption[@"cpaCode"] = @"default";
     [paramsOption addEntriesFromDictionary:params];
     paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
-    if (manager) {
+    NSLog(@"parame%@",paramsOption);
+    [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject){
         
-        [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-            success(responseObject);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
-            failure(error);
-        }];
-    }
+        if (responseObject) {
+           success(responseObject); 
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure(error);
+    }];
 }
 
 
-+ (void)loginRequestPost:(NSString *)urlStr parame:(NSDictionary *)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure{
++ (void)loginRequestPost:(NSString *)urlStr parame:(NSMutableDictionary *)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure{
     
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
