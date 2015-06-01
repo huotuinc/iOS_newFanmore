@@ -846,6 +846,9 @@
                             <constraint firstAttribute="trailing" secondItem="Ux7-lE-E72" secondAttribute="trailing" constant="15" id="z9K-cw-poL"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="wun-CQ-LHz" id="3ng-Fq-lls"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5I-Sk-OeR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

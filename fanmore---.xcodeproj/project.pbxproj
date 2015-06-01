@@ -23,7 +23,6 @@
 		83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DBD92C1B13128800B62830 /* HomeCell.xib */; };
 		83E21DA11B18112F0011516B /* DiscipleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E21DA01B18112F0011516B /* DiscipleViewController.m */; };
 		83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */; };
-		EF35542F1B15C3AA00324D89 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = EF35542E1B15C3AA00324D89 /* Foundation+Log.m */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
 		EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF31B0D81A40038A203 /* AppDelegate.m */; };
 		EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF61B0D81A40038A203 /* ViewController.m */; };
@@ -141,7 +140,6 @@
 		83F2DE641B186E16005E8305 /* NSDictionary+EXTERN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+EXTERN.h"; sourceTree = "<group>"; };
 		83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+EXTERN.m"; sourceTree = "<group>"; };
 		B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		EF35542E1B15C3AA00324D89 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		EF49ECEB1B0D81A40038A203 /* fanmore---.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fanmore---.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF49ECEF1B0D81A40038A203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF49ECF01B0D81A40038A203 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -514,7 +512,6 @@
 		EF35542D1B15C3AA00324D89 /* other */ = {
 			isa = PBXGroup;
 			children = (
-				EF35542E1B15C3AA00324D89 /* Foundation+Log.m */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -1193,7 +1190,6 @@
 				EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */,
 				EFCCA4C81B12D6E400C015A7 /* MJMethod.m in Sources */,
 				EFCCA4C61B12D6E400C015A7 /* MJIvar.m in Sources */,
-				EF35542F1B15C3AA00324D89 /* Foundation+Log.m in Sources */,
 				EFCCA4CC1B12D6E400C015A7 /* NSObject+MJKeyValue.m in Sources */,
 				83DBD8EB1B13059700B62830 /* MMExampleDrawerVisualStateManager.m in Sources */,
 				EF565D091B16AA6000FC2D6B /* MJRefreshHeaderView.m in Sources */,
