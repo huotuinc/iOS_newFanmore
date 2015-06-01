@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DiscipleViewController : UIViewController
+@interface DiscipleViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @end

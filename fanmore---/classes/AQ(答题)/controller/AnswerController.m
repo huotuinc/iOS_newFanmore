@@ -7,7 +7,21 @@
 //
 
 #import "AnswerController.h"
+#import "FinishController.h"
 
 @implementation AnswerController
+- (IBAction)AAction:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FinishController *finish = [storyboard instantiateViewControllerWithIdentifier:@"FinishController"];
+    [self.navigationController pushViewController:finish animated:YES];
+    
+}
+- (IBAction)BAction:(id)sender {
+}
+- (IBAction)CAction:(id)sender {
+}
+- (IBAction)DAction:(id)sender {
+}
 
 @end

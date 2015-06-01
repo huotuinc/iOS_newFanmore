@@ -10,6 +10,9 @@
 		1B56C822B3D3D6F344695E94 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83ED0B46534249FDED1AB9A4 /* libPods.a */; };
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD651B1854C100FAC712 /* MassageCenterController.m */; };
+		836D6AA81B1C756300119B3F /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AA71B1C756300119B3F /* FinishController.m */; };
+		836D6AAB1B1C776000119B3F /* JoinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAA1B1C776000119B3F /* JoinController.m */; };
+		836D6AAE1B1C821800119B3F /* FindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAD1B1C821800119B3F /* FindController.m */; };
 		837DF5DC1B14691200A5E2FA /* InviteCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */; };
 		83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */; };
 		83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */; };
@@ -115,6 +118,12 @@
 		8339BD621B18510E00FAC712 /* ChangePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordController.m; sourceTree = "<group>"; };
 		8339BD641B1854C100FAC712 /* MassageCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MassageCenterController.h; sourceTree = "<group>"; };
 		8339BD651B1854C100FAC712 /* MassageCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassageCenterController.m; sourceTree = "<group>"; };
+		836D6AA61B1C756300119B3F /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
+		836D6AA71B1C756300119B3F /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
+		836D6AA91B1C776000119B3F /* JoinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinController.h; sourceTree = "<group>"; };
+		836D6AAA1B1C776000119B3F /* JoinController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinController.m; sourceTree = "<group>"; };
+		836D6AAC1B1C821800119B3F /* FindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindController.h; sourceTree = "<group>"; };
+		836D6AAD1B1C821800119B3F /* FindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindController.m; sourceTree = "<group>"; };
 		837DF5DA1B14691200A5E2FA /* InviteCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeViewController.h; sourceTree = "<group>"; };
 		837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeViewController.m; sourceTree = "<group>"; };
 		83A0E9F91B155BCE009708FB /* InviteCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeCell.h; sourceTree = "<group>"; };
@@ -452,6 +461,12 @@
 			children = (
 				83E72CCB1B1C2B2D00286735 /* AnswerController.h */,
 				83E72CCC1B1C2B2D00286735 /* AnswerController.m */,
+				836D6AA61B1C756300119B3F /* FinishController.h */,
+				836D6AA71B1C756300119B3F /* FinishController.m */,
+				836D6AA91B1C776000119B3F /* JoinController.h */,
+				836D6AAA1B1C776000119B3F /* JoinController.m */,
+				836D6AAC1B1C821800119B3F /* FindController.h */,
+				836D6AAD1B1C821800119B3F /* FindController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1235,7 +1250,9 @@
 				EF565D101B16B7AB00FC2D6B /* AccountSettingViewController.m in Sources */,
 				EFCCA4D91B12EA9F00C015A7 /* Message.m in Sources */,
 				EF565D511B170AF600FC2D6B /* LoginResultData.m in Sources */,
+				836D6AAB1B1C776000119B3F /* JoinController.m in Sources */,
 				83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */,
+				836D6AA81B1C756300119B3F /* FinishController.m in Sources */,
 				EF565D571B170D5500FC2D6B /* Result.m in Sources */,
 				EF565D0A1B16AA6000FC2D6B /* UIScrollView+MJExtension.m in Sources */,
 				EFE837B51B12F62A0093E14E /* purchase.m in Sources */,
@@ -1278,6 +1295,7 @@
 				EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */,
 				EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */,
 				EFD02B461B155CDA00D11D6D /* MJSettingLabelItem.m in Sources */,
+				836D6AAE1B1C821800119B3F /* FindController.m in Sources */,
 				EF565D4E1B170A5E00FC2D6B /* updateData.m in Sources */,
 				EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */,
 				EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */,
