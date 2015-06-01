@@ -35,6 +35,11 @@
  *  @return <#return value description#>
  */
 
+- (void)changeTitle:(NSString *)str
+{
+    self.title = str;
+}
+
 
 /**
  *   初始化
