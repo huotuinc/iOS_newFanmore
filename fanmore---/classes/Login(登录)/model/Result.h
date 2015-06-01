@@ -15,5 +15,5 @@
 @property(nonatomic,copy) NSString * resultCode;
 @property(nonatomic,strong) LoginResultData * resultData;
 @property(nonatomic,copy) NSString * tip;
-@property(nonatomic,strong) NSString * description;
+@property(nonatomic,strong) NSString * resultDescription;
 @end
