@@ -29,6 +29,17 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     [self.detailWebView loadRequest:request];
 }
+/**
+ *  设置titleLabel
+ *
+ *  @return <#return value description#>
+ */
+
+- (void)changeTitle:(NSString *)str
+{
+    self.title = str;
+}
+
 
 /**
  *   初始化

@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "RootViewController.h"
+#import "Result.h"
+#import "LoginResultData.h"
 
 @interface LoginViewController ()
 /**用户名*/
@@ -67,6 +69,7 @@
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGFloat sizesss = CGRectGetMaxY(self.loginBtn.frame) - (ScreenHeight - kbSize.height);
+    
     if (sizesss > 0) {
         
         [UIView animateWithDuration:0.15 animations:^{
@@ -92,7 +95,7 @@
  */
 - (void) setweigtAttribute
 {
-    self.title = @"用户登录";
+    self.title = @"粉猫登陆";
 //    self.loginBtn.backgroundColor = LWColor(18, 18, 127);
 }
 
@@ -145,7 +148,7 @@
 
 - (void)dealloc{
     
-//    [[NSNotification description] removeObserver:self forKeyPath:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"登录窗口销毁了");
 }
 /**

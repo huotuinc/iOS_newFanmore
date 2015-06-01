@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MobClick.h"
-#import <INTULocationManager.h>//定位
+//#import <INTULocationManager.h>//定位
 @interface AppDelegate ()
 
 
@@ -20,10 +20,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
-    /**友盟**/
+//    *友盟*
     [MobClick startWithAppkey:UMENGID reportPolicy:BATCH channelId:nil];
     [MobClick setCrashReportEnabled:YES];
-    /**友盟注册**/
+//    *友盟注册*
     
     
     if ([INTULocationManager locationServicesState] == INTULocationServicesStateAvailable) {
