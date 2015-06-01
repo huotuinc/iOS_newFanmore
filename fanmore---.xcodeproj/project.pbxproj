@@ -22,6 +22,7 @@
 		83DBD92D1B13128800B62830 /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBD92B1B13128800B62830 /* HomeCell.m */; };
 		83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DBD92C1B13128800B62830 /* HomeCell.xib */; };
 		83E21DA11B18112F0011516B /* DiscipleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E21DA01B18112F0011516B /* DiscipleViewController.m */; };
+		83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */; };
 		EF35542F1B15C3AA00324D89 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = EF35542E1B15C3AA00324D89 /* Foundation+Log.m */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
 		EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF31B0D81A40038A203 /* AppDelegate.m */; };
@@ -137,6 +138,8 @@
 		83E21D9F1B18112F0011516B /* DiscipleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscipleViewController.h; sourceTree = "<group>"; };
 		83E21DA01B18112F0011516B /* DiscipleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscipleViewController.m; sourceTree = "<group>"; };
 		83ED0B46534249FDED1AB9A4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		83F2DE641B186E16005E8305 /* NSDictionary+EXTERN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+EXTERN.h"; sourceTree = "<group>"; };
+		83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+EXTERN.m"; sourceTree = "<group>"; };
 		B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EF35542E1B15C3AA00324D89 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		EF49ECEB1B0D81A40038A203 /* fanmore---.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fanmore---.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -367,6 +370,8 @@
 		83D495411B15998C00935889 /* 扩展 */ = {
 			isa = PBXGroup;
 			children = (
+				83F2DE641B186E16005E8305 /* NSDictionary+EXTERN.h */,
+				83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */,
 				83D495451B159AC300935889 /* UIViewController+FM.h */,
 				83D495461B159AC300935889 /* UIViewController+FM.m */,
 				EF565D1F1B16E7C500FC2D6B /* UITextField+HT.h */,
@@ -1243,6 +1248,7 @@
 				EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */,
 				EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */,
 				EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */,
+				83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */,
 				EF4A333F1B15915600A55D50 /* FeedBackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
