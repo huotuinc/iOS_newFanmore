@@ -42,7 +42,7 @@
     //2、设置键盘弹出的监听
     [self registerForKeyboardNotifications];
     //3、设置键盘弹出
-    [self.userNameTextFiled becomeFirstResponder] ;
+    [self.userNameTextFiled becomeFirstResponder];
 }
 
 /**
@@ -121,28 +121,29 @@
 //    }
     //设置参数
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
-//    params[@"username"] = self.userNameTextFiled.text;
-//    params[@"password"] = [MD5Encryption md5by32:self.passwdTextField.text];
-//    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"login"];
-//    //发送网络请求
-//    [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary* json) {
-//        
-//        NSLog(@"xxxxxx==%@",json);
-//        LoginResultData * login = [LoginResultData objectWithKeyValues:json[@"resultData"]];
-//        NSLog(@"xxxxxx====%@",login.global.helpURL);
-//        if(![self checkTel:self.userNameTextFiled.text]){
-//            NSLog(@"不是手机号");
-//            BoundPhoneViewController * bound = [[BoundPhoneViewController alloc] init];
-//            [self.navigationController pushViewController:bound animated:YES];
-//        }else{
+    params[@"username"] = self.userNameTextFiled.text;
+    params[@"password"] = [MD5Encryption md5by32:self.passwdTextField.text];
+    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"login"];
+    NSLog(@"url==%@",params);
+    //发送网络请求
+    [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+  
+#warning 账号保存
+        //保存用户名
+        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginUserName];
+        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginPassword];
+        if(![self checkTel:self.userNameTextFiled.text]){
+            NSLog(@"不是手机号");
+            BoundPhoneViewController * bound = [[BoundPhoneViewController alloc] init];
+            [self.navigationController pushViewController:bound animated:YES];
+        }else{
             RootViewController * roots = [[RootViewController alloc] init];
             UIWindow * mainWindow = [UIApplication sharedApplication].keyWindow;
             mainWindow.rootViewController = roots;
-//        }
-//    } failure:^(NSError *error) {
-//        NSLog(@"登录失败%@",[error localizedDescription]);
-//        
-//    }];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"登录失败%@",[error localizedDescription]);
+    }];
 }
 
 - (void)dealloc{

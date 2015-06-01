@@ -35,15 +35,7 @@
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Fcv-09-EDH"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名/手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sc9-qy-Di0">
-                                    <rect key="frame" x="81" y="0.0" width="506" height="45"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="45" id="JLB-BF-zsa"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gBh-nF-uki">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gBh-nF-uki">
                                     <rect key="frame" x="81" y="45" width="506" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="ITq-Tn-YA2"/>
@@ -86,6 +78,14 @@
                                         <constraint firstAttribute="height" constant="1" id="7gT-VK-nvp"/>
                                     </constraints>
                                 </view>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13857560740" placeholder="用户名/手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sc9-qy-Di0">
+                                    <rect key="frame" x="81" y="0.0" width="506" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="JLB-BF-zsa"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>

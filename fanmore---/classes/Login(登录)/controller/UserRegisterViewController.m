@@ -40,10 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
-   
-    
     //1、设置导航栏样式
     [self setNavgationStytle];
     //2、设置文本框代理
@@ -123,6 +119,9 @@
     __weak UserRegisterViewController *wself = self;
     [UserLoginTool loginRequestGet:urlStr parame:parame success:^(id json) {
         NSLog(@"注册成功%@",json);
+        //保存用户名
+        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginUserName];
+        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginPassword];
         if ([wself.delegate respondsToSelector:@selector(UserRegisterViewSuccess)]) {
             
             [wself.delegate UserRegisterViewSuccess];

@@ -26,34 +26,35 @@
 //    *友盟注册*
     
     
-//    if ([INTULocationManager locationServicesState] == INTULocationServicesStateAvailable) {
-//        NSLog(@"定位服务可以用");
-//        if (IsIos8) {
-//            /**定位*/
-//            INTULocationManager * locMgr = [INTULocationManager sharedInstance];
-//            [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-//                if (status == INTULocationStatusSuccess) {
-//                    NSLog(@"定位成功纬度 %f 精度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
-//                }
-//                else if (status == INTULocationStatusTimedOut) {
-//                    
-//                    NSLog(@"定位超时");
-//                }
-//                else {
-//                    
-//                    NSLog(@"定位失败");
-//                }
-//            }];
-//        }
-//    }
+    if ([INTULocationManager locationServicesState] == INTULocationServicesStateAvailable) {
+        NSLog(@"定位服务可以用");
+        if (IsIos8) {
+            /**定位*/
+            INTULocationManager * locMgr = [INTULocationManager sharedInstance];
+            [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                if (status == INTULocationStatusSuccess) {
+                    NSLog(@"定位成功纬度 %f 精度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
+                    
+                    NSString * lat = [NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude];
+                    NSString * lg = [NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude];
+                    [[NSUserDefaults standardUserDefaults] setObject:lat forKey:DWLatitude]; //保存纬度
+                    [[NSUserDefaults standardUserDefaults] setObject:lg forKey:DWLongitude];//保存精度
+                }
+                else{
+                    [MBProgressHUD showError:@"定位失败"];
+                }
+                    
+            }];
+        }
+    }
   
     
     
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"appKey"] = APPKEY;
-    params[@"lat"] = @(lat_parame);
-    params[@"lng"] = @(lng_parame);
+    params[@"lat"] = @(120.2);
+    params[@"lng"] = @(13.3);
     params[@"timestamp"] = @(1234567890);
     params[@"operation"] = OPERATION_parame;
     params[@"version"] = @(APPLICATIONVERSION_parame);
@@ -71,9 +72,18 @@
         
 //        NSLog(@"xxxxxxx=%@",error.description);
     }];
-    LoginViewController * login = [[LoginViewController alloc] init];
-    UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-    self.window.rootViewController = loginNav;
+    
+    //用户名和数据有数据
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
+        
+        RootViewController * roots = [[RootViewController alloc] init];
+        self.window.rootViewController = roots;
+    }else{
+        LoginViewController * login = [[LoginViewController alloc] init];
+        UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+        self.window.rootViewController = loginNav;
+        
+    }
     [self.window makeKeyAndVisible];
     return YES;
 }
