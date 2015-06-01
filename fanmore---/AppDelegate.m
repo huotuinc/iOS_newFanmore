@@ -77,7 +77,6 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
         
         RootViewController * roots = [[RootViewController alloc] init];
-       
         self.window.rootViewController = roots;
     }else{
         LoginViewController * login = [[LoginViewController alloc] init];
