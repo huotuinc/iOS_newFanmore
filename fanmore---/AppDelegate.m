@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MobClick.h"
-#import <INTULocationManager.h>//定位
+//#import <INTULocationManager.h>//定位
 @interface AppDelegate ()
 
 
@@ -20,32 +20,32 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
-    /**友盟**/
+//    *友盟*
     [MobClick startWithAppkey:UMENGID reportPolicy:BATCH channelId:nil];
     [MobClick setCrashReportEnabled:YES];
-    /**友盟注册**/
+//    *友盟注册*
     
     
-    if ([INTULocationManager locationServicesState] == INTULocationServicesStateAvailable) {
-        NSLog(@"定位服务可以用");
-        if (IsIos8) {
-            /**定位*/
-            INTULocationManager * locMgr = [INTULocationManager sharedInstance];
-            [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-                if (status == INTULocationStatusSuccess) {
-                    NSLog(@"定位成功纬度 %f 精度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
-                }
-                else if (status == INTULocationStatusTimedOut) {
-                    
-                    NSLog(@"定位超时");
-                }
-                else {
-                    
-                    NSLog(@"定位失败");
-                }
-            }];
-        }
-    }
+//    if ([INTULocationManager locationServicesState] == INTULocationServicesStateAvailable) {
+//        NSLog(@"定位服务可以用");
+//        if (IsIos8) {
+//            /**定位*/
+//            INTULocationManager * locMgr = [INTULocationManager sharedInstance];
+//            [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+//                if (status == INTULocationStatusSuccess) {
+//                    NSLog(@"定位成功纬度 %f 精度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
+//                }
+//                else if (status == INTULocationStatusTimedOut) {
+//                    
+//                    NSLog(@"定位超时");
+//                }
+//                else {
+//                    
+//                    NSLog(@"定位失败");
+//                }
+//            }];
+//        }
+//    }
   
     
     
