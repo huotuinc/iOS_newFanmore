@@ -25,31 +25,26 @@
     [MobClick setCrashReportEnabled:YES];
 //    *友盟注册*
     
+   
     
-    if ([INTULocationManager locationServicesState] == INTULocationServicesStateAvailable) {
-        NSLog(@"定位服务可以用");
-        if (IsIos8) {
-            /**定位*/
-            INTULocationManager * locMgr = [INTULocationManager sharedInstance];
-            [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-                if (status == INTULocationStatusSuccess) {
-                    NSLog(@"定位成功纬度 %f 精度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
-                    
-                    NSString * lat = [NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude];
-                    NSString * lg = [NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude];
-                    [[NSUserDefaults standardUserDefaults] setObject:lat forKey:DWLatitude]; //保存纬度
-                    [[NSUserDefaults standardUserDefaults] setObject:lg forKey:DWLongitude];//保存精度
-                }
-                else{
-                    [MBProgressHUD showError:@"定位失败"];
-                }
-                    
-            }];
+    /**定位*/
+    INTULocationManager * locMgr = [INTULocationManager sharedInstance];
+    [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+        if (status == INTULocationStatusSuccess) {
+            NSLog(@"定位成功纬度 %f 精度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
+            
+            NSString * lat = [NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude];
+            NSString * lg = [NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude];
+            [[NSUserDefaults standardUserDefaults] setObject:lat forKey:DWLatitude]; //保存纬度
+            [[NSUserDefaults standardUserDefaults] setObject:lg forKey:DWLongitude];//保存精度
         }
-    }
-  
+        else{
+            [MBProgressHUD showError:@"定位失败"];
+        }
+            
+    }];
     
-    
+    //出使化网络
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"appKey"] = APPKEY;
