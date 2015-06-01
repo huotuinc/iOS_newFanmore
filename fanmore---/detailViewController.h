@@ -10,4 +10,11 @@
 
 @interface detailViewController : UIViewController
 
+/**网页webView*/
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *goQusetion;
+- (IBAction)goQusetionAction:(id)sender;
+
 @end

@@ -182,7 +182,7 @@ static NSString *homeCellidentify = @"homeCellId";
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    detailViewController * detailVc = [storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 /**
