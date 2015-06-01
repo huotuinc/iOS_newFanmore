@@ -30,7 +30,10 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 
 #pragma mark - tableView
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80;
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -41,7 +44,11 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    DiscipleCell *cell = nil;
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"DiscipleCell" owner:nil options:nil] lastObject];
+    }
+    return cell;
 }
 
 
