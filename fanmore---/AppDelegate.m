@@ -61,7 +61,7 @@
     //网络请求借口
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
-//        NSLog(@"success====%@",responseObject);
+        NSLog(@"success====%@",responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

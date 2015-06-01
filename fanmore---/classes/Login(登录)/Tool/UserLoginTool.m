@@ -56,19 +56,20 @@
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
     paramsOption[@"appKey"] = APPKEY;
-    params[@"lat"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
-    params[@"lng"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
+    params[@"lat"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude]?[[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude]:@(1);
+    params[@"lng"] = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude]?[[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude]:@(2);
     paramsOption[@"timestamp"] = @(1234567890);
     paramsOption[@"operation"] = OPERATION_parame;
     paramsOption[@"version"] = @(APPLICATIONVERSION_parame);
     paramsOption[@"token"] = @"12321312321";
     paramsOption[@"imei"] = @"201505280940";
+    paramsOption[@"cityCode"] = @"1372";
+    paramsOption[@"cpaCode"] = @"default";
     [paramsOption addEntriesFromDictionary:params];
-    NSLog(@"ccccccc==%@",paramsOption);
+    paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
+    NSLog(@"parame%@",paramsOption);
     if (manager) {
-        
-        [manager POST:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
+        [manager POST:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject) {
             success(success);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             

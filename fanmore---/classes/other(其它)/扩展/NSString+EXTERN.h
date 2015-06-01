@@ -12,5 +12,5 @@
 
 
 /**手机号正则表达式判断*/
--(BOOL) checkTel:(NSString *) phoneNumber;
++ (BOOL) checkTel:(NSString *) phoneNumber;
 @end

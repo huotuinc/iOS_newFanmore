@@ -142,7 +142,9 @@
             mainWindow.rootViewController = roots;
         }
     } failure:^(NSError *error) {
+        
         NSLog(@"登录失败%@",[error localizedDescription]);
+        
     }];
 }
 
