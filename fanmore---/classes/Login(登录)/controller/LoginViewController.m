@@ -125,7 +125,6 @@
     //发送网络请求
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
         
-        NSLog(@"%@",json);
         if(![self checkTel:self.userNameTextFiled.text]){
             NSLog(@"不是手机号");
             BoundPhoneViewController * bound = [[BoundPhoneViewController alloc] init];
@@ -138,8 +137,6 @@
     } failure:^(NSError *error) {
         NSLog(@"登录失败%@",[error localizedDescription]);
     }];
-    
-    NSLog(@"登录被点击了");
 }
 
 - (void)dealloc{

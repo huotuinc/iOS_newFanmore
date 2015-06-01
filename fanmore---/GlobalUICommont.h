@@ -28,8 +28,10 @@
 /**时间*/
 #define timestamp_parame [[NSDate date] timeIntervalSince1970]]
 
-#define lat_parame 116
-#define lng_parame 40
+#define DWLongitude @"dwLong" //定位精度
+#define DWLatitude @"dwLat"   //定位纬度
+#define loginUserName  @"username" //用户名
+#define loginPassword @"password"  //密码
 #define imei_parame ([[[UIDevice currentDevice] identifierForVendor] UUIDString])
 
 //网络请求的固定参数
