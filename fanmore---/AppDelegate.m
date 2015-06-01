@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MobClick.h"
-//#import <INTULocationManager.h>//定位
+#import <INTULocationManager.h>//定位
 @interface AppDelegate ()
 
 
@@ -47,7 +47,7 @@
             }];
         }
     }
-  
+
     
     
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];

@@ -25,7 +25,9 @@ static NSString *homeCellidentify = @"homeCellId";
     
     [super viewWillAppear:animated];
     
-
+    RootViewController * root = (RootViewController *)self.mm_drawerController;
+    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
 }
 
 - (void)loadView
@@ -177,13 +179,14 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    detailViewController * detailVc = [[detailViewController alloc] init];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    detailViewController * detailVc = [storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 /**
  *  买流量
- *
- *  @param sender <#sender description#>
  */
 
 - (void)rightBarButtonAction:(UIButton *) sender
