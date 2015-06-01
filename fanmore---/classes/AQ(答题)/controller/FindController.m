@@ -10,4 +10,8 @@
 
 @implementation FindController
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+}
+
 @end

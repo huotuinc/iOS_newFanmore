@@ -39,10 +39,22 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首页";
+    
+    [self _initView];
+    
     [self _initNav];
     
     //集成刷新控件
     [self setupRefresh];
+    
+    
+    
+}
+
+- (void)_initView
+{
+    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
+    
 }
 
 /**
@@ -143,11 +155,7 @@ static NSString *homeCellidentify = @"homeCellId";
 
 
 
-- (void)_initView
-{
-    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
-    
-}
+
 
 #pragma mark 协议方法
 

@@ -10,4 +10,8 @@
 
 @implementation JoinController
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+}
+
 @end

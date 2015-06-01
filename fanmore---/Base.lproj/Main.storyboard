@@ -1276,6 +1276,9 @@
                             <constraint firstItem="TaO-oq-BRY" firstAttribute="top" secondItem="yqh-RU-BuL" secondAttribute="bottom" id="oKT-zI-lyB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="yqh-RU-BuL" id="BLn-ab-k3v"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7r-We-xJq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

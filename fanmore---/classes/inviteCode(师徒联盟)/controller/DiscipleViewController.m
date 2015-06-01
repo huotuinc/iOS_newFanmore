@@ -7,8 +7,12 @@
 //
 
 #import "DiscipleViewController.h"
+#import "DiscipleCell.h"
+
 
 @implementation DiscipleViewController
+
+static NSString *discipleCellidentify = @"DiscipleCellid";
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -18,7 +22,9 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"DiscipleCell" bundle:nil] forCellReuseIdentifier:discipleCellidentify];
 }
 
 

@@ -13,6 +13,8 @@
 		836D6AA81B1C756300119B3F /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AA71B1C756300119B3F /* FinishController.m */; };
 		836D6AAB1B1C776000119B3F /* JoinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAA1B1C776000119B3F /* JoinController.m */; };
 		836D6AAE1B1C821800119B3F /* FindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAD1B1C821800119B3F /* FindController.m */; };
+		836D6AB51B1C872300119B3F /* DiscipleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AB31B1C872300119B3F /* DiscipleCell.m */; };
+		836D6AB61B1C872300119B3F /* DiscipleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836D6AB41B1C872300119B3F /* DiscipleCell.xib */; };
 		837DF5DC1B14691200A5E2FA /* InviteCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */; };
 		83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */; };
 		83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */; };
@@ -124,6 +126,9 @@
 		836D6AAA1B1C776000119B3F /* JoinController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinController.m; sourceTree = "<group>"; };
 		836D6AAC1B1C821800119B3F /* FindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindController.h; sourceTree = "<group>"; };
 		836D6AAD1B1C821800119B3F /* FindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindController.m; sourceTree = "<group>"; };
+		836D6AB21B1C872300119B3F /* DiscipleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscipleCell.h; sourceTree = "<group>"; };
+		836D6AB31B1C872300119B3F /* DiscipleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscipleCell.m; sourceTree = "<group>"; };
+		836D6AB41B1C872300119B3F /* DiscipleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscipleCell.xib; sourceTree = "<group>"; };
 		837DF5DA1B14691200A5E2FA /* InviteCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeViewController.h; sourceTree = "<group>"; };
 		837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeViewController.m; sourceTree = "<group>"; };
 		83A0E9F91B155BCE009708FB /* InviteCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeCell.h; sourceTree = "<group>"; };
@@ -366,6 +371,9 @@
 				83A0E9F91B155BCE009708FB /* InviteCodeCell.h */,
 				83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */,
 				83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */,
+				836D6AB21B1C872300119B3F /* DiscipleCell.h */,
+				836D6AB31B1C872300119B3F /* DiscipleCell.m */,
+				836D6AB41B1C872300119B3F /* DiscipleCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1176,6 +1184,7 @@
 				EF565D461B17091F00FC2D6B /* UserRegisterViewController.xib in Resources */,
 				83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */,
 				EF565D441B17091F00FC2D6B /* LoginViewController.xib in Resources */,
+				836D6AB61B1C872300119B3F /* DiscipleCell.xib in Resources */,
 				83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1238,6 +1247,7 @@
 				EF565D3F1B17091F00FC2D6B /* BoundPhoneViewController.m in Sources */,
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
 				EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */,
+				836D6AB51B1C872300119B3F /* DiscipleCell.m in Sources */,
 				83D495471B159AC300935889 /* UIViewController+FM.m in Sources */,
 				EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */,
 				EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */,

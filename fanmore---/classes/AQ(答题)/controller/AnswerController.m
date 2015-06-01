@@ -10,6 +10,14 @@
 #import "FinishController.h"
 
 @implementation AnswerController
+
+- (void)viewDidLoad{
+    
+    [super viewDidLoad];
+    
+    
+}
+
 - (IBAction)AAction:(id)sender {
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

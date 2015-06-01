@@ -10,4 +10,7 @@
 
 @implementation FinishController
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+}
 @end

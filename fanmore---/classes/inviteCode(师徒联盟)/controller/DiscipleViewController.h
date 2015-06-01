@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DiscipleViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
