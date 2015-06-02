@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-
+#import "TrafficShowController.h"
 #import "RootViewController.h"
 #import <UIViewController+MMDrawerController.h>
 #import "HomeCell.h"
@@ -199,13 +199,15 @@ static NSString *homeCellidentify = @"homeCellId";
 
 - (void)rightBarButtonAction:(UIButton *) sender
 {
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    TrafficShowController *show = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+    [self.navigationController pushViewController:show animated:YES];
 }
 
 /**
  *  签到
  *
- *  @param sender <#sender description#>
+ *  @param sender
  */
 - (void)signInAction:(UIButton *)sender
 {

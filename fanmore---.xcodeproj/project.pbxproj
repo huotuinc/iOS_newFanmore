@@ -26,9 +26,11 @@
 		83DBD8F31B13073600B62830 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBD8F21B13073600B62830 /* MenuViewController.m */; };
 		83DBD92D1B13128800B62830 /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBD92B1B13128800B62830 /* HomeCell.m */; };
 		83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DBD92C1B13128800B62830 /* HomeCell.xib */; };
+		83E490021B1D747900A44FC8 /* TrafficShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E490011B1D747900A44FC8 /* TrafficShowController.m */; };
+		83E490051B1D749A00A44FC8 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E490041B1D749A00A44FC8 /* detailViewController.m */; };
+		83E490081B1D74C400A44FC8 /* PICircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E490071B1D74C400A44FC8 /* PICircularProgressView.m */; };
 		83E72CCD1B1C2B2D00286735 /* AnswerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CCC1B1C2B2D00286735 /* AnswerController.m */; };
 		83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CD81B1C3EA800286735 /* DiscipleViewController.m */; };
-		83E72CDC1B1C3EB700286735 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CDB1B1C3EB700286735 /* detailViewController.m */; };
 		83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CDE1B1C3EBE00286735 /* asignViewController.m */; };
 		83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
@@ -149,12 +151,16 @@
 		83DBD92A1B13128800B62830 /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeCell.h; path = "classes/home(主页)/view/HomeCell.h"; sourceTree = "<group>"; };
 		83DBD92B1B13128800B62830 /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeCell.m; path = "classes/home(主页)/view/HomeCell.m"; sourceTree = "<group>"; };
 		83DBD92C1B13128800B62830 /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeCell.xib; path = "classes/home(主页)/view/HomeCell.xib"; sourceTree = "<group>"; };
+		83E490001B1D747900A44FC8 /* TrafficShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrafficShowController.h; path = "classes/home(主页)/controller/TrafficShowController.h"; sourceTree = "<group>"; };
+		83E490011B1D747900A44FC8 /* TrafficShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrafficShowController.m; path = "classes/home(主页)/controller/TrafficShowController.m"; sourceTree = "<group>"; };
+		83E490031B1D749A00A44FC8 /* detailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = detailViewController.h; path = "classes/home(主页)/controller/detailViewController.h"; sourceTree = "<group>"; };
+		83E490041B1D749A00A44FC8 /* detailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = detailViewController.m; path = "classes/home(主页)/controller/detailViewController.m"; sourceTree = "<group>"; };
+		83E490061B1D74C400A44FC8 /* PICircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PICircularProgressView.h; path = "classes/home(主页)/view/PICircularProgressView.h"; sourceTree = "<group>"; };
+		83E490071B1D74C400A44FC8 /* PICircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PICircularProgressView.m; path = "classes/home(主页)/view/PICircularProgressView.m"; sourceTree = "<group>"; };
 		83E72CCB1B1C2B2D00286735 /* AnswerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerController.h; sourceTree = "<group>"; };
 		83E72CCC1B1C2B2D00286735 /* AnswerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerController.m; sourceTree = "<group>"; };
 		83E72CD71B1C3EA800286735 /* DiscipleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscipleViewController.h; sourceTree = "<group>"; };
 		83E72CD81B1C3EA800286735 /* DiscipleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscipleViewController.m; sourceTree = "<group>"; };
-		83E72CDA1B1C3EB700286735 /* detailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detailViewController.h; sourceTree = "<group>"; };
-		83E72CDB1B1C3EB700286735 /* detailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detailViewController.m; sourceTree = "<group>"; };
 		83E72CDD1B1C3EBE00286735 /* asignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asignViewController.h; sourceTree = "<group>"; };
 		83E72CDE1B1C3EBE00286735 /* asignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asignViewController.m; sourceTree = "<group>"; };
 		83ED0B46534249FDED1AB9A4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -547,8 +553,10 @@
 			children = (
 				83DBD8E41B12FE1600B62830 /* HomeViewController.h */,
 				83DBD8E51B12FE1600B62830 /* HomeViewController.m */,
-				83E72CDA1B1C3EB700286735 /* detailViewController.h */,
-				83E72CDB1B1C3EB700286735 /* detailViewController.m */,
+				83E490031B1D749A00A44FC8 /* detailViewController.h */,
+				83E490041B1D749A00A44FC8 /* detailViewController.m */,
+				83E490001B1D747900A44FC8 /* TrafficShowController.h */,
+				83E490011B1D747900A44FC8 /* TrafficShowController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -556,6 +564,8 @@
 		EF1EA6031B0DA34900C1F60D /* view */ = {
 			isa = PBXGroup;
 			children = (
+				83E490061B1D74C400A44FC8 /* PICircularProgressView.h */,
+				83E490071B1D74C400A44FC8 /* PICircularProgressView.m */,
 				83DBD92A1B13128800B62830 /* HomeCell.h */,
 				83DBD92B1B13128800B62830 /* HomeCell.m */,
 				83DBD92C1B13128800B62830 /* HomeCell.xib */,
@@ -1239,6 +1249,7 @@
 				EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */,
 				EF565D1A1B16DD9900FC2D6B /* ForeshowTableViewCell.m in Sources */,
 				EFCCA4C51B12D6E400C015A7 /* MJFoundation.m in Sources */,
+				83E490051B1D749A00A44FC8 /* detailViewController.m in Sources */,
 				EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */,
 				83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */,
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
@@ -1274,7 +1285,6 @@
 				83DBD8F31B13073600B62830 /* MenuViewController.m in Sources */,
 				EFD931801B0EF93D0058F525 /* GTMBase64.m in Sources */,
 				837DF5DC1B14691200A5E2FA /* InviteCodeViewController.m in Sources */,
-				83E72CDC1B1C3EB700286735 /* detailViewController.m in Sources */,
 				EFCCA4CD1B12D6E400C015A7 /* NSObject+MJMember.m in Sources */,
 				EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */,
 				EF565D0C1B16AA6000FC2D6B /* UIView+MJExtension.m in Sources */,
@@ -1287,12 +1297,14 @@
 				83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */,
 				83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */,
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
+				83E490081B1D74C400A44FC8 /* PICircularProgressView.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
 				83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */,
 				EF565D071B16AA6000FC2D6B /* MJRefreshConst.m in Sources */,
 				EFE837BD1B12FADB0093E14E /* question.m in Sources */,
 				EFD02B4B1B155D1E00D11D6D /* settingViewController.m in Sources */,
+				83E490021B1D747900A44FC8 /* TrafficShowController.m in Sources */,
 				EF565D081B16AA6000FC2D6B /* MJRefreshFooterView.m in Sources */,
 				EFCCA4D51B12E36F00C015A7 /* taskData.m in Sources */,
 				EF565D541B170C2100FC2D6B /* userData.m in Sources */,

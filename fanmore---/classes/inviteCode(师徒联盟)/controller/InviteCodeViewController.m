@@ -121,6 +121,10 @@
 - (void)rightBarButtonAction:(UIButton *)sender
 {
 #warning 分享
+    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"" bundle:<#(NSBundle *)#>]
+    
+    
 }
 
 - (IBAction)copyAction:(UIButton *)sender {
