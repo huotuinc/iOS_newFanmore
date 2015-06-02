@@ -10,7 +10,7 @@
 #define fanmore____GlobalUICommont_h
 
 /**服务器地址*/
-#define  MainURL @"http://apitest.fanmore.cn:8080/fanmoreweb/app"
+#define  MainURL @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
 
 //有盟appKey
 #define UMENGID @"52faffcf56240bc21a023179"
