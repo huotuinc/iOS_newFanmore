@@ -96,7 +96,11 @@
 
 - (void)QuiteAccount:(UIButton *)btn{
     
-    NSLog(@"退出账号");
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName]) {
+        
+        LoginViewController * login = [[LoginViewController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = login;
+    }
 }
 - (void)backAction:(UIButton *)btn{
     
