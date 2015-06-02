@@ -29,7 +29,7 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:@"view-new" ofType:@"html"];
     NSURL* url = [NSURL fileURLWithPath:path];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    self.detailWebView.backgroundColor = [UIColor redColor];
+    self.detailWebView.backgroundColor = [UIColor whiteColor];
     [self.detailWebView loadRequest:request];
 }
 /**
