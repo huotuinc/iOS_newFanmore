@@ -116,14 +116,20 @@
     parame[@"authcode"] = self.verificationCode.text;
     self.InvitationCode.text.length?(parame[@"invcode"] = self.InvitationCode.text):(parame[@"invcode"] = [NSString stringWithFormat:@""]);
     //发送网络请求
+    
+    NSLog(@"par======================%@",parame);
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"reg"];
     __weak UserRegisterViewController *wself = self;
-    [UserLoginTool loginRequestGet:urlStr parame:parame success:^(NSDictionary* json) {
+    [UserLoginTool loginRequestPost:urlStr parame:parame success:^(NSDictionary* json) {
         
+        NSLog(@"注册＝＝＝＝＝＝%@",json);
+        if (json==nil) {
+            return ;
+        }
         //手机号是否被注册
-        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] ==  54001) {
+        if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue] ==  54004) {
             
-            [MBProgressHUD showSuccess:@"手机号已被注册"];
+            [MBProgressHUD showSuccess:@"手机已经注册,请直接登录"];
             return ;
         }
         //验证码错误
@@ -138,13 +144,12 @@
             //保存用户名
             [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:loginUserName];
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:passwd] forKey:loginPassword];
-            
             //注册完后的数据
             userData * userInfo = [userData objectWithKeyValues:json];
-            NSLog(@"%@",json);
             
-            //比较反回的token和本地的token比较
+           //比较反回的token和本地的token比较
             NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+            [MBProgressHUD showSuccess:@"注册成功"];
             if (![token isEqualToString:userInfo.token]) {
                 
                 [[NSUserDefaults standardUserDefaults] setObject:token forKey:AppToken];
@@ -153,7 +158,6 @@
                 
                 [wself.delegate UserRegisterViewSuccess:userInfo];
             }
-            [MBProgressHUD showSuccess:@"注册成功"];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         
@@ -161,10 +165,12 @@
         
         NSLog(@"注册失败%@",[error localizedDescription]);
     }];
+    NSLog(@"0000000000000");
 }
 
 - (IBAction)verification:(UIButton *)sender {
     
+    NSLog(@"xxxxxxxxxxxxxxxxxx");
     //判断手机号是否输入正确
     NSString * phoneNumber= self.phoneNumber.text;
     NSLog(@"%@",phoneNumber);
@@ -184,16 +190,24 @@
     //网络请求获取验证码
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"phone"] = phoneNumber;
-    params[@"type"] = @(1);
+    params[@"type"] = @"1";
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
-    NSLog(@"=======%@",urlStr);
-    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
-       NSLog(@"注册验证码获取成功");
+    [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
+        
+        NSLog(@"dasdasd%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==54001) {
+            
+            [MBProgressHUD showError:@"手机号已经被注册，请选择其他手机号"];
+            return ;
+        }else{
+            [self settime];
+        }
+        
     } failure:^(NSError *error) {
-        NSLog(@"注册验证码获取失败%@",[error localizedDescription]);
+        
     }];
-    //验证码的倒计时
-    [self settime];
+
+    
 }
 
 /**

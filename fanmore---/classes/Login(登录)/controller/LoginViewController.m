@@ -129,12 +129,19 @@
   
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
-            NSLog(@"登录成功");
+            NSLog(@"登录成功 %@",json);
+            
+            userData * userInfo = [userData objectWithKeyValues:json[@"resultData"]];
             //保存用户名和密码
             [[NSUserDefaults standardUserDefaults] setObject:self.userNameTextFiled.text forKey:loginUserName];
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:self.passwdTextField.text] forKey:loginPassword];
             
-            userData * userInfo = [userData objectWithKeyValues:json[@"resultData"]];
+            //保存登录token
+            NSString * apptoken = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+            if (![apptoken isEqualToString:userInfo.token]) { //当前token和原先的token不同
+                
+                [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:AppToken];
+            }
 #warning 判断是否需要绑定
             
         }
@@ -196,6 +203,6 @@
 
 #pragma UserRegisterViewDelegate 注册成功
 - (void)UserRegisterViewSuccess:(userData *)userInfo{
-    NSLog(@"用户注册成功，返回");
+    NSLog(@"xxxxxxxxxxxxxxxxxxxx==================================用户注册成功，返回");
 }
 @end
