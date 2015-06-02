@@ -12,6 +12,9 @@
 @interface detailViewController ()
 
 
+/**详情页面的网页*/
+@property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
+
 
 @end
 
@@ -23,10 +26,11 @@
     // 初始化
     [self setup];
     
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"protect" ofType:@"html"];
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"view-new" ofType:@"html"];
     NSURL* url = [NSURL fileURLWithPath:path];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-
+    self.detailWebView.backgroundColor = [UIColor redColor];
+    [self.detailWebView loadRequest:request];
 }
 /**
  *  设置titleLabel

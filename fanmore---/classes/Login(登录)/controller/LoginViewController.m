@@ -203,6 +203,6 @@
 
 #pragma UserRegisterViewDelegate 注册成功
 - (void)UserRegisterViewSuccess:(userData *)userInfo{
-    NSLog(@"用户注册成功，返回");
+    NSLog(@"xxxxxxxxxxxxxxxxxxxx==================================用户注册成功，返回");
 }
 @end
