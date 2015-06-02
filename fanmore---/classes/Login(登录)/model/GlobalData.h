@@ -23,12 +23,15 @@
 @property(nonatomic,strong) NSString * helpURL;
 
 /**收入*/
-@property(nonatomic,strong) NSArray * incomings;
+@property(nonatomic,strong) NSString * incomings;
 
 /**职业*/
-@property(nonatomic,strong) NSArray * career;
+@property(nonatomic,strong) NSString * career;
 
 /**爱好*/
-@property(nonatomic,strong) NSArray * favs;
+@property(nonatomic,strong) NSString * favs;
+
+/**最少阅读时间单位秒*/
+@property(nonatomic,assign) int lessReadSeconds;
 
 @end

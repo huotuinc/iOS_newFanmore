@@ -7,7 +7,14 @@
 //  公共信息(globalDat
 
 #import "GlobalData.h"
+#import "twoOption.h"
 
 @implementation GlobalData
+
+
+//- (NSDictionary *)objectClassInArray
+//{
+//    return @{@"incomings":[twoOption class],@"career":[twoOption class],@"favs":[twoOption class]};
+//}
 
 @end

@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class userData;
 
 @protocol UserRegisterViewDelegate <NSObject>
 
 @optional
-- (void)UserRegisterViewSuccess;
+/**用户注册成功*/
+- (void)UserRegisterViewSuccess:(userData *) userInfo;
+
 @end
+
 @interface UserRegisterViewController : UIViewController
 
 @property(nonatomic,weak) id delegate;

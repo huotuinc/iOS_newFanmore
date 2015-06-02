@@ -7,6 +7,7 @@
 //  用户注册
 
 #import "UserRegisterViewController.h"
+#import "userData.h"
 
 
 @interface UserRegisterViewController () <UITextFieldDelegate>
@@ -61,7 +62,7 @@
 - (void)setNavgationStytle{
 //    self.view.backgroundColor = [UIColor blueColor];
     self.title = @"用户注册";
-   
+  
 }
 
 /**
@@ -85,7 +86,7 @@
  */
 - (IBAction)registerButtonClick:(UIButton *)sender {
     
-    NSLog(@"dasdasdasdasdasds注册");
+    
     if (!self.phoneNumber.text.length) {//手机号不能为空
         
         [MBProgressHUD showError:@"手机号不能为空"];
@@ -117,20 +118,48 @@
     //发送网络请求
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"reg"];
     __weak UserRegisterViewController *wself = self;
-    [UserLoginTool loginRequestGet:urlStr parame:parame success:^(id json) {
-        NSLog(@"注册成功%@",json);
-        //保存用户名
-        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginUserName];
-        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginPassword];
-        if ([wself.delegate respondsToSelector:@selector(UserRegisterViewSuccess)]) {
+    [UserLoginTool loginRequestGet:urlStr parame:parame success:^(NSDictionary* json) {
+        
+        //手机号是否被注册
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] ==  54001) {
             
-            [wself.delegate UserRegisterViewSuccess];
+            [MBProgressHUD showSuccess:@"手机号已被注册"];
+            return ;
         }
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        //验证码错误
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] ==  53007) {
+            
+            [MBProgressHUD showSuccess:@"验证码错误"];
+            return ;
+        }
+        //注册成功
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+            
+            //保存用户名
+            [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:loginUserName];
+            [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:passwd] forKey:loginPassword];
+            
+            //注册完后的数据
+            userData * userInfo = [userData objectWithKeyValues:json];
+            NSLog(@"%@",json);
+            
+            //比较反回的token和本地的token比较
+            NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+            if (![token isEqualToString:userInfo.token]) {
+                
+                [[NSUserDefaults standardUserDefaults] setObject:token forKey:AppToken];
+            }
+            if ([wself.delegate respondsToSelector:@selector(UserRegisterViewSuccess:)]) {
+                
+                [wself.delegate UserRegisterViewSuccess:userInfo];
+            }
+            [MBProgressHUD showSuccess:@"注册成功"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        
     } failure:^(NSError *error) {
         
-       
-         NSLog(@"注册失败%@",[error localizedDescription]);
+        NSLog(@"注册失败%@",[error localizedDescription]);
     }];
 }
 
@@ -144,6 +173,7 @@
         [MBProgressHUD showError:@"手机号不能为空"];
         return;
     }
+    
     //判断是否是手机号
     if (![self checkTel:phoneNumber]) {
         
@@ -151,7 +181,6 @@
         self.phoneNumber.text = @"";
         return ;
     }
-    
     //网络请求获取验证码
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"phone"] = phoneNumber;

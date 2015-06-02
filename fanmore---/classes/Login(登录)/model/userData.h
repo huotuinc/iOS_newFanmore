@@ -44,4 +44,8 @@
 
 /**欢迎提示，包括积分转换信息，来宾转正信息*/
 @property(nonatomic,strong) NSString * welcomeTip;
+
+/**身份验证 服务端负责生成 负责验证；app端只需要保存 传递*/
+@property(nonatomic,strong) NSString * token;
+
 @end
