@@ -1,4 +1,4 @@
-//
+
 //  InviteCodeViewController.m
 //  fanmore---
 //
@@ -10,6 +10,7 @@
 #import "InviteCodeViewController.h"
 #import "InviteCodeCell.h"
 #import "RootViewController.h"
+#import "DiscipleViewController.h"
 
 
 @interface InviteCodeViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -53,6 +54,17 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if (indexPath.row == 2) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        DiscipleViewController *disciple = [storyboard instantiateViewControllerWithIdentifier:@"DiscipleViewController"];
+        [self.navigationController pushViewController:disciple animated:YES];
+    }
 }
 
 
@@ -109,6 +121,10 @@
 - (void)rightBarButtonAction:(UIButton *)sender
 {
 #warning 分享
+    
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"" bundle:<#(NSBundle *)#>]
+    
+    
 }
 
 - (IBAction)copyAction:(UIButton *)sender {
