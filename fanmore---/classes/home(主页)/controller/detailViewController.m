@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *answerBtn;
+
 @end
 
 @implementation detailViewController
@@ -29,7 +31,9 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:@"view-new" ofType:@"html"];
     NSURL* url = [NSURL fileURLWithPath:path];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    CGFloat xxxx = ScreenHeight - CGRectGetMinY(self.answerBtn.frame) + 5;
     self.detailWebView.backgroundColor = [UIColor whiteColor];
+    self.detailWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, xxxx, 0);
     [self.detailWebView loadRequest:request];
 }
 /**
