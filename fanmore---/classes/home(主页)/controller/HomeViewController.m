@@ -27,6 +27,7 @@ static NSString *homeCellidentify = @"homeCellId";
     
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     
 }
 

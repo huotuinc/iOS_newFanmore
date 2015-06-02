@@ -26,6 +26,15 @@
     
 }
 
+ - (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    RootViewController * root = (RootViewController *)self.mm_drawerController;
+    [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
