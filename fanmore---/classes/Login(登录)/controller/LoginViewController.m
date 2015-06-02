@@ -11,7 +11,7 @@
 #import "Result.h"
 #import "LoginResultData.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UserRegisterViewDelegate>
 /**用户名*/
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextFiled;
 /**密码*/
@@ -124,14 +124,21 @@
     params[@"username"] = self.userNameTextFiled.text;
     params[@"password"] = [MD5Encryption md5by32:self.passwdTextField.text];
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"login"];
-    NSLog(@"url==%@",params);
     //发送网络请求
-    [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+    [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
   
-#warning 账号保存
-        //保存用户名
-        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginUserName];
-        [[NSUserDefaults standardUserDefaults] setObject:@"xxxxx" forKey:loginPassword];
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+            
+            NSLog(@"登录成功");
+            //保存用户名和密码
+            [[NSUserDefaults standardUserDefaults] setObject:self.userNameTextFiled.text forKey:loginUserName];
+            [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:self.passwdTextField.text] forKey:loginPassword];
+            
+            userData * userInfo = [userData objectWithKeyValues:json[@"resultData"]];
+#warning 判断是否需要绑定
+            
+        }
+        
         if(![self checkTel:self.userNameTextFiled.text]){
             NSLog(@"不是手机号");
             BoundPhoneViewController * bound = [[BoundPhoneViewController alloc] init];
@@ -186,4 +193,9 @@
     return YES;
 }
 
+
+#pragma UserRegisterViewDelegate 注册成功
+- (void)UserRegisterViewSuccess:(userData *)userInfo{
+    NSLog(@"用户注册成功，返回");
+}
 @end

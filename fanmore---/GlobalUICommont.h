@@ -17,22 +17,29 @@
 
 
 //网络请求的固定参数
-
 #define HuoToAppSecret @"1165a8d240b29af3f418b8d10599d0da"  //火图安全网络请求安全协议
 //appKey
 #define APPKEY @"b73ca64567fb49ee963477263283a1bf"
 /**应用版本号*/
-#define APPLICATIONVERSION_parame ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue])
+#define AppVersion [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue]
 /**平台*/
 #define OPERATION_parame @"FM2015AP"
+/**设备唯一号*/
+#define  DeviceNo ([[UIDevice currentDevice].identifierForVendor UUIDString])
 /**时间*/
-#define timestamp_parame [[NSDate date] timeIntervalSince1970]]
+#define apptimesSince1970 [NSString stringWithFormat:@"%.0f",[[[NSDate alloc] init] timeIntervalSince1970]]
+
+/**appToken*/
+#define AppToken @"AppToken"
+
 
 #define DWLongitude @"dwLong" //定位精度
 #define DWLatitude @"dwLat"   //定位纬度
+
 #define loginUserName  @"username" //用户名
 #define loginPassword @"password"  //密码
-#define imei_parame ([[[UIDevice currentDevice] identifierForVendor] UUIDString])
+
+
 
 //网络请求的固定参数
 

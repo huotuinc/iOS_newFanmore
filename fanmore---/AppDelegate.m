@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "MobClick.h"
 #import <INTULocationManager.h>//定位
+#import "LoginResultData.h"
+
 @interface AppDelegate ()
 
 
@@ -25,14 +27,11 @@
     [MobClick setCrashReportEnabled:YES];
 //    *友盟注册*
     
-   
-    
-    /**定位*/
+   /**定位*/
     INTULocationManager * locMgr = [INTULocationManager sharedInstance];
     [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
         if (status == INTULocationStatusSuccess) {
             NSLog(@"定位成功纬度 %f 精度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
-            
             NSString * lat = [NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude];
             NSString * lg = [NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude];
             [[NSUserDefaults standardUserDefaults] setObject:lat forKey:DWLatitude]; //保存纬度
@@ -44,43 +43,74 @@
             
     }];
     
-    //出使化网络
-    AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
-    NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    params[@"appKey"] = APPKEY;
-    params[@"lat"] = @(120.2);
-    params[@"lng"] = @(13.3);
-    params[@"timestamp"] = @(1234567890);
-    params[@"operation"] = OPERATION_parame;
-    params[@"version"] = @(APPLICATIONVERSION_parame);
-    params[@"token"] = @"";
-    params[@"imei"] = @"201505280940";
-    params[@"cityCode"] = @"1372";
-    params[@"sign"] = [NSDictionary asignWithMutableDictionary:params];
-    params[@"cpaCode"] = @"default";
-    //网络请求借口
-    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
-    [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
-        NSLog(@"success====%@",responseObject);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-//        NSLog(@"xxxxxxx=%@",error.description);
-    }];
-    
+    __weak AppDelegate * wself = self;
     //用户名和数据有数据
     if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
         
+        [wself setupInit];
+        //跳转到首页
         RootViewController * roots = [[RootViewController alloc] init];
         self.window.rootViewController = roots;
     }else{
+        
+        [wself setupInit];
+        //跳转到登录界面
         LoginViewController * login = [[LoginViewController alloc] init];
         UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
         self.window.rootViewController = loginNav;
-        
     }
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+
+/**
+ *  返回值token比较值
+ *
+ *  @return falure 就token不通
+ */
+- (void)setupInit{
+    
+    //出使化网络
+    AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"appSecret"] = HuoToAppSecret;
+    params[@"appKey"] = APPKEY;
+    NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
+    NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
+    NSLog(@"lat = %@  log = %@",lat,lng);
+    params[@"lat"] = @(116.0);
+    params[@"lng"] =@(40.0);
+    params[@"timestamp"] = apptimesSince1970;
+    params[@"operation"] = OPERATION_parame;
+    params[@"version"] = [NSString stringWithFormat:@"%f",AppVersion];
+    NSString * apptoken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppToken"];
+    params[@"token"] = apptoken?apptoken:@"";
+    params[@"imei"] = DeviceNo;
+    params[@"cityCode"] = @"123";
+    params[@"cpaCode"] = @"default";
+    params[@"sign"] = [NSDictionary asignWithMutableDictionary:params];
+    [params removeObjectForKey:@"appSecret"];
+    //网络请求借口
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
+    [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
+        NSLog(@"%@",responseObject);
+        if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {
+            LoginResultData * resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];
+            NSLog(@"success====%@",resultData);
+            
+        }else{
+            
+            NSLog(@"网络请求出错了");
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"xxxxxxx=%@",error.description);
+    }];
+
+ 
 }
 //添加滑动的手势
 - (void)handleSwipes22:(UISwipeGestureRecognizer *)sender{

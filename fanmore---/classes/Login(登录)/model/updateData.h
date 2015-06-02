@@ -15,7 +15,7 @@
 @property(nonatomic,strong) NSString * tips;
 @property(nonatomic,strong) NSNumber * updateStatus;
 
-
+//
 //- (instancetype)initWithVersion:(NSString *)version updateUrl:(NSString *)updateUrl tips:(NSString *)tips updateStatus:(NSNumber *)updateStatus;
 //
 //+ (instancetype)updateDataWithVersion:(NSString *)version updateUrl:(NSString *)updateUrl tips:(NSString *)tips updateStatus:(NSNumber *)updateStatus;

@@ -11,5 +11,10 @@
 @interface twoOption : NSObject
 
 
-//@property(nonatomic,copy) 
+/**name*/
+@property(nonatomic,copy) NSString * name;
+
+/**value*/
+@property(nonatomic,copy) NSString * value;
+
 @end
