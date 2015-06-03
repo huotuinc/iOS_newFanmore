@@ -1248,6 +1248,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="answerBtn" destination="Ux7-lE-E72" id="4A6-ia-MWy"/>
                         <outlet property="detailWebView" destination="wun-CQ-LHz" id="zRf-Og-hra"/>
                         <outlet property="goQusetion" destination="Ux7-lE-E72" id="hD7-6g-zIQ"/>
                         <outlet property="webView" destination="wun-CQ-LHz" id="3Qu-7i-pax"/>

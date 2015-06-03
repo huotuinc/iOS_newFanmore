@@ -20,6 +20,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+  
 }
 
 - (void)viewDidLoad
