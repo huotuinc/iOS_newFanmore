@@ -12,14 +12,33 @@
 #import <UIViewController+MMDrawerController.h>
 #import "HomeCell.h"
 #import "detailViewController.h"
+#import "BuyFlowViewController.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
+
+/**任务列表*/
+@property(nonatomic,strong)NSMutableArray * tasks;
 @end
 
 @implementation HomeViewController
 
 static NSString *homeCellidentify = @"homeCellId";
+
+
+
+/**
+ *  网络数据数组懒加载
+ *
+ *  @return 一个数组
+ */
+- (NSMutableArray *)tasks{
+    if (_tasks == nil) {
+        _tasks = [NSMutableArray array];
+    }
+    return _tasks;
+}
+
 
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -101,6 +120,9 @@ static NSString *homeCellidentify = @"homeCellId";
 
 
 -(void)getMoreData{
+    
+    
+//    [UserLoginTool loginRequestGet:<#(NSString *)#> parame:<#(NSMutableDictionary *)#> success:<#^(id json)success#> failure:<#^(NSError *error)failure#>]
 //    //1、设置网络获取的参数
 //    HA4SInfoRequestParame * parame = [HA4SInfoRequestParame InfoRequestParameWithpartnerCode:proCode andStartIndex:startIndex andPageSize:@(PageSize)];
 //    //2、网络获取加载数据
@@ -201,8 +223,8 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)rightBarButtonAction:(UIButton *) sender
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    TrafficShowController *show = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
-    [self.navigationController pushViewController:show animated:YES];
+    BuyFlowViewController *buyFlowVc = [storyboard instantiateViewControllerWithIdentifier:@"BuyFlowViewController"];
+    [self.navigationController pushViewController:buyFlowVc animated:YES];
 }
 
 /**

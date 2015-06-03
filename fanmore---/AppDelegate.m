@@ -11,6 +11,16 @@
 #import <INTULocationManager.h>//定位
 #import "LoginResultData.h"
 
+#import <ShareSDK/ShareSDK.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WXApi.h"
+//#import "WeiboApi.h"
+#import "WeiboSDK.h"
+//#import <RennSDK/RennSDK.h>
+
+
+
 @interface AppDelegate ()
 
 
@@ -27,6 +37,43 @@
     [MobClick setCrashReportEnabled:YES];
 //    *友盟注册*
     
+    
+    /**shareSdK*/
+    //1、连接短信分享
+    [ShareSDK connectSMS];
+    //2、连接邮件
+    [ShareSDK connectMail];
+    
+    [ShareSDK registerApp:@"api20"];//字符串api20为您的ShareSDK的AppKey
+    
+    //3添加新浪微博应用 注册网址 http://open.weibo.com
+    [ShareSDK connectSinaWeiboWithAppKey:APPKEY
+                               appSecret:@"0783d8dd1f0eb5a45687cde79aa10108"
+                             redirectUri:@"http://www.sharesdk.cn"];
+    //3当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
+    [ShareSDK  connectSinaWeiboWithAppKey:APPKEY
+                                appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
+                              redirectUri:@"http://www.sharesdk.cn"
+                              weiboSDKCls:[WeiboSDK class]];
+    //4添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
+    [ShareSDK connectQZoneWithAppKey:APPKEY
+                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"
+                   qqApiInterfaceCls:[QQApiInterface class]
+                     tencentOAuthCls:[TencentOAuth class]];
+    
+    //4添加QQ应用  注册网址  http://mobile.qq.com/api/
+    [ShareSDK connectQQWithQZoneAppKey:APPKEY
+                     qqApiInterfaceCls:[QQApiInterface class]
+                       tencentOAuthCls:[TencentOAuth class]];
+    
+    //5添加微信应用 注册网址 http://open.weixin.qq.com
+    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
+                           wechatCls:[WXApi class]];
+    //5微信登陆的时候需要初始化
+    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
+                           appSecret:@"64020361b8ec4c99936c0e3999a9f249"
+                           wechatCls:[WXApi class]];
+    /**shareSdK*/
    /**定位*/
     INTULocationManager * locMgr = [INTULocationManager sharedInstance];
     [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
@@ -47,13 +94,25 @@
     //用户名和数据有数据
     if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
         
-        [wself setupInit];
-        //跳转到首页
-        RootViewController * roots = [[RootViewController alloc] init];
-        self.window.rootViewController = roots;
+        NSString * newToken = [wself setupInit];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:AppToken] isEqualToString:newToken]) {//token 相同
+            //跳转到首页
+            RootViewController * roots = [[RootViewController alloc] init];
+            self.window.rootViewController = roots;
+        }else{
+            
+            [[NSUserDefaults standardUserDefaults] setObject:newToken forKey:AppToken];  //不同保存新的token
+            //跳转到登录界面
+            LoginViewController * login = [[LoginViewController alloc] init];
+            UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+            self.window.rootViewController = loginNav;
+            
+        }
+        
+        
     }else{
         
-        [wself setupInit];
+        NSString * newToken = [wself setupInit];
         //跳转到登录界面
         LoginViewController * login = [[LoginViewController alloc] init];
         UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
@@ -69,7 +128,7 @@
  *
  *  @return falure 就token不通
  */
-- (void)setupInit{
+- (NSString *)setupInit{
     
     //出使化网络
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
@@ -93,11 +152,13 @@
     [params removeObjectForKey:@"appSecret"];
     //网络请求借口
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
+    __block LoginResultData * resultData = [[LoginResultData alloc] init];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
         NSLog(@"%@",responseObject);
         if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {
-            LoginResultData * resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];
-            NSLog(@"success====%@",resultData);
+            resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];
+            
+            NSLog(@"resultData====%@",resultData);
             
         }else{
             
@@ -110,7 +171,7 @@
         NSLog(@"xxxxxxx=%@",error.description);
     }];
 
- 
+    return resultData.user.token;
 }
 //添加滑动的手势
 - (void)handleSwipes22:(UISwipeGestureRecognizer *)sender{

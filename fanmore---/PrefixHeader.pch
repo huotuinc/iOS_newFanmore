@@ -16,7 +16,8 @@
 
 #ifdef __OBJC__
 
-#import "GlobalUICommont.h"
+#import "GlobalUICommont.h"  //友盟
+#import <ShareSDK/ShareSDK.h> //shareSDK   
 #import "MBProgressHUD+MJ.h"
 #import "MJExtension.h"
 #import "AFNetworking.h"
