@@ -11,6 +11,32 @@
 
 @interface TrafficShowController : UIViewController
 
+/**
+ *  中间⭕️视图
+ */
 @property (weak, nonatomic) IBOutlet PICircularProgressView *PICView;
+
+/**
+ *  购买按钮
+ */
+@property (weak, nonatomic) IBOutlet UIButton *buyButton;
+
+/**
+ *  选择视图
+ */
+@property (strong, nonatomic) UIView *bgView;
+@property (assign, nonatomic) double *height;
+
+/**
+ *  视图中的选项
+ */
+@property (strong, nonatomic) UICollectionView *collectionView;
+
+- (IBAction)exchangeAction:(id)sender;
+
+@property (assign, nonatomic) NSInteger itemNum;
+
+@property (assign, nonatomic) CGFloat collectionHeight;
+
 
 @end
