@@ -103,13 +103,11 @@
         
         [aa removeFromSuperview];
     }
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button-W"]];
-    image.contentMode = UIViewContentModeScaleAspectFit;
-    cell.backgroundView = image;
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button－G"]];
 
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
-    label.text = @"100M";
+    label.text = self.goods[indexPath.row + indexPath.section];
     label.textAlignment = NSTextAlignmentCenter;
     [cell addSubview:label];
     

@@ -58,11 +58,11 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.bgView addSubview:self.collectionView];
     
     
-    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
-    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
-    
-    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
-    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
+//    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
+//    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
+//    
+//    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
+//    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
     
 }
 
@@ -89,10 +89,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     if (!cell) {
         cell = [[UICollectionViewCell alloc] init];
     }
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button-W"]];
-    image.contentMode = UIViewContentModeScaleAspectFit;
-    cell.backgroundView = image;
-    
+    cell.backgroundColor = [UIColor     colorWithPatternImage:[UIImage imageNamed:@"button－G"]];
+
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
     label.text = @"100M";
     label.textAlignment = NSTextAlignmentCenter;
