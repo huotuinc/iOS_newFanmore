@@ -20,6 +20,7 @@
  *  购买按钮
  */
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
+@property (weak, nonatomic) IBOutlet UIButton *exchageButton;
 
 /**
  *  选择视图
@@ -33,6 +34,7 @@
 @property (strong, nonatomic) UICollectionView *collectionView;
 
 - (IBAction)exchangeAction:(id)sender;
+- (IBAction)buyAction:(id)sender;
 
 @property (assign, nonatomic) NSInteger itemNum;
 
