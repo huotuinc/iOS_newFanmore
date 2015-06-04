@@ -32,6 +32,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
+    
+    NSLog(@"xxxxxxxxxxxxxxxxxlaunchOptions=======%@",launchOptions);
+    
 //    *友盟*
     [MobClick startWithAppkey:UMENGID reportPolicy:BATCH channelId:nil];
     [MobClick setCrashReportEnabled:YES];
@@ -90,36 +93,47 @@
             
     }];
     
-    __weak AppDelegate * wself = self;
-    //用户名和数据有数据
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
-        
-        NSString * newToken = [wself setupInit];
-//        if ([[[NSUserDefaults standardUserDefaults] objectForKey:AppToken] isEqualToString:newToken]) {//token 相同
-            //跳转到首页
-            RootViewController * roots = [[RootViewController alloc] init];
-            self.window.rootViewController = roots;
-//        }else{
-//            
-//            [[NSUserDefaults standardUserDefaults] setObject:newToken forKey:AppToken];  //不同保存新的token
-//            //跳转到登录界面
-//            LoginViewController * login = [[LoginViewController alloc] init];
-//            UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-//            self.window.rootViewController = loginNav;
-//            
-//        }
-        
-        
-    }else{
-        
-        NSString * newToken = [wself setupInit];
-        //跳转到登录界面
-        LoginViewController * login = [[LoginViewController alloc] init];
-        UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-        self.window.rootViewController = loginNav;
-    }
+    //进行初始化借口调用
+    [self setupInit];
+    
+    //
+    RootViewController * roots = [[RootViewController alloc] init];
+    self.window.rootViewController = roots;
+    
     [self.window makeKeyAndVisible];
     return YES;
+    
+    
+    
+    //    __weak AppDelegate * wself = self;
+//    //用户名和数据有数据
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
+//        
+//        NSString * newToken = [wself setupInit];
+////        if ([[[NSUserDefaults standardUserDefaults] objectForKey:AppToken] isEqualToString:newToken]) {//token 相同
+//            //跳转到首页
+//            RootViewController * roots = [[RootViewController alloc] init];
+//            self.window.rootViewController = roots;
+////        }else{
+////            
+////            [[NSUserDefaults standardUserDefaults] setObject:newToken forKey:AppToken];  //不同保存新的token
+////            //跳转到登录界面
+////            LoginViewController * login = [[LoginViewController alloc] init];
+////            UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+////            self.window.rootViewController = loginNav;
+////            
+////        }
+//        
+//        
+//    }else{
+//        
+////        NSString * newToken = [wself setupInit];
+//        //跳转到登录界面
+//        LoginViewController * login = [[LoginViewController alloc] init];
+//        UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+//        self.window.rootViewController = loginNav;
+//    }
+    
 }
 
 
@@ -154,9 +168,24 @@
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
     __block LoginResultData * resultData = [[LoginResultData alloc] init];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
-        NSLog(@"%@",responseObject);
+        NSLog(@"init 借口返回的数据%@",responseObject);
         if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {
+            
             resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];
+            
+            //取出本地token
+//            NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:apptoken];
+            
+//            NSLog(@"localtoken=======%@  new===============%@",token,resultData.user.token);
+            if (![@"13123" isEqualToString:resultData.user.token]) {  //token 与本地不同
+                
+                NSString * login = @"faluse";
+                [[NSUserDefaults standardUserDefaults] setObject:login forKey:loginFlag];
+            }else{  //token 与本地相同
+                
+                NSString * login = @"success";
+                [[NSUserDefaults standardUserDefaults] setObject:login forKey:loginFlag];
+            }
             
             NSLog(@"resultData====%@",resultData);
             

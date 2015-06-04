@@ -71,6 +71,13 @@
     self.collection.dataSource = self;
     self.collection.delegate = self;
     [self.collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
+    
+    
+    
+//    NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:self.oldPriceLable.text];
+//    [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(2, 10)];
+//    [attri addAttribute:NSStrikethroughColorAttributeName value:self.oldPriceLable.textColor range:NSMakeRange(0, 10)];
+//    [self.oldPriceLable setAttributedText:attri];
 }
 
 
@@ -115,6 +122,10 @@
 }
 
 
+- (void)optionsButtonClick:(UIButton *)btn{
+    
+    NSLog(@"%ld",(long)btn.tag);
+}
 #pragma UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

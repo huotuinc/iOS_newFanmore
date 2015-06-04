@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bbc-LE-jve">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bbc-LE-jve">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -948,7 +948,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="确认密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3WZ-D2-shV">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="确认新密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3WZ-D2-shV">
                                         <rect key="frame" x="82" y="93" width="504" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Sue-gs-df4"/>
@@ -984,7 +984,7 @@
                                             <constraint firstAttribute="height" constant="1" id="aWo-h7-FEL"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iee-Xa-Eev">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入新密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iee-Xa-Eev">
                                         <rect key="frame" x="82" y="47" width="504" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="2f9-1Q-PNT"/>
@@ -1116,6 +1116,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="firstPassWord" destination="Iee-Xa-Eev" id="BbK-hz-m44"/>
+                        <outlet property="oldPassWordTextField" destination="ecg-uT-UFD" id="V7T-wh-dLO"/>
+                        <outlet property="phoneTextLable" destination="OKB-mH-Xxj" id="G7I-HK-y3i"/>
+                        <outlet property="secondPassword" destination="3WZ-D2-shV" id="dqN-j2-BeE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1yJ-pr-VY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1685,7 +1691,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="admin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5t-SA-sKB">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5t-SA-sKB">
                                         <rect key="frame" x="140" y="5" width="85" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="jIX-qx-Z0N"/>

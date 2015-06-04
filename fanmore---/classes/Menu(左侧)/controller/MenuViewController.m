@@ -72,6 +72,13 @@
         [self.navigationController pushViewController:traffic animated:YES];
     }];
     
+     self.nameLable.userInteractionEnabled = YES;
+    [self.nameLable bk_whenTapped:^{
+
+        LoginViewController * login = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:login animated:YES];
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

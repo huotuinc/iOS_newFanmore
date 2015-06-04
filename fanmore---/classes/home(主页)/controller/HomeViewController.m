@@ -122,6 +122,9 @@ static NSString *homeCellidentify = @"homeCellId";
 -(void)getMoreData{
     
     
+    
+    
+    
 //    [UserLoginTool loginRequestGet:<#(NSString *)#> parame:<#(NSMutableDictionary *)#> success:<#^(id json)success#> failure:<#^(NSError *error)failure#>]
 //    //1、设置网络获取的参数
 //    HA4SInfoRequestParame * parame = [HA4SInfoRequestParame InfoRequestParameWithpartnerCode:proCode andStartIndex:startIndex andPageSize:@(PageSize)];
