@@ -72,6 +72,13 @@
     self.collection.dataSource = self;
     self.collection.delegate = self;
     [self.collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
+    
+    
+    
+//    NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:self.oldPriceLable.text];
+//    [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(2, 10)];
+//    [attri addAttribute:NSStrikethroughColorAttributeName value:self.oldPriceLable.textColor range:NSMakeRange(0, 10)];
+//    [self.oldPriceLable setAttributedText:attri];
 }
 
 
@@ -104,6 +111,7 @@
     [btn addTarget:self action:@selector(optionsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     btn.frame = CGRectMake(0, 0, cell.frame.size.width , cell.frame.size.height);
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn setBackgroundImage:[[UIImage imageNamed:@"tonday"] stretchableImageWithLeftCapWidth:1 topCapHeight:1] forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"tonday"] forState:UIControlStateSelected];
     [btn setTitle:self.goods[indexPath.row] forState:UIControlStateNormal];
    
@@ -113,7 +121,7 @@
 
 - (void)optionsButtonClick:(UIButton *)btn{
     
-    NSLog(@"%d",btn.tag);
+    NSLog(@"%ld",(long)btn.tag);
 }
 #pragma UICollectionViewDelegate
 

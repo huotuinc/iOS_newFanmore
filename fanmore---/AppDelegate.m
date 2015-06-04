@@ -112,7 +112,7 @@
         
     }else{
         
-        NSString * newToken = [wself setupInit];
+//        NSString * newToken = [wself setupInit];
         //跳转到登录界面
         LoginViewController * login = [[LoginViewController alloc] init];
         UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
