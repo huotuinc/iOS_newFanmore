@@ -95,19 +95,19 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
         
         NSString * newToken = [wself setupInit];
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:AppToken] isEqualToString:newToken]) {//token 相同
+//        if ([[[NSUserDefaults standardUserDefaults] objectForKey:AppToken] isEqualToString:newToken]) {//token 相同
             //跳转到首页
             RootViewController * roots = [[RootViewController alloc] init];
             self.window.rootViewController = roots;
-        }else{
-            
-            [[NSUserDefaults standardUserDefaults] setObject:newToken forKey:AppToken];  //不同保存新的token
-            //跳转到登录界面
-            LoginViewController * login = [[LoginViewController alloc] init];
-            UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-            self.window.rootViewController = loginNav;
-            
-        }
+//        }else{
+//            
+//            [[NSUserDefaults standardUserDefaults] setObject:newToken forKey:AppToken];  //不同保存新的token
+//            //跳转到登录界面
+//            LoginViewController * login = [[LoginViewController alloc] init];
+//            UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+//            self.window.rootViewController = loginNav;
+//            
+//        }
         
         
     }else{

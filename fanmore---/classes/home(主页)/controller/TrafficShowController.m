@@ -7,6 +7,7 @@
 //
 
 #import "TrafficShowController.h"
+#import "BuyFlowViewController.h"
 
 @interface TrafficShowController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -56,6 +57,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewidentifier];
     [self.bgView addSubview:self.collectionView];
     
+    
+    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
+    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
+    
+    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-B"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
+    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-B"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
     
 }
 
@@ -114,6 +121,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,6 +149,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     }];
 //
     
+}
+
+- (IBAction)buyAction:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    BuyFlowViewController *buy = [storyboard instantiateViewControllerWithIdentifier:@"BuyFlowViewController"];
+    [self.navigationController pushViewController:buy animated:YES];
 }
 
 - (void)regAction:(UIGestureRecognizer *)sender

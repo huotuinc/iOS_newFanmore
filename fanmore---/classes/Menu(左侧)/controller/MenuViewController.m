@@ -14,8 +14,13 @@
 #import <UIViewController+MMDrawerController.h>
 #import "AccountSettingViewController.h"
 #import "TodayForesController.h"
+#import "TrafficShowController.h"
+
 
 @interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource>
+/**
+ 
+ */
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLable;
 @property (weak, nonatomic) IBOutlet UILabel *flowLable;
@@ -59,6 +64,13 @@
     self.optionList.scrollEnabled = NO;
     self.optionList.tableFooterView = [[UIView alloc] init];
     self.optionList.tableHeaderView = [[UIView alloc] init];
+    
+    self.flowLable.userInteractionEnabled = YES;
+    [self.flowLable bk_whenTapped:^{
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+        [self.navigationController pushViewController:traffic animated:YES];
+    }];
     
 }
 

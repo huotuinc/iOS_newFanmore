@@ -44,11 +44,10 @@
         flowL.minimumInteritemSpacing = 15;
         flowL.sectionInset = UIEdgeInsetsMake(0, 15, 0, 0);
         
-        flowL.itemSize = CGSizeMake((ScreenWidth -20 - 40) / 3, 50);
+//        flowL.itemSize = CGSizeMake((ScreenWidth -20 - 40) / 3, 50);
         _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.goodsCollectionView.frame.size.width, self.goodsCollectionView.frame.size.height) collectionViewLayout:flowL];
         _collection.backgroundColor = [UIColor whiteColor];
         _collection.showsVerticalScrollIndicator = NO;
-        
     }
     
     return _collection;
@@ -90,11 +89,17 @@
 #pragma UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return 11;
+    return self.goods.count;
 }
 - (NSInteger)numberOfItemsInSection:(NSInteger)section{
     return 3;
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(80, 60);
+}
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -105,6 +110,15 @@
         
         [aa removeFromSuperview];
     }
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button-W"]];
+    image.contentMode = UIViewContentModeScaleAspectFit;
+    cell.backgroundView = image;
+
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
+    label.text = @"100M";
+    label.textAlignment = NSTextAlignmentCenter;
+    [cell addSubview:label];
     
     UIButton * btn = [[UIButton alloc] init];
     btn.tag = indexPath.row;
