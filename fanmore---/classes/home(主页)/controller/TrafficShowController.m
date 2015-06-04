@@ -61,8 +61,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
     [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
     
-    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-B"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
-    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-B"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
+    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
+    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
     
 }
 
