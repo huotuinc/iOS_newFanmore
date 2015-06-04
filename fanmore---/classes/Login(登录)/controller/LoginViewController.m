@@ -35,6 +35,16 @@
 
 @implementation LoginViewController
 
+
+/**显示导行栏*/
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    RootViewController * root = (RootViewController *)self.mm_drawerController;
+    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     //1、设置控件属性

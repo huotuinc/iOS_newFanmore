@@ -27,11 +27,11 @@
 /**电话*/
 @property(nonatomic,strong) NSString * mobile;
 /**职业索引*/
-@property(nonatomic,strong) NSNumber * career;
+@property(nonatomic,strong) NSArray * career;
 /**收入索引*/
-@property(nonatomic,strong) NSNumber * incoming;
+@property(nonatomic,strong) NSArray * incoming;
 /**爱好索引串  以逗号隔开*/
-@property(nonatomic,strong) NSString * favs;
+@property(nonatomic,strong) NSArray * favs;
 
 /**区域*/
 @property(nonatomic,strong) NSString * area;

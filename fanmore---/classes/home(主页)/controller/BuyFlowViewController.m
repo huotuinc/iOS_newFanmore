@@ -120,18 +120,9 @@
     label.textAlignment = NSTextAlignmentCenter;
     [cell addSubview:label];
     
-    UIButton * btn = [[UIButton alloc] init];
-    btn.tag = indexPath.row;
-    [btn addTarget:self action:@selector(optionsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    btn.frame = CGRectMake(0, 0, cell.frame.size.width , cell.frame.size.height);
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn setBackgroundImage:[[UIImage imageNamed:@"tonday"] stretchableImageWithLeftCapWidth:1 topCapHeight:1] forState:UIControlStateNormal];
-    [btn setBackgroundImage:[UIImage imageNamed:@"tonday"] forState:UIControlStateSelected];
-    [btn setTitle:self.goods[indexPath.row] forState:UIControlStateNormal];
-   
-    [cell.contentView addSubview:btn];
     return cell;
 }
+
 
 - (void)optionsButtonClick:(UIButton *)btn{
     

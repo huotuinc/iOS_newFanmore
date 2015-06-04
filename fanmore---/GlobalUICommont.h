@@ -38,7 +38,7 @@
 
 #define loginUserName  @"username" //用户名
 #define loginPassword @"password"  //密码
-
+#define loginFlag @"loginFlag"  // 是否需要等人标志
 
 
 //网络请求的固定参数
