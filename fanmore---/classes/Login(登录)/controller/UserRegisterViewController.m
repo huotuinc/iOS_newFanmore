@@ -117,15 +117,13 @@
     self.InvitationCode.text.length?(parame[@"invcode"] = self.InvitationCode.text):(parame[@"invcode"] = [NSString stringWithFormat:@""]);
     //发送网络请求
     
-    NSLog(@"par======================%@",parame);
+    NSLog(@"par======xxxxxxxxxxx================%@",parame);
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"reg"];
     __weak UserRegisterViewController *wself = self;
     [UserLoginTool loginRequestPost:urlStr parame:parame success:^(NSDictionary* json) {
         
         NSLog(@"注册＝＝＝＝＝＝%@",json);
-        if (json==nil) {
-            return ;
-        }
+        
         //手机号是否被注册
         if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue] ==  54004) {
             
@@ -158,14 +156,14 @@
                 
                 [wself.delegate UserRegisterViewSuccess:userInfo];
             }
-            [self.navigationController popToRootViewControllerAnimated:YES];
+//            [self.navigationController popToRootViewControllerAnimated:YES];
         }
         
     } failure:^(NSError *error) {
         
         NSLog(@"注册失败%@",[error localizedDescription]);
     }];
-    NSLog(@"0000000000000");
+   
 }
 
 - (IBAction)verification:(UIButton *)sender {

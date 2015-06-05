@@ -58,12 +58,23 @@
 - (IBAction)codeButton:(id)sender {
    
     //绑定手机号
-    if ([NSString checkTel:self.phoneNumber.text]) {
+    if (![NSString checkTel:self.phoneNumber.text]) {
         [MBProgressHUD showError:@"请输入正确的手机号"];
         return;
     }
     //验证码的倒计时
     [self settime];
+    
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"phone"] = self.phoneNumber.text;
+    params[@"type"] = @"3";
+    NSString * urlStr= [MainURL stringByAppendingPathComponent:@"sendSMS"];
+    [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
+        
+        NSLog(@"======%@",json);
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error.description);
+    }];
 }
 
 /**
@@ -131,13 +142,21 @@
     params[@"authcode"] = self.codeTextField.text;
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"bandingmobile"];
     
+    __weak BoundPhoneViewController * wself = self;
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
        //绑定手机成功
-        RootViewController * roots = [[RootViewController alloc] init];
-        UIWindow * mainWindow = [UIApplication sharedApplication].keyWindow;
-        mainWindow.rootViewController = roots;
-    } failure:^(NSError *error) {
+//        RootViewController * roots = [[RootViewController alloc] init];
+//        UIWindow * mainWindow = [UIApplication sharedApplication].keyWindow;
+//        mainWindow.rootViewController = roots;
+        [MBProgressHUD hideHUD];
+        if ([wself.delegate respondsToSelector:@selector(BoundPhoneViewControllerToBoundPhoneNumber)]) {
+            
+            [wself.delegate BoundPhoneViewControllerToBoundPhoneNumber];
+        }
         
+    } failure:^(NSError *error) {
+         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:@"绑定手机失败"];
     }];
     

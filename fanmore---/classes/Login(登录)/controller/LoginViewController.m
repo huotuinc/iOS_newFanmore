@@ -11,7 +11,7 @@
 #import "Result.h"
 #import "LoginResultData.h"
 
-@interface LoginViewController ()<UserRegisterViewDelegate>
+@interface LoginViewController ()<UserRegisterViewDelegate,BoundPhoneViewControllerDelegate>
 /**用户名*/
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextFiled;
 /**密码*/
@@ -63,12 +63,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
-    
-}
+ }
 /**
  *  键盘弹出
  *
@@ -121,14 +119,16 @@
 - (IBAction)loginBtn:(id)sender {
     
     [self.view endEditing:YES];
-//    if (!self.userNameTextFiled.text.length) {
+    
+    if (!self.userNameTextFiled.text.length) {
 //        [MBProgressHUD showError:@"用户名或者手机号不能为空"];
-//        return;
-//    }
-//    if (!self.passwdTextField.text.length) {
-//        [MBProgressHUD showError:@"密码不能为空"];
-//        return;
-//    }
+        [MBProgressHUD showError:@"用户名或者手机号不能为空" toView:self.view];
+        return;
+    }
+    if (!self.passwdTextField.text.length) {
+        [MBProgressHUD showError:@"密码不能为空"];
+        return;
+    }
     //设置参数
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"username"] = self.userNameTextFiled.text;
@@ -139,7 +139,7 @@
   
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
-            NSLog(@"登录成功 %@",json);
+            NSLog(@"登录成功=========== %@",json);
             
             userData * userInfo = [userData objectWithKeyValues:json[@"resultData"]];
             //保存用户名和密码
@@ -147,30 +147,47 @@
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:self.passwdTextField.text] forKey:loginPassword];
             
             //保存登录token
-            NSString * apptoken = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+            NSString * apptoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
             if (![apptoken isEqualToString:userInfo.token]) { //当前token和原先的token不同
                 
                 [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:AppToken];
             }
-#warning 判断是否需要绑定
+
+            //0表示没有绑定的必要 1表示有绑定的必要
+            if ([json[@"resultData"][@"requireMobile"] intValue] == 0) {
+            
+                BoundPhoneViewController * bdVc = [[BoundPhoneViewController alloc] init];
+                [self.navigationController pushViewController:bdVc animated:YES];
+            }else{
+                
+                [self loginSuccess];
+            }
             
         }
         
-        if(![self checkTel:self.userNameTextFiled.text]){
-            NSLog(@"不是手机号");
-            BoundPhoneViewController * bound = [[BoundPhoneViewController alloc] init];
-            [self.navigationController pushViewController:bound animated:YES];
-        }else{
-            RootViewController * roots = [[RootViewController alloc] init];
-            UIWindow * mainWindow = [UIApplication sharedApplication].keyWindow;
-            mainWindow.rootViewController = roots;
-        }
+        
     } failure:^(NSError *error) {
         
         NSLog(@"登录失败%@",[error localizedDescription]);
         
     }];
 }
+
+
+/**
+ *  有动画
+ */
+- (void) loginSuccess{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+/**
+ *  没动画
+ */
+- (void) loginSuccess1{
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 
 - (void)dealloc{
     
@@ -213,6 +230,13 @@
 
 #pragma UserRegisterViewDelegate 注册成功
 - (void)UserRegisterViewSuccess:(userData *)userInfo{
-    NSLog(@"xxxxxxxxxxxxxxxxxxxx==================================用户注册成功，返回");
+   
+    [self loginSuccess1];
+}
+
+
+- (void)BoundPhoneViewControllerToBoundPhoneNumber{
+    
+    [self loginSuccess1];
 }
 @end

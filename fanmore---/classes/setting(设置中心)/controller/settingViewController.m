@@ -11,6 +11,8 @@
 #import "MJSettingArrowItem.h"
 #import "MJSettingLabelItem.h"
 #import "MJSettingItem.h"
+
+
 @interface settingViewController ()
 
 @end
@@ -60,6 +62,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     // 2.添加数据
     [self setupGroup0];
+    
+    self.tableView.sectionHeaderHeight = -11;
 }
 
 
