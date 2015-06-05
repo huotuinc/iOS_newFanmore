@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FinishController : UIViewController
+@interface FinishController : UIViewController<UIWebViewDelegate>
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

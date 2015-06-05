@@ -25,10 +25,16 @@
 
 @property (nonatomic,strong) UICollectionView  * collection;
 
+@property (strong, nonatomic) NSIndexPath *selected;
+
+@property (assign, nonatomic) int num;
+
 /**商品*/
 @property(nonatomic,strong) NSArray * goods;
 /**购买按钮*/
 - (IBAction)buyButtonClick:(UIButton *)sender;
+
+
 
 @end
 @implementation BuyFlowViewController
@@ -38,16 +44,22 @@
 - (UICollectionView *)collection{
     
     if (_collection == nil) {
+        CGFloat collectionHeight = 0;
+        if (self.goods.count / self.num) {
+            collectionHeight = (self.goods.count / self.num + 1) * 65 + 5;
+        }else {
+            collectionHeight = self.goods.count / self.num * (60 + 5) + 5;
+        }
         
-        UICollectionViewFlowLayout *flowL = [UICollectionViewFlowLayout alloc];
-        flowL.minimumLineSpacing = 15;
-        flowL.minimumInteritemSpacing = 15;
-        flowL.sectionInset = UIEdgeInsetsMake(0, 15, 0, 0);
-        
-//        flowL.itemSize = CGSizeMake((ScreenWidth -20 - 40) / 3, 50);
-        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.goodsCollectionView.frame.size.width, self.goodsCollectionView.frame.size.height) collectionViewLayout:flowL];
+        UICollectionViewFlowLayout *flowL = [[UICollectionViewFlowLayout alloc] init];
+        [flowL setScrollDirection:UICollectionViewScrollDirectionVertical];
+        flowL.scrollDirection = UICollectionViewScrollDirectionVertical;
+        flowL.footerReferenceSize = CGSizeMake(260 , 10);
+        flowL.minimumInteritemSpacing = 10;
+
+        _collection = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 0, ScreenWidth - 40 - 20, ScreenHeight  / 2.5) collectionViewLayout:flowL];
         _collection.backgroundColor = [UIColor whiteColor];
-        _collection.showsVerticalScrollIndicator = NO;
+        _collection.scrollEnabled = YES;
     }
     
     return _collection;
@@ -57,7 +69,7 @@
     if (_goods == nil) {
         
         _goods = [NSArray array];
-        _goods = @[@"10M",@"20M",@"30M",@"50M",@"70M",@"150M",@"210M",@"210M",@"500M",@"1000M",@"1500M",@"3000M"];
+        _goods = @[@"10M",@"20M",@"30M",@"50M",@"70M",@"150M",@"210M",@"250M",@"500M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M"];
     }
     return _goods;
 }
@@ -66,7 +78,14 @@
 - (void)viewDidLoad{
     
     [super viewDidLoad];
-     self.title = @"购买流量";
+    self.title = @"购买流量";
+    
+    if (ScreenWidth - 40 - 20 > 25 + 4 * 80 ) {
+        self.num = 4;
+    }else {
+        self.num = 3;
+    }
+    
     [self.goodsCollectionView addSubview:self.collection];
     self.collection.dataSource = self;
     self.collection.delegate = self;
@@ -74,10 +93,15 @@
     
     
     
-//    NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:self.oldPriceLable.text];
-//    [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(2, 10)];
-//    [attri addAttribute:NSStrikethroughColorAttributeName value:self.oldPriceLable.textColor range:NSMakeRange(0, 10)];
-//    [self.oldPriceLable setAttributedText:attri];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    RootViewController * root = (RootViewController *)self.mm_drawerController;
+//    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
 }
 
 
@@ -89,11 +113,19 @@
 #pragma UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return self.goods.count;
+    return self.num;
 }
-- (NSInteger)numberOfItemsInSection:(NSInteger)section{
-    return 3;
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    if (self.goods.count % self.num) {
+        return self.goods.count / self.num + 1;
+    }else {
+        return self.goods.count / self.num;
+    }
 }
+
+
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -114,9 +146,11 @@
 
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
-    label.text = self.goods[indexPath.row + indexPath.section];
+    
+    label.text = self.goods[indexPath.row + indexPath.section * self.num];
     label.textAlignment = NSTextAlignmentCenter;
-    [cell addSubview:label];
+    label.tag = indexPath.row + indexPath.section * self.num + 100;
+    [cell.contentView addSubview:label];
     
     return cell;
 }
@@ -130,6 +164,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSLog(@"xxxxxxxx");
+    UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
+    scell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button－G"]];
+    UILabel *slabel = (UILabel *)[self.view viewWithTag:self.selected.row + self.selected.section * self.num + 100];
+    slabel.textColor = [UIColor blackColor];
+    
+    
+    UICollectionViewCell *cell = [self.collection cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor orangeColor];
+    UILabel *label = (UILabel *)[self.view viewWithTag:indexPath.row + indexPath.section * self.num + 100];
+    label.textColor = [UIColor whiteColor];
+    
+    self.selected = indexPath;
+    
 }
 @end

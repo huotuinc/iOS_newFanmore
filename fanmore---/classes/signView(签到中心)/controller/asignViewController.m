@@ -99,6 +99,10 @@
  *  @param sender <#sender description#>
  */
 - (IBAction)asignBtnClick:(id)sender {
-    NSLog(@"qiandao");
+    [MBProgressHUD showSuccess:@"签到成功 +1.5M"];
+    [self.monday setBackgroundImage:[UIImage imageNamed:@"asignBlue"] forState:UIControlStateNormal];
+    [self.monday setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.monday.userInteractionEnabled = NO;
 }
+
 @end

@@ -33,7 +33,7 @@
     
     
     
-    NSLog(@"xxxxxxxxxxxxxxxxxlaunchOptions=======%@",launchOptions);
+//    NSLog(@"xxxxxxxxxxxxxxxxxlaunchOptions=======%@",launchOptions);
     
 //    *友盟*
     [MobClick startWithAppkey:UMENGID reportPolicy:BATCH channelId:nil];

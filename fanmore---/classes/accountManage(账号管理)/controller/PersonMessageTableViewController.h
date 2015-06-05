@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonMessageTableViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
