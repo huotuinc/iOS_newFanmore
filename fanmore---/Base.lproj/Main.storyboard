@@ -111,7 +111,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wCW-hM-Azl">
-                                        <rect key="frame" x="0.0" y="0.0" width="587" height="45"/>
+                                        <rect key="frame" x="13" y="0.0" width="574" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="vhj-Eo-2g8"/>
                                         </constraints>
@@ -123,7 +123,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Rpj-Eq-1fh" secondAttribute="bottom" id="1Sf-jn-Lht"/>
                                     <constraint firstAttribute="centerX" secondItem="Rpj-Eq-1fh" secondAttribute="centerX" id="3AT-iB-rTn"/>
-                                    <constraint firstItem="wCW-hM-Azl" firstAttribute="leading" secondItem="O0h-HE-Syc" secondAttribute="leading" id="EAd-og-kXF"/>
+                                    <constraint firstItem="wCW-hM-Azl" firstAttribute="leading" secondItem="O0h-HE-Syc" secondAttribute="leading" constant="13" id="EAd-og-kXF"/>
                                     <constraint firstItem="6v7-SM-ahh" firstAttribute="top" secondItem="O0h-HE-Syc" secondAttribute="top" id="L4Q-Lv-iSf"/>
                                     <constraint firstItem="Rpj-Eq-1fh" firstAttribute="width" secondItem="O0h-HE-Syc" secondAttribute="width" id="UD0-7j-jyY"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="XYy-pJ-w7c"/>
@@ -142,6 +142,7 @@
                             <constraint firstItem="O0h-HE-Syc" firstAttribute="leading" secondItem="MD3-hT-wnH" secondAttribute="leading" id="Zo9-lF-mWn"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="KAy-wV-MfO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YtV-Kx-kr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -233,6 +234,9 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="n2b-bY-ljE" kind="push" id="ANJ-2V-JYN"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="iOE-As-H3F">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
