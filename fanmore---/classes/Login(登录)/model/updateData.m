@@ -10,6 +10,8 @@
 
 @implementation updateData
 
+MJCodingImplementation
+
 //- (instancetype)initWithVersion:(NSString *)version updateUrl:(NSString *)updateUrl tips:(NSString *)tips updateStatus:(NSNumber *)updateStatus{
 //    
 //    fuck [updateData updateDataWithVersion:version updateUrl:updateUrl tips:tips updateStatus:updateStatus];

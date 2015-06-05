@@ -34,7 +34,7 @@
     paramsOption[@"timestamp"] = apptimesSince1970;
     paramsOption[@"operation"] = OPERATION_parame;
     paramsOption[@"version"] =[NSString stringWithFormat:@"%f",AppVersion];
-    NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+    NSString * token = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
     paramsOption[@"token"] = token?token:@"";
     paramsOption[@"imei"] = DeviceNo;
     paramsOption[@"cityCode"] = @"123";

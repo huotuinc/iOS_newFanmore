@@ -24,26 +24,27 @@
     return @{@"incomings":[twoOption class],@"career":[twoOption class],@"favs":[twoOption class]};
 }
 
+MJCodingImplementation
 
-- (void)encodeWithCoder:(NSCoder *)enCoder{
-    
-    [self enumerateIvarsWithBlock:^(MJIvar *ivar, BOOL *stop) {
-        
-        [enCoder encodeObject:ivar.value forKey:ivar.propertyName];
-    }];
-}
-
-
-- (id)initWithCoder:(NSCoder *)decoder{
-    
-    if (self = [super init]) {
-        
-        [self enumerateIvarsWithBlock:^(MJIvar *ivar, BOOL *stop) {
-           
-            ivar.value = [decoder decodeObjectForKey:ivar.propertyName];
-        }];
-    }
-    
-    return self;
-}
+//- (void)encodeWithCoder:(NSCoder *)enCoder{
+//    
+//    [self enumerateIvarsWithBlock:^(MJIvar *ivar, BOOL *stop) {
+//        
+//        [enCoder encodeObject:ivar.value forKey:ivar.propertyName];
+//    }];
+//}
+//
+//
+//- (id)initWithCoder:(NSCoder *)decoder{
+//    
+//    if (self = [super init]) {
+//        
+//        [self enumerateIvarsWithBlock:^(MJIvar *ivar, BOOL *stop) {
+//           
+//            ivar.value = [decoder decodeObjectForKey:ivar.propertyName];
+//        }];
+//    }
+//    
+//    return self;
+//}
 @end

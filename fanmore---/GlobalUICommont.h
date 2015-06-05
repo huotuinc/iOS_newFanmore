@@ -56,8 +56,9 @@
 #define PHONENUMBERLENGTH 11   //手机号长度
 #define VERIFICATIONCODELENGTH 6  //验证码长度
 
+#define AppReadSeconds  @"lessReadSeconds"  //点击答题时倒记时
 
-
+#define InitResultDate @"initResultDate"    //初始化返回数据对象
 #endif
 
 

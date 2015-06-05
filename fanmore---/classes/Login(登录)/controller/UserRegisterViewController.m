@@ -90,17 +90,17 @@
     if (!self.phoneNumber.text.length) {//手机号不能为空
         
         [MBProgressHUD showError:@"手机号不能为空"];
-        return;
+//        return;
     }
     if (!self.verificationCode.text.length) {//验证码不能为空
         
         [MBProgressHUD showError:@"验证码不能为空"];
-        return;
+//        return;
     }
     if (!self.firstPassword.text.length||!self.secondPassword.text.length) {//手机号不能为空
         
         [MBProgressHUD showError:@"密码不能为空"];
-        return;
+//        return;
     }
     if (![self.firstPassword.text isEqualToString:self.secondPassword.text]) {
         
@@ -128,14 +128,18 @@
         if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue] ==  54004) {
             
             [MBProgressHUD showSuccess:@"手机已经注册,请直接登录"];
-            return ;
+//            return ;
         }
         //验证码错误
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] ==  53007) {
             
             [MBProgressHUD showSuccess:@"验证码错误"];
-            return ;
+//            return ;
         }
+        
+        RootViewController * roots = [[RootViewController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController =  roots;
+//        [self.navigationController popToRootViewControllerAnimated:YES];
         //注册成功
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
