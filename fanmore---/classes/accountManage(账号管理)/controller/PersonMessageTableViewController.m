@@ -22,12 +22,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView setTableFooterView:[[UIView alloc] init]];
-    
     
 }
 
 #pragma tableview
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 2.5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 2.5;
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
