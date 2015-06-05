@@ -103,12 +103,11 @@
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ybb-sd-AH2">
                                     <rect key="frame" x="481" y="52" width="105" height="30"/>
-                                    <color key="backgroundColor" red="0.0048019419269999999" green="0.55332796880000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="jbX-EG-5Gu"/>
                                         <constraint firstAttribute="width" constant="105" id="mwv-s1-Jid"/>
                                     </constraints>
-                                    <state key="normal" title="获取验证码">
+                                    <state key="normal" title="获取验证码" backgroundImage="button-BR">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -314,12 +313,11 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sS2-Je-gZb">
                             <rect key="frame" x="15" y="356" width="570" height="40"/>
-                            <color key="backgroundColor" red="0.0048019419269999999" green="0.55332796880000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="9B0-gV-Vt5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                            <state key="normal" title="注册">
+                            <state key="normal" title="注册" backgroundImage="button-BR">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -362,4 +360,7 @@
             <point key="canvasLocation" x="703" y="-283"/>
         </view>
     </objects>
+    <resources>
+        <image name="button-BR" width="480" height="80"/>
+    </resources>
 </document>

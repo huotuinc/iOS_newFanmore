@@ -26,9 +26,9 @@
 - (void)setupGroup0
 {
     MJSettingItem *advice = [MJSettingLabelItem itemWithTitle:@"手机号" rightTitle:@"13857560740"];
-    MJSettingItem *cache = [MJSettingArrowItem itemWithIcon:@"person" title:@"用户资料" destVcClass:nil];
-    MJSettingItem *about = [MJSettingArrowItem itemWithIcon:@"lock" title:@"密码修改" destVcClass:nil];
-    MJSettingItem *handShake = [MJSettingArrowItem itemWithIcon:@"page" title:@"消息中心" destVcClass:nil];
+    MJSettingItem *cache = [MJSettingArrowItem itemWithTitle:@"用户资料" destVcClass:nil];
+    MJSettingItem *about = [MJSettingArrowItem itemWithTitle:@"密码修改" destVcClass:nil];
+    MJSettingItem *handShake = [MJSettingArrowItem itemWithTitle:@"消息中心" destVcClass:nil];
     MJSettingGroup *group = [[MJSettingGroup alloc] init];
     group.items = @[advice, cache, about,handShake];
     [self.data addObject:group];

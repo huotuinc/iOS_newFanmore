@@ -15,6 +15,9 @@
     
     [super viewDidLoad];
     
+    self.AButton.layer.cornerRadius = 2;
+    self.AButton.layer.borderWidth = 1;
+    self.AButton.layer.borderColor = [UIColor colorWithWhite:0.835 alpha:1.000].CGColor;
     
 }
 

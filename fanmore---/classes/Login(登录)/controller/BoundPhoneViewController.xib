@@ -131,12 +131,11 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="di2-pb-Xec">
                     <rect key="frame" x="15" y="188" width="570" height="40"/>
-                    <color key="backgroundColor" red="0.0048019419269999999" green="0.55332796880000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="jOb-hZ-eD5"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                    <state key="normal" title="下一步">
+                    <state key="normal" title="下一步" backgroundImage="button-BR">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -158,4 +157,7 @@
             <point key="canvasLocation" x="410" y="399"/>
         </view>
     </objects>
+    <resources>
+        <image name="button-BR" width="480" height="80"/>
+    </resources>
 </document>
