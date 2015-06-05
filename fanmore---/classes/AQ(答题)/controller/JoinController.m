@@ -10,6 +10,17 @@
 
 @implementation JoinController
 
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    RootViewController * root = (RootViewController *)self.mm_drawerController;
+    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+}
+
 - (void)viewDidLoad{
     [super viewDidLoad];
 }

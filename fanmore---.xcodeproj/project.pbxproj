@@ -40,8 +40,6 @@
 		EF49ECFC1B0D81A40038A203 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF49ECFB1B0D81A40038A203 /* Images.xcassets */; };
 		EF49ECFF1B0D81A40038A203 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF49ECFD1B0D81A40038A203 /* LaunchScreen.xib */; };
 		EF49ED0B1B0D81A40038A203 /* fanmore___Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ED0A1B0D81A40038A203 /* fanmore___Tests.m */; };
-		EF4A333F1B15915600A55D50 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4A333D1B15915600A55D50 /* FeedBackViewController.m */; };
-		EF4A33401B15915600A55D50 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF4A333E1B15915600A55D50 /* FeedBackViewController.xib */; };
 		EF565D051B16AA6000FC2D6B /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF565CF51B16AA6000FC2D6B /* MJRefresh.bundle */; };
 		EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565CF81B16AA6000FC2D6B /* MJRefreshBaseView.m */; };
 		EF565D071B16AA6000FC2D6B /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565CFA1B16AA6000FC2D6B /* MJRefreshConst.m */; };
@@ -104,6 +102,8 @@
 		EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */; };
 		EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */; };
 		EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */; };
+		EFCB46051B213198005D5026 /* FeedBack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFCB46041B213198005D5026 /* FeedBack.storyboard */; };
+		EFCB46081B2131BB005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB46071B2131BB005D5026 /* FeedBackViewController.m */; };
 		EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */; };
 		EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AD1B12D6E400C015A7 /* MJArgument.m */; };
 		EFCCA4C41B12D6E400C015A7 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AF1B12D6E400C015A7 /* MJConst.m */; };
@@ -131,7 +131,6 @@
 		EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B411B155CDA00D11D6D /* MJSettingCell.m */; };
 		EFD02B4B1B155D1E00D11D6D /* settingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B4A1B155D1E00D11D6D /* settingViewController.m */; };
 		EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD7A9C31B1D9DE30004A9A4 /* view-new.html */; };
-		EFD7A9C61B1DA3BD0004A9A4 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD7A9C51B1DA3BD0004A9A4 /* Foundation+Log.m */; };
 		EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD931791B0EF93D0058F525 /* Base64Util.m */; };
 		EFD931801B0EF93D0058F525 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317B1B0EF93D0058F525 /* GTMBase64.m */; };
 		EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317E1B0EF93D0058F525 /* MD5Encryption.m */; };
@@ -214,9 +213,6 @@
 		EF49ED041B0D81A40038A203 /* fanmore---Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fanmore---Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF49ED091B0D81A40038A203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF49ED0A1B0D81A40038A203 /* fanmore___Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "fanmore___Tests.m"; sourceTree = "<group>"; };
-		EF4A333C1B15915600A55D50 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
-		EF4A333D1B15915600A55D50 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
-		EF4A333E1B15915600A55D50 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
 		EF565CF51B16AA6000FC2D6B /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		EF565CF61B16AA6000FC2D6B /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		EF565CF71B16AA6000FC2D6B /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -309,6 +305,9 @@
 		EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
 		EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
 		EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
+		EFCB46041B213198005D5026 /* FeedBack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedBack.storyboard; sourceTree = "<group>"; };
+		EFCB46061B2131BB005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
+		EFCB46071B2131BB005D5026 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		EFCCA4981B12C53700C015A7 /* PersonMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageTableViewController.h; sourceTree = "<group>"; };
 		EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMessageTableViewController.m; sourceTree = "<group>"; };
 		EFCCA4AC1B12D6E400C015A7 /* MJArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJArgument.h; sourceTree = "<group>"; };
@@ -363,7 +362,6 @@
 		EFD02B491B155D1E00D11D6D /* settingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingViewController.h; sourceTree = "<group>"; };
 		EFD02B4A1B155D1E00D11D6D /* settingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingViewController.m; sourceTree = "<group>"; };
 		EFD7A9C31B1D9DE30004A9A4 /* view-new.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "view-new.html"; sourceTree = "<group>"; };
-		EFD7A9C51B1DA3BD0004A9A4 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		EFD9316C1B0EBC8E0058F525 /* GlobalUICommont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalUICommont.h; sourceTree = "<group>"; };
 		EFD931781B0EF93D0058F525 /* Base64Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Util.h; sourceTree = "<group>"; };
 		EFD931791B0EF93D0058F525 /* Base64Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Util.m; sourceTree = "<group>"; };
@@ -621,7 +619,6 @@
 		EF1EA5FF1B0DA2D600C1F60D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EFD7A9C51B1DA3BD0004A9A4 /* Foundation+Log.m */,
 				EFD7A9C21B1D9DE30004A9A4 /* Htmlresource(网页资源) */,
 				EF565D111B16DCA900FC2D6B /* TodayForeshow(今天预告) */,
 				EFD02B2E1B155CDA00D11D6D /* setting(设置中心) */,
@@ -764,16 +761,6 @@
 				EF49ED091B0D81A40038A203 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EF4A333B1B1588AD00A55D50 /* 意见反馈 */ = {
-			isa = PBXGroup;
-			children = (
-				EF4A333C1B15915600A55D50 /* FeedBackViewController.h */,
-				EF4A333D1B15915600A55D50 /* FeedBackViewController.m */,
-				EF4A333E1B15915600A55D50 /* FeedBackViewController.xib */,
-			);
-			name = "意见反馈";
 			sourceTree = "<group>";
 		};
 		EF565CF41B16AA6000FC2D6B /* MJRefresh */ = {
@@ -1180,6 +1167,9 @@
 				EFD02B2F1B155CDA00D11D6D /* controller */,
 				EFD02B321B155CDA00D11D6D /* model */,
 				EFD02B3F1B155CDA00D11D6D /* VIew */,
+				EFCB46041B213198005D5026 /* FeedBack.storyboard */,
+				EFCB46061B2131BB005D5026 /* FeedBackViewController.h */,
+				EFCB46071B2131BB005D5026 /* FeedBackViewController.m */,
 			);
 			name = "setting(设置中心)";
 			path = "classes/setting(设置中心)";
@@ -1188,7 +1178,6 @@
 		EFD02B2F1B155CDA00D11D6D /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				EF4A333B1B1588AD00A55D50 /* 意见反馈 */,
 				EFD02B301B155CDA00D11D6D /* MJBaseSettingViewController.h */,
 				EFD02B311B155CDA00D11D6D /* MJBaseSettingViewController.m */,
 				EFD02B491B155D1E00D11D6D /* settingViewController.h */,
@@ -1398,6 +1387,7 @@
 				EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */,
 				EF49ECFA1B0D81A40038A203 /* Main.storyboard in Resources */,
 				EF565D051B16AA6000FC2D6B /* MJRefresh.bundle in Resources */,
+				EFCB46051B213198005D5026 /* FeedBack.storyboard in Resources */,
 				EF49ECFF1B0D81A40038A203 /* LaunchScreen.xib in Resources */,
 				EFC86AFB1B1EFD700081BBC8 /* WeiboSDK.bundle in Resources */,
 				EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */,
@@ -1405,7 +1395,6 @@
 				EF565D401B17091F00FC2D6B /* BoundPhoneViewController.xib in Resources */,
 				EFC86AF91B1EFD700081BBC8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EF49ECFC1B0D81A40038A203 /* Images.xcassets in Resources */,
-				EF4A33401B15915600A55D50 /* FeedBackViewController.xib in Resources */,
 				EF565D461B17091F00FC2D6B /* UserRegisterViewController.xib in Resources */,
 				83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */,
 				EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */,
@@ -1495,7 +1484,6 @@
 				EF565D0A1B16AA6000FC2D6B /* UIScrollView+MJExtension.m in Sources */,
 				EFE837B51B12F62A0093E14E /* purchase.m in Sources */,
 				EFC86A7D1B1E8D7E0081BBC8 /* BuyFlowViewController.m in Sources */,
-				EFD7A9C61B1DA3BD0004A9A4 /* Foundation+Log.m in Sources */,
 				EFE837B91B12FA3C0093E14E /* app.m in Sources */,
 				EF565D411B17091F00FC2D6B /* findBackPwViewController.m in Sources */,
 				EFD02B471B155CDA00D11D6D /* MJSettingSwitchItem.m in Sources */,
@@ -1535,6 +1523,7 @@
 				EF565D211B16E7C500FC2D6B /* UITextField+HT.m in Sources */,
 				EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */,
 				EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */,
+				EFCB46081B2131BB005D5026 /* FeedBackViewController.m in Sources */,
 				EFD02B461B155CDA00D11D6D /* MJSettingLabelItem.m in Sources */,
 				836D6AAE1B1C821800119B3F /* FindController.m in Sources */,
 				EF565D4E1B170A5E00FC2D6B /* updateData.m in Sources */,
@@ -1543,7 +1532,6 @@
 				EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */,
 				83E72CCD1B1C2B2D00286735 /* AnswerController.m in Sources */,
 				83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */,
-				EF4A333F1B15915600A55D50 /* FeedBackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

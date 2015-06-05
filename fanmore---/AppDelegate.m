@@ -33,13 +33,10 @@
     
     
     
-//    NSLog(@"xxxxxxxxxxxxxxxxxlaunchOptions=======%@",launchOptions);
-    
 //    *友盟*
     [MobClick startWithAppkey:UMENGID reportPolicy:BATCH channelId:nil];
     [MobClick setCrashReportEnabled:YES];
 //    *友盟注册*
-    
     
     /**shareSdK*/
     //1、连接短信分享
@@ -104,36 +101,6 @@
     return YES;
     
     
-    
-    //    __weak AppDelegate * wself = self;
-//    //用户名和数据有数据
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName] && [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword]) {
-//        
-//        NSString * newToken = [wself setupInit];
-////        if ([[[NSUserDefaults standardUserDefaults] objectForKey:AppToken] isEqualToString:newToken]) {//token 相同
-//            //跳转到首页
-//            RootViewController * roots = [[RootViewController alloc] init];
-//            self.window.rootViewController = roots;
-////        }else{
-////            
-////            [[NSUserDefaults standardUserDefaults] setObject:newToken forKey:AppToken];  //不同保存新的token
-////            //跳转到登录界面
-////            LoginViewController * login = [[LoginViewController alloc] init];
-////            UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-////            self.window.rootViewController = loginNav;
-////            
-////        }
-//        
-//        
-//    }else{
-//        
-////        NSString * newToken = [wself setupInit];
-//        //跳转到登录界面
-//        LoginViewController * login = [[LoginViewController alloc] init];
-//        UINavigationController * loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-//        self.window.rootViewController = loginNav;
-//    }
-    
 }
 
 
@@ -142,7 +109,7 @@
  *
  *  @return falure 就token不通
  */
-- (NSString *)setupInit{
+- (void)setupInit{
     
     //出使化网络
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
@@ -157,41 +124,41 @@
     params[@"timestamp"] = apptimesSince1970;
     params[@"operation"] = OPERATION_parame;
     params[@"version"] = [NSString stringWithFormat:@"%f",AppVersion];
-    NSString * apptoken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppToken"];
-    params[@"token"] = apptoken?apptoken:@"";
+    NSString * aaatoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
+    params[@"token"] = aaatoken?aaatoken:@"";
     params[@"imei"] = DeviceNo;
     params[@"cityCode"] = @"123";
     params[@"cpaCode"] = @"default";
     params[@"sign"] = [NSDictionary asignWithMutableDictionary:params];
     [params removeObjectForKey:@"appSecret"];
+    NSLog(@"init---prame===%@",params);
+    
     //网络请求借口
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
     __block LoginResultData * resultData = [[LoginResultData alloc] init];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
+        
         NSLog(@"init 借口返回的数据%@",responseObject);
-        if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {
+        
+        if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {//返回数据成功
             
-            resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];
+            resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];//数据对象话
             
             //取出本地token
-//            NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:apptoken];
-            
-//            NSLog(@"localtoken=======%@  new===============%@",token,resultData.user.token);
-            if (![@"13123" isEqualToString:resultData.user.token]) {  //token 与本地不同
+            NSString *localToken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
+            if (![localToken isEqualToString:resultData.user.token]) {
+                //保存新的token
+                [[NSUserDefaults standardUserDefaults] setObject:resultData.user.token forKey:AppToken];
+                NSString * flag = @"wrong";
+                [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
+            }else{
                 
-                NSString * login = @"faluse";
-                [[NSUserDefaults standardUserDefaults] setObject:login forKey:loginFlag];
-            }else{  //token 与本地相同
-                
-                NSString * login = @"success";
-                [[NSUserDefaults standardUserDefaults] setObject:login forKey:loginFlag];
+                NSString * flag = @"right";
+                [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
             }
-            
-            NSLog(@"resultData====%@",resultData);
-            
         }else{
             
-            NSLog(@"网络请求出错了");
+            NSLog(@"网络请求出错了。。。。。。。。。。。。。。。。");
         }
         
         
@@ -200,7 +167,7 @@
         NSLog(@"xxxxxxx=%@",error.description);
     }];
 
-    return resultData.user.token;
+   
 }
 //添加滑动的手势
 - (void)handleSwipes22:(UISwipeGestureRecognizer *)sender{

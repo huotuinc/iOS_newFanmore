@@ -29,8 +29,19 @@
     
 }
 - (IBAction)BAction:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+  
+    JoinController *joinVc = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
+    [self.navigationController pushViewController:joinVc animated:YES];
+  
 }
 - (IBAction)CAction:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    FindController *findVc = [storyboard instantiateViewControllerWithIdentifier:@"FindController"];
+    [self.navigationController pushViewController:findVc animated:YES];
 }
 - (IBAction)DAction:(id)sender {
 }

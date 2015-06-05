@@ -20,6 +20,6 @@
 
 @interface UserRegisterViewController : UIViewController
 
-@property(nonatomic,weak) id delegate;
+@property(nonatomic,weak) id<UserRegisterViewDelegate> delegate;
 
 @end

@@ -15,6 +15,7 @@
 #import "AccountSettingViewController.h"
 #import "TodayForesController.h"
 #import "TrafficShowController.h"
+#import "FeedBackViewController.h"
 
 
 @interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -55,8 +56,21 @@
     return _images;
 }
 
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    
+    //判断是否要登录
+    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    
+    if (![flag isEqualToString:@"wrong"]) {
+        self.nameLable.text = @"xxx已登陆";
+    }
+    
+    
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.optionList.delegate = self;
     self.optionList.backgroundColor = [UIColor whiteColor];
@@ -91,6 +105,16 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
+    
+    //判断是否要登录
+    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    NSLog(@"============%@",flag);
+    if (![flag isEqualToString:@"wrong"]) {
+        self.nameLable.text = @"xxx已登陆";
+    }else{
+        self.nameLable.text = @"登陆";
+    }
 
 }
 
@@ -174,8 +198,11 @@
             break;
         }
         case 4:{
-            settingViewController * setVc = [[settingViewController alloc] init];
-            [self.navigationController pushViewController:setVc animated:YES];
+            
+            UIStoryboard * aasb = [UIStoryboard storyboardWithName:@"FeedBack" bundle:nil];
+            FeedBackViewController * vc = aasb.instantiateInitialViewController;
+//            settingViewController * setVc = [[settingViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 5:{
