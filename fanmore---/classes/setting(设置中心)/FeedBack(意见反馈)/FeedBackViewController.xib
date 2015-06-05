@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedBackViewController">
+            <connections>
+                <outlet property="feedBackButton" destination="bXc-qr-dpX" id="RRs-F9-YFf"/>
+                <outlet property="feedBackTextView" destination="utw-2q-1vh" id="rS4-dC-Z3v"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGg-Ow-Uhw">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXc-qr-dpX">
+                            <rect key="frame" x="20" y="260" width="560" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="t0e-ll-tax"/>
+                            </constraints>
+                            <state key="normal" title="提交意见">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="FeedBackButton:" destination="-1" eventType="touchUpInside" id="nks-BU-3Sc"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="对你的本次反馈, 我们公司表示万分的感谢，为门会继续改进，感谢你的支持。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16E-qv-pFB">
+                            <rect key="frame" x="20" y="310" width="560" height="41"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请输入你的宝贵意见" translatesAutoresizingMaskIntoConstraints="NO" id="utw-2q-1vh">
+                            <rect key="frame" x="20" y="70" width="560" height="180"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="utw-2q-1vh" firstAttribute="leading" secondItem="lGg-Ow-Uhw" secondAttribute="leading" constant="20" id="4VG-Dv-bI4"/>
+                        <constraint firstItem="16E-qv-pFB" firstAttribute="leading" secondItem="lGg-Ow-Uhw" secondAttribute="leading" constant="20" id="775-za-lpn"/>
+                        <constraint firstItem="bXc-qr-dpX" firstAttribute="top" secondItem="utw-2q-1vh" secondAttribute="bottom" constant="10" id="Tam-Ix-DWB"/>
+                        <constraint firstAttribute="trailing" secondItem="16E-qv-pFB" secondAttribute="trailing" constant="20" id="WxX-wm-1U8"/>
+                        <constraint firstItem="utw-2q-1vh" firstAttribute="height" secondItem="lGg-Ow-Uhw" secondAttribute="height" multiplier="0.3" id="Yxc-gv-gTi"/>
+                        <constraint firstItem="bXc-qr-dpX" firstAttribute="leading" secondItem="lGg-Ow-Uhw" secondAttribute="leading" constant="20" id="bKS-1i-5TC"/>
+                        <constraint firstItem="utw-2q-1vh" firstAttribute="top" secondItem="lGg-Ow-Uhw" secondAttribute="top" constant="70" id="bSN-Sj-cdn"/>
+                        <constraint firstAttribute="trailing" secondItem="utw-2q-1vh" secondAttribute="trailing" constant="20" id="bT2-9x-F7q"/>
+                        <constraint firstAttribute="trailing" secondItem="bXc-qr-dpX" secondAttribute="trailing" constant="20" id="n20-59-bCN"/>
+                        <constraint firstItem="16E-qv-pFB" firstAttribute="top" secondItem="bXc-qr-dpX" secondAttribute="bottom" constant="10" id="oRk-N5-R9K"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="lGg-Ow-Uhw" secondAttribute="trailing" id="6Kv-9p-ANk"/>
+                <constraint firstItem="lGg-Ow-Uhw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DAX-7A-cPX"/>
+                <constraint firstItem="lGg-Ow-Uhw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jqs-bu-Du2"/>
+                <constraint firstAttribute="bottom" secondItem="lGg-Ow-Uhw" secondAttribute="bottom" id="xc9-jO-qTe"/>
+            </constraints>
+            <point key="canvasLocation" x="1236" y="483"/>
+        </view>
+    </objects>
+</document>

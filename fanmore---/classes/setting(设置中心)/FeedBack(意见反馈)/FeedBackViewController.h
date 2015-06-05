@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FeedBackViewController : UITableViewController
+@interface FeedBackViewController : UIViewController
 
 @end

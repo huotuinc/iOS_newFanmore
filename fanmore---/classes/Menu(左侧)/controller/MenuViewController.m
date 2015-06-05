@@ -15,7 +15,7 @@
 #import "AccountSettingViewController.h"
 #import "TodayForesController.h"
 #import "TrafficShowController.h"
-#import "FeedBackViewController.h"
+
 
 
 @interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -199,10 +199,10 @@
         }
         case 4:{
             
-            UIStoryboard * aasb = [UIStoryboard storyboardWithName:@"FeedBack" bundle:nil];
-            FeedBackViewController * vc = aasb.instantiateInitialViewController;
-//            settingViewController * setVc = [[settingViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+//            UIStoryboard * aasb = [UIStoryboard storyboardWithName:@"FeedBack" bundle:nil];
+//            FeedBackViewController * vc = aasb.instantiateInitialViewController;
+            settingViewController * setVc = [[settingViewController alloc] init];
+            [self.navigationController pushViewController:setVc animated:YES];
             break;
         }
         case 5:{

@@ -121,12 +121,34 @@
     [self.view endEditing:YES];
     
     if (!self.userNameTextFiled.text.length) {
-//        [MBProgressHUD showError:@"用户名或者手机号不能为空"];
-        [MBProgressHUD showError:@"用户名或者手机号不能为空" toView:self.view];
+
+        if (IsIos8) {
+            
+            UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:@"错误提示" message:@"用户名或者手机号不能为空" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                }];
+            [alertVc addAction:action];
+            [self presentViewController:alertVc animated:YES completion:nil];
+        }else{ //非ios8
+            
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message: @"用户名或者手机号不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        }
         return;
     }
     if (!self.passwdTextField.text.length) {
-        [MBProgressHUD showError:@"密码不能为空"];
+        if (IsIos8) {
+            
+            UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:@"错误提示" message:@"密码不能为空" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            }];
+            [alertVc addAction:action];
+            [self presentViewController:alertVc animated:YES completion:nil];
+        }else{ //非ios8
+            
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message: @"密码不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        }
         return;
     }
     //设置参数
@@ -140,7 +162,6 @@
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             NSLog(@"登录成功=========== %@",json);
-            
             userData * userInfo = [userData objectWithKeyValues:json[@"resultData"]];
             //保存用户名和密码
             [[NSUserDefaults standardUserDefaults] setObject:self.userNameTextFiled.text forKey:loginUserName];

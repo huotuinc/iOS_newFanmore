@@ -102,8 +102,8 @@
 		EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */; };
 		EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */; };
 		EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */; };
-		EFCB46051B213198005D5026 /* FeedBack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFCB46041B213198005D5026 /* FeedBack.storyboard */; };
-		EFCB46081B2131BB005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB46071B2131BB005D5026 /* FeedBackViewController.m */; };
+		EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB460B1B214499005D5026 /* FeedBackViewController.m */; };
+		EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCB460C1B214499005D5026 /* FeedBackViewController.xib */; };
 		EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */; };
 		EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AD1B12D6E400C015A7 /* MJArgument.m */; };
 		EFCCA4C41B12D6E400C015A7 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AF1B12D6E400C015A7 /* MJConst.m */; };
@@ -305,9 +305,9 @@
 		EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
 		EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
 		EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
-		EFCB46041B213198005D5026 /* FeedBack.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedBack.storyboard; sourceTree = "<group>"; };
-		EFCB46061B2131BB005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
-		EFCB46071B2131BB005D5026 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
+		EFCB460A1B214499005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
+		EFCB460B1B214499005D5026 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
+		EFCB460C1B214499005D5026 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
 		EFCCA4981B12C53700C015A7 /* PersonMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageTableViewController.h; sourceTree = "<group>"; };
 		EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMessageTableViewController.m; sourceTree = "<group>"; };
 		EFCCA4AC1B12D6E400C015A7 /* MJArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJArgument.h; sourceTree = "<group>"; };
@@ -1007,6 +1007,16 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		EFCB46091B214475005D5026 /* FeedBack(意见反馈) */ = {
+			isa = PBXGroup;
+			children = (
+				EFCB460A1B214499005D5026 /* FeedBackViewController.h */,
+				EFCB460B1B214499005D5026 /* FeedBackViewController.m */,
+				EFCB460C1B214499005D5026 /* FeedBackViewController.xib */,
+			);
+			path = "FeedBack(意见反馈)";
+			sourceTree = "<group>";
+		};
 		EFCCA4891B12B85800C015A7 /* accountManage(账号管理) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1164,12 +1174,10 @@
 		EFD02B2E1B155CDA00D11D6D /* setting(设置中心) */ = {
 			isa = PBXGroup;
 			children = (
+				EFCB46091B214475005D5026 /* FeedBack(意见反馈) */,
 				EFD02B2F1B155CDA00D11D6D /* controller */,
 				EFD02B321B155CDA00D11D6D /* model */,
 				EFD02B3F1B155CDA00D11D6D /* VIew */,
-				EFCB46041B213198005D5026 /* FeedBack.storyboard */,
-				EFCB46061B2131BB005D5026 /* FeedBackViewController.h */,
-				EFCB46071B2131BB005D5026 /* FeedBackViewController.m */,
 			);
 			name = "setting(设置中心)";
 			path = "classes/setting(设置中心)";
@@ -1383,11 +1391,11 @@
 			files = (
 				EFC86AF51B1EFD700081BBC8 /* ShareSDKLocalizable.strings in Resources */,
 				EF565D421B17091F00FC2D6B /* findBackPwViewController.xib in Resources */,
+				EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */,
 				EFD02B2D1B1552E400D11D6D /* protect.html in Resources */,
 				EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */,
 				EF49ECFA1B0D81A40038A203 /* Main.storyboard in Resources */,
 				EF565D051B16AA6000FC2D6B /* MJRefresh.bundle in Resources */,
-				EFCB46051B213198005D5026 /* FeedBack.storyboard in Resources */,
 				EF49ECFF1B0D81A40038A203 /* LaunchScreen.xib in Resources */,
 				EFC86AFB1B1EFD700081BBC8 /* WeiboSDK.bundle in Resources */,
 				EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */,
@@ -1523,7 +1531,7 @@
 				EF565D211B16E7C500FC2D6B /* UITextField+HT.m in Sources */,
 				EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */,
 				EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */,
-				EFCB46081B2131BB005D5026 /* FeedBackViewController.m in Sources */,
+				EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */,
 				EFD02B461B155CDA00D11D6D /* MJSettingLabelItem.m in Sources */,
 				836D6AAE1B1C821800119B3F /* FindController.m in Sources */,
 				EF565D4E1B170A5E00FC2D6B /* updateData.m in Sources */,
