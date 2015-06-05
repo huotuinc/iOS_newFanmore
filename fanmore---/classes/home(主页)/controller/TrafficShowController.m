@@ -11,6 +11,8 @@
 
 @interface TrafficShowController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
+@property (assign, nonatomic) int num;
+
 @end
 
 @implementation TrafficShowController
@@ -28,12 +30,18 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.PICView.outerBackgroundColor = [UIColor colorWithRed:1 green:141 blue:255 alpha:1];
     
     self.itemNum = 11;
-#warning view高度自适应
-    //view高度
-    if (self.itemNum / 3) {
-        self.collectionHeight = (self.itemNum / 3 + 1) * 65 + 5;
+    
+    if (ScreenWidth - 40 > 25 + 4 * 80 ) {
+        self.num = 4;
     }else {
-        self.collectionHeight = self.itemNum / 3 * (60 + 5) + 5;
+        self.num = 3;
+    }
+#pragma view高度自适应
+    //view高度
+    if (self.itemNum % self.num) {
+        self.collectionHeight = (self.itemNum / self.num + 1) * 70;
+    }else {
+        self.collectionHeight = self.itemNum / self.num * (60 + 10);
     }
     
     
@@ -49,8 +57,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumLineSpacing:5];
+    [flowLayout setFooterReferenceSize:CGSizeMake(0, 10)];
     
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(ScreenWidth / 2 - 130, ScreenHeight / 2 - self.collectionHeight / 2, 260, self.collectionHeight) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, ScreenHeight / 2 - self.collectionHeight / 2, ScreenWidth - 40, self.collectionHeight) collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -58,23 +67,27 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.bgView addSubview:self.collectionView];
     
     
-    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
-    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
-    
-    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
-    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
+//    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
+//    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
+//    
+//    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
+//    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
     
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.itemNum;
+    return self.num;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    if (self.itemNum % self.num) {
+        return self.itemNum / self.num + 1;
+    }else {
+        return self.itemNum / self.num;
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -89,9 +102,10 @@ static NSString *collectionViewidentifier = @"collectionCell";
     if (!cell) {
         cell = [[UICollectionViewCell alloc] init];
     }
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button-W"]];
-    image.contentMode = UIViewContentModeScaleAspectFit;
-    cell.backgroundView = image;
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button－G"]];
+    image.frame = CGRectMake(0, 0, 80, 60);
+    cell.contentMode = UIViewContentModeScaleAspectFit;
+    [cell.contentView addSubview:image];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
     label.text = @"100M";

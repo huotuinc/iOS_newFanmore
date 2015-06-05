@@ -54,7 +54,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邀请码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TcL-bc-vcl">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="没有可不填" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TcL-bc-vcl">
                                     <rect key="frame" x="81" y="0.0" width="506" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="djg-0R-qQ6"/>
@@ -201,8 +201,8 @@
                                     <exclude reference="ALT-GQ-Z2n"/>
                                     <exclude reference="bkV-4z-TaO"/>
                                     <exclude reference="UuF-az-S1i"/>
-                                    <exclude reference="MVX-JO-6mD"/>
                                     <exclude reference="6Ya-V0-CGQ"/>
+                                    <exclude reference="MVX-JO-6mD"/>
                                     <exclude reference="097-Ag-VR4"/>
                                 </mask>
                             </variation>
@@ -244,7 +244,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认秘密" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gz0-lL-Dzg">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gz0-lL-Dzg">
                                     <rect key="frame" x="13" y="45" width="68" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="HLF-Oi-9Fx"/>
@@ -294,7 +294,6 @@
                                 <constraint firstAttribute="height" constant="90" id="PeC-9m-ecH"/>
                                 <constraint firstItem="1Yk-tK-iJ6" firstAttribute="leading" secondItem="gz0-lL-Dzg" secondAttribute="trailing" id="Wwg-mL-Xw9"/>
                                 <constraint firstItem="M4t-1e-XEG" firstAttribute="top" secondItem="OeL-gM-tLW" secondAttribute="top" id="bTO-ad-h9M"/>
-                                <constraint firstItem="AD9-fU-F4z" firstAttribute="top" secondItem="OeL-gM-tLW" secondAttribute="top" id="cgO-ak-La3"/>
                                 <constraint firstItem="1CK-gs-Eq5" firstAttribute="width" secondItem="OeL-gM-tLW" secondAttribute="width" multiplier="9:10" id="d8z-Az-3gc"/>
                                 <constraint firstAttribute="trailing" secondItem="1CK-gs-Eq5" secondAttribute="trailing" id="eUZ-gH-34j"/>
                                 <constraint firstAttribute="centerX" secondItem="rdb-8E-bAd" secondAttribute="centerX" id="eba-KR-bOx"/>
@@ -309,7 +308,6 @@
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="cgO-ak-La3"/>
                                     <exclude reference="sJj-oI-4wa"/>
                                 </mask>
                             </variation>
@@ -320,6 +318,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="9B0-gV-Vt5"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                             <state key="normal" title="注册">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>

@@ -8,6 +8,11 @@
 
 #import "FinishController.h"
 
+
+@interface FinishController()
+
+@end
+
 @implementation FinishController
 
 
@@ -22,5 +27,26 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if ([request.URL.host isEqualToString:@"closepage"]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    if ([request.URL.host isEqualToString:@"10M"]) {
+        [MBProgressHUD showSuccess:@"+10M"];
+    }
+    return YES;
+}
+
+
 @end

@@ -11,6 +11,7 @@
 @interface PersonMessageTableViewController ()
 
 @property(nonatomic,strong)NSArray * messages;
+
 @end
 
 @implementation PersonMessageTableViewController
@@ -21,9 +22,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableView setTableFooterView:[[UIView alloc] init]];
     
     
-    
+}
+
+#pragma tableview
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
