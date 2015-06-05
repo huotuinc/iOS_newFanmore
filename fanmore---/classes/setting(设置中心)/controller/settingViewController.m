@@ -11,6 +11,7 @@
 #import "MJSettingArrowItem.h"
 #import "MJSettingLabelItem.h"
 #import "MJSettingItem.h"
+#import "FeedBackViewController.h"
 
 
 @interface settingViewController ()
@@ -34,7 +35,7 @@
  */
 - (void)setupGroup0
 {
-    MJSettingItem *advice = [MJSettingArrowItem itemWithIcon:nil title:@"意见反馈" destVcClass:nil];
+    MJSettingItem *advice = [MJSettingArrowItem itemWithIcon:nil title:@"意见反馈" destVcClass:[FeedBackViewController class]];
     MJSettingItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:@"110KB"];
     MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们"];
     MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:@"V2.0"];
@@ -55,15 +56,15 @@
 //    [self initBackAndTitle:@"更多设置"];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    self.tableView.scrollEnabled = NO;
+//    self.tableView.scrollEnabled = NO;
     //1显示导航栏
     [self _initNav];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     // 2.添加数据
     [self setupGroup0];
     
-    self.tableView.sectionHeaderHeight = -11;
+    
 }
 
 
