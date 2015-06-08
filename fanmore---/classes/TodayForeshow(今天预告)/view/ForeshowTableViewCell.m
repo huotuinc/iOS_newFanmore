@@ -44,6 +44,17 @@
 }
 
 - (IBAction)timeButtonClick:(id)sender {
+    
+    
+    NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    
+    if ([self.delegate respondsToSelector:@selector(ForeshowTableViewCellSetTimeAlert:)]) {
+        
+        [self.delegate ForeshowTableViewCellSetTimeAlert:self];
+        
+    }
+    
+    
     UILocalNotification * notification = [[UILocalNotification alloc] init];
     if (notification != nil) {
         NSDate *now=[NSDate new];

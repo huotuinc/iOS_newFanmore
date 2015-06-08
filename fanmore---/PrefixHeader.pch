@@ -53,6 +53,7 @@
 #import "NSDictionary+EXTERN.h" //计算网络请求加密
 #import <INTULocationManager.h>
 #import <UIView+BlocksKit.h> //
+#import <FMDB.h>
 
 
 #import "userData.h"   //返回
