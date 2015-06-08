@@ -38,11 +38,8 @@
     self.feedBackTextView.layer.cornerRadius =1.0;
     self.feedBackTextView.contentInset = UIEdgeInsetsZero;
     self.feedBackTextView.delegate = self;
-    self.feedBackTextView.backgroundColor = [UIColor lightGrayColor];
+    self.feedBackTextView.backgroundColor = [UIColor colorWithWhite:0.951 alpha:1.000];
     
-    UIImage * button = [UIImage imageNamed:@"button-BR"];
-    button = [button stretchableImageWithLeftCapWidth:button.size.width * 0.5 topCapHeight:button.size.height * 0.5];
-    [self.feedBackButton setBackgroundImage:button forState:UIControlStateNormal];
     
 }
 

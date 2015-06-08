@@ -30,6 +30,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     [segment insertSegmentWithTitle:@"时间" atIndex:0 animated:NO];
     [segment insertSegmentWithTitle:@"贡献度" atIndex:1 animated:NO];
     self.navigationItem.titleView = segment;
+    segment.selectedSegmentIndex = 0;
     
     [segment addTarget:self action:@selector(chanege:) forControlEvents:UIControlEventValueChanged];
     
