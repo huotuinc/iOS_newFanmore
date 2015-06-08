@@ -120,6 +120,7 @@
     
     [self.view endEditing:YES];
     
+    //手机号
     if (!self.userNameTextFiled.text.length) {
 
         if (IsIos8) {
@@ -136,6 +137,7 @@
         }
         return;
     }
+    //密码
     if (!self.passwdTextField.text.length) {
         if (IsIos8) {
             
@@ -152,13 +154,15 @@
         return;
     }
     //设置参数
+    
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"username"] = self.userNameTextFiled.text;
     params[@"password"] = [MD5Encryption md5by32:self.passwdTextField.text];
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"login"];
     //发送网络请求
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
-  
+        
+        NSLog(@"登录成功=========== %@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             NSLog(@"登录成功=========== %@",json);

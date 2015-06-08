@@ -151,7 +151,20 @@
         
         if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {//返回数据成功
             
+            
+            
             resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];//数据对象话
+            
+            
+//            //保存答题能阅读的时间
+//            [[NSUserDefaults standardUserDefaults] setObject: [NSString stringWithFormat:@"%d",resultData.global.lessReadSeconds] forKey:AppReadSeconds];
+//            
+//            //保存答题能阅读的时间
+//            [[NSUserDefaults standardUserDefaults] setObject: [NSString stringWithFormat:@"%d",resultData.global.amountToCheckout] forKey:AppReadSeconds];
+            
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:InitResultDate];
+            [NSKeyedArchiver archiveRootObject:resultData.global toFile:fileName];
             
             //取出本地token
             NSString *localToken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];

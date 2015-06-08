@@ -104,7 +104,7 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)headerRereshing  //加载最新数据
 {
 //    startIndex = @1;
-//    [self getMoreData];
+    [self getMoreData];
 //    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
 }
@@ -113,7 +113,7 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)footerRereshing{  //加载更多数据数据
 //    startIndex = @(1 + _carMessagesF.count);
 //    // 1.添加数据
-//    [self getMoreData];
+    [self getMoreData];
 //    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView footerEndRefreshing];
 }
@@ -122,8 +122,14 @@ static NSString *homeCellidentify = @"homeCellId";
 -(void)getMoreData{
     
     
-    
-    
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    [UserLoginTool loginRequestGet:usrStr parame:nil success:^(NSDictionary * json) {
+        
+        NSLog(@"xxxxxxxx任务列表%@",json);
+        
+    } failure:^(NSError *error) {
+        
+    }];
     
 //    [UserLoginTool loginRequestGet:<#(NSString *)#> parame:<#(NSMutableDictionary *)#> success:<#^(id json)success#> failure:<#^(NSError *error)failure#>]
 //    //1、设置网络获取的参数
