@@ -104,7 +104,7 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)headerRereshing  //加载最新数据
 {
 //    startIndex = @1;
-    [self getMoreData];
+    [self getNewMoreData];
 //    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
 }
@@ -118,10 +118,20 @@ static NSString *homeCellidentify = @"homeCellId";
     [self.tableView footerEndRefreshing];
 }
 
-
+-(void)getNewMoreData{
+    
+    NSLog(@"加载最新的＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    [UserLoginTool loginRequestGet:usrStr parame:nil success:^(id json) {
+        
+        NSLog(@"%@",json );
+    } failure:^(NSError *error) {
+        
+    }];
+}
 -(void)getMoreData{
     
-    
+    NSLog(@"加载跟多的＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     [UserLoginTool loginRequestGet:usrStr parame:nil success:^(NSDictionary * json) {
         

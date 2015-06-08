@@ -97,7 +97,6 @@
     //
     RootViewController * roots = [[RootViewController alloc] init];
     self.window.rootViewController = roots;
-    
     [self.window makeKeyAndVisible];
     
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
