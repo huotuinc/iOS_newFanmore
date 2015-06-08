@@ -55,6 +55,8 @@
 /**注册宏*/
 #define PHONENUMBERLENGTH 11   //手机号长度
 #define VERIFICATIONCODELENGTH 6  //验证码长度
+#define FanMoreDB @"fanMoreDB"  //粉猫数据库
+#define TaskDataTable @"taskDataTable" //任务数据库任务表
 
 #define AppReadSeconds  @"lessReadSeconds"  //点击答题时倒记时
 

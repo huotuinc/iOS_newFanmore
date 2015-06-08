@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class ForeshowTableViewCell;
+
+@protocol ForeshowTableViewCellDelegate <NSObject>
+
+@optional
+
+- (void)ForeshowTableViewCellSetTimeAlert:(ForeshowTableViewCell *) cell;
+
+@end
+
 @interface ForeshowTableViewCell : UITableViewCell
 
-
-
+@property(nonatomic,strong) id <ForeshowTableViewCellDelegate> delegate;
 
 + (instancetype)ForeshowTableViewCell;
 @end

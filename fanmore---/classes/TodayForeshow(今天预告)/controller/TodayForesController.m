@@ -9,6 +9,10 @@
 #import "TodayForesController.h"
 #import "ForeshowTableViewCell.h"
 
+
+@interface TodayForesController ()<ForeshowTableViewCellDelegate>
+
+@end
 @implementation TodayForesController
 
 static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
@@ -45,7 +49,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
-    [self.tableView headerBeginRefreshing];
+//    [self.tableView headerBeginRefreshing];
     
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
@@ -119,19 +123,32 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     ForeshowTableViewCell *cell = nil;
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ForeshowTableViewCell" owner:nil options:nil] lastObject];
+        cell.delegate = self;
     }
     
     return cell;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    
-//}
+#pragma ForeshowTableViewCellDelegate
 
-
+- (void)ForeshowTableViewCellSetTimeAlert:(ForeshowTableViewCell *)cell{
+    
+    for (id aa in cell.contentView.subviews) {
+        NSLog(@"xxxxxxxxxxx");
+        if ([aa isKindOfClass:[UIButton class]]) {
+             NSLog(@"xxxxxxxxxxxaaa");
+            
+            UIImage * image = [UIImage imageNamed:@"button-W"];
+            image = [image stretchableImageWithLeftCapWidth:image.size.width* 0.5 topCapHeight:image.size.height*0.5];
+            [(UIButton *)aa setBackgroundImage:image forState:UIControlStateNormal];
+            
+        }
+    }
+}
 
 @end

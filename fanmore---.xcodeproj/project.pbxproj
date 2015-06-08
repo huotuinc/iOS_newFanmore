@@ -74,6 +74,9 @@
 		EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67301B0DD07E008B6909 /* MBProgressHUD+MJ.m */; };
 		EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */; };
 		EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */; };
+		EFC249821B255BDA00CD6DCD /* RequestTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249811B255BDA00CD6DCD /* RequestTasks.m */; };
+		EFC249851B256D1F00CD6DCD /* TaskDataCeach.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249841B256D1F00CD6DCD /* TaskDataCeach.m */; };
+		EFC249881B25749500CD6DCD /* taskData.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249871B25749500CD6DCD /* taskData.m */; };
 		EFC86A7D1B1E8D7E0081BBC8 /* BuyFlowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC86A7C1B1E8D7E0081BBC8 /* BuyFlowViewController.m */; };
 		EFC86AB71B1EFAFE0081BBC8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AB61B1EFAFE0081BBC8 /* SystemConfiguration.framework */; };
 		EFC86AB91B1EFB170081BBC8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AB81B1EFB170081BBC8 /* QuartzCore.framework */; };
@@ -120,7 +123,6 @@
 		EFCCA4CB1B12D6E400C015A7 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4BE1B12D6E400C015A7 /* NSObject+MJCoding.m */; };
 		EFCCA4CC1B12D6E400C015A7 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4C01B12D6E400C015A7 /* NSObject+MJKeyValue.m */; };
 		EFCCA4CD1B12D6E400C015A7 /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4C21B12D6E400C015A7 /* NSObject+MJMember.m */; };
-		EFCCA4D51B12E36F00C015A7 /* taskData.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4D41B12E36F00C015A7 /* taskData.m */; };
 		EFCCA4D91B12EA9F00C015A7 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4D81B12EA9F00C015A7 /* Message.m */; };
 		EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4DC1B12EB6D00C015A7 /* detail.m */; };
 		EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */; };
@@ -278,6 +280,12 @@
 		EF8D67321B0DD07E008B6909 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EF8D673A1B0DE436008B6909 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		EFC249801B255BDA00CD6DCD /* RequestTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestTasks.h; sourceTree = "<group>"; };
+		EFC249811B255BDA00CD6DCD /* RequestTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTasks.m; sourceTree = "<group>"; };
+		EFC249831B256D1F00CD6DCD /* TaskDataCeach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDataCeach.h; sourceTree = "<group>"; };
+		EFC249841B256D1F00CD6DCD /* TaskDataCeach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDataCeach.m; sourceTree = "<group>"; };
+		EFC249861B25749500CD6DCD /* taskData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = taskData.h; path = "classes/home(主页)/model/taskData.h"; sourceTree = "<group>"; };
+		EFC249871B25749500CD6DCD /* taskData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = taskData.m; path = "classes/home(主页)/model/taskData.m"; sourceTree = "<group>"; };
 		EFC86A7B1B1E8D7E0081BBC8 /* BuyFlowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuyFlowViewController.h; path = "classes/home(主页)/controller/BuyFlowViewController.h"; sourceTree = "<group>"; };
 		EFC86A7C1B1E8D7E0081BBC8 /* BuyFlowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BuyFlowViewController.m; path = "classes/home(主页)/controller/BuyFlowViewController.m"; sourceTree = "<group>"; };
 		EFC86AB61B1EFAFE0081BBC8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -343,8 +351,6 @@
 		EFCCA4C01B12D6E400C015A7 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
 		EFCCA4C11B12D6E400C015A7 /* NSObject+MJMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJMember.h"; sourceTree = "<group>"; };
 		EFCCA4C21B12D6E400C015A7 /* NSObject+MJMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJMember.m"; sourceTree = "<group>"; };
-		EFCCA4D31B12E36F00C015A7 /* taskData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taskData.h; sourceTree = "<group>"; };
-		EFCCA4D41B12E36F00C015A7 /* taskData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = taskData.m; sourceTree = "<group>"; };
 		EFCCA4D71B12EA9F00C015A7 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		EFCCA4D81B12EA9F00C015A7 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		EFCCA4DB1B12EB6D00C015A7 /* detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detail.h; sourceTree = "<group>"; };
@@ -660,6 +666,7 @@
 		EF1EA6011B0DA31F00C1F60D /* home(主页) */ = {
 			isa = PBXGroup;
 			children = (
+				EFC2497F1B255B6E00CD6DCD /* Tool */,
 				EFD02B2C1B1552E400D11D6D /* protect.html */,
 				EF1EA6041B0DA35D00C1F60D /* model */,
 				EF1EA6031B0DA34900C1F60D /* view */,
@@ -704,6 +711,8 @@
 		EF1EA6041B0DA35D00C1F60D /* model */ = {
 			isa = PBXGroup;
 			children = (
+				EFC249861B25749500CD6DCD /* taskData.h */,
+				EFC249871B25749500CD6DCD /* taskData.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -938,6 +947,18 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		EFC2497F1B255B6E00CD6DCD /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				EFC249801B255BDA00CD6DCD /* RequestTasks.h */,
+				EFC249811B255BDA00CD6DCD /* RequestTasks.m */,
+				EFC249831B256D1F00CD6DCD /* TaskDataCeach.h */,
+				EFC249841B256D1F00CD6DCD /* TaskDataCeach.m */,
+			);
+			name = Tool;
+			path = "classes/home(主页)/Tool";
+			sourceTree = "<group>";
+		};
 		EFC86ACE1B1EFD700081BBC8 /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1080,7 +1101,6 @@
 				EFE837B21B12F6100093E14E /* purchase */,
 				EFCCA4DA1B12EB6000C015A7 /* detail */,
 				EFCCA4D61B12EA9000C015A7 /* Message */,
-				EFCCA4D21B12E36000C015A7 /* taskData */,
 			);
 			name = model;
 			path = classes/model;
@@ -1114,15 +1134,6 @@
 				EFCCA4C21B12D6E400C015A7 /* NSObject+MJMember.m */,
 			);
 			path = MJExtension;
-			sourceTree = "<group>";
-		};
-		EFCCA4D21B12E36000C015A7 /* taskData */ = {
-			isa = PBXGroup;
-			children = (
-				EFCCA4D31B12E36F00C015A7 /* taskData.h */,
-				EFCCA4D41B12E36F00C015A7 /* taskData.m */,
-			);
-			path = taskData;
 			sourceTree = "<group>";
 		};
 		EFCCA4D61B12EA9000C015A7 /* Message */ = {
@@ -1484,6 +1495,7 @@
 				83E490051B1D749A00A44FC8 /* detailViewController.m in Sources */,
 				EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */,
 				83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */,
+				EFC249881B25749500CD6DCD /* taskData.m in Sources */,
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
 				EFCCA4CA1B12D6E400C015A7 /* MJTypeEncoding.m in Sources */,
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
@@ -1516,6 +1528,7 @@
 				EFCCA4C41B12D6E400C015A7 /* MJConst.m in Sources */,
 				EF565D0B1B16AA6000FC2D6B /* UIScrollView+MJRefresh.m in Sources */,
 				83DBD8F31B13073600B62830 /* MenuViewController.m in Sources */,
+				EFC249821B255BDA00CD6DCD /* RequestTasks.m in Sources */,
 				EFD931801B0EF93D0058F525 /* GTMBase64.m in Sources */,
 				837DF5DC1B14691200A5E2FA /* InviteCodeViewController.m in Sources */,
 				EFCCA4CD1B12D6E400C015A7 /* NSObject+MJMember.m in Sources */,
@@ -1540,7 +1553,6 @@
 				EFD02B4B1B155D1E00D11D6D /* settingViewController.m in Sources */,
 				83E490021B1D747900A44FC8 /* TrafficShowController.m in Sources */,
 				EF565D081B16AA6000FC2D6B /* MJRefreshFooterView.m in Sources */,
-				EFCCA4D51B12E36F00C015A7 /* taskData.m in Sources */,
 				EF565D541B170C2100FC2D6B /* userData.m in Sources */,
 				8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */,
 				EFD02B431B155CDA00D11D6D /* MJSettingGroup.m in Sources */,
@@ -1548,6 +1560,7 @@
 				83DBD8E31B12FD2800B62830 /* RootViewController.m in Sources */,
 				EFD02B451B155CDA00D11D6D /* MJSettingItem.m in Sources */,
 				EF565D211B16E7C500FC2D6B /* UITextField+HT.m in Sources */,
+				EFC249851B256D1F00CD6DCD /* TaskDataCeach.m in Sources */,
 				EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */,
 				EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */,
 				EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */,

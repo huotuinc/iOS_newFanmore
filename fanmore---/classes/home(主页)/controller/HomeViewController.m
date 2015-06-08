@@ -18,7 +18,7 @@
 
 
 /**任务列表*/
-@property(nonatomic,strong)NSMutableArray * tasks;
+@property(nonatomic,strong)NSMutableArray * taskDatas;
 @end
 
 @implementation HomeViewController
@@ -32,13 +32,14 @@ static NSString *homeCellidentify = @"homeCellId";
  *
  *  @return 一个数组
  */
-- (NSMutableArray *)tasks{
-    if (_tasks == nil) {
-        _tasks = [NSMutableArray array];
+- (NSMutableArray *)taskDatas{
+    if (_taskDatas == nil) {
+        
+        _taskDatas = [NSMutableArray array];
     }
-    return _tasks;
+    
+    return _taskDatas;
 }
-
 
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -85,7 +86,7 @@ static NSString *homeCellidentify = @"homeCellId";
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
-    [self.tableView headerBeginRefreshing];
+//    [self.tableView headerBeginRefreshing];
     
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
