@@ -8,7 +8,7 @@
 
 #import "PersonMessageTableViewController.h"
 
-@interface PersonMessageTableViewController ()
+@interface PersonMessageTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property(nonatomic,strong)NSArray * messages;
 
@@ -79,12 +79,28 @@
                 UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:@"选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
                 UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     
+                   
                     
                 }];
                 UIAlertAction * photo = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                    UIImagePickerController * pc = [[UIImagePickerController alloc] init];
+                    pc.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+                    pc.delegate = self;
+                    [self presentViewController:pc animated:YES completion:nil];
+                    
                 }];
+                
                 UIAlertAction * ceme  = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                    
+                    UIImagePickerController * pc = [[UIImagePickerController alloc] init];
+                     pc.allowsEditing = YES;
+                    pc.sourceType=UIImagePickerControllerSourceTypeCamera;
+                    pc.delegate = self;
+                    [self presentViewController:pc animated:YES completion:nil];
                 }];
+                
                 [alertVc addAction:photo];
                 [alertVc addAction:ceme];
                 [alertVc addAction:action];
@@ -100,7 +116,11 @@
     }
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
+    NSLog(@"xxxxxxxx====%@",info);
+    UIImage * photoImage = info[@"UIImagePickerControllerOriginalImage"];
+}
 
 - (void)dateChanged:(UIDatePicker *) datePick{
     
@@ -108,29 +128,15 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString * birthtime = [dateFormatter stringFromDate:datePick.date];
     NSLog(@"zzzzzzz%@",birthtime);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [datePick removeFromSuperview];
+        
+    });
+    
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-
-
-///**
-// *  设置datepicker的工具条
-// */
-//- (void)setupDatePicker
-//{
-//    
-//    UIToolbar * toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-//    UIBarButtonItem * item1 = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancleClick)];
-//    UIBarButtonItem * item2 = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(selectClick)];
-//    UIBarButtonItem * item3 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-//    toolBar.items = @[item1,item3,item2];
-//    //    self.datePicker.inputAccessoryView = toolBar;
-//    self.DateText.inputAccessoryView = toolBar;
-//    self.serverTime.inputAccessoryView = toolBar;
-//}
 
 
 
