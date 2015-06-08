@@ -96,7 +96,6 @@
     //
     RootViewController * roots = [[RootViewController alloc] init];
     self.window.rootViewController = roots;
-    
     [self.window makeKeyAndVisible];
     return YES;
     
