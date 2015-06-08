@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface FindController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *AButton;
+@property (weak, nonatomic) IBOutlet UIButton *BButton;
+@property (weak, nonatomic) IBOutlet UIButton *CButton;
+@property (weak, nonatomic) IBOutlet UIButton *DButton;
 
 @end

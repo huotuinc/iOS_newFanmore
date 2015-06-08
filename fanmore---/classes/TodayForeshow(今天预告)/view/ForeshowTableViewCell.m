@@ -44,5 +44,20 @@
 }
 
 - (IBAction)timeButtonClick:(id)sender {
+    UILocalNotification * notification = [[UILocalNotification alloc] init];
+    if (notification != nil) {
+        NSDate *now=[NSDate new];
+        notification.fireDate = [now dateByAddingTimeInterval:5];
+//        notification.fireDate = [NSDate dateWithTimeIntervalSince1970:];
+        notification.timeZone = [NSTimeZone defaultTimeZone];
+        notification.alertBody = @"我是火焰之王";
+        
+        NSDictionary* info = [NSDictionary dictionaryWithObject:@"1121`2" forKey:@"good"];
+        notification.userInfo = info;
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
+   
+    
 }
 @end

@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1B56C822B3D3D6F344695E94 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83ED0B46534249FDED1AB9A4 /* libPods.a */; };
+		830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D011B2194FC00BBE276 /* BPViewController.m */; };
+		830B4D061B2196DC00BBE276 /* BPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D041B2196DC00BBE276 /* BPCell.m */; };
+		830B4D071B2196DC00BBE276 /* BPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B4D051B2196DC00BBE276 /* BPCell.xib */; };
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD651B1854C100FAC712 /* MassageCenterController.m */; };
+		836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 836A0AA01B22E97600C8E765 /* 未命名.tiff */; };
 		836D6AA81B1C756300119B3F /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AA71B1C756300119B3F /* FinishController.m */; };
 		836D6AAB1B1C776000119B3F /* JoinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAA1B1C776000119B3F /* JoinController.m */; };
 		836D6AAE1B1C821800119B3F /* FindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAD1B1C821800119B3F /* FindController.m */; };
@@ -151,10 +155,16 @@
 
 /* Begin PBXFileReference section */
 		4215C255FF8423CA4D63FB2E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		830B4D001B2194FC00BBE276 /* BPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPViewController.h; path = "classes/home(主页)/controller/BPViewController.h"; sourceTree = "<group>"; };
+		830B4D011B2194FC00BBE276 /* BPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPViewController.m; path = "classes/home(主页)/controller/BPViewController.m"; sourceTree = "<group>"; };
+		830B4D031B2196DC00BBE276 /* BPCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPCell.h; path = "classes/home(主页)/view/BPCell.h"; sourceTree = "<group>"; };
+		830B4D041B2196DC00BBE276 /* BPCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPCell.m; path = "classes/home(主页)/view/BPCell.m"; sourceTree = "<group>"; };
+		830B4D051B2196DC00BBE276 /* BPCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BPCell.xib; path = "classes/home(主页)/view/BPCell.xib"; sourceTree = "<group>"; };
 		8339BD611B18510E00FAC712 /* ChangePasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordController.h; sourceTree = "<group>"; };
 		8339BD621B18510E00FAC712 /* ChangePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordController.m; sourceTree = "<group>"; };
 		8339BD641B1854C100FAC712 /* MassageCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MassageCenterController.h; sourceTree = "<group>"; };
 		8339BD651B1854C100FAC712 /* MassageCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassageCenterController.m; sourceTree = "<group>"; };
+		836A0AA01B22E97600C8E765 /* 未命名.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "未命名.tiff"; sourceTree = "<group>"; };
 		836D6AA61B1C756300119B3F /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
 		836D6AA71B1C756300119B3F /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
 		836D6AA91B1C776000119B3F /* JoinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinController.h; sourceTree = "<group>"; };
@@ -669,6 +679,8 @@
 				83E490011B1D747900A44FC8 /* TrafficShowController.m */,
 				EFC86A7B1B1E8D7E0081BBC8 /* BuyFlowViewController.h */,
 				EFC86A7C1B1E8D7E0081BBC8 /* BuyFlowViewController.m */,
+				830B4D001B2194FC00BBE276 /* BPViewController.h */,
+				830B4D011B2194FC00BBE276 /* BPViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -681,6 +693,10 @@
 				83DBD92A1B13128800B62830 /* HomeCell.h */,
 				83DBD92B1B13128800B62830 /* HomeCell.m */,
 				83DBD92C1B13128800B62830 /* HomeCell.xib */,
+				836A0AA01B22E97600C8E765 /* 未命名.tiff */,
+				830B4D031B2196DC00BBE276 /* BPCell.h */,
+				830B4D041B2196DC00BBE276 /* BPCell.m */,
+				830B4D051B2196DC00BBE276 /* BPCell.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1400,11 +1416,13 @@
 				EFC86AFB1B1EFD700081BBC8 /* WeiboSDK.bundle in Resources */,
 				EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */,
 				EF565D1B1B16DD9900FC2D6B /* ForeshowTableViewCell.xib in Resources */,
+				830B4D071B2196DC00BBE276 /* BPCell.xib in Resources */,
 				EF565D401B17091F00FC2D6B /* BoundPhoneViewController.xib in Resources */,
 				EFC86AF91B1EFD700081BBC8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EF49ECFC1B0D81A40038A203 /* Images.xcassets in Resources */,
 				EF565D461B17091F00FC2D6B /* UserRegisterViewController.xib in Resources */,
 				83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */,
+				836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */,
 				EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				EF565D441B17091F00FC2D6B /* LoginViewController.xib in Resources */,
 				EFC86AF61B1EFD700081BBC8 /* Resource.bundle in Resources */,
@@ -1513,6 +1531,7 @@
 				83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */,
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
 				83E490081B1D74C400A44FC8 /* PICircularProgressView.m in Sources */,
+				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
 				83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */,
@@ -1532,6 +1551,7 @@
 				EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */,
 				EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */,
 				EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */,
+				830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */,
 				EFD02B461B155CDA00D11D6D /* MJSettingLabelItem.m in Sources */,
 				836D6AAE1B1C821800119B3F /* FindController.m in Sources */,
 				EF565D4E1B170A5E00FC2D6B /* updateData.m in Sources */,
