@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="BPCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姚生记有奖竞猜" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWo-Z5-fks">
+                        <rect key="frame" x="13" y="5" width="145" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Cne-2B-8em"/>
+                            <constraint firstAttribute="width" constant="145" id="R8k-jL-yjg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天 12:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srw-ZX-u35">
+                        <rect key="frame" x="13" y="30" width="145" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="OZM-b2-LgE"/>
+                            <constraint firstAttribute="width" constant="145" id="tHL-UJ-eJJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＋100M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="px3-Z5-Edt">
+                        <rect key="frame" x="207" y="8" width="100" height="43"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="vMG-w2-9if"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                        <color key="textColor" red="0.34509803921568627" green="0.77647058823529413" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="srw-ZX-u35" secondAttribute="bottom" constant="8" id="274-eu-vZB"/>
+                    <constraint firstAttribute="bottom" secondItem="px3-Z5-Edt" secondAttribute="bottom" constant="8" id="9gR-N8-tlv"/>
+                    <constraint firstAttribute="trailing" secondItem="px3-Z5-Edt" secondAttribute="trailing" constant="13" id="Gr5-ew-WQ3"/>
+                    <constraint firstItem="QWo-Z5-fks" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Vwv-gr-zcX"/>
+                    <constraint firstItem="px3-Z5-Edt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Y0A-yE-M83"/>
+                    <constraint firstAttribute="centerY" secondItem="px3-Z5-Edt" secondAttribute="centerY" id="bDS-t1-vRK"/>
+                    <constraint firstItem="srw-ZX-u35" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="hKA-wS-xqW"/>
+                    <constraint firstItem="QWo-Z5-fks" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="x9P-7c-Rsd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="256" y="349"/>
+        </tableViewCell>
+    </objects>
+</document>

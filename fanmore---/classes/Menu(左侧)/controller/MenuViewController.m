@@ -228,7 +228,8 @@
 
 
 - (IBAction)backAction:(UIButton *)sender {
-    RootViewController * root = (RootViewController *)self.mm_drawerController;
-    [root toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+    [self.navigationController pushViewController:traffic animated:YES];
 }
 @end

@@ -8,6 +8,7 @@
 
 #import "TrafficShowController.h"
 #import "BuyFlowViewController.h"
+#import "BPViewController.h"
 
 @interface TrafficShowController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -62,33 +63,35 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, ScreenHeight / 2 - self.collectionHeight / 2, ScreenWidth - 40, self.collectionHeight) collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor clearColor];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewidentifier];
     [self.bgView addSubview:self.collectionView];
     
     
-//    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
-//    [self.buyButton setBackgroundImage:[[UIImage imageNamed:@"button-W"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
-//    
-//    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateNormal];
-//    [self.exchageButton setBackgroundImage:[[UIImage imageNamed:@"button-BS"] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forState:UIControlStateHighlighted];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        BPViewController *bpView = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
+        [self.navigationController pushViewController:bpView animated:YES];
+    }];
     
 }
 
 
+
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.num;
+    return self.itemNum;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    if (self.itemNum % self.num) {
-        return self.itemNum / self.num + 1;
-    }else {
-        return self.itemNum / self.num;
-    }
-}
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+//{
+//    if (self.itemNum % self.num) {
+//        return self.itemNum / self.num + 1;
+//    }else {
+//        return self.itemNum / self.num;
+//    }
+//}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

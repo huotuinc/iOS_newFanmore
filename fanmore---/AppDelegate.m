@@ -33,6 +33,7 @@
     
     
     
+    
 //    *友盟*
     [MobClick startWithAppkey:UMENGID reportPolicy:BATCH channelId:nil];
     [MobClick setCrashReportEnabled:YES];
@@ -97,6 +98,14 @@
     RootViewController * roots = [[RootViewController alloc] init];
     self.window.rootViewController = roots;
     [self.window makeKeyAndVisible];
+    
+    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif)
+    {
+        NSLog(@"浙A99981");
+    }
+    
+    
     return YES;
     
     
@@ -184,6 +193,13 @@
 //添加滑动的手势
 - (void)handleSwipes22:(UISwipeGestureRecognizer *)sender{
     [self.deckController toggleRightViewAnimated:YES];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    if (notification) {
+        UIAlertView *alert =  [[UIAlertView alloc] initWithTitle:nil message:@"received E-mail" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 

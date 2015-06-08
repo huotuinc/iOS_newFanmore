@@ -25,6 +25,14 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"DiscipleCell" bundle:nil] forCellReuseIdentifier:discipleCellidentify];
+    
+    UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:nil];
+    [segment insertSegmentWithTitle:@"时间" atIndex:0 animated:NO];
+    [segment insertSegmentWithTitle:@"贡献度" atIndex:1 animated:NO];
+    self.navigationItem.titleView = segment;
+    
+    [segment addTarget:self action:@selector(chanege:) forControlEvents:UIControlEventValueChanged];
+    
 }
 
 
@@ -49,6 +57,11 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DiscipleCell" owner:nil options:nil] lastObject];
     }
     return cell;
+}
+
+- (void)chanege:(UISegmentedControl *)sender
+{
+    
 }
 
 

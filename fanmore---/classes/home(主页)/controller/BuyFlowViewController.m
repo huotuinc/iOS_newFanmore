@@ -113,17 +113,17 @@
 #pragma UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return self.num;
+    return self.goods.count;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    if (self.goods.count % self.num) {
-        return self.goods.count / self.num + 1;
-    }else {
-        return self.goods.count / self.num;
-    }
-}
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+//{
+//    if (self.goods.count % self.num) {
+//        return self.goods.count / self.num + 1;
+//    }else {
+//        return self.goods.count / self.num;
+//    }
+//}
 
 
 
@@ -136,7 +136,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
    
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    UICollectionViewCell * cell = [self.collection dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
 //    cell.backgroundColor = LWColor(110, 110, 110);
     for (id aa in cell.contentView.subviews) {
         

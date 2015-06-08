@@ -15,10 +15,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-4D-mst">
-                        <rect key="frame" x="85" y="10" width="100" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天欧冠巴萨激战尤文" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-4D-mst">
+                        <rect key="frame" x="85" y="10" width="180" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="JBz-xJ-n4i"/>
+                            <constraint firstAttribute="width" constant="180" id="JBz-xJ-n4i"/>
                             <constraint firstAttribute="height" constant="21" id="zdC-gL-DZe"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -31,10 +31,10 @@
                         <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费领取10M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRN-9z-gCd">
-                        <rect key="frame" x="211" y="10" width="99" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRN-9z-gCd">
+                        <rect key="frame" x="260" y="10" width="50" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="99" id="EhU-yP-6gK"/>
+                            <constraint firstAttribute="width" constant="50" id="EhU-yP-6gK"/>
                             <constraint firstAttribute="height" constant="21" id="w6n-ix-ytc"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -73,9 +73,8 @@
                             <constraint firstAttribute="height" constant="70" id="dGu-Rv-JE4"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0jK-cX-QNi">
-                        <rect key="frame" x="10" y="12" width="70" height="70"/>
-                        <color key="backgroundColor" red="0.23921568630000001" green="0.67450980390000004" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="未命名.tiff" translatesAutoresizingMaskIntoConstraints="NO" id="0jK-cX-QNi">
+                        <rect key="frame" x="10" y="15" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="BwX-oc-Jgk"/>
                             <constraint firstAttribute="height" constant="70" id="XaS-vq-hZq"/>
@@ -104,7 +103,7 @@
                     <constraint firstAttribute="bottom" secondItem="0jK-cX-QNi" secondAttribute="bottom" constant="10" id="oqa-XO-MJ8"/>
                     <constraint firstAttribute="trailing" secondItem="RRN-9z-gCd" secondAttribute="trailing" constant="10" id="wIt-q7-UMt"/>
                     <constraint firstItem="nGH-4D-mst" firstAttribute="leading" secondItem="0jK-cX-QNi" secondAttribute="trailing" constant="5" id="xrv-Uq-lOO"/>
-                    <constraint firstAttribute="centerY" secondItem="0jK-cX-QNi" secondAttribute="centerY" constant="3" id="zPH-jf-hR2"/>
+                    <constraint firstAttribute="centerY" secondItem="0jK-cX-QNi" secondAttribute="centerY" id="zPH-jf-hR2"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -121,7 +120,10 @@
                 <outlet property="showImage" destination="0jK-cX-QNi" id="rl1-Fy-cEj"/>
                 <outlet property="timeLabel" destination="UFQ-QQ-8uU" id="cED-WZ-456"/>
             </connections>
-            <point key="canvasLocation" x="321" y="340.5"/>
+            <point key="canvasLocation" x="321" y="340"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="未命名.tiff" width="301" height="301"/>
+    </resources>
 </document>

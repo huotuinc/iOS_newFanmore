@@ -114,7 +114,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 110 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,6 +123,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ForeshowTableViewCell" owner:nil options:nil] lastObject];
     }
+    
     return cell;
 }
 
