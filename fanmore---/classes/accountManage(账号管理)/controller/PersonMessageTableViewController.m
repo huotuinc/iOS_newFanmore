@@ -14,6 +14,8 @@
 
 /**用户头像*/
 @property (weak, nonatomic) IBOutlet UIButton *iconView;
+/**用户出生年月*/
+@property (weak, nonatomic) IBOutlet UILabel *birthDayLable;
 
 @property(nonatomic,strong) UIDatePicker *datePicker;
 
