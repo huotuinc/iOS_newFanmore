@@ -20,6 +20,8 @@
 		836D6AB51B1C872300119B3F /* DiscipleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AB31B1C872300119B3F /* DiscipleCell.m */; };
 		836D6AB61B1C872300119B3F /* DiscipleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836D6AB41B1C872300119B3F /* DiscipleCell.xib */; };
 		837DF5DC1B14691200A5E2FA /* InviteCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */; };
+		8381167C1B2591AF00261F51 /* NameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8381167B1B2591AF00261F51 /* NameController.m */; };
+		838116821B25AC5A00261F51 /* SexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838116811B25AC5A00261F51 /* SexController.m */; };
 		83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */; };
 		83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */; };
 		83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B61B781B1713F000B027E0 /* TodayForesController.m */; };
@@ -176,6 +178,10 @@
 		836D6AB41B1C872300119B3F /* DiscipleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscipleCell.xib; sourceTree = "<group>"; };
 		837DF5DA1B14691200A5E2FA /* InviteCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeViewController.h; sourceTree = "<group>"; };
 		837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeViewController.m; sourceTree = "<group>"; };
+		8381167A1B2591AF00261F51 /* NameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameController.h; sourceTree = "<group>"; };
+		8381167B1B2591AF00261F51 /* NameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameController.m; sourceTree = "<group>"; };
+		838116801B25AC5A00261F51 /* SexController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexController.h; sourceTree = "<group>"; };
+		838116811B25AC5A00261F51 /* SexController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexController.m; sourceTree = "<group>"; };
 		83A0E9F91B155BCE009708FB /* InviteCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeCell.h; sourceTree = "<group>"; };
 		83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeCell.m; sourceTree = "<group>"; };
 		83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCodeCell.xib; sourceTree = "<group>"; };
@@ -1067,6 +1073,10 @@
 				EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */,
 				8339BD641B1854C100FAC712 /* MassageCenterController.h */,
 				8339BD651B1854C100FAC712 /* MassageCenterController.m */,
+				8381167A1B2591AF00261F51 /* NameController.h */,
+				8381167B1B2591AF00261F51 /* NameController.m */,
+				838116801B25AC5A00261F51 /* SexController.h */,
+				838116811B25AC5A00261F51 /* SexController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1484,6 +1494,7 @@
 				83E490051B1D749A00A44FC8 /* detailViewController.m in Sources */,
 				EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */,
 				83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */,
+				838116821B25AC5A00261F51 /* SexController.m in Sources */,
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
 				EFCCA4CA1B12D6E400C015A7 /* MJTypeEncoding.m in Sources */,
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
@@ -1556,6 +1567,7 @@
 				836D6AAE1B1C821800119B3F /* FindController.m in Sources */,
 				EF565D4E1B170A5E00FC2D6B /* updateData.m in Sources */,
 				EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */,
+				8381167C1B2591AF00261F51 /* NameController.m in Sources */,
 				EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */,
 				EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */,
 				83E72CCD1B1C2B2D00286735 /* AnswerController.m in Sources */,

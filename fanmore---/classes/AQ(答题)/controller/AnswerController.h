@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface AnswerController : UIViewController
+
+@property (assign, nonatomic) BOOL isAnswer;
+
+@property (assign ,nonatomic) int tureAnswer;
+
 @property (weak, nonatomic) IBOutlet UIButton *AButton;
 @property (weak, nonatomic) IBOutlet UIButton *BButton;
 @property (weak, nonatomic) IBOutlet UIButton *CButton;

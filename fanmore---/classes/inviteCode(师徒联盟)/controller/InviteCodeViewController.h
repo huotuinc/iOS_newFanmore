@@ -10,15 +10,20 @@
 
 @interface InviteCodeViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *myInviteLabel;
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 /**
- *  复制到剪贴板
- *
- *  @param sender <#sender description#>
+ *  分享按钮
+ *  师徒规则
+ *  昨日流量
+ *  徒弟总流量
+ *  徒弟人数
  */
-- (IBAction)copyAction:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UILabel *rulesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yesterdayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *discipleContribution;
+@property (weak, nonatomic) IBOutlet UILabel *discipleCount;
+
+
+- (IBAction)shareAction:(UIButton *)sender;
 
 @end
