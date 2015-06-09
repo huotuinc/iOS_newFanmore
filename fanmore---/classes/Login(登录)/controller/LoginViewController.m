@@ -161,12 +161,11 @@
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"login"];
     //发送网络请求
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
-        
-        NSLog(@"登录成功=========== %@",json);
+        NSLog(@"login========%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             NSLog(@"登录成功=========== %@",json);
-            userData * userInfo = [userData objectWithKeyValues:json[@"resultData"]];
+            userData * userInfo = [userData objectWithKeyValues:(json[@"resultData"][@"user"])];
             //保存用户名和密码
             [[NSUserDefaults standardUserDefaults] setObject:self.userNameTextFiled.text forKey:loginUserName];
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:self.passwdTextField.text] forKey:loginPassword];
@@ -179,12 +178,13 @@
             }
 
             //0表示没有绑定的必要 1表示有绑定的必要
-            if ([json[@"resultData"][@"requireMobile"] intValue] == 0) {
+            if ([json[@"resultData"][@"requireMobile"] intValue] == 1) {
             
                 BoundPhoneViewController * bdVc = [[BoundPhoneViewController alloc] init];
                 [self.navigationController pushViewController:bdVc animated:YES];
             }else{
                 
+                [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
                 [self loginSuccess];
             }
             

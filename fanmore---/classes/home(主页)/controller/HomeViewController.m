@@ -13,6 +13,7 @@
 #import "HomeCell.h"
 #import "detailViewController.h"
 #import "BuyFlowViewController.h"
+#import "taskData.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -122,10 +123,11 @@ static NSString *homeCellidentify = @"homeCellId";
 -(void)getNewMoreData{
     
     NSLog(@"加载最新的＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    NSString * usrStr = @"http://192.168.0.25:8080/fanmore/app/taskList";//[MainURL stringByAppendingPathComponent:@"taskList"];
     [UserLoginTool loginRequestGet:usrStr parame:nil success:^(id json) {
         
-        NSLog(@"%@",json );
+        NSLog(@"xxxxxxxx任务列表%@",json);
+        [taskData objectArrayWithJSONData:json[@"resultData"][@"task"]];
     } failure:^(NSError *error) {
         
     }];
@@ -136,7 +138,8 @@ static NSString *homeCellidentify = @"homeCellId";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     [UserLoginTool loginRequestGet:usrStr parame:nil success:^(NSDictionary * json) {
         
-        NSLog(@"xxxxxxxx任务列表%@",json);
+       
+        
         
     } failure:^(NSError *error) {
         

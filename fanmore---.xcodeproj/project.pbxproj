@@ -14,8 +14,6 @@
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD651B1854C100FAC712 /* MassageCenterController.m */; };
 		833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC76D1B2689A0008DA984 /* HobbyController.m */; };
-		833CC7741B26AFB9008DA984 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC7711B26AFB9008DA984 /* RegexKitLite.m */; };
-		833CC7751B26AFB9008DA984 /* WXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC7731B26AFB9008DA984 /* WXLabel.m */; };
 		836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 836A0AA01B22E97600C8E765 /* 未命名.tiff */; };
 		836D6AA81B1C756300119B3F /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AA71B1C756300119B3F /* FinishController.m */; };
 		836D6AAB1B1C776000119B3F /* JoinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAA1B1C776000119B3F /* JoinController.m */; };
@@ -146,6 +144,7 @@
 		EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD931791B0EF93D0058F525 /* Base64Util.m */; };
 		EFD931801B0EF93D0058F525 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317B1B0EF93D0058F525 /* GTMBase64.m */; };
 		EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317E1B0EF93D0058F525 /* MD5Encryption.m */; };
+		EFE76B7D1B26D6D700C956A5 /* HomeTaskResult.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE76B7C1B26D6D700C956A5 /* HomeTaskResult.m */; };
 		EFE837B51B12F62A0093E14E /* purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837B41B12F62A0093E14E /* purchase.m */; };
 		EFE837B91B12FA3C0093E14E /* app.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837B81B12FA3C0093E14E /* app.m */; };
 		EFE837BD1B12FADB0093E14E /* question.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837BC1B12FADB0093E14E /* question.m */; };
@@ -174,10 +173,6 @@
 		8339BD651B1854C100FAC712 /* MassageCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassageCenterController.m; sourceTree = "<group>"; };
 		833CC76C1B2689A0008DA984 /* HobbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HobbyController.h; sourceTree = "<group>"; };
 		833CC76D1B2689A0008DA984 /* HobbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HobbyController.m; sourceTree = "<group>"; };
-		833CC7701B26AFB9008DA984 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
-		833CC7711B26AFB9008DA984 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
-		833CC7721B26AFB9008DA984 /* WXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXLabel.h; sourceTree = "<group>"; };
-		833CC7731B26AFB9008DA984 /* WXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXLabel.m; sourceTree = "<group>"; };
 		836A0AA01B22E97600C8E765 /* 未命名.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "未命名.tiff"; sourceTree = "<group>"; };
 		836D6AA61B1C756300119B3F /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
 		836D6AA71B1C756300119B3F /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
@@ -406,6 +401,8 @@
 		EFD9317C1B0EF93D0058F525 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		EFD9317D1B0EF93D0058F525 /* MD5Encryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Encryption.h; sourceTree = "<group>"; };
 		EFD9317E1B0EF93D0058F525 /* MD5Encryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5Encryption.m; sourceTree = "<group>"; };
+		EFE76B7B1B26D6D700C956A5 /* HomeTaskResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTaskResult.h; sourceTree = "<group>"; };
+		EFE76B7C1B26D6D700C956A5 /* HomeTaskResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTaskResult.m; sourceTree = "<group>"; };
 		EFE837B31B12F62A0093E14E /* purchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = purchase.h; sourceTree = "<group>"; };
 		EFE837B41B12F62A0093E14E /* purchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = purchase.m; sourceTree = "<group>"; };
 		EFE837B71B12FA3C0093E14E /* app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = app.h; sourceTree = "<group>"; };
@@ -473,17 +470,6 @@
 				B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		833CC76F1B26AFB9008DA984 /* WXLabel */ = {
-			isa = PBXGroup;
-			children = (
-				833CC7701B26AFB9008DA984 /* RegexKitLite.h */,
-				833CC7711B26AFB9008DA984 /* RegexKitLite.m */,
-				833CC7721B26AFB9008DA984 /* WXLabel.h */,
-				833CC7731B26AFB9008DA984 /* WXLabel.m */,
-			);
-			path = WXLabel;
 			sourceTree = "<group>";
 		};
 		837DF5D61B14687D00A5E2FA /* inviteCode(师徒联盟) */ = {
@@ -916,6 +902,8 @@
 				EF565D561B170D5500FC2D6B /* Result.m */,
 				EF565D581B17146300FC2D6B /* twoOption.h */,
 				EF565D591B17146300FC2D6B /* twoOption.m */,
+				EFE76B7B1B26D6D700C956A5 /* HomeTaskResult.h */,
+				EFE76B7C1B26D6D700C956A5 /* HomeTaskResult.m */,
 			);
 			name = model;
 			path = "classes/Login(登录)/model";
@@ -1549,7 +1537,6 @@
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
 				EFCCA4CA1B12D6E400C015A7 /* MJTypeEncoding.m in Sources */,
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
-				833CC7751B26AFB9008DA984 /* WXLabel.m in Sources */,
 				EF565D3F1B17091F00FC2D6B /* BoundPhoneViewController.m in Sources */,
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
 				EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */,
@@ -1597,7 +1584,6 @@
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
 				83E490081B1D74C400A44FC8 /* PICircularProgressView.m in Sources */,
 				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,
-				833CC7741B26AFB9008DA984 /* RegexKitLite.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
 				83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */,
@@ -1614,6 +1600,7 @@
 				EFCD67F01B267C0600B8F9D9 /* FSMediaPicker.m in Sources */,
 				EFD02B451B155CDA00D11D6D /* MJSettingItem.m in Sources */,
 				EF565D211B16E7C500FC2D6B /* UITextField+HT.m in Sources */,
+				EFE76B7D1B26D6D700C956A5 /* HomeTaskResult.m in Sources */,
 				EFC249851B256D1F00CD6DCD /* TaskDataCeach.m in Sources */,
 				EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */,
 				EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */,

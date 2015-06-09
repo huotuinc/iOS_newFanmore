@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface userData : NSObject
+/**性别*/
+@property(nonatomic,assign) int  sex;
 /**流量余额*/
 @property(nonatomic,strong) NSNumber * balance;
 /**用户头像连接*/
@@ -27,11 +29,11 @@
 /**电话*/
 @property(nonatomic,strong) NSString * mobile;
 /**职业索引*/
-@property(nonatomic,strong) NSArray * career;
+@property(nonatomic,assign) int  career;
 /**收入索引*/
-@property(nonatomic,strong) NSArray * incoming;
+@property(nonatomic,strong) NSString * incoming;
 /**爱好索引串  以逗号隔开*/
-@property(nonatomic,strong) NSArray * favs;
+@property(nonatomic,strong) NSString * favs;
 
 /**区域*/
 @property(nonatomic,strong) NSString * area;

@@ -32,7 +32,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
-    
+//    NSString * adasdas= [[NSUserDefaults standardUserDefaults] objectForKey:<#(NSString *)#>];
+//    NSLog(@"local ===%@",adasdas);
     
 //    *友盟*
     [MobClick startWithAppkey:UMENGID reportPolicy:BATCH channelId:nil];
@@ -173,11 +174,15 @@
             
             //取出本地token
             NSString *localToken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
+            NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",localToken);
+            NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",resultData.user.token);
             if (![localToken isEqualToString:resultData.user.token]) {
                 //保存新的token
                 [[NSUserDefaults standardUserDefaults] setObject:resultData.user.token forKey:AppToken];
                 NSString * flag = @"wrong";
                 [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
+                
+                NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppToken]);
             }else{
                 
                 NSString * flag = @"right";

@@ -22,18 +22,18 @@
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
     paramsOption[@"appKey"] = APPKEY;
-    params[@"appSecret"] = HuoToAppSecret;
+    paramsOption[@"appSecret"] = HuoToAppSecret;
     NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
     NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-    params[@"lat"] = lat?lat:@(0.0);
-    params[@"lng"] = lng?lng:@(0.0);;
+    paramsOption[@"lat"] = (lat?lat:@(0.0));
+    paramsOption[@"lng"] = (lng?lng:@(0.0));
     paramsOption[@"timestamp"] = apptimesSince1970;
     paramsOption[@"operation"] = OPERATION_parame;
     paramsOption[@"version"] =[NSString stringWithFormat:@"%f",AppVersion];
     NSString * token = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
     paramsOption[@"token"] = token?token:@"";
     paramsOption[@"imei"] = DeviceNo;
-    paramsOption[@"cityCode"] = @"123";
+    paramsOption[@"cityCode"] = @"1372";
     paramsOption[@"cpaCode"] = @"default";
     if (params != nil) { //传入参数不为空
        [paramsOption addEntriesFromDictionary:params];
@@ -58,7 +58,7 @@
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
     paramsOption[@"appKey"] = APPKEY;
-    params[@"appSecret"] = HuoToAppSecret;
+    paramsOption[@"appSecret"] = HuoToAppSecret;
     NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
     NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
     paramsOption[@"lat"] = lat?lat:@(0.0);

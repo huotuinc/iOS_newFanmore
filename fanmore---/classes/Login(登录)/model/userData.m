@@ -19,10 +19,10 @@
 @implementation userData
 
 
-- (NSDictionary *)objectClassInArray
-{
-    return @{@"incomings":[twoOption class],@"career":[twoOption class],@"favs":[twoOption class]};
-}
+//- (NSDictionary *)objectClassInArray
+//{
+//    return @{@"incomings":[twoOption class],@"career":[twoOption class],@"favs":[twoOption class]};
+//}
 
 MJCodingImplementation
 

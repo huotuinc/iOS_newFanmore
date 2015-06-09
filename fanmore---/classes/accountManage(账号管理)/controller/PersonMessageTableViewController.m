@@ -9,6 +9,7 @@
 #import "PersonMessageTableViewController.h"
 #import "FSMediaPicker.h"
 #import "GTMBase64.h"
+#import "ProfessionalController.h"
 
 @interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 

@@ -147,14 +147,19 @@
             [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:loginUserName];
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:passwd] forKey:loginPassword];
             //注册完后的数据
-            userData * userInfo = [userData objectWithKeyValues:json];
+            userData * userInfo = [userData objectWithKeyValues:(json[@"resultData"][@"user"])];
             
            //比较反回的token和本地的token比较
             NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+            NSLog(@"注册前的%@",token);
             [MBProgressHUD showSuccess:@"注册成功"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
+            NSLog(@"xxxxxx0000000000hhhhhhhh%@",userInfo.token);
             if (![token isEqualToString:userInfo.token]) {
                 
-                [[NSUserDefaults standardUserDefaults] setObject:token forKey:AppToken];
+                [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:AppToken];
+                
+                NSLog(@"注册后的%@", [[NSUserDefaults standardUserDefaults] objectForKey:AppToken]);
             }
             if ([wself.delegate respondsToSelector:@selector(UserRegisterViewSuccess:)]) {
                 
