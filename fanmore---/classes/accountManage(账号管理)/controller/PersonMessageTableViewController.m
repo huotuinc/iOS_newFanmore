@@ -7,6 +7,8 @@
 //  账号信息
 
 #import "PersonMessageTableViewController.h"
+#import "ProfessionalController.h"
+
 
 @interface PersonMessageTableViewController ()
 
@@ -96,6 +98,14 @@
             self.datePicker.center = self.view.center;
              [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
             [self.view addSubview:self.datePicker];
+        }
+    }
+    if (indexPath.section == 1) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        if (indexPath.row == 0) {
+            ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
+            pro.goods = @[@"教师",@"护士",@"医生",@"攻城狮",@"程序猿"];
+            [self.navigationController pushViewController:pro animated:YES];
         }
     }
 }
