@@ -138,6 +138,7 @@
     params[@"operation"] = OPERATION_parame;
     params[@"version"] = [NSString stringWithFormat:@"%f",AppVersion];
     NSString * aaatoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
+    NSLog(@"aaatoken === %@",aaatoken);
     params[@"token"] = aaatoken?aaatoken:@"";
     params[@"imei"] = DeviceNo;
     params[@"cityCode"] = @"123";

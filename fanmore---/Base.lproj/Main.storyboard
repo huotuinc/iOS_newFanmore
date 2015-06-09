@@ -659,6 +659,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="birthDayLable" destination="GKX-9m-1i3" id="JUt-C9-GIC"/>
                         <outlet property="iconView" destination="4QD-jY-aQf" id="pNQ-In-fog"/>
                         <outlet property="tableView" destination="O9b-Ie-CiE" id="vBS-XL-WP3"/>
                     </connections>
