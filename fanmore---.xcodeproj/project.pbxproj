@@ -78,7 +78,6 @@
 		EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */; };
 		EFC249821B255BDA00CD6DCD /* RequestTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249811B255BDA00CD6DCD /* RequestTasks.m */; };
 		EFC249851B256D1F00CD6DCD /* TaskDataCeach.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249841B256D1F00CD6DCD /* TaskDataCeach.m */; };
-		EFC249881B25749500CD6DCD /* taskData.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249871B25749500CD6DCD /* taskData.m */; };
 		EFC86A7D1B1E8D7E0081BBC8 /* BuyFlowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC86A7C1B1E8D7E0081BBC8 /* BuyFlowViewController.m */; };
 		EFC86AB71B1EFAFE0081BBC8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AB61B1EFAFE0081BBC8 /* SystemConfiguration.framework */; };
 		EFC86AB91B1EFB170081BBC8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AB81B1EFB170081BBC8 /* QuartzCore.framework */; };
@@ -127,6 +126,7 @@
 		EFCCA4CD1B12D6E400C015A7 /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4C21B12D6E400C015A7 /* NSObject+MJMember.m */; };
 		EFCCA4D91B12EA9F00C015A7 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4D81B12EA9F00C015A7 /* Message.m */; };
 		EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4DC1B12EB6D00C015A7 /* detail.m */; };
+		EFCD67F01B267C0600B8F9D9 /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCD67EF1B267C0600B8F9D9 /* FSMediaPicker.m */; };
 		EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */; };
 		EFCDC82A1B17F63100D28DB1 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */; };
 		EFD02B2D1B1552E400D11D6D /* protect.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD02B2C1B1552E400D11D6D /* protect.html */; };
@@ -361,6 +361,8 @@
 		EFCCA4D81B12EA9F00C015A7 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		EFCCA4DB1B12EB6D00C015A7 /* detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detail.h; sourceTree = "<group>"; };
 		EFCCA4DC1B12EB6D00C015A7 /* detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detail.m; sourceTree = "<group>"; };
+		EFCD67EE1B267C0600B8F9D9 /* FSMediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMediaPicker.h; sourceTree = "<group>"; };
+		EFCD67EF1B267C0600B8F9D9 /* FSMediaPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMediaPicker.m; sourceTree = "<group>"; };
 		EFCDC8231B17F59700D28DB1 /* NSString+EXTERN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EXTERN.h"; sourceTree = "<group>"; };
 		EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EXTERN.m"; sourceTree = "<group>"; };
 		EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
@@ -929,6 +931,7 @@
 		EF8D672D1B0DD07E008B6909 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				EFCD67ED1B267C0600B8F9D9 /* FSMediaPicker */,
 				EFC86ACE1B1EFD700081BBC8 /* ShareSDK */,
 				EFCDC8261B17F63100D28DB1 /* UMAnalytics_Sdk_3.5.8 */,
 				EF565CF41B16AA6000FC2D6B /* MJRefresh */,
@@ -1162,6 +1165,15 @@
 				EFCCA4DC1B12EB6D00C015A7 /* detail.m */,
 			);
 			path = detail;
+			sourceTree = "<group>";
+		};
+		EFCD67ED1B267C0600B8F9D9 /* FSMediaPicker */ = {
+			isa = PBXGroup;
+			children = (
+				EFCD67EE1B267C0600B8F9D9 /* FSMediaPicker.h */,
+				EFCD67EF1B267C0600B8F9D9 /* FSMediaPicker.m */,
+			);
+			path = FSMediaPicker;
 			sourceTree = "<group>";
 		};
 		EFCDC8261B17F63100D28DB1 /* UMAnalytics_Sdk_3.5.8 */ = {
@@ -1568,6 +1580,7 @@
 				EFD02B431B155CDA00D11D6D /* MJSettingGroup.m in Sources */,
 				EF49ECF11B0D81A40038A203 /* main.m in Sources */,
 				83DBD8E31B12FD2800B62830 /* RootViewController.m in Sources */,
+				EFCD67F01B267C0600B8F9D9 /* FSMediaPicker.m in Sources */,
 				EFD02B451B155CDA00D11D6D /* MJSettingItem.m in Sources */,
 				EF565D211B16E7C500FC2D6B /* UITextField+HT.m in Sources */,
 				EFC249851B256D1F00CD6DCD /* TaskDataCeach.m in Sources */,

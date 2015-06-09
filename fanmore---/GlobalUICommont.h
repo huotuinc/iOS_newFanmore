@@ -39,7 +39,7 @@
 #define loginUserName  @"username" //用户名
 #define loginPassword @"password"  //密码
 #define loginFlag @"loginFlag"  // 是否需要等人标志
-
+#define UserLoginNumber [NSUserDefaults standardUserDefaults] stringForKey:@"username"]
 
 //网络请求的固定参数
 
@@ -57,6 +57,7 @@
 #define VERIFICATIONCODELENGTH 6  //验证码长度
 #define FanMoreDB @"fanMoreDB"  //粉猫数据库
 #define TaskDataTable @"taskDataTable" //任务数据库任务表
+#define UserIconView @"appIconView"    //用户头像
 
 #define AppReadSeconds  @"lessReadSeconds"  //点击答题时倒记时
 
