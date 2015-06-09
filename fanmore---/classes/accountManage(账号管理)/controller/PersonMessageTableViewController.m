@@ -9,7 +9,6 @@
 #import "PersonMessageTableViewController.h"
 #import "ProfessionalController.h"
 
-
 @interface PersonMessageTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property(nonatomic,strong)NSArray * messages;
