@@ -13,6 +13,9 @@
 		830B4D071B2196DC00BBE276 /* BPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B4D051B2196DC00BBE276 /* BPCell.xib */; };
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD651B1854C100FAC712 /* MassageCenterController.m */; };
+		833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC76D1B2689A0008DA984 /* HobbyController.m */; };
+		833CC7741B26AFB9008DA984 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC7711B26AFB9008DA984 /* RegexKitLite.m */; };
+		833CC7751B26AFB9008DA984 /* WXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC7731B26AFB9008DA984 /* WXLabel.m */; };
 		836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 836A0AA01B22E97600C8E765 /* 未命名.tiff */; };
 		836D6AA81B1C756300119B3F /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AA71B1C756300119B3F /* FinishController.m */; };
 		836D6AAB1B1C776000119B3F /* JoinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAA1B1C776000119B3F /* JoinController.m */; };
@@ -22,6 +25,7 @@
 		837DF5DC1B14691200A5E2FA /* InviteCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */; };
 		8381167C1B2591AF00261F51 /* NameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8381167B1B2591AF00261F51 /* NameController.m */; };
 		838116821B25AC5A00261F51 /* SexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838116811B25AC5A00261F51 /* SexController.m */; };
+		83833F011B267A7B00D93079 /* ProfessionalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83833F001B267A7B00D93079 /* ProfessionalController.m */; };
 		83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */; };
 		83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */; };
 		83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B61B781B1713F000B027E0 /* TodayForesController.m */; };
@@ -168,6 +172,12 @@
 		8339BD621B18510E00FAC712 /* ChangePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordController.m; sourceTree = "<group>"; };
 		8339BD641B1854C100FAC712 /* MassageCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MassageCenterController.h; sourceTree = "<group>"; };
 		8339BD651B1854C100FAC712 /* MassageCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassageCenterController.m; sourceTree = "<group>"; };
+		833CC76C1B2689A0008DA984 /* HobbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HobbyController.h; sourceTree = "<group>"; };
+		833CC76D1B2689A0008DA984 /* HobbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HobbyController.m; sourceTree = "<group>"; };
+		833CC7701B26AFB9008DA984 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		833CC7711B26AFB9008DA984 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		833CC7721B26AFB9008DA984 /* WXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXLabel.h; sourceTree = "<group>"; };
+		833CC7731B26AFB9008DA984 /* WXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXLabel.m; sourceTree = "<group>"; };
 		836A0AA01B22E97600C8E765 /* 未命名.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "未命名.tiff"; sourceTree = "<group>"; };
 		836D6AA61B1C756300119B3F /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
 		836D6AA71B1C756300119B3F /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
@@ -184,6 +194,8 @@
 		8381167B1B2591AF00261F51 /* NameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameController.m; sourceTree = "<group>"; };
 		838116801B25AC5A00261F51 /* SexController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexController.h; sourceTree = "<group>"; };
 		838116811B25AC5A00261F51 /* SexController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexController.m; sourceTree = "<group>"; };
+		83833EFF1B267A7B00D93079 /* ProfessionalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionalController.h; sourceTree = "<group>"; };
+		83833F001B267A7B00D93079 /* ProfessionalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionalController.m; sourceTree = "<group>"; };
 		83A0E9F91B155BCE009708FB /* InviteCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeCell.h; sourceTree = "<group>"; };
 		83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeCell.m; sourceTree = "<group>"; };
 		83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCodeCell.xib; sourceTree = "<group>"; };
@@ -461,6 +473,17 @@
 				B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		833CC76F1B26AFB9008DA984 /* WXLabel */ = {
+			isa = PBXGroup;
+			children = (
+				833CC7701B26AFB9008DA984 /* RegexKitLite.h */,
+				833CC7711B26AFB9008DA984 /* RegexKitLite.m */,
+				833CC7721B26AFB9008DA984 /* WXLabel.h */,
+				833CC7731B26AFB9008DA984 /* WXLabel.m */,
+			);
+			path = WXLabel;
 			sourceTree = "<group>";
 		};
 		837DF5D61B14687D00A5E2FA /* inviteCode(师徒联盟) */ = {
@@ -1101,6 +1124,10 @@
 				8381167B1B2591AF00261F51 /* NameController.m */,
 				838116801B25AC5A00261F51 /* SexController.h */,
 				838116811B25AC5A00261F51 /* SexController.m */,
+				83833EFF1B267A7B00D93079 /* ProfessionalController.h */,
+				83833F001B267A7B00D93079 /* ProfessionalController.m */,
+				833CC76C1B2689A0008DA984 /* HobbyController.h */,
+				833CC76D1B2689A0008DA984 /* HobbyController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1511,6 +1538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83833F011B267A7B00D93079 /* ProfessionalController.m in Sources */,
 				EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */,
 				EF565D1A1B16DD9900FC2D6B /* ForeshowTableViewCell.m in Sources */,
 				EFCCA4C51B12D6E400C015A7 /* MJFoundation.m in Sources */,
@@ -1521,6 +1549,7 @@
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
 				EFCCA4CA1B12D6E400C015A7 /* MJTypeEncoding.m in Sources */,
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
+				833CC7751B26AFB9008DA984 /* WXLabel.m in Sources */,
 				EF565D3F1B17091F00FC2D6B /* BoundPhoneViewController.m in Sources */,
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
 				EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */,
@@ -1542,6 +1571,7 @@
 				836D6AA81B1C756300119B3F /* FinishController.m in Sources */,
 				EF565D571B170D5500FC2D6B /* Result.m in Sources */,
 				EF565D0A1B16AA6000FC2D6B /* UIScrollView+MJExtension.m in Sources */,
+				833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */,
 				EFE837B51B12F62A0093E14E /* purchase.m in Sources */,
 				EFC86A7D1B1E8D7E0081BBC8 /* BuyFlowViewController.m in Sources */,
 				EFE837B91B12FA3C0093E14E /* app.m in Sources */,
@@ -1567,6 +1597,7 @@
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
 				83E490081B1D74C400A44FC8 /* PICircularProgressView.m in Sources */,
 				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,
+				833CC7741B26AFB9008DA984 /* RegexKitLite.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
 				83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */,
