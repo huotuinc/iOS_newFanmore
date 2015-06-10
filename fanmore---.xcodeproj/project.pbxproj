@@ -145,6 +145,7 @@
 		EFD931801B0EF93D0058F525 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317B1B0EF93D0058F525 /* GTMBase64.m */; };
 		EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317E1B0EF93D0058F525 /* MD5Encryption.m */; };
 		EFE76B7D1B26D6D700C956A5 /* HomeTaskResult.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE76B7C1B26D6D700C956A5 /* HomeTaskResult.m */; };
+		EFE76B811B26DC4100C956A5 /* taskData.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE76B801B26DC4100C956A5 /* taskData.m */; };
 		EFE837B51B12F62A0093E14E /* purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837B41B12F62A0093E14E /* purchase.m */; };
 		EFE837B91B12FA3C0093E14E /* app.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837B81B12FA3C0093E14E /* app.m */; };
 		EFE837BD1B12FADB0093E14E /* question.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837BC1B12FADB0093E14E /* question.m */; };
@@ -297,8 +298,6 @@
 		EFC249811B255BDA00CD6DCD /* RequestTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTasks.m; sourceTree = "<group>"; };
 		EFC249831B256D1F00CD6DCD /* TaskDataCeach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDataCeach.h; sourceTree = "<group>"; };
 		EFC249841B256D1F00CD6DCD /* TaskDataCeach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDataCeach.m; sourceTree = "<group>"; };
-		EFC249861B25749500CD6DCD /* taskData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = taskData.h; path = "classes/home(主页)/model/taskData.h"; sourceTree = "<group>"; };
-		EFC249871B25749500CD6DCD /* taskData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = taskData.m; path = "classes/home(主页)/model/taskData.m"; sourceTree = "<group>"; };
 		EFC86A7B1B1E8D7E0081BBC8 /* BuyFlowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuyFlowViewController.h; path = "classes/home(主页)/controller/BuyFlowViewController.h"; sourceTree = "<group>"; };
 		EFC86A7C1B1E8D7E0081BBC8 /* BuyFlowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BuyFlowViewController.m; path = "classes/home(主页)/controller/BuyFlowViewController.m"; sourceTree = "<group>"; };
 		EFC86AB61B1EFAFE0081BBC8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -403,6 +402,8 @@
 		EFD9317E1B0EF93D0058F525 /* MD5Encryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5Encryption.m; sourceTree = "<group>"; };
 		EFE76B7B1B26D6D700C956A5 /* HomeTaskResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTaskResult.h; sourceTree = "<group>"; };
 		EFE76B7C1B26D6D700C956A5 /* HomeTaskResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTaskResult.m; sourceTree = "<group>"; };
+		EFE76B7F1B26DC4100C956A5 /* taskData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taskData.h; sourceTree = "<group>"; };
+		EFE76B801B26DC4100C956A5 /* taskData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = taskData.m; sourceTree = "<group>"; };
 		EFE837B31B12F62A0093E14E /* purchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = purchase.h; sourceTree = "<group>"; };
 		EFE837B41B12F62A0093E14E /* purchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = purchase.m; sourceTree = "<group>"; };
 		EFE837B71B12FA3C0093E14E /* app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = app.h; sourceTree = "<group>"; };
@@ -683,9 +684,9 @@
 		EF1EA6011B0DA31F00C1F60D /* home(主页) */ = {
 			isa = PBXGroup;
 			children = (
+				EFE76B7E1B26DC4100C956A5 /* model */,
 				EFC2497F1B255B6E00CD6DCD /* Tool */,
 				EFD02B2C1B1552E400D11D6D /* protect.html */,
-				EF1EA6041B0DA35D00C1F60D /* model */,
 				EF1EA6031B0DA34900C1F60D /* view */,
 				EF1EA6021B0DA33900C1F60D /* controller */,
 			);
@@ -723,15 +724,6 @@
 				830B4D051B2196DC00BBE276 /* BPCell.xib */,
 			);
 			name = view;
-			sourceTree = "<group>";
-		};
-		EF1EA6041B0DA35D00C1F60D /* model */ = {
-			isa = PBXGroup;
-			children = (
-				EFC249861B25749500CD6DCD /* taskData.h */,
-				EFC249871B25749500CD6DCD /* taskData.m */,
-			);
-			name = model;
 			sourceTree = "<group>";
 		};
 		EF35542D1B15C3AA00324D89 /* other */ = {
@@ -1323,6 +1315,16 @@
 			path = Encryption;
 			sourceTree = "<group>";
 		};
+		EFE76B7E1B26DC4100C956A5 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				EFE76B7F1B26DC4100C956A5 /* taskData.h */,
+				EFE76B801B26DC4100C956A5 /* taskData.m */,
+			);
+			name = model;
+			path = "classes/home(主页)/model";
+			sourceTree = "<group>";
+		};
 		EFE837B21B12F6100093E14E /* purchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1550,6 +1552,7 @@
 				83DBD8EB1B13059700B62830 /* MMExampleDrawerVisualStateManager.m in Sources */,
 				EF565D091B16AA6000FC2D6B /* MJRefreshHeaderView.m in Sources */,
 				EF565D481B17091F00FC2D6B /* UserLoginTool.m in Sources */,
+				EFE76B811B26DC4100C956A5 /* taskData.m in Sources */,
 				EF565D101B16B7AB00FC2D6B /* AccountSettingViewController.m in Sources */,
 				EFCCA4D91B12EA9F00C015A7 /* Message.m in Sources */,
 				EF565D511B170AF600FC2D6B /* LoginResultData.m in Sources */,

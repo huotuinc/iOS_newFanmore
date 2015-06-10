@@ -179,7 +179,7 @@
 
             //0表示没有绑定的必要 1表示有绑定的必要
             if ([json[@"resultData"][@"requireMobile"] intValue] == 1) {
-            
+                [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
                 BoundPhoneViewController * bdVc = [[BoundPhoneViewController alloc] init];
                 [self.navigationController pushViewController:bdVc animated:YES];
             }else{

@@ -15,6 +15,7 @@
 #import "BuyFlowViewController.h"
 #import "taskData.h"
 
+
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 
@@ -87,7 +88,7 @@ static NSString *homeCellidentify = @"homeCellId";
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
-//    [self.tableView headerBeginRefreshing];
+    [self.tableView headerBeginRefreshing];
     
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
@@ -127,7 +128,13 @@ static NSString *homeCellidentify = @"homeCellId";
     [UserLoginTool loginRequestGet:usrStr parame:nil success:^(id json) {
         
         NSLog(@"xxxxxxxx任务列表%@",json);
-        [taskData objectArrayWithJSONData:json[@"resultData"][@"task"]];
+        NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
+        NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
+        [taskaa addObjectsFromArray:self.taskDatas];
+        self.taskDatas = taskaa;
+        
+        [self.tableView reloadData];    //刷新数据
+        
     } failure:^(NSError *error) {
         
     }];
@@ -135,16 +142,16 @@ static NSString *homeCellidentify = @"homeCellId";
 -(void)getMoreData{
     
     NSLog(@"加载跟多的＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
-    [UserLoginTool loginRequestGet:usrStr parame:nil success:^(NSDictionary * json) {
-        
-       
-        
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
+//    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+//    [UserLoginTool loginRequestGet:usrStr parame:nil success:^(NSDictionary * json) {
+//        
+//       
+//        
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//    
 //    [UserLoginTool loginRequestGet:<#(NSString *)#> parame:<#(NSMutableDictionary *)#> success:<#^(id json)success#> failure:<#^(NSError *error)failure#>]
 //    //1、设置网络获取的参数
 //    HA4SInfoRequestParame * parame = [HA4SInfoRequestParame InfoRequestParameWithpartnerCode:proCode andStartIndex:startIndex andPageSize:@(PageSize)];
@@ -221,6 +228,20 @@ static NSString *homeCellidentify = @"homeCellId";
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeCell" owner:nil options:nil] lastObject];
     }
+    
+//    taskData * task = self.taskDatas[indexPath.row];
+//    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[task.publishDate doubleValue]];
+//    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+//    NSString * publishtime = [formatter stringFromDate:ptime];
+////    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:];
+////    [NSString s]
+////    
+////    
+//    //设置cell样式
+//    
+//    
+//    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@",task.luckies] andIntroduceLabel:task.desc andGetImage:(task.reward?1:0)];
+    
     if (indexPath.row == 2) {
         [cell setSelection:1];
     }else if (indexPath.row == 3) {
