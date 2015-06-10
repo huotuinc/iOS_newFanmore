@@ -54,7 +54,7 @@
     
     if (self.AButton.tag == self.tureAnswer) {
         [self showTureAnswer];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             FinishController *finish = [storyboard instantiateViewControllerWithIdentifier:@"FinishController"];
             [self.navigationController pushViewController:finish animated:YES];
@@ -62,7 +62,7 @@
     }else {
         [self showTureAnswer];
         [self.AButton setBackgroundImage:[UIImage imageNamed:@"A_c"] forState:UIControlStateNormal];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             FinishController *finish = [storyboard instantiateViewControllerWithIdentifier:@"FinishController"];
             [self.navigationController pushViewController:finish animated:YES];
@@ -77,7 +77,7 @@
     
     if (self.BButton.tag == self.tureAnswer) {
         [self showTureAnswer];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];   
             JoinController *joinVc = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
             [self.navigationController pushViewController:joinVc animated:YES];
@@ -85,7 +85,7 @@
     }else {
         [self showTureAnswer];
         [self.BButton setBackgroundImage:[UIImage imageNamed:@"B_c"] forState:UIControlStateNormal];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             JoinController *joinVc = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
             [self.navigationController pushViewController:joinVc animated:YES];

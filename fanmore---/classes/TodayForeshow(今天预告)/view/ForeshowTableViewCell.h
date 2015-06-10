@@ -20,6 +20,7 @@
 
 @interface ForeshowTableViewCell : UITableViewCell
 
+@property (assign, nonatomic) BOOL isWarning;
 @property(nonatomic,strong) id <ForeshowTableViewCellDelegate> delegate;
 
 + (instancetype)ForeshowTableViewCell;

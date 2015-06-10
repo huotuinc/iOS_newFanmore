@@ -48,13 +48,12 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGQ-P1-78a">
                         <rect key="frame" x="245" y="9" width="70" height="30"/>
-                        <color key="backgroundColor" red="0.0048019419269999999" green="0.55332796880000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Mnj-qC-ruA"/>
                             <constraint firstAttribute="width" constant="70" id="chz-KU-bdo"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="设置提醒" backgroundImage="button-BR">
+                        <state key="normal" title="设置提醒" backgroundImage="bian_b">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -112,7 +111,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="button-BR" width="480" height="80"/>
+        <image name="bian_b" width="35" height="15"/>
         <image name="未命名.tiff" width="301" height="301"/>
     </resources>
 </document>

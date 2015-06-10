@@ -22,5 +22,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+//- (CGFloat)tabelViewCellHeightAndText:(NSString *)str  {
+//    
+//}
+
 
 @end

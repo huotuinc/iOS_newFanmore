@@ -129,6 +129,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ForeshowTableViewCell" owner:nil options:nil] lastObject];
         cell.delegate = self;
+        cell.isWarning = NO;
     }
     
     return cell;
@@ -142,10 +143,19 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         NSLog(@"xxxxxxxxxxx");
         if ([aa isKindOfClass:[UIButton class]]) {
              NSLog(@"xxxxxxxxxxxaaa");
-            
-            UIImage * image = [UIImage imageNamed:@"button-W"];
-            image = [image stretchableImageWithLeftCapWidth:image.size.width* 0.5 topCapHeight:image.size.height*0.5];
-            [(UIButton *)aa setBackgroundImage:image forState:UIControlStateNormal];
+            if (cell.isWarning == NO) {
+                UIImage * image = [UIImage imageNamed:@"bian"];
+                image = [image stretchableImageWithLeftCapWidth:image.size.width* 0.5 topCapHeight:image.size.height*0.5];
+                [(UIButton *)aa setBackgroundImage:image forState:UIControlStateNormal];
+                [(UIButton *)aa setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
+                [(UIButton *)aa setTitle:@"取消提醒" forState:UIControlStateNormal];
+            }else {
+                UIImage * image = [UIImage imageNamed:@"bian_b"];
+                image = [image stretchableImageWithLeftCapWidth:image.size.width* 0.5 topCapHeight:image.size.height*0.5];
+                [(UIButton *)aa setBackgroundImage:image forState:UIControlStateNormal];
+                [(UIButton *)aa setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [(UIButton *)aa setTitle:@"设置提醒" forState:UIControlStateNormal];
+            }
             
         }
     }
