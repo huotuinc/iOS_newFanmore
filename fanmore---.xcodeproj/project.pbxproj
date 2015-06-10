@@ -41,7 +41,7 @@
 		83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CD81B1C3EA800286735 /* DiscipleViewController.m */; };
 		83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CDE1B1C3EBE00286735 /* asignViewController.m */; };
 		83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */; };
-		83F875F11B27D1860089C6F5 /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F875F01B27D1860089C6F5 /* FSMediaPicker.m */; };
+		EF2E54341B27D40E0060E965 /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E54331B27D40E0060E965 /* FSMediaPicker.m */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
 		EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF31B0D81A40038A203 /* AppDelegate.m */; };
 		EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF61B0D81A40038A203 /* ViewController.m */; };
@@ -955,7 +955,7 @@
 		EF8D672D1B0DD07E008B6909 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				83F875EE1B27D1860089C6F5 /* FSMediaPicker */,
+				EF2E54311B27D40E0060E965 /* FSMediaPicker */,
 				EFC86ACE1B1EFD700081BBC8 /* ShareSDK */,
 				EFCDC8261B17F63100D28DB1 /* UMAnalytics_Sdk_3.5.8 */,
 				EF565CF41B16AA6000FC2D6B /* MJRefresh */,
