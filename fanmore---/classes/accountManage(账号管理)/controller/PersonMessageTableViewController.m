@@ -7,7 +7,7 @@
 //  账号信息
 
 #import "PersonMessageTableViewController.h"
-#import "FSMediaPicker.h"
+//#import "FSMediaPicker.h"
 #import "GTMBase64.h"
 #import "ProfessionalController.h"
 

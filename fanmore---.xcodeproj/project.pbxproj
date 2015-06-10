@@ -129,7 +129,6 @@
 		EFCCA4CD1B12D6E400C015A7 /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4C21B12D6E400C015A7 /* NSObject+MJMember.m */; };
 		EFCCA4D91B12EA9F00C015A7 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4D81B12EA9F00C015A7 /* Message.m */; };
 		EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4DC1B12EB6D00C015A7 /* detail.m */; };
-		EFCD67F01B267C0600B8F9D9 /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCD67EF1B267C0600B8F9D9 /* FSMediaPicker.m */; };
 		EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */; };
 		EFCDC82A1B17F63100D28DB1 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */; };
 		EFD02B2D1B1552E400D11D6D /* protect.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD02B2C1B1552E400D11D6D /* protect.html */; };
@@ -229,6 +228,8 @@
 		83F875EF1B27D1860089C6F5 /* FSMediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMediaPicker.h; sourceTree = "<group>"; };
 		83F875F01B27D1860089C6F5 /* FSMediaPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMediaPicker.m; sourceTree = "<group>"; };
 		B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EF2E54321B27D40E0060E965 /* FSMediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMediaPicker.h; sourceTree = "<group>"; };
+		EF2E54331B27D40E0060E965 /* FSMediaPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMediaPicker.m; sourceTree = "<group>"; };
 		EF49ECEB1B0D81A40038A203 /* fanmore---.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fanmore---.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF49ECEF1B0D81A40038A203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF49ECF01B0D81A40038A203 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -735,6 +736,15 @@
 				830B4D051B2196DC00BBE276 /* BPCell.xib */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		EF2E54311B27D40E0060E965 /* FSMediaPicker */ = {
+			isa = PBXGroup;
+			children = (
+				EF2E54321B27D40E0060E965 /* FSMediaPicker.h */,
+				EF2E54331B27D40E0060E965 /* FSMediaPicker.m */,
+			);
+			path = FSMediaPicker;
 			sourceTree = "<group>";
 		};
 		EF35542D1B15C3AA00324D89 /* other */ = {
@@ -1543,6 +1553,7 @@
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
 				EF565D3F1B17091F00FC2D6B /* BoundPhoneViewController.m in Sources */,
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
+				EF2E54341B27D40E0060E965 /* FSMediaPicker.m in Sources */,
 				EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */,
 				836D6AB51B1C872300119B3F /* DiscipleCell.m in Sources */,
 				83D495471B159AC300935889 /* UIViewController+FM.m in Sources */,
@@ -1603,7 +1614,6 @@
 				EFD02B431B155CDA00D11D6D /* MJSettingGroup.m in Sources */,
 				EF49ECF11B0D81A40038A203 /* main.m in Sources */,
 				83DBD8E31B12FD2800B62830 /* RootViewController.m in Sources */,
-				EFCD67F01B267C0600B8F9D9 /* FSMediaPicker.m in Sources */,
 				EFD02B451B155CDA00D11D6D /* MJSettingItem.m in Sources */,
 				EF565D211B16E7C500FC2D6B /* UITextField+HT.m in Sources */,
 				EFE76B7D1B26D6D700C956A5 /* HomeTaskResult.m in Sources */,
