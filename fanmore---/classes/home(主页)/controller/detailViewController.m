@@ -53,7 +53,6 @@
  */
 - (void)setup{
     
-    self.title = @"详情页面";
     
     
     

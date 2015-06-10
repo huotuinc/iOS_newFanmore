@@ -14,8 +14,6 @@
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD651B1854C100FAC712 /* MassageCenterController.m */; };
 		833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC76D1B2689A0008DA984 /* HobbyController.m */; };
-		833CC7741B26AFB9008DA984 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC7711B26AFB9008DA984 /* RegexKitLite.m */; };
-		833CC7751B26AFB9008DA984 /* WXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC7731B26AFB9008DA984 /* WXLabel.m */; };
 		836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 836A0AA01B22E97600C8E765 /* 未命名.tiff */; };
 		836D6AA81B1C756300119B3F /* FinishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AA71B1C756300119B3F /* FinishController.m */; };
 		836D6AAB1B1C776000119B3F /* JoinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836D6AAA1B1C776000119B3F /* JoinController.m */; };
@@ -173,10 +171,6 @@
 		8339BD651B1854C100FAC712 /* MassageCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassageCenterController.m; sourceTree = "<group>"; };
 		833CC76C1B2689A0008DA984 /* HobbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HobbyController.h; sourceTree = "<group>"; };
 		833CC76D1B2689A0008DA984 /* HobbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HobbyController.m; sourceTree = "<group>"; };
-		833CC7701B26AFB9008DA984 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
-		833CC7711B26AFB9008DA984 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
-		833CC7721B26AFB9008DA984 /* WXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXLabel.h; sourceTree = "<group>"; };
-		833CC7731B26AFB9008DA984 /* WXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXLabel.m; sourceTree = "<group>"; };
 		836A0AA01B22E97600C8E765 /* 未命名.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "未命名.tiff"; sourceTree = "<group>"; };
 		836D6AA61B1C756300119B3F /* FinishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishController.h; sourceTree = "<group>"; };
 		836D6AA71B1C756300119B3F /* FinishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishController.m; sourceTree = "<group>"; };
@@ -470,17 +464,6 @@
 				B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		833CC76F1B26AFB9008DA984 /* WXLabel */ = {
-			isa = PBXGroup;
-			children = (
-				833CC7701B26AFB9008DA984 /* RegexKitLite.h */,
-				833CC7711B26AFB9008DA984 /* RegexKitLite.m */,
-				833CC7721B26AFB9008DA984 /* WXLabel.h */,
-				833CC7731B26AFB9008DA984 /* WXLabel.m */,
-			);
-			path = WXLabel;
 			sourceTree = "<group>";
 		};
 		837DF5D61B14687D00A5E2FA /* inviteCode(师徒联盟) */ = {
@@ -951,7 +934,6 @@
 		EF8D672D1B0DD07E008B6909 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				833CC76F1B26AFB9008DA984 /* WXLabel */,
 				EFC86ACE1B1EFD700081BBC8 /* ShareSDK */,
 				EFCDC8261B17F63100D28DB1 /* UMAnalytics_Sdk_3.5.8 */,
 				EF565CF41B16AA6000FC2D6B /* MJRefresh */,
@@ -1537,7 +1519,6 @@
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
 				EFCCA4CA1B12D6E400C015A7 /* MJTypeEncoding.m in Sources */,
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
-				833CC7751B26AFB9008DA984 /* WXLabel.m in Sources */,
 				EF565D3F1B17091F00FC2D6B /* BoundPhoneViewController.m in Sources */,
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
 				EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */,
@@ -1585,7 +1566,6 @@
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
 				83E490081B1D74C400A44FC8 /* PICircularProgressView.m in Sources */,
 				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,
-				833CC7741B26AFB9008DA984 /* RegexKitLite.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
 				83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */,

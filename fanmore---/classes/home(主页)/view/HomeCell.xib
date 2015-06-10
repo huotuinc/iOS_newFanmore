@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天欧冠巴萨激战尤文" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-4D-mst">
-                        <rect key="frame" x="85" y="10" width="180" height="21"/>
+                        <rect key="frame" x="85" y="15" width="180" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="180" id="JBz-xJ-n4i"/>
                             <constraint firstAttribute="height" constant="21" id="zdC-gL-DZe"/>
@@ -26,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-04-04" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFQ-QQ-8uU">
-                        <rect key="frame" x="85" y="31" width="65" height="15"/>
+                        <rect key="frame" x="85" y="36" width="65" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -52,12 +52,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="就看风景啊龙卷风垃圾法律激发了世界法拉盛减肥法儿玩儿我打算发撒风的撒的撒打算打算打算打算打算打算打算的" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKy-Gw-2hj">
-                        <rect key="frame" x="85" y="45" width="225" height="44"/>
+                        <rect key="frame" x="85" y="47" width="225" height="42"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="44" id="8QV-jB-NH9"/>
+                            <constraint firstAttribute="height" constant="42" id="8QV-jB-NH9"/>
                             <constraint firstAttribute="width" constant="189" id="dqQ-Yj-CPz"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
@@ -73,7 +73,7 @@
                             <constraint firstAttribute="height" constant="70" id="dGu-Rv-JE4"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="未命名.tiff" translatesAutoresizingMaskIntoConstraints="NO" id="0jK-cX-QNi">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mrtou_b" translatesAutoresizingMaskIntoConstraints="NO" id="0jK-cX-QNi">
                         <rect key="frame" x="10" y="15" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="BwX-oc-Jgk"/>
@@ -96,7 +96,7 @@
                     <constraint firstItem="UFQ-QQ-8uU" firstAttribute="leading" secondItem="0jK-cX-QNi" secondAttribute="trailing" constant="5" id="DMT-u0-HoU"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="top" secondItem="RRN-9z-gCd" secondAttribute="bottom" id="GWE-Vc-6vv"/>
                     <constraint firstAttribute="trailing" secondItem="ZKy-Gw-2hj" secondAttribute="trailing" constant="10" id="ROk-Fc-dnC"/>
-                    <constraint firstItem="nGH-4D-mst" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="TeT-Gc-bR6"/>
+                    <constraint firstItem="nGH-4D-mst" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="TeT-Gc-bR6"/>
                     <constraint firstAttribute="trailing" secondItem="Ojb-Eg-SxG" secondAttribute="trailing" constant="10" id="VSt-xb-lr8"/>
                     <constraint firstItem="RRN-9z-gCd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="amT-jJ-H4v"/>
                     <constraint firstAttribute="bottom" secondItem="XbP-Z9-ED8" secondAttribute="bottom" id="i0Q-qN-GUE"/>
@@ -120,10 +120,10 @@
                 <outlet property="showImage" destination="0jK-cX-QNi" id="rl1-Fy-cEj"/>
                 <outlet property="timeLabel" destination="UFQ-QQ-8uU" id="cED-WZ-456"/>
             </connections>
-            <point key="canvasLocation" x="321" y="340"/>
+            <point key="canvasLocation" x="211" y="328"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="未命名.tiff" width="301" height="301"/>
+        <image name="mrtou_b" width="150" height="150"/>
     </resources>
 </document>

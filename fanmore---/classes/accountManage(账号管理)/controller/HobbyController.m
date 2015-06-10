@@ -7,7 +7,7 @@
 //
 
 #import "HobbyController.h"
-#import "WXLabel.h"
+
 
 @interface HobbyController ()
 

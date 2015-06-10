@@ -27,8 +27,11 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.PICView.progress = 0.8;
     self.PICView.thicknessRatio = 0.15;
     self.PICView.showText = NO;
-    self.PICView.innerBackgroundColor = [UIColor colorWithRed:245 green:245 blue:245 alpha:1];
-    self.PICView.outerBackgroundColor = [UIColor colorWithRed:1 green:141 blue:255 alpha:1];
+    self.PICView.roundedHead = NO;
+    self.PICView.showShadow = NO;
+    self.PICView.innerBackgroundColor = [UIColor whiteColor];
+    self.PICView.outerBackgroundColor = [UIColor colorWithWhite:0.826 alpha:1.000];
+//    self.PICView.progressBottomGradientColor = 0;
     
     self.itemNum = 11;
     
@@ -47,7 +50,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     
     self.bgView = [[UIView alloc] initWithFrame:CGRectMake( 0, 0, ScreenWidth, ScreenHeight)];
-    self.bgView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.5];
+    self.bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
     [self.view addSubview:self.bgView];
     self.bgView.hidden = YES;
     UITapGestureRecognizer *reg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(regAction:)];
@@ -68,7 +71,11 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.bgView addSubview:self.collectionView];
     
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y - 35, self.collectionView.frame.size.width, 25)];
+    label.text = @"流量兑换当月有效";
+    [self.bgView addSubview:label];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         BPViewController *bpView = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
         [self.navigationController pushViewController:bpView animated:YES];
@@ -140,6 +147,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
     
     [self.navigationController setNavigationBarHidden:NO];
+    
+    self.bgView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
