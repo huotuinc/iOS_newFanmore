@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B56C822B3D3D6F344695E94 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83ED0B46534249FDED1AB9A4 /* libPods.a */; };
+		830812401B28552200AC4E18 /* PICircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8308123F1B28552200AC4E18 /* PICircularProgressView.m */; };
 		830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D011B2194FC00BBE276 /* BPViewController.m */; };
 		830B4D061B2196DC00BBE276 /* BPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D041B2196DC00BBE276 /* BPCell.m */; };
 		830B4D071B2196DC00BBE276 /* BPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B4D051B2196DC00BBE276 /* BPCell.xib */; };
@@ -36,11 +37,12 @@
 		83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DBD92C1B13128800B62830 /* HomeCell.xib */; };
 		83E490021B1D747900A44FC8 /* TrafficShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E490011B1D747900A44FC8 /* TrafficShowController.m */; };
 		83E490051B1D749A00A44FC8 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E490041B1D749A00A44FC8 /* detailViewController.m */; };
-		83E490081B1D74C400A44FC8 /* PICircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E490071B1D74C400A44FC8 /* PICircularProgressView.m */; };
 		83E72CCD1B1C2B2D00286735 /* AnswerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CCC1B1C2B2D00286735 /* AnswerController.m */; };
 		83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CD81B1C3EA800286735 /* DiscipleViewController.m */; };
 		83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CDE1B1C3EBE00286735 /* asignViewController.m */; };
 		83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */; };
+		83F875F51B27E2C00089C6F5 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F875F31B27E2C00089C6F5 /* MessageCell.m */; };
+		83F875F61B27E2C00089C6F5 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F875F41B27E2C00089C6F5 /* MessageCell.xib */; };
 		EF2E54341B27D40E0060E965 /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E54331B27D40E0060E965 /* FSMediaPicker.m */; };
 		EF2E54371B27E2AB0060E965 /* GetHomeDataTool.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E54361B27E2AB0060E965 /* GetHomeDataTool.m */; };
 		EF2E543B1B2853F30060E965 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E543A1B2853F30060E965 /* Message.m */; };
@@ -166,6 +168,8 @@
 
 /* Begin PBXFileReference section */
 		4215C255FF8423CA4D63FB2E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8308123E1B28552200AC4E18 /* PICircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICircularProgressView.h; sourceTree = "<group>"; };
+		8308123F1B28552200AC4E18 /* PICircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICircularProgressView.m; sourceTree = "<group>"; };
 		830B4D001B2194FC00BBE276 /* BPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPViewController.h; path = "classes/home(主页)/controller/BPViewController.h"; sourceTree = "<group>"; };
 		830B4D011B2194FC00BBE276 /* BPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPViewController.m; path = "classes/home(主页)/controller/BPViewController.m"; sourceTree = "<group>"; };
 		830B4D031B2196DC00BBE276 /* BPCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPCell.h; path = "classes/home(主页)/view/BPCell.h"; sourceTree = "<group>"; };
@@ -217,8 +221,6 @@
 		83E490011B1D747900A44FC8 /* TrafficShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrafficShowController.m; path = "classes/home(主页)/controller/TrafficShowController.m"; sourceTree = "<group>"; };
 		83E490031B1D749A00A44FC8 /* detailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = detailViewController.h; path = "classes/home(主页)/controller/detailViewController.h"; sourceTree = "<group>"; };
 		83E490041B1D749A00A44FC8 /* detailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = detailViewController.m; path = "classes/home(主页)/controller/detailViewController.m"; sourceTree = "<group>"; };
-		83E490061B1D74C400A44FC8 /* PICircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PICircularProgressView.h; path = "classes/home(主页)/view/PICircularProgressView.h"; sourceTree = "<group>"; };
-		83E490071B1D74C400A44FC8 /* PICircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PICircularProgressView.m; path = "classes/home(主页)/view/PICircularProgressView.m"; sourceTree = "<group>"; };
 		83E72CCB1B1C2B2D00286735 /* AnswerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerController.h; sourceTree = "<group>"; };
 		83E72CCC1B1C2B2D00286735 /* AnswerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerController.m; sourceTree = "<group>"; };
 		83E72CD71B1C3EA800286735 /* DiscipleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscipleViewController.h; sourceTree = "<group>"; };
@@ -722,8 +724,8 @@
 		EF1EA6031B0DA34900C1F60D /* view */ = {
 			isa = PBXGroup;
 			children = (
-				83E490061B1D74C400A44FC8 /* PICircularProgressView.h */,
-				83E490071B1D74C400A44FC8 /* PICircularProgressView.m */,
+				8308123E1B28552200AC4E18 /* PICircularProgressView.h */,
+				8308123F1B28552200AC4E18 /* PICircularProgressView.m */,
 				83DBD92A1B13128800B62830 /* HomeCell.h */,
 				83DBD92B1B13128800B62830 /* HomeCell.m */,
 				83DBD92C1B13128800B62830 /* HomeCell.xib */,
@@ -1475,6 +1477,7 @@
 				EF565D1B1B16DD9900FC2D6B /* ForeshowTableViewCell.xib in Resources */,
 				830B4D071B2196DC00BBE276 /* BPCell.xib in Resources */,
 				EF565D401B17091F00FC2D6B /* BoundPhoneViewController.xib in Resources */,
+				83F875F61B27E2C00089C6F5 /* MessageCell.xib in Resources */,
 				EFC86AF91B1EFD700081BBC8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				EF49ECFC1B0D81A40038A203 /* Images.xcassets in Resources */,
 				EF565D461B17091F00FC2D6B /* UserRegisterViewController.xib in Resources */,
@@ -1546,6 +1549,7 @@
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
 				EFCCA4CA1B12D6E400C015A7 /* MJTypeEncoding.m in Sources */,
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
+				830812401B28552200AC4E18 /* PICircularProgressView.m in Sources */,
 				EF565D3F1B17091F00FC2D6B /* BoundPhoneViewController.m in Sources */,
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
 				EF2E54341B27D40E0060E965 /* FSMediaPicker.m in Sources */,
@@ -1589,11 +1593,11 @@
 				EFCCA4C71B12D6E400C015A7 /* MJMember.m in Sources */,
 				EF565D451B17091F00FC2D6B /* UserRegisterViewController.m in Sources */,
 				EFD02B441B155CDA00D11D6D /* MJSettingArrowItem.m in Sources */,
+				83F875F51B27E2C00089C6F5 /* MessageCell.m in Sources */,
 				EFCCA4CB1B12D6E400C015A7 /* NSObject+MJCoding.m in Sources */,
 				83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */,
 				83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */,
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
-				83E490081B1D74C400A44FC8 /* PICircularProgressView.m in Sources */,
 				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
@@ -1767,6 +1771,7 @@
 			baseConfigurationReference = 4215C255FF8423CA4D63FB2E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1798,6 +1803,7 @@
 			baseConfigurationReference = B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

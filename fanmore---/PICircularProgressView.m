@@ -32,7 +32,7 @@
         [appearance setProgressFillColor:nil];
         
         [appearance setProgressTopGradientColor:[UIColor colorWithRed:15.0/255.0 green:97.0/255.0 blue:189.0/255.0 alpha:1.0]];
-        [appearance setProgressBottomGradientColor:[UIColor colorWithRed:15.0/255.0 green:97.0/255.0 blue:189.0/255.0 alpha:1.0]];
+        [appearance setProgressBottomGradientColor:[UIColor colorWithRed:114.0/255.0 green:174.0/255.0 blue:235.0/255.0 alpha:1.0]];
         
         // TODO: It's not guaranteed that UIView supports UIAppearance for backgroundColor.
         [appearance setBackgroundColor:[UIColor clearColor]];
@@ -70,28 +70,14 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    if (_innerBackgroundColor)
-    {
-        // Fill innerCircle with innerBackgroundColor
-        UIBezierPath *innerCircle = [UIBezierPath bezierPathWithArcCenter:center
-                                                                   radius:radius - circleWidth
-                                                               startAngle:2*M_PI
-                                                                 endAngle:0.0
-                                                                clockwise:YES];
-        
-        [_innerBackgroundColor setFill];
-        
-        [innerCircle fill];
-    }
-    
     if (_outerBackgroundColor)
     {
         // Fill outerCircle with outerBackgroundColor
         UIBezierPath *outerCircle = [UIBezierPath bezierPathWithArcCenter:center
-                                                              radius:radius
-                                                          startAngle:0.0
-                                                            endAngle:2*M_PI
-                                                           clockwise:NO];
+                                                                   radius:radius
+                                                               startAngle:0.0
+                                                                 endAngle:2*M_PI
+                                                                clockwise:NO];
         [outerCircle addArcWithCenter:center
                                radius:radius - circleWidth
                            startAngle:2*M_PI
@@ -102,6 +88,22 @@
         
         [outerCircle fill];
     }
+    
+    if (_innerBackgroundColor)
+    {
+        // Fill innerCircle with innerBackgroundColor
+        UIBezierPath *innerCircle = [UIBezierPath bezierPathWithArcCenter:center
+                                                                   radius:radius - circleWidth
+                                                               startAngle:0
+                                                                 endAngle:2*M_PI
+                                                                clockwise:YES];
+        
+        [_innerBackgroundColor setFill];
+        
+        [innerCircle fill];
+    }
+
+
     
     if (_showShadow)
     {

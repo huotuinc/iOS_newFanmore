@@ -25,6 +25,11 @@
 /**提醒按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *timeButton;
 
+/**
+ *  已经设置提醒
+ */
+
+
 /**提醒按钮点击*/
 - (IBAction)timeButtonClick:(id)sender;
 
@@ -55,19 +60,42 @@
     }
     
     
-    UILocalNotification * notification = [[UILocalNotification alloc] init];
-    if (notification != nil) {
-        NSDate *now=[NSDate new];
-        notification.fireDate = [now dateByAddingTimeInterval:5];
-//        notification.fireDate = [NSDate dateWithTimeIntervalSince1970:];
-        notification.timeZone = [NSTimeZone defaultTimeZone];
-        notification.alertBody = @"我是火焰之王";
-        
-        NSDictionary* info = [NSDictionary dictionaryWithObject:@"1121`2" forKey:@"good"];
-        notification.userInfo = info;
-        
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    if (!self.isWarning) {
+        UILocalNotification * notification = [[UILocalNotification alloc] init];
+        if (notification != nil) {
+            NSDate *now=[NSDate new];
+            notification.fireDate = [now dateByAddingTimeInterval:10];
+            //        notification.fireDate = [NSDate dateWithTimeIntervalSince1970:];
+            notification.timeZone = [NSTimeZone defaultTimeZone];
+            notification.alertBody = @"我是火焰之王";
+            
+            NSDictionary* info = [NSDictionary dictionaryWithObject:@"1121`2" forKey:@"good"];
+            notification.userInfo = info;
+//            notification.applicationIconBadgeNumber = [[[UIApplication sharedApplication] scheduledLocalNotifications] count]+1;
+            NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:1],@"nfkey",nil];
+            notification.userInfo = dict;
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+            self.isWarning = !self.isWarning;
+            [MBProgressHUD showSuccess:@"提醒设置成功"];
+        }
+    }else {
+        NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
+        if (array.count > 0) {
+            for (int i = 0; i < array.count; i++) {
+                UILocalNotification *loa = [array objectAtIndex:i];
+                NSDictionary *userInfo = loa.userInfo;
+                NSNumber *obj = [userInfo objectForKey:@"nfkey"];
+                int mytag=[obj intValue];
+                if (mytag == 1) {
+                    [[UIApplication sharedApplication] cancelLocalNotification:loa];
+                    [MBProgressHUD showSuccess:@"已取消提醒"];
+                    self.isWarning = !self.isWarning;
+                    break;
+                }
+            }
+        }
     }
+    
    
     
 }

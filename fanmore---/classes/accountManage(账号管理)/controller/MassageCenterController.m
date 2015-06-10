@@ -86,6 +86,10 @@
     return 11;
 }
 
+//- (CGFloat)tabelViewCellHeightAndText:(NSString *)str  {
+//    
+//}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 

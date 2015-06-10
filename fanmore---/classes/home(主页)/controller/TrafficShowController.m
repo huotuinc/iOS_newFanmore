@@ -29,10 +29,11 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.PICView.showText = NO;
     self.PICView.roundedHead = NO;
     self.PICView.showShadow = NO;
-    self.PICView.innerBackgroundColor = [UIColor clearColor];
+    
     self.PICView.outerBackgroundColor = [UIColor colorWithWhite:0.826 alpha:1.000];
-    self.PICView.progressTopGradientColor = [UIColor colorWithRed:0.072 green:0.397 blue:0.993 alpha:1.000];
-    self.PICView.progressBottomGradientColor = [UIColor colorWithRed:0.072 green:0.397 blue:0.993 alpha:1.000];
+    self.PICView.innerBackgroundColor = [UIColor whiteColor];
+    self.PICView.progressTopGradientColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
+    self.PICView.progressBottomGradientColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
     
     self.itemNum = 11;
     
@@ -131,7 +132,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [UIView animateWithDuration:0.35 animations:^{
 
         self.bgView.hidden = YES;
-
+        [self.navigationController setNavigationBarHidden:NO];
     }];
     
 }
@@ -171,6 +172,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [UIView animateWithDuration:0.35 animations:^{
         self.bgView.hidden = NO;
+        [self.navigationController setNavigationBarHidden:YES];
         
 //        [UIView commitAnimations];
     }];
@@ -188,6 +190,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
 {
     [UIView animateWithDuration:0.35 animations:^{
         self.bgView.hidden = YES;
+        [self.navigationController setNavigationBarHidden:NO];
         
 //        [UIView commitAnimations];
     }];
