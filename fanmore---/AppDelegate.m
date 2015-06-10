@@ -169,8 +169,9 @@
 //            [[NSUserDefaults standardUserDefaults] setObject: [NSString stringWithFormat:@"%d",resultData.global.amountToCheckout] forKey:AppReadSeconds];
             
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-            NSString *fileName = [path stringByAppendingPathComponent:InitResultDate];
-            [NSKeyedArchiver archiveRootObject:resultData.global toFile:fileName];
+            
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:resultData.user toFile:fileName];
             
             //取出本地token
             NSString *localToken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];

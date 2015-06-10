@@ -25,8 +25,8 @@
     paramsOption[@"appSecret"] = HuoToAppSecret;
     NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
     NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-    paramsOption[@"lat"] = (lat?lat:@(0.0));
-    paramsOption[@"lng"] = (lng?lng:@(0.0));
+    paramsOption[@"lat"] = (lat?lat:@(40.0));
+    paramsOption[@"lng"] = (lng?lng:@(116.0));
     paramsOption[@"timestamp"] = apptimesSince1970;
     paramsOption[@"operation"] = OPERATION_parame;
     paramsOption[@"version"] =[NSString stringWithFormat:@"%f",AppVersion];
@@ -61,8 +61,8 @@
     paramsOption[@"appSecret"] = HuoToAppSecret;
     NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
     NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-    paramsOption[@"lat"] = lat?lat:@(0.0);
-    paramsOption[@"lng"] = lng?lng:@(0.0);;
+    paramsOption[@"lat"] = lat?lat:@(40.0);
+    paramsOption[@"lng"] = lng?lng:@(116.0);;
     paramsOption[@"timestamp"] = apptimesSince1970;;
     paramsOption[@"operation"] = OPERATION_parame;
     paramsOption[@"version"] = [NSString stringWithFormat:@"%f",AppVersion];

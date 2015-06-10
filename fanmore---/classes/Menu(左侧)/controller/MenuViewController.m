@@ -15,6 +15,7 @@
 #import "AccountSettingViewController.h"
 #import "TodayForesController.h"
 #import "TrafficShowController.h"
+#import "userData.h"
 
 
 
@@ -61,14 +62,7 @@
     
     [super viewDidLoad];
     
-    //判断是否要登录
-    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
-    NSLog(@"========xxxxx====%@",flag);
-    if (![flag isEqualToString:@"wrong"]) {
-        self.nameLable.text = @"xxxxx";
-    }else{
-        self.nameLable.text = @"登陆";
-    }
+    
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.optionList.delegate = self;
@@ -101,11 +95,22 @@
     
     self.title = @"菜单";
     
+    //判断是否要登录
+    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    NSLog(@"========xxxxx====%@",flag);
+    if (![flag isEqualToString:@"wrong"]) {
+        self.nameLable.text = @"xxxxx登陆";
+        
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+        
+    }else{
+        self.nameLable.text = @"登陆";
+    }
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    
-    
 }
 
 #pragma TableViewDelegate dateSource

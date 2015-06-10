@@ -166,24 +166,29 @@
             
             NSLog(@"登录成功=========== %@",json);
             userData * userInfo = [userData objectWithKeyValues:(json[@"resultData"][@"user"])];
-            //保存用户名和密码
+            
+            //1、登入成功用户数据本地化
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
+            
+            
+            //2、保存用户名和密码
             [[NSUserDefaults standardUserDefaults] setObject:self.userNameTextFiled.text forKey:loginUserName];
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:self.passwdTextField.text] forKey:loginPassword];
             
-            //保存登录token
+            //3、保存登录token
             NSString * apptoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
             if (![apptoken isEqualToString:userInfo.token]) { //当前token和原先的token不同
-                
                 [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:AppToken];
             }
 
-            //0表示没有绑定的必要 1表示有绑定的必要
+            //4、表示没有绑定的必要 1表示有绑定的必要
             if ([json[@"resultData"][@"requireMobile"] intValue] == 1) {
                 [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
                 BoundPhoneViewController * bdVc = [[BoundPhoneViewController alloc] init];
                 [self.navigationController pushViewController:bdVc animated:YES];
             }else{
-                
                 [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
                 [self loginSuccess];
             }
