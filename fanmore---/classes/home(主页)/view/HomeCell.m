@@ -7,12 +7,12 @@
 //
 
 #import "HomeCell.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 @implementation HomeCell
 
-- (void)setImage:(UIImage *)image andNameLabel:(NSString *)name andTimeLabel:(NSString *)time andReceiveLabel:(NSString *)receive andJoinLabel:(NSString *)join andIntroduceLabel:(NSString *)introduce andGetImage:(int) selection
+- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *)time andReceiveLabel:(NSString *)receive andJoinLabel:(NSString *)join andIntroduceLabel:(NSString *)introduce andGetImage:(int) selection
 {
-    [self.imageView setImage:image];
+    [self.imageView sd_setImageWithPreviousCachedImageWithURL:[NSURL URLWithString:imageStr] andPlaceholderImage:nil options:SDWebImageRetryFailed progress:nil completed:nil];
     self.nameLabel.text = name;
     self.timeLabel.text = time;
     self.receiveLabel.text = receive;

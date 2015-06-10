@@ -35,7 +35,7 @@
 @property (assign, nonatomic) int selection;
 
 
-- (void)setImage:(UIImage *)image andNameLabel:(NSString *)name andTimeLabel:(NSString *) time andReceiveLabel:(NSString *) receiveLabel andJoinLabel:(NSString *) join andIntroduceLabel:(NSString *) introduce andGetImage:(int) selection;
+- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *) time andReceiveLabel:(NSString *) receiveLabel andJoinLabel:(NSString *) join andIntroduceLabel:(NSString *) introduce andGetImage:(int) selection;
 
 
 - (void)setSelection:(int)selection;

@@ -7,9 +7,11 @@
 //  账号信息
 
 #import "PersonMessageTableViewController.h"
+#import "FSMediaPicker.h"
+#import "GTMBase64.h"
 #import "ProfessionalController.h"
 
-@interface PersonMessageTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property(nonatomic,strong)NSArray * messages;
 
@@ -46,7 +48,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    UIImage * iconImage = [[NSUserDefaults standardUserDefaults] objectForKey:UserIconView];
+    if (iconImage) {
+        
+        [self.iconView setBackgroundImage:iconImage forState:UIControlStateNormal];
+    }
     
 }
 
@@ -73,6 +79,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  
     if (indexPath.section == 0) {
         
         if (indexPath.row == 0) {//头像
@@ -81,29 +88,20 @@
                 
                 UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:@"选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
                 UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    
-                   
-                    
-                }];
+                   }];
                 UIAlertAction * photo = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    
                     UIImagePickerController * pc = [[UIImagePickerController alloc] init];
                     pc.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
                     pc.delegate = self;
                     [self presentViewController:pc animated:YES completion:nil];
-                    
                 }];
-                
                 UIAlertAction * ceme  = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    
-                    
                     UIImagePickerController * pc = [[UIImagePickerController alloc] init];
-                     pc.allowsEditing = YES;
+                    pc.allowsEditing = YES;
                     pc.sourceType=UIImagePickerControllerSourceTypeCamera;
                     pc.delegate = self;
                     [self presentViewController:pc animated:YES completion:nil];
                 }];
-                
                 [alertVc addAction:photo];
                 [alertVc addAction:ceme];
                 [alertVc addAction:action];
@@ -111,7 +109,6 @@
             }
         }
         if (indexPath.row == 3) {//生日
-            
             self.datePicker.center = self.view.center;
              [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
             [self.view addSubview:self.datePicker];
@@ -131,6 +128,25 @@
 
     NSLog(@"xxxxxxxx====%@",info);
     UIImage * photoImage = info[@"UIImagePickerControllerOriginalImage"];
+    [self.iconView setBackgroundImage:photoImage forState:UIControlStateNormal];
+    NSData * data = nil;
+    if (UIImagePNGRepresentation(photoImage) == nil) {
+        data = UIImageJPEGRepresentation(photoImage, 1);
+    } else {
+        data = UIImagePNGRepresentation(photoImage);
+    }
+    NSString * imageString = [GTMBase64 stringByEncodingData:data];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"profileType"] = @"0";
+    params[@"profileData"] = imageString;
+    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
+        
+        NSLog(@"上传头像success===%@",json);
+    } failure:^(NSError *error) {
+        NSLog(@"上传头像failure%@",[error description]);
+    }];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dateChanged:(UIDatePicker *) datePick{

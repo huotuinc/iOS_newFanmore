@@ -17,9 +17,9 @@
 /**图片连接*/
 @property(nonatomic,strong) NSString * pictureURL;
 /**最高可获取奖励流量*/
-@property(nonatomic,strong) NSNumber * carrry;
+@property(nonatomic,strong) NSNumber * maxBonus;
 /**已获取流量*/
-@property(nonatomic,strong) NSNumber * get;
+@property(nonatomic,strong) NSNumber * reward;
 /**简述*/
 @property(nonatomic,strong) NSString * desc;
 /**任务类别*/

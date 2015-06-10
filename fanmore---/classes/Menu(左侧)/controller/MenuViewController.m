@@ -61,15 +61,14 @@
     
     [super viewDidLoad];
     
-    
     //判断是否要登录
     NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
-    
+    NSLog(@"========xxxxx====%@",flag);
     if (![flag isEqualToString:@"wrong"]) {
-        self.nameLable.text = @"xxx已登陆";
+        self.nameLable.text = @"xxxxx";
+    }else{
+        self.nameLable.text = @"登陆";
     }
-    
-    
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.optionList.delegate = self;
@@ -107,15 +106,6 @@
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
     
-    //判断是否要登录
-    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
-    NSLog(@"============%@",flag);
-    if (![flag isEqualToString:@"wrong"]) {
-        self.nameLable.text = @"xxx已登陆";
-    }else{
-        self.nameLable.text = @"登陆";
-    }
-
 }
 
 #pragma TableViewDelegate dateSource
