@@ -824,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kRl-Ob-mWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1868" y="2343"/>
+            <point key="canvasLocation" x="-1680" y="2343"/>
         </scene>
         <!--Traffic Show Controller-->
         <scene sceneID="CNc-9h-bz3">
@@ -1941,6 +1941,8 @@
                                         <state key="normal" image="headImage" backgroundImage="mrtou_h">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" image="headImage" backgroundImage="mrtou_h"/>
+                                        <state key="highlighted" image="headImage" backgroundImage="mrtou_h"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPV-0E-Het" userLabel="I">
                                         <rect key="frame" x="260" y="0.0" width="40" height="80"/>

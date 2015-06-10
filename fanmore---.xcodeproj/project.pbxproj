@@ -225,6 +225,8 @@
 		83ED0B46534249FDED1AB9A4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F2DE641B186E16005E8305 /* NSDictionary+EXTERN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+EXTERN.h"; sourceTree = "<group>"; };
 		83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+EXTERN.m"; sourceTree = "<group>"; };
+		83F875EF1B27D1860089C6F5 /* FSMediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMediaPicker.h; sourceTree = "<group>"; };
+		83F875F01B27D1860089C6F5 /* FSMediaPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMediaPicker.m; sourceTree = "<group>"; };
 		B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EF2E54321B27D40E0060E965 /* FSMediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMediaPicker.h; sourceTree = "<group>"; };
 		EF2E54331B27D40E0060E965 /* FSMediaPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMediaPicker.m; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 		EFCCA4D81B12EA9F00C015A7 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		EFCCA4DB1B12EB6D00C015A7 /* detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detail.h; sourceTree = "<group>"; };
 		EFCCA4DC1B12EB6D00C015A7 /* detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detail.m; sourceTree = "<group>"; };
+		EFCD67EF1B267C0600B8F9D9 /* FSMediaPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMediaPicker.m; sourceTree = "<group>"; };
 		EFCDC8231B17F59700D28DB1 /* NSString+EXTERN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EXTERN.h"; sourceTree = "<group>"; };
 		EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EXTERN.m"; sourceTree = "<group>"; };
 		EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
@@ -628,6 +631,15 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		83F875EE1B27D1860089C6F5 /* FSMediaPicker */ = {
+			isa = PBXGroup;
+			children = (
+				83F875EF1B27D1860089C6F5 /* FSMediaPicker.h */,
+				83F875F01B27D1860089C6F5 /* FSMediaPicker.m */,
+			);
+			path = FSMediaPicker;
 			sourceTree = "<group>";
 		};
 		DD30E3145DCCEA159969E2DF /* Frameworks */ = {
@@ -1591,6 +1603,7 @@
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
 				83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */,
+				83F875F11B27D1860089C6F5 /* FSMediaPicker.m in Sources */,
 				EF565D071B16AA6000FC2D6B /* MJRefreshConst.m in Sources */,
 				EFE837BD1B12FADB0093E14E /* question.m in Sources */,
 				EFD02B4B1B155D1E00D11D6D /* settingViewController.m in Sources */,

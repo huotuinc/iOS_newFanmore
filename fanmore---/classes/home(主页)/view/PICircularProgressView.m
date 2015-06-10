@@ -32,7 +32,7 @@
         [appearance setProgressFillColor:nil];
         
         [appearance setProgressTopGradientColor:[UIColor colorWithRed:15.0/255.0 green:97.0/255.0 blue:189.0/255.0 alpha:1.0]];
-        [appearance setProgressBottomGradientColor:[UIColor colorWithRed:114.0/255.0 green:174.0/255.0 blue:235.0/255.0 alpha:1.0]];
+        [appearance setProgressBottomGradientColor:[UIColor colorWithRed:15.0/255.0 green:97.0/255.0 blue:189.0/255.0 alpha:1.0]];
         
         // TODO: It's not guaranteed that UIView supports UIAppearance for backgroundColor.
         [appearance setBackgroundColor:[UIColor clearColor]];

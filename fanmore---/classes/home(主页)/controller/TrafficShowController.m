@@ -29,9 +29,10 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.PICView.showText = NO;
     self.PICView.roundedHead = NO;
     self.PICView.showShadow = NO;
-    self.PICView.innerBackgroundColor = [UIColor whiteColor];
+    self.PICView.innerBackgroundColor = [UIColor clearColor];
     self.PICView.outerBackgroundColor = [UIColor colorWithWhite:0.826 alpha:1.000];
-//    self.PICView.progressBottomGradientColor = 0;
+    self.PICView.progressTopGradientColor = [UIColor colorWithRed:0.072 green:0.397 blue:0.993 alpha:1.000];
+    self.PICView.progressBottomGradientColor = [UIColor colorWithRed:0.072 green:0.397 blue:0.993 alpha:1.000];
     
     self.itemNum = 11;
     
