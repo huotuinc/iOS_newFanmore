@@ -8,6 +8,7 @@
 
 #import "detailViewController.h"
 #import "AnswerController.h"
+#import "LoginViewController.h"
 
 @interface detailViewController ()
 
@@ -34,6 +35,7 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     CGFloat xxxx = (ScreenHeight - CGRectGetMinY(self.answerBtn.frame)) * 0.7+20;
     self.detailWebView.backgroundColor = [UIColor whiteColor];
+    self.detailWebView.scrollView.backgroundColor = [UIColor whiteColor];
     self.detailWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, xxxx, 0);
     [self.detailWebView loadRequest:request];
 }
@@ -112,9 +114,65 @@
 
 - (IBAction)goQusetionAction:(id)sender {
     
+    NSLog(@"xxxxxxx开始答题");
+    
+    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    if ([flag isEqualToString:@"wrong"]) {//如果没有登入要登入
+        
+        LoginViewController * loginVc = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:loginVc animated:YES];
+        return;
+    }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
     [self.navigationController pushViewController:answer animated:YES];
     
 }
+
+
+/**
+ * 设置验证码的倒计时
+ */
+- (void)settime{
+    
+    
+    __weak detailViewController * wself = self;
+    
+    /*************倒计时************/
+    __block int timeout=59; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout<=0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
+                NSString * butTitle = [NSString stringWithFormat:@"答题留取M流量(%@)",time];
+                [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
+                //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
+                //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
+                wself.answerBtn.userInteractionEnabled = YES;
+                [wself goQusetionAction:nil];
+            });
+        }else{
+            //            int minutes = timeout / 60;
+            
+            NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
+            int seconds = timeout % [time intValue];
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                NSLog(@"____%@",strTime);
+                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题留取流量(%@)",strTime] forState:UIControlStateNormal];
+                wself.answerBtn.userInteractionEnabled = NO;
+                
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+
 @end

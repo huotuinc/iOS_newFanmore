@@ -16,18 +16,20 @@
 #import "TodayForesController.h"
 #import "TrafficShowController.h"
 #import "userData.h"
-
+#import "SDWebImageManager.h"
 
 
 @interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**
  
  */
-@property (weak, nonatomic) IBOutlet UIImageView *iconView;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLable;
 @property (weak, nonatomic) IBOutlet UILabel *flowLable;
 @property (weak, nonatomic) IBOutlet UITableView *optionList;
-@property (weak, nonatomic) IBOutlet UIImageView *bottomImahe;
+
+/**用户登入头像*/
+@property (weak, nonatomic) IBOutlet UIButton *userProfileBtn;
 
 /**文字列表*/
 @property(nonatomic,strong) NSArray * lists;
@@ -91,23 +93,29 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //隐藏导航条
-    
     self.title = @"菜单";
-    
-    //判断是否要登录
+    //1、判断是否要登录
     NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
     NSLog(@"========xxxxx====%@",flag);
     if (![flag isEqualToString:@"wrong"]) {
         self.nameLable.text = @"xxxxx登陆";
-        
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
         userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-        
+        //2、设置用户登入头像
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        NSURL * profileImage = [NSURL URLWithString:user.pictureURL];
+        [manager downloadImageWithURL:profileImage options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            if (image) {
+                [self.userProfileBtn setBackgroundImage:image forState:UIControlStateNormal];
+            }
+        }];
+        //3、设置当前用户流量
+        self.flowLable.text = [NSString stringWithFormat:@"%@",user.balance];
     }else{
         self.nameLable.text = @"登陆";
     }
+    //隐藏导航条
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];

@@ -40,8 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //1、设置导航栏样式
+     //1、设置导航栏样式
     [self setNavgationStytle];
     //2、设置文本框代理
     [self setupWidget];

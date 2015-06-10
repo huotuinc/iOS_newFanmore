@@ -162,17 +162,11 @@
             resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];//数据对象话
             
             
-//            //保存答题能阅读的时间
-//            [[NSUserDefaults standardUserDefaults] setObject: [NSString stringWithFormat:@"%d",resultData.global.lessReadSeconds] forKey:AppReadSeconds];
-//            
+            //保存答题能阅读的时间
+            [[NSUserDefaults standardUserDefaults] setObject: @(resultData.global.lessReadSeconds) forKey:AppReadSeconds];
+//
 //            //保存答题能阅读的时间
 //            [[NSUserDefaults standardUserDefaults] setObject: [NSString stringWithFormat:@"%d",resultData.global.amountToCheckout] forKey:AppReadSeconds];
-            
-            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-            
-            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-            [NSKeyedArchiver archiveRootObject:resultData.user toFile:fileName];
-            
             //取出本地token
             NSString *localToken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
             NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",localToken);
@@ -185,9 +179,11 @@
                 
                 NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppToken]);
             }else{
-                
                 NSString * flag = @"right";
                 [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                [NSKeyedArchiver archiveRootObject:resultData.user toFile:fileName];
             }
         }else{
             

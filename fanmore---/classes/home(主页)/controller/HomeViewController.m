@@ -70,14 +70,12 @@ static NSString *homeCellidentify = @"homeCellId";
     //集成刷新控件
     [self setupRefresh];
     
-    
-    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)_initView
 {
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
-    
 }
 
 /**
@@ -89,18 +87,11 @@ static NSString *homeCellidentify = @"homeCellId";
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
     [self.tableView headerBeginRefreshing];
-    
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
     self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
     self.tableView.headerRefreshingText = @"正在刷新最新数据,请稍等";
-    
-    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
-    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-    self.tableView.footerRefreshingText = @"正在加载更多数据,请稍等";
+
 }
 #pragma mark 开始进入刷新状态
 //头部刷新
@@ -112,15 +103,9 @@ static NSString *homeCellidentify = @"homeCellId";
     [self.tableView headerEndRefreshing];
 }
 
-//尾部刷新
-- (void)footerRereshing{  //加载更多数据数据
-//    startIndex = @(1 + _carMessagesF.count);
-//    // 1.添加数据
-    [self getMoreData];
-//    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [self.tableView footerEndRefreshing];
-}
-
+/**
+ *  下拉加载更新数据
+ */
 -(void)getNewMoreData{
     
     NSLog(@"加载最新的＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
@@ -139,43 +124,6 @@ static NSString *homeCellidentify = @"homeCellId";
         
     }];
 }
--(void)getMoreData{
-    
-    NSLog(@"加载跟多的＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-//    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
-//    [UserLoginTool loginRequestGet:usrStr parame:nil success:^(NSDictionary * json) {
-//        
-//       
-//        
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
-//    
-//    [UserLoginTool loginRequestGet:<#(NSString *)#> parame:<#(NSMutableDictionary *)#> success:<#^(id json)success#> failure:<#^(NSError *error)failure#>]
-//    //1、设置网络获取的参数
-//    HA4SInfoRequestParame * parame = [HA4SInfoRequestParame InfoRequestParameWithpartnerCode:proCode andStartIndex:startIndex andPageSize:@(PageSize)];
-//    //2、网络获取加载数据
-//    [HA4SInfoTool store4SMessage:parame success:^(NSArray * responseObject) {
-//        NSMutableArray * arrays = [NSMutableArray array];
-//        for (HA4SRequestResult * obj in responseObject) {
-//            HA4sFrame * frame = [HA4sFrame FrameWith4SRequestResult:obj];
-//            [arrays addObject:frame];
-//        }
-//        if ([startIndex intValue] == 1) {
-//            [_carMessagesF removeAllObjects];
-//            [_carMessagesF setArray:arrays];
-//        }else{
-//            [_carMessagesF addObjectsFromArray:arrays];
-//        }
-//        [self.tableView reloadData];
-//        
-//    } failure:^(NSError * error) {
-//        NSLog(@"error 4s店咨询:%@",error);
-//        
-//    }];
-}
-
 
 - (void)_initNav
 {
@@ -219,7 +167,7 @@ static NSString *homeCellidentify = @"homeCellId";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return self.taskDatas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -228,28 +176,17 @@ static NSString *homeCellidentify = @"homeCellId";
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeCell" owner:nil options:nil] lastObject];
     }
-    
-//    taskData * task = self.taskDatas[indexPath.row];
-//    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[task.publishDate doubleValue]];
-//    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-//    NSString * publishtime = [formatter stringFromDate:ptime];
-////    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:];
-////    [NSString s]
-////    
-////    
-//    //设置cell样式
-//    
-//    
-//    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@",task.luckies] andIntroduceLabel:task.desc andGetImage:(task.reward?1:0)];
-    
-    if (indexPath.row == 2) {
-        [cell setSelection:1];
-    }else if (indexPath.row == 3) {
-        [cell setSelection:2];
-    }
-    return cell;
+    //设置cell样式
+    taskData * task = self.taskDatas[indexPath.row];
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[task.publishDate doubleValue]];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString * publishtime = [formatter stringFromDate:ptime];
+    NSLog(@"xxxxxxxx====time  ===%@",publishtime);
+    NSLog(@"pictureURL==%@   title==%@",task.pictureURL,task.title);
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"已有%@人参与",task.luckies] andIntroduceLabel:task.desc andGetImage:(task.reward?0:1)];
+     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     

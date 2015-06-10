@@ -13,6 +13,7 @@
 #import "MJSettingItem.h"
 #import "PersonMessageTableViewController.h"
 #import "ChangePasswordController.h"
+#import "MassageCenterController.h"
 
 @interface AccountSettingViewController ()
 
@@ -92,6 +93,11 @@
     if (indexPath.row == 2) {
         ChangePasswordController *change = [storyboard instantiateViewControllerWithIdentifier:@"ChangePasswordController"];
         [self.navigationController pushViewController:change animated:YES];
+    }
+    
+    if (indexPath.row == 3) {
+        MassageCenterController *messageVC = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
+        [self.navigationController pushViewController:messageVC animated:YES];
     }
 }
 

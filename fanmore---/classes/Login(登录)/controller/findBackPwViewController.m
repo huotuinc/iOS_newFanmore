@@ -70,16 +70,19 @@
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"phone"] = phoneNumber;
     params[@"type"] = @(2);
-    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"forgetPassword"];
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
+    //发送网络请求
+    NSLog(@"sssssss====%@",urlStr);
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
         
         NSLog(@"忘记密码请求成功%@",json);
+        //验证码的倒计时
+        [self settime];
     } failure:^(NSError *error) {
         
         NSLog(@"注册失败%@",[error localizedDescription]);
     }];
-    //验证码的倒计时
-    [self settime];
+    
 }
 
 /**
@@ -141,7 +144,7 @@
     
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"forgetPassword"];
     //发送网络请求
-    
+    NSLog(@"sssssss====%@",urlStr);
     __weak findBackPwViewController *wself = self;
     
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {

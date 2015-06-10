@@ -12,10 +12,8 @@
 
 /**消息编号*/
 @property(nonatomic,strong) NSNumber * messageid;
-/**消息标题*/
-@property(nonatomic,strong) NSString * title;
 /**消息地址*/
-@property(nonatomic,strong) NSString * url;
+@property(nonatomic,strong) NSString * context;
 /**时间*/
 @property(nonatomic,strong) NSString * date;
 @end

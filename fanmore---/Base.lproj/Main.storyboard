@@ -2039,6 +2039,7 @@
                         <outlet property="flowLable" destination="Hft-I8-uXn" id="CkJ-Ko-ljr"/>
                         <outlet property="nameLable" destination="f5t-SA-sKB" id="6Ku-fl-hWn"/>
                         <outlet property="optionList" destination="4IB-So-oIq" id="Shq-So-Qq1"/>
+                        <outlet property="userProfileBtn" destination="DaR-7m-2Aa" id="apt-k2-obJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A9M-uQ-G2z" userLabel="First Responder" sceneMemberID="firstResponder"/>
