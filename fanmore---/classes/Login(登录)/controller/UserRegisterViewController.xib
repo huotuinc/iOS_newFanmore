@@ -324,17 +324,29 @@
                                 <action selector="registerButtonClick:" destination="-1" eventType="touchUpInside" id="tb3-mW-2CU"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用条款和隐私政策" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYl-aT-x6m">
+                            <rect key="frame" x="224" y="401" width="153" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="153" id="CFk-fw-iyN"/>
+                                <constraint firstAttribute="height" constant="21" id="Ii6-vk-VB8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="15"/>
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ihd-D5-tR9" secondAttribute="trailing" id="6U4-DE-rz5"/>
                         <constraint firstItem="ihd-D5-tR9" firstAttribute="leading" secondItem="Nan-Nz-TWH" secondAttribute="leading" id="8kf-aH-RxE"/>
                         <constraint firstItem="OeL-gM-tLW" firstAttribute="leading" secondItem="Nan-Nz-TWH" secondAttribute="leading" id="NG1-KU-7Cs"/>
+                        <constraint firstItem="nYl-aT-x6m" firstAttribute="top" secondItem="sS2-Je-gZb" secondAttribute="bottom" constant="5" id="SeF-Tr-Gtn"/>
                         <constraint firstItem="PdT-b4-kNR" firstAttribute="leading" secondItem="Nan-Nz-TWH" secondAttribute="leading" id="TQk-iO-Fuc"/>
                         <constraint firstItem="ihd-D5-tR9" firstAttribute="leading" secondItem="Nan-Nz-TWH" secondAttribute="leading" id="Ume-ny-mHl"/>
                         <constraint firstItem="OeL-gM-tLW" firstAttribute="top" secondItem="PdT-b4-kNR" secondAttribute="bottom" constant="20" id="Ya0-8C-cne"/>
                         <constraint firstAttribute="trailing" secondItem="PdT-b4-kNR" secondAttribute="trailing" id="Yk3-hC-a35"/>
                         <constraint firstAttribute="trailing" secondItem="PdT-b4-kNR" secondAttribute="trailing" id="eo0-ip-9eQ"/>
+                        <constraint firstAttribute="centerX" secondItem="nYl-aT-x6m" secondAttribute="centerX" id="hLv-m9-pI9"/>
                         <constraint firstItem="PdT-b4-kNR" firstAttribute="top" secondItem="Nan-Nz-TWH" secondAttribute="top" constant="84" id="pIX-hF-FvK"/>
                         <constraint firstItem="sS2-Je-gZb" firstAttribute="top" secondItem="ihd-D5-tR9" secondAttribute="bottom" constant="17" id="qV8-Xf-LIJ"/>
                         <constraint firstAttribute="trailing" secondItem="OeL-gM-tLW" secondAttribute="trailing" id="qqA-sQ-Lqw"/>
