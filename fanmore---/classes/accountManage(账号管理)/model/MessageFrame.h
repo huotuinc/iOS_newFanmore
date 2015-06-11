@@ -15,14 +15,12 @@
 
 @property(nonatomic,strong) Message * message;
 
-@property(nonatomic,assign) CGFloat contextF;
+@property(nonatomic,assign) CGRect  containView;
 
-@property(nonatomic,assign) CGFloat timeF;
+@property(nonatomic,assign) CGRect  contextF;
 
+@property(nonatomic,assign) CGRect  timeF;
 
-+(instancetype)FrameWithMessage:(Message *)mes;
-
-- (instancetype)initWithMessage:(Message *)mes;
-
+@property(nonatomic,assign) CGFloat  cellHeight;
 
 @end

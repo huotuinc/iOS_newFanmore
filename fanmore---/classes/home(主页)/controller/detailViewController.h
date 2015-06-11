@@ -15,6 +15,16 @@
 
 
 @property (weak, nonatomic) IBOutlet UIButton *goQusetion;
+
+/**问题编号*/
+@property(strong,nonatomic) NSNumber *taskId;
+
+/**答题类型*/
+@property(strong,nonatomic) NSNumber * type;
+
+/**首页详情*/
+@property(strong,nonatomic) NSString * detailUrl;
+
 - (IBAction)goQusetionAction:(id)sender;
 
 @end

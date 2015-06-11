@@ -43,11 +43,8 @@
     
     NSLog(@"网络请求参数parame%@",paramsOption);
     [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSLog(@"%@",responseObject);
         success(responseObject);
-        
-       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }

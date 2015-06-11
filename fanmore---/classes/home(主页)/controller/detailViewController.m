@@ -9,6 +9,8 @@
 #import "detailViewController.h"
 #import "AnswerController.h"
 #import "LoginViewController.h"
+#import "UserLoginTool.h"
+#import "taskDetail.h"
 
 @interface detailViewController ()
 
@@ -19,10 +21,24 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *answerBtn;
 
+/**几道答题*/
+@property(nonatomic,strong) NSMutableArray * detailTasks;
+
 @end
 
 @implementation detailViewController
 
+
+
+- (NSMutableArray *)detailTasks{
+    
+    if (_detailTasks == nil) {
+        
+        _detailTasks = [NSMutableArray array];
+    }
+    
+    return _detailTasks;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,15 +46,53 @@
     // 初始化
     [self setup];
     
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"view-new" ofType:@"html"];
-    NSURL* url = [NSURL fileURLWithPath:path];
+//    NSLog(@"")
+    [self getQuestion];
+    
+    [self settime];
+    
+    NSURL* url =  [NSURL URLWithString:self.detailUrl];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    CGFloat xxxx = (ScreenHeight - CGRectGetMinY(self.answerBtn.frame)) * 0.7+20;
-    self.detailWebView.backgroundColor = [UIColor whiteColor];
+    //CGFloat xxxx = (ScreenHeight - CGRectGetMinY(self.answerBtn.frame)) * 0.7+20;
+    self.detailWebView.backgroundColor = [UIColor redColor];
     self.detailWebView.scrollView.backgroundColor = [UIColor whiteColor];
-    self.detailWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, xxxx, 0);
+    //self.detailWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, xxxx, 0);
+    
+//    UIWindow * win = [UIApplication sharedApplication].windows;
+//    win.backgroundColor = [UIColor whiteColor];
     [self.detailWebView loadRequest:request];
 }
+
+
+- (void)getQuestion{
+    
+    NSString * url = [MainURL stringByAppendingPathComponent:@"taskDetail"];
+    NSLog(@"%@",url);
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"taskId"] = self.taskId;
+    [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            NSLog(@"xxxxxxxxxxxxx----%@",json);
+            NSArray * detailTaskS = [taskDetail objectArrayWithKeyValuesArray:json[@"resultData"][@"taskDetail"]];
+            [self.detailTasks addObjectsFromArray:detailTaskS];
+         }
+     } failure:^(NSError *error) {
+        
+        NSLog(@"xxxx%@",[error description]);
+    }];
+    
+}
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+//    [self settime];
+}
+
+
+
+
 /**
  *  设置titleLabel
  *
@@ -105,6 +159,8 @@
     
     [super viewWillAppear:animated];
     
+    //    myTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
+    
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
@@ -116,6 +172,8 @@
     
     NSLog(@"xxxxxxx开始答题");
     
+    
+    //判断是否需要登入
     NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
     if ([flag isEqualToString:@"wrong"]) {//如果没有登入要登入
         
@@ -123,10 +181,37 @@
         [self.navigationController pushViewController:loginVc animated:YES];
         return;
     }
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
-    [self.navigationController pushViewController:answer animated:YES];
+    //答题类型
+    if ([self.type intValue] == 1) {//答题类
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
+        answer.question = self.detailTasks;
+        [self.navigationController pushViewController:answer animated:YES];
+    }
     
+    if ([self.type intValue] == 2) {//报名类
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"FinishController"];
+        [self.navigationController pushViewController:answer animated:YES];
+    }
+    
+    if ([self.type intValue] == 3) {//画册类
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
+        [self.navigationController pushViewController:answer animated:YES];
+    }
+    
+    if ([self.type intValue] == 4) {//游戏类
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
+        [self.navigationController pushViewController:answer animated:YES];
+    }
+    
+  
 }
 
 
@@ -135,11 +220,15 @@
  */
 - (void)settime{
     
-    
     __weak detailViewController * wself = self;
     
     /*************倒计时************/
-    __block int timeout=59; //倒计时时间
+   
+    __block int timeout= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]-1; //倒计时时间
+    NSLog(@"xxxxxxxxxxxx%d",timeout);
+    __block int timeAll= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]; //倒计时时间
+    timeout = 10;
+    timeAll = 11;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
@@ -149,23 +238,22 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
                 NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
-                NSString * butTitle = [NSString stringWithFormat:@"答题留取M流量(%@)",time];
+                NSString * butTitle = [NSString stringWithFormat:@"答题留取%@M流量",time];
                 [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
                 //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
                 wself.answerBtn.userInteractionEnabled = YES;
-                [wself goQusetionAction:nil];
+//                [wself goQusetionAction:nil];
             });
         }else{
-            //            int minutes = timeout / 60;
-            
-            NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
-            int seconds = timeout % [time intValue];
-            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+            int minutes = timeout / timeAll;
+//            NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
+            int seconds = timeout % timeAll;
+            NSString *strTime = [NSString stringWithFormat:@"%d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
                 NSLog(@"____%@",strTime);
-                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题留取流量(%@)",strTime] forState:UIControlStateNormal];
+                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题留取%@M流量(%@)",@(1),strTime] forState:UIControlStateNormal];
                 wself.answerBtn.userInteractionEnabled = NO;
                 
             });

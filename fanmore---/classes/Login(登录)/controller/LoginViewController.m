@@ -52,7 +52,7 @@
     //2、设置键盘弹出的监听
     [self registerForKeyboardNotifications];
     //3、设置键盘弹出
-    [self.userNameTextFiled becomeFirstResponder];
+//    [self.userNameTextFiled becomeFirstResponder];
 }
 
 /**
@@ -160,10 +160,12 @@
     params[@"password"] = [MD5Encryption md5by32:self.passwdTextField.text];
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"login"];
     //发送网络请求
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
         NSLog(@"login========%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
+            [MBProgressHUD hideHUD];
             NSLog(@"登录成功=========== %@",json);
             userData * userInfo = [userData objectWithKeyValues:(json[@"resultData"][@"user"])];
             
@@ -198,7 +200,9 @@
         
     } failure:^(NSError *error) {
         
+        [MBProgressHUD hideHUD];
         NSLog(@"登录失败%@",[error localizedDescription]);
+//        [MBProgressHUD showError:@"无法连接到服务器"];
         
     }];
 }

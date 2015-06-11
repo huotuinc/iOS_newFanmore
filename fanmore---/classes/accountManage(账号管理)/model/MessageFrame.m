@@ -13,29 +13,35 @@
 
 @implementation MessageFrame
 
-+(instancetype)FrameWithMessage:(Message *)mes
-{
-    MessageFrame * frame = [[self alloc] init];
-    frame.message = mes;
-    return frame;
-}
-
-- (instancetype)initWithMessage:(Message *)mes
-{
-    return [MessageFrame FrameWithMessage:mes];
-}
 
 
-- (void)setMessage:(Message *)message
-{
-    //1、设置头像
-    CGFloat contextX = MessageMargin;
-    CGFloat contextY = MessageMargin;
+- (void)setMessage:(Message *)message{
     
-    NSString * context = message.context;
-//    nsmu
-//    [context boundingRectWithSize:CGSizeMake(ScreenWidth - 20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:<#(NSDictionary *)#> context:<#(NSStringDrawingContext *)#>]
-    CGFloat contextW = 60;
-    CGFloat contextH = 60;
+    //1外面view
+    CGFloat viewX = 0;
+    CGFloat viewy = 0;
+    CGFloat viewW = ScreenWidth;
+    
+    //2里面的文本
+    
+    CGFloat conX = MessageMargin;
+    CGFloat conY = MessageMargin;
+    CGFloat conW = ScreenWidth - MessageMargin * 2;
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    dict[NSFontAttributeName] = [UIFont systemFontOfSize:14];
+    CGRect conH = [message.context boundingRectWithSize:CGSizeMake(conW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
+    self.contextF = CGRectMake(conX, conY, conH.size.width, conH.size.height);
+    
+    CGFloat timeX = conX;
+    CGFloat timeY = CGRectGetMaxY(self.contextF) + MessageMargin;
+    CGFloat timeW = conW;
+    CGFloat timeH = 20;
+    self.timeF = CGRectMake(timeX, timeY, timeW, timeH);
+    
+    CGFloat viewH = CGRectGetMaxY(self.timeF);
+    self.containView = CGRectMake(viewX, viewy, viewW, viewH);
+    
+    self.cellHeight = CGRectGetMaxY(self.containView);
+    
 }
 @end

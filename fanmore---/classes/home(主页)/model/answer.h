@@ -10,7 +10,7 @@
 
 @interface answer : NSObject
 
-@property(nonatomic,strong) NSNumber * aid;
+@property(nonatomic,assign) int aid;
 /**问题*/
-@property(nonatomic,strong) NSString * name;
+@property(nonatomic,copy) NSString * name;
 @end
