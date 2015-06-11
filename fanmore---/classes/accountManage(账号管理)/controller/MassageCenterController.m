@@ -12,7 +12,7 @@
 @interface MassageCenterController ()
 
 /**消息存放数组*/
-@property(nonatomic,strong) NSMutableArray * messages;
+@property(nonatomic,strong) NSMutableArray * messageF;
 
 @end
 
@@ -22,11 +22,11 @@
 
 
 
-- (NSMutableArray *)messages{
-    if (_messages == nil) {
-        _messages = [NSMutableArray array];
+- (NSMutableArray *)messageF{
+    if (_messageF == nil) {
+        _messageF = [NSMutableArray array];
     }
-    return _messages;
+    return _messageF;
 }
 
 
@@ -85,10 +85,6 @@
 {
     return 11;
 }
-
-//- (CGFloat)tabelViewCellHeightAndText:(NSString *)str  {
-//    
-//}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
