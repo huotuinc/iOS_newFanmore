@@ -33,7 +33,7 @@
     CGFloat contextY = MessageMargin;
     
     NSString * context = message.context;
-    nsmu
+//    nsmu
 //    [context boundingRectWithSize:CGSizeMake(ScreenWidth - 20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:<#(NSDictionary *)#> context:<#(NSStringDrawingContext *)#>]
     CGFloat contextW = 60;
     CGFloat contextH = 60;
