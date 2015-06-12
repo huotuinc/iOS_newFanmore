@@ -97,10 +97,8 @@
 }
 - (IBAction)CAction:(id)sender {
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    FindController *findVc = [storyboard instantiateViewControllerWithIdentifier:@"FindController"];
-    [self.navigationController pushViewController:findVc animated:YES];
+    
 }
 - (IBAction)DAction:(id)sender {
     

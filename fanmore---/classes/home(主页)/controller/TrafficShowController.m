@@ -9,6 +9,7 @@
 #import "TrafficShowController.h"
 #import "BuyFlowViewController.h"
 #import "BPViewController.h"
+#import "ConversionController.h"
 
 @interface TrafficShowController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -50,92 +51,74 @@ static NSString *collectionViewidentifier = @"collectionCell";
         self.collectionHeight = self.itemNum / self.num * (60 + 10);
     }
     
-    
-    self.bgView = [[UIView alloc] initWithFrame:CGRectMake( 0, 0, ScreenWidth, ScreenHeight)];
-    self.bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
-    [self.view addSubview:self.bgView];
-    self.bgView.hidden = YES;
-    UITapGestureRecognizer *reg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(regAction:)];
-    
-    [self.bgView addGestureRecognizer:reg];
-    
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [flowLayout setMinimumLineSpacing:5];
-    [flowLayout setFooterReferenceSize:CGSizeMake(0, 10)];
-    
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, ScreenHeight / 2 - self.collectionHeight / 2, ScreenWidth - 40, self.collectionHeight) collectionViewLayout:flowLayout];
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = [UIColor clearColor];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewidentifier];
-    [self.bgView addSubview:self.collectionView];
-    
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y - 35, self.collectionView.frame.size.width, 25)];
-    label.text = @"流量兑换当月有效";
-    [self.bgView addSubview:label];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         BPViewController *bpView = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
         [self.navigationController pushViewController:bpView animated:YES];
     }];
     
+    [self.buyButton.layer setMasksToBounds:YES];
+    self.buyButton.layer.borderWidth = 0.5;
+    self.buyButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
+    self.buyButton.layer.cornerRadius = 2;
+    
+    [self.friendButton.layer setMasksToBounds:YES];
+    self.friendButton.layer.borderWidth = 0.5;
+    self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
+    self.friendButton.layer.cornerRadius = 2;
 }
 
 
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return self.itemNum;
-}
-
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 //{
-//    if (self.itemNum % self.num) {
-//        return self.itemNum / self.num + 1;
-//    }else {
-//        return self.itemNum / self.num;
-//    }
+//    return self.itemNum;
 //}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(80, 60);
-}
-
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:collectionViewidentifier forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UICollectionViewCell alloc] init];
-    }
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button－G"]];
-    image.frame = CGRectMake(0, 0, 80, 60);
-    cell.contentMode = UIViewContentModeScaleAspectFit;
-    [cell.contentView addSubview:image];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
-    label.text = @"100M";
-    label.textAlignment = NSTextAlignmentCenter;
-    [cell addSubview:label];
-    
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    [UIView animateWithDuration:0.35 animations:^{
-
-        self.bgView.hidden = YES;
-        [self.navigationController setNavigationBarHidden:NO];
-    }];
-    
-}
+//
+////- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+////{
+////    if (self.itemNum % self.num) {
+////        return self.itemNum / self.num + 1;
+////    }else {
+////        return self.itemNum / self.num;
+////    }
+////}
+//
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return CGSizeMake(80, 60);
+//}
+//
+//
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:collectionViewidentifier forIndexPath:indexPath];
+//    if (!cell) {
+//        cell = [[UICollectionViewCell alloc] init];
+//    }
+//    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button－G"]];
+//    image.frame = CGRectMake(0, 0, 80, 60);
+//    cell.contentMode = UIViewContentModeScaleAspectFit;
+//    [cell.contentView addSubview:image];
+//    
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
+//    label.text = @"100M";
+//    label.textAlignment = NSTextAlignmentCenter;
+//    [cell addSubview:label];
+//    
+//    return cell;
+//}
+//
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [UIView animateWithDuration:0.35 animations:^{
+//
+//        self.bgView.hidden = YES;
+//        [self.navigationController setNavigationBarHidden:NO];
+//    }];
+//    
+//}
 
 
 
@@ -150,7 +133,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [self.navigationController setNavigationBarHidden:NO];
     
-    self.bgView.hidden = YES;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,14 +153,11 @@ static NSString *collectionViewidentifier = @"collectionCell";
 
 - (IBAction)exchangeAction:(id)sender {
     
-    [UIView animateWithDuration:0.35 animations:^{
-        self.bgView.hidden = NO;
-        [self.navigationController setNavigationBarHidden:YES];
-        
-//        [UIView commitAnimations];
-    }];
-//
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
+    ConversionController *con = [storyboard instantiateViewControllerWithIdentifier:@"ConversionController"];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:con];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (IBAction)buyAction:(id)sender {
@@ -186,14 +166,6 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.navigationController pushViewController:buy animated:YES];
 }
 
-- (void)regAction:(UIGestureRecognizer *)sender
-{
-    [UIView animateWithDuration:0.35 animations:^{
-        self.bgView.hidden = YES;
-        [self.navigationController setNavigationBarHidden:NO];
-        
-//        [UIView commitAnimations];
-    }];
-}
+
 
 @end

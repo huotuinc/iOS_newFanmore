@@ -17,6 +17,8 @@
 #import "TrafficShowController.h"
 #import "userData.h"
 #import "SDWebImageManager.h"
+#import "SendController.h"
+#import "BegController.h"
 
 
 @interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -44,7 +46,7 @@
     if (_lists == nil) {
         
         _lists = [NSArray array];
-        _lists = @[@"首页",@"账号设置",@"今日预告",@"师徒联盟",@"更多设置",@"签到中心"];
+        _lists = @[@"首页",@"账号设置",@"今日预告",@"师徒联盟",@"更多设置",@"签到中心",@"送流量"];
     }
     return _lists;
 }
@@ -54,7 +56,7 @@
     if (_images == nil) {
         
         _images = [NSArray array];
-        _images = @[@"home",@"account",@"tonday",@"teacher",@"more",@"signIn"];
+        _images = @[@"home",@"account",@"tonday",@"teacher",@"more",@"signIn",@"send"];
     }
     return _images;
 }
@@ -214,6 +216,12 @@
             asignViewController * asignVc = [storyboard instantiateViewControllerWithIdentifier:@"sign"];
             [self.navigationController pushViewController:asignVc animated:YES];
             break;
+        }
+        case 6:{
+//            SendController *send = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
+//            [self.navigationController pushViewController:send animated:YES];
+            BegController *beg = [storyboard instantiateViewControllerWithIdentifier:@"BegController"];
+            [self.navigationController pushViewController:beg animated:YES];
         }
             
         default:

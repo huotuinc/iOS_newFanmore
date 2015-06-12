@@ -19,6 +19,7 @@
 #import "GlobalUICommont.h"  //友盟
 #import <ShareSDK/ShareSDK.h> //shareSDK   
 #import "MBProgressHUD+MJ.h"
+#import "UITableView+CJ.h"
 #import "MJExtension.h"
 #import "AFNetworking.h"
 #import "MD5Encryption.h"    //数据加密
@@ -60,5 +61,5 @@
 
 /**答题**/
 #import "JoinController.h" //报名
-#import "FindController.h" //
+
 #endif
