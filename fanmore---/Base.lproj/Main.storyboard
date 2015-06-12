@@ -820,6 +820,9 @@
                         <outlet property="BButton" destination="dLv-Cd-Ihp" id="yz3-fI-V6m"/>
                         <outlet property="CButton" destination="I1N-JY-S8h" id="0Rk-Ij-brx"/>
                         <outlet property="DButton" destination="3rw-NT-yYK" id="4RW-7Y-wL4"/>
+                        <outlet property="queLable" destination="QOs-h1-mcZ" id="zLc-yt-Wzx"/>
+                        <outlet property="queNumber" destination="sAm-7o-PpL" id="ipi-X5-cO5"/>
+                        <outlet property="qusImageView" destination="vS2-i9-fg9" id="Z2S-j0-f08"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kRl-Ob-mWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1509,7 +1512,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QHn-mF-Bdu">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="-44" width="600" height="644"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oc3-LP-JfW" id="uSP-qK-2FH"/>
@@ -1520,7 +1523,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QHn-mF-Bdu" firstAttribute="leading" secondItem="hoP-ta-ZHe" secondAttribute="leading" id="7cB-xh-qTw"/>
-                            <constraint firstItem="QHn-mF-Bdu" firstAttribute="top" secondItem="6Af-sD-fBY" secondAttribute="bottom" id="D9v-1y-7MO"/>
+                            <constraint firstItem="QHn-mF-Bdu" firstAttribute="top" secondItem="6Af-sD-fBY" secondAttribute="bottom" constant="-64" id="D9v-1y-7MO"/>
                             <constraint firstItem="I5d-tE-j77" firstAttribute="top" secondItem="QHn-mF-Bdu" secondAttribute="bottom" id="Flm-Sw-Gle"/>
                             <constraint firstAttribute="trailing" secondItem="QHn-mF-Bdu" secondAttribute="trailing" id="QAA-qG-BmG"/>
                         </constraints>
@@ -1532,6 +1535,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvy-1n-ewY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-577" y="1672"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="HhS-4w-HJJ">
+            <objects>
+                <viewController id="cGA-Ik-1hq" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JCh-tz-Rer"/>
+                        <viewControllerLayoutGuide type="bottom" id="qxz-d8-W3z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rUI-R7-O7a">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="053-Vl-xvI">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qxz-d8-W3z" firstAttribute="top" secondItem="053-Vl-xvI" secondAttribute="bottom" id="AoO-1n-8Bl"/>
+                            <constraint firstAttribute="trailing" secondItem="053-Vl-xvI" secondAttribute="trailing" id="MPy-So-4pu"/>
+                            <constraint firstItem="053-Vl-xvI" firstAttribute="top" secondItem="rUI-R7-O7a" secondAttribute="top" id="auC-Z8-Z6i"/>
+                            <constraint firstItem="053-Vl-xvI" firstAttribute="leading" secondItem="rUI-R7-O7a" secondAttribute="leading" id="b9b-77-lq5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qCg-Ak-gby" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="90" y="1666"/>
         </scene>
         <!--Join Controller-->
         <scene sceneID="UTE-Ly-6h3">
@@ -1780,7 +1813,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余流量" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7k4-iy-sWV">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="流量剩余" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7k4-iy-sWV">
                                         <rect key="frame" x="122" y="57" width="85" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="eJO-dS-ORv"/>
@@ -1790,9 +1823,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5t-SA-sKB">
-                                        <rect key="frame" x="122" y="4" width="85" height="20"/>
+                                        <rect key="frame" x="122" y="4" width="150" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="85" id="jIX-qx-Z0N"/>
+                                            <constraint firstAttribute="width" constant="150" id="jIX-qx-Z0N"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

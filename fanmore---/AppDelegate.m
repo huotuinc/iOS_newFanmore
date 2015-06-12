@@ -46,7 +46,7 @@
     //2、连接邮件
     [ShareSDK connectMail];
     
-    [ShareSDK registerApp:@"api20"];//字符串api20为您的ShareSDK的AppKey
+    [ShareSDK registerApp:APPKEY];//字符串api20为您的ShareSDK的AppKey
     
     //3添加新浪微博应用 注册网址 http://open.weibo.com
     [ShareSDK connectSinaWeiboWithAppKey:APPKEY

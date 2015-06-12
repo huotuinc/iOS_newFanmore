@@ -88,6 +88,8 @@
 		EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */; };
 		EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */; };
 		EFAEB3271B291DDD00855D25 /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAEB3261B291DDD00855D25 /* FSMediaPicker.m */; };
+		EFAEB32A1B29557100855D25 /* taskDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAEB3291B29557100855D25 /* taskDetail.m */; };
+		EFAEB32D1B2958F400855D25 /* answer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAEB32C1B2958F400855D25 /* answer.m */; };
 		EFC249821B255BDA00CD6DCD /* RequestTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249811B255BDA00CD6DCD /* RequestTasks.m */; };
 		EFC249851B256D1F00CD6DCD /* TaskDataCeach.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249841B256D1F00CD6DCD /* TaskDataCeach.m */; };
 		EFC86A7D1B1E8D7E0081BBC8 /* BuyFlowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC86A7C1B1E8D7E0081BBC8 /* BuyFlowViewController.m */; };
@@ -318,6 +320,10 @@
 		EF8D673A1B0DE436008B6909 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		EFAEB3251B291DDD00855D25 /* FSMediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMediaPicker.h; sourceTree = "<group>"; };
 		EFAEB3261B291DDD00855D25 /* FSMediaPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMediaPicker.m; sourceTree = "<group>"; };
+		EFAEB3281B29557100855D25 /* taskDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taskDetail.h; sourceTree = "<group>"; };
+		EFAEB3291B29557100855D25 /* taskDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = taskDetail.m; sourceTree = "<group>"; };
+		EFAEB32B1B2958F400855D25 /* answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = answer.h; sourceTree = "<group>"; };
+		EFAEB32C1B2958F400855D25 /* answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = answer.m; sourceTree = "<group>"; };
 		EFC249801B255BDA00CD6DCD /* RequestTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestTasks.h; sourceTree = "<group>"; };
 		EFC249811B255BDA00CD6DCD /* RequestTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTasks.m; sourceTree = "<group>"; };
 		EFC249831B256D1F00CD6DCD /* TaskDataCeach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDataCeach.h; sourceTree = "<group>"; };
@@ -430,8 +436,6 @@
 		EFE837B81B12FA3C0093E14E /* app.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = app.m; sourceTree = "<group>"; };
 		EFE837BB1B12FADB0093E14E /* question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = question.h; sourceTree = "<group>"; };
 		EFE837BC1B12FADB0093E14E /* question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = question.m; sourceTree = "<group>"; };
-		EFE837BF1B12FBC70093E14E /* answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = answer.h; sourceTree = "<group>"; };
-		EFE837C01B12FBC70093E14E /* answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = answer.m; sourceTree = "<group>"; };
 		EFE837C91B12FEFF0093E14E /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
 		EFE837CA1B12FEFF0093E14E /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		EFE837CB1B12FEFF0093E14E /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
@@ -1191,7 +1195,6 @@
 		EFCCA49B1B12CA6100C015A7 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				EFE837BE1B12FBAF0093E14E /* answer */,
 				EFE837BA1B12FACB0093E14E /* question */,
 				EFE837B61B12F6CA0093E14E /* app */,
 				EFE837B21B12F6100093E14E /* purchase */,
@@ -1375,8 +1378,12 @@
 		EFE76B7E1B26DC4100C956A5 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				EFAEB32B1B2958F400855D25 /* answer.h */,
+				EFAEB32C1B2958F400855D25 /* answer.m */,
 				EFE76B7F1B26DC4100C956A5 /* taskData.h */,
 				EFE76B801B26DC4100C956A5 /* taskData.m */,
+				EFAEB3281B29557100855D25 /* taskDetail.h */,
+				EFAEB3291B29557100855D25 /* taskDetail.m */,
 			);
 			name = model;
 			path = "classes/home(主页)/model";
@@ -1407,15 +1414,6 @@
 				EFE837BC1B12FADB0093E14E /* question.m */,
 			);
 			path = question;
-			sourceTree = "<group>";
-		};
-		EFE837BE1B12FBAF0093E14E /* answer */ = {
-			isa = PBXGroup;
-			children = (
-				EFE837BF1B12FBC70093E14E /* answer.h */,
-				EFE837C01B12FBC70093E14E /* answer.m */,
-			);
-			path = answer;
 			sourceTree = "<group>";
 		};
 		EFE837C81B12FEFF0093E14E /* ViewDeck */ = {
@@ -1592,6 +1590,7 @@
 				EFCCA4C51B12D6E400C015A7 /* MJFoundation.m in Sources */,
 				83E490051B1D749A00A44FC8 /* detailViewController.m in Sources */,
 				EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */,
+				EFAEB32A1B29557100855D25 /* taskDetail.m in Sources */,
 				83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */,
 				838116821B25AC5A00261F51 /* SexController.m in Sources */,
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
@@ -1636,6 +1635,7 @@
 				EFCCA4CD1B12D6E400C015A7 /* NSObject+MJMember.m in Sources */,
 				EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */,
 				EF565D0C1B16AA6000FC2D6B /* UIView+MJExtension.m in Sources */,
+				EFAEB32D1B2958F400855D25 /* answer.m in Sources */,
 				8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */,
 				EF565D431B17091F00FC2D6B /* LoginViewController.m in Sources */,
 				EFCCA4C71B12D6E400C015A7 /* MJMember.m in Sources */,

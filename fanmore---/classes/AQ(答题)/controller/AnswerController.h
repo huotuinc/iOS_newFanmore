@@ -19,4 +19,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *CButton;
 @property (weak, nonatomic) IBOutlet UIButton *DButton;
 
+/**题目的图片*/
+@property (weak, nonatomic) IBOutlet UIImageView *qusImageView;
+/**题目的内容*/
+@property (weak, nonatomic) IBOutlet UILabel *queLable;
+/**题目的编号*/
+@property (weak, nonatomic) IBOutlet UILabel *queNumber;
+
+
+/**题目列表*/
+@property(nonatomic,strong) NSArray * question;
 @end

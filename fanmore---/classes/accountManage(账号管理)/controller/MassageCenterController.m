@@ -7,6 +7,9 @@
 //
 
 #import "MassageCenterController.h"
+#import "MessageTableViewCell.h"
+#import "Message.h"
+#import "MessageFrame.h"
 
 
 @interface MassageCenterController ()
@@ -25,8 +28,11 @@
 - (NSMutableArray *)messageF{
     if (_messageF == nil) {
         _messageF = [NSMutableArray array];
+        
+        
     }
     return _messageF;
+    
 }
 
 
@@ -46,7 +52,7 @@
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
-    [self.tableView headerBeginRefreshing];
+//    [self.tableView headerBeginRefreshing];
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
     self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
@@ -88,15 +94,9 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-        static NSString *ID = @"xxxxxxx";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-    }
     
-    cell.textLabel.text = @"asdasdasdasdasd";
+    MessageTableViewCell * cell = [MessageTableViewCell cellWithTableView:tableView];
+    cell.messageF = nil;
     return cell;
 
 }

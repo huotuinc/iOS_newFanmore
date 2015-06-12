@@ -100,20 +100,21 @@
     NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
     NSLog(@"========xxxxx====%@",flag);
     if (![flag isEqualToString:@"wrong"]) {
-        self.nameLable.text = @"xxxxx登陆";
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
         userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
         //2、设置用户登入头像
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         NSURL * profileImage = [NSURL URLWithString:user.pictureURL];
+        
+        self.nameLable.text = user.name;
         [manager downloadImageWithURL:profileImage options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             if (image) {
                 [self.userProfileBtn setBackgroundImage:image forState:UIControlStateNormal];
             }
         }];
         //3、设置当前用户流量
-        self.flowLable.text = [NSString stringWithFormat:@"%@",user.balance];
+        self.flowLable.text = [NSString stringWithFormat:@"%@M",user.balance];
     }else{
         self.nameLable.text = @"登陆";
     }
