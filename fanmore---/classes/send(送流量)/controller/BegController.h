@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface BegController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *trafficField;
 
 @end

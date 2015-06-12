@@ -1677,6 +1677,45 @@
             </objects>
             <point key="canvasLocation" x="-577" y="2323"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="CAd-H4-vMb">
+            <objects>
+                <viewController id="Ad2-1Y-7J5" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Xl-rN-cTf"/>
+                        <viewControllerLayoutGuide type="bottom" id="JYg-FI-7wF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zCe-Sk-Hpu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b2F-WL-xMg">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ad2-1Y-7J5" id="m5e-3G-WmA"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="o9m-Tv-PKE" id="1K4-9F-dib"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vvk-zz-XrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="o9m-Tv-PKE">
+                    <connections>
+                        <outlet property="delegate" destination="Ad2-1Y-7J5" id="HJp-8c-U7V"/>
+                        <outlet property="searchBar" destination="b2F-WL-xMg" id="D8U-Ed-KaV"/>
+                        <outlet property="searchContentsController" destination="Ad2-1Y-7J5" id="AZr-s2-TnF"/>
+                        <outlet property="searchResultsDataSource" destination="Ad2-1Y-7J5" id="EK1-zc-YtX"/>
+                        <outlet property="searchResultsDelegate" destination="Ad2-1Y-7J5" id="a9X-4G-hJI"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="89" y="2320"/>
+        </scene>
         <!--Disciple View Controller-->
         <scene sceneID="PaD-Yg-Cya">
             <objects>
@@ -2323,7 +2362,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWp-zy-kum">
                                 <rect key="frame" x="0.0" y="200" width="320" height="200"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入流量" textAlignment="center" minimumFontSize="17" background="button-W" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-DV-t0d">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入流量" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-DV-t0d">
                                         <rect key="frame" x="20" y="20" width="280" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="97" id="kdy-bT-SQI"/>
@@ -2407,6 +2446,9 @@
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="trafficField" destination="Eyl-DV-t0d" id="WNR-Lm-N3R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wi7-u2-QGx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2619,7 +2661,6 @@
         <image name="D" width="305" height="44"/>
         <image name="asignGray" width="400" height="397"/>
         <image name="button-BR" width="480" height="80"/>
-        <image name="button-W" width="480" height="80"/>
         <image name="headImage" width="138" height="138"/>
         <image name="mrtou_h" width="150" height="150"/>
         <image name="right" width="20" height="34"/>
