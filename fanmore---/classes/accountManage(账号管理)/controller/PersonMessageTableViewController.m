@@ -82,6 +82,7 @@
     self.nameLable.text = userinfo.name; //2姓名
     self.sexLable.text =  userinfo.sex?@"女":@"男";  //3性别
     self.birthDayLable.text = userinfo.birthDate;  //4
+    
     for (twoOption * aa in glo.career) {
         if (aa.value == userinfo.career) {
             self.careerLable.text = aa.name;//5
