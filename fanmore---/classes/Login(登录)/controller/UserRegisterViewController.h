@@ -21,5 +21,6 @@
 @interface UserRegisterViewController : UIViewController
 
 @property(nonatomic,weak) id<UserRegisterViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *privacyLabel;
 
 @end

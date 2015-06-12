@@ -21,6 +21,7 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UIButton *exchageButton;
+@property (weak, nonatomic) IBOutlet UIButton *friendButton;
 
 /**
  *  选择视图
@@ -35,6 +36,7 @@
 
 - (IBAction)exchangeAction:(id)sender;
 - (IBAction)buyAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *friendAction;
 
 @property (assign, nonatomic) NSInteger itemNum;
 

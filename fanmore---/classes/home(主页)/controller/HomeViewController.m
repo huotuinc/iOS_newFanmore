@@ -14,7 +14,7 @@
 #import "detailViewController.h"
 #import "BuyFlowViewController.h"
 #import "taskData.h"
-
+#import <AddressBook/AddressBook.h>
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -70,7 +70,9 @@ static NSString *homeCellidentify = @"homeCellId";
     //集成刷新控件
     [self setupRefresh];
     
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.tableView removeSpaces];
+    
+
 }
 
 - (void)_initView
@@ -93,6 +95,57 @@ static NSString *homeCellidentify = @"homeCellId";
     self.tableView.headerRefreshingText = @"正在刷新最新数据,请稍等";
 
 }
+
+
+#pragma mark 读取通讯录
+- (void)getAdressBook
+{
+    ABAddressBookRef addressBooks = nil;
+    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
+        
+    {
+        addressBooks =  ABAddressBookCreateWithOptions(NULL, NULL);
+        
+        //获取通讯录权限
+        
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        
+        ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
+        
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+
+    }
+    else
+    {
+        addressBooks = ABAddressBookCreate();
+        
+    }
+    
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
+    CFIndex nPeople = ABAddressBookGetPersonCount(addressBooks);
+    for (NSInteger i = 0; i < nPeople; i++) {
+        //        TKAddressBook *addressBook = [[TKAddressBook alloc] init];
+        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
+        CFStringRef abFullName = ABRecordCopyCompositeName(person);
+        NSString *nameString = (__bridge NSString *)abName;
+        NSString *lastNameString = (__bridge NSString *)abLastName;
+        if ((__bridge id)abFullName != nil) {
+            nameString = (__bridge NSString *)abFullName;
+        } else {
+            if ((__bridge id)abLastName != nil)
+            {
+                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
+            }
+        }
+        NSLog(@"%@",nameString);
+    }
+}
+
+
+
 #pragma mark 开始进入刷新状态
 //头部刷新
 - (void)headerRereshing  //加载最新数据

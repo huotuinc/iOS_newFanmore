@@ -46,6 +46,12 @@
     [self setupWidget];
     //3、监听键盘弹出
 //    [self setupkeyboardShow];
+    
+    
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.privacyLabel.text];
+    NSRange strRange = {0,[str length]};
+    [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
+    self.privacyLabel.attributedText = str;
 }
 
 /**
