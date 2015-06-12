@@ -12,6 +12,7 @@
 #import "MessageFrame.h"
 
 
+
 @interface MassageCenterController ()
 
 /**消息存放数组*/
@@ -100,4 +101,6 @@
     return cell;
 
 }
+
+
 @end

@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfessionalController : UIViewController
 
+@protocol ProfessionalControllerDelegate <NSObject>
+
+@optional
+/**选择职业*/
+- (void) ProfessionalControllerBringBackCareer:(NSString *)career isFlag:(BOOL) flag;
+
+@end
+
+@interface ProfessionalController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 /**
  *  数据列表
@@ -26,5 +35,11 @@
  *  保存选中的行方便操作
  */
 @property (weak, nonatomic) NSIndexPath *selectIndexPath;
+
+/**用户当前的职业*/
+@property (nonatomic,strong) NSString * currentCareer;
+
+
+@property(strong,nonatomic) id<ProfessionalControllerDelegate> delegate;
 
 @end

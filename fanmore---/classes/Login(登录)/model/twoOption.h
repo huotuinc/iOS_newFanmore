@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface twoOption : NSObject
+@interface twoOption : NSObject <NSCoding>
 
 
 /**name*/
 @property(nonatomic,copy) NSString * name;
 
 /**value*/
-@property(nonatomic,copy) NSString * value;
+@property(nonatomic,assign) int value;
 
 @end

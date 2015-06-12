@@ -160,13 +160,11 @@
             
             
             resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];//数据对象话
-            
+            NSLog(@"%@",responseObject[@"resultData"]);
             
             //保存答题能阅读的时间
             [[NSUserDefaults standardUserDefaults] setObject: @(resultData.global.lessReadSeconds) forKey:AppReadSeconds];
-//
-//            //保存答题能阅读的时间
-//            [[NSUserDefaults standardUserDefaults] setObject: [NSString stringWithFormat:@"%d",resultData.global.amountToCheckout] forKey:AppReadSeconds];
+
             //取出本地token
             NSString *localToken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
             NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",localToken);
@@ -178,12 +176,26 @@
                 [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
                 
                 NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppToken]);
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                
+                //1、保存全局信息
+                NSString *fileName = [path stringByAppendingPathComponent:InitGlobalDate];
+                [NSKeyedArchiver archiveRootObject:resultData.global toFile:fileName]; //保存用户信息
+                
             }else{
                 NSString * flag = @"right";
                 [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
+                //初始化
                 NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                
+                //1、保存个人信息
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-                [NSKeyedArchiver archiveRootObject:resultData.user toFile:fileName];
+                [NSKeyedArchiver archiveRootObject:resultData.user toFile:fileName]; //保存用户信息
+                //2、保存全局信息
+                fileName = [path stringByAppendingPathComponent:InitGlobalDate];//保存全局信息
+                [NSKeyedArchiver archiveRootObject:resultData.global toFile:fileName]; //保存用户信息
+                
+                
             }
         }else{
             

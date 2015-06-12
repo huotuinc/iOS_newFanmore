@@ -7,28 +7,40 @@
 //  账号信息
 
 #import "PersonMessageTableViewController.h"
-//#import "FSMediaPicker.h"
+#import "UserLoginTool.h"
 #import "GTMBase64.h"
 #import "ProfessionalController.h"
+#import "userData.h"
+#import "GlobalData.h"
+#import "twoOption.h"
 
-@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate>
 
 @property(nonatomic,strong)NSArray * messages;
-
-/**用户头像*/
+/**1用户头像*/
 @property (weak, nonatomic) IBOutlet UIButton *iconView;
-/**用户出生年月*/
+/**2用户姓名*/
+@property (weak, nonatomic) IBOutlet UILabel *nameLable;
+/**3用户性别*/
+@property (weak, nonatomic) IBOutlet UILabel *sexLable;
+/**4用户出生年月*/
 @property (weak, nonatomic) IBOutlet UILabel *birthDayLable;
-
+/**5用户职业*/
+@property (weak, nonatomic) IBOutlet UILabel *careerLable;
+/**6用户收入*/
+@property (weak, nonatomic) IBOutlet UILabel *userIncomeLable;
+/**7用户爱好*/
+@property (weak, nonatomic) IBOutlet UILabel *favLable;
+/**8用户所在区域*/
+@property (weak, nonatomic) IBOutlet UILabel *placeLable;
+/**9用户账号时间*/
+@property (weak, nonatomic) IBOutlet UILabel *registTimeLable;
+/**时间选择器*/
 @property(nonatomic,strong) UIDatePicker *datePicker;
-
 - (IBAction)iconViewCkick:(id)sender;
 @end
 
 @implementation PersonMessageTableViewController
-
-
-
 - (UIDatePicker *)datePicker
 {
     if (_datePicker==nil) {
@@ -38,8 +50,6 @@
         _datePicker.date = [NSDate date];
         _datePicker.backgroundColor = [UIColor colorWithWhite:0.955 alpha:1];
         _datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-       
-
     }
     
     return _datePicker;
@@ -53,9 +63,40 @@
         
         [self.iconView setBackgroundImage:iconImage forState:UIControlStateNormal];
     }
+     //初始化个人信息
+    [self setupPersonMessage];
+}
+/**
+ *  初始化个人信息
+ */
+- (void)setupPersonMessage{
+    //获取用户数据
+    //初始化
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString * fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData * userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    
+    fileName = [path stringByAppendingPathComponent:InitGlobalDate];
+    GlobalData * glo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    
+    self.nameLable.text = userinfo.name; //2姓名
+    self.sexLable.text =  userinfo.sex?@"女":@"男";  //3性别
+    self.birthDayLable.text = userinfo.birthDate;  //4
+    
+    for (twoOption * aa in glo.career) {
+        if (aa.value == userinfo.career) {
+            self.careerLable.text = aa.name;//5
+            break;
+        }
+    }
+    
+    self.favLable.text = userinfo.favs; //7
+    self.placeLable.text = userinfo.area;//8
+    
+    
+    
     
 }
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -118,7 +159,16 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         if (indexPath.row == 0) {
             ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
-            pro.goods = @[@"教师",@"护士",@"医生",@"攻城狮",@"程序猿"];
+            pro.delegate = self;
+            pro.isPrefessional = YES;
+            pro.currentCareer = self.careerLable.text;
+            [self.navigationController pushViewController:pro animated:YES];
+        }
+        if (indexPath.row == 1) {
+            ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
+            pro.delegate = self;
+            pro.currentCareer = self.userIncomeLable.text;
+            pro.isPrefessional = NO;
             [self.navigationController pushViewController:pro animated:YES];
         }
     }
@@ -149,28 +199,74 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+/**
+ *  修改个人生日资料
+ *
+ *  @param datePick <#datePick description#>
+ */
 - (void)dateChanged:(UIDatePicker *) datePick{
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString * birthtime = [dateFormatter stringFromDate:datePick.date];
-    NSLog(@"zzzzzzz%@",birthtime);
-    
+ 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [datePick removeFromSuperview];
-        
+        self.birthDayLable.text = birthtime;
     });
+    
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    parame[@"profileType"] = @(2);
+    parame[@"profileData"] = self.birthDayLable.text;
+    [self toupDatePersonMessageWithApi:urlStr withParame:parame];
     
 }
 
 
+- (void)toupDatePersonMessageWithApi:(NSString *)urlStr withParame:(NSMutableDictionary *)paremes{
 
+    [UserLoginTool loginRequestPost:urlStr parame:paremes success:^(id json) {
+        
+        [MBProgressHUD showSuccess:@"生日资料上传成功"];
+        
+#warning 保存本地用户数据
+//        userData * user = [userData objectWithKeyValues:json[]]
+//        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+//        [NSKeyedArchiver archiveRootObject: toFile:fileName];
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"生日资料上传失败"];
+    }];
+    
+
+}
 
 #pragma mark - Table view data source
 
 
+#pragma ProfessionalControllerDelegate
 
+
+
+- (void)ProfessionalControllerBringBackCareer:(NSString *)career isFlag:(BOOL)flag{
+    
+     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    if (flag) {
+        self.careerLable.text = career;
+         parame[@"profileType"] = @(3);
+    }else{
+        self.userIncomeLable.text = career;
+         parame[@"profileType"] = @(4);
+    }
+    //把职业上传到服务器
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
+    parame[@"profileData"] = career;
+    [self toupDatePersonMessageWithApi:urlStr withParame:parame];
+    
+}
 
 
 - (IBAction)iconViewCkick:(id)sender {

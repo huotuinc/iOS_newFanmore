@@ -660,8 +660,15 @@
                     </tableView>
                     <connections>
                         <outlet property="birthDayLable" destination="GKX-9m-1i3" id="JUt-C9-GIC"/>
+                        <outlet property="careerLable" destination="5P4-1h-iUX" id="xDJ-wk-tmz"/>
+                        <outlet property="favLable" destination="TQy-Bz-NCQ" id="J77-dJ-2Iu"/>
                         <outlet property="iconView" destination="4QD-jY-aQf" id="pNQ-In-fog"/>
+                        <outlet property="nameLable" destination="gbk-e4-VZz" id="d2W-za-c7D"/>
+                        <outlet property="placeLable" destination="7GX-4m-FpU" id="eEo-ab-N1q"/>
+                        <outlet property="registTimeLable" destination="TLU-Rc-CyO" id="A2G-Hc-P0g"/>
+                        <outlet property="sexLable" destination="0aI-mm-cQf" id="WGj-Rk-qN4"/>
                         <outlet property="tableView" destination="O9b-Ie-CiE" id="vBS-XL-WP3"/>
+                        <outlet property="userIncomeLable" destination="FwD-7K-0UJ" id="bBa-3o-qW0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xna-lA-r56" userLabel="First Responder" sceneMemberID="firstResponder"/>

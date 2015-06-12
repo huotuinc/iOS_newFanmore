@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface userData : NSObject
-/**性别*/
+/**性别  0 男  1 女*/
 @property(nonatomic,assign) int  sex;
 /**流量余额*/
 @property(nonatomic,strong) NSNumber * balance;
@@ -34,7 +34,6 @@
 @property(nonatomic,strong) NSString * incoming;
 /**爱好索引串  以逗号隔开*/
 @property(nonatomic,strong) NSString * favs;
-
 /**区域*/
 @property(nonatomic,strong) NSString * area;
 
