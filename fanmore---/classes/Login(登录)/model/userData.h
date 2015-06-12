@@ -38,7 +38,7 @@
 @property(nonatomic,strong) NSString * area;
 
 /**注册时间*/
-@property(nonatomic,strong) NSString * regDate;
+@property(nonatomic,assign) long long regDate;
 
 /**无效类型 0:有效用户 1:手机无效(需要绑定手机)*/
 @property(nonatomic,strong) NSNumber * invalidCode;
