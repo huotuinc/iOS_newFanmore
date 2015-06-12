@@ -14,6 +14,7 @@
 #import "PersonMessageTableViewController.h"
 #import "ChangePasswordController.h"
 #import "MassageCenterController.h"
+#import "userData.h"
 
 @interface AccountSettingViewController ()
 
@@ -26,7 +27,16 @@
  */
 - (void)setupGroup0
 {
-    MJSettingItem *advice = [MJSettingLabelItem itemWithTitle:@"手机号" rightTitle:@"13857560740"];
+    NSString * name = @"";
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:loginFlag] isEqualToString:@"right"]) {
+        //1、登入成功用户数据本地化
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        userData * usera =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+        name = usera.name;
+    }
+    
+    MJSettingItem *advice = [MJSettingLabelItem itemWithTitle:@"手机号" rightTitle:name];
     MJSettingItem *cache = [MJSettingArrowItem itemWithTitle:@"用户资料" destVcClass:nil];
     MJSettingItem *about = [MJSettingArrowItem itemWithTitle:@"密码修改" destVcClass:nil];
     MJSettingItem *handShake = [MJSettingArrowItem itemWithTitle:@"消息中心" destVcClass:nil];

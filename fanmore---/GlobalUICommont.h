@@ -63,6 +63,7 @@
 #define AppReadSeconds  @"lessReadSeconds"  //点击答题时倒记时
 
 #define InitResultDate @"initResultDate"    //初始化返回数据对象
+#define InitGlobalDate @"initGlobalDate"    //初始化返回的global
 #define LocalUserDate @"loginUserDate"  //登入绑定返回的用户数据
 #endif
 

@@ -8,6 +8,6 @@
 
 #import "twoOption.h"
 
-@implementation twoOption
-
+@implementation twoOption 
+MJCodingImplementation
 @end

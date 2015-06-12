@@ -7,19 +7,78 @@
 //
 
 #import "ProfessionalController.h"
+#import "GlobalData.h"
+#import "twoOption.h"
 
 @interface ProfessionalController ()<UITableViewDelegate,UITableViewDataSource>
 
+
+/**职业列表*/
+@property (strong, nonatomic) NSArray *careers;
+/**职业列表*/
+@property (assign, nonatomic) int  isSelect;
 @end
 
 @implementation ProfessionalController
 
 static NSString *professionalIdentify = @"pfCellId";
 
-#pragma mark tableView
+
+
+
+- (NSArray *)careers{
+    
+    if (_careers == nil) {
+        
+        _careers = [NSArray array];
+        //初始化
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString * fileName = [path stringByAppendingPathComponent:InitGlobalDate];
+        GlobalData * global =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+        
+        if (_isPrefessional) {
+           _careers = global.career;
+        }else{
+           _careers = global.incomings;
+        }
+        
+        
+    }
+    return _careers;
+}
+
+- (void)setCurrentCareer:(NSString *)currentCareer
+{
+    _currentCareer = currentCareer;
+    
+    for (int index = 0; index < self.careers.count; index++) {
+        
+        twoOption * two = self.careers[index];
+        if ([two.name isEqualToString:currentCareer]) {
+            
+            _isSelect = index;
+            break;
+        }else{
+            _isSelect = -1;
+        }
+    }
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"职业列表";
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:professionalIdentify];
+    [self.tableView setTableFooterView:[[UIView alloc] init]];
+    [self.tableView setTableHeaderView:[[UIView alloc] init]];
+   
+}
+
+
+#pragma mark DateSouces tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.goods.count;
+   
+    return self.careers.count;
+   
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -28,31 +87,31 @@ static NSString *professionalIdentify = @"pfCellId";
     if (cell == nil) {
         cell = [[UITableViewCell alloc] init];
     }
-    cell.textLabel.text = self.goods[indexPath.row];
+    
+    NSLog(@"xxxxxx%@",self.currentCareer);
+    
+    NSLog(@"%lu",(unsigned long)[self.careers indexOfObject:self.currentCareer]);
+    if (_isSelect == indexPath.row) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }else{
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+
+    twoOption * ca = self.careers[indexPath.row];
+    cell.textLabel.text = ca.name;
     return cell;
 }
 
+#pragma mark tableView
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:professionalIdentify];
-    [self.tableView setTableFooterView:[[UIView alloc] init]];
-    [self.tableView setTableHeaderView:[[UIView alloc] init]];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    twoOption * op = self.careers[indexPath.row];
+    if ([self.delegate respondsToSelector:@selector(ProfessionalControllerBringBackCareer:isFlag:)]) {
+       [self.delegate ProfessionalControllerBringBackCareer:op.name isFlag:_isPrefessional];
+     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

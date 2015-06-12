@@ -11,7 +11,7 @@
 @interface GlobalData : NSObject
 
 /**流量充值最小值*/
-@property(nonatomic,strong)NSNumber * amountToCheckout;
+@property(nonatomic,assign)int  amountToCheckout;
 
 /**流量充值最小值*/
 @property(nonatomic,strong) NSString * signMsg;
@@ -23,13 +23,13 @@
 @property(nonatomic,strong) NSString * helpURL;
 
 /**收入*/
-@property(nonatomic,strong) NSString * incomings;
+@property(nonatomic,strong) NSArray * incomings;
 
 /**职业*/
-@property(nonatomic,strong) NSString * career;
+@property(nonatomic,strong) NSArray * career;
 
 /**爱好*/
-@property(nonatomic,strong) NSString * favs;
+@property(nonatomic,strong) NSArray * favs;
 
 /**最少阅读时间单位秒*/
 @property(nonatomic,assign) int lessReadSeconds;
