@@ -15,6 +15,9 @@
 
 @property (assign, nonatomic) int num;
 
+/**已赚取的流量*/
+@property (weak, nonatomic) IBOutlet UILabel *flowNumber;
+
 @end
 
 @implementation TrafficShowController
@@ -25,6 +28,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    
+    self.flowNumber.text = [NSString stringWithFormat:@"%dM",self.userInfo.balance];
     self.PICView.progress = 0.8;
     self.PICView.thicknessRatio = 0.15;
     self.PICView.showText = NO;
@@ -151,7 +157,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
 }
 */
 
-- (IBAction)exchangeAction:(id)sender {
+- (IBAction)exchangeAction:(id)sender { //流量交换
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     

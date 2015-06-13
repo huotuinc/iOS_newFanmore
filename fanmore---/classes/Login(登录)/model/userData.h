@@ -12,7 +12,7 @@
 /**性别  0 男  1 女*/
 @property(nonatomic,assign) int  sex;
 /**流量余额*/
-@property(nonatomic,strong) NSNumber * balance;
+@property(nonatomic,assign) int balance;
 /**用户头像连接*/
 @property(nonatomic,strong) NSString * pictureURL;
 /**邀请码*/

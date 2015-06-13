@@ -168,17 +168,13 @@
             [MBProgressHUD hideHUD];
             NSLog(@"登录成功=========== %@",json);
             userData * userInfo = [userData objectWithKeyValues:(json[@"resultData"][@"user"])];
-            
             //1、登入成功用户数据本地化
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
-            
-            
-            //2、保存用户名和密码
+            //2、保存手机号和密码
             [[NSUserDefaults standardUserDefaults] setObject:self.userNameTextFiled.text forKey:loginUserName];
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:self.passwdTextField.text] forKey:loginPassword];
-            
             //3、保存登录token
             NSString * apptoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
             if (![apptoken isEqualToString:userInfo.token]) { //当前token和原先的token不同
@@ -192,7 +188,14 @@
                 [self.navigationController pushViewController:bdVc animated:YES];
             }else{
                 [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
-                [self loginSuccess];
+                
+                if ([self.delegate respondsToSelector:@selector(LoginViewDelegate:)]) {
+                    
+                    [self.delegate LoginViewDelegate:self.loginType];
+                }
+                [self.navigationController popToRootViewControllerAnimated:YES];
+               
+                
             }
             
         }
@@ -212,6 +215,10 @@
  *  有动画
  */
 - (void) loginSuccess{
+    if ([self.delegate respondsToSelector:@selector(LoginViewDelegate:)]) {
+        
+        [self.delegate LoginViewDelegate:self.loginType];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -219,6 +226,11 @@
  *  没动画
  */
 - (void) loginSuccess1{
+    
+    if ([self.delegate respondsToSelector:@selector(LoginViewDelegate:)]) {
+        
+        [self.delegate LoginViewDelegate:self.loginType];
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 

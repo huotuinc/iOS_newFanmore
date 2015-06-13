@@ -150,6 +150,7 @@
 		EFD02B471B155CDA00D11D6D /* MJSettingSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B3E1B155CDA00D11D6D /* MJSettingSwitchItem.m */; };
 		EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B411B155CDA00D11D6D /* MJSettingCell.m */; };
 		EFD02B4B1B155D1E00D11D6D /* settingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B4A1B155D1E00D11D6D /* settingViewController.m */; };
+		EFD1ABD01B2C09C100CFFDD1 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD1ABCF1B2C09C100CFFDD1 /* Foundation+Log.m */; };
 		EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD7A9C31B1D9DE30004A9A4 /* view-new.html */; };
 		EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD931791B0EF93D0058F525 /* Base64Util.m */; };
 		EFD931801B0EF93D0058F525 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317B1B0EF93D0058F525 /* GTMBase64.m */; };
@@ -417,6 +418,7 @@
 		EFD02B411B155CDA00D11D6D /* MJSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJSettingCell.m; sourceTree = "<group>"; };
 		EFD02B491B155D1E00D11D6D /* settingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingViewController.h; sourceTree = "<group>"; };
 		EFD02B4A1B155D1E00D11D6D /* settingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingViewController.m; sourceTree = "<group>"; };
+		EFD1ABCF1B2C09C100CFFDD1 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		EFD7A9C31B1D9DE30004A9A4 /* view-new.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "view-new.html"; sourceTree = "<group>"; };
 		EFD9316C1B0EBC8E0058F525 /* GlobalUICommont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalUICommont.h; sourceTree = "<group>"; };
 		EFD931781B0EF93D0058F525 /* Base64Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Util.h; sourceTree = "<group>"; };
@@ -839,6 +841,7 @@
 		EF49ECED1B0D81A40038A203 /* fanmore--- */ = {
 			isa = PBXGroup;
 			children = (
+				EFD1ABCF1B2C09C100CFFDD1 /* Foundation+Log.m */,
 				EF1EA5FF1B0DA2D600C1F60D /* Classes */,
 				EF49ECF21B0D81A40038A203 /* AppDelegate.h */,
 				EF49ECF31B0D81A40038A203 /* AppDelegate.m */,
@@ -1293,7 +1296,6 @@
 				EFCB46091B214475005D5026 /* FeedBack(意见反馈) */,
 				EFD02B2F1B155CDA00D11D6D /* controller */,
 				EFD02B321B155CDA00D11D6D /* model */,
-				EFD02B3F1B155CDA00D11D6D /* VIew */,
 			);
 			name = "setting(设置中心)";
 			path = "classes/setting(设置中心)";
@@ -1302,6 +1304,7 @@
 		EFD02B2F1B155CDA00D11D6D /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				EFD02B3F1B155CDA00D11D6D /* VIew */,
 				EFD02B301B155CDA00D11D6D /* MJBaseSettingViewController.h */,
 				EFD02B311B155CDA00D11D6D /* MJBaseSettingViewController.m */,
 				EFD02B491B155D1E00D11D6D /* settingViewController.h */,
@@ -1349,7 +1352,8 @@
 				EFD02B401B155CDA00D11D6D /* MJSettingCell.h */,
 				EFD02B411B155CDA00D11D6D /* MJSettingCell.m */,
 			);
-			path = VIew;
+			name = VIew;
+			path = ../VIew;
 			sourceTree = "<group>";
 		};
 		EFD7A9C21B1D9DE30004A9A4 /* Htmlresource(网页资源) */ = {
@@ -1635,6 +1639,7 @@
 				EFCCA4CD1B12D6E400C015A7 /* NSObject+MJMember.m in Sources */,
 				EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */,
 				EF565D0C1B16AA6000FC2D6B /* UIView+MJExtension.m in Sources */,
+				EFD1ABD01B2C09C100CFFDD1 /* Foundation+Log.m in Sources */,
 				EFAEB32D1B2958F400855D25 /* answer.m in Sources */,
 				8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */,
 				EF565D431B17091F00FC2D6B /* LoginViewController.m in Sources */,

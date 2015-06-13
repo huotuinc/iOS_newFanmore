@@ -253,7 +253,7 @@ static NSString *homeCellidentify = @"homeCellId";
     }
     
     //设置cell样式
-    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"已有%@人参与",task.luckies] andIntroduceLabel:task.desc andGetImage:a];
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"免费领取%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"已有%@人参与",task.luckies] andIntroduceLabel:task.desc andGetImage:a];
      return cell;
 }
 

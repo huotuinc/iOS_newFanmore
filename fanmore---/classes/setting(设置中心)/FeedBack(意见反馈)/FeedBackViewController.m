@@ -24,12 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //设置边框：
     [self setupstatus];
-    
-    
-    
 }
 
 - (void) setupstatus{
@@ -40,8 +36,6 @@
     self.feedBackTextView.contentInset = UIEdgeInsetsZero;
     self.feedBackTextView.delegate = self;
     self.feedBackTextView.backgroundColor = [UIColor colorWithWhite:0.951 alpha:1.000];
-    
-    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

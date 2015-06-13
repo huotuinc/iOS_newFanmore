@@ -4,10 +4,12 @@
 //
 //  Created by HuoTu-Mac on 15/6/2.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  流量明细
 
 #import <UIKit/UIKit.h>
 #import "PICircularProgressView.h"
+
+@class userData;
 
 @interface TrafficShowController : UIViewController
 
@@ -42,5 +44,7 @@
 
 @property (assign, nonatomic) CGFloat collectionHeight;
 
+/**用户个人信息*/
+@property(nonatomic,strong) userData * userInfo;
 
 @end
