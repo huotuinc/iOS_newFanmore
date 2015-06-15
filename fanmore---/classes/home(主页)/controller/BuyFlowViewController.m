@@ -6,11 +6,13 @@
 //  Copyright (c) 2015年 HT. All rights reserved.
 //  购买流量
 
+#import "Order.h"
+#import "DataSigner.h"
 #import "BuyFlowViewController.h"
-
+#import <AlipaySDK/AlipaySDK.h>  //支付宝接入头文件
 #define cellID @"collviewCell"
 
-@interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
 /**手机运行商*/
 @property (weak, nonatomic) IBOutlet UILabel *phoneCompany;
 /**手机号*/
@@ -85,7 +87,7 @@
     }else {
         self.num = 3;
     }
-    
+//    self.selected = [[NSIndexPath alloc] init];
     [self.goodsCollectionView addSubview:self.collection];
     self.collection.dataSource = self;
     self.collection.delegate = self;
@@ -107,9 +109,136 @@
 
 - (IBAction)buyButtonClick:(id)sender {
     
-    NSLog(@"xxxxxxxxxxxxxxxxxxx");
+    UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
+    if (scell.selected == YES) {
+        
+        NSString * good = self.goods[self.selected.row];
+        NSLog(@"%@",good);
+    }
+    
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择支付方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"支付宝", @"微信",nil];
+    [actionSheet showInView:self.view];
+    
+    
+    NSLog(@"购买流量xxxxxxxxxxxxxxxxxxx");
 }
 
+
+
+/**
+ *  action sheet
+ *
+ *  @param actionSheet <#actionSheet description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        [self PayByAlipay]; // 支付宝
+    }
+    if (buttonIndex == 1) {
+        [self PayByWeiXin]; // 微信支付
+    }
+}
+
+/**
+ *  支付宝
+ */
+- (void)PayByAlipay{
+    /*============================================================================*/
+    /*=======================需要填写商户app申请的===================================*/
+    /*============================================================================*/
+    NSString *partner = @"2088211251545121";
+    NSString *seller = @"heyun@chinaswt.cn";
+    NSString *privateKey = @"wkxysgteujgbcxawiylcm79598fbtiwu";
+    /*============================================================================*/
+    /*============================================================================*/
+    /*============================================================================*/
+    //partner和seller获取失败,提示
+    if ([partner length] == 0 ||
+        [seller length] == 0 ||
+        [privateKey length] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"缺少partner或者seller或者私钥。"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    /*
+     *生成订单信息及签名
+     */
+    //将商品信息赋予AlixPayOrder的成员变量
+    Order *order = [[Order alloc] init];
+    order.partner = partner;
+    order.seller = seller;
+    order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
+    order.productName = @"粉毛流量"; //商品标题
+    order.productDescription = @"通过粉猫买流量"; //商品描述
+    order.amount = [NSString stringWithFormat:@"%.2f",12.5]; //商品价格
+    order.notifyURL =  @"http://www.xxx.com"; //回调URL
+    
+    order.service = @"mobile.securitypay.pay";
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    order.itBPay = @"30m";
+    order.showUrl = @"m.alipay.com";
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+    NSString *appScheme = @"newfanmore2015";
+    
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+    NSString *signedString = [signer signString:orderSpec];
+    
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+        
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            NSLog(@"reslut = %@",resultDic);
+        }];
+        
+    }
+
+}
+
+/**
+ *  微信支付
+ */
+- (void)PayByWeiXin{
+    
+    
+}
+
+/**
+ *  随即生成订单号
+ *
+ *  @return <#return value description#>
+ */
+- (NSString *)generateTradeNO
+{
+    static int kNumber = 15;
+    
+    NSString *sourceStr = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    NSMutableString *resultStr = [[NSMutableString alloc] init];
+    srand((int)time(0));
+    for (int i = 0; i < kNumber; i++)
+    {
+        unsigned index = rand() % [sourceStr length];
+        NSString *oneStr = [sourceStr substringWithRange:NSMakeRange(index, 1)];
+        [resultStr appendString:oneStr];
+    }
+    return resultStr;
+}
 #pragma UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     

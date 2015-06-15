@@ -28,5 +28,5 @@
 
 
 /**题目列表*/
-@property(nonatomic,strong) NSArray * question;
+@property(nonatomic,strong) NSArray * questions;
 @end
