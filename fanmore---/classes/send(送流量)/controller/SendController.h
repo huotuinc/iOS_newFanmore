@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RNTableViewController.h"
 
 @interface SendController : UIViewController
 
@@ -14,8 +15,12 @@
 
 @property (strong, nonatomic) NSMutableArray *searchArray;
 
-- (void)ressetSearch;
+@property (strong, nonatomic) UITableView *ResultsTableView;
 
-- (void)handleSearchForTeam:(NSString *) secrchString;
+/**
+ *  用于用户数据返回服务器
+ */
+@property (strong, nonatomic) NSMutableString *userPhone;
+
 
 @end

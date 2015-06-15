@@ -197,15 +197,12 @@ static NSString *homeCellidentify = @"homeCellId";
                                                                               }];
     
     
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"买流量" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction:)];
-//    rightBarButton.tintColor = [UIColor blackColor];
     
     if (self.tableView.hidden) {
-        self.navigationItem.rightBarButtonItem = rightBarButton;
     }else {
         UIBarButtonItem *signInBarButton = [[UIBarButtonItem alloc] initWithTitle:@"签到" style:UIBarButtonItemStylePlain target:self  action:@selector(signInAction:)];
 //        signInBarButton.tintColor = [UIColor blackColor];
-        NSArray *array = [NSArray arrayWithObjects:signInBarButton, rightBarButton, nil];
+        NSArray *array = [NSArray arrayWithObjects:signInBarButton, nil];
         self.navigationItem.rightBarButtonItems = array;
     }
     /**
