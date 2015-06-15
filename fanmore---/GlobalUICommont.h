@@ -22,7 +22,7 @@
 //appKey
 #define APPKEY @"b73ca64567fb49ee963477263283a1bf"
 /**应用版本号*/
-#define AppVersion [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue]
+#define AppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]
 /**平台*/
 #define OPERATION_parame @"FM2015AP"
 /**设备唯一号*/

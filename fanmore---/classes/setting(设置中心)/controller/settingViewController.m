@@ -48,7 +48,7 @@
     MJSettingItem *advice = [MJSettingArrowItem itemWithIcon:nil title:@"意见反馈" destVcClass:[FeedBackViewController class]];
     MJSettingItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:@"110KB"];
     MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们"];
-    MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:[NSString stringWithFormat:@"V%.1f",AppVersion]];
+    MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
     MJSettingGroup *group = [[MJSettingGroup alloc] init];
     group.items = @[advice, cache, about,handShake];
     [self.data addObject:group];

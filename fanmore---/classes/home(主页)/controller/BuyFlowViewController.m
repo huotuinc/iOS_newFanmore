@@ -177,7 +177,7 @@
     order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
     order.productName = @"粉毛流量"; //商品标题
     order.productDescription = @"通过粉猫买流量"; //商品描述
-    order.amount = [NSString stringWithFormat:@"%.2f",12.5]; //商品价格
+    order.amount = [NSString stringWithFormat:@"%.2f",0.1]; //商品价格
     order.notifyURL =  @"http://www.xxx.com"; //回调URL
     
     order.service = @"mobile.securitypay.pay";

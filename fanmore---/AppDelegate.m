@@ -138,7 +138,7 @@
     params[@"lng"] =@(40.0);
     params[@"timestamp"] = apptimesSince1970;
     params[@"operation"] = OPERATION_parame;
-    params[@"version"] = [NSString stringWithFormat:@"%f",AppVersion];
+    params[@"version"] = AppVersion;
     NSString * aaatoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
     NSLog(@"aaatoken === %@",aaatoken);
     params[@"token"] = aaatoken?aaatoken:@"";

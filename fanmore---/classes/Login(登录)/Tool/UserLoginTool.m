@@ -29,7 +29,7 @@
     paramsOption[@"lng"] = (lng?lng:@(116.0));
     paramsOption[@"timestamp"] = apptimesSince1970;
     paramsOption[@"operation"] = OPERATION_parame;
-    paramsOption[@"version"] =[NSString stringWithFormat:@"%f",AppVersion];
+    paramsOption[@"version"] =AppVersion;
     NSString * token = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
     paramsOption[@"token"] = token?token:@"";
     paramsOption[@"imei"] = DeviceNo;
@@ -62,7 +62,7 @@
     paramsOption[@"lng"] = lng?lng:@(116.0);;
     paramsOption[@"timestamp"] = apptimesSince1970;;
     paramsOption[@"operation"] = OPERATION_parame;
-    paramsOption[@"version"] = [NSString stringWithFormat:@"%f",AppVersion];
+    paramsOption[@"version"] = AppVersion;
     NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
     paramsOption[@"token"] = token?token:@"";
     paramsOption[@"imei"] = DeviceNo;
