@@ -186,14 +186,14 @@
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
-        answer.question = self.detailTasks;
+        answer.questions = self.detailTasks;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
     if ([self.type intValue] == 2) {//报名类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"FinishController"];
+        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
         [self.navigationController pushViewController:answer animated:YES];
     }
     
@@ -227,8 +227,8 @@
     __block int timeout= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]-1; //倒计时时间
     NSLog(@"xxxxxxxxxxxx%d",timeout);
     __block int timeAll= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]; //倒计时时间
-    timeout = 10;
-    timeAll = 11;
+    timeout = 5;
+    timeAll = 6;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
