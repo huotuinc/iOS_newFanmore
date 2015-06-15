@@ -10,4 +10,12 @@
 
 @interface SendController : UIViewController
 
+@property (strong, nonatomic) NSArray *personArray;
+
+@property (strong, nonatomic) NSMutableArray *searchArray;
+
+- (void)ressetSearch;
+
+- (void)handleSearchForTeam:(NSString *) secrchString;
+
 @end

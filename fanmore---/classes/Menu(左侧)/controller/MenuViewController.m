@@ -220,7 +220,7 @@
         case 6:{
 //            SendController *send = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
 //            [self.navigationController pushViewController:send animated:YES];
-            BegController *beg = [storyboard instantiateViewControllerWithIdentifier:@"BegController"];
+            SendController *beg = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
             [self.navigationController pushViewController:beg animated:YES];
         }
             

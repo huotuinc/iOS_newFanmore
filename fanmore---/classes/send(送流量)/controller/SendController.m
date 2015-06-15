@@ -48,51 +48,55 @@
     CFIndex nPeople = ABAddressBookGetPersonCount(addressBooks);
     for (NSInteger i = 0; i < nPeople; i++) {
         //        TKAddressBook *addressBook = [[TKAddressBook alloc] init];
+        //唯一识别符号
         ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
-        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
-        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
-        CFStringRef abFullName = ABRecordCopyCompositeName(person);
-        NSString *nameString = (__bridge NSString *)abName;
-        NSString *lastNameString = (__bridge NSString *)abLastName;
-        if ((__bridge id)abFullName != nil) {
-            nameString = (__bridge NSString *)abFullName;
-        } else {
-            if ((__bridge id)abLastName != nil)
-            {
-                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
-            }
-        }
-        NSLog(@"%@",nameString);
         
-        ABPropertyID multiProperties[] = {
-            kABPersonPhoneProperty,
-            kABPersonEmailProperty
-        };
-        NSInteger multiPropertiesTotal = sizeof(multiProperties) / sizeof(ABPropertyID);
-        for (NSInteger j = 0; j < multiPropertiesTotal; j++) {
-            ABPropertyID property = multiProperties[j];
-            ABMultiValueRef valuesRef = ABRecordCopyValue(person, property);
-            NSInteger valuesCount = 0;
-            if (valuesRef != nil) valuesCount = ABMultiValueGetCount(valuesRef);
-            
-            if (valuesCount == 0) {
-                CFRelease(valuesRef);
-                continue;
-            }
-            //获取电话号码和email
-            
-            for (NSInteger k = 0; k < valuesCount; k++) {
-                CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
-                switch (j) {
-                    case 0: {// Phone number
-                        NSLog(@"%@", (__bridge NSString*)value);
-                        break;
-                    }
-                }
-                CFRelease(value);
-            }
-            CFRelease(valuesRef);
-        }
+        ABRecordID *reId = ABRecordGetRecordID(person);
+        NSLog(@"%d", reId);
+//        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+//        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
+//        CFStringRef abFullName = ABRecordCopyCompositeName(person);
+//        NSString *nameString = (__bridge NSString *)abName;
+//        NSString *lastNameString = (__bridge NSString *)abLastName;
+//        if ((__bridge id)abFullName != nil) {
+//            nameString = (__bridge NSString *)abFullName;
+//        } else {
+//            if ((__bridge id)abLastName != nil)
+//            {
+//                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
+//            }
+//        }
+//        NSLog(@"%@",nameString);
+        
+//        ABPropertyID multiProperties[] = {
+//            kABPersonPhoneProperty,
+//            kABPersonEmailProperty
+//        };
+//        NSInteger multiPropertiesTotal = sizeof(multiProperties) / sizeof(ABPropertyID);
+//        for (NSInteger j = 0; j < multiPropertiesTotal; j++) {
+//            ABPropertyID property = multiProperties[j];
+//            ABMultiValueRef valuesRef = ABRecordCopyValue(person, property);
+//            NSInteger valuesCount = 0;
+//            if (valuesRef != nil) valuesCount = ABMultiValueGetCount(valuesRef);
+//            
+//            if (valuesCount == 0) {
+//                CFRelease(valuesRef);
+//                continue;
+//            }
+//            //获取电话号码和email
+//            
+//            for (NSInteger k = 0; k < valuesCount; k++) {
+//                CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
+//                switch (j) {
+//                    case 0: {// Phone number
+//                        NSLog(@"%@", (__bridge NSString*)value);
+//                        break;
+//                    }®
+//                }
+//                CFRelease(value);
+//            }
+//            CFRelease(valuesRef);
+//        }
     }
     //    NSLog(@"%@",allPeople);
 }
