@@ -27,14 +27,11 @@
  */
 - (void)setupGroup0
 {
-    NSString * name = @"";
-    if ([[[NSUserDefaults standardUserDefaults] stringForKey:loginFlag] isEqualToString:@"right"]) {
-        //1、登入成功用户数据本地化
-        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-        userData * usera =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-        name = usera.name;
-    }
+
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData * usera =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+     NSString* name = usera.name;
     
     MJSettingItem *advice = [MJSettingLabelItem itemWithTitle:@"手机号" rightTitle:name];
     MJSettingItem *cache = [MJSettingArrowItem itemWithTitle:@"用户资料" destVcClass:nil];
@@ -48,12 +45,17 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    RootViewController * root = (RootViewController *)self.mm_drawerController;
+    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+}
 
 - (void)_initNav
 {
@@ -63,7 +65,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.navigationController setNavigationBarHidden:YES];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -84,12 +85,7 @@
     [self.view addSubview:quiteAccount];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    RootViewController * root = (RootViewController *)self.mm_drawerController;
-    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -114,15 +110,21 @@
 
 - (void)QuiteAccount:(UIButton *)btn{
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:loginUserName]) {
+    NSLog(@"zxcadasdasdas");
+    
         
-        LoginViewController * login = [[LoginViewController alloc] init];
-        [UIApplication sharedApplication].keyWindow.rootViewController = login;
-    }
+//    LoginViewController * login = [[LoginViewController alloc] init];
+//    login.loginType = 0;
+//    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:login];
+//    [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+    [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 - (void)backAction:(UIButton *)btn{
     
-    [self.navigationController popViewControllerAnimated:YES];
+//    NSLog(@"xccasdasd");
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

@@ -1293,7 +1293,6 @@
 				EFCB46091B214475005D5026 /* FeedBack(意见反馈) */,
 				EFD02B2F1B155CDA00D11D6D /* controller */,
 				EFD02B321B155CDA00D11D6D /* model */,
-				EFD02B3F1B155CDA00D11D6D /* VIew */,
 			);
 			name = "setting(设置中心)";
 			path = "classes/setting(设置中心)";
@@ -1302,6 +1301,7 @@
 		EFD02B2F1B155CDA00D11D6D /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				EFD02B3F1B155CDA00D11D6D /* VIew */,
 				EFD02B301B155CDA00D11D6D /* MJBaseSettingViewController.h */,
 				EFD02B311B155CDA00D11D6D /* MJBaseSettingViewController.m */,
 				EFD02B491B155D1E00D11D6D /* settingViewController.h */,
@@ -1349,7 +1349,8 @@
 				EFD02B401B155CDA00D11D6D /* MJSettingCell.h */,
 				EFD02B411B155CDA00D11D6D /* MJSettingCell.m */,
 			);
-			path = VIew;
+			name = VIew;
+			path = ../VIew;
 			sourceTree = "<group>";
 		};
 		EFD7A9C21B1D9DE30004A9A4 /* Htmlresource(网页资源) */ = {

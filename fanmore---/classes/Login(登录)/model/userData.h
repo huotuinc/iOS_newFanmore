@@ -12,7 +12,7 @@
 /**性别  0 男  1 女*/
 @property(nonatomic,assign) int  sex;
 /**流量余额*/
-@property(nonatomic,strong) NSNumber * balance;
+@property(nonatomic,assign) int balance;
 /**用户头像连接*/
 @property(nonatomic,strong) NSString * pictureURL;
 /**邀请码*/
@@ -38,7 +38,7 @@
 @property(nonatomic,strong) NSString * area;
 
 /**注册时间*/
-@property(nonatomic,strong) NSString * regDate;
+@property(nonatomic,assign) long long regDate;
 
 /**无效类型 0:有效用户 1:手机无效(需要绑定手机)*/
 @property(nonatomic,strong) NSNumber * invalidCode;

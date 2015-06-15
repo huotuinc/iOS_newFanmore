@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 HT. All rights reserved.
 //  账号信息
 
+#import <SDWebImageManager.h>
 #import "PersonMessageTableViewController.h"
 #import "UserLoginTool.h"
 #import "GTMBase64.h"
@@ -65,6 +66,7 @@
     }
      //初始化个人信息
     [self setupPersonMessage];
+    NSLog(@"xxxxxxxxxxxxx");
 }
 /**
  *  初始化个人信息
@@ -79,8 +81,16 @@
     fileName = [path stringByAppendingPathComponent:InitGlobalDate];
     GlobalData * glo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
+   
+    SDWebImageManager * manager = [SDWebImageManager sharedManager];
+    NSURL * url = [NSURL URLWithString:userinfo.pictureURL];
+    [manager downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        
+        [self.iconView setBackgroundImage:image forState:UIControlStateNormal];
+    }];
+
     self.nameLable.text = userinfo.name; //2姓名
-    self.sexLable.text =  userinfo.sex?@"女":@"男";  //3性别
+    self.sexLable.text =  userinfo.sex?@"男":@"女";  //3性别
     self.birthDayLable.text = userinfo.birthDate;  //4
     
     for (twoOption * aa in glo.career) {
@@ -89,10 +99,14 @@
             break;
         }
     }
-    
     self.favLable.text = userinfo.favs; //7
     self.placeLable.text = userinfo.area;//8
     
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:userinfo.regDate];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString * retime = [dateFormatter stringFromDate:date];
+    self.registTimeLable.text =retime;
     
     
     
@@ -210,12 +224,12 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString * birthtime = [dateFormatter stringFromDate:datePick.date];
  
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [datePick removeFromSuperview];
-        self.birthDayLable.text = birthtime;
+        
     });
-    
+    self.birthDayLable.text = birthtime;
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     parame[@"profileType"] = @(2);

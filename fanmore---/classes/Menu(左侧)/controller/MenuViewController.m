@@ -19,9 +19,9 @@
 #import "SDWebImageManager.h"
 #import "SendController.h"
 #import "BegController.h"
+#import <SDWebImageManager.h>
 
-
-@interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource,LoginViewDelegate>
 /**
  
  */
@@ -37,9 +37,25 @@
 @property(nonatomic,strong) NSArray * lists;
 /**图片列表*/
 @property(nonatomic,strong) NSArray * images;
+
+
+/**当前是否登入*/
+@property(nonatomic,assign) BOOL isLogin;
 @end
 
 @implementation MenuViewController
+
+
+
+
+- (BOOL)isLogin{
+
+    //1、判断是否要登录
+    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    NSLog(@"========xxxxx====%@",flag);
+    _isLogin = [flag isEqualToString:@"right"];
+    return _isLogin;
+}
 
 - (NSArray *)lists
 {
@@ -66,6 +82,7 @@
     
     [super viewDidLoad];
     
+    self.title = @"菜单";
     
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -76,15 +93,18 @@
     self.optionList.tableFooterView = [[UIView alloc] init];
     self.optionList.tableHeaderView = [[UIView alloc] init];
     
+  
+    
     self.flowLable.userInteractionEnabled = YES;
-    [self.flowLable bk_whenTapped:^{
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
-        [self.navigationController pushViewController:traffic animated:YES];
-    }];
+//    [self.flowLable bk_whenTapped:^{ //流量详情
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+////        traffic.userInfo = user;
+//        [self.navigationController pushViewController:traffic animated:YES];
+//    }];
     
      self.nameLable.userInteractionEnabled = YES;
-    [self.nameLable bk_whenTapped:^{
+    [self.nameLable bk_whenTapped:^{//登入按钮
 
         LoginViewController * login = [[LoginViewController alloc] init];
         [self.navigationController pushViewController:login animated:YES];
@@ -95,33 +115,45 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = @"菜单";
-    //1、判断是否要登录
-    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
-    NSLog(@"========xxxxx====%@",flag);
-    if (![flag isEqualToString:@"wrong"]) {
-        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-        userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-        //2、设置用户登入头像
-        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        NSURL * profileImage = [NSURL URLWithString:user.pictureURL];
-        
-        self.nameLable.text = user.name;
-        [manager downloadImageWithURL:profileImage options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-            if (image) {
-                [self.userProfileBtn setBackgroundImage:image forState:UIControlStateNormal];
-            }
-        }];
-        //3、设置当前用户流量
-        self.flowLable.text = [NSString stringWithFormat:@"%@M",user.balance];
-    }else{
-        self.nameLable.text = @"登陆";
-    }
-    //隐藏导航条
+        //隐藏导航条
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    if (self.isLogin) {
+        
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+        
+        //1、设置用户名
+        self.nameLable.text = user.name;
+        //2、设置用户登入头像
+        SDWebImageManager * manager = [SDWebImageManager sharedManager];
+        NSURL * url = [NSURL URLWithString:user.pictureURL];
+        [manager downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            
+            if (error == nil) {
+                [self.userProfileBtn setBackgroundImage:image forState:UIControlStateNormal];
+            }
+            
+        }];
+        //3、设置当前用户流量
+        self.flowLable.text = [NSString stringWithFormat:@"%dM",user.balance];
+        
+        [self.flowLable bk_whenTapped:^{ //流量详情
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+                    traffic.userInfo = user;
+            [self.navigationController pushViewController:traffic animated:YES];
+        }];
+    }else{
+        self.nameLable.text = @"登陆";
+        [self.flowLable bk_whenTapped:^{ //流量详情
+            LoginViewController * login = [[LoginViewController alloc] init];
+            [self.navigationController pushViewController:login animated:YES];
+        }];
+    }
+
 }
 
 #pragma TableViewDelegate dateSource
@@ -177,33 +209,54 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-//    if (indexPath.row == 0) {
-//        RootViewController * root = (RootViewController *)self.mm_drawerController;
-//        [root toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
-//    }
-    switch (indexPath.row) {
+
+    switch (indexPath.row) {//首页
         case 0:{
             RootViewController * root = (RootViewController *)self.mm_drawerController;
             [root toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
             break;
         }
-        case 1:{
-            AccountSettingViewController* Account = [[AccountSettingViewController alloc] init];
-            [self.navigationController pushViewController:Account animated:YES];
+        case 1:{//账号设置
+            
+            if (self.isLogin) {
+                AccountSettingViewController* Account = [[AccountSettingViewController alloc] init];
+                [self.navigationController pushViewController:Account animated:YES];
+            }else{
+                
+                LoginViewController * login = [[LoginViewController alloc] init];
+                login.loginType = 1;
+                login.delegate = self;
+                [self.navigationController pushViewController:login animated:YES];
+            }
             break;
         }
-        case 2:{
-            TodayForesController *today = [storyboard instantiateViewControllerWithIdentifier:@"TodayForesController"];
-            [self.navigationController pushViewController:today animated:YES];
+        case 2:{//今日预告
+            if (self.isLogin) {
+                TodayForesController *today = [storyboard instantiateViewControllerWithIdentifier:@"TodayForesController"];
+                [self.navigationController pushViewController:today animated:YES];
+            }else{
+                LoginViewController * login = [[LoginViewController alloc] init];
+                login.loginType = 2;
+                login.delegate = self;
+                [self.navigationController pushViewController:login animated:YES];
+            }
+            
             break;
         }
-        case 3:{
-            InviteCodeViewController *invite = [storyboard instantiateViewControllerWithIdentifier:@"InviteCodeViewController"];
-            [self.navigationController pushViewController:invite animated:YES];
+        case 3:{//师徒联盟
+            if (self.isLogin) {
+                InviteCodeViewController *invite = [storyboard instantiateViewControllerWithIdentifier:@"InviteCodeViewController"];
+                [self.navigationController pushViewController:invite animated:YES];
+            }else {
+                LoginViewController * login = [[LoginViewController alloc] init];
+                login.loginType = 3;
+                login.delegate = self;
+                [self.navigationController pushViewController:login animated:YES];
+            }
+            
             break;
         }
-        case 4:{
+        case 4:{//更多设置
             
 //            UIStoryboard * aasb = [UIStoryboard storyboardWithName:@"FeedBack" bundle:nil];
 //            FeedBackViewController * vc = aasb.instantiateInitialViewController;
@@ -211,13 +264,13 @@
             [self.navigationController pushViewController:setVc animated:YES];
             break;
         }
-        case 5:{
+        case 5:{//签到中心
             
             asignViewController * asignVc = [storyboard instantiateViewControllerWithIdentifier:@"sign"];
             [self.navigationController pushViewController:asignVc animated:YES];
             break;
         }
-        case 6:{
+        case 6:{//送流量
 //            SendController *send = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
 //            [self.navigationController pushViewController:send animated:YES];
             SendController *beg = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
@@ -243,5 +296,25 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
     [self.navigationController pushViewController:traffic animated:YES];
+}
+
+
+
+/**
+ *  登入的代理方法
+ */
+
+- (void)LoginViewDelegate:(int)PushType{
+    
+//    NSLog(@"dsadasdasd");
+//    if (PushType == 1) {
+//        
+//        AccountSettingViewController* Account = [[AccountSettingViewController alloc] init];
+//        [self.navigationController pushViewController:Account animated:YES];
+//    }else if (PushType == 2) {
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        TodayForesController *today = [storyboard instantiateViewControllerWithIdentifier:@"TodayForesController"];
+//        [self.navigationController pushViewController:today animated:YES];
+//    }
 }
 @end

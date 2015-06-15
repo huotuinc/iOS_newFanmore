@@ -4,18 +4,29 @@
 //
 //  Created by HuoTu-Mac on 15/5/28.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  今日预告
 
 #import "TodayForesController.h"
 #import "ForeshowTableViewCell.h"
+#import "UserLoginTool.h"
 
 
 @interface TodayForesController ()<ForeshowTableViewCellDelegate>
-
+/**今日预告列表*/
+@property(nonatomic,strong)NSMutableArray * Notices;
 @end
 @implementation TodayForesController
 
 static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
+
+
+- (NSMutableArray *)Notices{
+    
+    if (_Notices == nil) {
+        _Notices = [NSMutableArray array];
+    }
+    return _Notices;
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -51,17 +62,10 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     //#warning 自动刷新(一进入程序就下拉刷新)
 //    [self.tableView headerBeginRefreshing];
     
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    
-    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+   // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
     self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
     self.tableView.headerRefreshingText = @"正在刷新最新数据,请稍等";
-    
-    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
-    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-    self.tableView.footerRefreshingText = @"正在加载更多数据,请稍等";
 }
 
 
@@ -86,27 +90,20 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 
 -(void)getMoreData{
-    //    //1、设置网络获取的参数
-    //    HA4SInfoRequestParame * parame = [HA4SInfoRequestParame InfoRequestParameWithpartnerCode:proCode andStartIndex:startIndex andPageSize:@(PageSize)];
-    //    //2、网络获取加载数据
-    //    [HA4SInfoTool store4SMessage:parame success:^(NSArray * responseObject) {
-    //        NSMutableArray * arrays = [NSMutableArray array];
-    //        for (HA4SRequestResult * obj in responseObject) {
-    //            HA4sFrame * frame = [HA4sFrame FrameWith4SRequestResult:obj];
-    //            [arrays addObject:frame];
-    //        }
-    //        if ([startIndex intValue] == 1) {
-    //            [_carMessagesF removeAllObjects];
-    //            [_carMessagesF setArray:arrays];
-    //        }else{
-    //            [_carMessagesF addObjectsFromArray:arrays];
-    //        }
-    //        [self.tableView reloadData];
-    //
-    //    } failure:^(NSError * error) {
-    //        NSLog(@"error 4s店咨询:%@",error);
-    //        
-    //    }];
+    
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+//    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+//        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+//            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
+//            NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
+//            [taskaa addObjectsFromArray:self.taskDatas];
+//            self.taskDatas = taskaa;
+//            [self.tableView reloadData];    //刷新数据
+//        }
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
 }
 
 
