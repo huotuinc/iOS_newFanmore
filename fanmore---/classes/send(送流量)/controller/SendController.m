@@ -121,7 +121,7 @@ NSString *frinedCellIdentifier = @"friend";
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     NSLog(@"11");
-    self.search.searchResultsTableView = self.ResultsTableView;
+//    self.search.searchResultsTableView = self.ResultsTableView;
 }
 
 
