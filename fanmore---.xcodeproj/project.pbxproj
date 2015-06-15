@@ -1762,6 +1762,7 @@
 				EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */,
 				EFD02B2D1B1552E400D11D6D /* protect.html in Resources */,
 				EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */,
+                EFD8C4E81B2EA265002D2CB2 /* AlipaySDK.bundle in Resources */,
 				839C30E81B2E6CF4000EE05A /* FriendCell.xib in Resources */,
 				EF49ECFA1B0D81A40038A203 /* Main.storyboard in Resources */,
 				EF565D051B16AA6000FC2D6B /* MJRefresh.bundle in Resources */,
