@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RNTableViewController.h"
+#import "FriendModel.h"
+
 
 @interface SendController : UIViewController
 
-@property (strong, nonatomic) NSArray *personArray;
+@property (strong, nonatomic) NSMutableArray *personArray;
 
 @property (strong, nonatomic) NSMutableArray *searchArray;
 

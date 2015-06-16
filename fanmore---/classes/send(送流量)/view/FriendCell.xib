@@ -21,39 +21,39 @@
                             <constraint firstAttribute="width" constant="60" id="Myb-Z1-oeV"/>
                             <constraint firstAttribute="height" constant="60" id="NJU-8i-461"/>
                         </constraints>
-                        <state key="normal" title="Button" image="headImage">
+                        <state key="normal" title="Button" image="headImage" backgroundImage="mrtou_h">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13958477670" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQv-2s-dRn">
                         <rect key="frame" x="80" y="9" width="94" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="朱家聪" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xID-KN-c30">
                         <rect key="frame" x="80" y="28" width="51" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="women" translatesAutoresizingMaskIntoConstraints="NO" id="fBk-9J-ctv">
-                        <rect key="frame" x="75" y="49" width="80" height="20"/>
+                        <rect key="frame" x="80" y="55" width="40" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="0z1-4S-4bQ"/>
-                            <constraint firstAttribute="height" constant="20" id="9WC-sk-DpH"/>
+                            <constraint firstAttribute="width" constant="40" id="0z1-4S-4bQ"/>
+                            <constraint firstAttribute="height" constant="14" id="9WC-sk-DpH"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wt9-mU-h9f">
                         <rect key="frame" x="263" y="17" width="47" height="23"/>
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电信" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5R-fB-cEq">
                         <rect key="frame" x="280" y="40" width="30" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -70,7 +70,13 @@
                     <constraint firstItem="6Vb-gP-aN9" firstAttribute="top" secondItem="nQv-2s-dRn" secondAttribute="top" id="dmN-wJ-GBU"/>
                     <constraint firstItem="wt9-mU-h9f" firstAttribute="trailing" secondItem="D5R-fB-cEq" secondAttribute="trailing" id="mIB-Q5-QD6"/>
                     <constraint firstAttribute="centerY" secondItem="xID-KN-c30" secondAttribute="centerY" id="tGR-FR-GaK"/>
+                    <constraint firstItem="fBk-9J-ctv" firstAttribute="leading" secondItem="xID-KN-c30" secondAttribute="leading" id="xca-eF-CPZ"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Fn6-fn-z5m"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="fanmoreImage" destination="fBk-9J-ctv" id="Klm-ig-dCB"/>
@@ -85,6 +91,7 @@
     </objects>
     <resources>
         <image name="headImage" width="138" height="138"/>
-        <image name="women" width="80" height="28"/>
+        <image name="mrtou_h" width="150" height="150"/>
+        <image name="women" width="40" height="14"/>
     </resources>
 </document>
