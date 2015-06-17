@@ -15,17 +15,28 @@
 #import "BuyFlowViewController.h"
 #import "taskData.h"
 #import <AddressBook/AddressBook.h>
+#import "userData.h"
+#import "LoginViewController.h"
+
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**任务列表*/
 @property(nonatomic,strong)NSMutableArray * taskDatas;
+/**当前是否登入*/
+@property(nonatomic,assign) BOOL isLogin;
 @end
 
 @implementation HomeViewController
 
 static NSString *homeCellidentify = @"homeCellId";
 
-
+- (BOOL)isLogin{
+    
+    //1、判断是否要登录
+    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    _isLogin = [flag isEqualToString:@"right"];
+    return _isLogin;
+}
 
 /**
  *  网络数据数组懒加载
@@ -42,7 +53,6 @@ static NSString *homeCellidentify = @"homeCellId";
         [self getNewMoreData:params];
         [self.tableView reloadData];
     }
-    
     return _taskDatas;
 }
 
@@ -75,7 +85,12 @@ static NSString *homeCellidentify = @"homeCellId";
     
     [self.tableView removeSpaces];
     
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
 }
 
 - (void)_initView
@@ -178,6 +193,8 @@ static NSString *homeCellidentify = @"homeCellId";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     __weak HomeViewController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        
+        NSLog(@"xxxxxx%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
@@ -289,8 +306,49 @@ static NSString *homeCellidentify = @"homeCellId";
  */
 - (void)signInAction:(UIButton *)sender
 {
-    
+    if (!self.isLogin) { //判断
+        
+        [MBProgressHUD showError:@"当前还未登录,请先登入"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            LoginViewController * login = [[LoginViewController alloc] init];
+            [self.navigationController pushViewController:login animated:YES];
+        });
+    }else {
+        
+        //初始化
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        //1、保存个人信息
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+        NSInteger week = [self getWeek];
+        if (((1<<(7-week)) & (userInfo.signInfo)) == (1<<(7-week))) {//签到
+            [MBProgressHUD showSuccess:@"你今天已签到"];
+        }else{//未签到
+            [[NSNotificationCenter defaultCenter] postNotificationName:TodaySignNot object:nil];
+        }
+    }
 }
 
-
+/**
+ *  获取今天是周几
+ *
+ *  @return  返回今天是周几
+ */
+- (NSInteger) getWeek{
+    
+    //获取日期
+    NSDate *date = [NSDate date];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init] ;
+    
+    NSInteger unitFlags = NSWeekdayCalendarUnit;
+    
+    comps = [calendar components:unitFlags fromDate:date];
+    
+    NSInteger week = [comps weekday]-1;
+    
+    return week;
+}
 @end

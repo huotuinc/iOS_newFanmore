@@ -45,6 +45,7 @@
 #define loginUserName  @"username" //用户名
 #define loginPassword @"password"  //密码
 #define loginFlag @"loginFlag"  // 是否需要等人标志
+
 #define UserLoginNumber [NSUserDefaults standardUserDefaults] stringForKey:@"username"]
 
 //网络请求的固定参数
@@ -70,6 +71,10 @@
 #define InitResultDate @"initResultDate"    //初始化返回数据对象
 #define InitGlobalDate @"initGlobalDate"    //初始化返回的global
 #define LocalUserDate @"loginUserDate"  //登入绑定返回的用户数据
+
+
+#define TodaySignNot @"TodaySignNot"   //签到推送通知类型
+
 #endif
 
 

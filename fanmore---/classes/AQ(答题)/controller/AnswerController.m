@@ -13,6 +13,8 @@
 #import <UIImageView+WebCache.h>
 #import "UserLoginTool.h"
 #import "detailViewController.h"
+#include "WebController.h"
+
 @interface AnswerController ()
 
 /**答案*/
@@ -23,6 +25,7 @@
 @implementation AnswerController
 
 static int _qindex = 0;
+int _rightQuest = 0;  //纪录正确的答题数
 
 
 - (NSMutableString *)ans
@@ -41,18 +44,29 @@ static int _qindex = 0;
     _qindex = 0;
     self.qusImageView.contentMode = UIViewContentModeScaleAspectFit;  //图片自动适配
     
+    if ([self.type intValue] == 3) { //画册类
+        self.qusImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *aaa = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pictureClickToFindAnswer:)];
+        [self.qusImageView addGestureRecognizer:aaa];
+    }
+    
     [self showQuestion];//设置题目第一次的题目
 
     
 }
 
-
+- (void)pictureClickToFindAnswer:(UITapGestureRecognizer *)tap{
+    
+    NSLog(@"%d",_qindex);
+    taskDetail * taskdetail = self.questions[_qindex];
+    NSLog(@"%@",taskdetail.relexUrl);
+    NSURL * picUrl = [NSURL URLWithString:taskdetail.relexUrl];
+    [[UIApplication sharedApplication] openURL:picUrl];
+}
 /**
  *  题目展示
  */
 - (void) showQuestion{
-    
-    
         //判断答题是否完成
         if (_qindex==self.questions.count) {
             
@@ -63,8 +77,15 @@ static int _qindex = 0;
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
                 
-                [MBProgressHUD showMessage:json[@"resultDescription"]];
                 NSLog(@"%@",json);
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
+                {
+                    WebController * show = [[WebController alloc] init];
+                    show.totleQuestion = self.questions.count;
+                    show.ritghtAnswer = _rightQuest;
+                    [self.navigationController pushViewController:show animated:YES];
+                }
+                
                 [MBProgressHUD hideHUD];
             } failure:^(NSError *error) {
                 NSLog(@"%@",[error description]);
@@ -86,10 +107,8 @@ static int _qindex = 0;
         //3、问题
         self.queLable.text = taskdetail.context;  //设置答题题目
         //4、设置题目编号
-        self.queNumber.text = [NSString stringWithFormat:@"%d/%lu",++_qindex,(unsigned long)self.questions.count];
+        self.queNumber.text = [NSString stringWithFormat:@"%d/%lu",_qindex+1,(unsigned long)self.questions.count];
 }
-
-
 /**
  *  答案展示按钮显示答案
  *
@@ -151,10 +170,10 @@ static int _qindex = 0;
  */
 - (IBAction)AAction:(UIButton *)sender {
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
-    
+    _qindex++;
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
-
+        _rightQuest++;
     }else {
         [self showTureAnswer];
         [sender setBackgroundImage:[UIImage imageNamed:@"A_c"] forState:UIControlStateNormal];
@@ -165,9 +184,11 @@ static int _qindex = 0;
     });
 }
 - (IBAction)BAction:(UIButton *)sender {
+     _qindex++;
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
+        _rightQuest++;
 
     }else {
         [self showTureAnswer];
@@ -180,9 +201,11 @@ static int _qindex = 0;
   
 }
 - (IBAction)CAction:(UIButton *)sender {
+     _qindex++;
    [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
+        _rightQuest++;
 
     }else {
         [self showTureAnswer];
@@ -195,9 +218,11 @@ static int _qindex = 0;
     });
 }
 - (IBAction)DAction:(UIButton *)sender {
+     _qindex++;
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (self.DButton.tag == self.tureAnswer) {
         [self showTureAnswer];
+        _rightQuest++;
     }else {
         [self showTureAnswer];
         [self.DButton setBackgroundImage:[UIImage imageNamed:@"D_c"] forState:UIControlStateNormal];

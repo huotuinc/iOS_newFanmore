@@ -187,6 +187,7 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
         answer.questions = self.detailTasks;
+        answer.type = @(1);
         answer.taskId = self.taskId;
         [self.navigationController pushViewController:answer animated:YES];
     }
@@ -202,6 +203,9 @@
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
+        answer.questions = self.detailTasks;
+        answer.type = @(3);
+        answer.taskId = self.taskId;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
