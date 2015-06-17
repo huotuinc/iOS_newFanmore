@@ -53,6 +53,11 @@
     [self registerForKeyboardNotifications];
     //3、设置键盘弹出
 //    [self.userNameTextFiled becomeFirstResponder];
+    
+    //4.导航栏返回
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 /**
@@ -198,7 +203,7 @@
                     
                     [self.delegate LoginViewDelegate:self.loginType];
                 }
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
                
                 
             }
@@ -236,7 +241,7 @@
         
         [self.delegate LoginViewDelegate:self.loginType];
     }
-    [self.navigationController popViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

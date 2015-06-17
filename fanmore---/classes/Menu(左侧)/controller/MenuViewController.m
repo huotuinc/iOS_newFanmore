@@ -108,16 +108,16 @@
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
-    if ([[[NSUserDefaults standardUserDefaults] stringForKey:loginFlag] isEqualToString:@"right"]) {
-        self.nameLable.userInteractionEnabled = NO;
-    }else {
-        self.nameLable.userInteractionEnabled = YES;
-        [self.nameLable bk_whenTapped:^{//登入按钮
-            
-            LoginViewController * login = [[LoginViewController alloc] init];
-            [self.navigationController pushViewController:login animated:YES];
-        }];
-    }
+//    if ([[[NSUserDefaults standardUserDefaults] stringForKey:loginFlag] isEqualToString:@"right"]) {
+//        self.nameLable.userInteractionEnabled = NO;
+//    }else {
+//        self.nameLable.userInteractionEnabled = YES;
+//        [self.nameLable bk_whenTapped:^{//登入按钮
+//            
+//            LoginViewController * login = [[LoginViewController alloc] init];
+//            [self presentViewController:login animated:YES completion:nil];
+//        }];
+//    }
     
     if (self.isLogin) {
         
@@ -126,6 +126,7 @@
         userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
         
         //1、设置用户名
+        self.nameLable.hidden = NO;
         self.nameLable.text = user.name;
         //2、设置用户登入头像
         SDWebImageManager * manager = [SDWebImageManager sharedManager];
@@ -138,7 +139,9 @@
             }
             
         }];
+        
         //3、设置当前用户流量
+        self.flowLable.hidden = NO;
         self.flowLable.text = [NSString stringWithFormat:@"%dM",user.balance];
         
         self.flowLable.userInteractionEnabled = YES;
@@ -153,14 +156,38 @@
         
         //5.开启下个页面的点击事件
         self.backButton.userInteractionEnabled = YES;
-        self.flowLable.userInteractionEnabled = YES;
+        self.backButton.hidden = NO;
+        
+        //6.剩余流量按钮
+        self.warningLabel.hidden = NO;
+        
+        //7.登录label隐藏
+        self.loginLabel.hidden = YES;
+    
         
     }else{
         
-        self.nameLable.text = @"点击头像登陆";
+        
         self.userProfileBtn.userInteractionEnabled = YES;
+        
+        //隐藏label
+        self.nameLable.hidden = YES;
+        self.backButton.hidden = YES;
         self.backButton.userInteractionEnabled = NO;
+        
+        self.flowLable.hidden = YES;
         self.flowLable.userInteractionEnabled = NO;
+        
+        self.warningLabel.hidden = YES;
+        
+        //显示登录按钮
+        self.loginLabel.hidden = NO;
+        self.loginLabel.userInteractionEnabled = YES;
+        [self.loginLabel bk_whenTapped:^{
+            LoginViewController * login = [[LoginViewController alloc] init];
+            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+            [self presentViewController:na animated:YES completion:nil];
+        }];
         
     }
 
@@ -236,7 +263,8 @@
                 LoginViewController * login = [[LoginViewController alloc] init];
                 login.loginType = 1;
                 login.delegate = self;
-                [self.navigationController pushViewController:login animated:YES];
+                UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+                [self presentViewController:na animated:YES completion:nil];
             }
             break;
         }
@@ -248,7 +276,8 @@
                 LoginViewController * login = [[LoginViewController alloc] init];
                 login.loginType = 2;
                 login.delegate = self;
-                [self.navigationController pushViewController:login animated:YES];
+                UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+                [self presentViewController:na animated:YES completion:nil];
             }
             
             break;
@@ -261,7 +290,8 @@
                 LoginViewController * login = [[LoginViewController alloc] init];
                 login.loginType = 3;
                 login.delegate = self;
-                [self.navigationController pushViewController:login animated:YES];
+                UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+                [self presentViewController:na animated:YES completion:nil];
             }
             
             break;
