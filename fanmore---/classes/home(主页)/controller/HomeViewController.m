@@ -115,52 +115,52 @@ static NSString *homeCellidentify = @"homeCellId";
 }
 
 
-#pragma mark 读取通讯录
-- (void)getAdressBook
-{
-    ABAddressBookRef addressBooks = nil;
-    
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
-        
-    {
-        addressBooks =  ABAddressBookCreateWithOptions(NULL, NULL);
-        
-        //获取通讯录权限
-        
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-        
-        ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
-        
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-
-    }
-    else
-    {
-        addressBooks = ABAddressBookCreate();
-        
-    }
-    
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
-    CFIndex nPeople = ABAddressBookGetPersonCount(addressBooks);
-    for (NSInteger i = 0; i < nPeople; i++) {
-        //        TKAddressBook *addressBook = [[TKAddressBook alloc] init];
-        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
-        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
-        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
-        CFStringRef abFullName = ABRecordCopyCompositeName(person);
-        NSString *nameString = (__bridge NSString *)abName;
-        NSString *lastNameString = (__bridge NSString *)abLastName;
-        if ((__bridge id)abFullName != nil) {
-            nameString = (__bridge NSString *)abFullName;
-        } else {
-            if ((__bridge id)abLastName != nil)
-            {
-                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
-            }
-        }
-        NSLog(@"%@",nameString);
-    }
-}
+//#pragma mark 读取通讯录
+//- (void)getAdressBook
+//{
+//    ABAddressBookRef addressBooks = nil;
+//    
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
+//        
+//    {
+//        addressBooks =  ABAddressBookCreateWithOptions(NULL, NULL);
+//        
+//        //获取通讯录权限
+//        
+//        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+//        
+//        ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
+//        
+//        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+//
+//    }
+//    else
+//    {
+//        addressBooks = ABAddressBookCreate();
+//        
+//    }
+//    
+//    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
+//    CFIndex nPeople = ABAddressBookGetPersonCount(addressBooks);
+//    for (NSInteger i = 0; i < nPeople; i++) {
+//        //        TKAddressBook *addressBook = [[TKAddressBook alloc] init];
+//        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+//        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+//        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
+//        CFStringRef abFullName = ABRecordCopyCompositeName(person);
+//        NSString *nameString = (__bridge NSString *)abName;
+//        NSString *lastNameString = (__bridge NSString *)abLastName;
+//        if ((__bridge id)abFullName != nil) {
+//            nameString = (__bridge NSString *)abFullName;
+//        } else {
+//            if ((__bridge id)abLastName != nil)
+//            {
+//                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
+//            }
+//        }
+//        NSLog(@"%@",nameString);
+//    }
+//}
 
 
 
@@ -311,7 +311,8 @@ static NSString *homeCellidentify = @"homeCellId";
         [MBProgressHUD showError:@"当前还未登录,请先登入"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             LoginViewController * login = [[LoginViewController alloc] init];
-            [self.navigationController pushViewController:login animated:YES];
+            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+            [self presentViewController:na animated:YES completion:nil];
         });
     }else {
         
