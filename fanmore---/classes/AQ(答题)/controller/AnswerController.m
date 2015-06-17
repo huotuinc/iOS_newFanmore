@@ -80,10 +80,10 @@ int _rightQuest = 0;  //纪录正确的答题数
                 NSLog(@"%@",json);
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
+                    
+                    
                     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                    
                     WebController * show = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
-                    
                     show.totleQuestion = self.questions.count;
                     show.ritghtAnswer = _rightQuest;
                     [self.navigationController pushViewController:show animated:YES];
