@@ -81,7 +81,7 @@ int _rightQuest = 0;  //纪录正确的答题数
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
                     
-                    
+                    //adasdasdasd
                     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                     WebController * show = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
                     show.totleQuestion = self.questions.count;
