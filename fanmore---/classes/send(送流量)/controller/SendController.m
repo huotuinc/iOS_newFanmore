@@ -19,6 +19,9 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *titleArray;
 
+
+
+
 @end
 
 @implementation SendController
@@ -29,7 +32,6 @@ NSString *frinedCellIdentifier = @"friend";
     [super viewDidLoad];
     
     self.personArray = [NSMutableArray array];
-    
     
     ABAddressBookRef addressBooks = nil;
     
@@ -106,7 +108,7 @@ NSString *frinedCellIdentifier = @"friend";
                 CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
                 switch (j) {
                     case 0: {// Phone number
-                        NSLog(@"%@", (__bridge NSString*)value);
+//                        NSLog(@"%@", (__bridge NSString*)value);
                         [self.userPhone appendFormat:@"%d/r%@/t",reId,(__bridge NSString*)value];
                         /**
                          生成一个model
@@ -114,6 +116,16 @@ NSString *frinedCellIdentifier = @"friend";
                         FriendModel *model = [[FriendModel alloc] init];
                         model.name = nameString;
                         model.phone = [NSString stringWithFormat:@"%@", (__bridge NSString*)value];
+                        HanyuPinyinOutputFormat *outputFormat = [[HanyuPinyinOutputFormat alloc] init];
+                        
+                        //姓名全部拼音
+                        NSString *str = [PinyinHelper toHanyuPinyinStringWithNSString:nameString withHanyuPinyinOutputFormat:outputFormat withNSString:@" "];
+                        model.hanyupingyin = str;
+                        
+                        //取出首字母
+                        NSString *first = [str substringWithRange:NSMakeRange(0, 1)];
+                        model.fristLetter = first;
+                        
                         [self.personArray addObject:model];
                         
                         break;
@@ -140,9 +152,7 @@ NSString *frinedCellIdentifier = @"friend";
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.frame.origin.y + self.searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44) style:UITableViewStyleGrouped];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:frinedCellIdentifier];
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:frinedCellIdentifier];
-    //添加search到headView
-//    self.tableView.tableHeaderView = searchBar;
+
     
     // 用 searchbar 初始化 SearchDisplayController
     // 并把 searchDisplayController 和当前 controller 关联起来
@@ -172,6 +182,7 @@ NSString *frinedCellIdentifier = @"friend";
         NSString *str = [[NSString alloc] initWithFormat:@"%c", 65 + i];
         [self.titleArray addObject:str];
     }
+
     
 }
 
@@ -240,22 +251,27 @@ NSString *frinedCellIdentifier = @"friend";
     if (tableView == self.tableView) {
         NSInteger i = 0;
         for (FriendModel *model in self.personArray) {
-            
-            HanyuPinyinOutputFormat *outputFormat = [[HanyuPinyinOutputFormat alloc] init];
-            NSString *str = [PinyinHelper toHanyuPinyinStringWithNSString:model.name withHanyuPinyinOutputFormat:outputFormat withNSString:@" "];
-            NSString *first = [str substringWithRange:NSMakeRange(0, 1)];
-            NSLog(@"%@",first);
+            if ([model.fristLetter isEqualToString:self.titleArray[section]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[section]]) {
+                i++;
+            }
         }
-        
-        
         return i;
     }else {
         [self.searchArray removeAllObjects];
         NSString *str = [[NSString alloc] initWithFormat:@"%@",self.searchBar.text];
+        NSString *str1 = str.uppercaseString;
+        NSString *str2 = str1.lowercaseString;
         for (FriendModel *model in self.personArray) {
             if ([model.phone rangeOfString:str].location !=NSNotFound) {
                 [self.searchArray addObject:model];
             }
+            if ([model.hanyupingyin rangeOfString:str].location != NSNotFound) {
+                [self.searchArray addObject:model];
+            }
+            if ([model.hanyupingyin rangeOfString:str2].location != NSNotFound) {
+                [self.searchArray addObject:model];
+            }
+            
         }
        
         
@@ -264,18 +280,25 @@ NSString *frinedCellIdentifier = @"friend";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FriendCell *cell = nil;
+    FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:frinedCellIdentifier];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"FriendCell" owner:nil options:nil] lastObject] ;
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"FriendCell" owner:nil options:nil] lastObject];
     }
     
     if (tableView == self.tableView) {
         
-        FriendModel *model = self.personArray[indexPath.row];
-        
-        cell.userName.text = model.name;
-        cell.userPhone.text = model.phone;
-    
+        NSMutableArray* tempArray = [NSMutableArray array];
+        for (FriendModel *model in self.personArray) {
+            if ([model.fristLetter isEqualToString:self.titleArray[indexPath.section]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[indexPath.section]]) {
+                
+                [tempArray addObject:model];
+                if (tempArray.count>indexPath.row){
+                    FriendModel *showModel = tempArray[indexPath.row];
+                    [cell setUserName:showModel.name AndUserPhone:showModel.phone];
+                    return cell;
+                }
+            }
+        }
     }else{
         FriendModel *model = self.searchArray[indexPath.row];
         
@@ -297,6 +320,17 @@ NSString *frinedCellIdentifier = @"friend";
     searchBar.frame = CGRectMake(0, 64, ScreenWidth, 44);
     self.tableView.frame = CGRectMake(0, searchBar.frame.origin.y + searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44);
 }
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    if (searchBar.text.length == 0) {
+        searchBar.frame = CGRectMake(0, 64, ScreenWidth, 44);
+        self.tableView.frame = CGRectMake(0, searchBar.frame.origin.y + searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44);
+    }
+
+    return YES;
+}
+
+
 
 
 

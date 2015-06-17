@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *flowLabel;
 @property (weak, nonatomic) IBOutlet UILabel *operatorLabel;
 
+
+- (void)setUserName:(NSString *)userName AndUserPhone:(NSString *)userPhone;
+
+
 - (void)setHeadImage:(UIImage *)headImage AndUserPhone:(NSString *)userPhone AndUserName:(NSString *) userName AndSex:(int) sex AndFlow:(NSString *)flot AndOperator:(NSString *)operatorStr ;
 
 @end
