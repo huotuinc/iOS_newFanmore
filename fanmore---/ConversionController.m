@@ -8,7 +8,9 @@
 
 #import "ConversionController.h"
 
-@interface ConversionController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface ConversionController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate>
+
+
 
 @end
 
@@ -95,10 +97,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     if (!cell) {
         cell = [[UICollectionViewCell alloc] init];
     }
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button－G"]];
-    image.frame = CGRectMake(0, 0, 80, 60);
-    cell.contentMode = UIViewContentModeScaleAspectFit;
-    [cell.contentView addSubview:image];
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button－G"]];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
     label.text = @"100M";
@@ -112,13 +111,18 @@ static NSString *collectionViewidentifier = @"collectionCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor orangeColor];
+    UILabel *label = (UILabel *)[self.view viewWithTag:indexPath.row + indexPath.section * self.num + 100];
+    label.textColor = [UIColor whiteColor];
     
     if (IsIos8) {
         UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:nil message:@"是否兑换流量100M" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self dismissViewControllerAnimated:YES completion:nil];
         }];
         UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self dismissViewControllerAnimated:YES completion:nil];
         }];
         [alertVc addAction:action];
         [alertVc addAction:action1];
@@ -132,6 +136,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
 //    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 - (void)regAction:(UIGestureRecognizer *)sender

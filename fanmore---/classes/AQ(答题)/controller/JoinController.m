@@ -19,6 +19,17 @@
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    
+    if (ScreenWidth == 1334 / 2) {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"7501334"]];
+    }
+    if (ScreenWidth == 2208 / 2) {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"12422208"]];
+    }
+//    if (ScreenWidth == 320) {
+//        <#statements#>
+//    }
+//    
 }
 
 - (void)viewDidLoad{

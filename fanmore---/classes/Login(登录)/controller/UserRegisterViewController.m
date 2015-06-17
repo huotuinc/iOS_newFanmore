@@ -170,7 +170,7 @@
                 
                 [wself.delegate UserRegisterViewSuccess:userInfo];
             }
-//            [self.navigationController popToRootViewControllerAnimated:YES];
+//            [self dismissViewControllerAnimated:YES completion:nil];
         }
         
     } failure:^(NSError *error) {

@@ -12,5 +12,7 @@
 - (IBAction)backAction:(UIButton *)sender;
 - (IBAction)userProfileBtn:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UILabel *warningLabel;
+@property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 
 @end
