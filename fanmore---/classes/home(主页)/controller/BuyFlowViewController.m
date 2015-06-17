@@ -140,7 +140,7 @@
         [self PayByAlipay]; // 支付宝
     }
     if (buttonIndex == 1) {
-        [self PayByWeiXin]; // 微信支付
+//        [self PayByWeiXin]; // 微信支付
     }
 }
 
@@ -207,10 +207,7 @@
         orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        orderSpec, signedString, @"RSA"];
         
-        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            NSLog(@"reslut = %@",resultDic);
-        }];
-        
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:nil];
     }
 
 }

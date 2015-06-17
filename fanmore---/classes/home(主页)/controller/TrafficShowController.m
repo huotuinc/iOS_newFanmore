@@ -10,6 +10,7 @@
 #import "BuyFlowViewController.h"
 #import "BPViewController.h"
 #import "ConversionController.h"
+#import "FriendMessageController.h"
 
 @interface TrafficShowController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -170,6 +171,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     BuyFlowViewController *buy = [storyboard instantiateViewControllerWithIdentifier:@"BuyFlowViewController"];
     [self.navigationController pushViewController:buy animated:YES];
+}
+
+- (IBAction)friendAction:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FriendMessageController *fm = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
+    [self.navigationController pushViewController:fm animated:YES];
 }
 
 

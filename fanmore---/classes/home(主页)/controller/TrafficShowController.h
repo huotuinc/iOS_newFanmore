@@ -38,7 +38,7 @@
 
 - (IBAction)exchangeAction:(id)sender;
 - (IBAction)buyAction:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *friendAction;
+- (IBAction)friendAction:(id)sender;
 
 @property (assign, nonatomic) NSInteger itemNum;
 

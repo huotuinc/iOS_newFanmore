@@ -163,6 +163,8 @@ NSString *frinedCellIdentifier = @"friend";
     // searchResultsDelegate 就是 UITableViewDelegate
     self.searchDisplayController.searchResultsDelegate = self;
     
+    
+    
 //    [self.tableView setHeaderHidden:YES];
     
     self.tableView.dataSource = self;

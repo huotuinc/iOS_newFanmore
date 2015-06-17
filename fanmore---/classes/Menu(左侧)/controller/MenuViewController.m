@@ -134,6 +134,7 @@
             
             if (error == nil) {
                 [self.userProfileBtn setBackgroundImage:image forState:UIControlStateNormal];
+                [self.userProfileBtn setBackgroundImage:image forState:UIControlStateHighlighted];
             }
             
         }];
@@ -147,11 +148,14 @@
             [self.navigationController pushViewController:traffic animated:YES];
         }];
     }else{
-        self.nameLable.text = @"登陆";
-        [self.flowLable bk_whenTapped:^{ //流量详情
-            LoginViewController * login = [[LoginViewController alloc] init];
-            [self.navigationController pushViewController:login animated:YES];
-        }];
+        if ([[[NSUserDefaults standardUserDefaults] stringForKey:loginFlag] isEqualToString:@"right"]) {
+            self.nameLable.text = @"登陆";
+            [self.flowLable bk_whenTapped:^{ //流量详情
+                LoginViewController * login = [[LoginViewController alloc] init];
+                [self.navigationController pushViewController:login animated:YES];
+            }];
+        }
+        
     }
 
 }
