@@ -11,10 +11,15 @@
 
 /**服务器地址*/
 #define  MainURL @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-/**服务器地址*/
-#define  TestMainURL @""
+
+/**微信支付*/
+#define WeiXinAppID @"wxd8c58460d0199dd5"
+#define WeiXinppSecrrt @"8ad99de44bd96a323eb40dc161e7d8e8"
+#define WeiXinPaySigNkey @"NzfP6pfeljyHeY08LO9p8YAKZCGLz8akO4lCGdXZOGnVsJqfo8jeuYB7C0GoFJGEKZMDVGKWYnbbJj3pCpvJzd4iY7bVglaNz54XAD26tiCr5DZGLjZFoRxbqe8i3HT5"
+#define WeiXinPARTNERKEY @"18076bf2a8bf9479f2cddeec13fd2ec0"
+#define WeiXin @"1220397601"
 //有盟appKey
-#define UMENGID @"52faffcf56240bc21a023179"
+#define UMAppKey @"52faffcf56240bc21a023179"
 
 
 //网络请求的固定参数
@@ -22,7 +27,7 @@
 //appKey
 #define APPKEY @"b73ca64567fb49ee963477263283a1bf"
 /**应用版本号*/
-#define AppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]
+#define AppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 /**平台*/
 #define OPERATION_parame @"FM2015AP"
 /**设备唯一号*/

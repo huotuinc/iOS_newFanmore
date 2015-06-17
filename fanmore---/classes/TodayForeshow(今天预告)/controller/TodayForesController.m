@@ -9,7 +9,7 @@
 #import "TodayForesController.h"
 #import "ForeshowTableViewCell.h"
 #import "UserLoginTool.h"
-
+#import "taskData.h"  //任务
 
 @interface TodayForesController ()<ForeshowTableViewCellDelegate>
 /**今日预告列表*/
@@ -24,6 +24,11 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     if (_Notices == nil) {
         _Notices = [NSMutableArray array];
+        NSMutableDictionary * params = [NSMutableDictionary dictionary];
+        params[@"pagingTag"] = @"";
+        params[@"pagingSize"] = @(8);
+        [self getNewMoreData:params];
+       
     }
     return _Notices;
 }
@@ -46,7 +51,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     self.tableView.tableHeaderView = [[UIView alloc] init];
     self.tableView.allowsSelection = NO;
-    
+    [self.tableView removeSpaces];
     //集成刷新控件
     [self setupRefresh];
 }
@@ -73,44 +78,57 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 //头部刷新
 - (void)headerRereshing  //加载最新数据
 {
-    //    startIndex = @1;
-    //    [self getMoreData];
-    //    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [self.tableView headerEndRefreshing];
-}
-
-//尾部刷新
-- (void)footerRereshing{  //加载更多数据数据
-    //    startIndex = @(1 + _carMessagesF.count);
-    //    // 1.添加数据
-    //    [self getMoreData];
-    //    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [self.tableView footerEndRefreshing];
-}
-
-
--(void)getMoreData{
     
-    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
-//    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
-//            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-//            NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
-//            [taskaa addObjectsFromArray:self.taskDatas];
-//            self.taskDatas = taskaa;
-//            [self.tableView reloadData];    //刷新数据
-//        }
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    if (self.Notices.count) {
+        taskData * aaa = self.Notices[0];
+        params[@"pagingTag"] = @(aaa.taskOrder);
+    }else{
+        params[@"pagingTag"] = @"";
+    }
+    
+    params[@"pagingSize"] = @(2);
+    [self getNewMoreData:params];
+    
+    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [self.tableView headerEndRefreshing];
+
+   
+}
+
+
+/**
+ *  获取更新数据
+ *
+ *  @param params <#params description#>
+ */
+-(void)getNewMoreData:(NSMutableDictionary *)params{
+    
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
+    __weak TodayForesController * wself = self;
+    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==5000) {//访问成果
+            [MBProgressHUD showError:@"没有新的预告"];
+            return ;
+        }
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
+            NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
+            [taskaa addObjectsFromArray:wself.Notices];
+            wself.Notices = taskaa;
+            [wself.tableView reloadData];    //刷新数据
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",[error description]);
+    }];
 }
 
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return self.Notices.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,6 +147,10 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         cell.isWarning = NO;
     }
     
+    taskData * task = self.Notices[indexPath.row];
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:task.publishDate andFlayLabel:
+    [NSString stringWithFormat:@"%@",task.maxBonus] andContentLabel:task.desc];
+    NSLog(@"sdadsasd");
     return cell;
 }
 

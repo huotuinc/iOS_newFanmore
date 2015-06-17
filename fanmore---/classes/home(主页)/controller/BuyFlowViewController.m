@@ -10,7 +10,10 @@
 #import "DataSigner.h"
 #import "BuyFlowViewController.h"
 #import <AlipaySDK/AlipaySDK.h>  //支付宝接入头文件
+#import "WXApi.h"
 #define cellID @"collviewCell"
+#import <AFNetworking.h>
+#import "payRequsestHandler.h"
 
 @interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
 /**手机运行商*/
@@ -149,8 +152,11 @@
     /*=======================需要填写商户app申请的===================================*/
     /*============================================================================*/
     NSString *partner = @"2088211251545121";
-    NSString *seller = @"heyun@chinaswt.cn";
-    NSString *privateKey = @"wkxysgteujgbcxawiylcm79598fbtiwu";
+    NSString *seller = @"2088211251545121";
+    //私营
+    NSString *privateKey = @"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAMCul0XS9X/cVMkmrSeaZXnSvrs/bK5EiZf3d3/lTwHx165wAX/UIz4AcZHbKkYKKzmZKrRsu3tLRKFuflooKSVmWxk2hmeMqRETPZ/t8rKf8UONZIpOlOXEmJ/rYwxhnMeVhbJJxsko2so/jc+XAPLyv0tsfoI/TsJuhaGQ569ZAgMBAAECgYAK4lHdOdtwS4vmiO7DC++rgAISJbUH6wsysGHpsZRS8cxTKDSNefg7ql6/9Hdg2XYznLlS08mLX2cTD2DHyvj38KtxLEhLP7MtgjFFeTJ5Ta1UuBRERcmy0xSLh2zayiSwGTM8Bwu7UD6LUSTGwrgRR2Gg4EDpSG08J5OCThKF4QJBAPOO6WKI/sEuoRDtcIJqtv58mc4RSmit/WszkvPlZrjNFDU6TrOEnPU0zi3f8scxpPxVYROBceGj362m+02G2I0CQQDKhlq4pIM2FLNoDP4mzEUyoXIwqn6vIsAv8n49Tr9QnBjCrKt8RiibhjSEvcYqM/1eocW0j2vUkqR17rNuVVz9AkBq+Z02gzdpwEJMPg3Jqnd/pViksuF8wtbo6/kimOKaTrEOg/KnVJrf9HaOnatzpDF0B0ghGhzb329SRWJhddXNAkAkjrgVmGyu+HGiGKZP7pOXHhl0u3H+vzEd9pHfEzXpoSO/EFgsKKXv3Pvh8jexKo1T5bPAchsu1gGl4B63jeUpAkBbgUalUpZWZ4Aii+Mfts+S2E5RooZfVFqVBIsK47hjcoqLw4JJenyjFu+Skl2jOQ8+I5y1Ggeg6fpBMr2rbVkf";
+    //公钥
+    NSString *pubKey = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
     /*============================================================================*/
     /*============================================================================*/
     /*============================================================================*/
@@ -176,10 +182,8 @@
     order.seller = seller;
     order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
     order.productName = @"粉毛流量"; //商品标题
-    order.productDescription = @"通过粉猫买流量"; //商品描述
-    order.amount = [NSString stringWithFormat:@"%.2f",0.1]; //商品价格
-    order.notifyURL =  @"http://www.xxx.com"; //回调URL
-    
+    order.productDescription = @"通过粉猫购买手机流量"; //商品描述
+    order.amount = [NSString stringWithFormat:@"%.2f",0.01]; //商品价格
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
     order.inputCharset = @"utf-8";
@@ -217,6 +221,70 @@
 - (void)PayByWeiXin{
     
     
+//    NSMutableDictionary * parames = [NSMutableDictionary dictionary];
+//    parames[@"appid"] = WeiXinAppID;
+//    parames[@"mch_id"] =
+//    parames[@"nonce_str"] =
+//    parames[@"body"] = @"购买粉毛的流量产品";
+//    parames[@"out_trade_no"] =
+//    parames[@"total_fee"] =
+//    parames[@"spbill_create_ip"] =
+//    parames[@"notify_url"] =
+//    parames[@"trade_type"] =
+    
+//    
+//    [payRequsestHandler alloc] init:WeiXinAppID app_secret:WeiXinppSecrrt partner_key:WeiXinPARTNERKEY app_key:<#(NSString *)#>
+//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//    NSString *url = @"https://api.mch.weixin.qq.com/pay/unifiedorder";
+//    [mgr POST:url parameters:mgr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        NSLog(@"%@",responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@",[error description]);
+//    }];
+    
+//
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    PayReq *request = [[PayReq alloc] init];
+//    
+//    request.partnerId = @"10000100";  //商家向财付通申请的商家id
+//    
+//    request.prepayId= @"1101000000140415649af9fc314aa427"; //预支付订单
+//    
+//    request.package = @"Sign=WXPay";  // 商家根据财付通文档填写的数据和签名
+//    
+//    request.nonceStr= @"a462b76e7436e98e0ed6e13c64b4fd1c"; //随机串，防重发
+//    
+//    request.timeStamp= 1397527777; //时间戳，防重发
+//    
+//    request.sign= @"582282D72DD2B03AD892830965F428CB16E7A256"; //商家根据微信开放平台文档对数据做的签名
+//    
+//    [WXApi sendReq:request];//发送
+}
+
+- (void)onResp:(BaseResp *)resp {
+    if ([resp isKindOfClass:[PayResp class]]) {
+        PayResp *response = (PayResp *)resp;
+        switch (response.errCode) {
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"支付成功");
+                break;
+            default:
+                NSLog(@"支付失败， retcode=%d",resp.errCode);
+                break;
+        }
+    }
 }
 
 /**
@@ -307,4 +375,7 @@
     self.selected = indexPath;
     
 }
+
+
+
 @end

@@ -150,11 +150,18 @@
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
         
         NSLog(@"找回密码成功%@",json);
-        if ([wself.delegate respondsToSelector:@selector(findBackPassWordScuess)]) {
-            [wself.delegate findBackPassWordScuess];
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
+            
+            [MBProgressHUD showSuccess:@"修改密码成功"];
+            
+            if ([wself.delegate respondsToSelector:@selector(findBackPassWordScuess)]) {
+                [wself.delegate findBackPassWordScuess];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        
     } failure:^(NSError *error) {
          NSLog(@"找回密码失败%@",[error localizedDescription]);
     }];

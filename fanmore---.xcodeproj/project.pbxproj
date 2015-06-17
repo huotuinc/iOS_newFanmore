@@ -135,6 +135,8 @@
 		EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */; };
 		EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB460B1B214499005D5026 /* FeedBackViewController.m */; };
 		EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCB460C1B214499005D5026 /* FeedBackViewController.xib */; };
+		EFCC33FA1B3002BD0018B228 /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = EFCC33F71B3002BD0018B228 /* payRequsestHandler.mm */; };
+		EFCC33FB1B3002BD0018B228 /* TenpayUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = EFCC33F91B3002BD0018B228 /* TenpayUtil.mm */; };
 		EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */; };
 		EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AD1B12D6E400C015A7 /* MJArgument.m */; };
 		EFCCA4C41B12D6E400C015A7 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AF1B12D6E400C015A7 /* MJConst.m */; };
@@ -181,6 +183,8 @@
 		EFF3D0D61B2EB4A800B2F446 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3D0CE1B2EB4A800B2F446 /* RSADataVerifier.m */; };
 		EFF3D0DE1B2EBE6900B2F446 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */; };
 		EFF3D0DF1B2EBE6900B2F446 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0DD1B2EBE6900B2F446 /* libssl.a */; };
+		EFF3D0E61B2EF0DF00B2F446 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0E51B2EF0DF00B2F446 /* libz.dylib */; };
+		EFF3D0EB1B2EFAF000B2F446 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -407,6 +411,10 @@
 		EFCB460A1B214499005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		EFCB460B1B214499005D5026 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		EFCB460C1B214499005D5026 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
+		EFCC33F61B3002BD0018B228 /* payRequsestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payRequsestHandler.h; sourceTree = "<group>"; };
+		EFCC33F71B3002BD0018B228 /* payRequsestHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payRequsestHandler.mm; sourceTree = "<group>"; };
+		EFCC33F81B3002BD0018B228 /* TenpayUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenpayUtil.h; sourceTree = "<group>"; };
+		EFCC33F91B3002BD0018B228 /* TenpayUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TenpayUtil.mm; sourceTree = "<group>"; };
 		EFCCA4981B12C53700C015A7 /* PersonMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageTableViewController.h; sourceTree = "<group>"; };
 		EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMessageTableViewController.m; sourceTree = "<group>"; };
 		EFCCA4AC1B12D6E400C015A7 /* MJArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJArgument.h; sourceTree = "<group>"; };
@@ -575,8 +583,12 @@
 		EFF3D0CC1B2EB4A800B2F446 /* RSADataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataSigner.m; sourceTree = "<group>"; };
 		EFF3D0CD1B2EB4A800B2F446 /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
 		EFF3D0CE1B2EB4A800B2F446 /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
-		EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		EFF3D0DD1B2EBE6900B2F446 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "fanmore---/libcrypto.a"; sourceTree = "<group>"; };
+		EFF3D0DD1B2EBE6900B2F446 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "fanmore---/libssl.a"; sourceTree = "<group>"; };
+		EFF3D0E51B2EF0DF00B2F446 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		EFF3D0E91B2EFAF000B2F446 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		EFF3D0EA1B2EFAF000B2F446 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -584,9 +596,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFF3D0E61B2EF0DF00B2F446 /* libz.dylib in Frameworks */,
+				EFC86AB71B1EFAFE0081BBC8 /* SystemConfiguration.framework in Frameworks */,
 				EFF3D0DF1B2EBE6900B2F446 /* libssl.a in Frameworks */,
 				EFC86AEE1B1EFD700081BBC8 /* MailConnection.framework in Frameworks */,
 				EFC86ACD1B1EFC080081BBC8 /* Accounts.framework in Frameworks */,
+				EFF3D0EB1B2EFAF000B2F446 /* libWeChatSDK.a in Frameworks */,
 				EFC86ACB1B1EFBF80081BBC8 /* Social.framework in Frameworks */,
 				EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				EFC86AC91B1EFBD50081BBC8 /* libsqlite3.0.dylib in Frameworks */,
@@ -610,7 +625,6 @@
 				EFC86AFC1B1EFD700081BBC8 /* libWeChatSDK.a in Frameworks */,
 				EFC86AFA1B1EFD700081BBC8 /* libWeiboSDK.a in Frameworks */,
 				EFC86AB91B1EFB170081BBC8 /* QuartzCore.framework in Frameworks */,
-				EFC86AB71B1EFAFE0081BBC8 /* SystemConfiguration.framework in Frameworks */,
 				EFF3D0DE1B2EBE6900B2F446 /* libcrypto.a in Frameworks */,
 				EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */,
 				1B56C822B3D3D6F344695E94 /* libPods.a in Frameworks */,
@@ -873,6 +887,9 @@
 		DD30E3145DCCEA159969E2DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */,
+				EFF3D0DD1B2EBE6900B2F446 /* libssl.a */,
+				EFF3D0E51B2EF0DF00B2F446 /* libz.dylib */,
 				EFD8C4E61B2EA265002D2CB2 /* AlipaySDK.bundle */,
 				EFD8C4E71B2EA265002D2CB2 /* AlipaySDK.framework */,
 				EFC86ACC1B1EFC080081BBC8 /* Accounts.framework */,
@@ -1021,8 +1038,7 @@
 		EF49ECED1B0D81A40038A203 /* fanmore--- */ = {
 			isa = PBXGroup;
 			children = (
-				EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */,
-				EFF3D0DD1B2EBE6900B2F446 /* libssl.a */,
+				EFF3D0E71B2EFAF000B2F446 /* SDKExport */,
 				EFF3D0711B2EB4A800B2F446 /* openssl */,
 				EFF3D0BD1B2EB4A800B2F446 /* Util */,
 				EF1EA5FF1B0DA2D600C1F60D /* Classes */,
@@ -1203,7 +1219,8 @@
 		EF8D672D1B0DD07E008B6909 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				83E263EB1B2F018500A2AC96 /* PinYin4Objc */,
+                83E263EB1B2F018500A2AC96 /* PinYin4Objc */,
+				EFCC33F51B3002BD0018B228 /* WeiXInlib */,
 				EFAEB3211B291D6600855D25 /* FSMediaPicker */,
 				EFC86ACE1B1EFD700081BBC8 /* ShareSDK */,
 				EFCDC8261B17F63100D28DB1 /* UMAnalytics_Sdk_3.5.8 */,
@@ -1345,6 +1362,17 @@
 				EFCB460C1B214499005D5026 /* FeedBackViewController.xib */,
 			);
 			path = "FeedBack(意见反馈)";
+			sourceTree = "<group>";
+		};
+		EFCC33F51B3002BD0018B228 /* WeiXInlib */ = {
+			isa = PBXGroup;
+			children = (
+				EFCC33F61B3002BD0018B228 /* payRequsestHandler.h */,
+				EFCC33F71B3002BD0018B228 /* payRequsestHandler.mm */,
+				EFCC33F81B3002BD0018B228 /* TenpayUtil.h */,
+				EFCC33F91B3002BD0018B228 /* TenpayUtil.mm */,
+			);
+			path = WeiXInlib;
 			sourceTree = "<group>";
 		};
 		EFCCA4891B12B85800C015A7 /* accountManage(账号管理) */ = {
@@ -1723,6 +1751,16 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		EFF3D0E71B2EFAF000B2F446 /* SDKExport */ = {
+			isa = PBXGroup;
+			children = (
+				EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */,
+				EFF3D0E91B2EFAF000B2F446 /* WXApi.h */,
+				EFF3D0EA1B2EFAF000B2F446 /* WXApiObject.h */,
+			);
+			path = SDKExport;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1898,6 +1936,7 @@
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
 				830812401B28552200AC4E18 /* PICircularProgressView.m in Sources */,
 				EF565D3F1B17091F00FC2D6B /* BoundPhoneViewController.m in Sources */,
+				EFCC33FA1B3002BD0018B228 /* payRequsestHandler.mm in Sources */,
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
 				EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */,
 				EFAEB3271B291DDD00855D25 /* FSMediaPicker.m in Sources */,
@@ -1915,7 +1954,8 @@
 				EFE76B811B26DC4100C956A5 /* taskData.m in Sources */,
 				EFF3D0D11B2EB4A800B2F446 /* DataVerifier.m in Sources */,
 				EF565D101B16B7AB00FC2D6B /* AccountSettingViewController.m in Sources */,
-				83E263EA1B2EAEA700A2AC96 /* FriendModel.m in Sources */,
+				EFCC33FB1B3002BD0018B228 /* TenpayUtil.mm in Sources */,
+                83E263EA1B2EAEA700A2AC96 /* FriendModel.m in Sources */,
 				EF565D511B170AF600FC2D6B /* LoginResultData.m in Sources */,
 				836D6AAB1B1C776000119B3F /* JoinController.m in Sources */,
 				83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */,
@@ -2181,6 +2221,8 @@
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/fanmore---",
+					"$(PROJECT_DIR)/fanmore---/WeiXinPay",
+					"$(PROJECT_DIR)/fanmore---/SDKExport",
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2236,6 +2278,8 @@
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/fanmore---",
+					"$(PROJECT_DIR)/fanmore---/WeiXinPay",
+					"$(PROJECT_DIR)/fanmore---/SDKExport",
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";

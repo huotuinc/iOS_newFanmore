@@ -738,7 +738,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YQa-SK-eXy">
                                 <rect key="frame" x="0.0" y="240" width="600" height="190"/>
                                 <subviews>
-                                    <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLv-Cd-Ihp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLv-Cd-Ihp" userLabel="b">
                                         <rect key="frame" x="148" y="53" width="305" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="WhV-44-ga5"/>
@@ -750,25 +750,10 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="BAction:" destination="rGU-GC-0o2" eventType="touchUpInside" id="fgz-pM-b4U"/>
+                                            <action selector="BAction:" destination="rGU-GC-0o2" eventType="touchUpInside" id="PPp-Ng-kBQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1N-JY-S8h">
-                                        <rect key="frame" x="148" y="99" width="305" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="McG-9m-So0"/>
-                                            <constraint firstAttribute="width" constant="305" id="Nod-lR-4Hb"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Button" backgroundImage="C">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="CAction:" destination="rGU-GC-0o2" eventType="touchUpInside" id="iZ2-uH-cEr"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-BM-pgf">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-BM-pgf" userLabel="a">
                                         <rect key="frame" x="148" y="5" width="305" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="305" id="bKP-Yi-pMw"/>
@@ -779,10 +764,10 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="AAction:" destination="rGU-GC-0o2" eventType="touchUpInside" id="Ewp-aN-XYP"/>
+                                            <action selector="AAction:" destination="rGU-GC-0o2" eventType="touchUpInside" id="C7b-Gz-zMB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rw-NT-yYK">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rw-NT-yYK" userLabel="d">
                                         <rect key="frame" x="148" y="145" width="305" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="N6n-27-ss6"/>
@@ -794,7 +779,22 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="DAction:" destination="rGU-GC-0o2" eventType="touchUpInside" id="xDc-Yn-cvV"/>
+                                            <action selector="DAction:" destination="rGU-GC-0o2" eventType="touchUpInside" id="7Qb-6A-dhR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1N-JY-S8h" userLabel="c">
+                                        <rect key="frame" x="148" y="99" width="305" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="McG-9m-So0"/>
+                                            <constraint firstAttribute="width" constant="305" id="Nod-lR-4Hb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Button" backgroundImage="C">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="CAction:" destination="rGU-GC-0o2" eventType="touchUpInside" id="J1b-z6-LcU"/>
                                         </connections>
                                     </button>
                                 </subviews>

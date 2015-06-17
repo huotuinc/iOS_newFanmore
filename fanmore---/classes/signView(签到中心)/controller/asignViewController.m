@@ -10,6 +10,7 @@
 #import "asignViewController.h"
 #import "RootViewController.h"
 #import <UIViewController+MMDrawerController.h>
+#import "userData.h"
 
 @interface asignViewController ()
 /**周一*/
@@ -66,18 +67,55 @@
     //设置导航栏的属性
     [self initBackAndTitle:@"一周连续签到"];
     
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //1、保存个人信息
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    
+//    NSInteger week = [self getWeek];  //获取今天是周几
+//    self.asignBtn.userInteractionEnabled = !((1<<(7-week)) & (userInfo.signInfo)) == (1<<(7-week));
+   
     for (UIButton * btn in self.buttons) {
         
-//        [btn setBackgroundColor:LWColor(18.04, 17.57, 127)];
+        if (((1<<(7-btn.tag)) & (userInfo.signInfo)) == (1<<(7-btn.tag))) {//签到
+            [btn setBackgroundImage:[UIImage imageNamed:@"asignBlue"] forState:UIControlStateNormal];
+            btn.userInteractionEnabled = NO;
+        }else{//未签到
+            
+            btn.userInteractionEnabled = YES;
+        }
+        
         btn.layer.masksToBounds = YES;
         [btn addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    //设置按钮属性
-//    self.asignBtn.backgroundColor = LWColor(18.04, 16.56, 125);
-    
 }
 
+
+/**
+ *  获取今天是周几
+ *
+ *  @return  返回今天是周几
+ */
+- (NSInteger) getWeek{
+    
+    //获取日期
+    NSDate *date = [NSDate date];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init] ;
+    
+    NSInteger unitFlags = NSWeekdayCalendarUnit;
+    
+    comps = [calendar components:unitFlags fromDate:date];
+    
+    NSInteger week = [comps weekday]-1;
+    
+    return week;
+}
 
 /**
  *   导航栏返回按钮
@@ -99,11 +137,53 @@
  *
  *  @param sender <#sender description#>
  */
-- (IBAction)asignBtnClick:(id)sender {
+- (IBAction)asignBtnClick:(UIButton *)sender {
+    
     [MBProgressHUD showSuccess:@"签到成功 +1.5M"];
-    [self.monday setBackgroundImage:[UIImage imageNamed:@"asignBlue"] forState:UIControlStateNormal];
-    [self.monday setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.monday.userInteractionEnabled = NO;
+    NSInteger week = [self getWeek];
+    
+    for (UIButton * btn in self.buttons) { //遍历今天是周几
+        
+        if (btn.tag == week) {
+            [btn setBackgroundImage:[UIImage imageNamed:@"asignBlue"] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            btn.userInteractionEnabled = NO;
+            
+            break;
+        }
+    }
+    
+    [MBProgressHUD showMessage:nil];
+    NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
+    [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
+        NSLog(@"%@",json);
+        
+        
+        if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
+             [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"今日已签到，请明天来签到"];
+            return ;
+        }
+        if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==1) {
+            
+            [MBProgressHUD showSuccess:@"签到成功" toView:self.view];
+            
+            userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            //1、保存个人信息
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            
+            [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            
+        }
+        [MBProgressHUD hideHUD];
+        
+    } failure:^(NSError *error) {
+        
+        NSLog(@"%@",[error description]);
+        [MBProgressHUD hideHUD];
+    }];
+   
 }
 
 @end

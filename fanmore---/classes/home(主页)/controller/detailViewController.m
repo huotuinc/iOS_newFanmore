@@ -69,7 +69,7 @@
     NSString * url = [MainURL stringByAppendingPathComponent:@"taskDetail"];
     NSLog(@"%@",url);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"taskId"] = self.taskId;
+    params[@"taskId"] = @(self.taskId);
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSLog(@"xxxxxxxxxxxxx----%@",json);
@@ -187,6 +187,7 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
         answer.questions = self.detailTasks;
+        answer.taskId = self.taskId;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
