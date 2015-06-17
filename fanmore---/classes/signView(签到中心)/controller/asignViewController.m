@@ -81,6 +81,7 @@
         
         if (((1<<(7-btn.tag)) & (userInfo.signInfo)) == (1<<(7-btn.tag))) {//签到
             [btn setBackgroundImage:[UIImage imageNamed:@"asignBlue"] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             btn.userInteractionEnabled = NO;
         }else{//未签到
             
@@ -91,9 +92,21 @@
         [btn addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    //注册通知中心
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qiandao:) name:TodaySignNot object:nil];
 }
 
 
+- (void)qiandao:(NSNotification *) not{
+    
+    NSLog(@"接受到签到通知");
+    [self asignBtnClick:self.asignBtn];
+}
+- (void)dealloc{
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+}
 /**
  *  获取今天是周几
  *
@@ -139,7 +152,10 @@
  */
 - (IBAction)asignBtnClick:(UIButton *)sender {
     
-    [MBProgressHUD showSuccess:@"签到成功 +1.5M"];
+    
+    
+    NSLog(@"dadadasdasdasdasdsa接受到签到通知");
+    
     NSInteger week = [self getWeek];
     
     for (UIButton * btn in self.buttons) { //遍历今天是周几
@@ -174,6 +190,7 @@
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            [MBProgressHUD showSuccess:@"签到成功 +1.5M"];
             
         }
         [MBProgressHUD hideHUD];

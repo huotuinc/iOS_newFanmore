@@ -41,18 +41,29 @@ static int _qindex = 0;
     _qindex = 0;
     self.qusImageView.contentMode = UIViewContentModeScaleAspectFit;  //图片自动适配
     
+    if ([self.type intValue] == 3) { //画册类
+        self.qusImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *aaa = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pictureClickToFindAnswer:)];
+        [self.qusImageView addGestureRecognizer:aaa];
+    }
+    
     [self showQuestion];//设置题目第一次的题目
 
     
 }
 
-
+- (void)pictureClickToFindAnswer:(UITapGestureRecognizer *)tap{
+    
+    NSLog(@"%d",_qindex);
+    taskDetail * taskdetail = self.questions[_qindex];
+    NSLog(@"%@",taskdetail.relexUrl);
+    NSURL * picUrl = [NSURL URLWithString:taskdetail.relexUrl];
+    [[UIApplication sharedApplication] openURL:picUrl];
+}
 /**
  *  题目展示
  */
 - (void) showQuestion{
-    
-    
         //判断答题是否完成
         if (_qindex==self.questions.count) {
             
@@ -62,7 +73,6 @@ static int _qindex = 0;
             NSLog(@"dadasdasdasdasdxxx0000000 %@",self.ans);
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-                
                 [MBProgressHUD showMessage:json[@"resultDescription"]];
                 NSLog(@"%@",json);
                 [MBProgressHUD hideHUD];
@@ -86,10 +96,8 @@ static int _qindex = 0;
         //3、问题
         self.queLable.text = taskdetail.context;  //设置答题题目
         //4、设置题目编号
-        self.queNumber.text = [NSString stringWithFormat:@"%d/%lu",++_qindex,(unsigned long)self.questions.count];
+        self.queNumber.text = [NSString stringWithFormat:@"%d/%lu",_qindex+1,(unsigned long)self.questions.count];
 }
-
-
 /**
  *  答案展示按钮显示答案
  *
@@ -151,7 +159,7 @@ static int _qindex = 0;
  */
 - (IBAction)AAction:(UIButton *)sender {
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
-    
+    _qindex++;
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
 
@@ -165,6 +173,7 @@ static int _qindex = 0;
     });
 }
 - (IBAction)BAction:(UIButton *)sender {
+     _qindex++;
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
@@ -180,6 +189,7 @@ static int _qindex = 0;
   
 }
 - (IBAction)CAction:(UIButton *)sender {
+     _qindex++;
    [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
@@ -195,6 +205,7 @@ static int _qindex = 0;
     });
 }
 - (IBAction)DAction:(UIButton *)sender {
+     _qindex++;
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (self.DButton.tag == self.tureAnswer) {
         [self showTureAnswer];

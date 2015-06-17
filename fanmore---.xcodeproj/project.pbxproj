@@ -161,6 +161,7 @@
 		EFD02B471B155CDA00D11D6D /* MJSettingSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B3E1B155CDA00D11D6D /* MJSettingSwitchItem.m */; };
 		EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B411B155CDA00D11D6D /* MJSettingCell.m */; };
 		EFD02B4B1B155D1E00D11D6D /* settingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B4A1B155D1E00D11D6D /* settingViewController.m */; };
+		EFD594521B315D9B00F6BDBB /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD594511B315D9B00F6BDBB /* Foundation+Log.m */; };
 		EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD7A9C31B1D9DE30004A9A4 /* view-new.html */; };
 		EFD8C4E81B2EA265002D2CB2 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFD8C4E61B2EA265002D2CB2 /* AlipaySDK.bundle */; };
 		EFD8C4E91B2EA265002D2CB2 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD8C4E71B2EA265002D2CB2 /* AlipaySDK.framework */; };
@@ -464,6 +465,7 @@
 		EFD02B411B155CDA00D11D6D /* MJSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJSettingCell.m; sourceTree = "<group>"; };
 		EFD02B491B155D1E00D11D6D /* settingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingViewController.h; sourceTree = "<group>"; };
 		EFD02B4A1B155D1E00D11D6D /* settingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingViewController.m; sourceTree = "<group>"; };
+		EFD594511B315D9B00F6BDBB /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		EFD7A9C31B1D9DE30004A9A4 /* view-new.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "view-new.html"; sourceTree = "<group>"; };
 		EFD8C4E61B2EA265002D2CB2 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		EFD8C4E71B2EA265002D2CB2 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
@@ -1038,6 +1040,7 @@
 		EF49ECED1B0D81A40038A203 /* fanmore--- */ = {
 			isa = PBXGroup;
 			children = (
+				EFD594511B315D9B00F6BDBB /* Foundation+Log.m */,
 				EFF3D0E71B2EFAF000B2F446 /* SDKExport */,
 				EFF3D0711B2EB4A800B2F446 /* openssl */,
 				EFF3D0BD1B2EB4A800B2F446 /* Util */,
@@ -1219,7 +1222,7 @@
 		EF8D672D1B0DD07E008B6909 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-                83E263EB1B2F018500A2AC96 /* PinYin4Objc */,
+				83E263EB1B2F018500A2AC96 /* PinYin4Objc */,
 				EFCC33F51B3002BD0018B228 /* WeiXInlib */,
 				EFAEB3211B291D6600855D25 /* FSMediaPicker */,
 				EFC86ACE1B1EFD700081BBC8 /* ShareSDK */,
@@ -1955,7 +1958,7 @@
 				EFF3D0D11B2EB4A800B2F446 /* DataVerifier.m in Sources */,
 				EF565D101B16B7AB00FC2D6B /* AccountSettingViewController.m in Sources */,
 				EFCC33FB1B3002BD0018B228 /* TenpayUtil.mm in Sources */,
-                83E263EA1B2EAEA700A2AC96 /* FriendModel.m in Sources */,
+				83E263EA1B2EAEA700A2AC96 /* FriendModel.m in Sources */,
 				EF565D511B170AF600FC2D6B /* LoginResultData.m in Sources */,
 				836D6AAB1B1C776000119B3F /* JoinController.m in Sources */,
 				83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */,
@@ -2036,6 +2039,7 @@
 				EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */,
 				EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */,
 				83E72CCD1B1C2B2D00286735 /* AnswerController.m in Sources */,
+				EFD594521B315D9B00F6BDBB /* Foundation+Log.m in Sources */,
 				EF2E54371B27E2AB0060E965 /* GetHomeDataTool.m in Sources */,
 				83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */,
 			);

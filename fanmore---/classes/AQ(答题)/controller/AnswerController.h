@@ -25,7 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *queLable;
 /**题目的编号*/
 @property (weak, nonatomic) IBOutlet UILabel *queNumber;
-
+/**答题类型*/
+@property(strong,nonatomic) NSNumber * type;
 /**题目类型编号*/
 @property(nonatomic,assign) int taskId;
 /**题目列表*/
