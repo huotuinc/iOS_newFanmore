@@ -163,6 +163,11 @@
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
         NSLog(@"login========%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 53011) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"密码错误"];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             [MBProgressHUD hideHUD];

@@ -10,7 +10,10 @@
 #import "DataSigner.h"
 #import "BuyFlowViewController.h"
 #import <AlipaySDK/AlipaySDK.h>  //支付宝接入头文件
+#import "WXApi.h"
 #define cellID @"collviewCell"
+#import <AFNetworking.h>
+#import "payRequsestHandler.h"
 
 @interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
 /**手机运行商*/
@@ -217,6 +220,70 @@
 - (void)PayByWeiXin{
     
     
+//    NSMutableDictionary * parames = [NSMutableDictionary dictionary];
+//    parames[@"appid"] = WeiXinAppID;
+//    parames[@"mch_id"] =
+//    parames[@"nonce_str"] =
+//    parames[@"body"] = @"购买粉毛的流量产品";
+//    parames[@"out_trade_no"] =
+//    parames[@"total_fee"] =
+//    parames[@"spbill_create_ip"] =
+//    parames[@"notify_url"] =
+//    parames[@"trade_type"] =
+    
+//    
+//    [payRequsestHandler alloc] init:WeiXinAppID app_secret:WeiXinppSecrrt partner_key:WeiXinPARTNERKEY app_key:<#(NSString *)#>
+//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//    NSString *url = @"https://api.mch.weixin.qq.com/pay/unifiedorder";
+//    [mgr POST:url parameters:mgr success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        NSLog(@"%@",responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@",[error description]);
+//    }];
+    
+//
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    PayReq *request = [[PayReq alloc] init];
+//    
+//    request.partnerId = @"10000100";  //商家向财付通申请的商家id
+//    
+//    request.prepayId= @"1101000000140415649af9fc314aa427"; //预支付订单
+//    
+//    request.package = @"Sign=WXPay";  // 商家根据财付通文档填写的数据和签名
+//    
+//    request.nonceStr= @"a462b76e7436e98e0ed6e13c64b4fd1c"; //随机串，防重发
+//    
+//    request.timeStamp= 1397527777; //时间戳，防重发
+//    
+//    request.sign= @"582282D72DD2B03AD892830965F428CB16E7A256"; //商家根据微信开放平台文档对数据做的签名
+//    
+//    [WXApi sendReq:request];//发送
+}
+
+- (void)onResp:(BaseResp *)resp {
+    if ([resp isKindOfClass:[PayResp class]]) {
+        PayResp *response = (PayResp *)resp;
+        switch (response.errCode) {
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"支付成功");
+                break;
+            default:
+                NSLog(@"支付失败， retcode=%d",resp.errCode);
+                break;
+        }
+    }
 }
 
 /**
@@ -307,4 +374,7 @@
     self.selected = indexPath;
     
 }
+
+
+
 @end

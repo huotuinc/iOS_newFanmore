@@ -18,12 +18,13 @@
 /**邀请码*/
 @property(nonatomic,strong) NSString * invCode;
 /**签到*/
-@property(nonatomic,strong) NSNumber * signInfo;
+@property(nonatomic,assign) int signInfo;
 /**今日签到获取流量*/
 @property(nonatomic,strong) NSNumber * signtoday;
-
 /**姓名*/
 @property(nonatomic,strong) NSString * name;
+/**真名姓名*/
+@property(nonatomic,strong) NSString * realName;
 /**生日*/
 @property(nonatomic,strong) NSString * birthDate;
 /**电话*/
@@ -36,16 +37,12 @@
 @property(nonatomic,strong) NSString * favs;
 /**区域*/
 @property(nonatomic,strong) NSString * area;
-
 /**注册时间*/
 @property(nonatomic,assign) long long regDate;
-
 /**无效类型 0:有效用户 1:手机无效(需要绑定手机)*/
 @property(nonatomic,strong) NSNumber * invalidCode;
-
 /**欢迎提示，包括积分转换信息，来宾转正信息*/
 @property(nonatomic,strong) NSString * welcomeTip;
-
 /**身份验证 服务端负责生成 负责验证；app端只需要保存 传递*/
 @property(nonatomic,strong) NSString * token;
 

@@ -89,7 +89,7 @@
         [self.iconView setBackgroundImage:image forState:UIControlStateNormal];
     }];
 
-    self.nameLable.text = userinfo.name; //2姓名
+    self.nameLable.text = userinfo.realName; //2姓名
     self.sexLable.text =  userinfo.sex?@"男":@"女";  //3性别
     self.birthDayLable.text = userinfo.birthDate;  //4
     
@@ -171,14 +171,21 @@
     }
     if (indexPath.section == 1) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        if (indexPath.row == 0) {
+        if (indexPath.row == 0) { //职业
             ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
             pro.delegate = self;
             pro.isPrefessional = YES;
             pro.currentCareer = self.careerLable.text;
             [self.navigationController pushViewController:pro animated:YES];
         }
-        if (indexPath.row == 1) {
+        if (indexPath.row == 1) { //收入
+            ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
+            pro.delegate = self;
+            pro.currentCareer = self.userIncomeLable.text;
+            pro.isPrefessional = NO;
+            [self.navigationController pushViewController:pro animated:YES];
+        }
+        if (indexPath.row == 2) { //爱好
             ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
             pro.delegate = self;
             pro.currentCareer = self.userIncomeLable.text;
@@ -203,7 +210,8 @@
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"profileType"] = @"0";
     params[@"profileData"] = imageString;
-    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+//    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+    NSString *urlStr = @"http://192.168.0.15:8080/fanmoreweb/app/updateProfile";
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
         
         NSLog(@"上传头像success===%@",json);
@@ -268,7 +276,7 @@
 - (void)ProfessionalControllerBringBackCareer:(NSString *)career isFlag:(BOOL)flag{
     
      NSMutableDictionary *parame = [NSMutableDictionary dictionary];
-    if (flag) {
+    if (flag) {//职业
         self.careerLable.text = career;
          parame[@"profileType"] = @(3);
     }else{

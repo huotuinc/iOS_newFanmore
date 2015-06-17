@@ -10,7 +10,7 @@
 
 @interface taskData : NSObject
 
-@property(nonatomic,strong) NSNumber * taskId;
+@property(nonatomic,assign) int  taskId;
 
 /**标题*/
 @property(nonatomic,strong) NSString * title;

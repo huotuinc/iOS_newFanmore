@@ -73,25 +73,15 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 //头部刷新
 - (void)headerRereshing  //加载最新数据
 {
-    //    startIndex = @1;
-    //    [self getMoreData];
-    //    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    
     [self.tableView headerEndRefreshing];
 }
 
-//尾部刷新
-- (void)footerRereshing{  //加载更多数据数据
-    //    startIndex = @(1 + _carMessagesF.count);
-    //    // 1.添加数据
-    //    [self getMoreData];
-    //    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [self.tableView footerEndRefreshing];
-}
 
 
 -(void)getMoreData{
     
-    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
 //    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
 //        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
 //            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];

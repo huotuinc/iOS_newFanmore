@@ -38,7 +38,7 @@ static NSString *homeCellidentify = @"homeCellId";
         _taskDatas = [NSMutableArray array];
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         params[@"pagingTag"] = @"";
-        params[@"pagingSize"] = @(2);
+        params[@"pagingSize"] = @(4);
         [self getNewMoreData:params];
         [self.tableView reloadData];
     }

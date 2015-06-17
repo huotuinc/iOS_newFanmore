@@ -12,7 +12,7 @@
 @protocol findBackPwViewDelegate <NSObject>
 
 /**忘记*/
-- (void) findBackPassWordScuess;
+- (void) findBackPassWordScuess;   //找回密码成功
 @optional
 
 @end

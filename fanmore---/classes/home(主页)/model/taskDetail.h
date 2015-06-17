@@ -26,7 +26,7 @@
 @property(nonatomic,copy)NSString * fieldPattern;
 
 /**问题编号*/
-@property(nonatomic,copy)NSString*  correntAid;
+@property(nonatomic,assign)int  correntAid;
 
 @property(nonatomic,strong) NSArray * answers;
 

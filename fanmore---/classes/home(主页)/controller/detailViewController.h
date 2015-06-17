@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *goQusetion;
 
 /**问题编号*/
-@property(strong,nonatomic) NSNumber *taskId;
+@property(assign,nonatomic)  int taskId;
 
 /**答题类型*/
 @property(strong,nonatomic) NSNumber * type;
