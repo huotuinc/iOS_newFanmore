@@ -345,7 +345,8 @@
 - (IBAction)userProfileBtn:(id)sender {
     
     LoginViewController * login = [[LoginViewController alloc] init];
-    [self.navigationController pushViewController:login animated:YES];
+    UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+    [self presentViewController:na animated:YES completion:nil];
 }
 
 
