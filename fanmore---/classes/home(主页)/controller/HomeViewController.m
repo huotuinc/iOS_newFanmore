@@ -51,7 +51,6 @@ static NSString *homeCellidentify = @"homeCellId";
         params[@"pagingTag"] = @"";
         params[@"pagingSize"] = @(4);
         [self getNewMoreData:params];
-        [self.tableView reloadData];
     }
     return _taskDatas;
 }
@@ -178,7 +177,7 @@ static NSString *homeCellidentify = @"homeCellId";
         params[@"pagingTag"] = @"";
     }
     
-    params[@"pagingSize"] = @(2);
+    params[@"pagingSize"] = @(4);
     [self getNewMoreData:params];
     
 //    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
@@ -191,16 +190,16 @@ static NSString *homeCellidentify = @"homeCellId";
 -(void)getNewMoreData:(NSMutableDictionary *)params{
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
-    __weak HomeViewController * wself = self;
+   
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
         NSLog(@"xxxxxx%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
-            [taskaa addObjectsFromArray:wself.taskDatas];
-            wself.taskDatas = taskaa;
-            [wself.tableView reloadData];    //刷新数据
+            [taskaa addObjectsFromArray:self.taskDatas];
+            self.taskDatas = taskaa;
+            [self.tableView reloadData];    //刷新数据
         }
             
     } failure:^(NSError *error) {
@@ -268,7 +267,6 @@ static NSString *homeCellidentify = @"homeCellId";
     }else{
         a = (task.reward?0:1);
     }
-    
     //设置cell样式
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"免费领取%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"已有%@人参与",task.luckies] andIntroduceLabel:task.desc andGetImage:a];
      return cell;

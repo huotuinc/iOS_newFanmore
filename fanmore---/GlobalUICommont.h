@@ -33,7 +33,7 @@
 /**设备唯一号*/
 #define  DeviceNo ([[UIDevice currentDevice].identifierForVendor UUIDString])
 /**时间*/
-#define apptimesSince1970 [NSString stringWithFormat:@"%.0f",[[[NSDate alloc] init] timeIntervalSince1970]]
+#define apptimesSince1970 [NSString stringWithFormat:@"%.0f",[[[NSDate alloc] init] timeIntervalSince1970]*1000]
 
 /**appToken*/
 #define AppToken @"AppToken"
