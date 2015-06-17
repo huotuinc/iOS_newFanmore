@@ -14,6 +14,7 @@
     self.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
+
 -(void)cleanSelection{
     [self selectRowAtIndexPath:Nil animated:YES scrollPosition:UITableViewScrollPositionNone];
 }

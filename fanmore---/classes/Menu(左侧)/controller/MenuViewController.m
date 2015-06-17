@@ -273,7 +273,7 @@
         case 6:{//送流量
 //            SendController *send = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
 //            [self.navigationController pushViewController:send animated:YES];
-            BegController *beg = [storyboard instantiateViewControllerWithIdentifier:@"BegController"];
+            SendController *beg = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
             [self.navigationController pushViewController:beg animated:YES];
         }
             

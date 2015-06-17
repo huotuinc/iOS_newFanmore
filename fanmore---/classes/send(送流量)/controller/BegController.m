@@ -16,7 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self.trafficField.layer setMasksToBounds:YES];
+    self.trafficField.layer.borderWidth = 0.5;
+    self.trafficField.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
+    self.trafficField.layer.cornerRadius = 2;
 }
 
 - (void)didReceiveMemoryWarning {
