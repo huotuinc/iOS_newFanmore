@@ -49,7 +49,7 @@ static NSString *homeCellidentify = @"homeCellId";
         _taskDatas = [NSMutableArray array];
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         params[@"pagingTag"] = @"";
-        params[@"pagingSize"] = @(4);
+        params[@"pagingSize"] = @(10);
         [self getNewMoreData:params];
     }
     return _taskDatas;
@@ -171,7 +171,7 @@ static NSString *homeCellidentify = @"homeCellId";
     
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     if (self.taskDatas.count) {
-        taskData * aaa = self.taskDatas[0];
+        taskData * aaa = [self.taskDatas firstObject];
         params[@"pagingTag"] = @(aaa.taskOrder);
     }else{
         params[@"pagingTag"] = @"";
