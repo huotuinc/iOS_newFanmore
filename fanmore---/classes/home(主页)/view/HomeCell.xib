@@ -85,7 +85,7 @@
                         </variation>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XbP-Z9-ED8">
-                        <rect key="frame" x="250" y="29" width="70" height="70"/>
+                        <rect key="frame" x="250" y="0.0" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="UDE-55-3r8"/>
                             <constraint firstAttribute="height" constant="70" id="dGu-Rv-JE4"/>
@@ -111,6 +111,7 @@
                     <constraint firstAttribute="bottom" secondItem="XbP-Z9-ED8" secondAttribute="bottom" id="i0Q-qN-GUE"/>
                     <constraint firstItem="ZKy-Gw-2hj" firstAttribute="top" secondItem="UFQ-QQ-8uU" secondAttribute="bottom" constant="-2" id="kZJ-2k-q5w"/>
                     <constraint firstAttribute="bottom" secondItem="0jK-cX-QNi" secondAttribute="bottom" constant="10" id="oqa-XO-MJ8"/>
+                    <constraint firstItem="XbP-Z9-ED8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uyW-km-6C4"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="leading" secondItem="ZKy-Gw-2hj" secondAttribute="leading" id="vQo-Ng-HUm"/>
                     <constraint firstAttribute="trailing" secondItem="RRN-9z-gCd" secondAttribute="trailing" constant="10" id="wIt-q7-UMt"/>
                     <constraint firstItem="nGH-4D-mst" firstAttribute="leading" secondItem="0jK-cX-QNi" secondAttribute="trailing" constant="5" id="xrv-Uq-lOO"/>
@@ -125,6 +126,7 @@
                         <exclude reference="VSt-xb-lr8"/>
                         <exclude reference="amT-jJ-H4v"/>
                         <exclude reference="wIt-q7-UMt"/>
+                        <exclude reference="i0Q-qN-GUE"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

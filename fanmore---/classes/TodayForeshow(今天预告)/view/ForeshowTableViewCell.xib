@@ -61,8 +61,8 @@
                             <action selector="timeButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eV1-yq-pNL"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yxn-ff-pxp">
-                        <rect key="frame" x="250" y="39" width="70" height="70"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="online" translatesAutoresizingMaskIntoConstraints="NO" id="Yxn-ff-pxp">
+                        <rect key="frame" x="250" y="0.0" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="70" id="Zy3-dr-805"/>
                             <constraint firstAttribute="width" constant="70" id="ndS-qz-BIm"/>
@@ -84,6 +84,7 @@
                     <constraint firstItem="MJE-wf-v9f" firstAttribute="leading" secondItem="vOC-B1-fla" secondAttribute="leading" id="4el-5E-qOI"/>
                     <constraint firstItem="2Tc-IF-kXn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="9ls-An-IBz"/>
                     <constraint firstItem="MJE-wf-v9f" firstAttribute="top" secondItem="vOC-B1-fla" secondAttribute="bottom" id="AdL-KR-hee"/>
+                    <constraint firstItem="zGQ-P1-78a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="CyM-rF-Xt5"/>
                     <constraint firstItem="sgg-f6-tsw" firstAttribute="leading" secondItem="2Tc-IF-kXn" secondAttribute="trailing" constant="8" id="FE0-BV-qhe"/>
                     <constraint firstItem="vOC-B1-fla" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Fv1-op-Qnb"/>
                     <constraint firstItem="zdJ-PP-K2u" firstAttribute="top" secondItem="sgg-f6-tsw" secondAttribute="bottom" constant="2" id="Q0W-C3-Var"/>
@@ -92,17 +93,25 @@
                     <constraint firstAttribute="trailing" secondItem="zGQ-P1-78a" secondAttribute="trailing" constant="5" id="dvM-vy-69s"/>
                     <constraint firstAttribute="bottom" secondItem="zdJ-PP-K2u" secondAttribute="bottom" constant="10" id="f2t-4a-WeW"/>
                     <constraint firstAttribute="trailing" secondItem="sgg-f6-tsw" secondAttribute="trailing" constant="30" id="fYq-bN-xrs"/>
+                    <constraint firstItem="Yxn-ff-pxp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="g7f-B3-fXc"/>
                     <constraint firstAttribute="trailing" secondItem="Yxn-ff-pxp" secondAttribute="trailing" id="olH-Ln-ct9"/>
                     <constraint firstItem="Yxn-ff-pxp" firstAttribute="leading" secondItem="MJE-wf-v9f" secondAttribute="trailing" constant="10" id="txo-1b-hD3"/>
                     <constraint firstItem="Yxn-ff-pxp" firstAttribute="leading" secondItem="zdJ-PP-K2u" secondAttribute="trailing" id="w9c-eK-Vp5"/>
                     <constraint firstAttribute="bottom" secondItem="Yxn-ff-pxp" secondAttribute="bottom" id="wrY-rJ-gqQ"/>
                     <constraint firstItem="2Tc-IF-kXn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="xIH-Ei-Gb2"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="35j-Xo-gPF"/>
+                        <exclude reference="wrY-rJ-gqQ"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contextLable" destination="sgg-f6-tsw" id="7aq-gZ-9F4"/>
                 <outlet property="flowlable" destination="MJE-wf-v9f" id="pGa-8I-XKc"/>
                 <outlet property="iconView" destination="2Tc-IF-kXn" id="Q4x-nP-9WX"/>
+                <outlet property="onlineImage" destination="Yxn-ff-pxp" id="jOD-E7-JHc"/>
                 <outlet property="timeButton" destination="zGQ-P1-78a" id="8mn-dW-nSl"/>
                 <outlet property="timeLable" destination="zdJ-PP-K2u" id="qIg-Ck-Yx0"/>
                 <outlet property="title" destination="vOC-B1-fla" id="FY4-1m-gKu"/>
@@ -111,7 +120,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bian_b" width="35" height="15"/>
+        <image name="bian_b" width="70" height="30"/>
+        <image name="online" width="96" height="90"/>
         <image name="未命名.tiff" width="301" height="301"/>
     </resources>
 </document>

@@ -27,6 +27,7 @@
 		839C30E71B2E6CF4000EE05A /* FriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 839C30E51B2E6CF4000EE05A /* FriendCell.m */; };
 		839C30E81B2E6CF4000EE05A /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 839C30E61B2E6CF4000EE05A /* FriendCell.xib */; };
 		83A085921B3142FE00FDFA2B /* FriendMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A085911B3142FE00FDFA2B /* FriendMessageController.m */; };
+		83A085981B31653E00FDFA2B /* WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A085971B31653E00FDFA2B /* WebController.m */; };
 		83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */; };
 		83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */; };
 		83AB70911B2A762000B2D09A /* SendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AB70901B2A762000B2D09A /* SendController.m */; };
@@ -234,6 +235,8 @@
 		839C30E61B2E6CF4000EE05A /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		83A085901B3142FE00FDFA2B /* FriendMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendMessageController.h; sourceTree = "<group>"; };
 		83A085911B3142FE00FDFA2B /* FriendMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendMessageController.m; sourceTree = "<group>"; };
+		83A085961B31653E00FDFA2B /* WebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebController.h; path = "classes/home(主页)/controller/WebController.h"; sourceTree = "<group>"; };
+		83A085971B31653E00FDFA2B /* WebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebController.m; path = "classes/home(主页)/controller/WebController.m"; sourceTree = "<group>"; };
 		83A0E9F91B155BCE009708FB /* InviteCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeCell.h; sourceTree = "<group>"; };
 		83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeCell.m; sourceTree = "<group>"; };
 		83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCodeCell.xib; sourceTree = "<group>"; };
@@ -973,6 +976,8 @@
 				830B4D011B2194FC00BBE276 /* BPViewController.m */,
 				83CA8FE81B2985DF008D37C6 /* ConversionController.h */,
 				83CA8FE91B2985DF008D37C6 /* ConversionController.m */,
+				83A085961B31653E00FDFA2B /* WebController.h */,
+				83A085971B31653E00FDFA2B /* WebController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1971,6 +1976,7 @@
 				EFE837B51B12F62A0093E14E /* purchase.m in Sources */,
 				EFC86A7D1B1E8D7E0081BBC8 /* BuyFlowViewController.m in Sources */,
 				EFF3D0D61B2EB4A800B2F446 /* RSADataVerifier.m in Sources */,
+				83A085981B31653E00FDFA2B /* WebController.m in Sources */,
 				EFF3D0D51B2EB4A800B2F446 /* RSADataSigner.m in Sources */,
 				EFE837B91B12FA3C0093E14E /* app.m in Sources */,
 				EF565D411B17091F00FC2D6B /* findBackPwViewController.m in Sources */,

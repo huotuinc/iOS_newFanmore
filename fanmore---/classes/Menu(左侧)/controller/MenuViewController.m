@@ -94,21 +94,9 @@
     self.optionList.tableHeaderView = [[UIView alloc] init];
     
   
-    
-    self.flowLable.userInteractionEnabled = YES;
-//    [self.flowLable bk_whenTapped:^{ //流量详情
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
-////        traffic.userInfo = user;
-//        [self.navigationController pushViewController:traffic animated:YES];
-//    }];
-    
-     self.nameLable.userInteractionEnabled = YES;
-    [self.nameLable bk_whenTapped:^{//登入按钮
 
-        LoginViewController * login = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:login animated:YES];
-    }];
+    
+    
     
 }
 
@@ -119,6 +107,18 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:loginFlag] isEqualToString:@"right"]) {
+        self.nameLable.userInteractionEnabled = NO;
+    }else {
+        self.nameLable.userInteractionEnabled = YES;
+        [self.nameLable bk_whenTapped:^{//登入按钮
+            
+            LoginViewController * login = [[LoginViewController alloc] init];
+            [self.navigationController pushViewController:login animated:YES];
+        }];
+    }
+    
     if (self.isLogin) {
         
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -141,20 +141,26 @@
         //3、设置当前用户流量
         self.flowLable.text = [NSString stringWithFormat:@"%dM",user.balance];
         
+        self.flowLable.userInteractionEnabled = YES;
         [self.flowLable bk_whenTapped:^{ //流量详情
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
                     traffic.userInfo = user;
             [self.navigationController pushViewController:traffic animated:YES];
         }];
+        //4.关闭头像点击事件
+        self.userProfileBtn.userInteractionEnabled = NO;
+        
+        //5.开启下个页面的点击事件
+        self.backButton.userInteractionEnabled = YES;
+        self.flowLable.userInteractionEnabled = YES;
+        
     }else{
-        if ([[[NSUserDefaults standardUserDefaults] stringForKey:loginFlag] isEqualToString:@"right"]) {
-            self.nameLable.text = @"登陆";
-            [self.flowLable bk_whenTapped:^{ //流量详情
-                LoginViewController * login = [[LoginViewController alloc] init];
-                [self.navigationController pushViewController:login animated:YES];
-            }];
-        }
+        
+        self.nameLable.text = @"点击头像登陆";
+        self.userProfileBtn.userInteractionEnabled = YES;
+        self.backButton.userInteractionEnabled = NO;
+        self.flowLable.userInteractionEnabled = NO;
         
     }
 
@@ -297,9 +303,19 @@
 
 
 - (IBAction)backAction:(UIButton *)sender {
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+    traffic.userInfo = user;
     [self.navigationController pushViewController:traffic animated:YES];
+}
+
+- (IBAction)userProfileBtn:(id)sender {
+    
+    LoginViewController * login = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:login animated:YES];
 }
 
 

@@ -1013,6 +1013,7 @@
                         <outlet property="exchageButton" destination="PT3-i1-kYX" id="dIg-ZV-Hln"/>
                         <outlet property="flowNumber" destination="ys7-Z0-QYc" id="QM2-0s-5Ch"/>
                         <outlet property="friendButton" destination="2sW-Kx-T0g" id="Vt1-RU-1Qy"/>
+                        <outlet property="promptLabel" destination="rqY-pV-NGU" id="S48-B1-8bO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hLY-5U-TKo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1543,10 +1544,10 @@
             </objects>
             <point key="canvasLocation" x="-577" y="1672"/>
         </scene>
-        <!--View Controller-->
+        <!--Web Controller-->
         <scene sceneID="HhS-4w-HJJ">
             <objects>
-                <viewController id="cGA-Ik-1hq" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebController" id="cGA-Ik-1hq" customClass="WebController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JCh-tz-Rer"/>
                         <viewControllerLayoutGuide type="bottom" id="qxz-d8-W3z"/>
@@ -1568,6 +1569,9 @@
                             <constraint firstItem="053-Vl-xvI" firstAttribute="leading" secondItem="rUI-R7-O7a" secondAttribute="leading" id="b9b-77-lq5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="053-Vl-xvI" id="ohJ-6h-qrk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCg-Ak-gby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1885,6 +1889,9 @@
                                         </state>
                                         <state key="selected" image="headImage" backgroundImage="mrtou_h"/>
                                         <state key="highlighted" image="headImage" backgroundImage="mrtou_h"/>
+                                        <connections>
+                                            <action selector="userProfileBtn:" destination="pIB-ai-sCt" eventType="touchUpInside" id="bDE-q3-4AS"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPV-0E-Het" userLabel="I">
                                         <rect key="frame" x="260" y="0.0" width="40" height="80"/>
@@ -1978,6 +1985,7 @@
                     <navigationItem key="navigationItem" id="xRt-xP-Rwl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="DPV-0E-Het" id="VpE-aJ-saV"/>
                         <outlet property="flowLable" destination="Hft-I8-uXn" id="CkJ-Ko-ljr"/>
                         <outlet property="nameLable" destination="f5t-SA-sKB" id="6Ku-fl-hWn"/>
                         <outlet property="optionList" destination="4IB-So-oIq" id="Shq-So-Qq1"/>

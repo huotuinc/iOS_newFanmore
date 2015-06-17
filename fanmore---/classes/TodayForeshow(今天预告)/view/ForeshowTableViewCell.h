@@ -25,6 +25,6 @@
 
 //+ (instancetype)ForeshowTableViewCell;
 
-- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *) times andFlayLabel:(NSString *) FlayLabel andContentLabel:(NSString *) Content;
+- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *) times andFlayLabel:(NSString *) FlayLabel andContentLabel:(NSString *) Content andOnlineImage:(BOOL) isOnline;
 
 @end
