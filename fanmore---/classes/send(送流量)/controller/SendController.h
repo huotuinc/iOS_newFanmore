@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSMutableArray *searchArray;
 
+
 @property (strong, nonatomic) UITableView *ResultsTableView;
 
 /**

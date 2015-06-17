@@ -24,6 +24,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UIButton *exchageButton;
 @property (weak, nonatomic) IBOutlet UIButton *friendButton;
+/**
+ *  提示文字
+ */
+@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 
 /**
  *  选择视图
@@ -38,7 +42,7 @@
 
 - (IBAction)exchangeAction:(id)sender;
 - (IBAction)buyAction:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *friendAction;
+- (IBAction)friendAction:(id)sender;
 
 @property (assign, nonatomic) NSInteger itemNum;
 

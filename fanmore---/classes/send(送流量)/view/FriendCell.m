@@ -23,6 +23,11 @@
     self.operatorLabel.text = operatorStr;
 }
 
+- (void)setUserName:(NSString *)userName AndUserPhone:(NSString *)userPhone {
+    self.userName.text = userName;
+    self.userPhone.text = userPhone;
+}
+
 
 - (void)awakeFromNib {
     // Initialization code

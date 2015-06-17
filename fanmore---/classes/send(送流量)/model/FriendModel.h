@@ -22,4 +22,8 @@
 
 @property (nonatomic, copy) NSString *operatorLabel;
 
+@property (nonatomic, strong) NSString *fristLetter;
+
+@property (nonatomic, strong) NSString *hanyupingyin;
+
 @end

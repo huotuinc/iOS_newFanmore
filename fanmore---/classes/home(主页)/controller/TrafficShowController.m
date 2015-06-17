@@ -10,8 +10,9 @@
 #import "BuyFlowViewController.h"
 #import "BPViewController.h"
 #import "ConversionController.h"
+#import "FriendMessageController.h"
 
-@interface TrafficShowController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface TrafficShowController ()
 
 @property (assign, nonatomic) int num;
 
@@ -31,7 +32,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     
     self.flowNumber.text = [NSString stringWithFormat:@"%dM",self.userInfo.balance];
-    self.PICView.progress = 0.8;
+    self.PICView.progress = self.userInfo.balance / 500.0;
     self.PICView.thicknessRatio = 0.15;
     self.PICView.showText = NO;
     self.PICView.roundedHead = NO;
@@ -42,20 +43,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.PICView.progressTopGradientColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
     self.PICView.progressBottomGradientColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
     
-    self.itemNum = 11;
+    self.promptLabel.text = [NSString stringWithFormat:@"你还差%dM，可以兑换%dM流量", 500  - self.userInfo.balance, 500];
     
-    if (ScreenWidth - 40 > 25 + 4 * 80 ) {
-        self.num = 4;
-    }else {
-        self.num = 3;
-    }
-#pragma view高度自适应
-    //view高度
-    if (self.itemNum % self.num) {
-        self.collectionHeight = (self.itemNum / self.num + 1) * 70;
-    }else {
-        self.collectionHeight = self.itemNum / self.num * (60 + 10);
-    }
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -77,54 +66,6 @@ static NSString *collectionViewidentifier = @"collectionCell";
 
 
 
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-//{
-//    return self.itemNum;
-//}
-//
-////- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-////{
-////    if (self.itemNum % self.num) {
-////        return self.itemNum / self.num + 1;
-////    }else {
-////        return self.itemNum / self.num;
-////    }
-////}
-//
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return CGSizeMake(80, 60);
-//}
-//
-//
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:collectionViewidentifier forIndexPath:indexPath];
-//    if (!cell) {
-//        cell = [[UICollectionViewCell alloc] init];
-//    }
-//    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button－G"]];
-//    image.frame = CGRectMake(0, 0, 80, 60);
-//    cell.contentMode = UIViewContentModeScaleAspectFit;
-//    [cell.contentView addSubview:image];
-//    
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
-//    label.text = @"100M";
-//    label.textAlignment = NSTextAlignmentCenter;
-//    [cell addSubview:label];
-//    
-//    return cell;
-//}
-//
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [UIView animateWithDuration:0.35 animations:^{
-//
-//        self.bgView.hidden = YES;
-//        [self.navigationController setNavigationBarHidden:NO];
-//    }];
-//    
-//}
 
 
 
@@ -170,6 +111,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     BuyFlowViewController *buy = [storyboard instantiateViewControllerWithIdentifier:@"BuyFlowViewController"];
     [self.navigationController pushViewController:buy animated:YES];
+}
+
+- (IBAction)friendAction:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FriendMessageController *fm = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
+    [self.navigationController pushViewController:fm animated:YES];
 }
 
 

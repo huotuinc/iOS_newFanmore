@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLable;
 /**提醒按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *timeButton;
+/**已上线标签*/
+@property (weak, nonatomic) IBOutlet UIImageView *onlineImage;
 
 /**
  *  已经设置提醒
@@ -48,7 +50,7 @@
  *  @param FlayLabel <#FlayLabel description#>
  *  @param Content   <#Content description#>
  */
-- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *)times andFlayLabel:(NSString *)FlayLabel andContentLabel:(NSString *)Content{
+- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *)times andFlayLabel:(NSString *)FlayLabel andContentLabel:(NSString *)Content andOnlineImage:(BOOL)isOnline{
 
     NSURL * imageUrl = [NSURL URLWithString:imageStr];
     //1设置今日预告图片
@@ -62,6 +64,9 @@
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
     self.timeLable.text = publishtime;
+    
+
+    self.onlineImage.hidden = !isOnline;
     
 
  

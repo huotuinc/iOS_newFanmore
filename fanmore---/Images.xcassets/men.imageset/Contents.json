@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "nv.png"
+      "filename" : "nan(1).png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "nv@2x.png"
+      "filename" : "nan@2x(1).png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "nv@3x.png"
+      "filename" : "nan@3x(1).png"
     }
   ],
   "info" : {

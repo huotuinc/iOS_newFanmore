@@ -964,7 +964,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="buyAction:" destination="Tml-jd-JxY" eventType="touchUpInside" id="Igt-Hv-SNL"/>
+                                    <action selector="friendAction:" destination="Tml-jd-JxY" eventType="touchUpInside" id="b1k-YB-i5A"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1012,8 +1012,8 @@
                         <outlet property="buyButton" destination="wqs-wm-Lyd" id="yHG-zl-uf1"/>
                         <outlet property="exchageButton" destination="PT3-i1-kYX" id="dIg-ZV-Hln"/>
                         <outlet property="flowNumber" destination="ys7-Z0-QYc" id="QM2-0s-5Ch"/>
-                        <outlet property="friendAction" destination="2sW-Kx-T0g" id="Raa-Kc-z8U"/>
-                        <outlet property="friendButton" destination="2sW-Kx-T0g" id="uE4-n0-MRD"/>
+                        <outlet property="friendButton" destination="2sW-Kx-T0g" id="Vt1-RU-1Qy"/>
+                        <outlet property="promptLabel" destination="rqY-pV-NGU" id="S48-B1-8bO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hLY-5U-TKo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1544,10 +1544,10 @@
             </objects>
             <point key="canvasLocation" x="-577" y="1672"/>
         </scene>
-        <!--View Controller-->
+        <!--Web Controller-->
         <scene sceneID="HhS-4w-HJJ">
             <objects>
-                <viewController id="cGA-Ik-1hq" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebController" id="cGA-Ik-1hq" customClass="WebController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JCh-tz-Rer"/>
                         <viewControllerLayoutGuide type="bottom" id="qxz-d8-W3z"/>
@@ -1569,10 +1569,50 @@
                             <constraint firstItem="053-Vl-xvI" firstAttribute="leading" secondItem="rUI-R7-O7a" secondAttribute="leading" id="b9b-77-lq5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="053-Vl-xvI" id="ohJ-6h-qrk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCg-Ak-gby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="90" y="1666"/>
+        </scene>
+        <!--Friend Message Controller-->
+        <scene sceneID="Pno-IX-o3q">
+            <objects>
+                <viewController storyboardIdentifier="FriendMessageController" id="mba-mn-iGi" customClass="FriendMessageController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fhS-g3-vPt"/>
+                        <viewControllerLayoutGuide type="bottom" id="ktA-RT-o6N"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BOu-YY-lv3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="caV-9L-kKm">
+                                <rect key="frame" x="0.0" y="-44" width="600" height="644"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="mba-mn-iGi" id="8tQ-yx-8LI"/>
+                                    <outlet property="delegate" destination="mba-mn-iGi" id="q92-TV-lA8"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="caV-9L-kKm" secondAttribute="trailing" id="5MW-34-XEl"/>
+                            <constraint firstItem="caV-9L-kKm" firstAttribute="leading" secondItem="BOu-YY-lv3" secondAttribute="leading" id="9eR-R6-e1w"/>
+                            <constraint firstAttribute="bottom" secondItem="caV-9L-kKm" secondAttribute="bottom" id="qm6-3i-dYZ"/>
+                            <constraint firstItem="caV-9L-kKm" firstAttribute="top" secondItem="fhS-g3-vPt" secondAttribute="bottom" constant="-64" id="yA1-eu-a0M"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="caV-9L-kKm" id="E7T-KI-vYN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b8q-ws-wzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="90" y="2323"/>
         </scene>
         <!--Join Controller-->
         <scene sceneID="UTE-Ly-6h3">
@@ -1849,6 +1889,9 @@
                                         </state>
                                         <state key="selected" image="headImage" backgroundImage="mrtou_h"/>
                                         <state key="highlighted" image="headImage" backgroundImage="mrtou_h"/>
+                                        <connections>
+                                            <action selector="userProfileBtn:" destination="pIB-ai-sCt" eventType="touchUpInside" id="bDE-q3-4AS"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPV-0E-Het" userLabel="I">
                                         <rect key="frame" x="260" y="0.0" width="40" height="80"/>
@@ -1942,6 +1985,7 @@
                     <navigationItem key="navigationItem" id="xRt-xP-Rwl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="DPV-0E-Het" id="VpE-aJ-saV"/>
                         <outlet property="flowLable" destination="Hft-I8-uXn" id="CkJ-Ko-ljr"/>
                         <outlet property="nameLable" destination="f5t-SA-sKB" id="6Ku-fl-hWn"/>
                         <outlet property="optionList" destination="4IB-So-oIq" id="Shq-So-Qq1"/>
@@ -2025,17 +2069,6 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEO-Ss-bqk">
-                                        <rect key="frame" x="30" y="350" width="150" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="AEO-Ss-bqk" secondAttribute="height" multiplier="1:1" id="yLC-7z-lrH"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="周日" backgroundImage="asignGray">
-                                            <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Zs-eJ-c6f">
                                         <rect key="frame" x="420" y="350" width="150" height="150"/>
                                         <constraints>
@@ -2066,6 +2099,17 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="周二" backgroundImage="asignGray">
+                                            <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEO-Ss-bqk">
+                                        <rect key="frame" x="30" y="350" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="AEO-Ss-bqk" secondAttribute="height" multiplier="1:1" id="yLC-7z-lrH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="周日" backgroundImage="asignGray">
                                             <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>

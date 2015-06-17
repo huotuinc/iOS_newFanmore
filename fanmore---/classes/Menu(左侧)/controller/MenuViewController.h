@@ -10,5 +10,7 @@
 
 @interface MenuViewController : UIViewController
 - (IBAction)backAction:(UIButton *)sender;
+- (IBAction)userProfileBtn:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @end
