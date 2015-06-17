@@ -11,4 +11,11 @@
 @interface WebController : UIViewController
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
+
+/**正确的答案数量*/
+@property(nonatomic,assign) int ritghtAnswer;
+
+/**答题的总数量*/
+@property(nonatomic,assign) NSUInteger totleQuestion;
+
 @end

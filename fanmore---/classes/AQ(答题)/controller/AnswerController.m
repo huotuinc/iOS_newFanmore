@@ -13,6 +13,8 @@
 #import <UIImageView+WebCache.h>
 #import "UserLoginTool.h"
 #import "detailViewController.h"
+#include "WebController.h"
+
 @interface AnswerController ()
 
 /**答案*/
@@ -23,6 +25,7 @@
 @implementation AnswerController
 
 static int _qindex = 0;
+int _rightQuest = 0;  //纪录正确的答题数
 
 
 - (NSMutableString *)ans
@@ -73,8 +76,16 @@ static int _qindex = 0;
             NSLog(@"dadasdasdasdasdxxx0000000 %@",self.ans);
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-                [MBProgressHUD showMessage:json[@"resultDescription"]];
+                
                 NSLog(@"%@",json);
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
+                {
+                    WebController * show = [[WebController alloc] init];
+                    show.totleQuestion = self.questions.count;
+                    show.ritghtAnswer = _rightQuest;
+                    [self.navigationController pushViewController:show animated:YES];
+                }
+                
                 [MBProgressHUD hideHUD];
             } failure:^(NSError *error) {
                 NSLog(@"%@",[error description]);
@@ -162,7 +173,7 @@ static int _qindex = 0;
     _qindex++;
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
-
+        _rightQuest++;
     }else {
         [self showTureAnswer];
         [sender setBackgroundImage:[UIImage imageNamed:@"A_c"] forState:UIControlStateNormal];
@@ -177,6 +188,7 @@ static int _qindex = 0;
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
+        _rightQuest++;
 
     }else {
         [self showTureAnswer];
@@ -193,6 +205,7 @@ static int _qindex = 0;
    [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
+        _rightQuest++;
 
     }else {
         [self showTureAnswer];
@@ -209,6 +222,7 @@ static int _qindex = 0;
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     if (self.DButton.tag == self.tureAnswer) {
         [self showTureAnswer];
+        _rightQuest++;
     }else {
         [self showTureAnswer];
         [self.DButton setBackgroundImage:[UIImage imageNamed:@"D_c"] forState:UIControlStateNormal];
