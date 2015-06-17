@@ -23,5 +23,8 @@
 @property (assign, nonatomic) BOOL isWarning;
 @property(nonatomic,strong) id <ForeshowTableViewCellDelegate> delegate;
 
-+ (instancetype)ForeshowTableViewCell;
+//+ (instancetype)ForeshowTableViewCell;
+
+- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *) times andFlayLabel:(NSString *) FlayLabel andContentLabel:(NSString *) Content;
+
 @end

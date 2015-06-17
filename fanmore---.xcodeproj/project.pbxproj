@@ -1219,6 +1219,7 @@
 		EF8D672D1B0DD07E008B6909 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+                83E263EB1B2F018500A2AC96 /* PinYin4Objc */,
 				EFCC33F51B3002BD0018B228 /* WeiXInlib */,
 				EFAEB3211B291D6600855D25 /* FSMediaPicker */,
 				EFC86ACE1B1EFD700081BBC8 /* ShareSDK */,
@@ -1954,6 +1955,7 @@
 				EFF3D0D11B2EB4A800B2F446 /* DataVerifier.m in Sources */,
 				EF565D101B16B7AB00FC2D6B /* AccountSettingViewController.m in Sources */,
 				EFCC33FB1B3002BD0018B228 /* TenpayUtil.mm in Sources */,
+                83E263EA1B2EAEA700A2AC96 /* FriendModel.m in Sources */,
 				EF565D511B170AF600FC2D6B /* LoginResultData.m in Sources */,
 				836D6AAB1B1C776000119B3F /* JoinController.m in Sources */,
 				83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */,

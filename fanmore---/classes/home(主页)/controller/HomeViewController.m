@@ -176,13 +176,14 @@ static NSString *homeCellidentify = @"homeCellId";
 -(void)getNewMoreData:(NSMutableDictionary *)params{
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    __weak HomeViewController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
-            [taskaa addObjectsFromArray:self.taskDatas];
-            self.taskDatas = taskaa;
-            [self.tableView reloadData];    //刷新数据
+            [taskaa addObjectsFromArray:wself.taskDatas];
+            wself.taskDatas = taskaa;
+            [wself.tableView reloadData];    //刷新数据
         }
             
     } failure:^(NSError *error) {
@@ -244,9 +245,6 @@ static NSString *homeCellidentify = @"homeCellId";
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
-    NSLog(@"xxxxxxxx====time  ===%@",publishtime);
-    NSLog(@"pictureURL==%@   title==%@",task.pictureURL,task.title);
-    
     int a = 0;  //首页右下角标志
     if([task.last intValue]==0){
         a = 2;

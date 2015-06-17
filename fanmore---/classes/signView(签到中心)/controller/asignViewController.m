@@ -74,8 +74,8 @@
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
-    NSInteger week = [self getWeek];  //获取今天是周几
-    self.asignBtn.userInteractionEnabled = !((1<<(7-week)) & (userInfo.signInfo)) == (1<<(7-week));
+//    NSInteger week = [self getWeek];  //获取今天是周几
+//    self.asignBtn.userInteractionEnabled = !((1<<(7-week)) & (userInfo.signInfo)) == (1<<(7-week));
    
     for (UIButton * btn in self.buttons) {
         
@@ -157,6 +157,13 @@
     NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
     [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
         NSLog(@"%@",json);
+        
+        
+        if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
+             [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"今日已签到，请明天来签到"];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==1) {
             
             [MBProgressHUD showSuccess:@"签到成功" toView:self.view];

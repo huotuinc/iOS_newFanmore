@@ -10,8 +10,10 @@
 
 @interface taskData : NSObject
 
+/**任务倒记时时间读秒*/
+@property(nonatomic,assign) int  backTime;
+/**任务编号*/
 @property(nonatomic,assign) int  taskId;
-
 /**标题*/
 @property(nonatomic,strong) NSString * title;
 /**图片连接*/

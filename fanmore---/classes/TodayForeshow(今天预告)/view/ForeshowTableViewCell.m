@@ -7,7 +7,7 @@
 //
 
 #import "ForeshowTableViewCell.h"
-
+#import <UIImageView+WebCache.h>
 
 @interface ForeshowTableViewCell()
 
@@ -38,8 +38,33 @@
 
 @implementation ForeshowTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+
+/**
+ *  设置
+ *
+ *  @param imageStr  <#imageStr description#>
+ *  @param name      <#name description#>
+ *  @param time      <#time description#>
+ *  @param FlayLabel <#FlayLabel description#>
+ *  @param Content   <#Content description#>
+ */
+- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *)times andFlayLabel:(NSString *)FlayLabel andContentLabel:(NSString *)Content{
+
+    NSURL * imageUrl = [NSURL URLWithString:imageStr];
+    //1设置今日预告图片
+    [self.iconView sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"mrtou_h"] options:SDWebImageRetryFailed];
+    self.title.text = name;
+    self.flowlable.text = [NSString stringWithFormat:@"免费领取%@M",FlayLabel];
+    self.contextLable.text = Content;
+    
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[times doubleValue]];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString * publishtime = [formatter stringFromDate:ptime];
+    self.timeLable.text = publishtime;
+    
+
+ 
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -50,16 +75,11 @@
 
 - (IBAction)timeButtonClick:(id)sender {
     
-    
-    NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-    
     if ([self.delegate respondsToSelector:@selector(ForeshowTableViewCellSetTimeAlert:)]) {
         
         [self.delegate ForeshowTableViewCellSetTimeAlert:self];
         
     }
-    
-    
     if (!self.isWarning) {
         UILocalNotification * notification = [[UILocalNotification alloc] init];
         if (notification != nil) {
@@ -71,7 +91,6 @@
             
             NSDictionary* info = [NSDictionary dictionaryWithObject:@"1121`2" forKey:@"good"];
             notification.userInfo = info;
-//            notification.applicationIconBadgeNumber = [[[UIApplication sharedApplication] scheduledLocalNotifications] count]+1;
             NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:1],@"nfkey",nil];
             notification.userInfo = dict;
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
