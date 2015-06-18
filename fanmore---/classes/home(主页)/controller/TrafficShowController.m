@@ -15,24 +15,50 @@
 @interface TrafficShowController ()
 
 @property (assign, nonatomic) int num;
-
 /**已赚取的流量*/
 @property (weak, nonatomic) IBOutlet UILabel *flowNumber;
-
+/**兑换流量选项*/
+@property(nonatomic,strong) NSArray * flays;
 @end
 
 @implementation TrafficShowController
-
 static NSString *collectionViewidentifier = @"collectionCell";
+/**
+ *  兑换流量选项
+ *
+ *  @return <#return value description#>
+ */
+- (NSArray *)flays{
+    
+    if (_flays == nil) {
+        _flays = [NSArray array];
+        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
+            
+            NSLog(@"xxxxxxxxx%@",json);
+            if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
+                
+                _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+    _flays = [_flays sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        return [obj1 compare:obj2];
+    }];
+    return _flays;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    
-    self.flowNumber.text = [NSString stringWithFormat:@"%dM",self.userInfo.balance];
-    self.PICView.progress = self.userInfo.balance / 500.0;
+    self.title = @"流量明细";
+    self.flays;
+    self.flowNumber.text = [NSString stringWithFormat:@"%@M",self.userInfo.balance];
+    self.PICView.progress = [self.userInfo.balance floatValue] / 500.0;
     self.PICView.thicknessRatio = 0.15;
     self.PICView.showText = NO;
     self.PICView.roundedHead = NO;
@@ -43,7 +69,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.PICView.progressTopGradientColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
     self.PICView.progressBottomGradientColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
     
-    self.promptLabel.text = [NSString stringWithFormat:@"你还差%dM，可以兑换%dM流量", 500  - self.userInfo.balance, 500];
+    
+    self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%dM流量", 500  - [self.userInfo.balance floatValue], 500];
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -101,8 +128,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
 - (IBAction)exchangeAction:(id)sender { //流量交换
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
     ConversionController *con = [storyboard instantiateViewControllerWithIdentifier:@"ConversionController"];
+    con.itemNum = self.flays.count;
+    con.flays = self.flays;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:con];
     [self presentViewController:nav animated:YES completion:nil];
 }

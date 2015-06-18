@@ -7,10 +7,12 @@
 //
 
 #import "ConversionController.h"
-
+#import "UserLoginTool.h"
+#import "userData.h"
 @interface ConversionController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate>
 
 
+@property(nonatomic,strong) userData * userInfo;
 
 @end
 
@@ -18,10 +20,26 @@
 
 static NSString *collectionViewidentifier = @"collectionCell";
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.itemNum = 11;
+NSString * _changeflah = nil;
+
+
+- (userData *)userInfo{
     
+    if (_userInfo == nil) {
+        
+        //初始化
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        //1、保存个人信息
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        _userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName]; //保存用户信息
+    }
+    
+    return _userInfo;
+}
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
     if (ScreenWidth - 40 > 25 + 4 * 80 ) {
         self.num = 4;
     }else {
@@ -34,23 +52,14 @@ static NSString *collectionViewidentifier = @"collectionCell";
     }else {
         self.collectionHeight = self.itemNum / self.num * (60 + 10);
     }
-    
-    
     self.bgView = [[UIView alloc] initWithFrame:CGRectMake( 0, 64, ScreenWidth, ScreenHeight - 64)];
     self.bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
     [self.view addSubview:self.bgView];
     
-//    UITapGestureRecognizer *reg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(regAction:)];
-//    
-//    [self.bgView addGestureRecognizer:reg];
-    
-    
-    
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [flowLayout setMinimumLineSpacing:5];
-//    [flowLayout setFooterReferenceSize:CGSizeMake(0, 10)];
-    
+
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, ScreenHeight / 2 - self.collectionHeight / 2 - 32, ScreenWidth - 40, self.collectionHeight) collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -62,28 +71,19 @@ static NSString *collectionViewidentifier = @"collectionCell";
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y - 35, self.collectionView.frame.size.width, 25)];
     label.text = @"流量兑换当月有效";
     [self.bgView addSubview:label];
-    
-
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"取消" style:UIBarButtonItemStylePlain handler:^(id sender) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
-//    [self.navigationController setNavigationBarHidden:NO];
+
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+   
     return self.itemNum;
 }
 
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-//{
-//    if (self.itemNum % self.num) {
-//        return self.itemNum / self.num + 1;
-//    }else {
-//        return self.itemNum / self.num;
-//    }
-//}
+
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -99,13 +99,15 @@ static NSString *collectionViewidentifier = @"collectionCell";
     }
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button－G"]];
     
+    NSString * flayMount = [NSString stringWithFormat:@"%@",self.flays[indexPath.row]];
+
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
-    label.text = @"100M";
+    label.text = flayMount;
     label.textAlignment = NSTextAlignmentCenter;
     [cell addSubview:label];
     
 //    cell.userInteractionEnabled = YES;
-    
+    NSLog(@"xcadasdasdasd");
     return cell;
 }
 
@@ -113,12 +115,36 @@ static NSString *collectionViewidentifier = @"collectionCell";
 {
     UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
     cell.backgroundColor = [UIColor orangeColor];
+    for (id aa in cell.subviews) {
+        
+        if ([aa isKindOfClass:[UILabel class]]) {
+            _changeflah = ((UILabel*)aa).text;
+        }
+    }
     UILabel *label = (UILabel *)[self.view viewWithTag:indexPath.row + indexPath.section * self.num + 100];
     label.textColor = [UIColor whiteColor];
     
+    if (([self.userInfo.balance floatValue]< [_changeflah floatValue])) {
+        [MBProgressHUD showError:@"当前可兑换流量不足"];
+        return;
+    }
+    
+    NSString *flaycount = [NSString stringWithFormat:@"是否兑换流量%@M",_changeflah];
     if (IsIos8) {
-        UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:nil message:@"是否兑换流量100M" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:nil message:flaycount preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            //兑换流量
+            NSString *url = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+            NSMutableDictionary *param = [NSMutableDictionary dictionary];
+            param[@"amount"] = _changeflah;
+            [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
+                
+                NSLog(@"%@",json);
+                
+            } failure:^(NSError *error) {
+                
+            }];
             [self dismissViewControllerAnimated:YES completion:nil];
         }];
         UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -129,7 +155,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
         [self presentViewController:alertVc animated:YES completion:nil];
     }else{ //非ios8
         
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message: @"是否兑换流量100M" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: @"取消",nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:flaycount delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: @"取消",nil];
         [alert show];
     }
 
@@ -139,6 +165,20 @@ static NSString *collectionViewidentifier = @"collectionCell";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (buttonIndex == 1) {
+        
+        //兑换流量
+        NSString *url = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        param[@"amount"] = _changeflah;
+        [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
+            
+            NSLog(@"%@",json);
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

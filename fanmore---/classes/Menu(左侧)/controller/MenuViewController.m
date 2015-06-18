@@ -139,10 +139,9 @@
             }
             
         }];
-        
         //3、设置当前用户流量
         self.flowLable.hidden = NO;
-        self.flowLable.text = [NSString stringWithFormat:@"%dM",user.balance];
+        self.flowLable.text = [NSString stringWithFormat:@"%@M",user.balance];
         
         self.flowLable.userInteractionEnabled = YES;
         [self.flowLable bk_whenTapped:^{ //流量详情

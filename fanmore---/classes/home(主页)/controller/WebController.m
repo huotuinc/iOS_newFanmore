@@ -17,12 +17,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.webView.delegate = self;
+    
+    NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
+    urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
+    urlStr = [urlStr stringByAppendingString:self.answerType];
+    urlStr = [NSString stringWithFormat:@"%@taskReward=%d&rights=%d&wrongs=%lu&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
+    NSLog(@"%@",urlStr);
+   NSURL * urlstr = [NSURL URLWithString:urlStr];
+    NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
+    [self.webView loadRequest:request];
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    });
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {

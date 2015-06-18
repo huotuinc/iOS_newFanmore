@@ -12,7 +12,7 @@
 
 - (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *)time andReceiveLabel:(NSString *)receive andJoinLabel:(NSString *)join andIntroduceLabel:(NSString *)introduce andGetImage:(int) selection
 {
-    [self.imageView sd_setImageWithPreviousCachedImageWithURL:[NSURL URLWithString:imageStr] andPlaceholderImage:nil options:SDWebImageRetryFailed progress:nil completed:nil];
+    [self.showImage sd_setImageWithPreviousCachedImageWithURL:[NSURL URLWithString:imageStr] andPlaceholderImage:[UIImage imageNamed:@"mrtou_b"] options:SDWebImageRetryFailed progress:nil completed:nil];
     self.nameLabel.text = name;
     self.timeLabel.text = time;
     self.receiveLabel.text = receive;

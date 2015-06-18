@@ -56,18 +56,16 @@ static NSString *homeCellidentify = @"homeCellId";
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    
     [super viewWillAppear:animated];
-    
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-    
 }
 
 - (void)loadView
 {
     [super loadView];
+    
     
 }
 
@@ -113,62 +111,10 @@ static NSString *homeCellidentify = @"homeCellId";
 
 }
 
-
-//#pragma mark 读取通讯录
-//- (void)getAdressBook
-//{
-//    ABAddressBookRef addressBooks = nil;
-//    
-//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
-//        
-//    {
-//        addressBooks =  ABAddressBookCreateWithOptions(NULL, NULL);
-//        
-//        //获取通讯录权限
-//        
-//        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-//        
-//        ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
-//        
-//        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-//
-//    }
-//    else
-//    {
-//        addressBooks = ABAddressBookCreate();
-//        
-//    }
-//    
-//    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
-//    CFIndex nPeople = ABAddressBookGetPersonCount(addressBooks);
-//    for (NSInteger i = 0; i < nPeople; i++) {
-//        //        TKAddressBook *addressBook = [[TKAddressBook alloc] init];
-//        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
-//        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
-//        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
-//        CFStringRef abFullName = ABRecordCopyCompositeName(person);
-//        NSString *nameString = (__bridge NSString *)abName;
-//        NSString *lastNameString = (__bridge NSString *)abLastName;
-//        if ((__bridge id)abFullName != nil) {
-//            nameString = (__bridge NSString *)abFullName;
-//        } else {
-//            if ((__bridge id)abLastName != nil)
-//            {
-//                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
-//            }
-//        }
-//        NSLog(@"%@",nameString);
-//    }
-//}
-
-
-
 #pragma mark 开始进入刷新状态
 //头部刷新
 - (void)headerRereshing  //加载最新数据
 {
-//    startIndex = @1;
-    
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     if (self.taskDatas.count) {
         taskData * aaa = [self.taskDatas firstObject];
@@ -176,11 +122,9 @@ static NSString *homeCellidentify = @"homeCellId";
     }else{
         params[@"pagingTag"] = @"";
     }
-    
     params[@"pagingSize"] = @(4);
     [self getNewMoreData:params];
-    
-//    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
 }
 
@@ -199,6 +143,7 @@ static NSString *homeCellidentify = @"homeCellId";
             NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
             [taskaa addObjectsFromArray:self.taskDatas];
             self.taskDatas = taskaa;
+            [self showHomeRefershCount:taskArray.count];
             [self.tableView reloadData];    //刷新数据
         }
             
@@ -223,13 +168,9 @@ static NSString *homeCellidentify = @"homeCellId";
     if (self.tableView.hidden) {
     }else {
         UIBarButtonItem *signInBarButton = [[UIBarButtonItem alloc] initWithTitle:@"签到" style:UIBarButtonItemStylePlain target:self  action:@selector(signInAction:)];
-//        signInBarButton.tintColor = [UIColor blackColor];
         NSArray *array = [NSArray arrayWithObjects:signInBarButton, nil];
         self.navigationItem.rightBarButtonItems = array;
     }
-    /**
-     *  设置签到和买流量
-     */
 }
 
 
@@ -257,7 +198,7 @@ static NSString *homeCellidentify = @"homeCellId";
     }
     //设置cell样式
     taskData * task = self.taskDatas[indexPath.row];
-    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[task.publishDate doubleValue]];
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[(task.publishDate) doubleValue]/1000.0];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
@@ -349,5 +290,46 @@ static NSString *homeCellidentify = @"homeCellId";
     NSInteger week = [comps weekday]-1;
     
     return week;
+}
+
+
+- (void) showHomeRefershCount:(NSUInteger)count{
+    
+    
+    UIButton * showBtn = [[UIButton alloc] init];
+    [self.navigationController.view insertSubview:showBtn belowSubview:self.navigationController.navigationBar];
+    showBtn.userInteractionEnabled = NO;
+    showBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [showBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [showBtn setBackgroundImage:[UIImage imageNamed:@"button-BR"] forState:UIControlStateNormal];
+    NSString * title = nil;
+    if (count>0) {
+        title = [NSString stringWithFormat:@"刷新了%lu条任务",(unsigned long)count];
+        [showBtn setTitle:title forState:UIControlStateNormal];
+        
+    }else{
+        [showBtn setTitle:@"没有新发布的任务" forState:UIControlStateNormal];
+    }
+    
+    CGFloat btnX = 10;
+    CGFloat btnH = 44;
+    CGFloat btnY = 64 - btnH;
+    CGFloat btnW = self.view.frame.size.width - 2 * btnX;
+    showBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        showBtn.transform = CGAffineTransformMakeTranslation(0, btnH+2);
+    } completion:^(BOOL finished) {
+        
+        [UIView animateKeyframesWithDuration:0.7 delay:1.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+            showBtn.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            
+            [showBtn removeFromSuperview];
+        }];
+    }];
+    
+    
 }
 @end
