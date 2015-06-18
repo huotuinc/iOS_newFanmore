@@ -245,7 +245,7 @@
     NSString * birthtime = [dateFormatter stringFromDate:datePick.date];
     NSData * date = [NSData data];
     
-    [date ]
+//    [date ]
     NSLog(@"------%@",datePick.date);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
