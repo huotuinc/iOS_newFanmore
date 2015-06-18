@@ -12,6 +12,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 //用户的爱好勾选
-@property (strong, nonatomic) NSArray *userHobby;
+@property (strong, nonatomic) NSString *userHobby;
 
 @end

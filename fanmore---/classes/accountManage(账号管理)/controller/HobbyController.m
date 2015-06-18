@@ -8,13 +8,14 @@
 
 #import "HobbyController.h"
 #import "GlobalData.h"
+#import "twoOption.h"
 
 
 @interface HobbyController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSArray *favs;
 
-@property (nonatomic, strong) NSArray *userSelected;
+@property (nonatomic, strong) NSMutableArray *userSelected;
 
 
 @end
@@ -26,23 +27,35 @@ static NSString *hobbyIdentify = @"hobbyCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"爱好";
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:hobbyIdentify];
-    
-}
-
-- (NSArray *)favsArray {
-    if (self.favs == nil) {
-        self.favs = [NSArray array];
+    if (_favs == nil) {
+        _favs = [NSArray array];
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString * fileName = [path stringByAppendingPathComponent:InitGlobalDate];
         GlobalData * global =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
         
-        self.favs = global.favs;
+        _favs = global.favs;
     }
-    return self.favs;
+    
+    self.title = @"爱好";
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:hobbyIdentify];
+    
+    self.userSelected = [NSMutableArray array];
+    
 }
+
+//- (NSArray *)favsArray {
+//    if (_favs == nil) {
+//        _favs = [NSArray array];
+//        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//        NSString * fileName = [path stringByAppendingPathComponent:InitGlobalDate];
+//        GlobalData * global =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+//        
+//        _favs = global.favs;
+//        NSLog(@"%@",global.favs);
+//    }
+//    return _favs;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -67,12 +80,12 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     if (cell == nil) {
         cell = [[UITableViewCell alloc] init];
     }
-    cell.textLabel.text = self.favs[indexPath.row];
-    for (NSString *str in self.userHobby) {
-        if ([cell.textLabel.text isEqualToString:str]) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            break;
-        }
+    
+    twoOption *str  = self.favs[indexPath.row];
+    cell.textLabel.text = str.name;
+    
+    if ([self.userHobby rangeOfString:cell.textLabel.text].location != NSNotFound) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     return cell;
 }
@@ -83,11 +96,37 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     [cell setSelected:NO];
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         cell.accessoryType = UITableViewCellAccessoryNone;
+        [self.userSelected removeObject:cell.textLabel.text];
     }else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.userSelected addObject:cell.textLabel.text];
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    NSMutableString *str = [NSMutableString string];
+    for (NSString *temp in self.userSelected) {
+        [str appendFormat:@"%@,",temp];
+    }
+    NSString *str1 = [str substringToIndex:[str length] - 1];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"profileType"] = @"5";
+    params[@"profileData"] = str1;
+    
+    NSString *urlStr = [MainURL stringByAppendingString:@"updateProfile"];
+    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
+        [MBProgressHUD showSuccess:@"上传成功"];
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+        [MBProgressHUD showError:@"上传失败"];
+    }];
+}
+//- (void)viewDisappear:(BOOL)animated
+//{
+//    
+//}
 
 
 /*
