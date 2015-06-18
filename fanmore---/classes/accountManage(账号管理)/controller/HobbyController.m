@@ -10,7 +10,7 @@
 #import "GlobalData.h"
 
 
-@interface HobbyController ()
+@interface HobbyController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSArray *favs;
 
@@ -51,10 +51,43 @@ static NSString *hobbyIdentify = @"hobbyCellId";
 
 #pragma mark tabelView
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.favs.count;
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:hobbyIdentify];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] init];
+    }
+    cell.textLabel.text = self.favs[indexPath.row];
+    for (NSString *str in self.userHobby) {
+        if ([cell.textLabel.text isEqualToString:str]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            break;
+        }
+    }
+    return cell;
+}
 
-#warning table 协议
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:NO];
+    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }else {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+}
+
 
 
 /*
