@@ -96,7 +96,7 @@
 
     self.nameLable.text = self.userinfo.realName; //2姓名
     self.sexLable.text =  self.userinfo.sex?@"男":@"女";  //3性别
-    self.birthDayLable.text = self.userinfo.birthDate;  //4
+//    self.birthDayLable.text = self.userinfo.birthDate;  //4
     
     for (twoOption * aa in glo.career) {
         if (aa.value == self.userinfo.career) {
@@ -208,7 +208,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
-    NSLog(@"xxxxxxxx====%@",info);
     UIImage * photoImage = info[@"UIImagePickerControllerOriginalImage"];
     [self.iconView setBackgroundImage:photoImage forState:UIControlStateNormal];
     NSData * data = nil;
