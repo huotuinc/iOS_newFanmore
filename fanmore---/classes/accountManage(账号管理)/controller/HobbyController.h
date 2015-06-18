@@ -11,6 +11,7 @@
 @interface HobbyController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (weak, nonatomic) NSArray *goods;
+//用户的爱好勾选
+@property (strong, nonatomic) NSArray *userHobby;
 
 @end

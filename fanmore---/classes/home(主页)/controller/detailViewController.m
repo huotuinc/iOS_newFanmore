@@ -178,7 +178,8 @@
     if ([flag isEqualToString:@"wrong"]) {//如果没有登入要登入
         
         LoginViewController * loginVc = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:loginVc animated:YES];
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
+        [self presentViewController:na animated:YES completion:nil];
         return;
     }
     //答题类型
@@ -195,7 +196,7 @@
     if ([self.type intValue] == 2) {//报名类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
+        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
         [self.navigationController pushViewController:answer animated:YES];
     }
     

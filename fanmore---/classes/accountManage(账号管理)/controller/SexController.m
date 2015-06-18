@@ -10,6 +10,8 @@
 
 @interface SexController ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (nonatomic, strong) NSIndexPath *selected;
+
 @end
 
 @implementation SexController
@@ -22,6 +24,8 @@
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = NO;
     [self.view addSubview:self.tableView];
+    
+    self.selected = [[NSIndexPath alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,11 +56,33 @@
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     if (indexPath.row == 0) {
         cell.textLabel.text = @"男";
+        if (self.sex) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            self.selected = indexPath;
+        }
     }else {
         cell.textLabel.text = @"女";
+        if (!self.sex) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            self.selected = indexPath;
+        }
     }
     return cell;
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //选中的cell打勾
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    UITableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:self.selected];
+    cell1.accessoryType = UITableViewCellAccessoryNone;
+    
+    #warning 网络访问 cell的数据上传
+}
+
 
 
 /*
