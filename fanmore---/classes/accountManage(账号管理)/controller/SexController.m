@@ -56,13 +56,13 @@
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     if (indexPath.row == 0) {
         cell.textLabel.text = @"男";
-        if (self.sex) {
+        if (!self.sex) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             self.selected = indexPath;
         }
     }else {
         cell.textLabel.text = @"女";
-        if (!self.sex) {
+        if (self.sex) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             self.selected = indexPath;
         }
@@ -80,7 +80,32 @@
     UITableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:self.selected];
     cell1.accessoryType = UITableViewCellAccessoryNone;
     
-    #warning 网络访问 cell的数据上传
+    
+    NSLog(@"xxxxxxxxxxxxxxxxxxx%@",cell.textLabel.text);
+    int a = 1;
+    if ([cell.textLabel.text isEqualToString:@"男"]) {
+        a= 0;
+    }
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    parame[@"profileType"] = @(6);
+    parame[@"profileData"] = @(a);
+    [UserLoginTool loginRequestPost:urlStr parame:parame success:^(id json) {
+        
+        NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+            userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

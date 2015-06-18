@@ -15,6 +15,8 @@
 @implementation NameController
 
 - (void)viewDidLoad {
+    
+    
     [super viewDidLoad];
     self.nameLabel.text = self.name;
 }
@@ -24,16 +26,35 @@
     // Dispose of any resources that can be recreated.
 }
 
-#warning 视图消失网络访问
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    NSLog(@"%@",self.nameLabel.text);
+    parame[@"profileType"] = @(1);
+    parame[@"profileData"] = self.nameLabel.text;
+    [UserLoginTool loginRequestPost:urlStr parame:parame success:^(id json) {
+        
+        NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+            userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    if ([self.delegate respondsToSelector:@selector(NameControllerpickName:)]) {
+        [self.delegate NameControllerpickName:self.nameLabel.text];
+    }
 }
-*/
+
+
 
 @end

@@ -15,8 +15,10 @@
 #import "GlobalData.h"
 #import "twoOption.h"
 #import "NameController.h"
+#import "SexController.h"
 
-@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate>
+
+@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate,NameControllerdelegate>
 
 @property(nonatomic,strong)NSArray * messages;
 /**1用户头像*/
@@ -60,6 +62,12 @@
     return _datePicker;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //初始化个人信息
+    [self setupPersonMessage];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,9 +76,7 @@
         
         [self.iconView setBackgroundImage:iconImage forState:UIControlStateNormal];
     }
-     //初始化个人信息
-    [self setupPersonMessage];
-    NSLog(@"xxxxxxxxxxxxx");
+    
 }
 /**
  *  初始化个人信息
@@ -94,8 +100,13 @@
     }];
 
     self.nameLable.text = self.userinfo.realName; //2姓名
-    self.sexLable.text =  self.userinfo.sex?@"男":@"女";  //3性别
-//    self.birthDayLable.text = self.userinfo.birthDate;  //4
+    self.sexLable.text =  self.userinfo.sex?@"女":@"男";  //3性别
+    
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(self.userinfo.birthDate/1000.0)];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString * publishtime = [formatter stringFromDate:ptime];
+    self.birthDayLable.text = publishtime;  //4
     
     for (twoOption * aa in glo.career) {
         if (aa.value == self.userinfo.career) {
@@ -103,10 +114,16 @@
             break;
         }
     }
+    for (twoOption * aa in glo.incomings) {
+        if (aa.value == self.userinfo.incoming) {
+            self.userIncomeLable.text = aa.name;//5
+            break;
+        }
+    }
     self.favLable.text = self.userinfo.favs; //7
     self.placeLable.text = self.userinfo.area;//8
     
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.userinfo.regDate];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:(self.userinfo.regDate/1000.0)];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString * retime = [dateFormatter stringFromDate:date];
@@ -167,11 +184,12 @@
                 [self presentViewController:alertVc animated:YES completion:nil];
             }
         }
-        if (indexPath.row == 1) {
+        if (indexPath.row == 1) { //姓名
             
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             NameController *nameVC = [storyboard instantiateViewControllerWithIdentifier:@"NameController"];
             nameVC.name = self.userinfo.realName;
+            nameVC.delegate = self;
             [self.navigationController pushViewController:nameVC animated:YES];
         }
         if (indexPath.row == 3) {//生日
@@ -242,9 +260,9 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString * birthtime = [dateFormatter stringFromDate:datePick.date];
-    NSData * date = [NSData data];
     
-//    [date ]
+    
+    
     NSLog(@"------%@",datePick.date);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
@@ -255,7 +273,7 @@
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     parame[@"profileType"] = @(2);
-    parame[@"profileData"] = self.birthDayLable.text;
+    parame[@"profileData"] =@((long long)[datePick.date timeIntervalSince1970] * 1000);
     [self toupDatePersonMessageWithApi:urlStr withParame:parame];
     
 }
@@ -268,11 +286,15 @@
         NSLog(@"大大叔大叔大叔大叔大叔大叔大叔的时代%@",json);
         [MBProgressHUD showSuccess:@"生日资料上传成功"];
         
-
-//        userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
-//        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-//        [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+            
+            userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            
+        }
+       
         
     } failure:^(NSError *error) {
         [MBProgressHUD showError:@"生日资料上传失败"];
@@ -288,23 +310,32 @@
 
 
 
-- (void)ProfessionalControllerBringBackCareer:(NSString *)career isFlag:(BOOL)flag{
+- (void)ProfessionalControllerBringBackCareer:(twoOption *)career isFlag:(BOOL)flag{
     
      NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     if (flag) {//职业
-        self.careerLable.text = career;
+         self.careerLable.text = career.name;
          parame[@"profileType"] = @(3);
     }else{
-        self.userIncomeLable.text = career;
+         self.userIncomeLable.text = career.name;
          parame[@"profileType"] = @(4);
     }
     //把职业上传到服务器
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
-    parame[@"profileData"] = career;
+    parame[@"profileData"] = @(career.value);
+    NSLog(@"%d",career.value);
     [self toupDatePersonMessageWithApi:urlStr withParame:parame];
     
 }
 
+- (void)NameControllerpickName:(NSString *)name{
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.nameLable.text = name;
+    });
+    
+}
 
 - (IBAction)iconViewCkick:(id)sender {
 }

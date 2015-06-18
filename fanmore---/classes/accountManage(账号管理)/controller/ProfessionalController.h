@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class twoOption;
 
 @protocol ProfessionalControllerDelegate <NSObject>
 
 @optional
 /**选择职业*/
-- (void) ProfessionalControllerBringBackCareer:(NSString *)career isFlag:(BOOL) flag;
+- (void) ProfessionalControllerBringBackCareer:(twoOption *)career isFlag:(BOOL) flag;
 
 @end
 

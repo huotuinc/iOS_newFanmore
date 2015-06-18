@@ -26,13 +26,13 @@
 /**真名姓名*/
 @property(nonatomic,strong) NSString * realName;
 /**生日*/
-@property(nonatomic,strong) NSString * birthDate;
+@property(nonatomic,assign) long long birthDate;
 /**电话*/
 @property(nonatomic,strong) NSString * mobile;
 /**职业索引*/
 @property(nonatomic,assign) int  career;
 /**收入索引*/
-@property(nonatomic,strong) NSString * incoming;
+@property(nonatomic,assign) int incoming;
 /**爱好索引串  以逗号隔开*/
 @property(nonatomic,strong) NSString * favs;
 /**区域*/

@@ -108,7 +108,7 @@ static NSString *professionalIdentify = @"pfCellId";
     
     twoOption * op = self.careers[indexPath.row];
     if ([self.delegate respondsToSelector:@selector(ProfessionalControllerBringBackCareer:isFlag:)]) {
-       [self.delegate ProfessionalControllerBringBackCareer:op.name isFlag:_isPrefessional];
+       [self.delegate ProfessionalControllerBringBackCareer:op isFlag:_isPrefessional];
      }
     [self.navigationController popViewControllerAnimated:YES];
 }
