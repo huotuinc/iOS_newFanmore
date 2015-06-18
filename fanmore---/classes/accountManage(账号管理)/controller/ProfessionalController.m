@@ -110,8 +110,31 @@ static NSString *professionalIdentify = @"pfCellId";
     if ([self.delegate respondsToSelector:@selector(ProfessionalControllerBringBackCareer:isFlag:)]) {
        [self.delegate ProfessionalControllerBringBackCareer:op isFlag:_isPrefessional];
      }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (self.isPrefessional) {
+        params[@"profileType"] = @"3";
+    }else {
+        params[@"profileType"] = @"4";
+    }
+    
+    params[@"profileData"] = @(indexPath.row);
+    
+    NSString *urlStr = [MainURL stringByAppendingString:@"updateProfile"];
+    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
+        [MBProgressHUD showSuccess:@"上传成功"];
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+        [MBProgressHUD showError:@"上传失败"];
+    }];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+    
+    
+
 
 
 @end

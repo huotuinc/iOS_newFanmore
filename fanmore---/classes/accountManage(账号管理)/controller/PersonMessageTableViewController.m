@@ -215,10 +215,9 @@
             [self.navigationController pushViewController:pro animated:YES];
         }
         if (indexPath.row == 2) { //爱好
-            ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
-            pro.delegate = self;
-            pro.currentCareer = self.userIncomeLable.text;
-            pro.isPrefessional = NO;
+            HobbyController *pro = [storyboard instantiateViewControllerWithIdentifier:@"HobbyController"];
+
+            pro.userHobby = self.userinfo.favs;
             [self.navigationController pushViewController:pro animated:YES];
         }
     }
