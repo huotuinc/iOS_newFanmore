@@ -14,6 +14,7 @@
 #import "userData.h"
 #import "GlobalData.h"
 #import "twoOption.h"
+#import "NameController.h"
 
 @interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate>
 
@@ -38,6 +39,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *registTimeLable;
 /**时间选择器*/
 @property(nonatomic,strong) UIDatePicker *datePicker;
+
+@property (nonatomic, strong) userData *userinfo;
+
 - (IBAction)iconViewCkick:(id)sender;
 @end
 
@@ -76,33 +80,33 @@
     //初始化
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString * fileName = [path stringByAppendingPathComponent:LocalUserDate];
-    userData * userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    self.userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
     fileName = [path stringByAppendingPathComponent:InitGlobalDate];
     GlobalData * glo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
    
     SDWebImageManager * manager = [SDWebImageManager sharedManager];
-    NSURL * url = [NSURL URLWithString:userinfo.pictureURL];
+    NSURL * url = [NSURL URLWithString:self.userinfo.pictureURL];
     [manager downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         
         [self.iconView setBackgroundImage:image forState:UIControlStateNormal];
     }];
 
-    self.nameLable.text = userinfo.realName; //2姓名
-    self.sexLable.text =  userinfo.sex?@"男":@"女";  //3性别
-    self.birthDayLable.text = userinfo.birthDate;  //4
+    self.nameLable.text = self.userinfo.realName; //2姓名
+    self.sexLable.text =  self.userinfo.sex?@"男":@"女";  //3性别
+    self.birthDayLable.text = self.userinfo.birthDate;  //4
     
     for (twoOption * aa in glo.career) {
-        if (aa.value == userinfo.career) {
+        if (aa.value == self.userinfo.career) {
             self.careerLable.text = aa.name;//5
             break;
         }
     }
-    self.favLable.text = userinfo.favs; //7
-    self.placeLable.text = userinfo.area;//8
+    self.favLable.text = self.userinfo.favs; //7
+    self.placeLable.text = self.userinfo.area;//8
     
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:userinfo.regDate];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.userinfo.regDate];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString * retime = [dateFormatter stringFromDate:date];
@@ -162,6 +166,13 @@
                 [alertVc addAction:action];
                 [self presentViewController:alertVc animated:YES completion:nil];
             }
+        }
+        if (indexPath.row == 1) {
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            NameController *nameVC = [storyboard instantiateViewControllerWithIdentifier:@"NameController"];
+            nameVC.name = self.userinfo.realName;
+            [self.navigationController pushViewController:nameVC animated:YES];
         }
         if (indexPath.row == 3) {//生日
             self.datePicker.center = self.view.center;

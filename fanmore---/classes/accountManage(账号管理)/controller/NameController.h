@@ -11,4 +11,6 @@
 @interface NameController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *nameLabel;
 
+@property (nonatomic, strong) NSString *name;
+
 @end

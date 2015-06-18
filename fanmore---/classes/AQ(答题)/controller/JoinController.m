@@ -23,13 +23,17 @@
     if (ScreenWidth == 1334 / 2) {
         self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"7501334"]];
     }
-    if (ScreenWidth == 2208 / 2) {
+    if (ScreenWidth == 2208 / 3) {
         self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"12422208"]];
     }
-//    if (ScreenWidth == 320) {
-//        <#statements#>
-//    }
-//    
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"640960"]];
+        }else {
+            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"6401136"]];
+        }
+    }
+    
 }
 
 - (void)viewDidLoad{

@@ -273,6 +273,9 @@ NSString *frinedCellIdentifier = @"friend";
             if ([model.hanyupingyin rangeOfString:str2].location != NSNotFound) {
                 [self.searchArray addObject:model];
             }
+            if ([model.name rangeOfString:str].location != NSNotFound) {
+                [self.searchArray addObject:model];
+            }
             
         }
        

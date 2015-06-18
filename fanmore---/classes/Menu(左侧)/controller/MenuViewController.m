@@ -305,16 +305,31 @@
             break;
         }
         case 5:{//签到中心
+            if (self.isLogin) {
+                asignViewController * asignVc = [storyboard instantiateViewControllerWithIdentifier:@"sign"];
+                [self.navigationController pushViewController:asignVc animated:YES];
+            }else{
+                LoginViewController * login = [[LoginViewController alloc] init];
+                login.loginType = 2;
+                login.delegate = self;
+                UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+                [self presentViewController:na animated:YES completion:nil];
+            }
             
-            asignViewController * asignVc = [storyboard instantiateViewControllerWithIdentifier:@"sign"];
-            [self.navigationController pushViewController:asignVc animated:YES];
             break;
         }
         case 6:{//送流量
-//            SendController *send = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
-//            [self.navigationController pushViewController:send animated:YES];
-            SendController *beg = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
-            [self.navigationController pushViewController:beg animated:YES];
+            if (self.isLogin) {
+                SendController *beg = [storyboard instantiateViewControllerWithIdentifier:@"SendController"];
+                [self.navigationController pushViewController:beg animated:YES];
+            }else{
+                LoginViewController * login = [[LoginViewController alloc] init];
+                login.loginType = 2;
+                login.delegate = self;
+                UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+                [self presentViewController:na animated:YES completion:nil];
+            }
+            
         }
             
         default:
