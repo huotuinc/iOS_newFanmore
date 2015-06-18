@@ -217,12 +217,13 @@
     } else {
         data = UIImagePNGRepresentation(photoImage);
     }
-    NSString * imageString = [GTMBase64 stringByEncodingData:data];
+    
+//    NSString * imageString = [GTMBase64 en];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"profileType"] = @"0";
-    params[@"profileData"] = imageString;
-//    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
-    NSString *urlStr = @"http://192.168.0.15:8080/fanmoreweb/app/updateProfile";
+//    params[@"profileData"] = imageString;
+    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
         
         NSLog(@"上传头像success===%@",json);
@@ -242,7 +243,10 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString * birthtime = [dateFormatter stringFromDate:datePick.date];
- 
+    NSData * date = [NSData data];
+    
+    [date ]
+    NSLog(@"------%@",datePick.date);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [datePick removeFromSuperview];
@@ -262,13 +266,14 @@
 
     [UserLoginTool loginRequestPost:urlStr parame:paremes success:^(id json) {
         
+        NSLog(@"大大叔大叔大叔大叔大叔大叔大叔的时代%@",json);
         [MBProgressHUD showSuccess:@"生日资料上传成功"];
         
-#warning 保存本地用户数据
-//        userData * user = [userData objectWithKeyValues:json[]]
+
+//        userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
 //        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 //        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-//        [NSKeyedArchiver archiveRootObject: toFile:fileName];
+//        [NSKeyedArchiver archiveRootObject:user toFile:fileName];
         
     } failure:^(NSError *error) {
         [MBProgressHUD showError:@"生日资料上传失败"];
