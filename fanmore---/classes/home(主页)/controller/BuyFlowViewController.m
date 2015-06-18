@@ -74,6 +74,14 @@
     if (_goods == nil) {
         
         _goods = [NSArray array];
+        
+        NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
+        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
+            
+            NSLog(@"%@",json);
+        } failure:^(NSError *error) {
+            
+        }];
         _goods = @[@"10M",@"20M",@"30M",@"50M",@"70M",@"150M",@"210M",@"250M",@"500M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M"];
     }
     return _goods;
@@ -90,15 +98,11 @@
     }else {
         self.num = 3;
     }
-//    self.selected = [[NSIndexPath alloc] init];
+
     [self.goodsCollectionView addSubview:self.collection];
     self.collection.dataSource = self;
     self.collection.delegate = self;
     [self.collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
-    
-    
-    
-
 }
 
 - (void)viewDidAppear:(BOOL)animated

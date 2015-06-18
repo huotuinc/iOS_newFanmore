@@ -81,12 +81,27 @@ int _rightQuest = 0;  //纪录正确的答题数
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
                     
+                    NSString * answerResultType = nil;
+                    if ([json[@"resultData"][@"illgel"] intValue] >0) {
+                        answerResultType = @"rejected.html?";
+                    }else if ([json[@"resultData"][@"reward"] intValue] > 0){
+                        answerResultType = @"success.html?";
+                        
+                    }else{
+                        answerResultType = @"failed.html?";
+                    }
+                    
                     //adasdasdasd
                     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                     WebController * show = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
                     show.totleQuestion = self.questions.count;
                     show.ritghtAnswer = _rightQuest;
+                    show.answerType = answerResultType;
+                    show.reward = [json[@"resultData"][@"chance"] intValue];
+                    show.chance = [json[@"resultData"][@"reward"] intValue];
                     [self.navigationController pushViewController:show animated:YES];
+                }else{
+                    [self.navigationController  popToRootViewControllerAnimated:YES];
                 }
                 
                 [MBProgressHUD hideHUD];
@@ -95,7 +110,7 @@ int _rightQuest = 0;  //纪录正确的答题数
                 [MBProgressHUD hideHUD];
             }];
             
-            [self.navigationController  popToRootViewControllerAnimated:YES];
+            
             return;
         }
         taskDetail * taskdetail = self.questions[_qindex];
@@ -179,6 +194,7 @@ int _rightQuest = 0;  //纪录正确的答题数
         _rightQuest++;
     }else {
         [self showTureAnswer];
+        self.qusImageView.image = [UIImage imageNamed:@"cuowu"];
         [sender setBackgroundImage:[UIImage imageNamed:@"A_c"] forState:UIControlStateNormal];
     }
     //显示下一题
@@ -195,6 +211,7 @@ int _rightQuest = 0;  //纪录正确的答题数
 
     }else {
         [self showTureAnswer];
+        self.qusImageView.image = [UIImage imageNamed:@"cuowu"];
         [self.BButton setBackgroundImage:[UIImage imageNamed:@"B_c"] forState:UIControlStateNormal];
     }
     //显示下一题
@@ -212,6 +229,7 @@ int _rightQuest = 0;  //纪录正确的答题数
 
     }else {
         [self showTureAnswer];
+        self.qusImageView.image = [UIImage imageNamed:@"cuowu"];
         [self.CButton setBackgroundImage:[UIImage imageNamed:@"C_c"] forState:UIControlStateNormal];
 
     }
@@ -228,6 +246,7 @@ int _rightQuest = 0;  //纪录正确的答题数
         _rightQuest++;
     }else {
         [self showTureAnswer];
+        self.qusImageView.image = [UIImage imageNamed:@"cuowu"];
         [self.DButton setBackgroundImage:[UIImage imageNamed:@"D_c"] forState:UIControlStateNormal];
     }
     //显示下一题

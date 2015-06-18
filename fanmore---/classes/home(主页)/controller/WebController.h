@@ -18,4 +18,13 @@
 /**答题的总数量*/
 @property(nonatomic,assign) NSUInteger totleQuestion;
 
+/**答题的结果类型*/
+@property(nonatomic,copy)NSString * answerType;
+
+/**答题剩余机会*/
+@property(nonatomic,assign)int chance;
+
+/**答题剩余机会*/
+@property(nonatomic,assign)int reward;
+
 @end

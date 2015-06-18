@@ -8,6 +8,8 @@
 
 #import "ForeshowTableViewCell.h"
 #import <UIImageView+WebCache.h>
+#import "MJExtension.h"
+#import "taskData.h"
 
 @interface ForeshowTableViewCell()
 
@@ -59,7 +61,7 @@
     self.flowlable.text = [NSString stringWithFormat:@"免费领取%@M",FlayLabel];
     self.contextLable.text = Content;
     
-    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[times doubleValue]];
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[times doubleValue]/1000];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
@@ -80,24 +82,25 @@
 
 - (IBAction)timeButtonClick:(id)sender {
     
-    if ([self.delegate respondsToSelector:@selector(ForeshowTableViewCellSetTimeAlert:)]) {
+    if ([self.delegate respondsToSelector:@selector(ForeshowTableViewCellSetTimeAlert:andTask:)]) {
         
-        [self.delegate ForeshowTableViewCellSetTimeAlert:self];
+        [self.delegate ForeshowTableViewCellSetTimeAlert:self andTask:self.task];
         
     }
     if (!self.isWarning) {
         UILocalNotification * notification = [[UILocalNotification alloc] init];
         if (notification != nil) {
             NSDate *now=[NSDate new];
+            
+            self.task.publishDate
             notification.fireDate = [now dateByAddingTimeInterval:10];
             //        notification.fireDate = [NSDate dateWithTimeIntervalSince1970:];
             notification.timeZone = [NSTimeZone defaultTimeZone];
-            notification.alertBody = @"我是火焰之王";
-            
-            NSDictionary* info = [NSDictionary dictionaryWithObject:@"1121`2" forKey:@"good"];
+            notification.alertBody = @"任务答题将要开始";
+            NSDictionary* info = [self.task keyValues];
             notification.userInfo = info;
             NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:1],@"nfkey",nil];
-            notification.userInfo = dict;
+            notification.userInfo = info;
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             self.isWarning = !self.isWarning;
             [MBProgressHUD showSuccess:@"提醒设置成功"];

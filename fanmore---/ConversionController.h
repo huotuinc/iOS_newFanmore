@@ -21,4 +21,7 @@
 
 @property (assign, nonatomic) int num;
 
+@property(nonatomic,strong) NSArray * flays;
+
+
 @end

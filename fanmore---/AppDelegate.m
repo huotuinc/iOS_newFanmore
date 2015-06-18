@@ -112,14 +112,42 @@
     }
     
     
+    //APNS
+    [self registRemoteNotification:application];
+    
     return YES;
     
     
 }
 
+/**
+ *  注册远程通知
+ */
+- (void)registRemoteNotification:(UIApplication *)application{
+    if (IsIos8) { //iOS 8 remoteNotification
+        UIUserNotificationType type = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings * settings = [UIUserNotificationSettings settingsForTypes:type categories:nil];
+        [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+    }else{
+        
+        UIRemoteNotificationType type = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert;
+        [application registerForRemoteNotificationTypes:type];
+        
+    }
+}
+
 
 /**
- *  返回值token比较值
+ *  获取deviceToken
+ */
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    
+    NSLog(@"苹果apns返回的deviceToken%@",deviceToken);
+    
+}
+/**
+ *  调用程序初始化接口
  *
  *  @return falure 就token不通
  */
@@ -210,18 +238,20 @@
 
    
 }
+
 //添加滑动的手势
 - (void)handleSwipes22:(UISwipeGestureRecognizer *)sender{
     [self.deckController toggleRightViewAnimated:YES];
 }
 
+
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     if (notification) {
+        NSLog(@"%@",notification);
         UIAlertView *alert =  [[UIAlertView alloc] initWithTitle:nil message:@"received E-mail" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
-
 
 /**
  *  支付宝支付成功返回
@@ -241,5 +271,8 @@
     }
     return YES;
 }
+
+
+
 
 @end

@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+
+@class taskData;
+
 @class ForeshowTableViewCell;
 
 @protocol ForeshowTableViewCellDelegate <NSObject>
 
 @optional
 
-- (void)ForeshowTableViewCellSetTimeAlert:(ForeshowTableViewCell *) cell;
+- (void)ForeshowTableViewCellSetTimeAlert:(ForeshowTableViewCell *) cell andTask:(taskData*)task;
 
 @end
 
@@ -24,6 +27,8 @@
 @property(nonatomic,strong) id <ForeshowTableViewCellDelegate> delegate;
 
 //+ (instancetype)ForeshowTableViewCell;
+
+@property(nonatomic ,strong)taskData * task;
 
 - (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *) times andFlayLabel:(NSString *) FlayLabel andContentLabel:(NSString *) Content andOnlineImage:(BOOL) isOnline;
 
