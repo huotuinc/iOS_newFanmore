@@ -185,14 +185,14 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         if (indexPath.row == 0) { //职业
             ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
-            pro.delegate = self;
+//            pro.delegate = self;
             pro.isPrefessional = YES;
             pro.currentCareer = self.careerLable.text;
             [self.navigationController pushViewController:pro animated:YES];
         }
         if (indexPath.row == 1) { //收入
             ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
-            pro.delegate = self;
+//            pro.delegate = self;
             pro.currentCareer = self.userIncomeLable.text;
             pro.isPrefessional = NO;
             [self.navigationController pushViewController:pro animated:YES];

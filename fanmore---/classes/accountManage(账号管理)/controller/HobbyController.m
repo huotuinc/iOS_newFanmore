@@ -109,19 +109,22 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     for (NSString *temp in self.userSelected) {
         [str appendFormat:@"%@,",temp];
     }
-    NSString *str1 = [str substringToIndex:[str length] - 1];
+    if (str.length != 0) {
+        NSString *str1 = [str substringToIndex:[str length] - 1];
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        params[@"profileType"] = @"5";
+        params[@"profileData"] = str1;
+        
+        NSString *urlStr = [MainURL stringByAppendingString:@"updateProfile"];
+        [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
+            [MBProgressHUD showSuccess:@"上传成功"];
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+            [MBProgressHUD showError:@"上传失败"];
+        }];
+    }
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"profileType"] = @"5";
-    params[@"profileData"] = str1;
-    
-    NSString *urlStr = [MainURL stringByAppendingString:@"updateProfile"];
-    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
-        [MBProgressHUD showSuccess:@"上传成功"];
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-        [MBProgressHUD showError:@"上传失败"];
-    }];
 }
 //- (void)viewDisappear:(BOOL)animated
 //{
