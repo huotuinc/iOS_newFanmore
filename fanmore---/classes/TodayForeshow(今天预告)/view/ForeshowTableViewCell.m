@@ -91,14 +91,11 @@
         UILocalNotification * notification = [[UILocalNotification alloc] init];
         if (notification != nil) {
             NSDate *now=[NSDate new];
-            notification.fireDate = [now dateByAddingTimeInterval:10];
-            //        notification.fireDate = [NSDate dateWithTimeIntervalSince1970:];
+            notification.fireDate = [now dateByAddingTimeInterval:10];//([self.task.publishDate doubleValue] /1000.0) - [now timeIntervalSince1970]];
             notification.timeZone = [NSTimeZone defaultTimeZone];
             notification.alertBody = @"任务答题将要开始";
             NSDictionary* info = [self.task keyValues];
-            notification.userInfo = info;
-            NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:1],@"nfkey",nil];
-            notification.userInfo = info;
+            notification.userInfo = @{@"taskInfo":self.task};
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             self.isWarning = !self.isWarning;
             [MBProgressHUD showSuccess:@"提醒设置成功"];

@@ -140,7 +140,16 @@ NSString * _changeflah = nil;
             param[@"amount"] = _changeflah;
             [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
                 
-                NSLog(@"%@",json);
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+                    
+                    
+                    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                    
+                    //1、保存个人信息
+                    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                    [NSKeyedArchiver archiveRootObject:[userData objectWithKeyValues:json[@"resultDate"][@"user"]] toFile:fileName];
+                
+                }
                 
             } failure:^(NSError *error) {
                 

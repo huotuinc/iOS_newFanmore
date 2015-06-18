@@ -91,41 +91,4 @@
     
 }
 
-
-//+ (void)toUploadingData:(NSString *)urlStr parame:(NSMutableDictionary *)params image:(UIImage *)image success:(void (^)(id json))success failure:(void (^)(NSError *error))failure{
-//    
-//    AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
-//    NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
-//    paramsOption[@"appKey"] = APPKEY;
-//    params[@"appSecret"] = HuoToAppSecret;
-//    NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
-//    NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-//    paramsOption[@"lat"] = lat?lat:@(0.0);
-//    paramsOption[@"lng"] = lng?lng:@(0.0);;
-//    paramsOption[@"timestamp"] = apptimesSince1970;;
-//    paramsOption[@"operation"] = OPERATION_parame;
-//    paramsOption[@"version"] = [NSString stringWithFormat:@"%f",AppVersion];
-//    NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
-//    paramsOption[@"token"] = token?token:@"";
-//    paramsOption[@"imei"] = DeviceNo;
-//    paramsOption[@"cityCode"] = @"1372";
-//    paramsOption[@"cpaCode"] = @"default";
-//    if (params != nil) { //传入参数不为空
-//        [paramsOption addEntriesFromDictionary:params];
-//    }
-//    paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
-//    [paramsOption removeObjectForKey:@"appSecret"];
-//    NSLog(@"parame%@",paramsOption);
-//    
-////    NSData * imageData = [NSData dataWithContentsOfFile:image];
-////    [manager POST:urlStr parameters:paramsOption constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-////        [formData appendPartWithFileData:<#(NSData *)#> name:<#(NSString *)#> fileName:@"iconView" mimeType:@"image/jpeg"]
-////    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-////        
-////        success(responseObject);
-////        
-////    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-////        failure(error);
-////    }];
-//}
 @end
