@@ -91,8 +91,6 @@
         UILocalNotification * notification = [[UILocalNotification alloc] init];
         if (notification != nil) {
             NSDate *now=[NSDate new];
-            
-            self.task.publishDate
             notification.fireDate = [now dateByAddingTimeInterval:10];
             //        notification.fireDate = [NSDate dateWithTimeIntervalSince1970:];
             notification.timeZone = [NSTimeZone defaultTimeZone];
