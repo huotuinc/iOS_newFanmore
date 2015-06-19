@@ -93,8 +93,8 @@
             NSDate *now=[NSDate new];
             notification.fireDate = [now dateByAddingTimeInterval:10];//([self.task.publishDate doubleValue] /1000.0) - [now timeIntervalSince1970]];
             notification.timeZone = [NSTimeZone defaultTimeZone];
+            notification.applicationIconBadgeNumber = 1;
             notification.alertBody = @"任务答题将要开始";
-            NSDictionary* info = [self.task keyValues];
             notification.userInfo = @{@"taskInfo":self.task};
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             self.isWarning = !self.isWarning;

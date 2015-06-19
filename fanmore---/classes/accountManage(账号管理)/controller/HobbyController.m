@@ -39,6 +39,7 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     self.title = @"爱好";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:hobbyIdentify];
+    [self.tableView removeSpaces];
     
     self.userSelected = [NSMutableArray array];
     
@@ -86,6 +87,7 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     
     if ([self.userHobby rangeOfString:cell.textLabel.text].location != NSNotFound) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.userSelected addObject:@(indexPath.row)];
     }
     return cell;
 }
@@ -96,10 +98,10 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     [cell setSelected:NO];
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        [self.userSelected removeObject:cell.textLabel.text];
+        [self.userSelected removeObject:@(indexPath.row)];
     }else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        [self.userSelected addObject:cell.textLabel.text];
+        [self.userSelected addObject:@(indexPath.row)];
     }
 }
 
