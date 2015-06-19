@@ -33,7 +33,7 @@
 #define QQAppKey @"101066212"
 #define QQappSecret @"09ef5bfed097b682a83b147d46e46a5a"
 /**微信*/
-#define WeiXinAppKey @"wxaeda2d5603b12302"
+#define WeiXinAppKey @"wxadee5477e854a778"
 /**shareSDK */
 
 

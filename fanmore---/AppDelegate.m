@@ -41,11 +41,6 @@
     [MobClick setCrashReportEnabled:YES];
 //    *友盟注册*
     
-    /**shareSdK*/
-    //1、连接短信分享
-    [ShareSDK connectSMS];
-    //2、连接邮件
-    [ShareSDK connectMail];
     
     [ShareSDK registerApp:ShareSDKAppKey];//字符串api20为您的ShareSDK的AppKey
     
@@ -63,6 +58,7 @@
 
     //5微信登陆的时候需要初始化
     [ShareSDK connectWeChatWithAppId:WeiXinAppKey
+                           appSecret:@"8c3b660de36a3b3fb678ca865e31f0f3"
                            wechatCls:[WXApi class]];
     /**shareSdK*/
    /**定位*/
