@@ -16,7 +16,7 @@
 #import "twoOption.h"
 #import "NameController.h"
 #import "SexController.h"
-
+#import "HobbyController.h"
 
 @interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate,NameControllerdelegate>
 
@@ -128,9 +128,6 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString * retime = [dateFormatter stringFromDate:date];
     self.registTimeLable.text =retime;
-    
-    
-    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -228,31 +225,65 @@
     UIImage * photoImage = info[@"UIImagePickerControllerOriginalImage"];
     [self.iconView setBackgroundImage:photoImage forState:UIControlStateNormal];
     NSData * data = nil;
+    BOOL flag = NO;
     if (UIImagePNGRepresentation(photoImage) == nil) {
         data = UIImageJPEGRepresentation(photoImage, 1);
     } else {
+        flag = YES;
         data = UIImagePNGRepresentation(photoImage);
     }
     
-//    NSString * imageString = [GTMBase64 en];
-    NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    params[@"profileType"] = @"0";
-//    params[@"profileData"] = imageString;
-    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+    NSString * aa = nil;
+    if (flag) {
+        aa = @"png/image";
+    }else{
+        aa = @"jpeg/image";
+    }
+    NSLog(@"%@",data);
+    NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
+    paramsOption[@"appKey"] = APPKEY;
+    paramsOption[@"appSecret"] = HuoToAppSecret;
+    NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
+    NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
+    paramsOption[@"lat"] = lat?lat:@(40.0);
+    paramsOption[@"lng"] = lng?lng:@(116.0);;
+    paramsOption[@"timestamp"] = apptimesSince1970;;
+    paramsOption[@"operation"] = OPERATION_parame;
+    paramsOption[@"version"] = AppVersion;
+    paramsOption[@"profileType"] = @"0";
+    NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+    paramsOption[@"token"] = token?token:@"";
+    paramsOption[@"imei"] = DeviceNo;
+    paramsOption[@"cityCode"] = @"1372";
+    paramsOption[@"cpaCode"] = @"default";
+    NSString * aab = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    paramsOption[@"profileData"] = aab;
+    paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
+    [paramsOption removeObjectForKey:@"appSecret"];
+   
+    
+//    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+//    [aab writeToFile:@"image" atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//    [NSBundle mainBundle] fi
+//    
+//    AFHTTPRequestOperationManager * ma = [AFHTTPRequestOperationManager manager];
+//    [ma POST:urlStr parameters:paramsOption constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        
+//        formData appendPartWithFileURL:[NSBundle mainBundle] name:@"profileData" fileName:@"image" mimeType:@"Base64" error:nil];
+//        
+//    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        
+//    }];
 
-    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
-        
-        NSLog(@"上传头像success===%@",json);
-    } failure:^(NSError *error) {
-        NSLog(@"上传头像failure%@",[error description]);
-    }];
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 /**
  *  修改个人生日资料
  *
- *  @param datePick <#datePick description#>
+ *  @param datePick datePick description
  */
 - (void)dateChanged:(UIDatePicker *) datePick{
     

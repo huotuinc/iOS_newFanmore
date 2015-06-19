@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) NSMutableArray *userSelected;
 
-
+@property(nonatomic,strong)NSMutableString * pickLove;
 @end
 
 @implementation HobbyController
