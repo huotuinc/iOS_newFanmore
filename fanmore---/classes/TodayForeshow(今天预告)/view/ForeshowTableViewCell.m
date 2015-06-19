@@ -95,7 +95,8 @@
             notification.timeZone = [NSTimeZone defaultTimeZone];
             notification.applicationIconBadgeNumber = 1;
             notification.alertBody = @"任务答题将要开始";
-            notification.userInfo = @{@"taskInfo":self.task};
+            NSDictionary *dic = [NSDictionary dictionaryWithObject:self.task forKey:@"taskInfo"];
+            notification.userInfo = @{@"taskInfo":dic};
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             self.isWarning = !self.isWarning;
             [MBProgressHUD showSuccess:@"提醒设置成功"];
