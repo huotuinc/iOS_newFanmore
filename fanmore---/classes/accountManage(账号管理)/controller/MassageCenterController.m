@@ -4,7 +4,7 @@
 //
 //  Created by HuoTu-Mac on 15/5/29.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  消息中心
 
 #import "MassageCenterController.h"
 #import "MessageTableViewCell.h"
@@ -65,7 +65,7 @@
 - (void)headerRereshing  //加载最新数据
 {
     //    startIndex = @1;
-    [self getNewMoreData];
+    [self getNewMoreData:nil];
     //    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
 }
@@ -73,7 +73,7 @@
 /**
  *  下拉加载更新数据
  */
--(void)getNewMoreData{
+-(void)getNewMoreData:(NSMutableDictionary *)parame{
     
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"messages"];//消息列表
