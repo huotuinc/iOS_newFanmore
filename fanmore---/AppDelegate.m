@@ -34,6 +34,7 @@
     
     application.applicationIconBadgeNumber = 0;
     
+    /**微信支付*/
     [WXApi registerApp:WeiXinAppID withDescription:@"fanmore--3.0.0"]; //像微信支付注册
     
 //    *友盟*
@@ -47,34 +48,22 @@
     //2、连接邮件
     [ShareSDK connectMail];
     
-    [ShareSDK registerApp:APPKEY];//字符串api20为您的ShareSDK的AppKey
+    [ShareSDK registerApp:ShareSDKAppKey];//字符串api20为您的ShareSDK的AppKey
     
     //3添加新浪微博应用 注册网址 http://open.weibo.com
-    [ShareSDK connectSinaWeiboWithAppKey:APPKEY
-                               appSecret:@"0783d8dd1f0eb5a45687cde79aa10108"
-                             redirectUri:@"http://www.sharesdk.cn"];
-    //3当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
-    [ShareSDK  connectSinaWeiboWithAppKey:APPKEY
-                                appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
-                              redirectUri:@"http://www.sharesdk.cn"
-                              weiboSDKCls:[WeiboSDK class]];
+    [ShareSDK connectSinaWeiboWithAppKey:XinLangAppkey
+                               appSecret:XinLangAppSecret
+                             redirectUri:XinLangRedirectUri];
+
     //4添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
-    [ShareSDK connectQZoneWithAppKey:APPKEY
-                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"
+    [ShareSDK connectQZoneWithAppKey:QQAppKey
+                           appSecret:QQappSecret
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     
-    //4添加QQ应用  注册网址  http://mobile.qq.com/api/
-    [ShareSDK connectQQWithQZoneAppKey:APPKEY
-                     qqApiInterfaceCls:[QQApiInterface class]
-                       tencentOAuthCls:[TencentOAuth class]];
-    
-    //5添加微信应用 注册网址 http://open.weixin.qq.com
-    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
-                           wechatCls:[WXApi class]];
+
     //5微信登陆的时候需要初始化
-    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
-                           appSecret:@"64020361b8ec4c99936c0e3999a9f249"
+    [ShareSDK connectWeChatWithAppId:WeiXinAppKey
                            wechatCls:[WXApi class]];
     /**shareSdK*/
    /**定位*/
@@ -254,6 +243,13 @@
     }
 }
 
+
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url wxDelegate:self];
+}
+
 /**
  *  支付宝支付成功返回
  *
@@ -270,6 +266,8 @@
             NSLog(@"result = %@",resultDic);
         }];
     }
+    
+    [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
     return YES;
 }
 

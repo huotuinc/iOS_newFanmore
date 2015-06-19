@@ -25,6 +25,15 @@
 /**首页详情*/
 @property(strong,nonatomic) NSString * detailUrl;
 
+/**答题倒计时时间*/
+@property(nonatomic,assign) int backTime;
+
+/**答题获取多少流量*/
+@property(nonatomic,assign) int flay;
+
+/**分享的url*/
+@property(nonatomic,strong)NSString *shareUrl;
+
 - (IBAction)goQusetionAction:(id)sender;
 
 @end

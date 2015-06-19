@@ -226,6 +226,9 @@ static NSString *homeCellidentify = @"homeCellId";
     detailVc.taskId = task.taskId; //获取问题编号
     detailVc.type = task.type;  //答题类型
     detailVc.detailUrl = task.contextURL;//网页详情的url
+    detailVc.backTime = task.backTime;
+    detailVc.flay = [task.maxBonus intValue];
+    detailVc.shareUrl = task.shareURL;
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 /**

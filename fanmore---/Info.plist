@@ -23,6 +23,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>newfanmore2015</string>
@@ -32,10 +34,26 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>微信</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxd8c58460d0199dd5</string>
+				<string>wxaeda2d5603b12302</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>QQ60625E4</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb1994677353</string>
 			</array>
 		</dict>
 	</array>

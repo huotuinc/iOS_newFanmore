@@ -18,8 +18,23 @@
 #define WeiXinPaySigNkey @"NzfP6pfeljyHeY08LO9p8YAKZCGLz8akO4lCGdXZOGnVsJqfo8jeuYB7C0GoFJGEKZMDVGKWYnbbJj3pCpvJzd4iY7bVglaNz54XAD26tiCr5DZGLjZFoRxbqe8i3HT5"
 #define WeiXinPARTNERKEY @"18076bf2a8bf9479f2cddeec13fd2ec0"
 #define WeiXin @"1220397601"
+
 //有盟appKey
 #define UMAppKey @"52faffcf56240bc21a023179"
+
+
+/**shareSDK */
+#define ShareSDKAppKey @"19b4b4d45192"
+/**新浪微博*/
+#define XinLangAppkey @"1994677353"
+#define XinLangAppSecret @"0783d8dd1f0eb5a45687cde79aa10108"
+#define XinLangRedirectUri @"https://api.weibo.com/oauth2/default.html"
+/**QQ**/
+#define QQAppKey @"101066212"
+#define QQappSecret @"09ef5bfed097b682a83b147d46e46a5a"
+/**微信*/
+#define WeiXinAppKey @"wxaeda2d5603b12302"
+/**shareSDK */
 
 
 //网络请求的固定参数
