@@ -24,8 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *contextLable;
 /**咨询时间*/
 @property (weak, nonatomic) IBOutlet UILabel *timeLable;
-/**提醒按钮*/
-@property (weak, nonatomic) IBOutlet UIButton *timeButton;
+
+
 /**已上线标签*/
 @property (weak, nonatomic) IBOutlet UIImageView *onlineImage;
 
@@ -74,6 +74,20 @@
  
 }
 
+- (void)timeButtonSetBule {
+    [self.timeButton setBackgroundImage:[UIImage imageNamed:@"bian"] forState:UIControlStateNormal];
+    [self.timeButton setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
+    [self.timeButton setTitle:@"取消提醒" forState:UIControlStateNormal];
+    
+}
+
+- (void)timeButtonWite {
+    [self.timeButton setBackgroundImage:[UIImage imageNamed:@"bian_b"] forState:UIControlStateNormal];
+    [self.timeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.timeButton setTitle:@"设置提醒" forState:UIControlStateNormal];
+}
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
@@ -91,15 +105,21 @@
         UILocalNotification * notification = [[UILocalNotification alloc] init];
         if (notification != nil) {
             NSDate *now=[NSDate new];
-            notification.fireDate = [now dateByAddingTimeInterval:10];//([self.task.publishDate doubleValue] /1000.0) - [now timeIntervalSince1970]];
+            notification.fireDate = [now dateByAddingTimeInterval:10];
+            //([self.task.publishDate doubleValue] /1000.0) - [now timeIntervalSince1970]
             notification.timeZone = [NSTimeZone defaultTimeZone];
-            notification.applicationIconBadgeNumber = 1;
+            notification.applicationIconBadgeNumber += 1;
             notification.alertBody = @"任务答题将要开始";
-            NSDictionary *dic = [NSDictionary dictionaryWithObject:self.task forKey:@"taskInfo"];
-            notification.userInfo = @{@"taskInfo":dic};
+            
+            notification.userInfo = @{@"id":@(self.task.taskId),@"key":[NSNumber numberWithInt:self.task.taskId]};
+            
+            
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             self.isWarning = !self.isWarning;
             [MBProgressHUD showSuccess:@"提醒设置成功"];
+            
+            [self timeButtonSetBule];
+            
         }
     }else {
         NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
@@ -107,19 +127,21 @@
             for (int i = 0; i < array.count; i++) {
                 UILocalNotification *loa = [array objectAtIndex:i];
                 NSDictionary *userInfo = loa.userInfo;
-                NSNumber *obj = [userInfo objectForKey:@"nfkey"];
-                int mytag=[obj intValue];
-                if (mytag == 1) {
+                NSNumber *obj = userInfo[@"key"];
+                int mytag = [obj intValue];
+                if (self.task.taskId == mytag) {
+//                    loa.applicationIconBadgeNumber = 0;
                     [[UIApplication sharedApplication] cancelLocalNotification:loa];
                     [MBProgressHUD showSuccess:@"已取消提醒"];
                     self.isWarning = !self.isWarning;
+                    
+                    [self timeButtonWite];
+                    
                     break;
                 }
             }
         }
     }
-    
-   
-    
+
 }
 @end
