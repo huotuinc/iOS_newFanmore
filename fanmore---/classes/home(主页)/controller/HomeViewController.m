@@ -210,7 +210,7 @@ static NSString *homeCellidentify = @"homeCellId";
         a = (task.reward?0:1);
     }
     //设置cell样式
-    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"免费领取%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"已有%@人参与",task.luckies] andIntroduceLabel:task.desc andGetImage:a];
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.desc] andGetImage:a];
      return cell;
 }
 
@@ -340,7 +340,7 @@ static NSString *homeCellidentify = @"homeCellId";
     
     CGFloat btnX = 0;
     CGFloat btnH = 44;
-    CGFloat btnY = 64 - btnH;
+    CGFloat btnY = 64 - btnH - 2;
     CGFloat btnW = self.view.frame.size.width - 2 * btnX;
     showBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
     

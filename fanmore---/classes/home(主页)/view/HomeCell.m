@@ -43,7 +43,9 @@
     }else if (self.selection == 2) {
         self.getImage.image = [UIImage imageNamed:@"broughtOut"];
     }
-    
+    self.receiveLabel.layer.borderColor = [UIColor redColor].CGColor;
+    self.receiveLabel.layer.borderWidth = 1;
+    self.receiveLabel.layer.cornerRadius = 5.0;
 }
 
 
