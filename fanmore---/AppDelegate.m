@@ -42,11 +42,6 @@
     [MobClick setCrashReportEnabled:YES];
 //    *友盟注册*
     
-    /**shareSdK*/
-    //1、连接短信分享
-    [ShareSDK connectSMS];
-    //2、连接邮件
-    [ShareSDK connectMail];
     
     [ShareSDK registerApp:ShareSDKAppKey];//字符串api20为您的ShareSDK的AppKey
     
