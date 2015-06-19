@@ -81,6 +81,14 @@
     }
     paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
     [paramsOption removeObjectForKey:@"appSecret"];
+    NSArray * parameaaa = [paramsOption allKeys];
+    NSMutableString * aaa = [[NSMutableString alloc] init];
+    for (NSString * a in parameaaa) {
+        [aaa appendString:[NSString stringWithFormat:@"%@=%@&",a,[paramsOption objectForKey:a]]];
+    }
+    [aaa substringToIndex:aaa.length];
+    NSLog(@"--------------------%@",aaa);
+    NSLog(@"xxxxxx-----网络请求get参数parame%@",paramsOption);
     NSLog(@"网络请求post参数%@",paramsOption);
     [manager POST:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(responseObject);

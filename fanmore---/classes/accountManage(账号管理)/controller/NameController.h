@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol NameControllerdelegate <NSObject>
+
+@optional
+
+/**选择姓名*/
+- (void)NameControllerpickName:(NSString *) name;
+@end
+
 @interface NameController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *nameLabel;
 
 @property (nonatomic, strong) NSString *name;
 
+@property(nonatomic,strong) id<NameControllerdelegate> delegate;
 @end

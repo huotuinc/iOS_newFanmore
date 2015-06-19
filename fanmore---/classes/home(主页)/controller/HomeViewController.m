@@ -262,17 +262,28 @@ static NSString *homeCellidentify = @"homeCellId";
         });
     }else {
         
-        //初始化
-        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        //1、保存个人信息
-        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-        userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-        NSInteger week = [self getWeek];
-        if (((1<<(7-week)) & (userInfo.signInfo)) == (1<<(7-week))) {//签到
-            [MBProgressHUD showSuccess:@"你今天已签到"];
-        }else{//未签到
-            [[NSNotificationCenter defaultCenter] postNotificationName:TodaySignNot object:nil];
-        }
+        NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
+        [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
+            NSLog(@"%@",json);
+            if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showError:@"今日已签到，请明天来签到"];
+                return ;
+            }
+            if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==1) {
+                [MBProgressHUD hideHUD];
+                userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                //1、保存个人信息
+                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 +%@M",user.signtoday]];
+            }
+            [MBProgressHUD hideHUD];
+        } failure:^(NSError *error) {
+            NSLog(@"%@",[error description]);
+            [MBProgressHUD hideHUD];
+        }];
     }
 }
 
@@ -300,12 +311,18 @@ static NSString *homeCellidentify = @"homeCellId";
 }
 
 
+
+/**
+ *  刷新数目条幅栏
+ *
+ */
 - (void) showHomeRefershCount:(NSUInteger)count{
     
     
     UIButton * showBtn = [[UIButton alloc] init];
     [self.navigationController.view insertSubview:showBtn belowSubview:self.navigationController.navigationBar];
     showBtn.userInteractionEnabled = NO;
+    showBtn.alpha = 0.7;
     showBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [showBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [showBtn setBackgroundImage:[UIImage imageNamed:@"button-BR"] forState:UIControlStateNormal];
