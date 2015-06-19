@@ -233,8 +233,8 @@
     __block int timeout= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]-1; //倒计时时间
     NSLog(@"xxxxxxxxxxxx%d",timeout);
     __block int timeAll= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]; //倒计时时间
-    timeout = 5;
-    timeAll = 6;
+    timeout = self.backTime-1;
+    timeAll = self.backTime;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
@@ -244,7 +244,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
                 NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
-                NSString * butTitle = [NSString stringWithFormat:@"答题留取%@M流量",time];
+                NSString * butTitle = [NSString stringWithFormat:@"答题留取%dM流量",self.flay];
                 [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
                 //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
@@ -259,7 +259,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
                 NSLog(@"____%@",strTime);
-                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题留取%@M流量(%@)",@(1),strTime] forState:UIControlStateNormal];
+                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题留取%dM流量(%@)",self.flay,strTime] forState:UIControlStateNormal];
                 wself.answerBtn.userInteractionEnabled = NO;
                 
             });

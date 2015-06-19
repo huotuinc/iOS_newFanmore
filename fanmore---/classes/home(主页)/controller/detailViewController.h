@@ -25,6 +25,12 @@
 /**首页详情*/
 @property(strong,nonatomic) NSString * detailUrl;
 
+/**答题倒计时时间*/
+@property(nonatomic,assign) int backTime;
+
+/**答题获取多少流量*/
+@property(nonatomic,assign) int flay;
+
 - (IBAction)goQusetionAction:(id)sender;
 
 @end
