@@ -31,6 +31,9 @@
 /**答题获取多少流量*/
 @property(nonatomic,assign) int flay;
 
+/**分享的url*/
+@property(nonatomic,strong)NSString *shareUrl;
+
 - (IBAction)goQusetionAction:(id)sender;
 
 @end

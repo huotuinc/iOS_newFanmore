@@ -228,6 +228,7 @@ static NSString *homeCellidentify = @"homeCellId";
     detailVc.detailUrl = task.contextURL;//网页详情的url
     detailVc.backTime = task.backTime;
     detailVc.flay = [task.maxBonus intValue];
+    detailVc.shareUrl = task.shareURL;
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 /**

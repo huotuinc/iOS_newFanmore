@@ -73,7 +73,7 @@ int _rightQuest = 0;  //纪录正确的答题数
             NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
             NSMutableDictionary * params = [NSMutableDictionary dictionary];
             params[@"taskId"] = @(self.taskId);
-            NSLog(@"dadasdasdasdasdxxx0000000 %@",self.ans);
+            NSLog(@"dadasdasdasdasdxxx0000000 %@",[self.ans substringToIndex:self.ans.length-1]);
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
                 
@@ -99,6 +99,7 @@ int _rightQuest = 0;  //纪录正确的答题数
                     show.answerType = answerResultType;
                     show.reward = [json[@"resultData"][@"chance"] intValue];
                     show.chance = [json[@"resultData"][@"reward"] intValue];
+                    
                     [self.navigationController pushViewController:show animated:YES];
                 }else{
                     [self.navigationController  popToRootViewControllerAnimated:YES];
