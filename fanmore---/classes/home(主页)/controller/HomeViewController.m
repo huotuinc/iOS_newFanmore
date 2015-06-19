@@ -17,6 +17,7 @@
 #import <AddressBook/AddressBook.h>
 #import "userData.h"
 #import "LoginViewController.h"
+#import "JoinController.h"
 
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -247,6 +248,12 @@ static NSString *homeCellidentify = @"homeCellId";
  */
 - (void)signInAction:(UIButton *)sender
 {
+    
+#warning 测试
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    JoinController *join = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
+    [self.navigationController pushViewController:join animated:YES];
+    
     if (!self.isLogin) { //判断
         
         [MBProgressHUD showError:@"当前还未登录,请先登入"];

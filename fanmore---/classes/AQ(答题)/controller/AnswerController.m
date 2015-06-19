@@ -126,6 +126,8 @@ int _rightQuest = 0;  //纪录正确的答题数
         self.queLable.text = taskdetail.context;  //设置答题题目
         //4、设置题目编号
         self.queNumber.text = [NSString stringWithFormat:@"%d/%lu",_qindex+1,(unsigned long)self.questions.count];
+    
+    [self buttonOpenTouche];
 }
 /**
  *  答案展示按钮显示答案
@@ -180,7 +182,24 @@ int _rightQuest = 0;  //纪录正确的答题数
         [self.DButton setBackgroundImage:[UIImage imageNamed:@"D_d"] forState:UIControlStateNormal];
     }
 }
-
+/**
+ *  关闭按钮点击事件
+ */
+- (void)buttonCloseTouch {
+    self.AButton.userInteractionEnabled = NO;
+    self.BButton.userInteractionEnabled = NO;
+    self.CButton.userInteractionEnabled = NO;
+    self.DButton.userInteractionEnabled = NO;
+}
+/**
+ *  开启按钮点击事件
+ */
+- (void)buttonOpenTouche {
+    self.AButton.userInteractionEnabled = YES;
+    self.BButton.userInteractionEnabled = YES;
+    self.CButton.userInteractionEnabled = YES;
+    self.DButton.userInteractionEnabled = YES;
+}
 
 /**
  *  选答案
@@ -189,6 +208,9 @@ int _rightQuest = 0;  //纪录正确的答题数
 - (IBAction)AAction:(UIButton *)sender {
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
     _qindex++;
+    
+    [self buttonCloseTouch];
+    
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
         _rightQuest++;
@@ -205,6 +227,9 @@ int _rightQuest = 0;  //纪录正确的答题数
 - (IBAction)BAction:(UIButton *)sender {
      _qindex++;
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
+    
+    [self buttonCloseTouch];
+    
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
         _rightQuest++;
@@ -223,6 +248,9 @@ int _rightQuest = 0;  //纪录正确的答题数
 - (IBAction)CAction:(UIButton *)sender {
      _qindex++;
    [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
+    
+    [self buttonCloseTouch];
+    
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
         _rightQuest++;
@@ -241,6 +269,9 @@ int _rightQuest = 0;  //纪录正确的答题数
 - (IBAction)DAction:(UIButton *)sender {
      _qindex++;
     [self.ans appendString:[NSString stringWithFormat:@"%ld|",(long)sender.tag]];
+    
+    [self buttonCloseTouch];
+    
     if (self.DButton.tag == self.tureAnswer) {
         [self showTureAnswer];
         _rightQuest++;

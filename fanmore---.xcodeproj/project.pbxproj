@@ -23,6 +23,7 @@
 		837DF5DC1B14691200A5E2FA /* InviteCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */; };
 		8381167C1B2591AF00261F51 /* NameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8381167B1B2591AF00261F51 /* NameController.m */; };
 		838116821B25AC5A00261F51 /* SexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838116811B25AC5A00261F51 /* SexController.m */; };
+		8382FF981B33A5C5003A7CB9 /* JoinNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8382FF971B33A5C5003A7CB9 /* JoinNextController.m */; };
 		83833F011B267A7B00D93079 /* ProfessionalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83833F001B267A7B00D93079 /* ProfessionalController.m */; };
 		839C30E71B2E6CF4000EE05A /* FriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 839C30E51B2E6CF4000EE05A /* FriendCell.m */; };
 		839C30E81B2E6CF4000EE05A /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 839C30E61B2E6CF4000EE05A /* FriendCell.xib */; };
@@ -228,6 +229,8 @@
 		8381167B1B2591AF00261F51 /* NameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameController.m; sourceTree = "<group>"; };
 		838116801B25AC5A00261F51 /* SexController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexController.h; sourceTree = "<group>"; };
 		838116811B25AC5A00261F51 /* SexController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexController.m; sourceTree = "<group>"; };
+		8382FF961B33A5C5003A7CB9 /* JoinNextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinNextController.h; sourceTree = "<group>"; };
+		8382FF971B33A5C5003A7CB9 /* JoinNextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinNextController.m; sourceTree = "<group>"; };
 		83833EFF1B267A7B00D93079 /* ProfessionalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionalController.h; sourceTree = "<group>"; };
 		83833F001B267A7B00D93079 /* ProfessionalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionalController.m; sourceTree = "<group>"; };
 		839C30E41B2E6CF4000EE05A /* FriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendCell.h; sourceTree = "<group>"; };
@@ -874,6 +877,8 @@
 				836D6AA71B1C756300119B3F /* FinishController.m */,
 				836D6AA91B1C776000119B3F /* JoinController.h */,
 				836D6AAA1B1C776000119B3F /* JoinController.m */,
+				8382FF961B33A5C5003A7CB9 /* JoinNextController.h */,
+				8382FF971B33A5C5003A7CB9 /* JoinNextController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2021,6 +2026,7 @@
 				83E263FC1B2F018500A2AC96 /* NSString+PinYin4Cocoa.m in Sources */,
 				EFF3D0D01B2EB4A800B2F446 /* DataSigner.m in Sources */,
 				8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */,
+				8382FF981B33A5C5003A7CB9 /* JoinNextController.m in Sources */,
 				83EAD9131B2AB8C7006870D3 /* BegController.m in Sources */,
 				EFF3D0CF1B2EB4A800B2F446 /* base64.m in Sources */,
 				EFD02B431B155CDA00D11D6D /* MJSettingGroup.m in Sources */,

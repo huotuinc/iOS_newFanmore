@@ -148,6 +148,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     }
     
     taskData * task = self.Notices[indexPath.row];
+    cell.task = task;
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
     [NSString stringWithFormat:@"%@",task.maxBonus] andContentLabel:task.desc andOnlineImage:NO];
