@@ -147,8 +147,30 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         cell.isWarning = NO;
     }
     
+    
+    
     taskData * task = self.Notices[indexPath.row];
     cell.task = task;
+    
+    NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    if (array.count > 0) {
+        for (int i = 0; i < array.count; i++) {
+            UILocalNotification *loa = [array objectAtIndex:i];
+            NSDictionary *userInfo = loa.userInfo;
+            NSNumber *obj = userInfo[@"key"];
+            int mytag = [obj intValue];
+            if (task.taskId == mytag) {
+                cell.isWarning = YES;
+                
+                [cell.timeButton setBackgroundImage:[UIImage imageNamed:@"bian"] forState:UIControlStateNormal];
+                [cell.timeButton setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
+                [cell.timeButton setTitle:@"取消提醒" forState:UIControlStateNormal];
+                
+                break;
+            }
+        }
+    }
+    
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
     [NSString stringWithFormat:@"%@",task.maxBonus] andContentLabel:task.desc andOnlineImage:NO];

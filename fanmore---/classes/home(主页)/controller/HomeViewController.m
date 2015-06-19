@@ -322,10 +322,10 @@ static NSString *homeCellidentify = @"homeCellId";
     UIButton * showBtn = [[UIButton alloc] init];
     [self.navigationController.view insertSubview:showBtn belowSubview:self.navigationController.navigationBar];
     showBtn.userInteractionEnabled = NO;
-    showBtn.alpha = 0.7;
+    showBtn.alpha = 0.9;
     showBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [showBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [showBtn setBackgroundImage:[UIImage imageNamed:@"button-BR"] forState:UIControlStateNormal];
+    [showBtn setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
+    [showBtn setBackgroundColor:[UIColor colorWithWhite:0.878 alpha:1.000]];
     NSString * title = nil;
     if (count>0) {
         title = [NSString stringWithFormat:@"刷新了%lu条任务",(unsigned long)count];
@@ -335,7 +335,7 @@ static NSString *homeCellidentify = @"homeCellId";
         [showBtn setTitle:@"没有新发布的任务" forState:UIControlStateNormal];
     }
     
-    CGFloat btnX = 10;
+    CGFloat btnX = 0;
     CGFloat btnH = 44;
     CGFloat btnY = 64 - btnH;
     CGFloat btnW = self.view.frame.size.width - 2 * btnX;

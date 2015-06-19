@@ -32,6 +32,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    application.applicationIconBadgeNumber = 0;
     
     [WXApi registerApp:WeiXinAppID withDescription:@"fanmore--3.0.0"]; //像微信支付注册
     
