@@ -58,10 +58,12 @@
     
 
     //5微信登陆的时候需要初始化
-    [ShareSDK connectWeChatWithAppId:WeiXinAppKey
-                           appSecret:@"8c3b660de36a3b3fb678ca865e31f0f3"
-                           wechatCls:[WXApi class]];
+    [ShareSDK connectWeChatTimelineWithAppId:@"WeiXinAppKey"
+                                   appSecret:@"8c3b660de36a3b3fb678ca865e31f0f3"
+                                   wechatCls:[WXApi class]];
+    
     /**shareSdK*/
+    
    /**定位*/
     INTULocationManager * locMgr = [INTULocationManager sharedInstance];
     [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
