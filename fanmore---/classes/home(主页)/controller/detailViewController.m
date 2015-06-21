@@ -51,6 +51,8 @@
     
     [self settime];
     
+#warning 测试
+//    NSURL *url = [NSURL URLWithString:@"www.qidian.com"];
     NSURL* url =  [NSURL URLWithString:self.detailUrl];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     //CGFloat xxxx = (ScreenHeight - CGRectGetMinY(self.answerBtn.frame)) * 0.7+20;

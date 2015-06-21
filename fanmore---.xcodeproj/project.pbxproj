@@ -12,6 +12,7 @@
 		830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D011B2194FC00BBE276 /* BPViewController.m */; };
 		830B4D061B2196DC00BBE276 /* BPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D041B2196DC00BBE276 /* BPCell.m */; };
 		830B4D071B2196DC00BBE276 /* BPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B4D051B2196DC00BBE276 /* BPCell.xib */; };
+		832C1DF91B3699FA004A8774 /* FMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 832C1DF81B3699FA004A8774 /* FMButton.m */; };
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD651B1854C100FAC712 /* MassageCenterController.m */; };
 		833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC76D1B2689A0008DA984 /* HobbyController.m */; };
@@ -209,6 +210,8 @@
 		830B4D031B2196DC00BBE276 /* BPCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPCell.h; path = "classes/home(主页)/view/BPCell.h"; sourceTree = "<group>"; };
 		830B4D041B2196DC00BBE276 /* BPCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPCell.m; path = "classes/home(主页)/view/BPCell.m"; sourceTree = "<group>"; };
 		830B4D051B2196DC00BBE276 /* BPCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BPCell.xib; path = "classes/home(主页)/view/BPCell.xib"; sourceTree = "<group>"; };
+		832C1DF71B3699FA004A8774 /* FMButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMButton.h; sourceTree = "<group>"; };
+		832C1DF81B3699FA004A8774 /* FMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMButton.m; sourceTree = "<group>"; };
 		8339BD611B18510E00FAC712 /* ChangePasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordController.h; sourceTree = "<group>"; };
 		8339BD621B18510E00FAC712 /* ChangePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordController.m; sourceTree = "<group>"; };
 		8339BD641B1854C100FAC712 /* MassageCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MassageCenterController.h; sourceTree = "<group>"; };
@@ -658,6 +661,15 @@
 				B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		832C1DF61B3699E1004A8774 /* fanmoreButton */ = {
+			isa = PBXGroup;
+			children = (
+				832C1DF71B3699FA004A8774 /* FMButton.h */,
+				832C1DF81B3699FA004A8774 /* FMButton.m */,
+			);
+			path = fanmoreButton;
 			sourceTree = "<group>";
 		};
 		837DF5D61B14687D00A5E2FA /* inviteCode(师徒联盟) */ = {
@@ -1222,6 +1234,7 @@
 		EF8D672C1B0DD07E008B6909 /* other(其它) */ = {
 			isa = PBXGroup;
 			children = (
+				832C1DF61B3699E1004A8774 /* fanmoreButton */,
 				83D495411B15998C00935889 /* 扩展 */,
 				83BF5F621B156C4100E6C701 /* extend */,
 				83DBD8E81B13059700B62830 /* MMDrawer */,
@@ -1975,6 +1988,7 @@
 				836D6AAB1B1C776000119B3F /* JoinController.m in Sources */,
 				83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */,
 				836D6AA81B1C756300119B3F /* FinishController.m in Sources */,
+				832C1DF91B3699FA004A8774 /* FMButton.m in Sources */,
 				EF565D571B170D5500FC2D6B /* Result.m in Sources */,
 				EF565D0A1B16AA6000FC2D6B /* UIScrollView+MJExtension.m in Sources */,
 				833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */,

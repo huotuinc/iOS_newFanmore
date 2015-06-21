@@ -35,7 +35,7 @@
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Fcv-09-EDH"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gBh-nF-uki">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="86557822liu" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gBh-nF-uki">
                                     <rect key="frame" x="81" y="45" width="226" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="ITq-Tn-YA2"/>
@@ -78,7 +78,7 @@
                                         <constraint firstAttribute="height" constant="1" id="7gT-VK-nvp"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13857560740" placeholder="用户名/手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sc9-qy-Di0">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13675847670" placeholder="用户名/手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sc9-qy-Di0">
                                     <rect key="frame" x="81" y="0.0" width="226" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="JLB-BF-zsa"/>
@@ -127,14 +127,13 @@
                                 </mask>
                             </variation>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5H-3X-mDr">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5H-3X-mDr" customClass="FMButton">
                             <rect key="frame" x="15" y="196" width="290" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="NHx-mV-wGr"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                            <state key="normal" title="登录" backgroundImage="button-BR">
-                                <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <state key="normal" title="登录">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -198,7 +197,4 @@
             <point key="canvasLocation" x="686" y="-113"/>
         </view>
     </objects>
-    <resources>
-        <image name="button-BR" width="480" height="80"/>
-    </resources>
 </document>

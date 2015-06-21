@@ -43,6 +43,8 @@
 @implementation ForeshowTableViewCell
 
 
+
+
 /**
  *  设置
  *
@@ -63,9 +65,9 @@
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[times doubleValue]/1000];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
-    self.timeLable.text = publishtime;
+    self.timeLable.text = [NSString stringWithFormat:@"上线时间%@",publishtime];
     
 
     self.onlineImage.hidden = !isOnline;
@@ -75,15 +77,17 @@
 }
 
 - (void)timeButtonSetBule {
-    [self.timeButton setBackgroundImage:[UIImage imageNamed:@"bian"] forState:UIControlStateNormal];
-    [self.timeButton setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
+    self.timeButton.layer.borderColor = [UIColor redColor].CGColor;
+    [self.timeButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.timeButton setTitle:@"取消提醒" forState:UIControlStateNormal];
     
 }
 
 - (void)timeButtonWite {
-    [self.timeButton setBackgroundImage:[UIImage imageNamed:@"bian_b"] forState:UIControlStateNormal];
-    [self.timeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.timeButton.layer.cornerRadius = 5;
+    self.timeButton.layer.borderWidth = 1;
+    self.timeButton.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;
+    [self.timeButton setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
     [self.timeButton setTitle:@"设置提醒" forState:UIControlStateNormal];
 }
 
@@ -144,4 +148,10 @@
     }
 
 }
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self timeButtonWite];
+}
+
 @end
