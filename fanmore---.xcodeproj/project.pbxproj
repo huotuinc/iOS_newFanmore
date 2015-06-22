@@ -62,6 +62,7 @@
 		EF2E543B1B2853F30060E965 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E543A1B2853F30060E965 /* Message.m */; };
 		EF2E543F1B2857800060E965 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E543E1B2857800060E965 /* MessageTableViewCell.m */; };
 		EF2E54421B285E6A0060E965 /* MessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E54411B285E6A0060E965 /* MessageFrame.m */; };
+		EF3B551D1B37A0CB0045ADEB /* LWNewFeatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
 		EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF31B0D81A40038A203 /* AppDelegate.m */; };
 		EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF61B0D81A40038A203 /* ViewController.m */; };
@@ -302,6 +303,8 @@
 		EF2E543E1B2857800060E965 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		EF2E54401B285E6A0060E965 /* MessageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFrame.h; sourceTree = "<group>"; };
 		EF2E54411B285E6A0060E965 /* MessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFrame.m; sourceTree = "<group>"; };
+		EF3B55191B37A0CB0045ADEB /* LWNewFeatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWNewFeatureController.h; sourceTree = "<group>"; };
+		EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWNewFeatureController.m; sourceTree = "<group>"; };
 		EF49ECEB1B0D81A40038A203 /* fanmore---.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fanmore---.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF49ECEF1B0D81A40038A203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF49ECF01B0D81A40038A203 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -925,6 +928,7 @@
 		EF1EA5FF1B0DA2D600C1F60D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EF3B55171B37A0CB0045ADEB /* NewFeature(版本新特性) */,
 				EFD7A9C21B1D9DE30004A9A4 /* Htmlresource(网页资源) */,
 				EF565D111B16DCA900FC2D6B /* TodayForeshow(今天预告) */,
 				EFD02B2E1B155CDA00D11D6D /* setting(设置中心) */,
@@ -1028,6 +1032,39 @@
 			children = (
 			);
 			path = other;
+			sourceTree = "<group>";
+		};
+		EF3B55171B37A0CB0045ADEB /* NewFeature(版本新特性) */ = {
+			isa = PBXGroup;
+			children = (
+				EF3B55181B37A0CB0045ADEB /* Controller */,
+				EF3B551B1B37A0CB0045ADEB /* Model */,
+				EF3B551C1B37A0CB0045ADEB /* View */,
+			);
+			path = "NewFeature(版本新特性)";
+			sourceTree = "<group>";
+		};
+		EF3B55181B37A0CB0045ADEB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EF3B55191B37A0CB0045ADEB /* LWNewFeatureController.h */,
+				EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EF3B551B1B37A0CB0045ADEB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EF3B551C1B37A0CB0045ADEB /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EF49ECE21B0D81A40038A203 = {
@@ -1842,6 +1879,21 @@
 				en,
 				Base,
 				"zh-Hans",
+				de,
+				es,
+				fr,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nl,
+				pt,
+				pt_PT,
+				ru,
+				sv,
+				zh_Hans,
+				zh_Hant,
 			);
 			mainGroup = EF49ECE21B0D81A40038A203;
 			productRefGroup = EF49ECEC1B0D81A40038A203 /* Products */;
@@ -1944,6 +1996,7 @@
 				EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */,
 				EFAEB32A1B29557100855D25 /* taskDetail.m in Sources */,
 				839C30E71B2E6CF4000EE05A /* FriendCell.m in Sources */,
+				EF3B551D1B37A0CB0045ADEB /* LWNewFeatureController.m in Sources */,
 				83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */,
 				838116821B25AC5A00261F51 /* SexController.m in Sources */,
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,
@@ -2205,6 +2258,11 @@
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK",
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK/UI",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Connection",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Core",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/QQConnectSDK",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/UI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fanmore---/PrefixHeader.pch";
@@ -2241,6 +2299,10 @@
 					"$(PROJECT_DIR)/fanmore---",
 					"$(PROJECT_DIR)/fanmore---/WeiXinPay",
 					"$(PROJECT_DIR)/fanmore---/SDKExport",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/libs/mobClick",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/SinaWeiboSDK",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/TencentWeiboSDK",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/WeChatSDK",
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2262,6 +2324,11 @@
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK",
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK/UI",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Connection",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Core",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/QQConnectSDK",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/UI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fanmore---/PrefixHeader.pch";
@@ -2298,6 +2365,10 @@
 					"$(PROJECT_DIR)/fanmore---",
 					"$(PROJECT_DIR)/fanmore---/WeiXinPay",
 					"$(PROJECT_DIR)/fanmore---/SDKExport",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/libs/mobClick",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/SinaWeiboSDK",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/TencentWeiboSDK",
+					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/WeChatSDK",
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
