@@ -98,6 +98,7 @@
 		EF565D541B170C2100FC2D6B /* userData.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D531B170C2100FC2D6B /* userData.m */; };
 		EF565D571B170D5500FC2D6B /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D561B170D5500FC2D6B /* Result.m */; };
 		EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D591B17146300FC2D6B /* twoOption.m */; };
+		EF72EAD21B3835F000872BA5 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF72EACF1B3835F000872BA5 /* libWeChatSDK.a */; };
 		EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67301B0DD07E008B6909 /* MBProgressHUD+MJ.m */; };
 		EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */; };
 		EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */; };
@@ -189,7 +190,6 @@
 		EFF3D0DE1B2EBE6900B2F446 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */; };
 		EFF3D0DF1B2EBE6900B2F446 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0DD1B2EBE6900B2F446 /* libssl.a */; };
 		EFF3D0E61B2EF0DF00B2F446 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0E51B2EF0DF00B2F446 /* libz.dylib */; };
-		EFF3D0EB1B2EFAF000B2F446 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,6 +370,9 @@
 		EF565D561B170D5500FC2D6B /* Result.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Result.m; sourceTree = "<group>"; };
 		EF565D581B17146300FC2D6B /* twoOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twoOption.h; sourceTree = "<group>"; };
 		EF565D591B17146300FC2D6B /* twoOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = twoOption.m; sourceTree = "<group>"; };
+		EF72EACF1B3835F000872BA5 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		EF72EAD01B3835F000872BA5 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		EF72EAD11B3835F000872BA5 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		EF8D672F1B0DD07E008B6909 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		EF8D67301B0DD07E008B6909 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 		EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
@@ -601,9 +604,6 @@
 		EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "fanmore---/libcrypto.a"; sourceTree = "<group>"; };
 		EFF3D0DD1B2EBE6900B2F446 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "fanmore---/libssl.a"; sourceTree = "<group>"; };
 		EFF3D0E51B2EF0DF00B2F446 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		EFF3D0E91B2EFAF000B2F446 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		EFF3D0EA1B2EFAF000B2F446 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -616,7 +616,7 @@
 				EFF3D0DF1B2EBE6900B2F446 /* libssl.a in Frameworks */,
 				EFC86AEE1B1EFD700081BBC8 /* MailConnection.framework in Frameworks */,
 				EFC86ACD1B1EFC080081BBC8 /* Accounts.framework in Frameworks */,
-				EFF3D0EB1B2EFAF000B2F446 /* libWeChatSDK.a in Frameworks */,
+				EF72EAD21B3835F000872BA5 /* libWeChatSDK.a in Frameworks */,
 				EFC86ACB1B1EFBF80081BBC8 /* Social.framework in Frameworks */,
 				EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				EFC86AC91B1EFBD50081BBC8 /* libsqlite3.0.dylib in Frameworks */,
@@ -1079,6 +1079,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EF440E101B3838A800761A9C /* lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		EF49ECE21B0D81A40038A203 = {
 			isa = PBXGroup;
 			children = (
@@ -1102,7 +1109,8 @@
 		EF49ECED1B0D81A40038A203 /* fanmore--- */ = {
 			isa = PBXGroup;
 			children = (
-				EFF3D0E71B2EFAF000B2F446 /* SDKExport */,
+				EF440E101B3838A800761A9C /* lib */,
+				EF72EACE1B3835F000872BA5 /* SDKExport */,
 				EFF3D0711B2EB4A800B2F446 /* openssl */,
 				EFF3D0BD1B2EB4A800B2F446 /* Util */,
 				EF1EA5FF1B0DA2D600C1F60D /* Classes */,
@@ -1266,6 +1274,16 @@
 			);
 			name = view;
 			path = "classes/Login(登录)/view";
+			sourceTree = "<group>";
+		};
+		EF72EACE1B3835F000872BA5 /* SDKExport */ = {
+			isa = PBXGroup;
+			children = (
+				EF72EACF1B3835F000872BA5 /* libWeChatSDK.a */,
+				EF72EAD01B3835F000872BA5 /* WXApi.h */,
+				EF72EAD11B3835F000872BA5 /* WXApiObject.h */,
+			);
+			path = SDKExport;
 			sourceTree = "<group>";
 		};
 		EF8D672C1B0DD07E008B6909 /* other(其它) */ = {
@@ -1816,16 +1834,6 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		EFF3D0E71B2EFAF000B2F446 /* SDKExport */ = {
-			isa = PBXGroup;
-			children = (
-				EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */,
-				EFF3D0E91B2EFAF000B2F446 /* WXApi.h */,
-				EFF3D0EA1B2EFAF000B2F446 /* WXApiObject.h */,
-			);
-			path = SDKExport;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2272,11 +2280,6 @@
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK",
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK/UI",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Connection",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Core",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/QQConnectSDK",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/UI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fanmore---/PrefixHeader.pch";
@@ -2313,10 +2316,6 @@
 					"$(PROJECT_DIR)/fanmore---",
 					"$(PROJECT_DIR)/fanmore---/WeiXinPay",
 					"$(PROJECT_DIR)/fanmore---/SDKExport",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/libs/mobClick",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/SinaWeiboSDK",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/TencentWeiboSDK",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/WeChatSDK",
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2338,11 +2337,6 @@
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK",
 					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/ShareSDK/UI",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Connection",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Core",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/QQConnectSDK",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/UI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fanmore---/PrefixHeader.pch";
@@ -2379,10 +2373,6 @@
 					"$(PROJECT_DIR)/fanmore---",
 					"$(PROJECT_DIR)/fanmore---/WeiXinPay",
 					"$(PROJECT_DIR)/fanmore---/SDKExport",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/libs/mobClick",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/SinaWeiboSDK",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/TencentWeiboSDK",
-					"$(PROJECT_DIR)/fanmore---/huoban+/huo/minipartner/ShareSDK/Extend/WeChatSDK",
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
