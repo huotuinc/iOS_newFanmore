@@ -53,6 +53,7 @@
     pageControll.currentPageIndicatorTintColor = LWColor(253, 98, 42);
     pageControll.pageIndicatorTintColor = LWColor(189, 189, 189);
     
+    //page
     self.padgeControl= pageControll;
     
 }
@@ -74,6 +75,7 @@
     for (int index = 0; index < LWNewFeatureImageCount; index++) {
         
         UIImageView * imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         //设置图片
         NSString *imageName = nil;
 //        if (fourInch) {//4inch
