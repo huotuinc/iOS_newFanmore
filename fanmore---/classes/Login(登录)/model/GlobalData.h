@@ -19,6 +19,9 @@
 /**关于我们*/
 @property(nonatomic,strong) NSString * aboutURL;
 
+/**关于我们*/
+@property(nonatomic,strong) NSString * serviceURL;
+
 /**帮助的连接*/
 @property(nonatomic,strong) NSString * helpURL;
 

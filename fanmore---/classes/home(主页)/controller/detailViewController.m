@@ -46,22 +46,16 @@
     // 初始化
     [self setup];
     
-//    NSLog(@"")
+
     [self getQuestion];
     
     [self settime];
     
-#warning 测试
-//    NSURL *url = [NSURL URLWithString:@"www.qidian.com"];
+
     NSURL* url =  [NSURL URLWithString:self.detailUrl];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    //CGFloat xxxx = (ScreenHeight - CGRectGetMinY(self.answerBtn.frame)) * 0.7+20;
     self.detailWebView.backgroundColor = [UIColor redColor];
     self.detailWebView.scrollView.backgroundColor = [UIColor whiteColor];
-    //self.detailWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, xxxx, 0);
-    
-//    UIWindow * win = [UIApplication sharedApplication].windows;
-//    win.backgroundColor = [UIColor whiteColor];
     [self.detailWebView loadRequest:request];
 }
 
@@ -125,10 +119,31 @@
                                                                                    
     //弹出分享菜单
     [ShareSDK showShareActionSheet:container shareList:nil content:publishContent statusBarTips:YES authOptions:nil shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                                                                                                 
+        
      if (state == SSResponseStateSuccess)
      {
+    
          NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
+         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"taskTurnedNotify"];
+         NSMutableDictionary * params = [NSMutableDictionary dictionary];
+         params[@"taskId"] = @(self.taskId);
+         int sType = 0;
+         if (type == 1) {
+             sType = 2;  //新浪微博
+         }else if(type == 6){
+             sType = 3;  //qq 空间
+         }else if(type == 23){
+             sType = 1;  //qq 空间
+         }
+         params[@"channel"] = @(sType);
+         
+         [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+             
+             NSLog(@"%@",json);
+         } failure:^(NSError *error) {
+             
+         }];
+         
      }else if (state == SSResponseStateFail){
          NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
      }

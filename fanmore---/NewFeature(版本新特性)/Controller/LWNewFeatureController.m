@@ -24,8 +24,6 @@
 {
     [super viewDidLoad];
 
-
-    
     //1、创建scrollView
     [self setupScrollView];
     //2、添加  pageControll
@@ -164,8 +162,9 @@
 -(void)startButtonClick
 {
     [UIApplication sharedApplication].statusBarHidden = NO;
+    RootViewController * roots = [[RootViewController alloc] init];
     //切换到 tabarcontrollor
-//    self.view.window.rootViewController = [[LWTaBarViewController alloc] init];
+    self.view.window.rootViewController = roots;
 }
 
 /**
@@ -173,7 +172,7 @@
  */
 -(void)checkBoxClick:(UIButton *)button
 {
-    button.Selected = !button.isSelected;
+    button.selected = !button.isSelected;
 }
 - (void)didReceiveMemoryWarning
 {

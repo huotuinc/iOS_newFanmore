@@ -35,6 +35,7 @@ static NSString *hobbyIdentify = @"hobbyCellId";
         
         _favs = global.favs;
     }
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(back)];
     
     self.title = @"爱好";
     
@@ -45,19 +46,11 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     
 }
 
-//- (NSArray *)favsArray {
-//    if (_favs == nil) {
-//        _favs = [NSArray array];
-//        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//        NSString * fileName = [path stringByAppendingPathComponent:InitGlobalDate];
-//        GlobalData * global =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-//        
-//        _favs = global.favs;
-//        NSLog(@"%@",global.favs);
-//    }
-//    return _favs;
-//}
 
+//- (void)back{
+//    
+
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -105,43 +98,26 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+
+
+- (void) viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     NSMutableString *str = [NSMutableString string];
+    NSMutableString *strss = [NSMutableString string];
     for (NSString *temp in self.userSelected) {
         [str appendFormat:@"%@,",temp];
+        twoOption * option = [self.favs objectAtIndex:[temp intValue]];
+        [strss appendFormat:@"%@,",option.name];
     }
     if (str.length != 0) {
         NSString *str1 = [str substringToIndex:[str length] - 1];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        params[@"profileType"] = @"5";
-        params[@"profileData"] = str1;
-        
-        NSString *urlStr = [MainURL stringByAppendingString:@"updateProfile"];
-        [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
-            [MBProgressHUD showSuccess:@"上传成功"];
-        } failure:^(NSError *error) {
-            NSLog(@"%@",error);
-            [MBProgressHUD showError:@"上传失败"];
-        }];
+        NSString *str2 = [strss substringToIndex:[strss length] - 1];
+        if ([self.delegate respondsToSelector:@selector(pickOVerhobby:andOption:)]) {
+            [self.delegate pickOVerhobby:str1 andOption:str2];
+        }
     }
-    
 }
-//- (void)viewDisappear:(BOOL)animated
-//{
-//    
-//}
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

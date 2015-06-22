@@ -43,12 +43,14 @@
 #define APPKEY @"b73ca64567fb49ee963477263283a1bf"
 /**应用版本号*/
 #define AppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+/**本地存储的版本号*/
+#define LocalAppVersion @"LocalAppVersion"
 /**平台*/
 #define OPERATION_parame @"FM2015AP"
 /**设备唯一号*/
 #define  DeviceNo ([[UIDevice currentDevice].identifierForVendor UUIDString])
 /**时间*/
-#define apptimesSince1970 [NSString stringWithFormat:@"%.0f",[[[NSDate alloc] init] timeIntervalSince1970]*1000]
+#define apptimesSince1970 [NSString stringWithFormat:@"%.0f",([[[NSDate alloc] init] timeIntervalSince1970]*1000)]
 
 /**appToken*/
 #define AppToken @"AppToken"
