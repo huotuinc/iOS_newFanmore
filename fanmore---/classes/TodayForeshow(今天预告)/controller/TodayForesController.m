@@ -162,9 +162,6 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
             if (task.taskId == mytag) {
                 cell.isWarning = YES;
                 
-                [cell.timeButton setBackgroundImage:[UIImage imageNamed:@"bian"] forState:UIControlStateNormal];
-                [cell.timeButton setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
-                [cell.timeButton setTitle:@"取消提醒" forState:UIControlStateNormal];
                 
                 break;
             }
@@ -173,7 +170,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
-    [NSString stringWithFormat:@"%@",task.maxBonus] andContentLabel:task.desc andOnlineImage:NO];
+     [NSString stringWithFormat:@"%@",task.maxBonus] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.desc] andOnlineImage:NO];
     NSLog(@"sdadsasd");
     return cell;
 }

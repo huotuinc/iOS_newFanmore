@@ -82,8 +82,9 @@
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             btn.userInteractionEnabled = NO;
         }else{//未签到
-            
-            btn.userInteractionEnabled = YES;
+            [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            btn.userInteractionEnabled = NO;
         }
         btn.layer.masksToBounds = YES;
         [btn addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];

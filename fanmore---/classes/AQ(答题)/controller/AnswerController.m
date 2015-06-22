@@ -51,8 +51,28 @@ int _rightQuest = 0;  //纪录正确的答题数
     }
     
     [self showQuestion];//设置题目第一次的题目
-
     
+    
+    [self _initBgViewAndImage];
+    
+    
+}
+
+- (void)_initBgViewAndImage
+{
+    if (ScreenWidth == 375) {
+        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt7501334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt12422208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt640960"]];
+        }else {
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt6401136"]];
+        }
+    }
 }
 
 - (void)pictureClickToFindAnswer:(UITapGestureRecognizer *)tap{
@@ -73,7 +93,7 @@ int _rightQuest = 0;  //纪录正确的答题数
             NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
             NSMutableDictionary * params = [NSMutableDictionary dictionary];
             params[@"taskId"] = @(self.taskId);
-            NSLog(@"dadasdasdasdasdxxx0000000 %@",[self.ans substringToIndex:self.ans.length-1]);
+//            NSLog(@"dadasdasdasdasdxxx0000000 %@",[self.ans substringToIndex:self.ans.length-1]);
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
                 

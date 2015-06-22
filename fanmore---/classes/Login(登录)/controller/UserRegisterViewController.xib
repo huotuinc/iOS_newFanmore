@@ -102,14 +102,13 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ybb-sd-AH2">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ybb-sd-AH2" customClass="FMButton">
                                     <rect key="frame" x="481" y="52" width="105" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="jbX-EG-5Gu"/>
                                         <constraint firstAttribute="width" constant="105" id="mwv-s1-Jid"/>
                                     </constraints>
-                                    <state key="normal" title="获取验证码" backgroundImage="button-BR">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <state key="normal" title="获取验证码">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -312,15 +311,13 @@
                                 </mask>
                             </variation>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sS2-Je-gZb">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sS2-Je-gZb" customClass="FMButton">
                             <rect key="frame" x="15" y="356" width="570" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="9B0-gV-Vt5"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                            <state key="normal" title="注册" backgroundImage="button-BR">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <state key="normal" title="注册"/>
                             <connections>
                                 <action selector="registerButtonClick:" destination="-1" eventType="touchUpInside" id="tb3-mW-2CU"/>
                             </connections>
@@ -373,7 +370,4 @@
             <point key="canvasLocation" x="703" y="-283"/>
         </view>
     </objects>
-    <resources>
-        <image name="button-BR" width="480" height="80"/>
-    </resources>
 </document>

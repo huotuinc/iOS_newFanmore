@@ -157,9 +157,9 @@ static NSString *homeCellidentify = @"homeCellId";
 {
     //根视图控制器转跳
     __weak RootViewController *rootVC = (RootViewController *)self.mm_drawerController;
-    UIImage *image = [UIImage imageNamed:@"menu"];
-    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"菜单" style:UIBarButtonItemStylePlain
+//    UIImage *image = [UIImage imageNamed:@"menu"];
+//    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain
                                                                               handler:^(id sender) {
                                                                                   [rootVC toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
                                                                               }];
@@ -201,7 +201,7 @@ static NSString *homeCellidentify = @"homeCellId";
     taskData * task = self.taskDatas[indexPath.row];
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[(task.publishDate) doubleValue]/1000.0];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
     int a = 0;  //首页右下角标志
     if([task.last intValue]==0){
@@ -251,9 +251,9 @@ static NSString *homeCellidentify = @"homeCellId";
 {
     
 #warning 测试
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    JoinController *join = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
-    [self.navigationController pushViewController:join animated:YES];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    JoinController *join = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
+//    [self.navigationController pushViewController:join animated:YES];
     
     if (!self.isLogin) { //判断
         

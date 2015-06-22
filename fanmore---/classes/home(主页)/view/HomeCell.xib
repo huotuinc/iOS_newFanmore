@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天欧冠巴萨激战尤文fads 发生的发生发放的是" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-4D-mst">
-                        <rect key="frame" x="95" y="10" width="150" height="36"/>
+                        <rect key="frame" x="95" y="8" width="150" height="36"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="JBz-xJ-n4i"/>
                             <constraint firstAttribute="height" constant="21" id="zdC-gL-DZe"/>
@@ -31,7 +31,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-04-04" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFQ-QQ-8uU">
-                        <rect key="frame" x="95" y="61" width="65" height="15"/>
+                        <rect key="frame" x="95" y="59" width="65" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -47,7 +47,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojb-Eg-SxG">
-                        <rect key="frame" x="95" y="76" width="24" height="21"/>
+                        <rect key="frame" x="95" y="74" width="24" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="114" id="2aK-Uv-kgp"/>
                             <constraint firstAttribute="height" constant="21" id="XV9-w6-tkB"/>
@@ -74,7 +74,7 @@
                         </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="由[群乐饭店]提供" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKy-Gw-2hj">
-                        <rect key="frame" x="95" y="46" width="150" height="15"/>
+                        <rect key="frame" x="95" y="44" width="150" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="8QV-jB-NH9"/>
                             <constraint firstAttribute="width" constant="189" id="dqQ-Yj-CPz"/>
@@ -90,7 +90,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hle-dh-2f8">
-                        <rect key="frame" x="119" y="76" width="33" height="21"/>
+                        <rect key="frame" x="119" y="74" width="33" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="RdI-hR-BRi"/>
                             <constraint firstAttribute="width" constant="114" id="ud9-q3-BDy"/>
@@ -105,7 +105,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参与" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSC-To-pVl">
-                        <rect key="frame" x="152" y="76" width="24" height="21"/>
+                        <rect key="frame" x="152" y="74" width="24" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="114" id="30v-tD-O1h"/>
                             <constraint firstAttribute="height" constant="21" id="6HC-yX-42e"/>
@@ -174,6 +174,7 @@
                     <constraint firstItem="Hle-dh-2f8" firstAttribute="leading" secondItem="Ojb-Eg-SxG" secondAttribute="trailing" id="oga-nP-87a"/>
                     <constraint firstAttribute="bottom" secondItem="0jK-cX-QNi" secondAttribute="bottom" constant="10" id="oqa-XO-MJ8"/>
                     <constraint firstItem="UFQ-QQ-8uU" firstAttribute="top" secondItem="ZKy-Gw-2hj" secondAttribute="bottom" id="pxt-CE-TQZ"/>
+                    <constraint firstItem="0jK-cX-QNi" firstAttribute="top" secondItem="nGH-4D-mst" secondAttribute="top" constant="2" id="qBD-3U-J00"/>
                     <constraint firstItem="XbP-Z9-ED8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uyW-km-6C4"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="leading" secondItem="ZKy-Gw-2hj" secondAttribute="leading" id="vQo-Ng-HUm"/>
                     <constraint firstAttribute="trailing" secondItem="RRN-9z-gCd" secondAttribute="trailing" constant="10" id="wIt-q7-UMt"/>
@@ -184,6 +185,7 @@
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="oqa-XO-MJ8"/>
+                        <exclude reference="TeT-Gc-bR6"/>
                         <exclude reference="8Zr-r3-ytU"/>
                         <exclude reference="9b7-yP-ZyY"/>
                         <exclude reference="ROk-Fc-dnC"/>

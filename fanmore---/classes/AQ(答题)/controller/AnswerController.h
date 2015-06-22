@@ -14,6 +14,8 @@
 
 @property (assign ,nonatomic) int tureAnswer;
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
 @property (weak, nonatomic) IBOutlet UIButton *AButton;
 @property (weak, nonatomic) IBOutlet UIButton *BButton;
 @property (weak, nonatomic) IBOutlet UIButton *CButton;

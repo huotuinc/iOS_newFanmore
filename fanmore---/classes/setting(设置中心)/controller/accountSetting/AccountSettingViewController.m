@@ -15,6 +15,7 @@
 #import "ChangePasswordController.h"
 #import "MassageCenterController.h"
 #import "userData.h"
+#import "FMButton.h"
 
 @interface AccountSettingViewController ()
 
@@ -76,11 +77,11 @@
     // 2.添加数据
     [self setupGroup0];
     
-    UIButton * quiteAccount = [[UIButton alloc] initWithFrame:CGRectMake(5, ScreenHeight - 140 -20, ScreenWidth - 10, 44)];
+    FMButton * quiteAccount = [[FMButton alloc] initWithFrame:CGRectMake(5, ScreenHeight - 140 -20, ScreenWidth - 10, 44)];
     [quiteAccount setTitle:@"退出账号" forState:UIControlStateNormal];
-    [quiteAccount setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    quiteAccount.titleLabel.font = [UIFont systemFontOfSize:22];
-    [quiteAccount setBackgroundImage:[UIImage imageNamed:@"button-BR"] forState:UIControlStateNormal];
+//    [quiteAccount setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    quiteAccount.titleLabel.font = [UIFont systemFontOfSize:20];
+//    [quiteAccount setBackgroundImage:[UIImage imageNamed:@"button-BR"] forState:UIControlStateNormal];
     [quiteAccount addTarget:self action:@selector(QuiteAccount:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:quiteAccount];
 }
