@@ -276,6 +276,7 @@ int _rightQuest = 0;  //纪录正确的答题数
     //显示下一题
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self showQuestion];
+        [self _initBgViewAndImage];
     });
 }
 - (IBAction)BAction:(UIButton *)sender {
@@ -296,6 +297,7 @@ int _rightQuest = 0;  //纪录正确的答题数
     //显示下一题
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self showQuestion];
+        [self _initBgViewAndImage];
     });
   
 }
@@ -318,6 +320,7 @@ int _rightQuest = 0;  //纪录正确的答题数
     //显示下一题
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self showQuestion];
+        [self _initBgViewAndImage];
     });
 }
 - (IBAction)DAction:(UIButton *)sender {
@@ -337,6 +340,7 @@ int _rightQuest = 0;  //纪录正确的答题数
     //显示下一题
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self showQuestion];
+        [self _initBgViewAndImage];
     });
 }
 

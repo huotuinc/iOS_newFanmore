@@ -58,6 +58,7 @@
 		83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CD81B1C3EA800286735 /* DiscipleViewController.m */; };
 		83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E72CDE1B1C3EBE00286735 /* asignViewController.m */; };
 		83EAD9131B2AB8C7006870D3 /* BegController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EAD9121B2AB8C7006870D3 /* BegController.m */; };
+		83F0285F1B38FFC700FD2A09 /* ExchangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F0285E1B38FFC700FD2A09 /* ExchangeController.m */; };
 		83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */; };
 		83F875F51B27E2C00089C6F5 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		83F875F61B27E2C00089C6F5 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -300,6 +301,8 @@
 		83EAD9111B2AB8C7006870D3 /* BegController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BegController.h; sourceTree = "<group>"; };
 		83EAD9121B2AB8C7006870D3 /* BegController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BegController.m; sourceTree = "<group>"; };
 		83ED0B46534249FDED1AB9A4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		83F0285D1B38FFC700FD2A09 /* ExchangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExchangeController.h; path = "classes/home(主页)/controller/ExchangeController.h"; sourceTree = "<group>"; };
+		83F0285E1B38FFC700FD2A09 /* ExchangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExchangeController.m; path = "classes/home(主页)/controller/ExchangeController.m"; sourceTree = "<group>"; };
 		83F2DE641B186E16005E8305 /* NSDictionary+EXTERN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+EXTERN.h"; sourceTree = "<group>"; };
 		83F2DE651B186E16005E8305 /* NSDictionary+EXTERN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+EXTERN.m"; sourceTree = "<group>"; };
 		B3FD91DA819FF73D5D13983C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -1002,6 +1005,8 @@
 				830B4D011B2194FC00BBE276 /* BPViewController.m */,
 				83CA8FE81B2985DF008D37C6 /* ConversionController.h */,
 				83CA8FE91B2985DF008D37C6 /* ConversionController.m */,
+				83F0285D1B38FFC700FD2A09 /* ExchangeController.h */,
+				83F0285E1B38FFC700FD2A09 /* ExchangeController.m */,
 				83A085961B31653E00FDFA2B /* WebController.h */,
 				83A085971B31653E00FDFA2B /* WebController.m */,
 			);
@@ -2116,6 +2121,7 @@
 				EFF3D0CF1B2EB4A800B2F446 /* base64.m in Sources */,
 				EFD02B431B155CDA00D11D6D /* MJSettingGroup.m in Sources */,
 				EF2E54421B285E6A0060E965 /* MessageFrame.m in Sources */,
+				83F0285F1B38FFC700FD2A09 /* ExchangeController.m in Sources */,
 				EF49ECF11B0D81A40038A203 /* main.m in Sources */,
 				83E263FB1B2F018500A2AC96 /* HanyuPinyinOutputFormat.m in Sources */,
 				83DBD8E31B12FD2800B62830 /* RootViewController.m in Sources */,
