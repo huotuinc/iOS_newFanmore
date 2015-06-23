@@ -51,27 +51,27 @@
     
     NSString * appVersion = [[NSUserDefaults standardUserDefaults] stringForKey:LocalAppVersion];
     NSLog(@"aaaa%@",appVersion);
-//    if (appVersion) {
-//        
-//        if ([appVersion isEqualToString:AppVersion]) {//相等
-//            RootViewController * roots = [[RootViewController alloc] init];
-//            self.window.rootViewController = roots;
-//            [self.window makeKeyAndVisible];
-//            
-//        }else{//不相等
-//            [[NSUserDefaults standardUserDefaults] setObject:appVersion forKey:LocalAppVersion];
-//            LWNewFeatureController *new = [[LWNewFeatureController alloc] init];
-//            self.window.rootViewController = new;
-//            [self.window makeKeyAndVisible];
-//        }
-//        
-//    }else{//没有版本号
-//        //
-//        [[NSUserDefaults standardUserDefaults] setObject:AppVersion forKey:LocalAppVersion];
-//        LWNewFeatureController *new = [[LWNewFeatureController alloc] init];
-//        self.window.rootViewController = new;
-//        [self.window makeKeyAndVisible];
-//    }
+    if (appVersion) {
+        
+        if ([appVersion isEqualToString:AppVersion]) {//相等
+            RootViewController * roots = [[RootViewController alloc] init];
+            self.window.rootViewController = roots;
+            [self.window makeKeyAndVisible];
+            
+        }else{//不相等
+            [[NSUserDefaults standardUserDefaults] setObject:appVersion forKey:LocalAppVersion];
+            LWNewFeatureController *new = [[LWNewFeatureController alloc] init];
+            self.window.rootViewController = new;
+            [self.window makeKeyAndVisible];
+        }
+        
+    }else{//没有版本号
+        //
+        [[NSUserDefaults standardUserDefaults] setObject:AppVersion forKey:LocalAppVersion];
+        LWNewFeatureController *new = [[LWNewFeatureController alloc] init];
+        self.window.rootViewController = new;
+        [self.window makeKeyAndVisible];
+    }
     
     
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
