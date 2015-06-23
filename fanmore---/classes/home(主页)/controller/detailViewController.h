@@ -34,6 +34,8 @@
 /**分享的url*/
 @property(nonatomic,strong)NSString *shareUrl;
 
+/**分享的url*/
+@property(nonatomic,assign)NSString *shareUrl;
 - (IBAction)goQusetionAction:(id)sender;
 
 @end
