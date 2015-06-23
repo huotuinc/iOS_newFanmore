@@ -44,6 +44,8 @@
         [self.webView loadRequest:request];
         
         
+    } else if(self.type == 3){ //隐条款
+        
     }else{ //答题
         
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
@@ -57,10 +59,7 @@
     }
     
     
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//    });
+
 }
 
 

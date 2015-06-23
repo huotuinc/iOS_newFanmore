@@ -67,6 +67,9 @@
 		EF2E543F1B2857800060E965 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E543E1B2857800060E965 /* MessageTableViewCell.m */; };
 		EF2E54421B285E6A0060E965 /* MessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E54411B285E6A0060E965 /* MessageFrame.m */; };
 		EF3B551D1B37A0CB0045ADEB /* LWNewFeatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */; };
+		EF440E181B383A1400761A9C /* ApiXml.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF440E131B383A1400761A9C /* ApiXml.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EF440E191B383A1400761A9C /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF440E151B383A1400761A9C /* payRequsestHandler.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EF440E1A1B383A1400761A9C /* WXUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF440E171B383A1400761A9C /* WXUtil.mm */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
 		EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF31B0D81A40038A203 /* AppDelegate.m */; };
 		EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF61B0D81A40038A203 /* ViewController.m */; };
@@ -144,8 +147,6 @@
 		EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */; };
 		EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB460B1B214499005D5026 /* FeedBackViewController.m */; };
 		EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCB460C1B214499005D5026 /* FeedBackViewController.xib */; };
-		EFCC33FA1B3002BD0018B228 /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = EFCC33F71B3002BD0018B228 /* payRequsestHandler.mm */; };
-		EFCC33FB1B3002BD0018B228 /* TenpayUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = EFCC33F91B3002BD0018B228 /* TenpayUtil.mm */; };
 		EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */; };
 		EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AD1B12D6E400C015A7 /* MJArgument.m */; };
 		EFCCA4C41B12D6E400C015A7 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AF1B12D6E400C015A7 /* MJConst.m */; };
@@ -316,6 +317,12 @@
 		EF2E54411B285E6A0060E965 /* MessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFrame.m; sourceTree = "<group>"; };
 		EF3B55191B37A0CB0045ADEB /* LWNewFeatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWNewFeatureController.h; sourceTree = "<group>"; };
 		EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWNewFeatureController.m; sourceTree = "<group>"; };
+		EF440E121B383A1400761A9C /* ApiXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiXml.h; sourceTree = "<group>"; };
+		EF440E131B383A1400761A9C /* ApiXml.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApiXml.mm; sourceTree = "<group>"; };
+		EF440E141B383A1400761A9C /* payRequsestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payRequsestHandler.h; sourceTree = "<group>"; };
+		EF440E151B383A1400761A9C /* payRequsestHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payRequsestHandler.mm; sourceTree = "<group>"; };
+		EF440E161B383A1400761A9C /* WXUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXUtil.h; sourceTree = "<group>"; };
+		EF440E171B383A1400761A9C /* WXUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WXUtil.mm; sourceTree = "<group>"; };
 		EF49ECEB1B0D81A40038A203 /* fanmore---.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fanmore---.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF49ECEF1B0D81A40038A203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF49ECF01B0D81A40038A203 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -437,10 +444,6 @@
 		EFCB460A1B214499005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		EFCB460B1B214499005D5026 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		EFCB460C1B214499005D5026 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
-		EFCC33F61B3002BD0018B228 /* payRequsestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payRequsestHandler.h; sourceTree = "<group>"; };
-		EFCC33F71B3002BD0018B228 /* payRequsestHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payRequsestHandler.mm; sourceTree = "<group>"; };
-		EFCC33F81B3002BD0018B228 /* TenpayUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenpayUtil.h; sourceTree = "<group>"; };
-		EFCC33F91B3002BD0018B228 /* TenpayUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TenpayUtil.mm; sourceTree = "<group>"; };
 		EFCCA4981B12C53700C015A7 /* PersonMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageTableViewController.h; sourceTree = "<group>"; };
 		EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMessageTableViewController.m; sourceTree = "<group>"; };
 		EFCCA4AC1B12D6E400C015A7 /* MJArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJArgument.h; sourceTree = "<group>"; };
@@ -1092,9 +1095,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		EF440E101B3838A800761A9C /* lib */ = {
+		EF440E111B383A1400761A9C /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				EF440E121B383A1400761A9C /* ApiXml.h */,
+				EF440E131B383A1400761A9C /* ApiXml.mm */,
+				EF440E141B383A1400761A9C /* payRequsestHandler.h */,
+				EF440E151B383A1400761A9C /* payRequsestHandler.mm */,
+				EF440E161B383A1400761A9C /* WXUtil.h */,
+				EF440E171B383A1400761A9C /* WXUtil.mm */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1122,7 +1131,7 @@
 		EF49ECED1B0D81A40038A203 /* fanmore--- */ = {
 			isa = PBXGroup;
 			children = (
-				EF440E101B3838A800761A9C /* lib */,
+				EF440E111B383A1400761A9C /* lib */,
 				EF72EACE1B3835F000872BA5 /* SDKExport */,
 				EFF3D0711B2EB4A800B2F446 /* openssl */,
 				EFF3D0BD1B2EB4A800B2F446 /* Util */,
@@ -1316,7 +1325,6 @@
 			isa = PBXGroup;
 			children = (
 				83E263EB1B2F018500A2AC96 /* PinYin4Objc */,
-				EFCC33F51B3002BD0018B228 /* WeiXInlib */,
 				EFAEB3211B291D6600855D25 /* FSMediaPicker */,
 				EFC86ACE1B1EFD700081BBC8 /* ShareSDK */,
 				EFCDC8261B17F63100D28DB1 /* UMAnalytics_Sdk_3.5.8 */,
@@ -1458,17 +1466,6 @@
 				EFCB460C1B214499005D5026 /* FeedBackViewController.xib */,
 			);
 			path = "FeedBack(意见反馈)";
-			sourceTree = "<group>";
-		};
-		EFCC33F51B3002BD0018B228 /* WeiXInlib */ = {
-			isa = PBXGroup;
-			children = (
-				EFCC33F61B3002BD0018B228 /* payRequsestHandler.h */,
-				EFCC33F71B3002BD0018B228 /* payRequsestHandler.mm */,
-				EFCC33F81B3002BD0018B228 /* TenpayUtil.h */,
-				EFCC33F91B3002BD0018B228 /* TenpayUtil.mm */,
-			);
-			path = WeiXInlib;
 			sourceTree = "<group>";
 		};
 		EFCCA4891B12B85800C015A7 /* accountManage(账号管理) */ = {
@@ -2039,7 +2036,7 @@
 				83DBD92D1B13128800B62830 /* HomeCell.m in Sources */,
 				830812401B28552200AC4E18 /* PICircularProgressView.m in Sources */,
 				EF565D3F1B17091F00FC2D6B /* BoundPhoneViewController.m in Sources */,
-				EFCC33FA1B3002BD0018B228 /* payRequsestHandler.mm in Sources */,
+				EF440E1A1B383A1400761A9C /* WXUtil.mm in Sources */,
 				EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */,
 				EF565D061B16AA6000FC2D6B /* MJRefreshBaseView.m in Sources */,
 				EFAEB3271B291DDD00855D25 /* FSMediaPicker.m in Sources */,
@@ -2058,7 +2055,6 @@
 				EFE76B811B26DC4100C956A5 /* taskData.m in Sources */,
 				EFF3D0D11B2EB4A800B2F446 /* DataVerifier.m in Sources */,
 				EF565D101B16B7AB00FC2D6B /* AccountSettingViewController.m in Sources */,
-				EFCC33FB1B3002BD0018B228 /* TenpayUtil.mm in Sources */,
 				83E263EA1B2EAEA700A2AC96 /* FriendModel.m in Sources */,
 				EF565D511B170AF600FC2D6B /* LoginResultData.m in Sources */,
 				836D6AAB1B1C776000119B3F /* JoinController.m in Sources */,
@@ -2075,6 +2071,7 @@
 				EFF3D0D51B2EB4A800B2F446 /* RSADataSigner.m in Sources */,
 				EFE837B91B12FA3C0093E14E /* app.m in Sources */,
 				EF565D411B17091F00FC2D6B /* findBackPwViewController.m in Sources */,
+				EF440E181B383A1400761A9C /* ApiXml.mm in Sources */,
 				EFF3D0D21B2EB4A800B2F446 /* MD5DataSigner.m in Sources */,
 				EFD02B471B155CDA00D11D6D /* MJSettingSwitchItem.m in Sources */,
 				EFCCA4C41B12D6E400C015A7 /* MJConst.m in Sources */,
@@ -2112,6 +2109,7 @@
 				83E263FE1B2F018500A2AC96 /* PinyinHelper.m in Sources */,
 				83E490021B1D747900A44FC8 /* TrafficShowController.m in Sources */,
 				EF565D081B16AA6000FC2D6B /* MJRefreshFooterView.m in Sources */,
+				EF440E191B383A1400761A9C /* payRequsestHandler.mm in Sources */,
 				EF565D541B170C2100FC2D6B /* userData.m in Sources */,
 				83E263FC1B2F018500A2AC96 /* NSString+PinYin4Cocoa.m in Sources */,
 				EFF3D0D01B2EB4A800B2F446 /* DataSigner.m in Sources */,
