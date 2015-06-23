@@ -118,17 +118,17 @@
  */
 -(void)setupLastImageView:(UIImageView *)imageView
 {
-    NSLog(@"xxxxxxxxxxxxxx添加开始按钮");
     imageView.userInteractionEnabled = YES;
     //添加按钮
     UIButton * startButton = [[UIButton alloc] init];
-    [startButton setBackgroundImage:[UIImage imageNamed:@"button-BR"] forState:UIControlStateNormal];
+//    [startButton setBackgroundImage:[UIImage imageNamed:@"button-BR"] forState:UIControlStateNormal];
 
     //设置尺寸
     CGFloat centerX = imageView.frame.size.width*0.5;
     CGFloat centerY = imageView.frame.size.height*0.9;
     startButton.center = CGPointMake(centerX,centerY);
-    startButton.bounds = (CGRect){CGPointZero,ScreenWidth*2/3};
+    [startButton becomeFirstResponder];
+    startButton.bounds = (CGRect){CGPointZero,{ScreenWidth*2/3,40}};
     [startButton addTarget:self action:@selector(startButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
     //设置文字
@@ -136,7 +136,6 @@
     [startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [imageView addSubview:startButton];
     
-   
 }
 
 
@@ -149,7 +148,14 @@
     [UIApplication sharedApplication].statusBarHidden = NO;
     RootViewController * roots = [[RootViewController alloc] init];
     //切换到 tabarcontrollor
-    self.view.window.rootViewController = roots;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.view.window.rootViewController = roots;
+    });
+//    [UIView animateWithDuration:1 animations:^{
+//        self.view.window.rootViewController = roots;
+//    }];
+    
 }
 
 
