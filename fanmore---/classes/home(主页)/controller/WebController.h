@@ -27,4 +27,7 @@
 /**答题剩余机会*/
 @property(nonatomic,assign)int reward;
 
+
+/**加载网页类型*/
+@property(nonatomic,assign) int type;
 @end

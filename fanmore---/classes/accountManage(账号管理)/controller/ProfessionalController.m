@@ -88,7 +88,7 @@ static NSString *professionalIdentify = @"pfCellId";
         cell = [[UITableViewCell alloc] init];
     }
     
-    NSLog(@"xxxxxx%@",self.currentCareer);
+    NSLog(@"xxxxxx收入和职业%@",self.currentCareer);
     
     NSLog(@"%lu",(unsigned long)[self.careers indexOfObject:self.currentCareer]);
     if (_isSelect == indexPath.row) {
@@ -107,26 +107,28 @@ static NSString *professionalIdentify = @"pfCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     twoOption * op = self.careers[indexPath.row];
+    NSLog(@"%d-----%@",op.value,op.name);
     if ([self.delegate respondsToSelector:@selector(ProfessionalControllerBringBackCareer:isFlag:)]) {
        [self.delegate ProfessionalControllerBringBackCareer:op isFlag:_isPrefessional];
      }
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if (self.isPrefessional) {
-        params[@"profileType"] = @"3";
-    }else {
-        params[@"profileType"] = @"4";
-    }
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    if (self.isPrefessional) {
+//        params[@"profileType"] = @"3";
+//    }else {
+//        params[@"profileType"] = @"4";
+//    }
+//    
+//    params[@"profileData"] = @(indexPath.row);
     
-    params[@"profileData"] = @(indexPath.row);
-    
-    NSString *urlStr = [MainURL stringByAppendingString:@"updateProfile"];
-    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
-        [MBProgressHUD showSuccess:@"上传成功"];
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-        [MBProgressHUD showError:@"上传失败"];
-    }];
+//    NSString *urlStr = [MainURL stringByAppendingString:@"updateProfile"];
+//    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
+//        [MBProgressHUD showSuccess:@"上传成功"];
+//        NSLog(@"dadadasdasdasd%@",json);
+//    } failure:^(NSError *error) {
+//        NSLog(@"%@",error);
+//        [MBProgressHUD showError:@"上传失败"];
+//    }];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

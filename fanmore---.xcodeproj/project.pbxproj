@@ -65,6 +65,7 @@
 		EF2E543B1B2853F30060E965 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E543A1B2853F30060E965 /* Message.m */; };
 		EF2E543F1B2857800060E965 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E543E1B2857800060E965 /* MessageTableViewCell.m */; };
 		EF2E54421B285E6A0060E965 /* MessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E54411B285E6A0060E965 /* MessageFrame.m */; };
+		EF3B551D1B37A0CB0045ADEB /* LWNewFeatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */; };
 		EF49ECF11B0D81A40038A203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF01B0D81A40038A203 /* main.m */; };
 		EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF31B0D81A40038A203 /* AppDelegate.m */; };
 		EF49ECF71B0D81A40038A203 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF49ECF61B0D81A40038A203 /* ViewController.m */; };
@@ -99,6 +100,7 @@
 		EF565D541B170C2100FC2D6B /* userData.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D531B170C2100FC2D6B /* userData.m */; };
 		EF565D571B170D5500FC2D6B /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D561B170D5500FC2D6B /* Result.m */; };
 		EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D591B17146300FC2D6B /* twoOption.m */; };
+		EF72EAD21B3835F000872BA5 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF72EACF1B3835F000872BA5 /* libWeChatSDK.a */; };
 		EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67301B0DD07E008B6909 /* MBProgressHUD+MJ.m */; };
 		EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */; };
 		EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */; };
@@ -190,7 +192,6 @@
 		EFF3D0DE1B2EBE6900B2F446 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */; };
 		EFF3D0DF1B2EBE6900B2F446 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0DD1B2EBE6900B2F446 /* libssl.a */; };
 		EFF3D0E61B2EF0DF00B2F446 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0E51B2EF0DF00B2F446 /* libz.dylib */; };
-		EFF3D0EB1B2EFAF000B2F446 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,6 +311,8 @@
 		EF2E543E1B2857800060E965 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		EF2E54401B285E6A0060E965 /* MessageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFrame.h; sourceTree = "<group>"; };
 		EF2E54411B285E6A0060E965 /* MessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFrame.m; sourceTree = "<group>"; };
+		EF3B55191B37A0CB0045ADEB /* LWNewFeatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWNewFeatureController.h; sourceTree = "<group>"; };
+		EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWNewFeatureController.m; sourceTree = "<group>"; };
 		EF49ECEB1B0D81A40038A203 /* fanmore---.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fanmore---.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF49ECEF1B0D81A40038A203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF49ECF01B0D81A40038A203 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -372,6 +375,9 @@
 		EF565D561B170D5500FC2D6B /* Result.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Result.m; sourceTree = "<group>"; };
 		EF565D581B17146300FC2D6B /* twoOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twoOption.h; sourceTree = "<group>"; };
 		EF565D591B17146300FC2D6B /* twoOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = twoOption.m; sourceTree = "<group>"; };
+		EF72EACF1B3835F000872BA5 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		EF72EAD01B3835F000872BA5 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		EF72EAD11B3835F000872BA5 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		EF8D672F1B0DD07E008B6909 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		EF8D67301B0DD07E008B6909 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 		EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
@@ -603,9 +609,6 @@
 		EFF3D0DC1B2EBE6900B2F446 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "fanmore---/libcrypto.a"; sourceTree = "<group>"; };
 		EFF3D0DD1B2EBE6900B2F446 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "fanmore---/libssl.a"; sourceTree = "<group>"; };
 		EFF3D0E51B2EF0DF00B2F446 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		EFF3D0E91B2EFAF000B2F446 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		EFF3D0EA1B2EFAF000B2F446 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -618,7 +621,7 @@
 				EFF3D0DF1B2EBE6900B2F446 /* libssl.a in Frameworks */,
 				EFC86AEE1B1EFD700081BBC8 /* MailConnection.framework in Frameworks */,
 				EFC86ACD1B1EFC080081BBC8 /* Accounts.framework in Frameworks */,
-				EFF3D0EB1B2EFAF000B2F446 /* libWeChatSDK.a in Frameworks */,
+				EF72EAD21B3835F000872BA5 /* libWeChatSDK.a in Frameworks */,
 				EFC86ACB1B1EFBF80081BBC8 /* Social.framework in Frameworks */,
 				EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				EFC86AC91B1EFBD50081BBC8 /* libsqlite3.0.dylib in Frameworks */,
@@ -942,6 +945,7 @@
 		EF1EA5FF1B0DA2D600C1F60D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EF3B55171B37A0CB0045ADEB /* NewFeature(版本新特性) */,
 				EFD7A9C21B1D9DE30004A9A4 /* Htmlresource(网页资源) */,
 				EF565D111B16DCA900FC2D6B /* TodayForeshow(今天预告) */,
 				EFD02B2E1B155CDA00D11D6D /* setting(设置中心) */,
@@ -1050,6 +1054,46 @@
 			path = other;
 			sourceTree = "<group>";
 		};
+		EF3B55171B37A0CB0045ADEB /* NewFeature(版本新特性) */ = {
+			isa = PBXGroup;
+			children = (
+				EF3B55181B37A0CB0045ADEB /* Controller */,
+				EF3B551B1B37A0CB0045ADEB /* Model */,
+				EF3B551C1B37A0CB0045ADEB /* View */,
+			);
+			path = "NewFeature(版本新特性)";
+			sourceTree = "<group>";
+		};
+		EF3B55181B37A0CB0045ADEB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EF3B55191B37A0CB0045ADEB /* LWNewFeatureController.h */,
+				EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EF3B551B1B37A0CB0045ADEB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EF3B551C1B37A0CB0045ADEB /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EF440E101B3838A800761A9C /* lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		EF49ECE21B0D81A40038A203 = {
 			isa = PBXGroup;
 			children = (
@@ -1073,7 +1117,8 @@
 		EF49ECED1B0D81A40038A203 /* fanmore--- */ = {
 			isa = PBXGroup;
 			children = (
-				EFF3D0E71B2EFAF000B2F446 /* SDKExport */,
+				EF440E101B3838A800761A9C /* lib */,
+				EF72EACE1B3835F000872BA5 /* SDKExport */,
 				EFF3D0711B2EB4A800B2F446 /* openssl */,
 				EFF3D0BD1B2EB4A800B2F446 /* Util */,
 				EF1EA5FF1B0DA2D600C1F60D /* Classes */,
@@ -1237,6 +1282,16 @@
 			);
 			name = view;
 			path = "classes/Login(登录)/view";
+			sourceTree = "<group>";
+		};
+		EF72EACE1B3835F000872BA5 /* SDKExport */ = {
+			isa = PBXGroup;
+			children = (
+				EF72EACF1B3835F000872BA5 /* libWeChatSDK.a */,
+				EF72EAD01B3835F000872BA5 /* WXApi.h */,
+				EF72EAD11B3835F000872BA5 /* WXApiObject.h */,
+			);
+			path = SDKExport;
 			sourceTree = "<group>";
 		};
 		EF8D672C1B0DD07E008B6909 /* other(其它) */ = {
@@ -1787,16 +1842,6 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		EFF3D0E71B2EFAF000B2F446 /* SDKExport */ = {
-			isa = PBXGroup;
-			children = (
-				EFF3D0E81B2EFAF000B2F446 /* libWeChatSDK.a */,
-				EFF3D0E91B2EFAF000B2F446 /* WXApi.h */,
-				EFF3D0EA1B2EFAF000B2F446 /* WXApiObject.h */,
-			);
-			path = SDKExport;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1863,6 +1908,21 @@
 				en,
 				Base,
 				"zh-Hans",
+				de,
+				es,
+				fr,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nl,
+				pt,
+				pt_PT,
+				ru,
+				sv,
+				zh_Hans,
+				zh_Hant,
 			);
 			mainGroup = EF49ECE21B0D81A40038A203;
 			productRefGroup = EF49ECEC1B0D81A40038A203 /* Products */;
@@ -1966,6 +2026,7 @@
 				EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */,
 				EFAEB32A1B29557100855D25 /* taskDetail.m in Sources */,
 				839C30E71B2E6CF4000EE05A /* FriendCell.m in Sources */,
+				EF3B551D1B37A0CB0045ADEB /* LWNewFeatureController.m in Sources */,
 				83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */,
 				838116821B25AC5A00261F51 /* SexController.m in Sources */,
 				EFCCA4C91B12D6E400C015A7 /* MJType.m in Sources */,

@@ -138,7 +138,7 @@ static NSString *homeCellidentify = @"homeCellId";
    
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
-        NSLog(@"xxxxxx%@",json);
+        NSLog(@"xxxxxx手术室%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];

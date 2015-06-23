@@ -17,8 +17,9 @@
 #import "NameController.h"
 #import "SexController.h"
 #import "HobbyController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate,NameControllerdelegate>
+@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate,NameControllerdelegate,HobbyControllerDelegate>
 
 @property(nonatomic,strong)NSArray * messages;
 /**1用户头像*/
@@ -44,10 +45,25 @@
 
 @property (nonatomic, strong) userData *userinfo;
 
+
+@property(nonatomic,strong) CLGeocoder *geocoder;
+
 - (IBAction)iconViewCkick:(id)sender;
 @end
 
 @implementation PersonMessageTableViewController
+
+
+- (CLGeocoder *)geocoder{
+    
+    if (_geocoder == nil) {
+        
+        _geocoder = [[CLGeocoder alloc] init];
+    }
+    return _geocoder;
+}
+
+
 - (UIDatePicker *)datePicker
 {
     if (_datePicker==nil) {
@@ -98,14 +114,25 @@
         
         [self.iconView setBackgroundImage:image forState:UIControlStateNormal];
     }];
+    
+    
 
+    if (!self.userinfo.area) {
+        CGFloat longs =  [[[NSUserDefaults standardUserDefaults] stringForKey:DWLongitude] floatValue];
+        CGFloat weis = [[[NSUserDefaults standardUserDefaults] stringForKey:DWLatitude] floatValue];
+        CLLocation * loc = [[CLLocation alloc] initWithLatitude:weis longitude:longs];
+        [self reverseGeocode:loc];
+    }else{
+        
+        self.placeLable.text = self.userinfo.area;
+    }
     self.nameLable.text = self.userinfo.realName; //2姓名
     self.sexLable.text =  self.userinfo.sex?@"女":@"男";  //3性别
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(self.userinfo.birthDate/1000.0)];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString * publishtime = [formatter stringFromDate:ptime];
+    NSString * publishtime = [formatter stringFromDate:ptime]; //唯独
     self.birthDayLable.text = publishtime;  //4
     
     for (twoOption * aa in glo.career) {
@@ -120,8 +147,24 @@
             break;
         }
     }
-    self.favLable.text = self.userinfo.favs; //7
-    self.placeLable.text = self.userinfo.area;//8
+    
+    NSArray * favs = [self.userinfo.favs componentsSeparatedByString:@","];
+    NSMutableString * favStr = [NSMutableString string];
+    for (NSString * aa in favs) {
+       
+        for (twoOption * bb in glo.favs) {
+            
+            if (bb.value == [aa intValue]) {
+                
+                [favStr appendFormat:@"%@,",bb.name];
+            }
+        }
+        
+    }
+    NSString * aa = [favStr substringToIndex:(favStr.length -1)];
+    NSLog(@"%@",aa);
+    self.favLable.text = aa; //7
+//    self.placeLable.text = self.userinfo.area;//8
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:(self.userinfo.regDate/1000.0)];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -164,7 +207,7 @@
                    }];
                 UIAlertAction * photo = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     UIImagePickerController * pc = [[UIImagePickerController alloc] init];
-                    pc.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+                    pc.sourceType=UIImagePickerControllerSourceTypeSavedPhotosAlbum;
                     pc.delegate = self;
                     [self presentViewController:pc animated:YES completion:nil];
                 }];
@@ -199,21 +242,21 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         if (indexPath.row == 0) { //职业
             ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
-//            pro.delegate = self;
+            pro.delegate = self;
             pro.isPrefessional = YES;
             pro.currentCareer = self.careerLable.text;
             [self.navigationController pushViewController:pro animated:YES];
         }
         if (indexPath.row == 1) { //收入
             ProfessionalController *pro = [storyboard instantiateViewControllerWithIdentifier:@"ProfessionalController"];
-//            pro.delegate = self;
+            pro.delegate = self;
             pro.currentCareer = self.userIncomeLable.text;
             pro.isPrefessional = NO;
             [self.navigationController pushViewController:pro animated:YES];
         }
         if (indexPath.row == 2) { //爱好
             HobbyController *pro = [storyboard instantiateViewControllerWithIdentifier:@"HobbyController"];
-
+            pro.delegate = self;
             pro.userHobby = self.userinfo.favs;
             [self.navigationController pushViewController:pro animated:YES];
         }
@@ -222,6 +265,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
+    NSLog(@"%@",info);
     UIImage * photoImage = info[@"UIImagePickerControllerOriginalImage"];
     [self.iconView setBackgroundImage:photoImage forState:UIControlStateNormal];
     NSData * data = nil;
@@ -233,50 +277,26 @@
         data = UIImagePNGRepresentation(photoImage);
     }
     
-    NSString * aa = nil;
-    if (flag) {
-        aa = @"png/image";
-    }else{
-        aa = @"jpeg/image";
-    }
-    NSLog(@"%@",data);
-    NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
-    paramsOption[@"appKey"] = APPKEY;
-    paramsOption[@"appSecret"] = HuoToAppSecret;
-    NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
-    NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-    paramsOption[@"lat"] = lat?lat:@(40.0);
-    paramsOption[@"lng"] = lng?lng:@(116.0);;
-    paramsOption[@"timestamp"] = apptimesSince1970;;
-    paramsOption[@"operation"] = OPERATION_parame;
-    paramsOption[@"version"] = AppVersion;
-    paramsOption[@"profileType"] = @"0";
-    NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
-    paramsOption[@"token"] = token?token:@"";
-    paramsOption[@"imei"] = DeviceNo;
-    paramsOption[@"cityCode"] = @"1372";
-    paramsOption[@"cpaCode"] = @"default";
-    NSString * aab = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    paramsOption[@"profileData"] = aab;
-    paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
-    [paramsOption removeObjectForKey:@"appSecret"];
-   
-    
-//    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
-//    [aab writeToFile:@"image" atomically:YES encoding:NSUTF8StringEncoding error:nil];
-//    [NSBundle mainBundle] fi
-//    
-//    AFHTTPRequestOperationManager * ma = [AFHTTPRequestOperationManager manager];
-//    [ma POST:urlStr parameters:paramsOption constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//        
-//        formData appendPartWithFileURL:[NSBundle mainBundle] name:@"profileData" fileName:@"image" mimeType:@"Base64" error:nil];
-//        
-//    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        
-//    }];
-
+    NSString * imagefile = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+        NSMutableDictionary * params = [NSMutableDictionary dictionary];
+        params[@"profileType"] = @(0);
+        params[@"profileData"] = imagefile;
+        [UserLoginTool loginRequestPost:urlStr parame:params success:^(NSDictionary* json) {
+            
+            if ([json[@"systemResultCode"] intValue] ==1&&[json[@"resultCode"] intValue]) {
+                userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            }
+            NSLog(@"icon%@",json);
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error.description);
+        }];
+        
+    }];
     
 }
 
@@ -315,7 +335,7 @@
         
         NSLog(@"大大叔大叔大叔大叔大叔大叔大叔的时代%@",json);
         [MBProgressHUD showSuccess:@"生日资料上传成功"];
-        
+        NSLog(@"dadasd%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
@@ -339,9 +359,15 @@
 #pragma ProfessionalControllerDelegate
 
 
-
+/**
+ *  职业收入的代理方法
+ *
+ *  @param career <#career description#>
+ *  @param flag   <#flag description#>
+ */
 - (void)ProfessionalControllerBringBackCareer:(twoOption *)career isFlag:(BOOL)flag{
     
+    NSLog(@"个人sasa时dadasdasdasd");
      NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     if (flag) {//职业
          self.careerLable.text = career.name;
@@ -368,5 +394,62 @@
 }
 
 - (IBAction)iconViewCkick:(id)sender {
+}
+
+
+
+/**
+ *  反地理编码
+ *
+ *  @param loc <#loc description#>
+ */
+- (void)reverseGeocode:(CLLocation *)loc{
+    
+    [self.geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        if (error) {
+            
+            self.placeLable.text = @"杭州";
+        }else {
+            
+            CLPlacemark *pm = [placemarks firstObject];
+            self.placeLable.text = pm.name;
+        }
+    }];
+}
+
+
+/**
+ *  上传个人爱好
+ *
+ *  @param parame <#parame description#>
+ *  @param option <#option description#>
+ */
+- (void)pickOVerhobby:(NSString *)parame andOption:(NSString *)option{
+    NSLog(@"dadasdasd%@---%@",parame,option);
+    
+    //把职业上传到服务器
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
+    NSMutableDictionary * parames = [NSMutableDictionary dictionary];
+    parames[@"profileType"] = @(5);
+    parames[@"profileData"] = parame;
+    [UserLoginTool loginRequestPost:urlStr parame:parames success:^(id json) {
+        NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+            
+            userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error.description);
+        
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.favLable.text = option;
+    });
+    
 }
 @end
