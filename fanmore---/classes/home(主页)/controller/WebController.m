@@ -19,32 +19,30 @@
     [super viewDidLoad];
     self.webView.delegate = self;
     
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //1、保存全局信息
+    NSString *fileName = [path stringByAppendingPathComponent:InitGlobalDate];
+    GlobalData * glob = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+
     self.webView.backgroundColor = [UIColor whiteColor];
     if(self.type == 1){//账号设置
         
-        
-        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        //1、保存全局信息
-        NSString *fileName = [path stringByAppendingPathComponent:InitGlobalDate];
-        GlobalData * glob = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-        NSLog(@"%@",glob.aboutURL);
-        NSURL * urlstr = [NSURL URLWithString:glob.aboutURL];
+        NSURL * urlstr = [NSURL URLWithString:glob.serviceURL];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
         
     }else if(self.type == 2){
         
-        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        //1、保存全局信息
-        NSString *fileName = [path stringByAppendingPathComponent:InitGlobalDate];
-        GlobalData * glob = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-        NSLog(@"%@",glob.serviceURL);
-        NSURL * urlstr = [NSURL URLWithString:glob.serviceURL];
+        NSURL * urlstr = [NSURL URLWithString:glob.ruleURL];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
         
         
     } else if(self.type == 3){ //隐条款
+       
+        NSURL * urlstr = [NSURL URLWithString:glob.privacyPoliciesURL];
+        NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
+        [self.webView loadRequest:request];
         
     }else{ //答题
         

@@ -22,6 +22,9 @@
 /**关于我们*/
 @property(nonatomic,strong) NSString * serviceURL;
 
+/**关于我们*/
+@property(nonatomic,strong) NSString * serverURL;
+
 /**帮助的连接*/
 @property(nonatomic,strong) NSString * helpURL;
 
@@ -36,5 +39,12 @@
 
 /**最少阅读时间单位秒*/
 @property(nonatomic,assign) int lessReadSeconds;
-
+/**客服电话号码*/
+@property(nonatomic,strong) NSString * customerServicePhone;
+/**隐私策略*/
+@property(nonatomic,strong) NSString * privacyPoliciesURL;
+/**规则说明*/
+@property(nonatomic,strong) NSString * ruleURL;
+/**验证码是否支持语音播报*/
+@property(nonatomic,assign)BOOL voiceSupported;
 @end

@@ -82,9 +82,16 @@
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             btn.userInteractionEnabled = NO;
         }else{//未签到
-            [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];
-            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            btn.userInteractionEnabled = NO;
+            if (btn.tag < ((long)[self Wednesday])) {//漏签的
+                [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                btn.userInteractionEnabled = NO;
+            }else{//未签的
+                [btn setBackgroundImage:[UIImage imageNamed:@"asignGray"] forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                btn.userInteractionEnabled = NO;
+            }
+            
         }
         btn.layer.masksToBounds = YES;
         [btn addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];

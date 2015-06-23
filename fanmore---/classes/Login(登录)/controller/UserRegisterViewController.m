@@ -8,7 +8,7 @@
 
 #import "UserRegisterViewController.h"
 #import "userData.h"
-
+#import "WebController.h"
 
 @interface UserRegisterViewController () <UITextFieldDelegate>
 
@@ -52,8 +52,20 @@
     NSRange strRange = {0,[str length]};
     [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
     self.privacyLabel.attributedText = str;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapViewAction:)];
+    self.privacyLabel.userInteractionEnabled = YES;
+    [self.privacyLabel addGestureRecognizer:tap];
 }
 
+- (void)tapViewAction:(UITapGestureRecognizer *)ges{
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WebController *buyFlowVc = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
+    buyFlowVc.type = 3;
+    [self.navigationController pushViewController:buyFlowVc animated:YES];
+    
+}
 /**
  * 监听键盘弹出
  */
