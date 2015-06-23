@@ -10,6 +10,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "FriendCell.h"
 #import "PinYin4Objc.h"
+#import "BegController.h"
 
 
 @interface SendController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -312,6 +313,15 @@ NSString *frinedCellIdentifier = @"friend";
     }
     return cell;
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    BegController *beg = [storyboard instantiateViewControllerWithIdentifier:@"BegController"];
+    [self.navigationController pushViewController:beg animated:YES];
+}
+
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {

@@ -43,6 +43,8 @@
     //集成刷新控件
     [self setupRefresh];
     
+    [self.tableView removeSpaces];
+    
 }
 
 /**

@@ -140,6 +140,19 @@ NSString * _changeflah = nil;
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:tableViewIdentifier];
     
+//    //设置头视图
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 20)];
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, ScreenWidth - 10, 20)];
+//    label.text = @"兑换流量当月有效";
+//    label.font = [UIFont systemFontOfSize:14];
+//    [view addSubview:label];
+//    
+//    self.tableView.tableHeaderView = view;
+    
+    self.title = @"兑换流量当月有效";
+    
+    
+    
     [self _initNav];
 }
 
