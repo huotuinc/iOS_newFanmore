@@ -168,6 +168,8 @@
     }else{
         
         
+        [self.userProfileBtn setBackgroundImage:[UIImage imageNamed:@"mrtou_h"] forState:UIControlStateNormal];
+        
         self.userProfileBtn.userInteractionEnabled = YES;
         
         //隐藏label

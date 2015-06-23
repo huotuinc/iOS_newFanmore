@@ -8,14 +8,36 @@
 
 #import "ExchangeController.h"
 #import "ConversionCell.h"
+#import "userData.h"
 
 @interface ExchangeController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (strong, nonatomic) NSIndexPath *selecet;
+@property(nonatomic,strong) userData * userInfo;
 
 @end
 
 @implementation ExchangeController
 
 static NSString *tableViewIdentifier = @"tableCell";
+
+NSString * _changeflah = nil;
+
+- (userData *)userInfo{
+    
+    if (_userInfo == nil) {
+        
+        //初始化
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        //1、保存个人信息
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        _userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName]; //保存用户信息
+    }
+    
+    return _userInfo;
+}
+
+
 
 #pragma table
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -34,10 +56,70 @@ static NSString *tableViewIdentifier = @"tableCell";
     if (cell == nil) {
         cell = [[UITableViewCell alloc] init];
     }
-//    cell.label.text = self.flays[indexPath.row];
+    cell.textLabel.text = @"70M";
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    UITableViewCell *scell = [tableView cellForRowAtIndexPath:self.selecet];
+    scell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor orangeColor];
+    self.selecet = indexPath;
+    
+    if (([self.userInfo.balance floatValue]< [_changeflah floatValue])) {
+                [MBProgressHUD showError:@"当前可兑换流量不足"];
+                return;
+            }
+        
+            NSString *flaycount = [NSString stringWithFormat:@"是否兑换流量%@M",_changeflah];
+            if (IsIos8) {
+                UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:nil message:flaycount preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+                    //兑换流量
+                    NSString *url = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+                    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+                    param[@"amount"] = _changeflah;
+                    [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
+        
+                        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+        
+        
+                            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        
+                            //1、保存个人信息
+                            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                            [NSKeyedArchiver archiveRootObject:[userData objectWithKeyValues:json[@"resultDate"][@"user"]] toFile:fileName];
+        
+                        }
+        
+                    } failure:^(NSError *error) {
+        
+                    }];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
+                UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
+                [alertVc addAction:action];
+                [alertVc addAction:action1];
+                [self presentViewController:alertVc animated:YES completion:nil];
+            }else{ //非ios8
+                
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:flaycount delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: @"取消",nil];
+                [alert show];
+            }
+
+
+}
+
+
 
 - (void)_initNav
 {
