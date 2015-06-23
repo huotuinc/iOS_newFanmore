@@ -24,4 +24,7 @@
 @property(nonatomic,strong) NSArray * flays;
 
 
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end

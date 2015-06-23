@@ -43,6 +43,7 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     
     self.userSelected = [NSMutableArray array];
     
+    
 }
 
 //- (NSArray *)favsArray {
