@@ -858,7 +858,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yau-CP-3mQ">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="-44" width="600" height="644"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="cF6-yX-Moi" id="s8y-Wg-dSD"/>
@@ -869,7 +869,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="yau-CP-3mQ" secondAttribute="bottom" id="7bs-bW-QVO"/>
-                            <constraint firstItem="yau-CP-3mQ" firstAttribute="top" secondItem="gBg-R6-LQL" secondAttribute="bottom" id="i4l-nF-eI4"/>
+                            <constraint firstItem="yau-CP-3mQ" firstAttribute="top" secondItem="gBg-R6-LQL" secondAttribute="bottom" constant="-64" id="i4l-nF-eI4"/>
                             <constraint firstAttribute="trailing" secondItem="yau-CP-3mQ" secondAttribute="trailing" id="kg2-Jj-fkl"/>
                             <constraint firstItem="yau-CP-3mQ" firstAttribute="leading" secondItem="tK3-5V-A83" secondAttribute="leading" id="nHA-gN-Lc2"/>
                         </constraints>

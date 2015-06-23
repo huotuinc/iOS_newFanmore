@@ -286,7 +286,9 @@
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         params[@"profileType"] = @(0);
         params[@"profileData"] = imagefile;
+        [MBProgressHUD showMessage:@"头像上传中，请稍候"];
         [UserLoginTool loginRequestPost:urlStr parame:params success:^(NSDictionary* json) {
+            [MBProgressHUD hideHUD];
             
             if ([json[@"systemResultCode"] intValue] ==1&&[json[@"resultCode"] intValue]) {
                 userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
@@ -294,8 +296,12 @@
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
             }
+            [MBProgressHUD showSuccess:@"上传成功"];
+            [self setupPersonMessage];
+//            [self.tableView reloadData];
             NSLog(@"icon%@",json);
         } failure:^(NSError *error) {
+            [MBProgressHUD hideHUD];
             NSLog(@"%@",error.description);
         }];
         
