@@ -300,6 +300,12 @@
     return resultStr;
 }
 #pragma UICollectionViewDataSource
+
+
+
+
+
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
     return self.goods.count;
@@ -314,7 +320,14 @@
 //    }
 //}
 
-
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath == self.selected) {
+        cell.backgroundColor = [UIColor orangeColor];
+        UILabel *label = (UILabel *)[self.view viewWithTag:indexPath.row + indexPath.section * self.num + 100];
+        label.textColor = [UIColor whiteColor];
+    }
+}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -340,6 +353,13 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.tag = indexPath.row + indexPath.section * self.num + 100;
     [cell.contentView addSubview:label];
+    
+//    if (indexPath == self.selected) {
+//        UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
+//        scell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button－G"]];
+//        UILabel *slabel = (UILabel *)[self.view viewWithTag:self.selected.row + self.selected.section * self.num + 100];
+//        slabel.textColor = [UIColor blackColor];
+//    }
     
     return cell;
 }

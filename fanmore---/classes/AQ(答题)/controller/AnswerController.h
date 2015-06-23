@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *DButton;
 
 /**题目的图片*/
-@property (weak, nonatomic) IBOutlet UIImageView *qusImageView;
+@property (weak, nonatomic) IBOutlet UIView *qusImageView;
 /**题目的内容*/
 @property (weak, nonatomic) IBOutlet UILabel *queLable;
 /**题目的编号*/

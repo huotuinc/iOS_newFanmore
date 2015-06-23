@@ -18,16 +18,16 @@
     [super viewDidLoad];
     
     if (ScreenWidth == 375) {
-        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"7501334"]];
+        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt7501334"]];
     }
     if (ScreenWidth == 414) {
-        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"12422208"]];
+        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt12422208"]];
     }
     if (ScreenWidth == 320) {
         if (ScreenHeight <= 480) {
-            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"640960"]];
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt640960"]];
         }else {
-            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"6401136"]];
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt6401136"]];
         }
     }
     

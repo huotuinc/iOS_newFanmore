@@ -168,6 +168,8 @@ static NSString *homeCellidentify = @"homeCellId";
     
     if (self.tableView.hidden) {
     }else {
+
+        
         UIBarButtonItem *signInBarButton = [[UIBarButtonItem alloc] initWithTitle:@"签到" style:UIBarButtonItemStylePlain target:self  action:@selector(signInAction:)];
         NSArray *array = [NSArray arrayWithObjects:signInBarButton, nil];
         self.navigationItem.rightBarButtonItems = array;
@@ -251,9 +253,9 @@ static NSString *homeCellidentify = @"homeCellId";
 {
     
 #warning 测试
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    JoinController *join = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
-//    [self.navigationController pushViewController:join animated:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    JoinController *join = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
+    [self.navigationController pushViewController:join animated:YES];
     
     if (!self.isLogin) { //判断
         

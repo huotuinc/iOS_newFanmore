@@ -60,6 +60,22 @@ int _rightQuest = 0;  //纪录正确的答题数
 
 - (void)_initBgViewAndImage
 {
+    if ([self.type intValue] == 3) {
+        if (ScreenWidth == 375) {
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wailian7501334"]];
+        }
+        if (ScreenWidth == 414) {
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wailian12422208"]];
+        }
+        if (ScreenWidth == 320) {
+            if (ScreenHeight <= 480) {
+                self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wailian640960"]];
+            }else {
+                self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wailian6401136"]];
+            }
+        }
+    }
+    
     if (ScreenWidth == 375) {
         self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt7501334"]];
     }
@@ -71,6 +87,23 @@ int _rightQuest = 0;  //纪录正确的答题数
             self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt640960"]];
         }else {
             self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt6401136"]];
+        }
+    }
+}
+
+- (void)_setBgImageWrong
+{
+    if (ScreenWidth == 375) {
+        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dacuo7501334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dacuo12422208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dacuo640960"]];
+        }else {
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dacuo6401136"]];
         }
     }
 }
@@ -140,7 +173,7 @@ int _rightQuest = 0;  //纪录正确的答题数
         self.tureAnswer = taskdetail.correntAid;
 #warning 缺展位图片
         //1、答题图片
-        [self.qusImageView sd_setImageWithPreviousCachedImageWithURL:[NSURL URLWithString:taskdetail.imageUrl] andPlaceholderImage:[UIImage imageNamed:@"mrtou_h"] options:SDWebImageRetryFailed|SDWebImageDelayPlaceholder progress:nil completed:nil];
+    
         //2、答案
         [self _initButton:taskdetail];
         //3、问题
@@ -237,7 +270,7 @@ int _rightQuest = 0;  //纪录正确的答题数
         _rightQuest++;
     }else {
         [self showTureAnswer];
-        self.qusImageView.image = [UIImage imageNamed:@"cuowu"];
+        [self _setBgImageWrong];
         [sender setBackgroundImage:[UIImage imageNamed:@"A_c"] forState:UIControlStateNormal];
     }
     //显示下一题
@@ -257,7 +290,7 @@ int _rightQuest = 0;  //纪录正确的答题数
 
     }else {
         [self showTureAnswer];
-        self.qusImageView.image = [UIImage imageNamed:@"cuowu"];
+        [self _setBgImageWrong];
         [self.BButton setBackgroundImage:[UIImage imageNamed:@"B_c"] forState:UIControlStateNormal];
     }
     //显示下一题
@@ -278,7 +311,7 @@ int _rightQuest = 0;  //纪录正确的答题数
 
     }else {
         [self showTureAnswer];
-        self.qusImageView.image = [UIImage imageNamed:@"cuowu"];
+        [self _setBgImageWrong];
         [self.CButton setBackgroundImage:[UIImage imageNamed:@"C_c"] forState:UIControlStateNormal];
 
     }
@@ -298,7 +331,7 @@ int _rightQuest = 0;  //纪录正确的答题数
         _rightQuest++;
     }else {
         [self showTureAnswer];
-        self.qusImageView.image = [UIImage imageNamed:@"cuowu"];
+        [self _setBgImageWrong];
         [self.DButton setBackgroundImage:[UIImage imageNamed:@"D_c"] forState:UIControlStateNormal];
     }
     //显示下一题
