@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "640X11363.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "wailian6401136.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

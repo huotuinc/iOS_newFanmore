@@ -11,6 +11,7 @@
 #import "BPViewController.h"
 #import "ConversionController.h"
 #import "FriendMessageController.h"
+#import "ExchangeController.h"
 
 @interface TrafficShowController ()
 
@@ -120,8 +121,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
 - (IBAction)exchangeAction:(id)sender { //流量交换
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ConversionController *con = [storyboard instantiateViewControllerWithIdentifier:@"ConversionController"];
-    con.itemNum = self.flays.count;
+    ConversionController *con = [storyboard instantiateViewControllerWithIdentifier:@"ExchangeController"];
+//    con.itemNum = self.flays.count;
     con.flays = self.flays;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:con];
     [self presentViewController:nav animated:YES completion:nil];

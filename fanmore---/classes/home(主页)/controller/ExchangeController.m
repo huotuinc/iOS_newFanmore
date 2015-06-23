@@ -7,16 +7,57 @@
 //
 
 #import "ExchangeController.h"
+#import "ConversionCell.h"
 
-@interface ExchangeController ()
+@interface ExchangeController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
 @implementation ExchangeController
 
+static NSString *tableViewIdentifier = @"tableCell";
+
+#pragma table
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.flays.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ConversionCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewIdentifier];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ConversionCell" owner:nil options:nil] lastObject];
+    }
+    cell.label.text = self.flays[indexPath.row];
+    
+    return cell;
+}
+
+- (void)_initNav
+{
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回"
+                                                                                style:UIBarButtonItemStylePlain
+                                                                              handler:^(id sender) {
+                                                                                  [self dismissViewControllerAnimated:YES completion:nil];
+                                                                              }];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.tableView removeSpaces];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self _initNav];
 }
 
 - (void)didReceiveMemoryWarning {

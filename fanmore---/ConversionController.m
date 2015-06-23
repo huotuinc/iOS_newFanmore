@@ -43,8 +43,7 @@ NSString * _changeflah = nil;
     [super viewDidLoad];
     
     
-    [self.tableView removeSpaces];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ConversionCell" bundle:nil] forCellReuseIdentifier:tableViewIdentifier];
+
     
     
 
