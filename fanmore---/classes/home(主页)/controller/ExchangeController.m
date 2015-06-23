@@ -20,7 +20,7 @@ static NSString *tableViewIdentifier = @"tableCell";
 #pragma table
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.flays.count;
+    return self.flays.count + 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -30,11 +30,11 @@ static NSString *tableViewIdentifier = @"tableCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ConversionCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewIdentifier];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"ConversionCell" owner:nil options:nil] lastObject];
+        cell = [[UITableViewCell alloc] init];
     }
-    cell.label.text = self.flays[indexPath.row];
+//    cell.label.text = self.flays[indexPath.row];
     
     return cell;
 }
@@ -55,7 +55,8 @@ static NSString *tableViewIdentifier = @"tableCell";
     // Do any additional setup after loading the view.
     
     [self.tableView removeSpaces];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:tableViewIdentifier];
     
     [self _initNav];
 }
