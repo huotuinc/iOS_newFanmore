@@ -46,12 +46,15 @@
     // 初始化
     [self setup];
     
-
-    [self getQuestion];
+    if (self.ishaveget) {
+        self.answerBtn.backgroundColor = [UIColor grayColor];
+    }else{
+        self.answerBtn.backgroundColor = [UIColor grayColor];
+        //获取题目s
+        [self getQuestion];
+        [self settime];
+    }
     
-    [self settime];
-    
-
     NSURL* url =  [NSURL URLWithString:self.detailUrl];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     self.detailWebView.backgroundColor = [UIColor redColor];
@@ -60,6 +63,9 @@
 }
 
 
+/**
+ *  获取题目s
+ */
 - (void)getQuestion{
     
     NSString * url = [MainURL stringByAppendingPathComponent:@"taskDetail"];

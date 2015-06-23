@@ -21,7 +21,7 @@
 /**最高可获取奖励流量*/
 @property(nonatomic,strong) NSNumber * maxBonus;
 /**已获取流量*/
-@property(nonatomic,strong) NSNumber * reward;
+@property(nonatomic,assign) float reward;
 /**简述*/
 @property(nonatomic,strong) NSString * desc;
 /**任务类别*/
