@@ -161,9 +161,12 @@
         }
         
     }
-    NSString * aa = [favStr substringToIndex:(favStr.length -1)];
-    NSLog(@"%@",aa);
-    self.favLable.text = aa; //7
+    if (favStr.length != 0) {
+        NSString * aa = [favStr substringToIndex:(favStr.length -1)];
+        NSLog(@"%@",aa);
+        self.favLable.text = aa;//7
+    }
+    
 //    self.placeLable.text = self.userinfo.area;//8
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:(self.userinfo.regDate/1000.0)];

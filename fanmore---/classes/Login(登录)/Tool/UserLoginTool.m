@@ -48,8 +48,8 @@
         [aaa appendString:[NSString stringWithFormat:@"%@=%@&",a,[paramsOption objectForKey:a]]];
     }
     [aaa substringToIndex:aaa.length];
-    NSLog(@"--------------------%@",aaa);
-    NSLog(@"xxxxxx-----网络请求get参数parame%@",paramsOption);
+//    NSLog(@"--------------------%@",aaa);
+//    NSLog(@"xxxxxx-----网络请求get参数parame%@",paramsOption);
     [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject){
         success(responseObject);
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
