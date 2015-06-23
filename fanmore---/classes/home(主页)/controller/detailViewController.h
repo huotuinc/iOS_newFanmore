@@ -34,8 +34,8 @@
 /**分享的url*/
 @property(nonatomic,strong)NSString *shareUrl;
 
-/**分享的url*/
-//@property(nonatomic,assign)NSString *shareUrl;
+/**判断是否已答过题*/
+@property(nonatomic,assign)BOOL ishaveget;
 
 - (IBAction)goQusetionAction:(id)sender;
 
