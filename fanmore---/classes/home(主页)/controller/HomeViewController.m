@@ -138,7 +138,7 @@ static NSString *homeCellidentify = @"homeCellId";
    
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
-        NSLog(@"xxxxxx手术室%@",json);
+        NSLog(@"xxxxxx手术室大大大师%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
@@ -231,6 +231,8 @@ static NSString *homeCellidentify = @"homeCellId";
     detailVc.backTime = task.backTime;
     detailVc.flay = [task.maxBonus intValue];
     detailVc.shareUrl = task.shareURL;
+    task.reward>0?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
+
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 /**

@@ -54,11 +54,29 @@
     MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
     MJSettingItem *guize = [MJSettingArrowItem itemWithIcon:nil title:@"投放指南" destVcClass:[WebController class]];
     MJSettingItem *gz = [MJSettingArrowItem itemWithIcon:nil title:@"规则说明" destVcClass:[WebController class]];
+    MJSettingItem *touch = [MJSettingLabelItem itemWithTitle:@"客服热线" rightTitle:@"10086"];
+    touch.option = ^{
+        
+         UIAlertView * aaa= [[UIAlertView alloc] initWithTitle:@"客服热线" message:@"确定要拨打10086吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [aaa show];
+       
+       
+        
+    };
     MJSettingGroup *group = [[MJSettingGroup alloc] init];
-    group.items = @[advice, cache, about,handShake,guize,gz];
+    group.items = @[advice, cache, about,handShake,guize,gz,touch];
     [self.data addObject:group];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==0) {
+        NSLog(@"0");
+    }else{ //确定
+        NSString *number=[NSString stringWithFormat:@"%ld",(long)(10086)];
+        NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",number];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]]; //拨号
+    }
+}
 - (void)_initNav
 {
     [self initBackAndTitle:@"更多设置"];
