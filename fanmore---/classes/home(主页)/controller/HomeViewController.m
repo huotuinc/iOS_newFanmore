@@ -20,12 +20,16 @@
 #import "JoinController.h"
 #import "MBProgressHUD+MJ.h"
 
+
+#define pageSize 6
+
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**任务列表*/
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
 @property(nonatomic,assign) BOOL isLogin;
 @end
+
 
 @implementation HomeViewController
 
@@ -50,7 +54,7 @@ static NSString *homeCellidentify = @"homeCellId";
         _taskDatas = [NSMutableArray array];
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         params[@"pagingTag"] = @"";
-        params[@"pagingSize"] = @(10);
+        params[@"pagingSize"] = @(pageSize);
         [self getNewMoreData:params];
     }
     return _taskDatas;
@@ -91,9 +95,12 @@ static NSString *homeCellidentify = @"homeCellId";
 //    [as show];
     
     UILabel * welable = [[UILabel alloc] init];
+    welable.layer.cornerRadius = 5;
+    welable.layer.masksToBounds = YES;
+    welable.alpha = 0.5;
     welable.textAlignment  = NSTextAlignmentCenter;
-    welable.backgroundColor = [UIColor redColor];
-    welable.font = [UIFont systemFontOfSize:14];
+    welable.backgroundColor = [UIColor lightGrayColor];
+    welable.font = [UIFont systemFontOfSize:18];
     welable.text = user.welcomeTip;
     welable.center = self.view.center;
     welable.bounds = CGRectMake(0, 0, ScreenWidth * 2 /3, 100);
@@ -127,6 +134,13 @@ static NSString *homeCellidentify = @"homeCellId";
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
     self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
     self.tableView.headerRefreshingText = @"正在刷新最新数据,请稍等";
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"正在加载更多数据,请稍等";
 
 }
 
@@ -135,18 +149,41 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)headerRereshing  //加载最新数据
 {
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    if (self.taskDatas.count) {
-        taskData * aaa = [self.taskDatas firstObject];
-        params[@"pagingTag"] = @(aaa.taskOrder);
-    }else{
-        params[@"pagingTag"] = @"";
-    }
-    params[@"pagingSize"] = @(4);
+    params[@"pagingTag"] = @"";
+    params[@"pagingSize"] = @(pageSize);
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
 }
 
+//尾部刷新
+- (void)footerRereshing{  //加载更多数据数据
+   
+    taskData * task = [self.taskDatas lastObject];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"pagingTag"] = @(task.taskOrder);
+    params[@"pagingSize"] = @(pageSize);
+    [self getMoreData:params];
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [self.tableView footerEndRefreshing];
+}
+
+
+
+- (void)getMoreData:(NSMutableDictionary *) params{
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
+    
+            [self.taskDatas addObjectsFromArray:taskArray];
+            [self.tableView reloadData];    //刷新数据
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",[error description]);
+    }];
+    
+}
 /**
  *  下拉加载更新数据
  */
@@ -158,10 +195,9 @@ static NSString *homeCellidentify = @"homeCellId";
         NSLog(@"xxxxxx手术室大大大师%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
-            [taskaa addObjectsFromArray:self.taskDatas];
-            self.taskDatas = taskaa;
-            [self showHomeRefershCount:taskArray.count];
+            [self.taskDatas removeAllObjects];
+            self.taskDatas = [NSMutableArray arrayWithArray:taskArray];
+            [self showHomeRefershCount];
             [self.tableView reloadData];    //刷新数据
         }
     } failure:^(NSError *error) {
@@ -169,6 +205,8 @@ static NSString *homeCellidentify = @"homeCellId";
     }];
     
 }
+
+
 
 - (void)_initNav
 {
@@ -226,7 +264,8 @@ static NSString *homeCellidentify = @"homeCellId";
     if([task.last intValue]==0){
         a = 2;
     }else{
-        a = (task.reward?0:1);
+        
+        a = (task.reward==0?0:1);
     }
     //设置cell样式
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.desc] andGetImage:a];
@@ -270,12 +309,6 @@ static NSString *homeCellidentify = @"homeCellId";
  */
 - (void)signInAction:(UIButton *)sender
 {
-    
-#warning 测试
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    JoinController *join = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
-//    [self.navigationController pushViewController:join animated:YES];
-    
     if (!self.isLogin) { //判断
         
         [MBProgressHUD showError:@"当前还未登录,请先登入"];
@@ -340,7 +373,7 @@ static NSString *homeCellidentify = @"homeCellId";
  *  刷新数目条幅栏
  *
  */
-- (void) showHomeRefershCount:(NSUInteger)count{
+- (void) showHomeRefershCount{
     
     
     UIButton * showBtn = [[UIButton alloc] init];
@@ -350,15 +383,7 @@ static NSString *homeCellidentify = @"homeCellId";
     showBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [showBtn setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
     [showBtn setBackgroundColor:[UIColor colorWithWhite:0.878 alpha:1.000]];
-    NSString * title = nil;
-    if (count>0) {
-        title = [NSString stringWithFormat:@"刷新了%lu条任务",(unsigned long)count];
-        [showBtn setTitle:title forState:UIControlStateNormal];
-        
-    }else{
-        [showBtn setTitle:@"没有新发布的任务" forState:UIControlStateNormal];
-    }
-    
+    [showBtn setTitle:@"数据已刷新" forState:UIControlStateNormal];
     CGFloat btnX = 0;
     CGFloat btnH = 44;
     CGFloat btnY = 64 - btnH - 2;
@@ -381,49 +406,5 @@ static NSString *homeCellidentify = @"homeCellId";
     
 }
 
-/**
- *  欢迎条目
- *
- *  @param count <#count description#>
- */
-//- (void) showWellcom{
-//    
-//
-//    UIButton * showBtn = [[UIButton alloc] init];
-//    [self.navigationController.view insertSubview:showBtn belowSubview:self.navigationController.navigationBar];
-//    showBtn.userInteractionEnabled = NO;
-//    showBtn.alpha = 0.9;
-//    showBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-//    [showBtn setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
-//    [showBtn setBackgroundColor:[UIColor colorWithWhite:0.878 alpha:1.000]];
-//    
-//    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//    
-//    //1、保存个人信息
-//    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-//    userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-//    [showBtn setTitle:user.welcomeTip forState:UIControlStateNormal];
-//    
-//    
-//    CGFloat btnX = 0;
-//    CGFloat btnH = ScreenHeight;
-//    CGFloat btnY = 0;
-//    CGFloat btnW = self.view.frame.size.width - 2 * btnX;
-//    showBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-//    
-//    [UIView animateWithDuration:2 animations:^{
-//        
-//        showBtn.transform = CGAffineTransformMakeTranslation(0, btnH+2);
-//    } completion:^(BOOL finished) {
-//        
-//        [UIView animateKeyframesWithDuration:2 delay:1.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
-//            showBtn.transform = CGAffineTransformIdentity;
-//        } completion:^(BOOL finished) {
-//            
-//            [showBtn removeFromSuperview];
-//        }];
-//    }];
-//    
-//    
-//}
+
 @end
