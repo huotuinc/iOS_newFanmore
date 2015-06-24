@@ -11,6 +11,8 @@
 #import "UserLoginTool.h"
 #import "taskData.h"  //任务
 
+
+#define pagesize 4
 @interface TodayForesController ()<ForeshowTableViewCellDelegate>
 /**今日预告列表*/
 @property(nonatomic,strong)NSMutableArray * Notices;
@@ -26,7 +28,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         _Notices = [NSMutableArray array];
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         params[@"pagingTag"] = @"";
-        params[@"pagingSize"] = @(8);
+        params[@"pagingSize"] = @(pagesize);
         [self getNewMoreData:params];
        
     }
@@ -71,6 +73,14 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
     self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
     self.tableView.headerRefreshingText = @"正在刷新最新数据,请稍等";
+    
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"正在加载更多数据,请稍等";
 }
 
 
@@ -80,14 +90,8 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 {
     
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    if (self.Notices.count) {
-        taskData * aaa = self.Notices[0];
-        params[@"pagingTag"] = @(aaa.taskOrder);
-    }else{
-        params[@"pagingTag"] = @"";
-    }
-    
-    params[@"pagingSize"] = @(2);
+    params[@"pagingTag"] = @"";
+    params[@"pagingSize"] = @(pagesize);
     [self getNewMoreData:params];
     
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
@@ -96,7 +100,32 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
    
 }
 
+//尾部刷新
+- (void)footerRereshing{  //加载更多数据数据
+    
+    taskData * task = [self.Notices lastObject];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"pagingTag"] = @(task.taskOrder);
+    params[@"pagingSize"] = @(pagesize);
+    [self getMoreData:params];
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [self.tableView footerEndRefreshing];
+}
 
+
+- (void)getMoreData:(NSMutableDictionary *) params{
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
+            [self.Notices addObjectsFromArray:taskArray];
+            [self.tableView reloadData];    //刷新数据
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",[error description]);
+    }];
+    
+}
 /**
  *  获取更新数据
  *
@@ -113,13 +142,13 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
-            [taskaa addObjectsFromArray:wself.Notices];
-            wself.Notices = taskaa;
+            [self.Notices removeAllObjects];
+            self.Notices = [NSMutableArray arrayWithArray:taskArray];
             [wself.tableView reloadData];    //刷新数据
         }
         
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         NSLog(@"%@",[error description]);
     }];
 }

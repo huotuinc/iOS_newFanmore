@@ -40,7 +40,7 @@
         
         //1外部的view
         UIView * view = [[UIView alloc] init];
-        view.backgroundColor = [UIColor lightGrayColor];
+//        view.backgroundColor = [UIColor lightGrayColor];
         self.wView = view;
         [self addSubview:view];
         
@@ -49,14 +49,14 @@
         contextLable.numberOfLines = 0;
         self.contextLable = contextLable;
         contextLable.font = [UIFont systemFontOfSize:14];
-        contextLable.backgroundColor = [UIColor blueColor];
+//        contextLable.backgroundColor = [UIColor blueColor];
         self.contextLable.contentMode = UIViewContentModeCenter;
         [contextLable setTextColor:[UIColor blackColor]];
         [view addSubview:contextLable];
         
         //3时间
         UILabel * timeLabel = [[UILabel alloc] init];
-        timeLabel.backgroundColor = [UIColor redColor];
+//        timeLabel.backgroundColor = [UIColor redColor];
         [timeLabel setTextColor:[UIColor blackColor]];
         timeLabel.contentMode = UIViewContentModeCenter;
         self.timeLable = timeLabel;
