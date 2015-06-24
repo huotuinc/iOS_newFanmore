@@ -65,7 +65,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     segment.selectedSegmentIndex = 0;
     [segment addTarget:self action:@selector(chanege:) forControlEvents:UIControlEventValueChanged];
     
-    
+    [self.tableView removeSpaces];
     /**集成刷新控件*/
     [self setupRefresh];
 }
@@ -114,7 +114,8 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
         NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             NSArray * plist =  [prenticeList objectArrayWithKeyValuesArray:json[@"resultData"][@"apps"]];
-            [wself.prentices arrayByAddingObjectsFromArray:plist];
+            
+            self.prentices  = [NSMutableArray arrayWithArray:plist];
             [self.tableView reloadData];
         }
     
@@ -133,7 +134,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.prentices.count;
 }
 
 
@@ -143,6 +144,11 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DiscipleCell" owner:nil options:nil] lastObject];
     }
+    
+    prenticeList * aa = self.prentices[indexPath.row];
+    NSLog(@"%@",aa);
+    [cell setHeadImage:aa.picUrl AndUserPhone:aa.showName AndeTime:aa.date AndFlow:[NSString stringWithFormat:@"%d",aa.m] AndDiscople:[NSString stringWithFormat:@"%d",aa.countOfApp]];
+    
     return cell;
 }
 

@@ -15,6 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *flowLabel;
 @property (weak, nonatomic) IBOutlet UILabel *disciple;
 
-- (void)setHeadImage:(NSString *)headUrl AndUserPhone:(NSString *) userPhone AndeTime:(NSString *) time AndFlow:(NSString *) flow AndDiscople:(NSString *) disciple;
+- (void)setHeadImage:(NSString *)headUrl AndUserPhone:(NSString *) userPhone AndeTime:(long long) time AndFlow:(NSString *) flow AndDiscople:(NSString *) disciple;
 
 @end
