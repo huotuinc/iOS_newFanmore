@@ -8,6 +8,7 @@
 
 #import "DiscipleViewController.h"
 #import "DiscipleCell.h"
+#import "prenticeList.h"
 
 
 @interface DiscipleViewController()
@@ -64,7 +65,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     segment.selectedSegmentIndex = 0;
     [segment addTarget:self action:@selector(chanege:) forControlEvents:UIControlEventValueChanged];
     
-    
+    [self.tableView removeSpaces];
     /**集成刷新控件*/
     [self setupRefresh];
 }
@@ -91,13 +92,10 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 {
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     
-//    if (self.taskDatas.count) {
-//        taskData * aaa = [self.taskDatas firstObject];
-//        params[@"pagingTag"] = @(aaa.taskOrder);
-//    }else{
-//        params[@"pagingTag"] = @"";
-//    }
     params[@"pagingSize"] = @(10);
+    params[@"pagingTag"] = @"";
+    params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
+    
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -110,9 +108,17 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
     
+    __weak DiscipleViewController * wself = self;
+    
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        
         NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+            NSArray * plist =  [prenticeList objectArrayWithKeyValuesArray:json[@"resultData"][@"apps"]];
+            
+            self.prentices  = [NSMutableArray arrayWithArray:plist];
+            [self.tableView reloadData];
+        }
+    
     } failure:^(NSError *error) {
         NSLog(@"%@",[error description]);
     }];
@@ -128,7 +134,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.prentices.count;
 }
 
 
@@ -138,6 +144,11 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DiscipleCell" owner:nil options:nil] lastObject];
     }
+    
+    prenticeList * aa = self.prentices[indexPath.row];
+    NSLog(@"%@",aa);
+    [cell setHeadImage:aa.picUrl AndUserPhone:aa.showName AndeTime:aa.date AndFlow:[NSString stringWithFormat:@"%d",aa.m] AndDiscople:[NSString stringWithFormat:@"%d",aa.countOfApp]];
+    
     return cell;
 }
 

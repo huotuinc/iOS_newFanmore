@@ -120,6 +120,12 @@
 //    [UIApplication sharedApplication].keyWindow.rootViewController = nav;
     [[NSUserDefaults standardUserDefaults] setObject:@"111" forKey:AppToken];
     [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //1、保存个人信息
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    [NSKeyedArchiver archiveRootObject:nil toFile:fileName];
     [self.navigationController popToRootViewControllerAnimated:YES];
     
 }

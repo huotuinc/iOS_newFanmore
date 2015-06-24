@@ -11,9 +11,12 @@
 @interface Message : NSObject
 
 /**消息编号*/
-@property(nonatomic,strong) NSNumber * messageid;
+@property(nonatomic,assign) int  messageid;
 /**消息地址*/
 @property(nonatomic,strong) NSString * context;
 /**时间*/
-@property(nonatomic,strong) NSString * date;
+@property(nonatomic,assign) long long  date;
+
+@property(nonatomic,assign) int messageOrder;
+
 @end

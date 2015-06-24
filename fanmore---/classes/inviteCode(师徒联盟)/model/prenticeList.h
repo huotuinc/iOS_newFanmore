@@ -10,19 +10,6 @@
 
 @interface prenticeList : NSObject
 
-/*
-private java.lang.Number 	appid
-private java.lang.Number 	countOfApp
-徒孙数量
-private java.util.Date 	date
-注册时间
-private java.lang.Number 	m
-贡献流量(M)
-private java.lang.String 	picUrl
-头像URL
-private java.lang.String 	showName
-展示的名称
-*/
 
 @property(nonatomic,assign) int appid;
 
@@ -30,7 +17,7 @@ private java.lang.String 	showName
 @property(nonatomic,assign) int countOfApp;
 
 /**注册时间*/
-@property(nonatomic,assign) int date;
+@property(nonatomic,assign) long long date;
 
 /**贡献流量(M)*/
 @property(nonatomic,assign) int m;

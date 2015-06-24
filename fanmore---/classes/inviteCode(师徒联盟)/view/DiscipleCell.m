@@ -10,7 +10,7 @@
 
 @implementation DiscipleCell
 
-- (void)setHeadImage:(NSString *)headUrl AndUserPhone:(NSString *) userPhone AndeTime:(NSString *) time AndFlow:(NSString *) flow AndDiscople:(NSString *) disciple {
+- (void)setHeadImage:(NSString *)headUrl AndUserPhone:(NSString *) userPhone AndeTime:(long long) time AndFlow:(NSString *) flow AndDiscople:(NSString *) disciple {
     
     NSURL *url = [NSURL URLWithString:headUrl];
     SDWebImageManager * manager = [SDWebImageManager sharedManager];
@@ -24,15 +24,16 @@
     }];
     
     self.userPhone.text = userPhone;
-    self.timeLabel.text = time;
-    self.flowLabel.text = flow;
-    self.disciple.text = disciple;
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(time/1000.0)];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
+    NSString * publishtime = [formatter stringFromDate:ptime];
+    self.timeLabel.text = publishtime;
+    self.flowLabel.text = [NSString stringWithFormat:@"贡献%@M",flow];
+    self.disciple.text = [NSString stringWithFormat:@"徒孙%@人",disciple];
 }
 
 
-- (void)awakeFromNib {
-    // Initialization code
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
