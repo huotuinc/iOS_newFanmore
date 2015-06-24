@@ -18,7 +18,7 @@
 #import "userData.h"
 #import "LoginViewController.h"
 #import "JoinController.h"
-
+#import "MBProgressHUD+MJ.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 /**任务列表*/
@@ -135,9 +135,8 @@ static NSString *homeCellidentify = @"homeCellId";
 -(void)getNewMoreData:(NSMutableDictionary *)params{
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
-   
+    
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        
         NSLog(@"xxxxxx手术室大大大师%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
@@ -147,10 +146,10 @@ static NSString *homeCellidentify = @"homeCellId";
             [self showHomeRefershCount:taskArray.count];
             [self.tableView reloadData];    //刷新数据
         }
-            
     } failure:^(NSError *error) {
         NSLog(@"%@",[error description]);
     }];
+    
 }
 
 - (void)_initNav

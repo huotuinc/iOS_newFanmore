@@ -4,7 +4,7 @@
 //
 //  Created by HuoTu-Mac on 15/5/29.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  徒弟列表
 
 #import <UIKit/UIKit.h>
 

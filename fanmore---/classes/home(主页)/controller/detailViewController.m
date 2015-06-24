@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "UserLoginTool.h"
 #import "taskDetail.h"
+#import "WebController.h"
 
 @interface detailViewController ()
 
@@ -45,11 +46,21 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // 初始化
     [self setup];
-    
+
     if (self.ishaveget) {
         self.answerBtn.backgroundColor = [UIColor grayColor];
+        self.answerBtn.backgroundColor = LWColor(163, 163, 163);
+        self.answerBtn.layer.cornerRadius = 6;
+        self.answerBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+        self.answerBtn.layer.borderWidth = 0.5;
+        [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.answerBtn.userInteractionEnabled = NO;
     }else{
-        self.answerBtn.backgroundColor = [UIColor grayColor];
+        self.answerBtn.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
+        self.answerBtn.layer.cornerRadius = 6;
+        self.answerBtn.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;
+        self.answerBtn.layer.borderWidth = 0.5;
+        [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         //获取题目s
         [self getQuestion];
         [self settime];
@@ -219,7 +230,9 @@
     if ([self.type intValue] == 4) {//游戏类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
+        WebController *answer = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
+        answer.type = 4;
+        answer.taskId = self.taskId;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
@@ -250,22 +263,20 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
 //                NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
-                NSString * butTitle = [NSString stringWithFormat:@"答题留取%dM流量",self.flay];
+                NSString * butTitle = [NSString stringWithFormat:@"答题领取%dM流量",self.flay];
                 [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
                 //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
                 wself.answerBtn.userInteractionEnabled = YES;
-//                [wself goQusetionAction:nil];
+
             });
         }else{
-//            int minutes = timeout / timeAll;
-//            NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
             int seconds = timeout % timeAll;
             NSString *strTime = [NSString stringWithFormat:@"%d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
                 NSLog(@"____%@",strTime);
-                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题留取%dM流量(%@)",self.flay,strTime] forState:UIControlStateNormal];
+                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%dM流量(%@)",self.flay,strTime] forState:UIControlStateNormal];
                 wself.answerBtn.userInteractionEnabled = NO;
                 
             });

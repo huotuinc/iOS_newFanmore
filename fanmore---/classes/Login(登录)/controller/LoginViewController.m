@@ -52,7 +52,7 @@
     //2、设置键盘弹出的监听
     [self registerForKeyboardNotifications];
     //3、设置键盘弹出
-//    [self.userNameTextFiled becomeFirstResponder];
+    [self.userNameTextFiled becomeFirstResponder];
     
     //4.导航栏返回
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -67,10 +67,10 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
+                                                 name:UIKeyboardWillShowNotification object:self.passwdTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
+                                                 name:UIKeyboardWillHideNotification object:self.passwdTextField];
  }
 /**
  *  键盘弹出
@@ -80,9 +80,11 @@
 -(void)keyboardWasShown:(NSNotification *) note{
     
     NSDictionary* info = [note userInfo];
+    NSLog(@"%@",info);
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    NSLog(@"kbsize == %f ----- y == %f",kbSize.height,CGRectGetMaxY(self.loginBtn.frame));
     CGFloat sizesss = CGRectGetMaxY(self.loginBtn.frame) - (ScreenHeight - kbSize.height);
-    
+    NSLog(@"--------------size%f",sizesss);
     if (sizesss > 0) {
         
         [UIView animateWithDuration:0.15 animations:^{
@@ -168,6 +170,11 @@
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
         NSLog(@"login========%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 54003) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"用户名不存在"];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 53011) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"密码错误"];

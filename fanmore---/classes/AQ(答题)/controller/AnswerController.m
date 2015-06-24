@@ -126,14 +126,11 @@ int _rightQuest = 0;  //纪录正确的答题数
             NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
             NSMutableDictionary * params = [NSMutableDictionary dictionary];
             params[@"taskId"] = @(self.taskId);
-//            NSLog(@"dadasdasdasdasdxxx0000000 %@",[self.ans substringToIndex:self.ans.length-1]);
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-                
                 NSLog(@"%@",json);
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
-                    
                     NSString * answerResultType = nil;
                     if ([json[@"resultData"][@"illgel"] intValue] >0) {
                         answerResultType = @"rejected.html?";
@@ -143,7 +140,6 @@ int _rightQuest = 0;  //纪录正确的答题数
                     }else{
                         answerResultType = @"failed.html?";
                     }
-                    
                     //adasdasdasd
                     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                     WebController * show = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];

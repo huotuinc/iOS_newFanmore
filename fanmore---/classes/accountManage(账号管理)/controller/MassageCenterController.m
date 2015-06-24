@@ -29,7 +29,10 @@
 - (NSMutableArray *)messageF{
     if (_messageF == nil) {
         _messageF = [NSMutableArray array];
-        
+        NSMutableDictionary * params = [NSMutableDictionary dictionary];
+        params[@"pagingTag"] = @"";
+        params[@"pagingSize"] = @(10);
+        [self getNewMoreData:params];
         
     }
     return _messageF;
@@ -43,8 +46,8 @@
     //集成刷新控件
     [self setupRefresh];
     
+    self.messageF;
     [self.tableView removeSpaces];
-    
 }
 
 /**
@@ -79,7 +82,7 @@
     
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"messages"];//消息列表
-    [UserLoginTool loginRequestGet:usrStr parame:nil success:^(id json) {
+    [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
         
         NSLog(@"-------%@",json);
         

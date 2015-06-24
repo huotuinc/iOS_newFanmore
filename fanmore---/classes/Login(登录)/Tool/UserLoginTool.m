@@ -47,9 +47,11 @@
     for (NSString * a in parameaaa) {
         [aaa appendString:[NSString stringWithFormat:@"%@=%@&",a,[paramsOption objectForKey:a]]];
     }
-    [aaa substringToIndex:aaa.length];
-//    NSLog(@"--------------------%@",aaa);
-//    NSLog(@"xxxxxx-----网络请求get参数parame%@",paramsOption);
+    aaa = [aaa substringToIndex:(int)(aaa.length-1)];
+    NSLog(@"--------------------%@",aaa);
+    
+    NSLog(@"dasdasdas-------parame--get%@",paramsOption);
+    
     [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject){
         success(responseObject);
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

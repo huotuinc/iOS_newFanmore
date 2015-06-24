@@ -31,7 +31,7 @@
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
         
-    }else if(self.type == 2){
+    }else if(self.type == 2){//规则说明
         
         NSURL * urlstr = [NSURL URLWithString:glob.ruleURL];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
@@ -44,7 +44,10 @@
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
         
-    }else{ //答题
+    } else if(self.type == 4){ //游戏类
+        
+    }
+    else{ //答题
         
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
@@ -65,11 +68,26 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if ([request.URL.scheme isEqualToString:@"newfanmore"]) {
-        if ([request.URL.host isEqualToString:@"finishgame"]) {
-            
+        if ([request.URL.host isEqualToString:@"finishgame"]) {//玩游戏结束
+            NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
+            NSMutableDictionary * params = [NSMutableDictionary dictionary];
+            params[@"taskId"] = @(self.taskId);
+            [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+                NSLog(@"%@",json);
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
+                {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                
+               
+            } failure:^(NSError *error) {
+                NSLog(@"%@",[error description]);
+               
+            }];
         }
-        if ([request.URL.host isEqualToString:@"cloes"]) {
+        if ([request.URL.host isEqualToString:@"appanswercallback"]) { //答题完成
             
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
         return NO;
     }

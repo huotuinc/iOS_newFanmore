@@ -73,7 +73,26 @@
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
-    [self.asignBtn setTitle:[NSString stringWithFormat:@"今日签到获得%@M",userInfo.signtoday] forState:UIControlStateNormal];
+    if (((1<<(7-[self getWeek])) & (userInfo.signInfo)) == (1<<(7-(int)[self getWeek]))){
+        [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
+        
+        self.asignBtn.backgroundColor = LWColor(163, 163, 163);
+        self.asignBtn.layer.cornerRadius = 6;
+        self.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+        self.asignBtn.layer.borderWidth = 0.5;
+        [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.asignBtn.userInteractionEnabled = NO;
+        
+    }else{
+        [self.asignBtn setTitle:[NSString stringWithFormat:@"今日未签到"] forState:UIControlStateNormal];
+        self.asignBtn.userInteractionEnabled = YES;
+        self.asignBtn.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
+        self.asignBtn.layer.cornerRadius = 6;
+        self.asignBtn.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;
+        self.asignBtn.layer.borderWidth = 0.5;
+        [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    
    
     //2、显示
     for (UIButton * btn in self.buttons) {
@@ -83,11 +102,11 @@
             btn.userInteractionEnabled = NO;
         }else{//未签到
             if (btn.tag < ((long)[self Wednesday])) {//漏签的
-                [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:[UIImage imageNamed:@"asignGray"] forState:UIControlStateNormal];
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 btn.userInteractionEnabled = NO;
             }else{//未签的
-                [btn setBackgroundImage:[UIImage imageNamed:@"asignGray"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 btn.userInteractionEnabled = NO;
             }
@@ -118,14 +137,14 @@
  *
  *  @return  返回今天是周几
  */
-- (NSInteger) getWeek{
+- (long) getWeek{
     //获取日期
     NSDate *date = [NSDate date];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init] ;
     NSInteger unitFlags = NSWeekdayCalendarUnit;
     comps = [calendar components:unitFlags fromDate:date];
-    NSInteger week = [comps weekday]-1;
+    long week = [comps weekday]-1;
     return week;
 }
 
