@@ -64,6 +64,14 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    if ([request.URL.scheme isEqualToString:@"newfanmore"]) {
+        if ([request.URL.host isEqualToString:@"finishgame"]) {
+            
+        }
+        if ([request.URL.host isEqualToString:@"cloes"]) {
+            
+        }
+    }
     return YES;
 }
 
