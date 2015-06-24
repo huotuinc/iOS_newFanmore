@@ -20,13 +20,13 @@
     // Configure the view for the selected state
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    self.label.layer.borderColor = [UIColor blackColor].CGColor;
-    self.label.layer.borderWidth = 1;
-    self.label.layer.cornerRadius = 5;
-}
+//- (void)layoutSubviews
+//{
+//    [super layoutSubviews];
+//    
+//    self.label.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.label.layer.borderWidth = 1;
+//    self.label.layer.cornerRadius = 5;
+//}
 
 @end

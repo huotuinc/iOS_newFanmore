@@ -19,11 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64 + 88) style:UITableViewStylePlain];
+    if (IsIos8) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 88 + 64) style:UITableViewStylePlain];
+        
+    }
+    else {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 88) style:UITableViewStylePlain];
+    }
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = NO;
     [self.view addSubview:self.tableView];
+    [self.tableView removeSpaces];
     
     self.selected = [[NSIndexPath alloc] init];
 }

@@ -37,7 +37,6 @@
 		83AB70911B2A762000B2D09A /* SendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AB70901B2A762000B2D09A /* SendController.m */; };
 		83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B61B781B1713F000B027E0 /* TodayForesController.m */; };
 		83CA8FB51B2932C2008D37C6 /* UITableView+CJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA8FB41B2932C2008D37C6 /* UITableView+CJ.m */; };
-		83CA8FEA1B2985DF008D37C6 /* ConversionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA8FE91B2985DF008D37C6 /* ConversionController.m */; };
 		83D495471B159AC300935889 /* UIViewController+FM.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D495461B159AC300935889 /* UIViewController+FM.m */; };
 		83DBD8E31B12FD2800B62830 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBD8E21B12FD2800B62830 /* RootViewController.m */; };
 		83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBD8E51B12FE1600B62830 /* HomeViewController.m */; };
@@ -260,8 +259,6 @@
 		83B61B781B1713F000B027E0 /* TodayForesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayForesController.m; sourceTree = "<group>"; };
 		83CA8FB31B2932C2008D37C6 /* UITableView+CJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CJ.h"; sourceTree = "<group>"; };
 		83CA8FB41B2932C2008D37C6 /* UITableView+CJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CJ.m"; sourceTree = "<group>"; };
-		83CA8FE81B2985DF008D37C6 /* ConversionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversionController.h; sourceTree = "<group>"; };
-		83CA8FE91B2985DF008D37C6 /* ConversionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversionController.m; sourceTree = "<group>"; };
 		83D495451B159AC300935889 /* UIViewController+FM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FM.h"; sourceTree = "<group>"; };
 		83D495461B159AC300935889 /* UIViewController+FM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FM.m"; sourceTree = "<group>"; };
 		83DBD8E11B12FD2800B62830 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -1006,8 +1003,6 @@
 				EFC86A7C1B1E8D7E0081BBC8 /* BuyFlowViewController.m */,
 				830B4D001B2194FC00BBE276 /* BPViewController.h */,
 				830B4D011B2194FC00BBE276 /* BPViewController.m */,
-				83CA8FE81B2985DF008D37C6 /* ConversionController.h */,
-				83CA8FE91B2985DF008D37C6 /* ConversionController.m */,
 				83F0285D1B38FFC700FD2A09 /* ExchangeController.h */,
 				83F0285E1B38FFC700FD2A09 /* ExchangeController.m */,
 				83A085961B31653E00FDFA2B /* WebController.h */,
@@ -2094,7 +2089,6 @@
 				EFCCA4CB1B12D6E400C015A7 /* NSObject+MJCoding.m in Sources */,
 				83AB70911B2A762000B2D09A /* SendController.m in Sources */,
 				83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */,
-				83CA8FEA1B2985DF008D37C6 /* ConversionController.m in Sources */,
 				83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */,
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
 				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,

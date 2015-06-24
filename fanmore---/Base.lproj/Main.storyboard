@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bbc-LE-jve">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bbc-LE-jve">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -242,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yrr-yC-jEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2498" y="2343"/>
+            <point key="canvasLocation" x="-2380" y="2349"/>
         </scene>
         <!--Person Message Table View Controller-->
         <scene sceneID="iSc-kU-YGY">
@@ -1270,7 +1270,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ecg-uT-UFD">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ecg-uT-UFD">
                                         <rect key="frame" x="82" y="1" width="504" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Jvp-uD-rtG"/>
@@ -1278,7 +1278,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="确认新密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3WZ-D2-shV">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="确认新密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3WZ-D2-shV">
                                         <rect key="frame" x="82" y="93" width="504" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Sue-gs-df4"/>
@@ -1314,7 +1314,7 @@
                                             <constraint firstAttribute="height" constant="1" id="aWo-h7-FEL"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入新密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iee-Xa-Eev">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入新密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Iee-Xa-Eev">
                                         <rect key="frame" x="82" y="47" width="504" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="2f9-1Q-PNT"/>
@@ -1617,7 +1617,7 @@
                                             <action selector="nextButtonAction:" destination="UNb-pk-PgR" eventType="touchUpInside" id="jg1-qV-6sf"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y72-oN-mlY">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y72-oN-mlY">
                                         <rect key="frame" x="40" y="248" width="240" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="kQf-wW-cwb"/>
@@ -1625,7 +1625,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="95C-xz-bjA">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="95C-xz-bjA">
                                         <rect key="frame" x="40" y="193" width="240" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="n1I-Cs-qXL"/>
@@ -1794,7 +1794,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5eK-Iu-glU">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5eK-Iu-glU">
                                         <rect key="frame" x="40" y="198" width="240" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Qb3-SI-IYM"/>
@@ -2465,7 +2465,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWp-zy-kum">
                                 <rect key="frame" x="0.0" y="200" width="320" height="200"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入流量" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-DV-t0d">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入流量" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-DV-t0d">
                                         <rect key="frame" x="20" y="20" width="280" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="97" id="kdy-bT-SQI"/>
@@ -2491,6 +2491,9 @@
                                         <state key="normal" title="送流量">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sendFlow:" destination="xgT-hq-atK" eventType="touchUpInside" id="ujv-7N-tSs"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Z0-nI-Shg" customClass="FMButton">
                                         <rect key="frame" x="20" y="140" width="280" height="40"/>
@@ -2501,6 +2504,9 @@
                                         <state key="normal" title="求流量">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="begFlow:" destination="xgT-hq-atK" eventType="touchUpInside" id="SR0-2n-UcZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2548,7 +2554,12 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="flowField" destination="Eyl-DV-t0d" id="Pxn-nt-xVR"/>
+                        <outlet property="friendHeadBtu" destination="apf-RA-DY9" id="sDl-KT-XZK"/>
+                        <outlet property="friendPhone" destination="9io-VG-kNp" id="x32-vb-Qev"/>
                         <outlet property="trafficField" destination="Eyl-DV-t0d" id="WNR-Lm-N3R"/>
+                        <outlet property="userFlow" destination="5ib-e1-O02" id="TkK-PQ-CBn"/>
+                        <outlet property="userHeadBtu" destination="5EY-BP-feA" id="Smn-By-q1i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wi7-u2-QGx" userLabel="First Responder" sceneMemberID="firstResponder"/>
