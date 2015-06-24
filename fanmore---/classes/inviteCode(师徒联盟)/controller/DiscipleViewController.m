@@ -8,6 +8,7 @@
 
 #import "DiscipleViewController.h"
 #import "DiscipleCell.h"
+#import "prenticeList.h"
 
 
 @interface DiscipleViewController()
@@ -91,13 +92,10 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 {
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     
-//    if (self.taskDatas.count) {
-//        taskData * aaa = [self.taskDatas firstObject];
-//        params[@"pagingTag"] = @(aaa.taskOrder);
-//    }else{
-//        params[@"pagingTag"] = @"";
-//    }
     params[@"pagingSize"] = @(10);
+    params[@"pagingTag"] = @"";
+    params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
+    
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -110,9 +108,16 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
     
+    __weak DiscipleViewController * wself = self;
+    
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        
         NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
+            NSArray * plist =  [prenticeList objectArrayWithKeyValuesArray:json[@"resultData"][@"apps"]];
+            [wself.prentices arrayByAddingObjectsFromArray:plist];
+            [self.tableView reloadData];
+        }
+    
     } failure:^(NSError *error) {
         NSLog(@"%@",[error description]);
     }];
@@ -148,6 +153,8 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
     params[@"pagingSize"] = @(10);
     params[@"pagingTag"] = @"";
+    //清楚远有数据
+    [self.prentices removeAllObjects];
     [self getNewMoreData:params];
 }
 
