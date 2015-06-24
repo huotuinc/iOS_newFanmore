@@ -9,6 +9,7 @@
 #import "MessageTableViewCell.h"
 
 #import "MessageFrame.h"
+#import "Message.h"
 
 @interface MessageTableViewCell ()
 
@@ -39,16 +40,25 @@
         
         //1外部的view
         UIView * view = [[UIView alloc] init];
+        view.backgroundColor = [UIColor lightGrayColor];
         self.wView = view;
         [self addSubview:view];
         
         //2正文内容
         UILabel * contextLable = [[UILabel alloc] init];
+        contextLable.numberOfLines = 0;
         self.contextLable = contextLable;
+        contextLable.font = [UIFont systemFontOfSize:14];
+        contextLable.backgroundColor = [UIColor blueColor];
+        self.contextLable.contentMode = UIViewContentModeCenter;
+        [contextLable setTextColor:[UIColor blackColor]];
         [view addSubview:contextLable];
         
         //3时间
         UILabel * timeLabel = [[UILabel alloc] init];
+        timeLabel.backgroundColor = [UIColor redColor];
+        [timeLabel setTextColor:[UIColor blackColor]];
+        timeLabel.contentMode = UIViewContentModeCenter;
         self.timeLable = timeLabel;
         [view addSubview:timeLabel];
         
@@ -61,8 +71,16 @@
 - (void)setMessageF:(MessageFrame *)messageF{
     
     _messageF = messageF;
+    Message * mess = messageF.message;
     self.wView.frame = messageF.containView;
+    self.contextLable.text = mess.context;
     self.contextLable.frame = messageF.contextF;
+    
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(mess.date/1000.0)];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
+    NSString * publishtime = [formatter stringFromDate:ptime];
+    self.timeLable.text = publishtime;
     self.timeLable.frame = messageF.timeF;
 }
 
