@@ -268,7 +268,7 @@ static NSString *homeCellidentify = @"homeCellId";
         a = (((task.reward > 0)| (task.taskFailed > 0)) ? 1:0);
     }
     //设置cell样式
-    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.desc] andGetImage:a];
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task] andGetImage:a];
      return cell;
 }
 

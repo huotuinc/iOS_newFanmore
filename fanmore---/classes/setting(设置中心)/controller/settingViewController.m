@@ -97,6 +97,16 @@ static NSString * _num = nil;
     // 2.模型数据
     MJSettingGroup *group = self.data[indexPath.section];
     MJSettingItem *item = group.items[indexPath.row];
+    if(indexPath.row == 0){
+        NSString * aa = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+        if ([aa isEqualToString:@"wrong"]) {
+            
+            LoginViewController * aa = [[LoginViewController alloc] init];
+            UINavigationController *ab = [[UINavigationController alloc] initWithRootViewController:aa];
+            [self presentViewController:ab animated:YES completion:nil];
+            
+        }
+    }
     
     if (item.option) { // block有值(点击这个cell,.有特定的操作需要执行)
         item.option();

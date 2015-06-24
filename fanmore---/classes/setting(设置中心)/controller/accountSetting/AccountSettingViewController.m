@@ -112,21 +112,10 @@
 - (void)QuiteAccount:(UIButton *)btn{
     
     NSLog(@"zxcadasdasdas");
-    
-        
-//    LoginViewController * login = [[LoginViewController alloc] init];
-//    login.loginType = 0;
-//    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:login];
-//    [UIApplication sharedApplication].keyWindow.rootViewController = nav;
-    [[NSUserDefaults standardUserDefaults] setObject:@"111" forKey:AppToken];
-    [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
-    
-    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    //1、保存个人信息
-    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-    [NSKeyedArchiver archiveRootObject:nil toFile:fileName];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    UIAlertView * ac = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要退出吗?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    [ac show];
+
+
     
 }
 - (void)backAction:(UIButton *)btn{
@@ -135,6 +124,26 @@
 //    [self.navigationController popViewControllerAnimated:YES];
 }
 
+/**
+ *  退出账号提示按钮
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"111" forKey:AppToken];
+        [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+    
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+        //1、保存个人信息
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        [NSKeyedArchiver archiveRootObject:nil toFile:fileName];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
 
 
 @end
