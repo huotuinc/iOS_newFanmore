@@ -142,7 +142,14 @@
         //3、设置当前用户流量
         self.flowLable.hidden = NO;
         
-        self.flowLable.text = [NSString stringWithFormat:@"%.1f123M",[user.balance doubleValue]];
+        CGFloat userFlow = [user.balance doubleValue];
+        if (userFlow - (int)userFlow > 0) {
+            self.flowLable.text = [NSString stringWithFormat:@"%.1fM",[user.balance doubleValue]];
+        }else {
+            self.flowLable.text = [NSString stringWithFormat:@"%.0fM",[user.balance doubleValue]];
+        }
+        
+        
         
         self.flowLable.userInteractionEnabled = YES;
         [self.flowLable bk_whenTapped:^{ //流量详情

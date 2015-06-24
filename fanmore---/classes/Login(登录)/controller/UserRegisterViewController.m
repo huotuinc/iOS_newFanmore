@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *firstSeperatorLine;
 /**用户注册分隔线*/
 @property (weak, nonatomic) IBOutlet UIView *secondSeperatorLine;
+@property (weak, nonatomic) IBOutlet UIButton *registerBtu;
 
 /**用户注册按钮点击监听*/
 - (IBAction)registerButtonClick:(id)sender;
@@ -46,6 +47,8 @@
     [self setupWidget];
     //3、监听键盘弹出
 //    [self setupkeyboardShow];
+    
+    [self registerForKeyboardNotifications];
     
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.privacyLabel.text];
@@ -66,11 +69,45 @@
     [self.navigationController pushViewController:buyFlowVc animated:YES];
     
 }
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
 /**
- * 监听键盘弹出
+ *  键盘弹出
+ *
+ *  @param noto <#noto description#>
  */
-- (void)setupkeyboardShow{
+-(void)keyboardWasShown:(NSNotification *) note{
     
+    NSDictionary* info = [note userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGFloat sizesss = CGRectGetMaxY(self.registerBtu.frame) - (ScreenHeight - kbSize.height);
+    
+    if (sizesss > 0) {
+        
+        [UIView animateWithDuration:0.15 animations:^{
+            
+            self.view.transform = CGAffineTransformMakeTranslation(0,-(sizesss));
+        }];
+        
+    }
+}
+/**
+ *  键盘退下
+ *
+ *  @param noto <#noto description#>
+ */
+-(void)keyboardWillBeHidden:(NSNotification *) note{
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        self.view.transform = CGAffineTransformIdentity;
+    }];
 }
 
 /**

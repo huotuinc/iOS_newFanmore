@@ -40,6 +40,8 @@
     //设置
     [self setupProperty];
     
+    [self registerForKeyboardNotifications];
+    
 }
 
 
@@ -47,6 +49,47 @@
     
     self.stateLable.text = @"为了您在活动中成功领取流量,\n请添写验证码，完成手机绑定";
     self.nextStepButton.backgroundColor = LWColor(0, 150, 255);
+}
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+/**
+ *  键盘弹出
+ *
+ *  @param noto <#noto description#>
+ */
+-(void)keyboardWasShown:(NSNotification *) note{
+    
+    NSDictionary* info = [note userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGFloat sizesss = CGRectGetMaxY(self.nextStepButton.frame) - (ScreenHeight - kbSize.height);
+    
+    if (sizesss > 0) {
+        
+        [UIView animateWithDuration:0.15 animations:^{
+            
+            self.view.transform = CGAffineTransformMakeTranslation(0,-(sizesss));
+        }];
+        
+    }
+}
+/**
+ *  键盘退下
+ *
+ *  @param noto <#noto description#>
+ */
+-(void)keyboardWillBeHidden:(NSNotification *) note{
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        self.view.transform = CGAffineTransformIdentity;
+    }];
 }
 
 
