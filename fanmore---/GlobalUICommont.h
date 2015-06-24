@@ -4,14 +4,14 @@
 //
 //  Created by lhb on 15/5/22.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  c
 
 #ifndef fanmore____GlobalUICommont_h
 #define fanmore____GlobalUICommont_h
 
 /**服务器地址*/
 #define  MainURL @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//http://192.168.0.14:8080/fanmoreweb/app"
+
 
 
 
