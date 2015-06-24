@@ -4,7 +4,7 @@
 //
 //  Created by lhb on 15/5/22.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//  c
+//  cs
 
 #ifndef fanmore____GlobalUICommont_h
 #define fanmore____GlobalUICommont_h
