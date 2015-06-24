@@ -58,7 +58,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     self.title = @"流量明细";
     self.flays;
-    self.flowNumber.text = [NSString stringWithFormat:@"%@M",self.userInfo.balance];
+    self.flowNumber.text = [NSString stringWithFormat:@"%@123M",self.userInfo.balance];
     self.PICView.progress = [self.userInfo.balance floatValue] / 500.0;
     self.PICView.thicknessRatio = 0.15;
     self.PICView.showText = NO;

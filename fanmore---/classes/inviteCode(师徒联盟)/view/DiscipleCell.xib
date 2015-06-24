@@ -79,6 +79,13 @@
                     <constraint firstAttribute="bottom" secondItem="W1y-5G-mxJ" secondAttribute="bottom" constant="15" id="z4c-Ws-k4j"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="disciple" destination="gSj-m4-qYW" id="hSJ-la-Rib"/>
+                <outlet property="flowLabel" destination="dWa-NM-zzq" id="TGW-Tv-kN6"/>
+                <outlet property="headImage" destination="6Hj-sQ-2dS" id="mk2-5w-HmC"/>
+                <outlet property="timeLabel" destination="W1y-5G-mxJ" id="Z9G-Iq-iQb"/>
+                <outlet property="userPhone" destination="4CZ-ep-JV6" id="1gz-c0-z5b"/>
+            </connections>
             <point key="canvasLocation" x="288" y="465"/>
         </tableViewCell>
     </objects>
