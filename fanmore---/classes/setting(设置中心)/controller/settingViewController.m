@@ -59,7 +59,7 @@ static NSString * _num = nil;
     
     MJSettingItem *advice = [MJSettingArrowItem itemWithIcon:nil title:@"意见反馈" destVcClass:[FeedBackViewController class]];
     MJSettingItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:@"110KB"];
-    MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们"];
+    MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们" destVcClass:[WebController class]];
     MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
     MJSettingItem *guize = [MJSettingArrowItem itemWithIcon:nil title:@"投放指南" destVcClass:[WebController class]];
     MJSettingItem *gz = [MJSettingArrowItem itemWithIcon:nil title:@"规则说明" destVcClass:[WebController class]];
@@ -105,7 +105,14 @@ static NSString * _num = nil;
         
         // 如果没有需要跳转的控制器
         if (arrowItem.destVcClass == nil) return;
-        if (indexPath.row == 4) {
+        if (indexPath.row == 2) {//关于我们
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            WebController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
+            detailVc.type = 5;
+            detailVc.title = @"关于我们";
+            [self.navigationController pushViewController:detailVc  animated:YES];
+            
+        }else if (indexPath.row == 4) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             WebController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
             detailVc.type = 1;

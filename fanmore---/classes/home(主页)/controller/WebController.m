@@ -46,6 +46,10 @@
         
     } else if(self.type == 4){ //游戏类
         
+    }else if(self.type == 5){
+        NSURL * urlstr = [NSURL URLWithString:glob.aboutURL];
+        NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
+        [self.webView loadRequest:request];
     }
     else{ //答题
         
