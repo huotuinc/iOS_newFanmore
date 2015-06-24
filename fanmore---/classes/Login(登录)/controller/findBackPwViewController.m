@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwork1Textfield;
 /**新密码*/
 @property (weak, nonatomic) IBOutlet UITextField *password2Textfield;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtu;
 
 
 /**获取验证码*/
@@ -35,6 +36,49 @@
     self.title = @"找回密码";
     //2、设置文本框代理
     [self setupWidget];
+    //3、键盘通知
+    [self registerForKeyboardNotifications];
+}
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+/**
+ *  键盘弹出
+ *
+ *  @param noto <#noto description#>
+ */
+-(void)keyboardWasShown:(NSNotification *) note{
+    
+    NSDictionary* info = [note userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGFloat sizesss = CGRectGetMaxY(self.saveBtu.frame) - (ScreenHeight - kbSize.height);
+    
+    if (sizesss > 0) {
+        
+        [UIView animateWithDuration:0.15 animations:^{
+            
+            self.view.transform = CGAffineTransformMakeTranslation(0,-(sizesss));
+        }];
+        
+    }
+}
+/**
+ *  键盘退下
+ *
+ *  @param noto <#noto description#>
+ */
+-(void)keyboardWillBeHidden:(NSNotification *) note{
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        self.view.transform = CGAffineTransformIdentity;
+    }];
 }
 
 

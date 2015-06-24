@@ -11,6 +11,6 @@
 @interface ExchangeController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property(nonatomic,strong) NSArray * flays;
+@property(nonatomic,strong) NSMutableArray * flays;
 
 @end

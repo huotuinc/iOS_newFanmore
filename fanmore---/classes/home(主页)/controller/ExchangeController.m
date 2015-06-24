@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSIndexPath *selecet;
 @property(nonatomic,strong) userData * userInfo;
+@property (nonatomic, strong) NSMutableArray *showArray;
 
 @end
 
@@ -42,7 +43,7 @@ NSString * _changeflah = nil;
 #pragma table
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.flays.count + 5;
+    return self.flays.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -56,7 +57,8 @@ NSString * _changeflah = nil;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] init];
     }
-    cell.textLabel.text = @"70M";
+    
+    cell.textLabel.text =  self.showArray[indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -72,12 +74,12 @@ NSString * _changeflah = nil;
     cell.backgroundColor = [UIColor orangeColor];
     self.selecet = indexPath;
     
-    if (([self.userInfo.balance floatValue]< [_changeflah floatValue])) {
+    if (([self.userInfo.balance floatValue]< [self.flays[indexPath.row] floatValue])) {
                 [MBProgressHUD showError:@"当前可兑换流量不足"];
                 return;
             }
         
-            NSString *flaycount = [NSString stringWithFormat:@"是否兑换流量%@M",_changeflah];
+            NSString *flaycount = [NSString stringWithFormat:@"是否兑换流量%@M",self.showArray[indexPath.row]];
             if (IsIos8) {
                 UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:nil message:flaycount preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -85,7 +87,7 @@ NSString * _changeflah = nil;
                     //兑换流量
                     NSString *url = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
                     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-                    param[@"amount"] = _changeflah;
+                    param[@"amount"] = self.flays[indexPath.row];
                     [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
         
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
@@ -151,6 +153,25 @@ NSString * _changeflah = nil;
     
     self.title = @"兑换流量当月有效";
     
+    self.showArray = [NSMutableArray array];
+    
+//    NSLog(@"%@", self.flays);
+    for (int i; i < self.flays.count; i++) {
+        NSString *str = [NSString stringWithFormat:@"%@M", self.flays[i]];
+        CGFloat j = [str floatValue];
+        if (j >= 1024) {
+            if (((int)j % 1024) ) {
+                NSString *newStr = [NSString stringWithFormat:@"%.1fG（1G=1024M）", j / 1024];
+                [self.showArray addObject:newStr];
+            }else {
+                NSString *newStr = [NSString stringWithFormat:@"%.0fG（1G=1024M）", j / 1024];
+                [self.showArray addObject:newStr];
+            }
+        }else {
+            [self.showArray addObject:str];
+        }
+    }
+//    NSLog(@"show!!!!%@", self.showArray);
     
     
     [self _initNav];

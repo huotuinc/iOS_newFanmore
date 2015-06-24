@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userFlow;
 @property (weak, nonatomic) IBOutlet UILabel *friendPhone;
 @property (weak, nonatomic) IBOutlet UITextField *flowField;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
 - (IBAction)sendFlow:(UIButton *)sender;
 - (IBAction)begFlow:(UIButton *)sender;
 

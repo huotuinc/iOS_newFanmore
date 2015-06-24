@@ -142,7 +142,14 @@
         //3、设置当前用户流量
         self.flowLable.hidden = NO;
         
-        self.flowLable.text = [NSString stringWithFormat:@"%.1fM",[user.balance doubleValue]];
+        CGFloat userFlow = [user.balance doubleValue];
+        if (userFlow - (int)userFlow > 0) {
+            self.flowLable.text = [NSString stringWithFormat:@"%.1fM",[user.balance doubleValue]];
+        }else {
+            self.flowLable.text = [NSString stringWithFormat:@"%.0fM",[user.balance doubleValue]];
+        }
+        
+        
         
         self.flowLable.userInteractionEnabled = YES;
         [self.flowLable bk_whenTapped:^{ //流量详情
@@ -156,7 +163,7 @@
         
         //5.开启下个页面的点击事件
         self.backButton.userInteractionEnabled = YES;
-        self.backButton.hidden = NO;
+        self.backButton.hidden = YES;
         
         //6.剩余流量按钮
         self.warningLabel.hidden = NO;

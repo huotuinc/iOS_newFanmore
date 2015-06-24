@@ -11,6 +11,7 @@
                 <outlet property="password2Textfield" destination="cRc-Fu-Q9L" id="DRO-ls-PeD"/>
                 <outlet property="passwork1Textfield" destination="f5J-Lk-9oz" id="lkd-LP-ysv"/>
                 <outlet property="phoneNumber" destination="wm0-Ny-xed" id="fXy-wA-UQT"/>
+                <outlet property="saveBtu" destination="5cw-Zb-PlD" id="CB7-cc-IFz"/>
                 <outlet property="verificationBtn" destination="Mw0-hm-I36" id="w2u-AF-9zv"/>
                 <outlet property="verificationTextfiled" destination="5Yk-bM-auB" id="5DR-i3-wt8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
