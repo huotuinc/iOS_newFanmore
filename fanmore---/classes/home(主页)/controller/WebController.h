@@ -30,4 +30,9 @@
 
 /**加载网页类型*/
 @property(nonatomic,assign) int type;
+
+
+/**问题编号*/
+@property(assign,nonatomic)  int taskId;
+
 @end

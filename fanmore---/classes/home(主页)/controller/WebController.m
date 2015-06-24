@@ -67,10 +67,30 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-
-//    if (request.URL.scheme isEqualToString:<#(NSString *)#>) {
-//        <#statements#>
-//    }
+    if ([request.URL.scheme isEqualToString:@"newfanmore"]) {
+        if ([request.URL.host isEqualToString:@"finishgame"]) {//玩游戏结束
+            NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
+            NSMutableDictionary * params = [NSMutableDictionary dictionary];
+            params[@"taskId"] = @(self.taskId);
+            [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+                NSLog(@"%@",json);
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
+                {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                
+               
+            } failure:^(NSError *error) {
+                NSLog(@"%@",[error description]);
+               
+            }];
+        }
+        if ([request.URL.host isEqualToString:@"appanswercallback"]) { //答题完成
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        return NO;
+    }
     return YES;
 }
 

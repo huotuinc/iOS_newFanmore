@@ -47,6 +47,7 @@
     [self setupRefresh];
     
     self.messageF;
+    [self.tableView removeSpaces];
 }
 
 /**

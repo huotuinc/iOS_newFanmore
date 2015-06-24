@@ -156,7 +156,6 @@
         
         RootViewController * roots = [[RootViewController alloc] init];
         [UIApplication sharedApplication].keyWindow.rootViewController =  roots;
-//        [self.navigationController popToRootViewControllerAnimated:YES];
         //注册成功
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
@@ -165,13 +164,16 @@
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:passwd] forKey:loginPassword];
             //注册完后的数据
             userData * userInfo = [userData objectWithKeyValues:(json[@"resultData"][@"user"])];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            //1、保存个人信息
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
             
            //比较反回的token和本地的token比较
             NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
             NSLog(@"注册前的%@",token);
             [MBProgressHUD showSuccess:@"注册成功"];
             [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
-            NSLog(@"xxxxxx0000000000hhhhhhhh%@",userInfo.token);
             if (![token isEqualToString:userInfo.token]) {
                 
                 [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:AppToken];
@@ -182,7 +184,8 @@
                 
                 [wself.delegate UserRegisterViewSuccess:userInfo];
             }
-//            [self dismissViewControllerAnimated:YES completion:nil];
+
+            
         }
         
     } failure:^(NSError *error) {
@@ -255,6 +258,7 @@
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
                 self.verification.userInteractionEnabled = YES;
             });
+            
         }else{
             //            int minutes = timeout / 60;
             int seconds = timeout % 60;

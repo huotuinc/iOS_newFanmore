@@ -161,6 +161,8 @@
 		EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4DC1B12EB6D00C015A7 /* detail.m */; };
 		EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */; };
 		EFCDC82A1B17F63100D28DB1 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */; };
+		EFCFB7761B3A5BA200D3A47D /* prenticeList.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCFB7751B3A5BA200D3A47D /* prenticeList.m */; };
+		EFCFB7781B3A76D500D3A47D /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCFB7771B3A76D500D3A47D /* Foundation+Log.m */; };
 		EFD02B2D1B1552E400D11D6D /* protect.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD02B2C1B1552E400D11D6D /* protect.html */; };
 		EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B311B155CDA00D11D6D /* MJBaseSettingViewController.m */; };
 		EFD02B431B155CDA00D11D6D /* MJSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B351B155CDA00D11D6D /* MJSettingGroup.m */; };
@@ -473,6 +475,9 @@
 		EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		EFCDC8281B17F63100D28DB1 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		EFCDC8291B17F63100D28DB1 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		EFCFB7741B3A5BA200D3A47D /* prenticeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prenticeList.h; sourceTree = "<group>"; };
+		EFCFB7751B3A5BA200D3A47D /* prenticeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = prenticeList.m; sourceTree = "<group>"; };
+		EFCFB7771B3A76D500D3A47D /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		EFD02B2C1B1552E400D11D6D /* protect.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = protect.html; sourceTree = "<group>"; };
 		EFD02B301B155CDA00D11D6D /* MJBaseSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBaseSettingViewController.h; sourceTree = "<group>"; };
 		EFD02B311B155CDA00D11D6D /* MJBaseSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBaseSettingViewController.m; sourceTree = "<group>"; };
@@ -686,8 +691,8 @@
 		837DF5D61B14687D00A5E2FA /* inviteCode(师徒联盟) */ = {
 			isa = PBXGroup;
 			children = (
+				EFCFB7731B3A5B9400D3A47D /* model */,
 				837DF5D71B1468C700A5E2FA /* controller */,
-				837DF5D81B1468C700A5E2FA /* model */,
 				837DF5D91B1468C700A5E2FA /* view */,
 			);
 			name = "inviteCode(师徒联盟)";
@@ -703,13 +708,6 @@
 				83E72CD81B1C3EA800286735 /* DiscipleViewController.m */,
 			);
 			path = controller;
-			sourceTree = "<group>";
-		};
-		837DF5D81B1468C700A5E2FA /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		837DF5D91B1468C700A5E2FA /* view */ = {
@@ -1126,6 +1124,7 @@
 		EF49ECED1B0D81A40038A203 /* fanmore--- */ = {
 			isa = PBXGroup;
 			children = (
+				EFCFB7771B3A76D500D3A47D /* Foundation+Log.m */,
 				EF440E111B383A1400761A9C /* lib */,
 				EF72EACE1B3835F000872BA5 /* SDKExport */,
 				EFF3D0711B2EB4A800B2F446 /* openssl */,
@@ -1588,6 +1587,15 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EFCFB7731B3A5B9400D3A47D /* model */ = {
+			isa = PBXGroup;
+			children = (
+				EFCFB7741B3A5BA200D3A47D /* prenticeList.h */,
+				EFCFB7751B3A5BA200D3A47D /* prenticeList.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		EFD02B2E1B155CDA00D11D6D /* setting(设置中心) */ = {
@@ -2128,6 +2136,7 @@
 				EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */,
 				830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */,
 				83E263FD1B2F018500A2AC96 /* PinyinFormatter.m in Sources */,
+				EFCFB7781B3A76D500D3A47D /* Foundation+Log.m in Sources */,
 				83A085921B3142FE00FDFA2B /* FriendMessageController.m in Sources */,
 				EF2E543F1B2857800060E965 /* MessageTableViewCell.m in Sources */,
 				EFD02B461B155CDA00D11D6D /* MJSettingLabelItem.m in Sources */,
@@ -2136,6 +2145,7 @@
 				8381167C1B2591AF00261F51 /* NameController.m in Sources */,
 				EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */,
 				EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */,
+				EFCFB7761B3A5BA200D3A47D /* prenticeList.m in Sources */,
 				83E72CCD1B1C2B2D00286735 /* AnswerController.m in Sources */,
 				EF2E54371B27E2AB0060E965 /* GetHomeDataTool.m in Sources */,
 				83F2DE661B186E16005E8305 /* NSDictionary+EXTERN.m in Sources */,
