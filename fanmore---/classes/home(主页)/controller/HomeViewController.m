@@ -80,15 +80,33 @@ static NSString *homeCellidentify = @"homeCellId";
     
     //集成刷新控件
     [self setupRefresh];
-    
     [self.tableView removeSpaces];
+    
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    
+//    UIAlertView * as = [[UIAlertView alloc] initWithTitle:@"" message:user.welcomeTip delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//    [as show];
+    
+    UILabel * welable = [[UILabel alloc] init];
+    welable.textAlignment  = NSTextAlignmentCenter;
+    welable.backgroundColor = [UIColor redColor];
+    welable.font = [UIFont systemFontOfSize:14];
+    welable.text = user.welcomeTip;
+    welable.center = self.view.center;
+    welable.bounds = CGRectMake(0, 0, ScreenWidth * 2 /3, 100);
+    [self.view addSubview:welable];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [welable removeFromSuperview];
+    });
     
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
 }
 
 - (void)_initView
@@ -362,4 +380,50 @@ static NSString *homeCellidentify = @"homeCellId";
     
     
 }
+
+/**
+ *  欢迎条目
+ *
+ *  @param count <#count description#>
+ */
+//- (void) showWellcom{
+//    
+//
+//    UIButton * showBtn = [[UIButton alloc] init];
+//    [self.navigationController.view insertSubview:showBtn belowSubview:self.navigationController.navigationBar];
+//    showBtn.userInteractionEnabled = NO;
+//    showBtn.alpha = 0.9;
+//    showBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+//    [showBtn setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
+//    [showBtn setBackgroundColor:[UIColor colorWithWhite:0.878 alpha:1.000]];
+//    
+//    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//    
+//    //1、保存个人信息
+//    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+//    userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+//    [showBtn setTitle:user.welcomeTip forState:UIControlStateNormal];
+//    
+//    
+//    CGFloat btnX = 0;
+//    CGFloat btnH = ScreenHeight;
+//    CGFloat btnY = 0;
+//    CGFloat btnW = self.view.frame.size.width - 2 * btnX;
+//    showBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
+//    
+//    [UIView animateWithDuration:2 animations:^{
+//        
+//        showBtn.transform = CGAffineTransformMakeTranslation(0, btnH+2);
+//    } completion:^(BOOL finished) {
+//        
+//        [UIView animateKeyframesWithDuration:2 delay:1.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+//            showBtn.transform = CGAffineTransformIdentity;
+//        } completion:^(BOOL finished) {
+//            
+//            [showBtn removeFromSuperview];
+//        }];
+//    }];
+//    
+//    
+//}
 @end
