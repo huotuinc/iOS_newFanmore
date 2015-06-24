@@ -38,6 +38,8 @@
     [self setupWidget];
     //3、键盘通知
     [self registerForKeyboardNotifications];
+    
+    [self.phoneNumber becomeFirstResponder];
 }
 
 - (void)registerForKeyboardNotifications

@@ -42,6 +42,8 @@
     
     [self registerForKeyboardNotifications];
     
+    [self.phoneNumber becomeFirstResponder];
+    
 }
 
 

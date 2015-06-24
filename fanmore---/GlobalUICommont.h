@@ -11,7 +11,7 @@
 
 /**服务器地址*/
 #define  MainURL @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//@"http://192.168.0.14:8080/fanmoreweb/app"
+//http://192.168.0.14:8080/fanmoreweb/app"
 
 
 

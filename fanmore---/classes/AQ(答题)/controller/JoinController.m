@@ -11,6 +11,46 @@
 
 @implementation JoinController
 
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+/**
+ *  键盘弹出
+ *
+ *  @param noto <#noto description#>
+ */
+-(void)keyboardWasShown:(NSNotification *) note{
+    
+    NSDictionary* info = [note userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGFloat sizesss = CGRectGetMaxY(self.nextButton.frame) - (ScreenHeight - kbSize.height);
+    
+    if (sizesss > 0) {
+        
+        [UIView animateWithDuration:0.15 animations:^{
+            
+            self.view.transform = CGAffineTransformMakeTranslation(0,-(sizesss));
+        }];
+        
+    }
+}
+/**
+ *  键盘退下
+ *
+ *  @param noto <#noto description#>
+ */
+-(void)keyboardWillBeHidden:(NSNotification *) note{
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        self.view.transform = CGAffineTransformIdentity;
+    }];
+}
 
 
 - (void)viewDidAppear:(BOOL)animated
@@ -59,6 +99,10 @@
             self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt6401136"]];
         }
     }
+    
+    [self registerForKeyboardNotifications];
+    
+    [self.field1 becomeFirstResponder];
 }
 
 - (IBAction)nextButtonAction:(UIButton *)sender {

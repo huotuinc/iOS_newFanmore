@@ -40,7 +40,10 @@
         self.phoneTextLable.text = phoneNumber;
     }
     
+    [self.phoneTextLable becomeFirstResponder];
 }
+
+
 - (IBAction)changePasswordButton:(id)sender {
     NSString * old = [MD5Encryption md5by32:self.oldPassWordTextField.text];
     NSString * local =  [[NSUserDefaults standardUserDefaults] objectForKey:loginPassword];

@@ -159,7 +159,8 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
     params[@"pagingSize"] = @(10);
     params[@"pagingTag"] = @"";
-    
+    //清楚远有数据
+    [self.prentices removeAllObjects];
     [self getNewMoreData:params];
 }
 
