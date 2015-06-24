@@ -10,6 +10,12 @@
 
 @implementation BPCell
 
+- (void)setTitleName:(NSString *)titleName AndTime:(NSString *) tiem AndFlow:(NSString *) flow
+{
+    self.titleName.text = titleName;
+    self.time.text = tiem;
+    self.flow.text = flow;
+}
 - (void)awakeFromNib {
     // Initialization code
 }

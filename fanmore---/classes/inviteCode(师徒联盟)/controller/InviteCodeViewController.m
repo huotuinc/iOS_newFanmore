@@ -11,9 +11,12 @@
 #import "InviteCodeCell.h"
 #import "RootViewController.h"
 #import "DiscipleViewController.h"
+#import "userData.h"
 
 
 @interface InviteCodeViewController ()
+
+@property (nonatomic, strong) NSString *shareUrl;
 
 @end
 
@@ -29,6 +32,8 @@
         [self.navigationController pushViewController:dis animated:YES];
     }];
     
+    
+    
 }
 
 
@@ -43,10 +48,21 @@
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
        
         NSLog(@"000000%@",json);
+        NSDictionary *dic = json[@"resultData"];
+        self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
+        self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
+        self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
+        self.shareUrl = dic[@"shareURL"];
     } failure:^(NSError *error) {
         
         NSLog(@"请求出错");
     }];
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    
+    [self.shareButton setTitle:[NSString stringWithFormat:@"分享邀请码%@", user.invCode] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,13 +79,7 @@
 
 
 
-- (void)rightBarButtonAction:(UIButton *)sender
-{
-    
-    NSLog(@"分享邀请吗");
-#warning 分享
-    
-}
+
 
 
 - (IBAction)shareAction:(UIButton *)sender {
@@ -77,43 +87,33 @@
     
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK" ofType:@"png"];
     
-//    //构造分享内容
-//    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:@"分享粉猫app得流量" url:@"http://www.mob.com" description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
-//    //创建弹出菜单容器
-//    id<ISSContainer> container = [ShareSDK container];
-//    
-//    //弹出分享菜单
-//    [ShareSDK showShareActionSheet:container shareList:nil content:publishContent statusBarTips:YES authOptions:nil shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-//        
-//        if (state == SSResponseStateSuccess)
-//        {
-//            
-//            NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
-//            NSString *urlStr = [MainURL stringByAppendingPathComponent:@"taskTurnedNotify"];
-//            NSMutableDictionary * params = [NSMutableDictionary dictionary];
-//            params[@"taskId"] = @(self.taskId);
-//            int sType = 0;
-//            if (type == 1) {
-//                sType = 2;  //新浪微博
-//            }else if(type == 6){
-//                sType = 3;  //qq 空间
-//            }else if(type == 23){
-//                sType = 1;  //qq 空间
-//            }
-//            params[@"channel"] = @(sType);
-//            
-//            [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-//                
-//                NSLog(@"%@",json);
-//            } failure:^(NSError *error) {
-//                
-//            }];
-//            
-//        }else if (state == SSResponseStateFail){
-//            NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
-//        }
-//    }];
-//    NSLog(@"分享");
-//}];
+    //构造分享内容
+    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:@"分享粉猫app得流量" url:@"http://www.mob.com" description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
+    //创建弹出菜单容器
+    id<ISSContainer> container = [ShareSDK container];
+    
+    //弹出分享菜单
+    [ShareSDK showShareActionSheet:container shareList:nil content:publishContent statusBarTips:YES authOptions:nil shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+        
+        if (state == SSResponseStateSuccess)
+        {
+            
+            NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
+            NSString *urlStr = [MainURL stringByAppendingPathComponent:@"taskTurnedNotify"];
+            NSMutableDictionary * params = [NSMutableDictionary dictionary];
+            
+            [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+                
+                NSLog(@"%@",json);
+            } failure:^(NSError *error) {
+                
+            }];
+            
+        }else if (state == SSResponseStateFail){
+            NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+        }
+    }];
+    NSLog(@"分享");
+
 }
 @end

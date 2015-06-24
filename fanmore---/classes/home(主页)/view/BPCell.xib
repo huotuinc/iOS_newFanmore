@@ -55,6 +55,11 @@
                     <constraint firstItem="QWo-Z5-fks" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="x9P-7c-Rsd"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="flow" destination="px3-Z5-Edt" id="q5r-kF-yIR"/>
+                <outlet property="time" destination="srw-ZX-u35" id="WGp-fY-1PT"/>
+                <outlet property="titleName" destination="QWo-Z5-fks" id="a9b-jh-w3i"/>
+            </connections>
             <point key="canvasLocation" x="256" y="349"/>
         </tableViewCell>
     </objects>

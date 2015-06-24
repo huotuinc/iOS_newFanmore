@@ -128,6 +128,13 @@
         //1、设置用户名
         self.nameLable.hidden = NO;
         self.nameLable.text = user.name;
+        self.nameLable.userInteractionEnabled = YES;
+        [self.nameLable bk_whenTapped:^{ //流量详情
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+            traffic.userInfo = user;
+            [self.navigationController pushViewController:traffic animated:YES];
+        }];
         //2、设置用户登入头像
         SDWebImageManager * manager = [SDWebImageManager sharedManager];
         NSURL * url = [NSURL URLWithString:user.pictureURL];
@@ -147,6 +154,9 @@
             self.flowLable.text = [NSString stringWithFormat:@"%.1fM",[user.balance doubleValue]];
         }else {
             self.flowLable.text = [NSString stringWithFormat:@"%.0fM",[user.balance doubleValue]];
+        }
+        if (userFlow > 1024) {
+            self.flowLable.text = [NSString stringWithFormat:@"%.1fG",[user.balance doubleValue] / 1024];
         }
         
         

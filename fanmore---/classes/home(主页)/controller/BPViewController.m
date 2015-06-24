@@ -7,10 +7,23 @@
 //
 
 #import "BPViewController.h"
+#import "Details.h"
 #import "BPCell.h"
+
 
 @interface BPViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+/**
+ *  数据列表
+ */
+@property (nonatomic, strong) NSMutableArray *details;
+
+/**
+ 
+ */
+@property (nonatomic, strong) NSString *str;
+
 
 @end
 
@@ -27,6 +40,11 @@ static NSString *BPCellidentify = @"BPCellId";
     
     //集成刷新控件
     [self setupRefresh];
+    
+    [self headerRereshing];
+
+    
+    [self.tableView removeSpaces];
 }
 
 
@@ -48,51 +66,54 @@ static NSString *BPCellidentify = @"BPCellId";
 
 #pragma mark 开始进入刷新状态
 ////头部刷新
-//- (void)headerRereshing  //加载最新数据
-//{
-//    NSMutableDictionary * params = [NSMutableDictionary dictionary];
-//    if (self.taskDatas.count) {
-//        taskData * aaa = [self.taskDatas firstObject];
-//        params[@"pagingTag"] = @(aaa.taskOrder);
-//    }else{
-//        params[@"pagingTag"] = @"";
-//    }
-//    params[@"pagingSize"] = @(4);
-//    [self getNewMoreData:params];
-//    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-//    [self.tableView headerEndRefreshing];
-//}
+- (void)headerRereshing  //加载最新数据
+{
+
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    if (self.details.count) {
+        Details * aaa = [self.details firstObject];
+        params[@"pagingTag"] = @(aaa.detailId);
+    }else{
+        params[@"pagingTag"] = @"";
+    }
+    params[@"pagingSize"] = @(10);
+    [self getNewMoreData:params];
+    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [self.tableView headerEndRefreshing];
+}
 //
 ///**
 // *  下拉加载更新数据
 // */
-//-(void)getNewMoreData:(NSMutableDictionary *)params{
-//    
-//    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
-//    
-//    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        
-//        NSLog(@"xxxxxx手术室%@",json);
-//        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
-//            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-//            NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
-//            [taskaa addObjectsFromArray:self.taskDatas];
-//            self.taskDatas = taskaa;
+-(void)getNewMoreData:(NSMutableDictionary *)params{
+    
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"details"];
+    
+    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        
+        NSLog(@"xxxxxx手术室%@",json);
+
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            NSArray * taskArray = [Details objectArrayWithKeyValuesArray:json[@"resultData"][@"details"]];
+            NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];
+            [taskaa addObjectsFromArray:self.details];
+            self.details = taskaa;
 //            [self showHomeRefershCount:taskArray.count];
-//            [self.tableView reloadData];    //刷新数据
-//        }
-//        
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@",[error description]);
-//    }];
-//}
+            NSLog(@"%@",self.details[1]);
+            [self.tableView reloadData];    //刷新数据
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",[error description]);
+    }];
+}
 
 
 #pragma mark tableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.details.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,10 +123,27 @@ static NSString *BPCellidentify = @"BPCellId";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BPCell *cell = nil;
+    BPCell *cell = [tableView dequeueReusableCellWithIdentifier:BPCellidentify];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"BPCell" owner:nil options:nil] lastObject];
     }
+    Details *detail = self.details[indexPath.row];
+    
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(detail.date/1000.0)];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
+    NSString * publishtime = [formatter stringFromDate:ptime];
+    
+    NSString *str;
+    if (detail.vary > 0) {
+        str = [NSString stringWithFormat:@"+%@M", detail.vary];
+        cell.flow.tintColor = [UIColor greenColor];
+    }else {
+        str = [NSString stringWithFormat:@"-%@M", detail.vary];
+        cell.flow.tintColor = [UIColor redColor];
+    }
+    
+    [cell setTitleName:detail.title AndTime:publishtime AndFlow:str];
     return cell;
 }
 

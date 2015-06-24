@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface BPCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *titleName;
+@property (weak, nonatomic) IBOutlet UILabel *time;
+@property (weak, nonatomic) IBOutlet UILabel *flow;
+
+- (void)setTitleName:(NSString *)titleName AndTime:(NSString *) tiem AndFlow:(NSString *) flow;
 
 @end

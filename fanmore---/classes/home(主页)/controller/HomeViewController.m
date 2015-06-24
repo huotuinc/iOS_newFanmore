@@ -254,9 +254,9 @@ static NSString *homeCellidentify = @"homeCellId";
 {
     
 #warning 测试
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    JoinController *join = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
-    [self.navigationController pushViewController:join animated:YES];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    JoinController *join = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
+//    [self.navigationController pushViewController:join animated:YES];
     
     if (!self.isLogin) { //判断
         

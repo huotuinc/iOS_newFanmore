@@ -134,7 +134,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DiscipleCell *cell = nil;
+    DiscipleCell *cell = [tableView dequeueReusableCellWithIdentifier:discipleCellidentify];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DiscipleCell" owner:nil options:nil] lastObject];
     }
@@ -148,6 +148,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
     params[@"pagingSize"] = @(10);
     params[@"pagingTag"] = @"";
+    
     [self getNewMoreData:params];
 }
 

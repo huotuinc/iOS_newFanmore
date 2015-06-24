@@ -56,14 +56,17 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"流量明细";
-    self.flays;
+    self.title = @"流量兑换";
+
     
     CGFloat userFlow = [self.userInfo.balance doubleValue];
     if (userFlow - (int)userFlow > 0) {
         self.flowNumber.text = [NSString stringWithFormat:@"%.1fM",[self.userInfo.balance doubleValue]];
     }else {
         self.flowNumber.text = [NSString stringWithFormat:@"%.0fM",[self.userInfo.balance doubleValue]];
+    }
+    if (userFlow > 1024) {
+        self.flowNumber.text = [NSString stringWithFormat:@"%.1fG",[self.userInfo.balance doubleValue] / 1024];
     }
 
     self.PICView.progress = [self.userInfo.balance floatValue] / 500.0;
@@ -84,6 +87,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         BPViewController *bpView = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
+        bpView.title = @"流量详细";
         [self.navigationController pushViewController:bpView animated:YES];
     }];
     

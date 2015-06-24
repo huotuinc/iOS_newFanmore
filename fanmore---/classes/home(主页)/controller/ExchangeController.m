@@ -43,7 +43,7 @@ NSString * _changeflah = nil;
 #pragma table
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.flays.count;
+    return self.showArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -58,7 +58,7 @@ NSString * _changeflah = nil;
         cell = [[UITableViewCell alloc] init];
     }
     
-    cell.textLabel.text =  self.showArray[indexPath.row];
+    cell.textLabel.text = self.showArray[indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -155,8 +155,8 @@ NSString * _changeflah = nil;
     
     self.showArray = [NSMutableArray array];
     
-//    NSLog(@"%@", self.flays);
-    for (int i; i < self.flays.count; i++) {
+    NSLog(@"%@", self.flays);
+    for (int i = 0; i < self.flays.count; i++) {
         NSString *str = [NSString stringWithFormat:@"%@M", self.flays[i]];
         CGFloat j = [str floatValue];
         if (j >= 1024) {
@@ -171,8 +171,8 @@ NSString * _changeflah = nil;
             [self.showArray addObject:str];
         }
     }
-//    NSLog(@"show!!!!%@", self.showArray);
-    
+    NSLog(@"show!!!!%@", self.showArray);
+
     
     [self _initNav];
 }
