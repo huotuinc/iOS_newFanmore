@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "UserLoginTool.h"
 #import "taskDetail.h"
+#import "WebController.h"
 
 @interface detailViewController ()
 
@@ -219,7 +220,8 @@
     if ([self.type intValue] == 4) {//游戏类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
+        WebController *answer = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
+        answer.type = 4;
         [self.navigationController pushViewController:answer animated:YES];
     }
     

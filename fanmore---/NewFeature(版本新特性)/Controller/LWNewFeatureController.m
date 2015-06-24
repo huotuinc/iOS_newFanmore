@@ -132,7 +132,7 @@
     [startButton addTarget:self action:@selector(startButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
     //设置文字
-    [startButton setTitle:@"开始粉猫之旅" forState:UIControlStateNormal];
+    [startButton setTitle:@"立即体验" forState:UIControlStateNormal];
     [startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [imageView addSubview:startButton];
     
@@ -146,11 +146,12 @@
 {
     NSLog(@"dasdasdasdasdasd");
     [UIApplication sharedApplication].statusBarHidden = NO;
+    UIWindow * win = [UIApplication sharedApplication].keyWindow;
     RootViewController * roots = [[RootViewController alloc] init];
     //切换到 tabarcontrollor
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.view.window.rootViewController = roots;
+        win.rootViewController = roots;
     });
 //    [UIView animateWithDuration:1 animations:^{
 //        self.view.window.rootViewController = roots;

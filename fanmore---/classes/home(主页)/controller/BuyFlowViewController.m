@@ -15,6 +15,7 @@
 #import <AFNetworking.h>
 #import "payRequsestHandler.h"
 
+
 @interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
 /**手机运行商*/
 @property (weak, nonatomic) IBOutlet UILabel *phoneCompany;
@@ -223,6 +224,7 @@
     
     
     payRequsestHandler * repay = [[payRequsestHandler alloc] init];
+    BOOL aa = [repay init:@"3123" mch_id:@"31312"];
     //1 先调统一下单
     NSString * url = @"https://api.mch.weixin.qq.com/pay/unifiedorder";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -238,9 +240,47 @@
     params[@"sign"] = [repay createMd5Sign:params];
     NSLog(@"微信支付参数%@",params);
     
+    //获取prepayId（预支付交易会话标识）
+    NSString * prePayid = nil;
+    prePayid  = [repay sendPrepay:params];
     
     
     
+    if ( prePayid != nil) {
+        //获取到prepayid后进行第二次签名
+        
+        NSString    *package, *time_stamp, *nonce_str;
+        //设置支付参数
+        time_t now;
+        time(&now);
+        time_stamp  = [NSString stringWithFormat:@"%ld", now];
+        nonce_str	= [WXUtil md5:time_stamp];
+        //重新按提交格式组包，微信客户端暂只支持package=Sign=WXPay格式，须考虑升级后支持携带package具体参数的情况
+        //package       = [NSString stringWithFormat:@"Sign=%@",package];
+        package         = @"Sign=WXPay";
+        //第二次签名参数列表
+        NSMutableDictionary *signParams = [NSMutableDictionary dictionary];
+        [signParams setObject: @"1123213"        forKey:@"appid"];
+        [signParams setObject: nonce_str    forKey:@"noncestr"];
+        [signParams setObject: package      forKey:@"package"];
+        [signParams setObject: @"1233213"        forKey:@"partnerid"];
+        [signParams setObject: time_stamp   forKey:@"timestamp"];
+        [signParams setObject: prePayid     forKey:@"prepayid"];
+        //[signParams setObject: @"MD5"       forKey:@"signType"];
+        //生成签名
+        NSString *sign  = [repay createMd5Sign:signParams];
+        
+        //添加签名
+        [signParams setObject: sign         forKey:@"sign"];
+        
+//        [debugInfo appendFormat:@"第二步签名成功，sign＝%@\n",sign];
+        
+        //返回参数列表
+//        return signParams;
+        
+    }else{
+//        [debugInfo appendFormat:@"获取prepayid失败！\n"];
+    }
     
     
     

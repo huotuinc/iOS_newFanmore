@@ -31,7 +31,7 @@
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
         
-    }else if(self.type == 2){
+    }else if(self.type == 2){//规则说明
         
         NSURL * urlstr = [NSURL URLWithString:glob.ruleURL];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
@@ -44,7 +44,10 @@
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
         
-    }else{ //答题
+    } else if(self.type == 4){ //游戏类
+        
+    }
+    else{ //答题
         
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
@@ -64,6 +67,10 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+
+//    if (request.URL.scheme isEqualToString:<#(NSString *)#>) {
+//        <#statements#>
+//    }
     return YES;
 }
 

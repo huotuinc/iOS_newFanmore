@@ -118,6 +118,7 @@
 //    login.loginType = 0;
 //    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:login];
 //    [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+    [[NSUserDefaults standardUserDefaults] setObject:@"111" forKey:AppToken];
     [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
     [self.navigationController popToRootViewControllerAnimated:YES];
     
