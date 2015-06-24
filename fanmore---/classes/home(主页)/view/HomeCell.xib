@@ -118,10 +118,10 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5K-0f-mjo">
-                        <rect key="frame" x="255" y="25" width="60" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.0M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5K-0f-mjo">
+                        <rect key="frame" x="235" y="25" width="80" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="09Q-td-FKU"/>
+                            <constraint firstAttribute="width" constant="80" id="09Q-td-FKU"/>
                             <constraint firstAttribute="height" constant="30" id="O7u-lD-QEE"/>
                             <constraint firstAttribute="height" constant="30" id="lAJ-qY-9NM"/>
                             <constraint firstAttribute="width" constant="55" id="n3M-Zd-WVW"/>
