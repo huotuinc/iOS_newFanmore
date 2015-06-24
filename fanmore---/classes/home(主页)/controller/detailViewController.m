@@ -126,9 +126,16 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"分享"
                                                                                  style:UIBarButtonItemStylePlain    handler:^(id sender) {
                                                                          
-                                                                                     
+    NSString * login = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    if ([login isEqualToString:@"wrong"]) {
+        [MBProgressHUD showError:@"未登录"];
+        LoginViewController * aa= [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        
+        [self presentViewController:bb animated:YES completion:nil];
+        
+    }else{
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK" ofType:@"png"];
-                                                                                     
     //构造分享内容
     id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:@"分享粉猫app得流量" url:@"http://www.mob.com" description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
      //创建弹出菜单容器
@@ -136,7 +143,6 @@
                                                                                    
     //弹出分享菜单
     [ShareSDK showShareActionSheet:container shareList:nil content:publishContent statusBarTips:YES authOptions:nil shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-        
      if (state == SSResponseStateSuccess)
      {
     
@@ -153,9 +159,7 @@
              sType = 1;  //qq 空间
          }
          params[@"channel"] = @(sType);
-         
          [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-             
              NSLog(@"%@",json);
          } failure:^(NSError *error) {
              
@@ -165,8 +169,9 @@
          NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
      }
      }];
-         NSLog(@"分享");
+                                                                                 }
      }];
+                                                                               
 }
 
 /**
