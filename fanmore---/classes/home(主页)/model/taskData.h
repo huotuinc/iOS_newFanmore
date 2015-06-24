@@ -36,6 +36,9 @@
 @property(nonatomic,strong) NSNumber * last;
 
 /**剩余流量*/
+@property(nonatomic,assign) int taskFailed;
+
+/**剩余流量*/
 @property(nonatomic,strong) NSString * contextURL;
 
 @property(nonatomic,assign) long taskOrder;

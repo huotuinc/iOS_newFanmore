@@ -17,7 +17,7 @@
 + (void)loginTasks:(NSString *)urlStr parame:(NSMutableDictionary *)params success:(void (^)(id))success failure:(void (^)(NSError *))failure{
     
     
-    if (YES) {//先从数据库里面获取数据
+    if (/* DISABLES CODE */ (YES)) {//先从数据库里面获取数据
         
     }else{//网络请求
         
@@ -31,7 +31,7 @@
         params[@"lng"] = lng?lng:@(0.0);;
         paramsOption[@"timestamp"] = apptimesSince1970;
         paramsOption[@"operation"] = OPERATION_parame;
-        paramsOption[@"version"] =[NSString stringWithFormat:@"%f",AppVersion];
+        paramsOption[@"version"] =[NSString stringWithFormat:@"%@",AppVersion];
         NSString * token = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
         paramsOption[@"token"] = token?token:@"";
         paramsOption[@"imei"] = DeviceNo;

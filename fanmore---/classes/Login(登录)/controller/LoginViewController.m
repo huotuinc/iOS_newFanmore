@@ -120,6 +120,7 @@
     [self.view endEditing:YES];
 }
 
+
 /**
  * 登录
  */
@@ -170,6 +171,7 @@
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
         NSLog(@"login========%@",json);
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 54003) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"用户名不存在"];
@@ -214,9 +216,6 @@
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self dismissViewControllerAnimated:YES completion:nil];
                 });
-                
-               
-                
             }
             
         }
@@ -257,10 +256,10 @@
 
 
 - (void)dealloc{
-    
+    [self.view endEditing:YES];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"登录窗口销毁了");
 }
+
 /**
  * 忘记密码
  */
