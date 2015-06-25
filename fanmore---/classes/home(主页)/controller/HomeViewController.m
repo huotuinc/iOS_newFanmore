@@ -194,6 +194,11 @@ static NSString *homeCellidentify = @"homeCellId";
             [MBProgressHUD showError:@"账号被登入"];
             return ;
         }
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56000){
+            [MBProgressHUD showSuccess:@"没有数据"];
+            [self.taskDatas removeAllObjects];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             [self.taskDatas removeAllObjects];

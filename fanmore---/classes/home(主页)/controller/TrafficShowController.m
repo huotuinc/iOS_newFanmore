@@ -57,7 +57,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     // Do any additional setup after loading the view.
     
     self.title = @"流量兑换";
-
+    self.flays;
     
     CGFloat userFlow = [self.userInfo.balance doubleValue];
     if (userFlow - (int)userFlow > 0) {

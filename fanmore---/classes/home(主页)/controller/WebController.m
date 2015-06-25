@@ -98,9 +98,12 @@
         }
         if ([request.URL.host isEqualToString:@"appanswercallback"]) { //答题完成
             
-            if (self.illgel>0 || self.reward>0) {
+            if (self.illgel>0) {
                 [self.navigationController popToRootViewControllerAnimated:YES];
-            }else if (self.chance >0 ){
+            }else if(self.reward>0){
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            else if (self.chance >0 ){
                 
                 for (UIViewController * aa in self.navigationController.childViewControllers) {
                     

@@ -143,7 +143,7 @@ int _rightQuest = 0;  //纪录正确的答题数
                     }else if ([json[@"resultData"][@"reward"] intValue] > 0){
                         answerResultType = @"success.html?";
                         
-                    }else{
+                    }else {
                         answerResultType = @"failed.html?";
                     }
                     //adasdasdasd

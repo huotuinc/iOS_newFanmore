@@ -61,13 +61,14 @@ static NSString * _company = nil;
         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
-            NSLog(@"%@",json);
+            NSLog(@"购买流量明细%@",json);
             if ([json[@"systemResultCode"] intValue] == 1) {
                 if ([json[@"resultCode"] intValue] == 56001) {
                     [MBProgressHUD showError:@"账号在其它地方登入，请重新登入"];
                     return ;
                 }else if([json[@"resultCode"] intValue] == 1){
                     _buyflay = [buyflay objectWithKeyValues:json[@"resultData"]];
+                    [_collection reloadData];
                 }
             }
         } failure:^(NSError *error) {
@@ -114,9 +115,9 @@ static NSString * _company = nil;
     
     [super viewDidLoad];
     self.title = @"购买流量";
-    self.buyflay;
     _company = self.buyflay.mobileMsg;
-    
+    self.oldPriceLable.adjustsFontSizeToFitWidth = YES;;
+    self.currentPriceLable.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -213,7 +214,11 @@ static NSString * _company = nil;
     order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
     order.productName = @"粉毛流量"; //商品标题
     order.productDescription = @"通过粉猫购买手机流量"; //商品描述
-    order.amount = [NSString stringWithFormat:@"%.2f",0.01]; //商品价格
+    NSArray * aa = self.buyflay.purchases;
+    
+    //商品价格
+    flayModel * bb = aa[self.selected.row];
+    order.amount = [NSString stringWithFormat:@"%.2f",bb.price]; //商品价格
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
     order.inputCharset = @"utf-8";
@@ -373,7 +378,8 @@ static NSString * _company = nil;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return self.goods.count;
+    NSArray * flayModes = self.buyflay.purchases;
+    return flayModes.count;
 }
 
 //- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -413,8 +419,9 @@ static NSString * _company = nil;
 
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
-    
-    label.text = self.goods[indexPath.row + indexPath.section * self.num];
+    NSArray * aa = self.buyflay.purchases;
+    flayModel * good = aa[indexPath.row + indexPath.section * self.num];
+    label.text = [NSString stringWithFormat:@"%dM",good.m];
     label.textAlignment = NSTextAlignmentCenter;
     label.tag = indexPath.row + indexPath.section * self.num + 100;
     [cell.contentView addSubview:label];
@@ -437,6 +444,12 @@ static NSString * _company = nil;
 #pragma UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    NSArray * aaM = self.buyflay.purchases;
+    flayModel * flay = aaM[indexPath.row];
+    self.oldPriceLable.text = flay.msg;
+    self.currentPriceLable.text = [NSString stringWithFormat:@"现价:￥%.1f",flay.price];
     
     UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
     scell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button－G"]];
