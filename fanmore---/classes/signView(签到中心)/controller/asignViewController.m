@@ -180,10 +180,16 @@
             break;
         }
     }
-    [MBProgressHUD showMessage:nil];
+//    [MBProgressHUD showMessage:nil];
     NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
     [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
         NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==56001) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"账号在其它地方登入"];
+            return ;
+        }
+
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"今日已签到，请明天来签到"];

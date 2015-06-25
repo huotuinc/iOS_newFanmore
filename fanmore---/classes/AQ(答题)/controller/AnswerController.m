@@ -130,6 +130,11 @@ int _rightQuest = 0;  //纪录正确的答题数
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
                 NSLog(@"%@",json);
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 56001)
+                {
+                    [MBProgressHUD showError:@"账号在其它地方登入"];
+                    return;
+                }
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
                     NSString * answerResultType = nil;

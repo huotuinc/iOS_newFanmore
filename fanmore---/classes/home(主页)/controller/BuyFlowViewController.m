@@ -14,6 +14,8 @@
 #define cellID @"collviewCell"
 #import <AFNetworking.h>
 #import "payRequsestHandler.h"
+#import "buyflay.h"
+#import "flayModel.h"
 
 
 @interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
@@ -37,15 +39,43 @@
 
 /**商品*/
 @property(nonatomic,strong) NSArray * goods;
+
+
+
+@property(nonatomic,strong)buyflay * buyflay;
 /**购买按钮*/
 - (IBAction)buyButtonClick:(UIButton *)sender;
 
 
 
 @end
+
+static NSString * _company = nil;
+
 @implementation BuyFlowViewController
 
 
+- (buyflay *)buyflay{
+    if (_buyflay == nil) {
+        
+        NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
+        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
+            
+            NSLog(@"%@",json);
+            if ([json[@"systemResultCode"] intValue] == 1) {
+                if ([json[@"resultCode"] intValue] == 56001) {
+                    [MBProgressHUD showError:@"账号在其它地方登入，请重新登入"];
+                    return ;
+                }else if([json[@"resultCode"] intValue] == 1){
+                    _buyflay = [buyflay objectWithKeyValues:json[@"resultData"]];
+                }
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"err");
+        }];
+    }
+    return _buyflay;
+}
 
 - (UICollectionView *)collection{
     
@@ -74,16 +104,7 @@
 - (NSArray *)goods{
     if (_goods == nil) {
         
-        _goods = [NSArray array];
-        
-        NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
-        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-            
-            NSLog(@"%@",json);
-        } failure:^(NSError *error) {
-            
-        }];
-        _goods = @[@"10M",@"20M",@"30M",@"50M",@"70M",@"150M",@"210M",@"250M",@"500M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M",@"50M",@"70M"];
+        _goods = _buyflay.purchases;
     }
     return _goods;
 }
@@ -93,17 +114,9 @@
     
     [super viewDidLoad];
     self.title = @"购买流量";
+    self.buyflay;
+    _company = self.buyflay.mobileMsg;
     
-    if (ScreenWidth - 40 - 20 > 25 + 4 * 80 ) {
-        self.num = 4;
-    }else {
-        self.num = 3;
-    }
-
-    [self.goodsCollectionView addSubview:self.collection];
-    self.collection.dataSource = self;
-    self.collection.delegate = self;
-    [self.collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -112,6 +125,18 @@
     RootViewController * root = (RootViewController *)self.mm_drawerController;
 //    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    
+    
+    if (ScreenWidth - 40 - 20 > 25 + 4 * 80 ) {
+        self.num = 4;
+    }else {
+        self.num = 3;
+    }
+    
+    [self.goodsCollectionView addSubview:self.collection];
+    self.collection.dataSource = self;
+    self.collection.delegate = self;
+    [self.collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
 }
 
 
