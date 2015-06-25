@@ -132,9 +132,10 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex == 0) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"111" forKey:AppToken];
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
         [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
     
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:loginUserName];
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
         //1、保存个人信息

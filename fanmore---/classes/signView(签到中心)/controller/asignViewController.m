@@ -68,7 +68,6 @@
     [self initBackAndTitle:@"一周连续签到"];
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
     //1、保存个人信息
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
@@ -177,7 +176,7 @@
             break;
         }
     }
-//    [MBProgressHUD showMessage:nil];
+    [MBProgressHUD showMessage:nil];
     NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
     [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
         NSLog(@"%@",json);

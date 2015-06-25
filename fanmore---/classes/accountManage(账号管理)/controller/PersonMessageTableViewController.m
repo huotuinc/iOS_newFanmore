@@ -318,7 +318,59 @@
         
     }];
     
+    {
+        NSURL *url = [NSURL URLWithString:@"http://apitest.51flashmall.com:8080/fanmoreweb/app/updateProfile"];
+        
+        //第二步，创建请求
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+        
+        [request setHTTPMethod:@"POST"];
+        
+        NSString *str = @"type=focus-c";
+        
+        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        
+        [request setHTTPBody:data];
+        
+        
+        NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
+        paramsOption[@"appKey"] = APPKEY;
+        paramsOption[@"appSecret"] = HuoToAppSecret;
+        NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
+        NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
+        paramsOption[@"lat"] = lat?lat:@(40.0);
+        paramsOption[@"lng"] = lng?lng:@(116.0);;
+        paramsOption[@"timestamp"] = apptimesSince1970;;
+        paramsOption[@"operation"] = OPERATION_parame;
+        paramsOption[@"version"] = AppVersion;
+        NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+        paramsOption[@"token"] = token?token:@"";
+        paramsOption[@"imei"] = DeviceNo;
+        paramsOption[@"cityCode"] = @"1372";
+        paramsOption[@"cpaCode"] = @"default";
+        paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
+        [paramsOption removeObjectForKey:@"appSecret"];
+        
+        //第三步，连接服务器
+        
+        NSURLConnection * connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    }
+    
 }
+
+//数据传完之后调用此方法
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+
+{
+    
+//    NSString *receiveStr = [[NSString alloc]initWithData:self.receiveData encoding:NSUTF8StringEncoding];
+//    
+//    NSLog(@"%@",receiveStr);
+    
+}
+
 
 
 /**

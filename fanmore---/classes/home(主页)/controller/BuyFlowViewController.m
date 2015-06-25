@@ -116,6 +116,12 @@ static NSString * _company = nil;
     [super viewDidLoad];
     self.title = @"购买流量";
     _company = self.buyflay.mobileMsg;
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    
+    self.phoneNumber.text = user.name;
     self.oldPriceLable.adjustsFontSizeToFitWidth = YES;;
     self.currentPriceLable.adjustsFontSizeToFitWidth = YES;
 }
@@ -128,6 +134,7 @@ static NSString * _company = nil;
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     
     
+//    self.phoneCompany.text = self.buyflay.mobileMsg;
     if (ScreenWidth - 40 - 20 > 25 + 4 * 80 ) {
         self.num = 4;
     }else {
@@ -137,6 +144,7 @@ static NSString * _company = nil;
     [self.goodsCollectionView addSubview:self.collection];
     self.collection.dataSource = self;
     self.collection.delegate = self;
+    
     [self.collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
 }
 
