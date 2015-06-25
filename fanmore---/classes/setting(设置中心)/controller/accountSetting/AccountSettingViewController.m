@@ -111,7 +111,6 @@
 
 - (void)QuiteAccount:(UIButton *)btn{
     
-    NSLog(@"zxcadasdasdas");
     UIAlertView * ac = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要退出吗?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
     [ac show];
 

@@ -9,6 +9,8 @@
 #import "WebController.h"
 #import "GlobalData.h"
 #import "HomeViewController.h"
+#import "detailViewController.h"
+
 @interface WebController ()<UIWebViewDelegate>
 
 @end
@@ -85,10 +87,10 @@
                 NSLog(@"%@",json);
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
+
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }
           
-               
             } failure:^(NSError *error) {
                 NSLog(@"%@",[error description]);
                
@@ -96,7 +98,20 @@
         }
         if ([request.URL.host isEqualToString:@"appanswercallback"]) { //答题完成
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            if (self.illgel>0 || self.reward>0) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }else if (self.chance >0 ){
+                
+                for (UIViewController * aa in self.navigationController.childViewControllers) {
+                    
+                    if ([aa isKindOfClass:[detailViewController class]]) {
+                        
+                        [self.navigationController popToViewController:aa animated:YES];
+                    }
+                }
+            }
+            
+            
         }
         return NO;
     }

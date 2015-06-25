@@ -190,16 +190,13 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
             int mytag = [obj intValue];
             if (task.taskId == mytag) {
                 cell.isWarning = YES;
-                
-                
                 break;
             }
         }
     }
     
-    
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
-     [NSString stringWithFormat:@"%@",task.maxBonus] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.desc] andOnlineImage:NO];
+     [NSString stringWithFormat:@"%@",task.maxBonus] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.desc] andOnlineImage:(task.status == 3)];
     NSLog(@"sdadsasd");
     return cell;
 }

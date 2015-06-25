@@ -73,17 +73,17 @@
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
-    if (((1<<(7-[self getWeek])) & (userInfo.signInfo)) == (1<<(7-(int)[self getWeek]))){
+    
+    
+    if (((1<<(7-[self getWeek])) & (userInfo.signInfo)) == (1<<(7-(int)[self getWeek]))){//今日签到
         [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
-        
         self.asignBtn.backgroundColor = LWColor(163, 163, 163);
         self.asignBtn.layer.cornerRadius = 6;
         self.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
         self.asignBtn.layer.borderWidth = 0.5;
         [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.asignBtn.userInteractionEnabled = NO;
-        
-    }else{
+    }else{//未签到
         [self.asignBtn setTitle:[NSString stringWithFormat:@"今日未签到"] forState:UIControlStateNormal];
         self.asignBtn.userInteractionEnabled = YES;
         self.asignBtn.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
@@ -93,7 +93,6 @@
         [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     
-   
     //2、显示
     for (UIButton * btn in self.buttons) {
         if (((1<<(7-btn.tag)) & (userInfo.signInfo)) == (1<<(7-btn.tag))) {//签到
@@ -110,12 +109,10 @@
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 btn.userInteractionEnabled = NO;
             }
-            
         }
         btn.layer.masksToBounds = YES;
         [btn addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
     //注册通知中心
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qiandao:) name:TodaySignNot object:nil];
 }
@@ -161,7 +158,7 @@
 
 - (void)btnclick:(UIButton *) btn{
     
-    NSLog(@"xxxxxxx%ld",btn.tag);
+    NSLog(@"xxxxxxx%ld",(long)btn.tag);
 }
 /**
  *  签到按钮点击

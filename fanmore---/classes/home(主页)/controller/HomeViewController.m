@@ -87,13 +87,9 @@ static NSString *homeCellidentify = @"homeCellId";
     [self setupRefresh];
     [self.tableView removeSpaces];
     
-    [self.tableView headerBeginRefreshing];
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-    
-//    UIAlertView * as = [[UIAlertView alloc] initWithTitle:@"" message:user.welcomeTip delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-//    [as show];
     
     UILabel * welable = [[UILabel alloc] init];
     welable.layer.cornerRadius = 5;
@@ -111,14 +107,6 @@ static NSString *homeCellidentify = @"homeCellId";
         [welable removeFromSuperview];
     });
     
-}
-
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    
-    
-    [super viewDidAppear:animated];
 }
 
 - (void)_initView
@@ -178,6 +166,10 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [MBProgressHUD showError:@"账号被登入"];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
     
@@ -198,6 +190,10 @@ static NSString *homeCellidentify = @"homeCellId";
     
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         NSLog(@"xxxxxx手术室大大大师%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [MBProgressHUD showError:@"账号被登入"];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             [self.taskDatas removeAllObjects];
@@ -292,6 +288,7 @@ static NSString *homeCellidentify = @"homeCellId";
     detailVc.backTime = task.backTime;
     detailVc.flay = [task.maxBonus intValue];
     detailVc.shareUrl = task.shareURL;
+    detailVc.title = task.title;
     (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
 
     [self.navigationController pushViewController:detailVc animated:YES];

@@ -116,7 +116,7 @@
     NSString * urlStr= [MainURL stringByAppendingPathComponent:@"sendSMS"];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
         
-        NSLog(@"======%@",json);
+       
     } failure:^(NSError *error) {
         NSLog(@"%@",error.description);
     }];
@@ -195,6 +195,13 @@
 //        RootViewController * roots = [[RootViewController alloc] init];
 //        UIWindow * mainWindow = [UIApplication sharedApplication].keyWindow;
 //        mainWindow.rootViewController = roots;
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1){
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            //1、保存个人信息
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:json[@"resuledate"][@"user"] toFile:fileName]; //保存用户信息
+        }
+        
         [MBProgressHUD hideHUD];
         if ([wself.delegate respondsToSelector:@selector(BoundPhoneViewControllerToBoundPhoneNumber)]) {
             

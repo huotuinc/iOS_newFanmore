@@ -73,6 +73,10 @@
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
         
         NSLog(@"sdasd%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [MBProgressHUD showError:@"账号被登入"];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             [MBProgressHUD showSuccess:@"提交意见成功"];

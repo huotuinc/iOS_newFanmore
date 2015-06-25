@@ -89,7 +89,7 @@
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK" ofType:@"png"];
     
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:@"分享粉猫app得流量" url:@"http://www.mob.com" description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:@"分享粉猫app得流量" url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     
@@ -104,7 +104,10 @@
             NSMutableDictionary * params = [NSMutableDictionary dictionary];
             
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-                
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+                    [MBProgressHUD showError:@"账号被登入"];
+                    return ;
+                }
                 NSLog(@"%@",json);
             } failure:^(NSError *error) {
                 

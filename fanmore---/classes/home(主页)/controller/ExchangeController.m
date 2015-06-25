@@ -89,7 +89,11 @@ NSString * _changeflah = nil;
                     NSMutableDictionary *param = [NSMutableDictionary dictionary];
                     param[@"amount"] = self.flays[indexPath.row];
                     [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
-        
+                        
+                        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+                            [MBProgressHUD showError:@"账号被登入"];
+                            return ;
+                        }
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
         
         

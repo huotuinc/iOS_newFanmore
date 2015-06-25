@@ -91,8 +91,7 @@ static NSString *BPCellidentify = @"BPCellId";
     
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
-        NSLog(@"xxxxxx手术室%@",json);
-
+        
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [Details objectArrayWithKeyValuesArray:json[@"resultData"][@"details"]];
             NSMutableArray * taskaa = [NSMutableArray arrayWithArray:taskArray];

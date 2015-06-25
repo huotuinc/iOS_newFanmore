@@ -27,7 +27,7 @@
 /**任务类别*/
 @property(nonatomic,strong) NSNumber * type;
 /**任务状态*/
-@property(nonatomic,strong) NSNumber * status;
+@property(nonatomic,assign) int status;
 /**发布时间*/
 @property(nonatomic,strong) NSString * publishDate;
 /**多少人获取了流量*/

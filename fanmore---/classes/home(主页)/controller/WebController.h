@@ -34,6 +34,8 @@
 /**答题剩余机会*/
 @property(nonatomic,assign)int reward;
 
+/**答题剩余机会*/
+@property(nonatomic,assign)int illgel;
 
 /**加载网页类型*/
 @property(nonatomic,assign) int type;

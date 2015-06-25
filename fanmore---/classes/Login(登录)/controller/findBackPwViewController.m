@@ -196,6 +196,10 @@
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
         
         NSLog(@"找回密码成功%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [MBProgressHUD showError:@"账号被登入"];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
             
             [MBProgressHUD showSuccess:@"修改密码成功"];

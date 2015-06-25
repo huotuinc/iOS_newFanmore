@@ -154,7 +154,7 @@ int _rightQuest = 0;  //纪录正确的答题数
                     show.answerType = answerResultType;
                     show.reward = [json[@"resultData"][@"chance"] intValue];
                     show.chance = [json[@"resultData"][@"reward"] intValue];
-                    
+                    show.illgel = [json[@"resultData"][@"illgel"] intValue];
                     [self.navigationController pushViewController:show animated:YES];
                 }else{
                     [self.navigationController  popToRootViewControllerAnimated:YES];

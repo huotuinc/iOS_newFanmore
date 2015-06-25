@@ -112,6 +112,10 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [MBProgressHUD showError:@"账号被登入"];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             NSArray * plist =  [prenticeList objectArrayWithKeyValuesArray:json[@"resultData"][@"apps"]];
             
