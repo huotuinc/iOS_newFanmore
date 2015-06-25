@@ -19,11 +19,11 @@
 #import "LoginViewController.h"
 #import "JoinController.h"
 #import "MBProgressHUD+MJ.h"
-
+#import "WebController.h"
 
 #define pageSize 6
 
-@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate>
 /**任务列表*/
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
@@ -62,6 +62,7 @@ static NSString *homeCellidentify = @"homeCellId";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
@@ -86,7 +87,7 @@ static NSString *homeCellidentify = @"homeCellId";
     [self setupRefresh];
     [self.tableView removeSpaces];
     
-    
+    [self.tableView headerBeginRefreshing];
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
@@ -97,11 +98,12 @@ static NSString *homeCellidentify = @"homeCellId";
     UILabel * welable = [[UILabel alloc] init];
     welable.layer.cornerRadius = 5;
     welable.layer.masksToBounds = YES;
-    welable.alpha = 0.5;
+    welable.alpha = 0.8;
     welable.textAlignment  = NSTextAlignmentCenter;
-    welable.backgroundColor = [UIColor lightGrayColor];
+    welable.backgroundColor = [UIColor grayColor];
+    [welable setTextColor:[UIColor blackColor]];
     welable.font = [UIFont systemFontOfSize:18];
-    welable.text = user.welcomeTip;
+    welable.text = user.welcomeTip?user.welcomeTip:@"欢迎使用粉猫";
     welable.center = self.view.center;
     welable.bounds = CGRectMake(0, 0, ScreenWidth * 2 /3, 100);
     [self.view addSubview:welable];
@@ -111,8 +113,11 @@ static NSString *homeCellidentify = @"homeCellId";
     
 }
 
+
 - (void)viewDidAppear:(BOOL)animated
 {
+    
+    
     [super viewDidAppear:animated];
 }
 
@@ -129,7 +134,7 @@ static NSString *homeCellidentify = @"homeCellId";
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
-//    [self.tableView headerBeginRefreshing];
+    [self.tableView headerBeginRefreshing];
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
     self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
@@ -268,7 +273,7 @@ static NSString *homeCellidentify = @"homeCellId";
         a = (((task.reward > 0)| (task.taskFailed > 0)) ? 1:0);
     }
     //设置cell样式
-    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task] andGetImage:a];
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
      return cell;
 }
 
@@ -287,7 +292,7 @@ static NSString *homeCellidentify = @"homeCellId";
     detailVc.backTime = task.backTime;
     detailVc.flay = [task.maxBonus intValue];
     detailVc.shareUrl = task.shareURL;
-    task.reward>0?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
+    (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
 
     [self.navigationController pushViewController:detailVc animated:YES];
 }
@@ -405,6 +410,9 @@ static NSString *homeCellidentify = @"homeCellId";
     
     
 }
-
+- (void)answerOverToreferch{
+    NSLog(@"12312313");
+    [self.tableView headerBeginRefreshing];
+}
 
 @end

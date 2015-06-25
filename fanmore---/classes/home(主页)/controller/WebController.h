@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol WebControllerDelegate <NSObject>
+
+@optional
+/**答题完成刷新*/
+- (void)answerOverToreferch;
+
+@end
 @interface WebController : UIViewController
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-
 
 /**正确的答案数量*/
 @property(nonatomic,assign) int ritghtAnswer;
@@ -35,4 +42,6 @@
 /**问题编号*/
 @property(assign,nonatomic)  int taskId;
 
+
+@property(nonatomic,strong) id <WebControllerDelegate> delegate;
 @end

@@ -43,6 +43,7 @@
     [self setupRefresh];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView removeSpaces];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
 }
 
 /**
@@ -121,7 +122,7 @@
     MessageTableViewCell * cell = [MessageTableViewCell cellWithTableView:tableView];
     MessageFrame * meF = self.messageF[indexPath.row];
     cell.messageF = meF;
-    cell.backgroundColor = [UIColor yellowColor];
+//    cell.backgroundColor = [UIColor yellowColor];
     return cell;
 
 }

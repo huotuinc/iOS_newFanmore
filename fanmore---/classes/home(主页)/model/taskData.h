@@ -49,5 +49,7 @@
 /**对于一个用户而言 每次打开一个任务 展示的题库应该是一样的*/
 @property(nonatomic,strong) NSString * questions;
 
+/**商户标题*/
+@property(nonatomic,strong) NSString * merchantTitle;
 
 @end

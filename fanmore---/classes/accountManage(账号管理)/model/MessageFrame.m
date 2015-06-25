@@ -36,9 +36,9 @@
     
     
     CGFloat timeY = CGRectGetMaxY(self.contextF) + 2*MessageMargin;
-    CGFloat timeW = viewW;
+    CGFloat timeW = conW;
     CGFloat timeH = 20;
-    CGFloat timeX = (ScreenWidth - timeW)*0.5;
+    CGFloat timeX = conX;
     self.timeF = CGRectMake(timeX, timeY, timeW, timeH);
     
     CGFloat viewH = CGRectGetMaxY(self.timeF);

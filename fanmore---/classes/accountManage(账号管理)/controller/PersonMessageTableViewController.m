@@ -63,7 +63,6 @@
     return _geocoder;
 }
 
-
 - (UIDatePicker *)datePicker
 {
     if (_datePicker==nil) {
@@ -267,20 +266,32 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-
+    
     NSLog(@"%@",info);
-    UIImage * photoImage = info[@"UIImagePickerControllerOriginalImage"];
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    NSLog(@"%@",mediaType);
+    // 判断获取类型：图片
+    UIImage *photoImage = nil;
+    if ([mediaType isEqualToString:( NSString *)kUTTypeImage]){
+        // 判断，图片是否允许修改
+        if ([picker allowsEditing]){
+            //获取用户编辑之后的图像
+            photoImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        } else {
+            // 照片的元数据参数
+            photoImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+        }
+    }
+    //    UIImage * photoImage = info[@"UIImagePickerControllerOriginalImage"];
     [self.iconView setBackgroundImage:photoImage forState:UIControlStateNormal];
-    NSData * data = nil;
-    BOOL flag = NO;
-    if (UIImagePNGRepresentation(photoImage) == nil) {
-        data = UIImageJPEGRepresentation(photoImage, 1);
-    } else {
-        flag = YES;
-        data = UIImagePNGRepresentation(photoImage);
+    
+    NSData *imageData = UIImagePNGRepresentation(photoImage);
+    if(imageData == nil)
+    {
+        imageData = UIImageJPEGRepresentation(photoImage, 1.0);
     }
     
-    NSString * imagefile = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString * imagefile = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     [picker dismissViewControllerAnimated:YES completion:^{
         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
@@ -307,6 +318,17 @@
         
     }];
     
+}
+
+
+/**
+ *  取消拍照
+ *
+ *  @param picker <#picker description#>
+ */
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**

@@ -49,7 +49,8 @@
        
         NSLog(@"000000%@",json);
         NSDictionary *dic = json[@"resultData"];
-        self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
+        
+        self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M",dic[@"yestodayM"]];
         self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
         self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
         self.shareUrl = dic[@"shareURL"];

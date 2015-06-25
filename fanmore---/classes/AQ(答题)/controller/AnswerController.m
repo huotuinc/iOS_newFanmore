@@ -121,7 +121,8 @@ int _rightQuest = 0;  //纪录正确的答题数
  */
 - (void) showQuestion{
         //判断答题是否完成
-        if (_qindex==self.questions.count) {
+    
+        if (self.questions.count && _qindex==self.questions.count) {
             
             NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
             NSMutableDictionary * params = [NSMutableDictionary dictionary];

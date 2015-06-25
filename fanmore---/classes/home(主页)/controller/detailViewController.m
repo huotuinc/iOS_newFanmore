@@ -13,7 +13,7 @@
 #import "taskDetail.h"
 #import "WebController.h"
 
-@interface detailViewController ()
+@interface detailViewController ()<LoginViewDelegate>
 
 
 /**详情页面的网页*/
@@ -55,12 +55,15 @@
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.answerBtn.userInteractionEnabled = NO;
+        [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%dM流量",self.flay] forState:UIControlStateNormal];
     }else{
         self.answerBtn.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
         self.answerBtn.layer.cornerRadius = 6;
         self.answerBtn.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%dM流量",self.flay] forState:UIControlStateNormal];
+        
         //获取题目s
         [self getQuestion];
         [self settime];
@@ -87,6 +90,7 @@
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSLog(@"xxxxxxxxxxxxx----%@",json);
             NSArray * detailTaskS = [taskDetail objectArrayWithKeyValuesArray:json[@"resultData"][@"taskDetail"]];
+            [self.detailTasks removeAllObjects];
             [self.detailTasks addObjectsFromArray:detailTaskS];
          }
      } failure:^(NSError *error) {
@@ -195,15 +199,20 @@
     NSLog(@"xxxxxxx开始答题");
     
     
+    
     //判断是否需要登入
     NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
     if ([flag isEqualToString:@"wrong"]) {//如果没有登入要登入
         
         LoginViewController * loginVc = [[LoginViewController alloc] init];
+        loginVc.delegate = self;
         UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
         [self presentViewController:na animated:YES completion:nil];
         return;
     }
+    
+    
+    
     //答题类型
     if ([self.type intValue] == 1) {//答题类
         
@@ -291,4 +300,10 @@
     dispatch_resume(_timer);
 }
 
+- (void)LoginViewDelegate:(int)PushType{
+
+    NSLog(@"登入代理方法dasdasdasdasd");
+    [self getQuestion];
+    
+}
 @end

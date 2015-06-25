@@ -8,7 +8,7 @@
 
 #import "WebController.h"
 #import "GlobalData.h"
-
+#import "HomeViewController.h"
 @interface WebController ()<UIWebViewDelegate>
 
 @end
@@ -18,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.webView.delegate = self;
+    
+    self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target: self action:@selector(backAction:)];
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     //1、保存全局信息
@@ -56,7 +58,7 @@
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
         urlStr = [urlStr stringByAppendingString:self.answerType];
-        urlStr = [NSString stringWithFormat:@"%@taskReward=%d&rights=%d&wrongs=%lu&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
+        urlStr = [NSString stringWithFormat:@"%@taskReward=%d&rights=%d&wrongs=%u&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
         NSLog(@"%@",urlStr);
         NSURL * urlstr = [NSURL URLWithString:urlStr];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
@@ -67,7 +69,10 @@
 
 }
 
-
+- (void)backAction:(UIButton *)btn{
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -82,7 +87,7 @@
                 {
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }
-                
+          
                
             } failure:^(NSError *error) {
                 NSLog(@"%@",[error description]);

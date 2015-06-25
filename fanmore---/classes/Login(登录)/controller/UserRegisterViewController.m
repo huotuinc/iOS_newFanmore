@@ -29,6 +29,8 @@
 /**用户注册分隔线*/
 @property (weak, nonatomic) IBOutlet UIView *secondSeperatorLine;
 @property (weak, nonatomic) IBOutlet UIButton *registerBtu;
+/**外部的view*/
+@property (weak, nonatomic) IBOutlet UIView *conview;
 
 /**用户注册按钮点击监听*/
 - (IBAction)registerButtonClick:(id)sender;
@@ -76,23 +78,23 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardWillShowNotification object:self.firstPassword];
+                                                 name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:self.firstPassword];
+                                                 name:UIKeyboardWillHideNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardWillShowNotification object:self.secondPassword];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:self.secondPassword];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardWillShowNotification object:self.InvitationCode];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:self.InvitationCode];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWasShown:)
+//                                                 name:UIKeyboardWillShowNotification object:self.secondPassword];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillBeHidden:)
+//                                                 name:UIKeyboardWillHideNotification object:self.secondPassword];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWasShown:)
+//                                                 name:UIKeyboardWillShowNotification object:self.InvitationCode];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillBeHidden:)
+//                                                 name:UIKeyboardWillHideNotification object:self.InvitationCode];
 }
 /**
  *  键盘弹出
@@ -101,17 +103,21 @@
  */
 -(void)keyboardWasShown:(NSNotification *) note{
     
+    if ([self.phoneNumber isFirstResponder]) {
+        return;
+    }else{
+    NSLog(@"dadadasdasdasdasdasdasdasdas");
     NSDictionary* info = [note userInfo];
+    NSLog(@"%@",note);
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGFloat sizesss = CGRectGetMaxY(self.registerBtu.frame) - (ScreenHeight - kbSize.height);
-    
     if (sizesss > 0) {
         
         [UIView animateWithDuration:0.15 animations:^{
             
-            self.view.transform = CGAffineTransformMakeTranslation(0,-(sizesss));
+            self.conview.transform = CGAffineTransformMakeTranslation(0,-(sizesss));
         }];
-        
+     }
     }
 }
 /**
@@ -122,7 +128,7 @@
 -(void)keyboardWillBeHidden:(NSNotification *) note{
     [UIView animateWithDuration:0.1 animations:^{
         
-        self.view.transform = CGAffineTransformIdentity;
+        self.conview.transform = CGAffineTransformIdentity;
     }];
 }
 
@@ -359,6 +365,10 @@
  */
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if (self.phoneNumber == textField) {//第二个密码文本框
+        [self.view endEditing:YES];
+        return;
+    }
     if (self.secondPassword == textField) {//第二个密码文本框
         if (![self.secondPassword.text isEqualToString:self.firstPassword.text]) {
             

@@ -14,7 +14,7 @@
 @interface MessageTableViewCell ()
 
 
-@property(nonatomic,strong) UIView * wView;
+@property(nonatomic,strong) UIImageView * wView;
 @property(nonatomic,strong) UILabel * contextLable;
 @property(nonatomic,strong) UILabel * timeLable;
 @end
@@ -38,11 +38,16 @@
 
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        
+        self.backgroundColor = [UIColor lightGrayColor];
+        self.contentView.layer.cornerRadius = 2;
+        self.contentView.layer.masksToBounds = YES;
         //1外部的view
-        UIView * view = [[UIView alloc] init];
-//        view.backgroundColor = [UIColor lightGrayColor];
-        self.wView = view;
-        [self addSubview:view];
+        UIImageView * aview = [[UIImageView alloc] init];
+        aview.layer.cornerRadius = 8;
+        aview.layer.masksToBounds = YES;
+        self.wView = aview;
+        [self addSubview:aview];
         
         //2正文内容
         UILabel * contextLable = [[UILabel alloc] init];
@@ -50,17 +55,18 @@
         self.contextLable = contextLable;
         contextLable.font = [UIFont systemFontOfSize:14];
 //        contextLable.backgroundColor = [UIColor blueColor];
-        self.contextLable.contentMode = UIViewContentModeCenter;
+        self.contextLable.textAlignment = NSTextAlignmentCenter;
         [contextLable setTextColor:[UIColor blackColor]];
-        [view addSubview:contextLable];
+        [aview addSubview:contextLable];
         
         //3时间
         UILabel * timeLabel = [[UILabel alloc] init];
 //        timeLabel.backgroundColor = [UIColor redColor];
         [timeLabel setTextColor:[UIColor blackColor]];
-        timeLabel.contentMode = UIViewContentModeCenter;
+        timeLabel.textAlignment = NSTextAlignmentCenter;
+        timeLabel.font = [UIFont systemFontOfSize:13];
         self.timeLable = timeLabel;
-        [view addSubview:timeLabel];
+        [aview addSubview:timeLabel];
         
     }
 
@@ -88,6 +94,8 @@
 - (void)setFrame:(CGRect)frame{
     frame.size.width -= 20;
     frame.origin.x = 10;
+    frame.size.height -=10;
+    frame.origin.y +=10;
     [super setFrame:frame];
 }
 @end
