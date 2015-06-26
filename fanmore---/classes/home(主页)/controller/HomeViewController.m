@@ -267,7 +267,7 @@ static NSString *homeCellidentify = @"homeCellId";
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
     int a = 0;  //首页右下角标志
-    if([task.last intValue]<=0){
+    if([task.last intValue]==0){
         a = 2;
     }else{
         

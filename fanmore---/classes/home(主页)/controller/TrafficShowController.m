@@ -13,7 +13,7 @@
 #import "FriendMessageController.h"
 #import "ExchangeController.h"
 
-@interface TrafficShowController ()
+@interface TrafficShowController ()<ExchangeControllerdelegate>
 
 @property (assign, nonatomic) int num;
 /**已赚取的流量*/
@@ -132,11 +132,14 @@ static NSString *collectionViewidentifier = @"collectionCell";
 - (IBAction)exchangeAction:(id)sender { //流量交换
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ConversionController *con = [storyboard instantiateViewControllerWithIdentifier:@"ExchangeController"];
+    ExchangeController *con = [storyboard instantiateViewControllerWithIdentifier:@"ExchangeController"];
 //    con.itemNum = self.flays.count;
     con.flays = self.flays;
+//    con.delegate = self;
+    con.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:con];
     [self presentViewController:nav animated:YES completion:nil];
+    
 }
 
 - (IBAction)buyAction:(id)sender {
@@ -151,6 +154,42 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.navigationController pushViewController:fm animated:YES];
 }
 
-
+- (void)successExchange:(NSString *)userBalance{
+    
+    NSLog(@"asdasdasdas%@",userBalance);
+    CGFloat userFlow = [userBalance doubleValue];
+    if (userFlow - (int)userFlow > 0) {
+        self.flowNumber.text = [NSString stringWithFormat:@"%.1fM",[userBalance doubleValue]];
+    }else {
+        self.flowNumber.text = [NSString stringWithFormat:@"%.0fM",[userBalance doubleValue]];
+    }
+    if (userFlow > 1024) {
+        self.flowNumber.text = [NSString stringWithFormat:@"%.1fG",[userBalance doubleValue] / 1024];
+    }
+    
+    
+    
+    
+    
+    self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%dM流量", 500  - [userBalance floatValue], 500];
+    
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        BPViewController *bpView = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
+        bpView.title = @"流量详细";
+        [self.navigationController pushViewController:bpView animated:YES];
+    }];
+    
+    [self.buyButton.layer setMasksToBounds:YES];
+    self.buyButton.layer.borderWidth = 0.5;
+    self.buyButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
+    self.buyButton.layer.cornerRadius = 2;
+    
+    [self.friendButton.layer setMasksToBounds:YES];
+    self.friendButton.layer.borderWidth = 0.5;
+    self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
+    self.friendButton.layer.cornerRadius = 2;
+}
 
 @end

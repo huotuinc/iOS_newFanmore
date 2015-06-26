@@ -8,9 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol ExchangeControllerdelegate <NSObject>
+
+@optional
+/**兑换流量成功*/
+- (void)successExchange:(NSString* ) userBalance;
+
+@end
+
+
 @interface ExchangeController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property(nonatomic,strong) NSMutableArray * flays;
+@property(nonatomic,strong) NSArray * flays;
+
+
+@property(nonatomic,strong) id<ExchangeControllerdelegate> delegate;
 
 @end

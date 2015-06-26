@@ -9,6 +9,7 @@
 #import "ExchangeController.h"
 #import "ConversionCell.h"
 #import "userData.h"
+#import "userData.h"
 
 @interface ExchangeController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -85,7 +86,7 @@ NSString * _changeflah = nil;
                 UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
                     //兑换流量
-                    NSString *url = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+                    NSString *url = [MainURL stringByAppendingPathComponent:@"checkout"];
                     NSMutableDictionary *param = [NSMutableDictionary dictionary];
                     param[@"amount"] = self.flays[indexPath.row];
                     [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
@@ -97,6 +98,17 @@ NSString * _changeflah = nil;
                         }
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
                             
+                            userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+                            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                            
+                            //1、保存个人信息
+                            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                            [NSKeyedArchiver archiveRootObject:user toFile:fileName]; //保存用户信息
+                            
+                            if ([self.delegate respondsToSelector:@selector(successExchange:)]) {
+                                
+                                [self.delegate successExchange:user.balance];
+                            }
                             [MBProgressHUD showSuccess:@"兑换流量成功"];
         
                         }

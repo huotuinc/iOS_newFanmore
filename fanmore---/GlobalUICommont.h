@@ -10,7 +10,8 @@
 #define fanmore____GlobalUICommont_h
 
 /**服务器地址*/
-#define  MainURL  @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+#define  MainURL  @"http://192.168.0.19:8080/fanmoreweb/app"
+//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
 //@"http://192.168.0.14:8080/fanmoreweb/app"
 //http://192.168.0.14:8080/fanmoreweb/
 //@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
