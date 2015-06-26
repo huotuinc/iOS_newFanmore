@@ -83,6 +83,8 @@ static NSString *homeCellidentify = @"homeCellId";
     
     [self _initNav];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homerefresh) name:RefreshHomeDate object:nil];
+    
     //集成刷新控件
     [self setupRefresh];
     [self.tableView removeSpaces];
@@ -135,6 +137,11 @@ static NSString *homeCellidentify = @"homeCellId";
     self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
     self.tableView.footerRefreshingText = @"正在加载更多数据,请稍等";
 
+}
+
+- (void) homerefresh{
+    
+    [self.tableView headerBeginRefreshing];
 }
 
 #pragma mark 开始进入刷新状态
@@ -424,6 +431,11 @@ static NSString *homeCellidentify = @"homeCellId";
 - (void)answerOverToreferch{
     NSLog(@"12312313");
     [self.tableView headerBeginRefreshing];
+}
+
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

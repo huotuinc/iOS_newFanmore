@@ -269,8 +269,12 @@
 
     switch (indexPath.row) {//首页
         case 0:{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
             RootViewController * root = (RootViewController *)self.mm_drawerController;
             [root toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+            
+            
             break;
         }
         case 1:{//账号设置

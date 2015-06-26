@@ -10,8 +10,9 @@
 #define fanmore____GlobalUICommont_h
 
 /**服务器地址*/
-#define  MainURL @"http://192.168.0.19:8080/fanmoreweb/app"
-//"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+#define  MainURL @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+//@"http://192.168.0.19:8080/fanmoreweb/app"
+//""
 //
 //@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
 //@"http://192.168.0.14:8080/fanmoreweb/app"
@@ -101,6 +102,9 @@
 
 #define TodaySignNot @"TodaySignNot"   //签到推送通知类型
 
+
+//通知
+#define RefreshHomeDate @"RefreshHomeDate"  //刷新home的数据
 #endif
 
 
