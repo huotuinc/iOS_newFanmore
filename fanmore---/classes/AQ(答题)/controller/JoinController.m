@@ -86,6 +86,20 @@
     
     [self _initFeildAndButton];
     
+    //设置屏幕背景
+    [self setviewBackimage];
+    
+    
+    //设置键盘
+    [self registerForKeyboardNotifications];
+    [self.field1 becomeFirstResponder];
+}
+
+/**
+ *  设置屏幕的背景图片
+ */
+- (void)setviewBackimage{
+    
     if (ScreenWidth == 375) {
         self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt7501334"]];
     }
@@ -99,10 +113,6 @@
             self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt6401136"]];
         }
     }
-    
-    [self registerForKeyboardNotifications];
-    
-    [self.field1 becomeFirstResponder];
 }
 
 - (IBAction)nextButtonAction:(UIButton *)sender {

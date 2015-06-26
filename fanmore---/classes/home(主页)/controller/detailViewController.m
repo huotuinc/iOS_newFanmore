@@ -236,7 +236,11 @@
     if (self.type == 2) {//报名类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
+        JoinController *answer = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
+        answer.questions = self.detailTasks;
+        answer.title = @"报名";
+        answer.type = @(2);//报名
+        answer.taskId = self.taskId;
         [self.navigationController pushViewController:answer animated:YES];
     }
     

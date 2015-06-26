@@ -15,6 +15,16 @@
 @property (weak, nonatomic) IBOutlet UITextField *field2;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
+
+
+/**答题类型*/
+@property(strong,nonatomic) NSNumber * type;
+/**题目类型编号*/
+@property(nonatomic,assign) int taskId;
+/**题目列表*/
+@property(nonatomic,strong) NSArray * questions;
+
+
 - (IBAction)nextButtonAction:(UIButton *)sender;
 
 @end
