@@ -32,7 +32,7 @@
 @property(nonatomic,assign)int chance;
 
 /**答题剩余机会*/
-@property(nonatomic,assign)int reward;
+@property(nonatomic,assign)float reward;
 
 /**答题剩余机会*/
 @property(nonatomic,assign)int illgel;

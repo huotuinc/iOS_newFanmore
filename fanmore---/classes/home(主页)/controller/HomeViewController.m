@@ -275,10 +275,16 @@ static NSString *homeCellidentify = @"homeCellId";
     NSString * publishtime = [formatter stringFromDate:ptime];
     int a = 0;  //首页右下角标志
     if([task.last intValue]==0){
-        a = 2;
+        a = 2; //已领完
     }else{
         
-        a = (((task.reward > 0)| (task.taskFailed > 0)) ? 1:0);
+       
+        if (task.reward > 0) {
+            a = 1;
+        }
+        if (task.taskFailed > 0) {
+            a= 1;
+        }
     }
     //设置cell样式
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];

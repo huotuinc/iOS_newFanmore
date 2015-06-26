@@ -4,7 +4,7 @@
 //
 //  Created by HuoTu-Mac on 15/6/17.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  网页
 
 #import "WebController.h"
 #import "GlobalData.h"
@@ -60,7 +60,7 @@
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
         urlStr = [urlStr stringByAppendingString:self.answerType];
-        urlStr = [NSString stringWithFormat:@"%@taskReward=%d&rights=%d&wrongs=%u&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
+        urlStr = [NSString stringWithFormat:@"%@taskReward=%.1f&rights=%d&wrongs=%u&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
         NSLog(@"%@",urlStr);
         NSURL * urlstr = [NSURL URLWithString:urlStr];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
@@ -103,16 +103,10 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else if(self.reward>0){
-               
-                
                 [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
-                
-            
             }else if (self.chance >0 ){
-                
                 for (UIViewController * aa in self.navigationController.childViewControllers) {
-                    
                     if ([aa isKindOfClass:[detailViewController class]]) {
                         
                         [self.navigationController popToViewController:aa animated:YES];
