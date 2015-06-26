@@ -207,6 +207,12 @@
                 NSString *fileName = [path stringByAppendingPathComponent:InitGlobalDate];
                 [NSKeyedArchiver archiveRootObject:resultData.global toFile:fileName]; //保存用户信息
                 
+              
+                
+                //1、保存个人信息
+                fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                [NSKeyedArchiver archiveRootObject:nil toFile:fileName]; //保存用户信息
+                
             }else{
                 NSString * flag = @"right";
                 [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
@@ -272,6 +278,11 @@
     /**shareSdK*/
 }
 
+
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
+    
+    
+}
 
 /**
  *  开启定位功能

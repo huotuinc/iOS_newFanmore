@@ -42,6 +42,7 @@ int _rightQuest = 0;  //纪录正确的答题数
     [super viewDidLoad];
     self.title = @"答题";
     _qindex = 0;
+    _rightQuest = 0;
     self.qusImageView.contentMode = UIViewContentModeScaleAspectFit;  //图片自动适配
     
     if ([self.type intValue] == 3) { //画册类
