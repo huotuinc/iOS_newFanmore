@@ -59,6 +59,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.title = @"流量兑换";
     self.flays;
     
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //1、保存全局信息
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    self.userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    
     CGFloat userFlow = [self.userInfo.balance doubleValue];
     if (userFlow - (int)userFlow > 0) {
         self.flowNumber.text = [NSString stringWithFormat:@"%.1fM",[self.userInfo.balance doubleValue]];
