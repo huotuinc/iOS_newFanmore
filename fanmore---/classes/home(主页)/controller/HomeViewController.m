@@ -274,21 +274,35 @@ static NSString *homeCellidentify = @"homeCellId";
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
-    int a = 0;  //首页右下角标志
-    if([task.last intValue]==0){
-        a = 2; //已领完
-    }else{
+//    int a = 0;  //首页右下角标志
+    NSLog(@"=======%f",task.reward);
+    NSLog(@"=======%d",task.taskFailed);
+    NSLog(@"=======%d",[task.last intValue]);
+    
+    int a = 0;
+    if (task.reward > 0) {
+        a = 2;
+    }else if(task.taskFailed > 0){
         
-       
-        if (task.reward > 0) {
-            a = 1;
-        }
-        if (task.taskFailed > 0) {
-            a= 1;
-        }
+        a = 2;
+    }else{
+        a = 0;
     }
+//    if([task.last intValue]==0){
+//        a = 2; //已领完
+//    }else{
+//        
+//        
+//        if (task.reward > 0) {
+//            a = 1;
+//        }
+//        if (task.taskFailed > 0) {
+//            a= 1;
+//        }
+//    }
     //设置cell样式
-    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%@M",task.maxBonus] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+   
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%.fM",task.maxBonus ] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
      return cell;
 }
 
@@ -305,7 +319,7 @@ static NSString *homeCellidentify = @"homeCellId";
     detailVc.type = task.type;  //答题类型
     detailVc.detailUrl = task.contextURL;//网页详情的url
     detailVc.backTime = task.backTime;
-    detailVc.flay = [task.maxBonus intValue];
+    detailVc.flay = task.maxBonus;
     detailVc.shareUrl = task.shareURL;
     detailVc.titless = task.title;
     if (task.type == 1) {

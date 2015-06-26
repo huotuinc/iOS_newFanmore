@@ -290,7 +290,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
 //                NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
-                NSString * butTitle = [NSString stringWithFormat:@"答题领取%dM流量",self.flay];
+                NSString * butTitle = [NSString stringWithFormat:@"答题领取%.fM流量",self.flay];
                 [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
                 //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
@@ -303,7 +303,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
                 NSLog(@"____%@",strTime);
-                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%dM流量(%@)",self.flay,strTime] forState:UIControlStateNormal];
+                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%.fM流量(%@)",self.flay,strTime] forState:UIControlStateNormal];
                 wself.answerBtn.userInteractionEnabled = NO;
                 
             });

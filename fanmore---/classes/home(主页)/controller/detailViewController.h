@@ -29,7 +29,7 @@
 @property(nonatomic,assign) int backTime;
 
 /**答题获取多少流量*/
-@property(nonatomic,assign) int flay;
+@property(nonatomic,assign) CGFloat flay;
 
 /**分享的url*/
 @property(nonatomic,strong)NSString *shareUrl;

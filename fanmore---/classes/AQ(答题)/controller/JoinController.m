@@ -33,7 +33,7 @@
     
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGFloat sizesss = CGRectGetMaxY(self.nextButton.frame) - (ScreenHeight - kbSize.height);
+    CGFloat sizesss = CGRectGetMaxY(self.nextButton.frame) - (ScreenHeight - kbSize.height-44);
     
     if (sizesss > 0) {
         
@@ -120,6 +120,10 @@
     userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     self.field2.text = userInfo.name;
     
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
 }
 /**
  *  设置屏幕的背景图片
