@@ -146,7 +146,7 @@
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK" ofType:@"png"];
         
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:self.title url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:self.titless url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
      //创建弹出菜单容器
      id<ISSContainer> container = [ShareSDK container];
                                                                                    
@@ -223,7 +223,7 @@
     
     
     //答题类型
-    if ([self.type intValue] == 1) {//答题类
+    if (self.type == 1) {//答题类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
@@ -233,14 +233,14 @@
         [self.navigationController pushViewController:answer animated:YES];
     }
     
-    if ([self.type intValue] == 2) {//报名类
+    if (self.type == 2) {//报名类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
         [self.navigationController pushViewController:answer animated:YES];
     }
     
-    if ([self.type intValue] == 3) {//画册类
+    if (self.type == 3) {//画册类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
@@ -250,7 +250,7 @@
         [self.navigationController pushViewController:answer animated:YES];
     }
     
-    if ([self.type intValue] == 4) {//游戏类
+    if (self.type  == 4) {//游戏类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WebController *answer = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];

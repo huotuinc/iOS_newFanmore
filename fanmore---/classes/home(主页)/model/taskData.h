@@ -25,7 +25,7 @@
 /**简述*/
 @property(nonatomic,strong) NSString * desc;
 /**任务类别*/
-@property(nonatomic,strong) NSNumber * type;
+@property(nonatomic,assign) int type;
 /**任务状态*/
 @property(nonatomic,assign) int status;
 /**发布时间*/

@@ -267,7 +267,7 @@ static NSString *homeCellidentify = @"homeCellId";
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
     int a = 0;  //首页右下角标志
-    if([task.last intValue]==0){
+    if([task.last intValue]<=0){
         a = 2;
     }else{
         
@@ -293,7 +293,16 @@ static NSString *homeCellidentify = @"homeCellId";
     detailVc.backTime = task.backTime;
     detailVc.flay = [task.maxBonus intValue];
     detailVc.shareUrl = task.shareURL;
-    detailVc.title = task.title;
+    detailVc.titless = task.title;
+    if (task.type == 1) {
+        detailVc.title = @"答题任务";
+    }else if(task.type == 2){
+        detailVc.title = @"报名任务";
+    }else if(task.type == 3){
+        detailVc.title = @"画册类任务";
+    }else{
+        detailVc.title = @"游戏类任务";
+    }
     (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
 
     [self.navigationController pushViewController:detailVc animated:YES];

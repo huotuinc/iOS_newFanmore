@@ -20,7 +20,7 @@
 @property(assign,nonatomic)  int taskId;
 
 /**答题类型*/
-@property(strong,nonatomic) NSNumber * type;
+@property(assign,nonatomic) int type;
 
 /**首页详情*/
 @property(strong,nonatomic) NSString * detailUrl;
@@ -35,7 +35,7 @@
 @property(nonatomic,strong)NSString *shareUrl;
 
 /**分享标题*/
-@property(nonatomic,strong)NSString *title;
+@property(nonatomic,strong)NSString *titless;
 
 /**判断是否已答过题*/
 @property(nonatomic,assign)BOOL ishaveget;

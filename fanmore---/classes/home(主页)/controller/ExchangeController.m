@@ -90,18 +90,14 @@ NSString * _changeflah = nil;
                     param[@"amount"] = self.flays[indexPath.row];
                     [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
                         
+                        NSLog(@"流量兑换后返回的数据%@",json);
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
                             [MBProgressHUD showError:@"账号被登入"];
                             return ;
                         }
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
-        
-        
-                            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        
-                            //1、保存个人信息
-                            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-                            [NSKeyedArchiver archiveRootObject:[userData objectWithKeyValues:json[@"resultDate"][@"user"]] toFile:fileName];
+                            
+                            [MBProgressHUD showSuccess:@"兑换流量成功"];
         
                         }
         

@@ -282,95 +282,114 @@
             photoImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         }
     }
-    //    UIImage * photoImage = info[@"UIImagePickerControllerOriginalImage"];
+    
+    
     [self.iconView setBackgroundImage:photoImage forState:UIControlStateNormal];
+    NSString * aa = [info objectForKey:UIImagePickerControllerReferenceURL];
+    NSLog(@"asdas%@",aa);
+    NSURL * picUrl = [NSURL URLWithString:aa];
+    NSData *imageData = [NSData dataWithContentsOfURL:picUrl];
+  
     
-    NSData *imageData = UIImagePNGRepresentation(photoImage);
-    if(imageData == nil)
-    {
-        imageData = UIImageJPEGRepresentation(photoImage, 1.0);
-    }
+    NSString * imagefile = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     
-    NSString * imagefile = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     [picker dismissViewControllerAnimated:YES completion:^{
-        NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+//        NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         params[@"profileType"] = @(0);
         params[@"profileData"] = imagefile;
-        [MBProgressHUD showMessage:@"头像上传中，请稍候"];
-        [UserLoginTool loginRequestPost:urlStr parame:params success:^(NSDictionary* json) {
-            [MBProgressHUD hideHUD];
-            
-            if ([json[@"systemResultCode"] intValue] ==1&&[json[@"resultCode"] intValue]) {
-                userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
-                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-                [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-            }
-            [MBProgressHUD showSuccess:@"上传成功"];
-            [self setupPersonMessage];
-//            [self.tableView reloadData];
-            NSLog(@"icon%@",json);
-        } failure:^(NSError *error) {
-            [MBProgressHUD hideHUD];
-            NSLog(@"%@",error.description);
-        }];
+//        [MBProgressHUD showMessage:@"头像上传中，请稍候"];
+        
+        [self updatefile:params]; //
+//        [UserLoginTool loginRequestPost:urlStr parame:params success:^(NSDictionary* json) {
+//            [MBProgressHUD hideHUD];
+//            
+//            if ([json[@"systemResultCode"] intValue] ==1&&[json[@"resultCode"] intValue]) {
+//                userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+//                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+//                [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+//            }
+//            [MBProgressHUD showSuccess:@"上传成功"];
+//            [self setupPersonMessage];
+////            [self.tableView reloadData];
+//            NSLog(@"icon%@",json);
+//        } failure:^(NSError *error) {
+//            [MBProgressHUD hideHUD];
+//            NSLog(@"%@",error.description);
+//        }];
         
     }];
     
-    {
-        NSURL *url = [NSURL URLWithString:@"http://apitest.51flashmall.com:8080/fanmoreweb/app/updateProfile"];
-        
-        //第二步，创建请求
-        
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-        
-        [request setHTTPMethod:@"POST"];
-        
-        NSString *str = @"type=focus-c";
-        
-        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-        
-        [request setHTTPBody:data];
-        
-        
-        NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
-        paramsOption[@"appKey"] = APPKEY;
-        paramsOption[@"appSecret"] = HuoToAppSecret;
-        NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
-        NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-        paramsOption[@"lat"] = lat?lat:@(40.0);
-        paramsOption[@"lng"] = lng?lng:@(116.0);;
-        paramsOption[@"timestamp"] = apptimesSince1970;;
-        paramsOption[@"operation"] = OPERATION_parame;
-        paramsOption[@"version"] = AppVersion;
-        NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
-        paramsOption[@"token"] = token?token:@"";
-        paramsOption[@"imei"] = DeviceNo;
-        paramsOption[@"cityCode"] = @"1372";
-        paramsOption[@"cpaCode"] = @"default";
-        paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
-        [paramsOption removeObjectForKey:@"appSecret"];
-        
-        //第三步，连接服务器
-        
-        NSURLConnection * connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    
+    
+}
+
+- (void)updatefile:(NSMutableDictionary *)parame{
+    
+    NSURL *url = [NSURL URLWithString:@"http://apitest.51flashmall.com:8080/fanmoreweb/app/updateProfile"];
+    
+    //第二步，创建请求
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request setHTTPMethod:@"POST"];
+    
+    
+    NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
+    paramsOption[@"appKey"] = APPKEY;
+    paramsOption[@"appSecret"] = HuoToAppSecret;
+    NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
+    NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
+    paramsOption[@"lat"] = lat?lat:@(40.0);
+    paramsOption[@"lng"] = lng?lng:@(116.0);;
+    paramsOption[@"timestamp"] = apptimesSince1970;;
+    paramsOption[@"operation"] = OPERATION_parame;
+    paramsOption[@"version"] = AppVersion;
+    NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+    paramsOption[@"token"] = token?token:@"";
+    paramsOption[@"imei"] = DeviceNo;
+    paramsOption[@"cityCode"] = @"1372";
+    paramsOption[@"cpaCode"] = @"default";
+    if (parame != nil) { //传入参数不为空
+        [paramsOption addEntriesFromDictionary:parame];
     }
+    paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
+    [paramsOption removeObjectForKey:@"appSecret"];
+    
+    
+    NSArray *bodyStr = [paramsOption allKeys];
+    NSMutableString * aa = [NSMutableString string];
+    for (NSString * key in bodyStr) {
+        
+        [aa appendString:[NSString stringWithFormat:@"%@=%@&",key,[paramsOption objectForKey:key]]];
+    }
+    NSLog(@"%@",aa);
+    NSData *data = [[aa substringToIndex:aa.length -1] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    [request setHTTPBody:data];
+    
+//    [MBProgressHUD showMessage:@"头像上传中"];
+    NSOperationQueue *queue = [NSOperationQueue mainQueue];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        if (connectionError||data==nil) {
+            [MBProgressHUD showError:@"请求失败"];
+            return ;
+        }
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"服务返回数据%@",dict);
+        NSString *error = dict[@"error"];
+        if(error){
+            
+            [MBProgressHUD showError:@"头像上传失败"];
+        }else{
+            NSString * success = dict[@"success"];
+            [MBProgressHUD showSuccess:success];
+        }
+    }];
     
 }
-
-//数据传完之后调用此方法
-
--(void)connectionDidFinishLoading:(NSURLConnection *)connection
-
-{
-    
-//    NSString *receiveStr = [[NSString alloc]initWithData:self.receiveData encoding:NSUTF8StringEncoding];
-//    
-//    NSLog(@"%@",receiveStr);
-    
-}
-
 
 
 /**
