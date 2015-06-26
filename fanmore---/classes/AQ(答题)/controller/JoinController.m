@@ -145,6 +145,10 @@
     
     if (self.questions.count == 2 ) {
         
+        if ([self.field1.text isEqualToString:@""]) {
+            [MBProgressHUD showError:@"用户名不能为空"];
+            return;
+        }
         taskDetail * task1 = self.questions[0];
         taskDetail * task2 =self.questions[1];
         NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];

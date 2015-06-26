@@ -156,6 +156,18 @@ int _rightQuest = 0;  //纪录正确的答题数
                     show.reward = [json[@"resultData"][@"reward"] floatValue];
                     show.chance = [json[@"resultData"][@"chance"] intValue];
                     show.illgel = [json[@"resultData"][@"illgel"] intValue];
+                    
+                    CGFloat aabb = [json[@"resultData"][@"reward"] floatValue];
+                    if (aabb > 0) {
+                        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                        
+                        //1、保存全局信息
+                        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                        userData *userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+                        userinfo.balance = [NSString stringWithFormat:@"%f",[userinfo.balance floatValue] + aabb];
+                        [NSKeyedArchiver archiveRootObject:userinfo toFile:fileName];
+                        
+                    }
                     [self.navigationController pushViewController:show animated:YES];
                 }else{
                     [self.navigationController  popToRootViewControllerAnimated:YES];

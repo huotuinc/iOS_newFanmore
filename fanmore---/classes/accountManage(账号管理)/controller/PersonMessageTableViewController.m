@@ -209,7 +209,7 @@
                    }];
                 UIAlertAction * photo = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     UIImagePickerController * pc = [[UIImagePickerController alloc] init];
-                    pc.sourceType=UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                    pc.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
                     pc.delegate = self;
                     [self presentViewController:pc animated:YES completion:nil];
                 }];
@@ -285,13 +285,19 @@
     
     
     [self.iconView setBackgroundImage:photoImage forState:UIControlStateNormal];
-    NSString * aa = [info objectForKey:UIImagePickerControllerReferenceURL];
-    NSLog(@"asdas%@",aa);
-    NSURL * picUrl = [NSURL URLWithString:aa];
-    NSData *imageData = [NSData dataWithContentsOfURL:picUrl];
+    NSData *data;
+    if (UIImagePNGRepresentation(photoImage) == nil) {
+        
+        data = UIImageJPEGRepresentation(photoImage, 1);
+        
+    } else {
+        
+        data = UIImagePNGRepresentation(photoImage);
+    }
   
     
-    NSString * imagefile = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSString * imagefile = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
     
     [picker dismissViewControllerAnimated:YES completion:^{
 //        NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
@@ -300,24 +306,25 @@
         params[@"profileData"] = imagefile;
 //        [MBProgressHUD showMessage:@"头像上传中，请稍候"];
         
-        [self updatefile:params]; //
-//        [UserLoginTool loginRequestPost:urlStr parame:params success:^(NSDictionary* json) {
-//            [MBProgressHUD hideHUD];
-//            
-//            if ([json[@"systemResultCode"] intValue] ==1&&[json[@"resultCode"] intValue]) {
-//                userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
-//                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-//                [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-//            }
-//            [MBProgressHUD showSuccess:@"上传成功"];
-//            [self setupPersonMessage];
-////            [self.tableView reloadData];
-//            NSLog(@"icon%@",json);
-//        } failure:^(NSError *error) {
-//            [MBProgressHUD hideHUD];
-//            NSLog(@"%@",error.description);
-//        }];
+//        [self updatefile:params]; //
+        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
+        [UserLoginTool loginRequestPost:urlStr parame:params success:^(NSDictionary* json) {
+            [MBProgressHUD hideHUD];
+            NSLog(@"上传头像%@",json);
+            if ([json[@"systemResultCode"] intValue] ==1&&[json[@"resultCode"] intValue] == 1) {
+                userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            }
+            [MBProgressHUD showSuccess:@"上传成功"];
+            [self setupPersonMessage];
+//            [self.tableView reloadData];
+            NSLog(@"icon%@",json);
+        } failure:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+            NSLog(@"%@",error.description);
+        }];
         
     }];
     
