@@ -72,8 +72,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
         self.flowNumber.text = [NSString stringWithFormat:@"%.0fM",[self.userInfo.balance doubleValue]];
     }
     if (userFlow > 1024) {
-        self.flowNumber.text = [NSString stringWithFormat:@"%.1fG",[self.userInfo.balance doubleValue] / 1024];
+        self.flowNumber.text = [NSString stringWithFormat:@"%.3fG",[self.userInfo.balance doubleValue] / 1024];
     }
+    self.flowNumber.adjustsFontSizeToFitWidth = YES;
 
     self.PICView.progress = [self.userInfo.balance floatValue] / 500.0;
     self.PICView.thicknessRatio = 0.15;
@@ -87,7 +88,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.PICView.progressBottomGradientColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
     
     
-    self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%dM流量", 500  - [self.userInfo.balance floatValue], 500];
+    
+    
+    
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -125,6 +128,26 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [self.navigationController setNavigationBarHidden:NO];
     
+//    NSLog(@"%@", self.flays);
+//    
+//    for (int i = 0; i < self.flays.count - 1; i++) {
+//        NSLog(@"%@",self.userInfo.balance);
+//        NSLog(@"%@", self.flays[0]);
+//        if (self.userInfo.balance > self.flays[0]) {
+//            if (self.userInfo.balance > self.flays[self.flays.count - 1]) {
+//                self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
+//            }
+//            if (self.userInfo.balance > self.flays[i]) {
+//                
+//                if (self.userInfo.balance < self.flays[i + 1]) {
+//                    self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%d以下包", (int)self.flays[i]];
+//                    break;
+//                }
+//            }
+//        }else {
+//            self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%dM流量包", (int)self.flays[0] - [self.userInfo.balance floatValue], (int)self.flays[0]];
+//        }
+//    }
 
 }
 
@@ -170,7 +193,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
         self.flowNumber.text = [NSString stringWithFormat:@"%.0fM",[userBalance doubleValue]];
     }
     if (userFlow > 1024) {
-        self.flowNumber.text = [NSString stringWithFormat:@"%.1fG",[userBalance doubleValue] / 1024];
+        self.flowNumber.text = [NSString stringWithFormat:@"%.3fG",[userBalance doubleValue] / 1024];
     }
     
     

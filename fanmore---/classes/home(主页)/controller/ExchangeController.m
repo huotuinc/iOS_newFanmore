@@ -59,7 +59,7 @@ NSString * _changeflah = nil;
         cell = [[UITableViewCell alloc] init];
     }
     
-    cell.textLabel.text = self.showArray[indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"兑换%@流量包", self.showArray[indexPath.row]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -132,7 +132,6 @@ NSString * _changeflah = nil;
 
 
 }
-
 
 
 - (void)_initNav
