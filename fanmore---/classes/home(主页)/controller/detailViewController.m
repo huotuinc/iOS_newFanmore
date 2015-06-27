@@ -171,6 +171,11 @@
                  [MBProgressHUD showError:@"账号被登入"];
                  return ;
              }
+             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1){//分享成功
+                 
+                 
+                 return ;
+             }
              NSLog(@"分享成功返回的数据%@",json);
          } failure:^(NSError *error) {
              

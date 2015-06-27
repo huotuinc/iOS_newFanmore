@@ -127,6 +127,7 @@ static NSString *BPCellidentify = @"BPCellId";
         cell = [[[NSBundle mainBundle] loadNibNamed:@"BPCell" owner:nil options:nil] lastObject];
     }
     Details *detail = self.details[indexPath.row];
+    NSLog(@"%f", detail.vary);
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(detail.date/1000.0)];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
@@ -135,11 +136,12 @@ static NSString *BPCellidentify = @"BPCellId";
     
     NSString *str;
     if (detail.vary > 0) {
-        str = [NSString stringWithFormat:@"+%@M", detail.vary];
-        cell.flow.tintColor = [UIColor greenColor];
+        str = [NSString stringWithFormat:@"+%.0fM", detail.vary];
+        cell.flow.textColor = [UIColor greenColor];
+        
     }else {
-        str = [NSString stringWithFormat:@"-%@M", detail.vary];
-        cell.flow.tintColor = [UIColor redColor];
+        str = [NSString stringWithFormat:@"%.0fM", detail.vary];
+        cell.flow.textColor = [UIColor redColor];
     }
     
     [cell setTitleName:detail.title AndTime:publishtime AndFlow:str];
