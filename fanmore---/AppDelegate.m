@@ -122,6 +122,8 @@
     return [ShareSDK handleOpenURL:url wxDelegate:self];
 }
 
+
+
 /**
  *  支付宝支付成功返回
  *
@@ -139,8 +141,8 @@
         }];
     }
     
-    [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
-    return YES;
+    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
+    
 }
 
 /**

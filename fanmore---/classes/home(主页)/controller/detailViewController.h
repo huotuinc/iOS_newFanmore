@@ -40,6 +40,10 @@
 /**判断是否已答过题*/
 @property(nonatomic,assign)BOOL ishaveget;
 
+/**任务的图标*/
+/**分享标题*/
+@property(nonatomic,strong)NSString *pictureUrl;
+
 - (IBAction)goQusetionAction:(id)sender;
 
 @end

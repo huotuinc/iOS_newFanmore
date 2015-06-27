@@ -143,10 +143,9 @@
         [self presentViewController:bb animated:YES completion:nil];
         
     }else{
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK" ofType:@"png"];
-        
+   
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:self.titless url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:self.pictureUrl] title:self.titless url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
      //创建弹出菜单容器
      id<ISSContainer> container = [ShareSDK container];
                                                                                    
@@ -171,6 +170,11 @@
          [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
              if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
                  [MBProgressHUD showError:@"账号被登入"];
+                 return ;
+             }
+             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1){//分享成功
+                 
+                 
                  return ;
              }
              NSLog(@"%@",json);

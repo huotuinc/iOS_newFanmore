@@ -302,7 +302,7 @@ static NSString *homeCellidentify = @"homeCellId";
 //    }
     //设置cell样式
    
-    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%.fM",task.maxBonus ] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%.1fM",task.maxBonus ] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
      return cell;
 }
 
@@ -322,6 +322,7 @@ static NSString *homeCellidentify = @"homeCellId";
     detailVc.flay = task.maxBonus;
     detailVc.shareUrl = task.shareURL;
     detailVc.titless = task.title;
+    detailVc.pictureUrl = task.pictureURL;
     if (task.type == 1) {
         detailVc.title = @"答题任务";
     }else if(task.type == 2){
