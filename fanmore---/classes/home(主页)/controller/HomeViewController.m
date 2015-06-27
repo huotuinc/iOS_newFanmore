@@ -301,8 +301,17 @@ static NSString *homeCellidentify = @"homeCellId";
 //        }
 //    }
     //设置cell样式
-   
-    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:[NSString stringWithFormat:@"%.1fM",task.maxBonus ] andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+    NSString * ml = [NSString stringWithFormat:@"%.1fM",task.maxBonus];
+    NSRange aa = [ml rangeOfString:@"."];
+    
+    NSString * bb = [ml substringWithRange:NSMakeRange(aa.location+1, 1)];
+    if ([bb isEqualToString:@"0"]) {
+        
+        ml = [NSString stringWithFormat:@"%.fM",task.maxBonus];
+
+    }
+    
+    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
      return cell;
 }
 

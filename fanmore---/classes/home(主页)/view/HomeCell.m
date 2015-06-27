@@ -16,7 +16,7 @@
     self.nameLabel.text = name;
     self.timeLabel.text = time;
     self.receiveLabel.text = receive;
-    
+    self.receiveLabel.adjustsFontSizeToFitWidth = YES;
     self.joinLabel.text = join;
     self.introduceLabel.text = introduce;
     if (selection) {
