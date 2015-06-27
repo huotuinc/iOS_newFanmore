@@ -4,8 +4,7 @@
 //
 //  Created by lhb on 15/5/26.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
-
+//  s
 #import "detailViewController.h"
 #import "AnswerController.h"
 #import "LoginViewController.h"
@@ -173,7 +172,7 @@
                  [MBProgressHUD showError:@"账号被登入"];
                  return ;
              }
-             NSLog(@"%@",json);
+             NSLog(@"分享成功返回的数据%@",json);
          } failure:^(NSError *error) {
              
          }];
