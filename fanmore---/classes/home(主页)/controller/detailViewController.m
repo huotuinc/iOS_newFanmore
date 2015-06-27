@@ -187,12 +187,26 @@
                  [MBProgressHUD showError:@"账号被登入"];
                  return ;
              }
-             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1){//分享成功
+             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
                  
-                 
-                 return ;
+                 if ([json[@"resultData"][@"illgel"] intValue]!=0 ||[json[@"resultData"][@"reward"] floatValue] <= 0.0) {
+                     [MBProgressHUD showError:@"分享获取流量失败"];
+                 }else if([json[@"resultData"][@"reward"] floatValue]> 0){
+                     
+                     CGFloat rewad = [json[@"resultData"][@"reward"] floatValue];
+                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"成功获取%.1fM流量",rewad]];
+                     
+                     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                     
+                     //1、保存个人信息
+                     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                     userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+                     CGFloat current = [userInfo.balance floatValue] + rewad;
+                     userInfo.balance = [NSString stringWithFormat:@"%.1f",current];
+                     [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
+                 }
              }
-             NSLog(@"分享成功返回的数据%@",json);
+            
          } failure:^(NSError *error) {
              
          }];

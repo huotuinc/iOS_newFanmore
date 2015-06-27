@@ -21,7 +21,7 @@
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
 
-#define pageSize 2
+#define pageSize 8
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate>
 /**任务列表*/
