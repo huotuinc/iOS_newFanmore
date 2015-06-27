@@ -77,7 +77,6 @@
         NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
         userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
         BOOL aa = [HAMineLoveCarDBOperator exqueryFMDBWithCondition:userInfo.name withTaskId:self.taskId];
-        
         if (aa) {
             
         }else{

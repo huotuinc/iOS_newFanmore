@@ -109,14 +109,8 @@ static NSString *homeCellidentify = @"homeCellId";
         [welable removeFromSuperview];
     });
     
-//    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
-    
 }
 
-//- (void)_initView
-//{
-//    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
-//}
 
 /**
  *  集成刷新控件
@@ -173,6 +167,11 @@ static NSString *homeCellidentify = @"homeCellId";
 
 
 
+/**
+ *   上拉加载更多
+ *
+ *  
+ */
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
