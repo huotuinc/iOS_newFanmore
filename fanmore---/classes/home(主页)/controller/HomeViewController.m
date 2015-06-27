@@ -79,7 +79,7 @@ static NSString *homeCellidentify = @"homeCellId";
     [super viewDidLoad];
     self.title = @"首页";
     
-    [self _initView];
+//    [self _initView];
     
     [self _initNav];
     
@@ -109,12 +109,14 @@ static NSString *homeCellidentify = @"homeCellId";
         [welable removeFromSuperview];
     });
     
+//    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
+    
 }
 
-- (void)_initView
-{
-    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
-}
+//- (void)_initView
+//{
+//    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
+//}
 
 /**
  *  集成刷新控件
@@ -279,20 +281,26 @@ static NSString *homeCellidentify = @"homeCellId";
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
-    int a = 0;
-    if (task.reward > 0 || task.taskFailed > 0) {
-        a = 1;
-    }else if(task.last<=0){
-        a = 2;
-    }
-    //设置cell样式
+    
     NSString * ml = [NSString stringWithFormat:@"%.1fM",task.maxBonus];
     NSRange aa = [ml rangeOfString:@"."];
     NSString * bb = [ml substringWithRange:NSMakeRange(aa.location+1, 1)];
     if ([bb isEqualToString:@"0"]) {
         ml = [NSString stringWithFormat:@"%.fM",task.maxBonus];
     }
-    [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+    int a = 0;
+    if (task.reward > 0 || task.taskFailed > 0) {
+        a = 1;
+        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+    }else if(task.last<=0){
+        a = 2;
+        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+    }else {
+        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+    }
+    //设置cell样式
+   
+    
      return cell;
 }
 
