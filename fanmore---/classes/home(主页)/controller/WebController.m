@@ -19,7 +19,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupWebview];
     self.webView.delegate = self;
+    
     
     self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target: self action:@selector(backAction:)];
     
@@ -69,6 +72,13 @@
     
     
 
+}
+- (void)setupWebview{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    backButton.frame=CGRectMake(0, 0, 11, 20);
+    [backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
 
 - (void)backAction:(UIButton *)btn{

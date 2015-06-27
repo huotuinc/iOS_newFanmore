@@ -24,7 +24,7 @@
 #define pageSize 8
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate>
-/**任务列表*/
+/**任s务列表*/
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
 @property(nonatomic,assign) BOOL isLogin;
@@ -163,8 +163,8 @@ static NSString *homeCellidentify = @"homeCellId";
    
     taskData * task = [self.taskDatas lastObject];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    params[@"pagingTag"] = @(task.taskOrder);
-//    NSLog(@"尾部刷新%ld",task)
+    params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
+//    NSLog(@"尾部刷新%ld",task.taskOrder);
     params[@"pagingSize"] = @(pageSize);
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
