@@ -21,7 +21,7 @@
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
 
-#define pageSize 6
+#define pageSize 2
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate>
 /**任务列表*/
@@ -159,9 +159,10 @@ static NSString *homeCellidentify = @"homeCellId";
 //尾部刷新
 - (void)footerRereshing{  //加载更多数据数据
    
-    taskData * task = [self.taskDatas firstObject];
+    taskData * task = [self.taskDatas lastObject];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @(task.taskOrder);
+//    NSLog(@"尾部刷新%ld",task)
     params[@"pagingSize"] = @(pageSize);
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
@@ -181,8 +182,11 @@ static NSString *homeCellidentify = @"homeCellId";
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            [self.taskDatas addObjectsFromArray:taskArray];
-            [self.tableView reloadData];    //刷新数据
+            if (taskArray.count > 0) {
+                [self.taskDatas addObjectsFromArray:taskArray];
+                [self.tableView reloadData];    //刷新数据
+            }
+            
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",[error description]);
@@ -274,27 +278,18 @@ static NSString *homeCellidentify = @"homeCellId";
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSString * publishtime = [formatter stringFromDate:ptime];
-//    int a = 0;  //首页右下角标志
-    NSLog(@"=======%f",task.reward);
-    NSLog(@"=======%d",task.taskFailed);
-    NSLog(@"=======%d",[task.last intValue]);
-    
     int a = 0;
     if (task.reward > 0 || task.taskFailed > 0) {
         a = 1;
     }else if(task.last<=0){
         a = 2;
     }
-
     //设置cell样式
     NSString * ml = [NSString stringWithFormat:@"%.1fM",task.maxBonus];
     NSRange aa = [ml rangeOfString:@"."];
-    
     NSString * bb = [ml substringWithRange:NSMakeRange(aa.location+1, 1)];
     if ([bb isEqualToString:@"0"]) {
-        
         ml = [NSString stringWithFormat:@"%.fM",task.maxBonus];
-
     }
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
      return cell;

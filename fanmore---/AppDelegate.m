@@ -281,10 +281,7 @@
 }
 
 
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
-    
-    
-}
+
 
 /**
  *  开启定位功能
@@ -323,5 +320,17 @@
         [application registerForRemoteNotificationTypes:type];
         
     }
+}
+
+
+
+/**
+ *  内存警告
+ *
+ *  @param application <#application description#>
+ */
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
+    
+    
 }
 @end

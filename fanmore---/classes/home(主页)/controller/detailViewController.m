@@ -11,6 +11,7 @@
 #import "UserLoginTool.h"
 #import "taskDetail.h"
 #import "WebController.h"
+#import "userData.h"
 
 @interface detailViewController ()<LoginViewDelegate>
 
@@ -54,14 +55,17 @@
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.answerBtn.userInteractionEnabled = NO;
-        [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%dM流量",self.flay] forState:UIControlStateNormal];
+        NSString *ml = [self xiaoshudianweishudeal:self.flay];
+        [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
+        
     }else{
         self.answerBtn.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
         self.answerBtn.layer.cornerRadius = 6;
         self.answerBtn.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%dM流量",self.flay] forState:UIControlStateNormal];
+        NSString *ml = [self xiaoshudianweishudeal:self.flay];
+        [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
         
         //获取题目s
         [self getQuestion];
@@ -76,6 +80,17 @@
 }
 
 
+- (NSString *)xiaoshudianweishudeal:(CGFloat)aac
+{
+    //设置cell样式
+    NSString * ml = [NSString stringWithFormat:@"%.1f",aac];
+    NSRange aa = [ml rangeOfString:@"."];
+    NSString * bb = [ml substringWithRange:NSMakeRange(aa.location+1, 1)];
+    if ([bb isEqualToString:@"0"]) {
+        ml = [NSString stringWithFormat:@"%.f",self.flay];
+    }
+    return ml;
+}
 /**
  *  获取题目s
  */
@@ -167,6 +182,7 @@
          }
          params[@"channel"] = @(sType);
          [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+              NSLog(@"分享成功返回的数据%@",json);
              if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
                  [MBProgressHUD showError:@"账号被登入"];
                  return ;
