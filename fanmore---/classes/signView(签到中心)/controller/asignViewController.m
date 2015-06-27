@@ -100,11 +100,11 @@
             btn.userInteractionEnabled = NO;
         }else{//未签到
             if (btn.tag < ((long)[self Wednesday])) {//漏签的
-                [btn setBackgroundImage:[UIImage imageNamed:@"asignGray"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 btn.userInteractionEnabled = NO;
             }else{//未签的
-                [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];
+                [btn setBackgroundImage:[UIImage imageNamed:@"asignGray"] forState:UIControlStateNormal];
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 btn.userInteractionEnabled = NO;
             }
@@ -189,6 +189,13 @@
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"今日已签到，请明天来签到"];
+            [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
+            self.asignBtn.backgroundColor = LWColor(163, 163, 163);
+            self.asignBtn.layer.cornerRadius = 6;
+            self.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+            self.asignBtn.layer.borderWidth = 0.5;
+            [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.asignBtn.userInteractionEnabled = NO;
             return ;
         }
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==1) {
