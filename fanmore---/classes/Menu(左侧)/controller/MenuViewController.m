@@ -226,10 +226,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * cellID = @"fanmore";
-    
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil) {
-        
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.textLabel.textColor = LWColor(18, 17, 125);
         cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -238,24 +236,16 @@
     }
     //图片名称
     NSString * name = self.images[indexPath.row];
-    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 6, ScreenHeight * 0.075 - 12, ScreenHeight * 0.075 - 12)];
     imageView.image = [UIImage imageNamed:name];
     [cell addSubview:imageView];
-    
-    
     //文字
-    
     NSString * title = self.lists[indexPath.row];
     UILabel *Label = [[UILabel alloc] initWithFrame:CGRectMake(5 + ScreenHeight * 0.08 - 12 + 10, ScreenHeight * 0.075  / 2 - 15, 150, 30)];
     Label.text = title;
     Label.textColor = LWColor(12, 127, 254);
     Label.font = [UIFont systemFontOfSize:18];
     [cell addSubview:Label];
-    
-//    cell.textLabel.text = title;
-
-    
     return cell;
 }
 #pragma TableViewDelegate delegate
@@ -272,10 +262,7 @@
             RootViewController * root = (RootViewController *)self.mm_drawerController;
             [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
             [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
-//            RootViewController * root = (RootViewController *)self.mm_drawerController;
             [root toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
-            
-            
             break;
         }
         case 1:{//账号设置
@@ -284,7 +271,6 @@
                 AccountSettingViewController* Account = [[AccountSettingViewController alloc] init];
                 [self.navigationController pushViewController:Account animated:YES];
             }else{
-                
                 LoginViewController * login = [[LoginViewController alloc] init];
                 login.loginType = 1;
                 login.delegate = self;
@@ -304,7 +290,6 @@
                 UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
                 [self presentViewController:na animated:YES completion:nil];
             }
-            
             break;
         }
         case 3:{//师徒联盟
@@ -323,8 +308,6 @@
         }
         case 4:{//更多设置
             
-//            UIStoryboard * aasb = [UIStoryboard storyboardWithName:@"FeedBack" bundle:nil];
-//            FeedBackViewController * vc = aasb.instantiateInitialViewController;
             settingViewController * setVc = [[settingViewController alloc] init];
             [self.navigationController pushViewController:setVc animated:YES];
             break;
@@ -340,7 +323,6 @@
                 UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
                 [self presentViewController:na animated:YES completion:nil];
             }
-            
             break;
         }
         case 6:{//送流量

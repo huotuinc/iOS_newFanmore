@@ -172,7 +172,7 @@ static NSString *BPCellidentify = @"BPCellId";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BPCell *cell = [tableView dequeueReusableCellWithIdentifier:BPCellidentify];
+    BPCell *cell = [tableView dequeueReusableCellWithIdentifier:BPCellidentify forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"BPCell" owner:nil options:nil] lastObject];
     }

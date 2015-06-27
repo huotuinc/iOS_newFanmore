@@ -282,8 +282,6 @@
             photoImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         }
     }
-    
-    
     [self.iconView setBackgroundImage:photoImage forState:UIControlStateNormal];
     NSData *data;
     if (UIImagePNGRepresentation(photoImage) == nil) {
@@ -294,23 +292,15 @@
         
         data = UIImagePNGRepresentation(photoImage);
     }
-  
-    
     NSString * imagefile = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    
-    
     [picker dismissViewControllerAnimated:YES completion:^{
-//        NSString *urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         params[@"profileType"] = @(0);
         params[@"profileData"] = imagefile;
-//        [MBProgressHUD showMessage:@"头像上传中，请稍候"];
-        
-//        [self updatefile:params]; //
+        [MBProgressHUD showMessage:@"头像上传中，请稍候"];
         NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
         [UserLoginTool loginRequestPost:urlStr parame:params success:^(NSDictionary* json) {
             [MBProgressHUD hideHUD];
-            NSLog(@"上传头像%@",json);
             if ([json[@"systemResultCode"] intValue] ==1&&[json[@"resultCode"] intValue] == 1) {
                 userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
                 NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -319,17 +309,12 @@
             }
             [MBProgressHUD showSuccess:@"上传成功"];
             [self setupPersonMessage];
-//            [self.tableView reloadData];
-            NSLog(@"icon%@",json);
         } failure:^(NSError *error) {
             [MBProgressHUD hideHUD];
             NSLog(@"%@",error.description);
         }];
         
     }];
-    
-    
-    
 }
 
 - (void)updatefile:(NSMutableDictionary *)parame{
