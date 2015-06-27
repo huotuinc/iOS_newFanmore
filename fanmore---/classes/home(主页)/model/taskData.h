@@ -41,7 +41,7 @@
 /**剩余流量*/
 @property(nonatomic,strong) NSString * contextURL;
 
-@property(nonatomic,assign) long long taskOrder;
+@property(nonatomic,assign) long taskOrder;
 
 /**分享出去时所用的URL，应当有所区别*/
 @property(nonatomic,strong) NSString * shareURL;
