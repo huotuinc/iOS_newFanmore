@@ -36,7 +36,7 @@ static FMDatabaseQueue * _dbqueue;;
 /**
  * 插入数据库
  */
-+ (BOOL)insertIntoFMDBWithSql:(NSString *)userName :(int) taskid{
++ (BOOL)insertIntoFMDBWithSql:(NSString *)userName withTaskId:(int) taskid{
     __block BOOL result = NO;
     [_dbqueue inDatabase:^(FMDatabase *db) {
         NSString *sql = [NSString stringWithFormat:@"insert into t_taskId(phonenumber,taskid) values(%@,%d);",userName,taskid];
@@ -51,7 +51,7 @@ static FMDatabaseQueue * _dbqueue;;
 /**
  * 查询某个车牌是否存在
  */
-+ (BOOL)exqueryFMDBWithCondition:(NSString *)userName :(int) taskid{
++ (BOOL)exqueryFMDBWithCondition:(NSString *)userName withTaskId:(int) taskid{
     NSString * sqlStr = [NSString stringWithFormat:@"select * from t_taskId where phonenumber = '%@' and taskid = %d;",userName,taskid];
     __block BOOL have = NO;
   

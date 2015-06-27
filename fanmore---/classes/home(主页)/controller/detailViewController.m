@@ -44,6 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     self.view.backgroundColor = [UIColor whiteColor];
     // 初始化
     [self setup];
@@ -70,6 +71,7 @@
         
         //获取题目s
         [self getQuestion];
+        [self todealSql];  //处理
         [self settime];
     }
     
@@ -80,6 +82,16 @@
     [self.detailWebView loadRequest:request];
 }
 
+- (BOOL)todealSql{
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //1、保存个人信息
+   NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+   userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+   return [HAMineLoveCarDBOperator exqueryFMDBWithCondition:userInfo.name withTaskId:self.taskId];
+   
+}
+
 
 - (NSString *)xiaoshudianweishudeal:(CGFloat)aac
 {
@@ -88,7 +100,7 @@
     NSRange aa = [ml rangeOfString:@"."];
     NSString * bb = [ml substringWithRange:NSMakeRange(aa.location+1, 1)];
     if ([bb isEqualToString:@"0"]) {
-        ml = [NSString stringWithFormat:@"%.f",self.flay];
+        ml = [NSString stringWithFormat:@"%.f",aac];
     }
     return ml;
 }
