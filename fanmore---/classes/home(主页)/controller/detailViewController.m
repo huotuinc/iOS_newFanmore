@@ -71,8 +71,20 @@
         
         //获取题目s
         [self getQuestion];
-        [self todealSql];  //处理
-        [self settime];
+        
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        //1、保存个人信息
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+        BOOL aa = [HAMineLoveCarDBOperator exqueryFMDBWithCondition:userInfo.name withTaskId:self.taskId];
+        
+        if (aa) {
+            
+        }else{
+            [HAMineLoveCarDBOperator insertIntoFMDBWithSql:userInfo.name withTaskId:self.taskId];
+           [self settime];
+        }
+        
     }
     
     NSURL* url =  [NSURL URLWithString:self.detailUrl];
@@ -80,16 +92,6 @@
     self.detailWebView.backgroundColor = [UIColor redColor];
     self.detailWebView.scrollView.backgroundColor = [UIColor whiteColor];
     [self.detailWebView loadRequest:request];
-}
-
-- (BOOL)todealSql{
-    
-    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    //1、保存个人信息
-   NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-   userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-   return [HAMineLoveCarDBOperator exqueryFMDBWithCondition:userInfo.name withTaskId:self.taskId];
-   
 }
 
 
