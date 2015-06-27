@@ -425,15 +425,31 @@ static NSString * _company = nil;
         [aa removeFromSuperview];
     }
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button－G"]];
-
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
-    NSArray * aa = self.buyflay.purchases;
-    flayModel * good = aa[indexPath.row + indexPath.section * self.num];
-    label.text = [NSString stringWithFormat:@"%dM",good.m];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.tag = indexPath.row + indexPath.section * self.num + 100;
-    [cell.contentView addSubview:label];
+    if (indexPath.row == 0) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
+        NSArray * aa = self.buyflay.purchases;
+        flayModel * good = aa[indexPath.row + indexPath.section * self.num];
+        label.text = [NSString stringWithFormat:@"%dM",good.m];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.tag = indexPath.row + indexPath.section * self.num + 100;
+        [cell.contentView addSubview:label];
+        
+        cell.backgroundColor = [UIColor orangeColor];
+        label.textColor = [UIColor whiteColor];
+        self.selected = indexPath;
+        
+        
+    }else {
+    
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 60)];
+        NSArray * aa = self.buyflay.purchases;
+        flayModel * good = aa[indexPath.row + indexPath.section * self.num];
+        label.text = [NSString stringWithFormat:@"%dM",good.m];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.tag = indexPath.row + indexPath.section * self.num + 100;
+        [cell.contentView addSubview:label];
+    }
     
 //    if (indexPath == self.selected) {
 //        UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
@@ -457,7 +473,7 @@ static NSString * _company = nil;
     
     NSArray * aaM = self.buyflay.purchases;
     flayModel * flay = aaM[indexPath.row];
-    self.oldPriceLable.text = flay.msg;
+    self.oldPriceLable.text = [NSString stringWithFormat:@"市场价%@折", flay.msg];
     self.currentPriceLable.text = [NSString stringWithFormat:@"现价:￥%.1f",flay.price];
     
     UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];

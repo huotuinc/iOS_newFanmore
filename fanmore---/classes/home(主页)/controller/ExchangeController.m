@@ -59,7 +59,7 @@ NSString * _changeflah = nil;
         cell = [[UITableViewCell alloc] init];
     }
     
-    cell.textLabel.text = self.showArray[indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"兑换%@流量包", self.showArray[indexPath.row]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -119,7 +119,7 @@ NSString * _changeflah = nil;
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }];
                 UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    [self dismissViewControllerAnimated:YES completion:nil];
+//                    [self dismissViewControllerAnimated:YES completion:nil];
                 }];
                 [alertVc addAction:action];
                 [alertVc addAction:action1];
@@ -132,7 +132,6 @@ NSString * _changeflah = nil;
 
 
 }
-
 
 
 - (void)_initNav

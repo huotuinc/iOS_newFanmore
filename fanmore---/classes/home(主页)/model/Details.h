@@ -23,6 +23,6 @@
 @property (nonatomic, assign) long detailId;
 
 //变化值
-@property (nonatomic, strong) NSNumber *vary;
+@property (nonatomic, assign) double vary;
 
 @end
