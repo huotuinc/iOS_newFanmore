@@ -130,7 +130,7 @@ static NSString *BPCellidentify = @"BPCellId";
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(detail.date/1000.0)];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy/MM/dd"];
+    [formatter setDateFormat:@"yyyy/MM/dd hh:mm:ss"];
     NSString * publishtime = [formatter stringFromDate:ptime];
     
     NSString *str;
