@@ -119,7 +119,7 @@ NSString * _changeflah = nil;
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }];
                 UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    [self dismissViewControllerAnimated:YES completion:nil];
+//                    [self dismissViewControllerAnimated:YES completion:nil];
                 }];
                 [alertVc addAction:action];
                 [alertVc addAction:action1];
