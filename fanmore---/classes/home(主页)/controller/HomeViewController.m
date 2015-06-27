@@ -109,7 +109,7 @@ static NSString *homeCellidentify = @"homeCellId";
         [welable removeFromSuperview];
     });
     
-//    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
+    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
 }
 
@@ -271,7 +271,7 @@ static NSString *homeCellidentify = @"homeCellId";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    HomeCell *cell = [tableView dequeueReusableCellWithIdentifier:homeCellidentify];
+    HomeCell *cell = [tableView dequeueReusableCellWithIdentifier:homeCellidentify forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeCell" owner:nil options:nil] lastObject];
     }
