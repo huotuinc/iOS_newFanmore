@@ -280,26 +280,12 @@ static NSString *homeCellidentify = @"homeCellId";
     NSLog(@"=======%d",[task.last intValue]);
     
     int a = 0;
-    if (task.reward > 0) {
+    if (task.reward > 0 || task.taskFailed > 0) {
+        a = 1;
+    }else if(task.last<=0){
         a = 2;
-    }else if(task.taskFailed > 0){
-        
-        a = 2;
-    }else{
-        a = 0;
     }
-//    if([task.last intValue]==0){
-//        a = 2; //已领完
-//    }else{
-//        
-//        
-//        if (task.reward > 0) {
-//            a = 1;
-//        }
-//        if (task.taskFailed > 0) {
-//            a= 1;
-//        }
-//    }
+
     //设置cell样式
     NSString * ml = [NSString stringWithFormat:@"%.1fM",task.maxBonus];
     NSRange aa = [ml rangeOfString:@"."];
@@ -310,7 +296,6 @@ static NSString *homeCellidentify = @"homeCellId";
         ml = [NSString stringWithFormat:@"%.fM",task.maxBonus];
 
     }
-    
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
      return cell;
 }
