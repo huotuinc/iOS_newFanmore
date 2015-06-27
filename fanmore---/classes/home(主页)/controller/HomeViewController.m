@@ -270,6 +270,7 @@ static NSString *homeCellidentify = @"homeCellId";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     HomeCell *cell = [tableView dequeueReusableCellWithIdentifier:homeCellidentify];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeCell" owner:nil options:nil] lastObject];

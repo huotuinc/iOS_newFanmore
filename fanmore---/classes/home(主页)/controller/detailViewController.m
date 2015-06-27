@@ -12,6 +12,7 @@
 #import "taskDetail.h"
 #import "WebController.h"
 #import "userData.h"
+#import "HAMineLoveCarDBOperator.h"
 
 @interface detailViewController ()<LoginViewDelegate>
 
@@ -43,6 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     self.view.backgroundColor = [UIColor whiteColor];
     // 初始化
     [self setup];
@@ -69,7 +71,20 @@
         
         //获取题目s
         [self getQuestion];
-        [self settime];
+        
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        //1、保存个人信息
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+        BOOL aa = [HAMineLoveCarDBOperator exqueryFMDBWithCondition:userInfo.name withTaskId:self.taskId];
+        
+        if (aa) {
+            
+        }else{
+            [HAMineLoveCarDBOperator insertIntoFMDBWithSql:userInfo.name withTaskId:self.taskId];
+           [self settime];
+        }
+        
     }
     
     NSURL* url =  [NSURL URLWithString:self.detailUrl];
@@ -87,7 +102,7 @@
     NSRange aa = [ml rangeOfString:@"."];
     NSString * bb = [ml substringWithRange:NSMakeRange(aa.location+1, 1)];
     if ([bb isEqualToString:@"0"]) {
-        ml = [NSString stringWithFormat:@"%.f",self.flay];
+        ml = [NSString stringWithFormat:@"%.f",aac];
     }
     return ml;
 }
@@ -167,8 +182,7 @@
     [ShareSDK showShareActionSheet:container shareList:nil content:publishContent statusBarTips:YES authOptions:nil shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
      if (state == SSResponseStateSuccess)
      {
-    
-         NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
+         [MBProgressHUD showSuccess:@"分享成功"];
          NSString *urlStr = [MainURL stringByAppendingPathComponent:@"taskTurnedNotify"];
          NSMutableDictionary * params = [NSMutableDictionary dictionary];
          params[@"taskId"] = @(self.taskId);
@@ -212,7 +226,7 @@
          }];
          
      }else if (state == SSResponseStateFail){
-         NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+         [MBProgressHUD showError:@"分享失败"];
      }
      }];
                                                                                  }
