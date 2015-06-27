@@ -24,7 +24,7 @@
 #define pageSize 8
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate>
-/**任务列表*/
+/**任s务列表*/
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
 @property(nonatomic,assign) BOOL isLogin;
