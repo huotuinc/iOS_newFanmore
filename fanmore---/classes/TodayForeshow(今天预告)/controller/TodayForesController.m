@@ -196,9 +196,21 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     }
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
-     [NSString stringWithFormat:@"%f",task.maxBonus] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.desc] andOnlineImage:(task.status == 3)];
+     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.desc] andOnlineImage:(task.status == 3)];
     NSLog(@"sdadsasd");
     return cell;
+}
+
+- (NSString *)xiaoshudianweishudeal:(CGFloat)aac
+{
+    //设置cell样式
+    NSString * ml = [NSString stringWithFormat:@"%.1f",aac];
+    NSRange aa = [ml rangeOfString:@"."];
+    NSString * bb = [ml substringWithRange:NSMakeRange(aa.location+1, 1)];
+    if ([bb isEqualToString:@"0"]) {
+        ml = [NSString stringWithFormat:@"%.f",aac];
+    }
+    return ml;
 }
 
 #pragma ForeshowTableViewCellDelegate

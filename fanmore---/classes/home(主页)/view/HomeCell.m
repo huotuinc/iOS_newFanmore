@@ -19,30 +19,26 @@
     self.receiveLabel.adjustsFontSizeToFitWidth = YES;
     self.joinLabel.text = join;
     self.introduceLabel.text = introduce;
-    if (selection) {
-        self.selection = selection;
-        [self layoutIfNeeded];
+    if (selection == 0) {
+        self.getImage.image = nil;
+    }else if (selection == 1) {
+        self.getImage.image = [UIImage imageNamed:@"received"];
+    }else if (selection == 2) {
+        self.getImage.image = [UIImage imageNamed:@"broughtOut"];
     }
 }
 
-- (void)setSelection:(int)selection
-{
-    if (selection) {
-        _selection = selection;
-        [self layoutIfNeeded];
-    }
-}
 
 
 -(void) layoutSubviews{
     [super layoutSubviews];
-    if (self.selection == 0) {
-        self.getImage.image = nil;
-    }else if (self.selection == 1) {
-        self.getImage.image = [UIImage imageNamed:@"received"];
-    }else if (self.selection == 2) {
-        self.getImage.image = [UIImage imageNamed:@"broughtOut"];
-    }
+//    if (self.selection == 0) {
+//        self.getImage.image = nil;
+//    }else if (self.selection == 1) {
+//        self.getImage.image = [UIImage imageNamed:@"received"];
+//    }else if (self.selection == 2) {
+//        self.getImage.image = [UIImage imageNamed:@"broughtOut"];
+//    }
     self.receiveLabel.layer.borderColor = [UIColor redColor].CGColor;
     self.receiveLabel.layer.borderWidth = 1;
     self.receiveLabel.layer.cornerRadius = 5.0;
