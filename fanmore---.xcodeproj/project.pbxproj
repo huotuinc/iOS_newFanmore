@@ -147,6 +147,7 @@
 		EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */; };
 		EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */; };
 		EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */; };
+		EFC9B7D01B3E8BE300A09686 /* HAMineLoveCarDBOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */; };
 		EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB460B1B214499005D5026 /* FeedBackViewController.m */; };
 		EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCB460C1B214499005D5026 /* FeedBackViewController.xib */; };
 		EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */; };
@@ -448,6 +449,8 @@
 		EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
 		EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
 		EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
+		EFC9B7CE1B3E8BE300A09686 /* HAMineLoveCarDBOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAMineLoveCarDBOperator.h; sourceTree = "<group>"; };
+		EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAMineLoveCarDBOperator.m; sourceTree = "<group>"; };
 		EFCB460A1B214499005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		EFCB460B1B214499005D5026 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		EFCB460C1B214499005D5026 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
@@ -1311,6 +1314,7 @@
 		EF8D672C1B0DD07E008B6909 /* other(其它) */ = {
 			isa = PBXGroup;
 			children = (
+				EFC9B7CD1B3E8BE300A09686 /* MineLoveCar */,
 				832C1DF61B3699E1004A8774 /* fanmoreButton */,
 				83D495411B15998C00935889 /* 扩展 */,
 				83BF5F621B156C4100E6C701 /* extend */,
@@ -1456,6 +1460,15 @@
 				EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		EFC9B7CD1B3E8BE300A09686 /* MineLoveCar */ = {
+			isa = PBXGroup;
+			children = (
+				EFC9B7CE1B3E8BE300A09686 /* HAMineLoveCarDBOperator.h */,
+				EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */,
+			);
+			path = MineLoveCar;
 			sourceTree = "<group>";
 		};
 		EFCB46091B214475005D5026 /* FeedBack(意见反馈) */ = {
@@ -2149,6 +2162,7 @@
 				EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */,
 				EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */,
 				830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */,
+				EFC9B7D01B3E8BE300A09686 /* HAMineLoveCarDBOperator.m in Sources */,
 				83E263FD1B2F018500A2AC96 /* PinyinFormatter.m in Sources */,
 				83A085921B3142FE00FDFA2B /* FriendMessageController.m in Sources */,
 				EF2E543F1B2857800060E965 /* MessageTableViewCell.m in Sources */,

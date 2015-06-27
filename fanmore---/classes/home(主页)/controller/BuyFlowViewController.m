@@ -117,6 +117,7 @@ static NSString * _company = nil;
     self.title = @"购买流量";
     _company = self.buyflay.mobileMsg;
     
+    [self.currentPriceLable setTintColor:[UIColor redColor]];
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
