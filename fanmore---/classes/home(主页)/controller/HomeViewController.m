@@ -163,8 +163,8 @@ static NSString *homeCellidentify = @"homeCellId";
    
     taskData * task = [self.taskDatas lastObject];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    params[@"pagingTag"] = @(task.taskOrder);
-//    NSLog(@"尾部刷新%ld",task)
+    params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
+//    NSLog(@"尾部刷新%ld",task.taskOrder);
     params[@"pagingSize"] = @(pageSize);
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
