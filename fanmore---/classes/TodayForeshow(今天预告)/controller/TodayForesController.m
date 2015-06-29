@@ -176,6 +176,9 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         cell.delegate = self;
         cell.isWarning = NO;
     }
+    
+    
+    
     taskData * task = self.Notices[indexPath.row];
     cell.task = task;
     
@@ -194,7 +197,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     }
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
-     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.merchantTitle] andOnlineImage:(task.status == 3)];
+     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.merchantTitle] andOnlineImage:nil];
     NSLog(@"sdadsasd");
     return cell;
 }
