@@ -33,7 +33,7 @@
 /**多少人获取了流量*/
 @property(nonatomic,strong) NSNumber * luckies;
 /**剩余流量*/
-@property(nonatomic,strong) NSNumber * last;
+@property(nonatomic,assign) CGFloat last;
 
 /**剩余流量*/
 @property(nonatomic,assign) int taskFailed;
