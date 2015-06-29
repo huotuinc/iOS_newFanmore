@@ -176,7 +176,7 @@
    
     
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithUrl:self.pictureUrl] title:self.titless url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithUrl:self.pictureUrl] title:self.titless url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
      //创建弹出菜单容器
      id<ISSContainer> container = [ShareSDK container];
                                                                                    
@@ -205,11 +205,11 @@
              if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
                  
                  if ([json[@"resultData"][@"illgel"] intValue]!=0 ||[json[@"resultData"][@"reward"] floatValue] <= 0.0) {
-                     [MBProgressHUD showError:@"分享成功"];
+                     [MBProgressHUD  showSuccess:@"分享成功"];
                  }else if([json[@"resultData"][@"reward"] floatValue]> 0){
                      
                      CGFloat rewad = [json[@"resultData"][@"reward"] floatValue];
-                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"成功获取%.1fM流量",rewad]];
+                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜你获得了%@M流量",[NSString xiaoshudianweishudeal:rewad]]];
                      
                      NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
                      

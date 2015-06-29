@@ -197,7 +197,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     }
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
-     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.merchantTitle] andOnlineImage:NO];
+     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.merchantTitle] andOnlineImage:YES];
     NSLog(@"sdadsasd");
     return cell;
 }
