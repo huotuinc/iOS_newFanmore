@@ -14,6 +14,7 @@
 #import "FeedBackViewController.h"
 #import "WebController.h"
 #import "GlobalData.h"
+#import "SDImageCache.h"
 
 @interface settingViewController ()
 
@@ -45,6 +46,50 @@ static NSString * _num = nil;
     
     
 }
+
+
+// 计算某个路径下的缓存文件大小
+- (long long)countCacheFileSizeInPath:(NSString *)path
+{
+    long long size = 0;
+    
+    
+    // 创建文件管理对象
+    NSFileManager *manager = [NSFileManager defaultManager]; //单例
+    // 获取路径下所有的文件名
+    NSArray *fileNames = [manager subpathsOfDirectoryAtPath:path error:nil];
+    // 遍历文件夹 计算文件大小
+    for (NSString *fileName in fileNames)
+    {
+        // 通过路径拼接出文件的路径
+        NSString *filePath = [NSString stringWithFormat:@"%@%@", path, fileName];
+        // 获取文件的相关信息
+        NSDictionary *attrbutesDic = [manager attributesOfItemAtPath:filePath error:nil];
+        long long fileSize = [attrbutesDic[NSFileSize] longLongValue];
+        size += fileSize;
+    }
+    
+    return size;
+    
+}
+
+
+- (CGFloat)countCacheFileSize
+{
+    long long cache = 0;
+    // 缓存主要存在于两个文件夹中
+    // /Library/Caches/com.zhujiacong.TimeMovie/fsCachedData/  webView
+    // /Library/Caches/com.hackemist.SDWebImageCache.default/  SDWebImage
+    // 第一个文件夹
+    // 获取沙盒路径
+    NSString * shapath = NSHomeDirectory();
+    shapath = [shapath stringByAppendingString:@"/Library/Caches/com.hackemist.SDWebImageCache.default/"];
+    cache = [self countCacheFileSizeInPath:shapath];
+    CGFloat cacheSize = (CGFloat)cache / 1024 / 1024;
+    return cacheSize;
+}
+
+
 /**
  *  第0组数据
  */
@@ -57,8 +102,17 @@ static NSString * _num = nil;
     GlobalData *glo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName]; //保存用户信息
     _num = glo.customerServicePhone;
     
+    CGFloat aa = [self countCacheFileSize];
+    
+    
     MJSettingItem *advice = [MJSettingArrowItem itemWithIcon:nil title:@"意见反馈" destVcClass:[FeedBackViewController class]];
-    MJSettingItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:@"110KB"];
+    
+    MJSettingLabelItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:[NSString stringWithFormat:@"缓存大小%.1fM",aa]];
+    cache.option = ^{
+        
+        
+    };
+    
     MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们" destVcClass:[WebController class]];
     MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
     MJSettingItem *guize = [MJSettingArrowItem itemWithIcon:nil title:@"投放指南" destVcClass:[WebController class]];
