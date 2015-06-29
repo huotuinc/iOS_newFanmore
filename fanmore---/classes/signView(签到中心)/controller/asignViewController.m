@@ -208,7 +208,7 @@
             //1、保存个人信息
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-            if ([self getWeek] == 7) {
+            if ([self getWeek] == 7 && user.signInfo == 127) {
                 [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量", user.signtoday]];
             }else {
                 [MBProgressHUD showSuccess:@"签到成功"];
@@ -221,7 +221,7 @@
             [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.asignBtn.userInteractionEnabled = NO;
         }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
         });
     } failure:^(NSError *error) {

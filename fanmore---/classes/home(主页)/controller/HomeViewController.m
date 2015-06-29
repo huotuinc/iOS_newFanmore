@@ -382,7 +382,7 @@ static NSString * homeCellidentify = @"homeCellId";
                 //1、保存个人信息
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-                if ([self getWeek] == 7) {
+                if ([self getWeek] == 7 && user.signInfo == 127) {
                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量", user.signtoday]];
                 }else {
                     [MBProgressHUD showSuccess:@"签到成功"];
