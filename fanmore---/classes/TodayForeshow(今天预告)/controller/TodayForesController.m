@@ -77,7 +77,6 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    
     self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
     self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
     self.tableView.footerRefreshingText = @"正在加载更多数据,请稍等";
@@ -88,7 +87,6 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 //头部刷新
 - (void)headerRereshing  //加载最新数据
 {
-    
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @"";
     params[@"pagingSize"] = @(pagesize);
@@ -96,8 +94,6 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
-
-   
 }
 
 //尾部刷新
@@ -114,12 +110,16 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 
 - (void)getMoreData:(NSMutableDictionary *) params{
-    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            [self.Notices addObjectsFromArray:taskArray];
-            [self.tableView reloadData];    //刷新数据
+            if (taskArray.count) {
+                [self.Notices addObjectsFromArray:taskArray];
+                [self.tableView reloadData];    //刷新数据
+            }else{
+                [MBProgressHUD showSuccess:@"加载成功,没有更多数据"];
+            }
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",[error description]);
@@ -136,6 +136,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
     __weak TodayForesController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==5000) {//访问成果
             [MBProgressHUD showError:@"没有新的预告"];
             return ;
@@ -175,9 +176,6 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         cell.delegate = self;
         cell.isWarning = NO;
     }
-    
-    
-    
     taskData * task = self.Notices[indexPath.row];
     cell.task = task;
     
@@ -196,7 +194,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     }
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
-     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.desc] andOnlineImage:(task.status == 3)];
+     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.merchantTitle] andOnlineImage:(task.status == 3)];
     NSLog(@"sdadsasd");
     return cell;
 }

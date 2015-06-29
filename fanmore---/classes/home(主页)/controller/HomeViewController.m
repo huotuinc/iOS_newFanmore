@@ -178,8 +178,6 @@ static NSString * homeCellidentify = @"homeCellId";
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        
-        NSLog(@"上啦加载的数据%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             return ;
@@ -204,8 +202,8 @@ static NSString * homeCellidentify = @"homeCellId";
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     
+
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        NSLog(@"xxxxxx手术室大大大师%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             return ;
@@ -222,7 +220,9 @@ static NSString * homeCellidentify = @"homeCellId";
             [self showHomeRefershCount];
             [self.tableView reloadData];    //刷新数据
         }
+        
     } failure:^(NSError *error) {
+        
         NSLog(@"%@",[error description]);
     }];
     
