@@ -179,7 +179,7 @@
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 53011) {
             [MBProgressHUD hideHUD];
-            [MBProgressHUD showError:@"密码错误"];
+            [MBProgressHUD showError:@"用户名或密码错误"];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
