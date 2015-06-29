@@ -101,7 +101,7 @@
         }else{//未签到
             if (btn.tag < ((long)[self Wednesday])) {//漏签的
                 [btn setBackgroundImage:[UIImage imageNamed:@"asignGray"] forState:UIControlStateNormal];
-                [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 btn.userInteractionEnabled = NO;
             }else{//未签的
                 [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];

@@ -72,6 +72,8 @@
 
     self.onlineImage.hidden = !isOnline;
     
+    self.timeButton.hidden = isOnline;
+    
 
  
 }
