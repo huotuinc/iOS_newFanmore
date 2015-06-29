@@ -114,6 +114,7 @@ static NSString * homeCellidentify = @"homeCellId";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operWebViewCn:) name:ReciveTaskId object:nil];
 }
 
 
@@ -453,6 +454,14 @@ static NSString * homeCellidentify = @"homeCellId";
     
     
 }
+
+- (void)operWebViewCn:(NSNotification *) notification {
+    NSLog(@"%@",notification);
+    
+    
+}
+
+
 - (void)answerOverToreferch{
    [self.tableView headerBeginRefreshing];
 }

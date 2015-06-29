@@ -102,6 +102,7 @@
 
 #define TodaySignNot @"TodaySignNot"   //签到推送通知类型
 
+#define ReciveTaskId @"reciveTaskId"    //收到本地推送首页转跳
 
 //通知
 #define RefreshHomeDate @"RefreshHomeDate"  //刷新home的数据

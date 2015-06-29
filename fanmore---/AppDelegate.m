@@ -92,6 +92,11 @@
     
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    
+}
+
 
 
 
@@ -127,7 +132,8 @@
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     detailViewController *detail = [story instantiateViewControllerWithIdentifier:@"detailViewController"];
     detail.taskId = (int)userInfo[@"id"];
-    [self.window.rootViewController presentViewController:detail animated:YES completion:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:userInfo];
+
 }
 
 
