@@ -956,6 +956,7 @@
 		EF1EA5FF1B0DA2D600C1F60D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EFD02B2E1B155CDA00D11D6D /* setting(设置中心) */,
 				EF3B55171B37A0CB0045ADEB /* NewFeature(版本新特性) */,
 				EFD7A9C21B1D9DE30004A9A4 /* Htmlresource(网页资源) */,
 				EF565D111B16DCA900FC2D6B /* TodayForeshow(今天预告) */,
@@ -1224,7 +1225,6 @@
 		EF565D131B16DCA900FC2D6B /* model */ = {
 			isa = PBXGroup;
 			children = (
-				EFD02B2E1B155CDA00D11D6D /* setting(设置中心) */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1625,7 +1625,7 @@
 				EFD02B321B155CDA00D11D6D /* model */,
 			);
 			name = "setting(设置中心)";
-			path = "../../setting(设置中心)";
+			path = "classes/setting(设置中心)";
 			sourceTree = "<group>";
 		};
 		EFD02B2F1B155CDA00D11D6D /* controller */ = {

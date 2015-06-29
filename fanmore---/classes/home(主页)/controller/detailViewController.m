@@ -13,6 +13,8 @@
 #import "WebController.h"
 #import "userData.h"
 #import "HAMineLoveCarDBOperator.h"
+#import "SDWebImageManager.h"
+
 
 @interface detailViewController ()<LoginViewDelegate>
 
@@ -158,7 +160,7 @@
  */
 - (void)setup{
     
-    //导航栏右侧分享按钮
+       //导航栏右侧分享按钮
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"分享"
                                                                                  style:UIBarButtonItemStylePlain    handler:^(id sender) {
                                                                          
@@ -172,8 +174,9 @@
         
     }else{
    
+    
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:self.pictureUrl] title:self.titless url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithUrl:self.pictureUrl] title:self.titless url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
      //创建弹出菜单容器
      id<ISSContainer> container = [ShareSDK container];
                                                                                    

@@ -19,6 +19,6 @@
 
 @interface findBackPwViewController : UIViewController
 
-@property(nonatomic,weak) id delegate;
+@property(nonatomic,weak) id<findBackPwViewDelegate> delegate;
 
 @end

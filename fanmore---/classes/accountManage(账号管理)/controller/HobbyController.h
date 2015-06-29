@@ -28,5 +28,5 @@
 //用户的爱好勾选
 @property (strong, nonatomic) NSString *userHobby;
 
-@property(nonatomic,strong)id <HobbyControllerDelegate> delegate;
+@property(nonatomic,weak)id <HobbyControllerDelegate> delegate;
 @end

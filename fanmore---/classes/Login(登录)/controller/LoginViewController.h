@@ -19,6 +19,6 @@
 
 /**跳转到登入界面的类型*/
 @property(nonatomic,assign) int loginType;
-@property(nonatomic,strong) id<LoginViewDelegate>delegate;
+@property(nonatomic,weak) id<LoginViewDelegate>delegate;
 
 @end

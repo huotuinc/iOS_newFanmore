@@ -107,10 +107,8 @@ static NSString * _num = nil;
     
     MJSettingItem *advice = [MJSettingArrowItem itemWithIcon:nil title:@"意见反馈" destVcClass:[FeedBackViewController class]];
     
-    MJSettingLabelItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:[NSString stringWithFormat:@"缓存大小%.1fM",aa]];
-    cache.option = ^{
-        [[SDImageCache sharedImageCache] clearDisk];
-    };
+    MJSettingItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:[NSString stringWithFormat:@"缓存大小%.1fM",aa]];
+    
     
     MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们" destVcClass:[WebController class]];
     MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
@@ -159,6 +157,39 @@ static NSString * _num = nil;
             [self presentViewController:ab animated:YES completion:nil];
             
         }
+    }
+    if (indexPath.row == 1) {
+        
+        [[SDImageCache sharedImageCache] clearDisk];
+        
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        //1、保存全局信息
+        NSString *fileName = [path stringByAppendingPathComponent:InitGlobalDate];
+        GlobalData *glo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName]; //保存用户信息
+        _num = glo.customerServicePhone;
+        
+        MJSettingItem *advice = [MJSettingArrowItem itemWithIcon:nil title:@"意见反馈" destVcClass:[FeedBackViewController class]];
+        
+        MJSettingItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:[NSString stringWithFormat:@"0M"]];
+        
+        
+        MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们" destVcClass:[WebController class]];
+        MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
+        MJSettingItem *guize = [MJSettingArrowItem itemWithIcon:nil title:@"投放指南" destVcClass:[WebController class]];
+        MJSettingItem *gz = [MJSettingArrowItem itemWithIcon:nil title:@"规则说明" destVcClass:[WebController class]];
+        MJSettingItem *touch = [MJSettingLabelItem itemWithTitle:@"客服热线" rightTitle:glo.customerServicePhone];
+        touch.option = ^{
+            
+            UIAlertView * aaa= [[UIAlertView alloc] initWithTitle:@"客服热线" message:[NSString stringWithFormat:@"确定要拨打%@吗?",glo.customerServicePhone] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [aaa show];
+        };
+        MJSettingGroup *group = [[MJSettingGroup alloc] init];
+        group.items = @[advice, cache, about,handShake,guize,gz,touch];
+        [self.data removeAllObjects];
+        [self.data addObject:group];
+        
+       
+        [self.tableView reloadData];
     }
     
     if (item.option) { // block有值(点击这个cell,.有特定的操作需要执行)
