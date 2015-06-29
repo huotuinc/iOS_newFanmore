@@ -63,6 +63,8 @@ static NSString * homeCellidentify = @"homeCellId";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [self.navigationController setNavigationBarHidden:NO];
+    
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
@@ -380,7 +382,11 @@ static NSString * homeCellidentify = @"homeCellId";
                 //1、保存个人信息
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功"]];
+                if ([self getWeek] == 7) {
+                    [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量", user.signtoday]];
+                }else {
+                    [MBProgressHUD showSuccess:@"签到成功"];
+                }
             }
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
@@ -411,7 +417,10 @@ static NSString * homeCellidentify = @"homeCellId";
     
     comps = [calendar components:unitFlags fromDate:date];
     
-    NSInteger week = [comps weekday]-1;
+    NSInteger week = [comps weekday] - 1;
+    if (week == 0) {
+        return 7;
+    }
     
     return week;
 }

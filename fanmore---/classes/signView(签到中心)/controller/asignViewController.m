@@ -25,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *Friday;
 /**周六*/
 @property (weak, nonatomic) IBOutlet UIButton *Saturday;
-/**周六*/
+/**周日*/
 @property (weak, nonatomic) IBOutlet UIButton *SunDay;
 
 /**安妞的试图*/
@@ -140,7 +140,10 @@
     NSDateComponents *comps = [[NSDateComponents alloc] init] ;
     NSInteger unitFlags = NSWeekdayCalendarUnit;
     comps = [calendar components:unitFlags fromDate:date];
-    long week = [comps weekday]-1;
+    long week = [comps weekday] - 1;
+    if (week == 0) {
+        return 7;
+    }
     return week;
 }
 
@@ -205,7 +208,11 @@
             //1、保存个人信息
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-            [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量",user.signtoday]];
+            if ([self getWeek] == 7) {
+                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量", user.signtoday]];
+            }else {
+                [MBProgressHUD showSuccess:@"签到成功"];
+            }
             [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
             self.asignBtn.backgroundColor = LWColor(163, 163, 163);
             self.asignBtn.layer.cornerRadius = 6;
