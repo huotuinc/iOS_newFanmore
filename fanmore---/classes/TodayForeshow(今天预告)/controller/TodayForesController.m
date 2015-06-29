@@ -13,6 +13,7 @@
 
 
 #define pagesize 4
+
 @interface TodayForesController ()<ForeshowTableViewCellDelegate>
 /**今日预告列表*/
 @property(nonatomic,strong)NSMutableArray * Notices;

@@ -206,6 +206,12 @@
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
             [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 +%@M",user.signtoday]];
+            self.asignBtn.backgroundColor = LWColor(163, 163, 163);
+            self.asignBtn.layer.cornerRadius = 6;
+            self.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+            self.asignBtn.layer.borderWidth = 0.5;
+            [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.asignBtn.userInteractionEnabled = NO;
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
