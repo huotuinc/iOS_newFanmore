@@ -40,7 +40,11 @@ static NSString *collectionViewidentifier = @"collectionCell";
             if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
                 
                 _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
+                
             }
+            
+            [self setWaringLabel];
+
         } failure:^(NSError *error) {
             
         }];
@@ -49,6 +53,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
         
         return [obj1 compare:obj2];
     }];
+    
+    
     return _flays;
 }
 
@@ -112,7 +118,39 @@ static NSString *collectionViewidentifier = @"collectionCell";
 }
 
 
-
+- (void)setWaringLabel {
+    NSLog(@"self.flays:%@", self.flays);
+    if (self.flays.count <= 2) {
+        if ([self.userInfo.balance floatValue] >= [self.flays[1] floatValue] ) {
+            self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
+        }else if ([self.userInfo.balance floatValue] < [self.flays[0] floatValue]) {
+            self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%@M流量包", [self.flays[0] floatValue] - [self.userInfo.balance floatValue], self.flays[0]];
+        }else {
+            self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%dM以下流量包", [self.flays[0] intValue]];
+        }
+    }else {
+        for (int i = 1; i < self.flays.count - 1; i++) {
+            NSLog(@"%@",self.userInfo.balance);
+            NSLog(@"%@", self.flays[0]);
+            if ([self.userInfo.balance floatValue] > [self.flays[0] floatValue]) {
+                NSLog(@"%@", self.flays[self.flays.count -1]);
+                if ([self.userInfo.balance floatValue] > [self.flays[self.flays.count - 1] floatValue]) {
+                    self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
+                    break;
+                }
+                if ([self.userInfo.balance floatValue] > [self.flays[i] floatValue]) {
+                
+                    if (self.userInfo.balance < self.flays[i + 1]) {
+                        self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%dM以下流量包", [self.flays[i] intValue]] ;
+                        break;
+                    }
+                }
+            }else {
+                self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%@M流量包", [self.flays[0] floatValue] - [self.userInfo.balance floatValue], self.flays[0]];
+            }
+        }
+    }
+}
 
 
 
@@ -128,26 +166,10 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [self.navigationController setNavigationBarHidden:NO];
     
+
+    
 //    NSLog(@"%@", self.flays);
-//    
-//    for (int i = 0; i < self.flays.count - 1; i++) {
-//        NSLog(@"%@",self.userInfo.balance);
-//        NSLog(@"%@", self.flays[0]);
-//        if (self.userInfo.balance > self.flays[0]) {
-//            if (self.userInfo.balance > self.flays[self.flays.count - 1]) {
-//                self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
-//            }
-//            if (self.userInfo.balance > self.flays[i]) {
-//                
-//                if (self.userInfo.balance < self.flays[i + 1]) {
-//                    self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%d以下包", (int)self.flays[i]];
-//                    break;
-//                }
-//            }
-//        }else {
-//            self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%dM流量包", (int)self.flays[0] - [self.userInfo.balance floatValue], (int)self.flays[0]];
-//        }
-//    }
+//
 
 }
 
