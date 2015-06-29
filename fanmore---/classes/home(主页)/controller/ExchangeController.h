@@ -24,6 +24,6 @@
 @property(nonatomic,strong) NSArray * flays;
 
 
-@property(nonatomic,strong) id<ExchangeControllerdelegate> delegate;
+@property(nonatomic,weak) id<ExchangeControllerdelegate> delegate;
 
 @end

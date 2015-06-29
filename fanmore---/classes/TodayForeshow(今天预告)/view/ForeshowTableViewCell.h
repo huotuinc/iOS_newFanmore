@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *timeButton;
 
 @property (assign, nonatomic) BOOL isWarning;
-@property(nonatomic,strong) id <ForeshowTableViewCellDelegate> delegate;
+@property(nonatomic,weak) id <ForeshowTableViewCellDelegate> delegate;
 
 //+ (instancetype)ForeshowTableViewCell;
 
