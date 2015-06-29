@@ -71,6 +71,11 @@ static NSString * _company = nil;
                     [_collection reloadData];
                 }
             }
+            NSArray * aaM = self.buyflay.purchases;
+            flayModel * flay = aaM[0];
+            self.oldPriceLable.text = [NSString stringWithFormat:@"%@", flay.msg];
+            self.currentPriceLable.text = [NSString stringWithFormat:@"现价:￥%.1f",flay.price];
+            
         } failure:^(NSError *error) {
             NSLog(@"err");
         }];
@@ -152,10 +157,7 @@ static NSString * _company = nil;
     [self.collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
     
     
-    NSArray * aaM = self.buyflay.purchases;
-    flayModel * flay = aaM[0];
-    self.oldPriceLable.text = [NSString stringWithFormat:@"%@", flay.msg];
-    self.currentPriceLable.text = [NSString stringWithFormat:@"现价:￥%.1f",flay.price];
+    
 }
 
 

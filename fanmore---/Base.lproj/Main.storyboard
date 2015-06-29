@@ -1448,13 +1448,13 @@
                                     <outlet property="delegate" destination="qbC-gr-fT1" id="qr6-sh-Bd5"/>
                                 </connections>
                             </webView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ux7-lE-E72">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ux7-lE-E72" customClass="FMButton">
                                 <rect key="frame" x="15" y="546" width="570" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1x3-Tl-eL8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="答题领取10M流量">
+                                <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

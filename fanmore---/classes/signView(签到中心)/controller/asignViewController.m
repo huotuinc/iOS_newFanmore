@@ -99,13 +99,13 @@
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             btn.userInteractionEnabled = NO;
         }else{//未签到
-            if (btn.tag < ((long)[self Wednesday])) {//漏签的
-                [btn setBackgroundImage:[UIImage imageNamed:@"asignGray"] forState:UIControlStateNormal];
-                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                btn.userInteractionEnabled = NO;
-            }else{//未签的
+            if (btn.tag < ((long)[self getWeek])) {//漏签的
                 [btn setBackgroundImage:[UIImage imageNamed:@"asignRed"] forState:UIControlStateNormal];
                 [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                btn.userInteractionEnabled = NO;
+            }else{//未签的
+                [btn setBackgroundImage:[UIImage imageNamed:@"asignGray"] forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 btn.userInteractionEnabled = NO;
             }
         }
@@ -207,7 +207,9 @@
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
             [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 +%@M",user.signtoday]];
         }
-        [MBProgressHUD hideHUD];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
     } failure:^(NSError *error) {
         NSLog(@"%@",[error description]);
         [MBProgressHUD hideHUD];
