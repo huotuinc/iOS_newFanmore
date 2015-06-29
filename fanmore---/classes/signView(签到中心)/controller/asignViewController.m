@@ -189,6 +189,13 @@
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"今日已签到，请明天来签到"];
+            [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
+            self.asignBtn.backgroundColor = LWColor(163, 163, 163);
+            self.asignBtn.layer.cornerRadius = 6;
+            self.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+            self.asignBtn.layer.borderWidth = 0.5;
+            [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.asignBtn.userInteractionEnabled = NO;
             return ;
         }
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==1) {
