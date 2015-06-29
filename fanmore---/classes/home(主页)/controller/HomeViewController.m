@@ -379,9 +379,12 @@ static NSString * homeCellidentify = @"homeCellId";
                 //1、保存个人信息
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 +%@M",user.signtoday]];
+                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功"]];
             }
-            [MBProgressHUD hideHUD];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+            
         } failure:^(NSError *error) {
             NSLog(@"%@",[error description]);
             [MBProgressHUD hideHUD];
