@@ -206,6 +206,7 @@
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
             [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 +%@M",user.signtoday]];
+            [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
             self.asignBtn.backgroundColor = LWColor(163, 163, 163);
             self.asignBtn.layer.cornerRadius = 6;
             self.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
