@@ -92,6 +92,11 @@
     
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    
+}
+
 
 
 
@@ -108,7 +113,8 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     if (notification) {
         NSLog(@"%@",notification);
-        UIAlertView *alert =  [[UIAlertView alloc] initWithTitle:nil message:@"received E-mail" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        NSDictionary *userInfo = notification.userInfo;
+        UIAlertView *alert =  [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", userInfo[@"titel"]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     
     }
@@ -126,7 +132,8 @@
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     detailViewController *detail = [story instantiateViewControllerWithIdentifier:@"detailViewController"];
     detail.taskId = (int)userInfo[@"id"];
-    [self.window.rootViewController.navigationController pushViewController:detail animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:userInfo];
+
 }
 
 
