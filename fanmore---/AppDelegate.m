@@ -10,7 +10,7 @@
 #import "MobClick.h"
 #import <INTULocationManager.h>//定位
 #import "LoginResultData.h"
-
+#import "detailViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
@@ -74,11 +74,9 @@
     }
     
     
-    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (localNotif)
-    {
-        NSLog(@"浙A99981");
-    }
+//    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    [self presentViewControllerWithUserInfo:userInfo];
     
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
     {
@@ -112,6 +110,7 @@
         NSLog(@"%@",notification);
         UIAlertView *alert =  [[UIAlertView alloc] initWithTitle:nil message:@"received E-mail" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+    
     }
 }
 
@@ -122,6 +121,14 @@
     return [ShareSDK handleOpenURL:url wxDelegate:self];
 }
 
+- (void)presentViewControllerWithUserInfo:(NSDictionary *)userInfo
+{
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    detailViewController *detail = [story instantiateViewControllerWithIdentifier:@"detailViewController"];
+    detail.taskId = (int)userInfo[@"id"];
+    [self.window.rootViewController.navigationController pushViewController:detail animated:YES];
+}
+
 
 
 /**
@@ -130,16 +137,16 @@
  */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     //如果极简开发包不可用,会跳转支付宝钱包进行支付,需要将支付宝钱包的支付结果回传给开 发包
-//    if ([url.host isEqualToString:@"safepay"]) {
-//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url
-//                                                  standbyCallback:^(NSDictionary *resultDic) {
-//                                                      NSLog(@"result = %@",resultDic);
-//                                                  }]; }
-//    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
-//        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-//            NSLog(@"result = %@",resultDic);
-//        }];
-//    }
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url
+                                                  standbyCallback:^(NSDictionary *resultDic) {
+                                                      NSLog(@"result = %@",resultDic);
+                                                  }]; }
+    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
     
     return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
     
