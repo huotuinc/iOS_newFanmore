@@ -67,7 +67,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
-//    [self.tableView headerBeginRefreshing];
+    [self.tableView headerBeginRefreshing];
     
    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
@@ -197,7 +197,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     }
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
-     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.merchantTitle] andOnlineImage:NO];
+     [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.merchantTitle] andOnlineImage:YES];
     NSLog(@"sdadsasd");
     return cell;
 }
