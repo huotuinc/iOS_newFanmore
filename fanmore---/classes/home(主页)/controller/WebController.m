@@ -59,7 +59,6 @@
         [self.webView loadRequest:request];
     }
     else{ //答题
-        
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
         urlStr = [urlStr stringByAppendingString:self.answerType];
@@ -69,9 +68,6 @@
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
     }
-    
-    
-
 }
 - (void)setupWebview{
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];

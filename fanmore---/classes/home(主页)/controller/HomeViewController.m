@@ -21,7 +21,7 @@
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
 
-#define pageSize 8
+#define pageSize 5
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate>
 /**任s务列表*/
@@ -33,7 +33,7 @@
 
 @implementation HomeViewController
 
-static NSString *homeCellidentify = @"homeCellId";
+static NSString * homeCellidentify = @"homeCellId";
 
 - (BOOL)isLogin{
     
@@ -75,6 +75,9 @@ static NSString *homeCellidentify = @"homeCellId";
     
 }
 
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首页";
@@ -113,10 +116,6 @@ static NSString *homeCellidentify = @"homeCellId";
     
 }
 
-//- (void)_initView
-//{
-//    [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
-//}
 
 /**
  *  集成刷新控件
@@ -171,8 +170,11 @@ static NSString *homeCellidentify = @"homeCellId";
     [self.tableView footerEndRefreshing];
 }
 
-
-
+/**
+ *   上拉加载更多
+ *
+ *  
+ */
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
@@ -426,7 +428,7 @@ static NSString *homeCellidentify = @"homeCellId";
     showBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [showBtn setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
     [showBtn setBackgroundColor:[UIColor colorWithWhite:0.878 alpha:1.000]];
-    [showBtn setTitle:@"数据已刷新" forState:UIControlStateNormal];
+    [showBtn setTitle:[NSString stringWithFormat:@"刷新%d条数据",pageSize] forState:UIControlStateNormal];
     CGFloat btnX = 0;
     CGFloat btnH = 44;
     CGFloat btnY = 64 - btnH - 2;
@@ -449,8 +451,7 @@ static NSString *homeCellidentify = @"homeCellId";
     
 }
 - (void)answerOverToreferch{
-    NSLog(@"12312313");
-    [self.tableView headerBeginRefreshing];
+   [self.tableView headerBeginRefreshing];
 }
 
 - (void)dealloc{

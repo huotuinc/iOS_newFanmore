@@ -10,6 +10,8 @@
 
 @interface Details : NSObject
 
+
+
 /**
  *  标题
  */
@@ -20,9 +22,13 @@
 @property (nonatomic, assign) long long date;
 
 //id
-@property (nonatomic, assign) long detailId;
+@property (nonatomic, assign) long long detailId;
+
+
+@property (nonatomic, assign) long long detailOrder;
 
 //变化值
-@property (nonatomic, assign) double vary;
+@property (nonatomic, assign) CGFloat vary;
+
 
 @end
