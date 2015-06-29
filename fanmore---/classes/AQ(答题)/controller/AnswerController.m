@@ -14,11 +14,18 @@
 #import "UserLoginTool.h"
 #import "detailViewController.h"
 #include "WebController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AnswerController ()
 
 /**答案*/
 @property(nonatomic,strong)NSMutableString * ans;
+
+//成功
+@property(nonatomic,assign)SystemSoundID successSound;
+//失败
+@property(nonatomic,assign)SystemSoundID failureSound;
+
 @end
 
 
@@ -26,6 +33,30 @@
 
 static int _qindex = 0;
 int _rightQuest = 0;  //纪录正确的答题数
+
+
+- (SystemSoundID)successSound{
+    
+    if (!_successSound) {
+        
+        NSURL *url=[[NSBundle mainBundle]URLForResource:@"right.mp3" withExtension:nil];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_successSound);
+    }
+    
+    return _successSound;
+}
+
+- (SystemSoundID)failureSound{
+    
+    if (_failureSound == 0) {
+        
+        NSURL *url=[[NSBundle mainBundle]URLForResource:@"wrong.mp3" withExtension:nil];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_failureSound);
+    }
+    
+    return _failureSound;
+}
+
 
 
 - (NSMutableString *)ans
@@ -186,7 +217,7 @@ int _rightQuest = 0;  //纪录正确的答题数
         //拼接答案
         [self.ans appendString:[NSString stringWithFormat:@"%d:",taskdetail.qid]];
         self.tureAnswer = taskdetail.correntAid;
-#warning 缺展位图片
+//#warning 缺展位图片
         //1、答题图片
     
         //2、答案
@@ -282,9 +313,11 @@ int _rightQuest = 0;  //纪录正确的答题数
     
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
+         AudioServicesPlayAlertSound(self.successSound);
         _rightQuest++;
     }else {
         [self showTureAnswer];
+        AudioServicesPlayAlertSound(self.failureSound);
         [self _setBgImageWrong];
         [sender setBackgroundImage:[UIImage imageNamed:@"A_c"] forState:UIControlStateNormal];
     }
@@ -302,10 +335,12 @@ int _rightQuest = 0;  //纪录正确的答题数
     
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
+        AudioServicesPlayAlertSound(self.successSound);
         _rightQuest++;
 
     }else {
         [self showTureAnswer];
+        AudioServicesPlayAlertSound(self.failureSound);
         [self _setBgImageWrong];
         [self.BButton setBackgroundImage:[UIImage imageNamed:@"B_c"] forState:UIControlStateNormal];
     }
@@ -324,10 +359,12 @@ int _rightQuest = 0;  //纪录正确的答题数
     
     if (sender.tag == self.tureAnswer) {
         [self showTureAnswer];
+        AudioServicesPlayAlertSound(self.successSound);
         _rightQuest++;
 
     }else {
         [self showTureAnswer];
+        AudioServicesPlayAlertSound(self.failureSound);
         [self _setBgImageWrong];
         [self.CButton setBackgroundImage:[UIImage imageNamed:@"C_c"] forState:UIControlStateNormal];
 
@@ -346,9 +383,11 @@ int _rightQuest = 0;  //纪录正确的答题数
     
     if (self.DButton.tag == self.tureAnswer) {
         [self showTureAnswer];
+        AudioServicesPlayAlertSound(self.successSound);
         _rightQuest++;
     }else {
         [self showTureAnswer];
+        AudioServicesPlayAlertSound(self.failureSound);
         [self _setBgImageWrong];
         [self.DButton setBackgroundImage:[UIImage imageNamed:@"D_c"] forState:UIControlStateNormal];
     }

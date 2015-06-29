@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IIViewDeckController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,IIViewDeckControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,IIViewDeckControllerDelegate,CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
