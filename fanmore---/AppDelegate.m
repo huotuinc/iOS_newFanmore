@@ -20,18 +20,34 @@
 //#import <RennSDK/RennSDK.h>
 #import <AlipaySDK/AlipaySDK.h>  //支付宝接入头文件
 #import "LWNewFeatureController.h"
+#import <CoreLocation/CoreLocation.h> //定位
+
 
 
 
 @interface AppDelegate ()
 
+@property(nonatomic,strong) CLLocationManager *mgr;
 
 @end
 
 @implementation AppDelegate
 
 
+- (CLLocationManager *)mgr{
+    
+    if (_mgr == nil) {
+        _mgr = [[CLLocationManager alloc] init];
+    }
+    return _mgr;
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //定位
+    [self test];
+    
     
     application.applicationIconBadgeNumber = 0;
     
@@ -42,7 +58,7 @@
     
     
     //定位功能
-    [self setupLocal];
+//    [self setupLocal];
    
     
     //进行初始化借口调用
@@ -345,6 +361,52 @@
  */
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
     
+    
+}
+
+
+
+/**
+ *  定位
+ */
+- (void)test{
+    self.mgr.delegate = self;
+    self.mgr.desiredAccuracy = kCLLocationAccuracyKilometer;
+    if (IsIos8) {
+        
+        [self.mgr requestAlwaysAuthorization];
+    }else{
+        [self.mgr startUpdatingLocation];
+    }
+}
+
+
+/**
+ *  定位定位代理方法
+ *
+ *  @param manager   <#manager description#>
+ *  @param locations <#locations description#>
+ */
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    NSLog(@"adsdasdasdasdasdasd%s",__func__);
+    CLLocation * loc = [locations lastObject];
+    NSString * lat = [NSString stringWithFormat:@"%f",loc.coordinate.latitude];
+    NSString * lg = [NSString stringWithFormat:@"%f",loc.coordinate.longitude];
+    [[NSUserDefaults standardUserDefaults] setObject:lat forKey:DWLatitude]; //保存纬度
+    [[NSUserDefaults standardUserDefaults] setObject:lg forKey:DWLongitude];//保存精度
+    NSLog(@"sdasdads %@   xxxxx ---- %@  ",lat,lg);
+    [self.mgr stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    if (status == kCLAuthorizationStatusNotDetermined) {
+        
+    }else if(status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse){
+        [self.mgr startUpdatingLocation];
+    }else{
+        
+    }
     
 }
 @end

@@ -98,6 +98,7 @@
         [self.iconView setBackgroundImage:iconImage forState:UIControlStateNormal];
     }
     [self setupPersonMessage];
+    self.title = @"个人信息";
 }
 /**
  *  初始化个人信息
@@ -122,7 +123,7 @@
     
     
 
-    if (!self.userinfo.area) {
+    if ([self.userinfo.area isEqualToString:@""]) {
         CGFloat longs =  [[[NSUserDefaults standardUserDefaults] stringForKey:DWLongitude] floatValue];
         CGFloat weis = [[[NSUserDefaults standardUserDefaults] stringForKey:DWLatitude] floatValue];
         CLLocation * loc = [[CLLocation alloc] initWithLatitude:weis longitude:longs];
@@ -529,16 +530,12 @@
  */
 - (void)reverseGeocode:(CLLocation *)loc{
     
+    NSLog(@"%f ---sssss-- %f" ,loc.coordinate.longitude ,loc.coordinate.latitude);
     [self.geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
         
-        if (error) {
-            
-            self.placeLable.text = @"杭州";
-        }else {
-            
-            CLPlacemark *pm = [placemarks firstObject];
-            self.placeLable.text = pm.name;
-        }
+        CLPlacemark *pm = [placemarks firstObject];
+        self.placeLable.text = pm.locality;
+        
     }];
 }
 

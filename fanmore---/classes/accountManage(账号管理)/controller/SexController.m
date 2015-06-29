@@ -121,6 +121,7 @@
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
             
+            [MBProgressHUD showSuccess:@"性别上传成功"];
             if ([self.delegate respondsToSelector:@selector(selectSexOver:)]) {
                 
                 [self.delegate selectSexOver:a];
