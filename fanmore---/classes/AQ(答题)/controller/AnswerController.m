@@ -39,7 +39,7 @@ int _rightQuest = 0;  //纪录正确的答题数
     
     if (!_successSound) {
         
-        NSURL *url=[[NSBundle mainBundle] URLForResource:@"checkin.wav" withExtension:nil];
+        NSURL *url=[[NSBundle mainBundle] URLForResource:@"right.wav" withExtension:nil];
         AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_successSound);
     }
     
@@ -50,7 +50,7 @@ int _rightQuest = 0;  //纪录正确的答题数
     
     if (_failureSound == 0) {
         
-        NSURL *url=[[NSBundle mainBundle]URLForResource:@"checkin.wav" withExtension:nil];
+        NSURL *url=[[NSBundle mainBundle]URLForResource:@"wrong.wav" withExtension:nil];
         AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_failureSound);
     }
     

@@ -10,12 +10,44 @@
 #import "GlobalData.h"
 #import "HomeViewController.h"
 #import "detailViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface WebController ()<UIWebViewDelegate>
+
+
+//成功
+@property(nonatomic,assign)SystemSoundID successSound;
+//失败
+@property(nonatomic,assign)SystemSoundID failureSound;
+
 
 @end
 
 @implementation WebController
+
+
+
+- (SystemSoundID)successSound{
+    
+    if (!_successSound) {
+        
+        NSURL *url=[[NSBundle mainBundle] URLForResource:@"checkin.wav" withExtension:nil];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_successSound);
+    }
+    
+    return _successSound;
+}
+
+- (SystemSoundID)failureSound{
+    
+    if (_failureSound == 0) {
+        
+        NSURL *url=[[NSBundle mainBundle]URLForResource:@"checkin.wav" withExtension:nil];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_failureSound);
+    }
+    
+    return _failureSound;
+}
 
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -68,6 +100,13 @@
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
         urlStr = [urlStr stringByAppendingString:self.answerType];
+        if ([self.answerType isEqualToString:@"rejected.html?"] || [self.answerType isEqualToString:@"failed.html?"] ) {
+            
+            AudioServicesPlayAlertSound(self.failureSound);
+        }else if([self.answerType isEqualToString:@"success.html?"]){
+            
+            AudioServicesPlayAlertSound(self.successSound);
+        }
         urlStr = [NSString stringWithFormat:@"%@taskReward=%.1f&rights=%d&wrongs=%u&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
         NSLog(@"%@",urlStr);
         NSURL * urlstr = [NSURL URLWithString:urlStr];
