@@ -108,6 +108,9 @@ static NSString * _num = nil;
     MJSettingItem *advice = [MJSettingArrowItem itemWithIcon:nil title:@"意见反馈" destVcClass:[FeedBackViewController class]];
     
     MJSettingLabelItem *cache = [MJSettingLabelItem itemWithTitle:@"清理缓存" rightTitle:[NSString stringWithFormat:@"缓存大小%.1fM",aa]];
+    cache.option = ^{
+        [[SDImageCache sharedImageCache] clearDisk];
+    };
     
     MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们" destVcClass:[WebController class]];
     MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
@@ -157,12 +160,7 @@ static NSString * _num = nil;
             
         }
     }
-    if (indexPath.row == 1) {
-        NSLog(@"213123");
-        MJSettingLabelItem * a =  (MJSettingLabelItem *)item;
-        a.rightLable = @"3122312";
-        
-    }
+    
     if (item.option) { // block有值(点击这个cell,.有特定的操作需要执行)
         item.option();
     } else if ([item isKindOfClass:[MJSettingArrowItem class]]) { // 箭头
@@ -204,7 +202,6 @@ static NSString * _num = nil;
 
 - (void)backAction:(UIButton *)btn{
     
-    NSLog(@"xxxxxxxxxxxxxx推出登入");
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -71,6 +71,49 @@
     [self.tableView headerEndRefreshing];
 }
 
+
+////尾部刷新
+//- (void)footerRereshing{  //加载更多数据数据
+//    
+//    MessageFrame * task = [self.messageF lastObject];
+//    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+//    params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
+//    //    NSLog(@"尾部刷新%ld",task.taskOrder);
+//    params[@"pagingSize"] = @(pageSize);
+//    [self getMoreData:params];
+//    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+//    [self.tableView footerEndRefreshing];
+//}
+//
+///**
+// *   上拉加载更多
+// *
+// *
+// */
+//- (void)getMoreData:(NSMutableDictionary *) params{
+//    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+//    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+//        
+//        NSLog(@"上啦加载的数据%@",json);
+//        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+//            [MBProgressHUD showError:@"账号被登入"];
+//            return ;
+//        }
+//        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+//            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
+//            if (taskArray.count > 0) {
+//                [self.taskDatas addObjectsFromArray:taskArray];
+//                [self.tableView reloadData];    //刷新数据
+//            }
+//            
+//        }
+//    } failure:^(NSError *error) {
+//        NSLog(@"%@",[error description]);
+//    }];
+//    
+//}
+
+
 /**
  *  下拉加载更新数据
  */
