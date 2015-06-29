@@ -145,7 +145,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="online" width="96" height="90"/>
+        <image name="online" width="53" height="53"/>
         <image name="未命名.tiff" width="301" height="301"/>
     </resources>
 </document>

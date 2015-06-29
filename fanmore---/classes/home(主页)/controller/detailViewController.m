@@ -88,7 +88,7 @@
     
     NSURL* url =  [NSURL URLWithString:self.detailUrl];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    self.detailWebView.backgroundColor = [UIColor redColor];
+    self.detailWebView.backgroundColor = [UIColor whiteColor];
     self.detailWebView.scrollView.backgroundColor = [UIColor whiteColor];
     [self.detailWebView loadRequest:request];
 }

@@ -123,7 +123,10 @@ static NSString * _company = nil;
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
     self.phoneNumber.text = user.name;
+    
     self.oldPriceLable.adjustsFontSizeToFitWidth = YES;;
+    
+    
     self.currentPriceLable.adjustsFontSizeToFitWidth = YES;
 }
 
@@ -147,6 +150,12 @@ static NSString * _company = nil;
     self.collection.delegate = self;
     
     [self.collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
+    
+    
+    NSArray * aaM = self.buyflay.purchases;
+    flayModel * flay = aaM[0];
+    self.oldPriceLable.text = [NSString stringWithFormat:@"%@", flay.msg];
+    self.currentPriceLable.text = [NSString stringWithFormat:@"现价:￥%.1f",flay.price];
 }
 
 
@@ -473,7 +482,7 @@ static NSString * _company = nil;
     
     NSArray * aaM = self.buyflay.purchases;
     flayModel * flay = aaM[indexPath.row];
-    self.oldPriceLable.text = [NSString stringWithFormat:@"市场价%@折", flay.msg];
+    self.oldPriceLable.text = [NSString stringWithFormat:@"%@", flay.msg];
     self.currentPriceLable.text = [NSString stringWithFormat:@"现价:￥%.1f",flay.price];
     
     UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
