@@ -107,9 +107,6 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 -(void)getNewMoreData:(NSMutableDictionary *)params{
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
-    
-    __weak DiscipleViewController * wself = self;
-    
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
