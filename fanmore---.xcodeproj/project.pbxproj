@@ -114,9 +114,9 @@
 		EFC249821B255BDA00CD6DCD /* RequestTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249811B255BDA00CD6DCD /* RequestTasks.m */; };
 		EFC249851B256D1F00CD6DCD /* TaskDataCeach.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC249841B256D1F00CD6DCD /* TaskDataCeach.m */; };
 		EFC46B471B4175180060DB5C /* checkin.wav in Resources */ = {isa = PBXBuildFile; fileRef = EFC46B431B4175180060DB5C /* checkin.wav */; };
-		EFC46B481B4175180060DB5C /* right.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFC46B441B4175180060DB5C /* right.mp3 */; };
 		EFC46B491B4175180060DB5C /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = EFC46B451B4175180060DB5C /* success.wav */; };
-		EFC46B4A1B4175180060DB5C /* wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFC46B461B4175180060DB5C /* wrong.mp3 */; };
+		EFC46B4D1B417C7F0060DB5C /* right.wav in Resources */ = {isa = PBXBuildFile; fileRef = EFC46B4B1B417C7F0060DB5C /* right.wav */; };
+		EFC46B4E1B417C7F0060DB5C /* wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = EFC46B4C1B417C7F0060DB5C /* wrong.wav */; };
 		EFC84F851B3BBD2A00392A4B /* flayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC84F841B3BBD2A00392A4B /* flayModel.m */; };
 		EFC84F881B3BCA0000392A4B /* buyflay.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC84F871B3BCA0000392A4B /* buyflay.m */; };
 		EFC86A7D1B1E8D7E0081BBC8 /* BuyFlowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC86A7C1B1E8D7E0081BBC8 /* BuyFlowViewController.m */; };
@@ -413,9 +413,9 @@
 		EFC249831B256D1F00CD6DCD /* TaskDataCeach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDataCeach.h; sourceTree = "<group>"; };
 		EFC249841B256D1F00CD6DCD /* TaskDataCeach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDataCeach.m; sourceTree = "<group>"; };
 		EFC46B431B4175180060DB5C /* checkin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = checkin.wav; sourceTree = "<group>"; };
-		EFC46B441B4175180060DB5C /* right.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = right.mp3; sourceTree = "<group>"; };
 		EFC46B451B4175180060DB5C /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
-		EFC46B461B4175180060DB5C /* wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrong.mp3; sourceTree = "<group>"; };
+		EFC46B4B1B417C7F0060DB5C /* right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = right.wav; sourceTree = "<group>"; };
+		EFC46B4C1B417C7F0060DB5C /* wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong.wav; sourceTree = "<group>"; };
 		EFC84F831B3BBD2A00392A4B /* flayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = flayModel.h; sourceTree = "<group>"; };
 		EFC84F841B3BBD2A00392A4B /* flayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = flayModel.m; sourceTree = "<group>"; };
 		EFC84F861B3BCA0000392A4B /* buyflay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buyflay.h; sourceTree = "<group>"; };
@@ -1389,10 +1389,10 @@
 		EFC46B421B4175180060DB5C /* wav */ = {
 			isa = PBXGroup;
 			children = (
+				EFC46B4B1B417C7F0060DB5C /* right.wav */,
+				EFC46B4C1B417C7F0060DB5C /* wrong.wav */,
 				EFC46B431B4175180060DB5C /* checkin.wav */,
-				EFC46B441B4175180060DB5C /* right.mp3 */,
 				EFC46B451B4175180060DB5C /* success.wav */,
-				EFC46B461B4175180060DB5C /* wrong.mp3 */,
 			);
 			path = wav;
 			sourceTree = "<group>";
@@ -1999,6 +1999,7 @@
 				839C30E81B2E6CF4000EE05A /* FriendCell.xib in Resources */,
 				EFC46B491B4175180060DB5C /* success.wav in Resources */,
 				EF49ECFA1B0D81A40038A203 /* Main.storyboard in Resources */,
+				EFC46B4D1B417C7F0060DB5C /* right.wav in Resources */,
 				EF565D051B16AA6000FC2D6B /* MJRefresh.bundle in Resources */,
 				EF49ECFF1B0D81A40038A203 /* LaunchScreen.xib in Resources */,
 				EFC86AFB1B1EFD700081BBC8 /* WeiboSDK.bundle in Resources */,
@@ -2006,11 +2007,10 @@
 				EF565D1B1B16DD9900FC2D6B /* ForeshowTableViewCell.xib in Resources */,
 				830B4D071B2196DC00BBE276 /* BPCell.xib in Resources */,
 				EF565D401B17091F00FC2D6B /* BoundPhoneViewController.xib in Resources */,
-				EFC46B481B4175180060DB5C /* right.mp3 in Resources */,
 				83F875F61B27E2C00089C6F5 /* (null) in Resources */,
+				EFC46B4E1B417C7F0060DB5C /* wrong.wav in Resources */,
 				EFC86AF91B1EFD700081BBC8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				8360169B1B37EF1D00B076DD /* ConversionCell.xib in Resources */,
-				EFC46B4A1B4175180060DB5C /* wrong.mp3 in Resources */,
 				EFC46B471B4175180060DB5C /* checkin.wav in Resources */,
 				EF49ECFC1B0D81A40038A203 /* Images.xcassets in Resources */,
 				EF565D461B17091F00FC2D6B /* UserRegisterViewController.xib in Resources */,

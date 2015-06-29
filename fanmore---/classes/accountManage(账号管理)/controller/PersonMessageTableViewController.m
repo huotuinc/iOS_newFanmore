@@ -18,6 +18,7 @@
 #import "SexController.h"
 #import "HobbyController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "PinYin4Objc.h"
 
 @interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate,NameControllerdelegate,HobbyControllerDelegate,UIActionSheetDelegate,SexControllerdelegate>
 

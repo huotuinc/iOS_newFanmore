@@ -29,6 +29,9 @@
 
 @property(nonatomic,strong) CLLocationManager *mgr;
 
+
+/**apns*/
+@property(nonatomic,strong) NSString * deviceToken;
 @end
 
 @implementation AppDelegate
@@ -122,6 +125,9 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
     NSLog(@"苹果apns返回的deviceToken%@",deviceToken);
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    self.deviceToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"deviceToken:%@", _deviceToken);
     
 }
 
