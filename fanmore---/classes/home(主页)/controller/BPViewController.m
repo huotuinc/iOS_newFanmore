@@ -187,11 +187,11 @@ static NSString *BPCellidentify = @"BPCellId";
     NSString *str;
     if (detail.vary > 0) {
         str = [NSString stringWithFormat:@"+%@M",[NSString xiaoshudianweishudeal:detail.vary]];
-        cell.flow.textColor = [UIColor redColor];
+        cell.flow.textColor = [UIColor greenColor];
         
     }else {
         str = [NSString stringWithFormat:@"%@M",[NSString xiaoshudianweishudeal:detail.vary]];
-        cell.flow.textColor = [UIColor greenColor];
+        cell.flow.textColor = [UIColor redColor];
     }
     
     [cell setTitleName:detail.title AndTime:publishtime AndFlow:str];
