@@ -64,15 +64,26 @@
     self.contextLable.text = Content;
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[times doubleValue]/1000];
+    NSDate * now = [NSDate date];
+    
+    
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy/MM/dd"];
+    [formatter setDateFormat:@"hh:mm"];
+    
     NSString * publishtime = [formatter stringFromDate:ptime];
-    self.timeLable.text = [NSString stringWithFormat:@"上线时间%@",publishtime];
+    self.timeLable.text = [NSString stringWithFormat:@"%@",publishtime];
+    
+    NSComparisonResult comper = [now compare:ptime];
+    NSLog(@"%ld",(long)comper);
     
 
-    self.onlineImage.hidden = !isOnline;
-    
-    self.timeButton.hidden = isOnline;
+    if ((long)comper < 0) {
+        self.onlineImage.hidden = YES;
+    }else {
+        self.onlineImage.hidden = NO;
+    }
+   
+    self.timeButton.hidden = !self.onlineImage.hidden;
     
 
  
