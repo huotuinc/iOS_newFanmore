@@ -50,19 +50,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // 初始化
     [self setup];
-
-    if (self.ishaveget) {
-        self.answerBtn.backgroundColor = [UIColor grayColor];
+    if (self.ishaveget) {//已答完
+        
         self.answerBtn.backgroundColor = LWColor(163, 163, 163);
         self.answerBtn.layer.cornerRadius = 6;
         self.answerBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.answerBtn.userInteractionEnabled = NO;
-        NSString *ml = [self xiaoshudianweishudeal:self.flay];
-        [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
-        
-    }else{
+//        NSString *ml = [self xiaoshudianweishudeal:self.flay];
+        [self.answerBtn setTitle:[NSString stringWithFormat:@"已答完"] forState:UIControlStateNormal];
+        self.answerBtn.backgroundColor = [UIColor grayColor];
+    }else{//未答
         self.answerBtn.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
         self.answerBtn.layer.cornerRadius = 6;
         self.answerBtn.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;

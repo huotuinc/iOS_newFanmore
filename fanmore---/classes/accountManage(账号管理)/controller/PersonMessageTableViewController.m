@@ -19,7 +19,7 @@
 #import "HobbyController.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate,NameControllerdelegate,HobbyControllerDelegate>
+@interface PersonMessageTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,ProfessionalControllerDelegate,ProfessionalControllerDelegate,NameControllerdelegate,HobbyControllerDelegate,UIActionSheetDelegate,SexControllerdelegate>
 
 @property(nonatomic,strong)NSArray * messages;
 /**1用户头像*/
@@ -40,6 +40,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *placeLable;
 /**9用户账号时间*/
 @property (weak, nonatomic) IBOutlet UILabel *registTimeLable;
+
+
+/**自己的性别*/
+@property(assign,nonatomic) int selfsex;
+
+
 /**时间选择器*/
 @property(nonatomic,strong) UIDatePicker *datePicker;
 
@@ -81,7 +87,7 @@
 {
     [super viewWillAppear:animated];
     //初始化个人信息
-    [self setupPersonMessage];
+    
 }
 
 - (void)viewDidLoad {
@@ -91,7 +97,7 @@
         
         [self.iconView setBackgroundImage:iconImage forState:UIControlStateNormal];
     }
-    
+    [self setupPersonMessage];
 }
 /**
  *  初始化个人信息
@@ -126,7 +132,9 @@
         self.placeLable.text = self.userinfo.area;
     }
     self.nameLable.text = self.userinfo.realName; //2姓名
-    self.sexLable.text =  self.userinfo.sex?@"女":@"男";  //3性别
+    self.sexLable.text =  self.userinfo.sex==1?@"女":@"男";  //3性别
+    
+    self.selfsex = self.userinfo.sex;
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(self.userinfo.birthDate/1000.0)];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
@@ -224,6 +232,11 @@
                 [alertVc addAction:ceme];
                 [alertVc addAction:action];
                 [self presentViewController:alertVc animated:YES completion:nil];
+            }else{
+                
+                UIActionSheet * aa = [[UIActionSheet alloc] initWithTitle:@"选择图片来源" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"相册",@"相机", nil];
+                [aa showInView:self.view];
+                
             }
         }
         if (indexPath.row == 1) { //姓名
@@ -231,6 +244,13 @@
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             NameController *nameVC = [storyboard instantiateViewControllerWithIdentifier:@"NameController"];
             nameVC.name = self.userinfo.realName;
+            nameVC.delegate = self;
+            [self.navigationController pushViewController:nameVC animated:YES];
+        }
+        if (indexPath.row == 2) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            SexController *nameVC = [storyboard instantiateViewControllerWithIdentifier:@"SexController"];
+            nameVC.sex = self.selfsex;
             nameVC.delegate = self;
             [self.navigationController pushViewController:nameVC animated:YES];
         }
@@ -317,6 +337,12 @@
     }];
 }
 
+
+/**
+ *  头像上传
+ *
+ *  @param parame <#parame description#>
+ */
 - (void)updatefile:(NSMutableDictionary *)parame{
     
     NSURL *url = [NSURL URLWithString:@"http://apitest.51flashmall.com:8080/fanmoreweb/app/updateProfile"];
@@ -325,8 +351,6 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"POST"];
-    
-    
     NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
     paramsOption[@"appKey"] = APPKEY;
     paramsOption[@"appSecret"] = HuoToAppSecret;
@@ -347,7 +371,6 @@
     }
     paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
     [paramsOption removeObjectForKey:@"appSecret"];
-    
     
     NSArray *bodyStr = [paramsOption allKeys];
     NSMutableString * aa = [NSMutableString string];
@@ -418,17 +441,17 @@
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     parame[@"profileType"] = @(2);
     parame[@"profileData"] =@((long long)[datePick.date timeIntervalSince1970] * 1000);
-    [self toupDatePersonMessageWithApi:urlStr withParame:parame];
+    [self toupDatePersonMessageWithApi:urlStr withParame:parame withOptin:@"生日上传成功"];
     
 }
 
 
-- (void)toupDatePersonMessageWithApi:(NSString *)urlStr withParame:(NSMutableDictionary *)paremes{
+- (void)toupDatePersonMessageWithApi:(NSString *)urlStr withParame:(NSMutableDictionary *)paremes withOptin:(NSString *)nn{
 
     [UserLoginTool loginRequestPost:urlStr parame:paremes success:^(id json) {
         
         NSLog(@"大大叔大叔大叔大叔大叔大叔大叔的时代%@",json);
-        [MBProgressHUD showSuccess:@"生日资料上传成功"];
+        [MBProgressHUD showSuccess:nn];
         NSLog(@"dadasd%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
@@ -459,7 +482,7 @@
  *  @param career <#career description#>
  *  @param flag   <#flag description#>
  */
-- (void)ProfessionalControllerBringBackCareer:(twoOption *)career isFlag:(BOOL)flag{
+- (void)ProfessionalControllerBringBackCareer:(twoOption *)career isFlag:(BOOL)flag {
     
     NSLog(@"个人sasa时dadasdasdasd");
      NSMutableDictionary *parame = [NSMutableDictionary dictionary];
@@ -474,7 +497,13 @@
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
     parame[@"profileData"] = @(career.value);
     NSLog(@"%d",career.value);
-    [self toupDatePersonMessageWithApi:urlStr withParame:parame];
+    NSString * ak = nil;
+    if (flag) {
+       ak = @"职业上传成功";
+    }else{
+        ak = @"收入上传成功";
+    }
+    [self toupDatePersonMessageWithApi:urlStr withParame:parame withOptin:ak];
     
 }
 
@@ -483,7 +512,7 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.nameLable.text = name;
-        [self setupPersonMessage];
+//        [self setupPersonMessage];
     });
     
 }
@@ -546,5 +575,50 @@
         self.favLable.text = option;
     });
     
+}
+
+
+/**
+ *    相机掉出
+ *
+ *  @param actionSheet <#actionSheet description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        UIImagePickerController * pc = [[UIImagePickerController alloc] init];
+        pc.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+        pc.delegate = self;
+        [self presentViewController:pc animated:YES completion:nil];
+        
+    }else if(buttonIndex == 2) {
+        
+        UIImagePickerController * pc = [[UIImagePickerController alloc] init];
+        pc.allowsEditing = YES;
+        pc.sourceType=UIImagePickerControllerSourceTypeCamera;
+        pc.delegate = self;
+        [self presentViewController:pc animated:YES completion:nil];
+    }
+}
+
+
+/**
+ *  性别选择的代理方法
+ *
+ *  @param sex <#sex description#>
+ */
+- (void)selectSexOver:(int)sex
+{
+    if (self.selfsex) {
+        self.selfsex  = 0;
+    }else{
+        self.selfsex = 1;
+    }
+    
+    if (sex) {
+        self.sexLable.text = @"女";
+    }else{
+        self.sexLable.text = @"男";
+    }
 }
 @end

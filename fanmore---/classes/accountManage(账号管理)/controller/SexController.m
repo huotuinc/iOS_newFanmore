@@ -12,9 +12,24 @@
 
 @property (nonatomic, strong) NSIndexPath *selected;
 
+@property(nonatomic,strong)NSArray * sexs;
+
 @end
 
 @implementation SexController
+
+
+
+- (NSArray *)sexs
+{
+    if (_sexs == nil) {
+        
+        _sexs = [NSArray array];
+        _sexs = @[@"男",@"女"];
+    }
+    return _sexs;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,43 +70,42 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return self.sexs.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"男";
-        if (!self.sex) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            self.selected = indexPath;
-        }
-    }else {
-        cell.textLabel.text = @"女";
-        if (self.sex) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            self.selected = indexPath;
-        }
+    
+    NSString * SEX = self.sexs[indexPath.row];
+    cell.textLabel.text = SEX;
+    
+    if(self.sex == indexPath.row){
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }else{
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
+        
+    
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //选中的cell打勾
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//    //选中的cell打勾
+//    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+//    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//    
+//    UITableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:self.selected];
+//    cell1.accessoryType = UITableViewCellAccessoryNone;
     
-    UITableViewCell *cell1 = [self.tableView cellForRowAtIndexPath:self.selected];
-    cell1.accessoryType = UITableViewCellAccessoryNone;
+    NSString * aa = self.sexs[indexPath.row];
     
-    
-    NSLog(@"xxxxxxxxxxxxxxxxxxx%@",cell.textLabel.text);
+//    NSLog(@"xxxxxxxxxxxxxxxxxxx%@",cell.textLabel.text);
     int a = 1;
-    if ([cell.textLabel.text isEqualToString:@"男"]) {
+    if ([aa isEqualToString:@"男"]) {
         a= 0;
     }
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
@@ -106,6 +120,11 @@
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            
+            if ([self.delegate respondsToSelector:@selector(selectSexOver:)]) {
+                
+                [self.delegate selectSexOver:a];
+            }
             
         }
         

@@ -205,7 +205,7 @@
             //1、保存个人信息
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-            [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 +%@M",user.signtoday]];
+            [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量",user.signtoday]];
             [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
             self.asignBtn.backgroundColor = LWColor(163, 163, 163);
             self.asignBtn.layer.cornerRadius = 6;
