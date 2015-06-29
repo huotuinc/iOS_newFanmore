@@ -4,7 +4,7 @@
 //
 //  Created by HuoTu-Mac on 15/6/17.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//  网页
+//  网页a
 
 #import "WebController.h"
 #import "GlobalData.h"
@@ -85,7 +85,7 @@
 
 - (void)backAction:(UIButton *)btn{
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -126,6 +126,7 @@
                     }
                 }
             }else{
+                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
             
