@@ -11,7 +11,7 @@
 #import "Message.h"
 #import "MessageFrame.h"
 
-
+#define pageSize 8
 
 @interface MassageCenterController ()
 
@@ -60,6 +60,14 @@
     self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
     self.tableView.headerRefreshingText = @"正在刷新最新数据,请稍等";
     
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"正在加载更多数据,请稍等";
+    
 }
 #pragma mark 开始进入刷新状态
 //头部刷新
@@ -72,46 +80,56 @@
 }
 
 
-////尾部刷新
-//- (void)footerRereshing{  //加载更多数据数据
-//    
-//    MessageFrame * task = [self.messageF lastObject];
-//    NSMutableDictionary * params = [NSMutableDictionary dictionary];
-//    params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
-//    //    NSLog(@"尾部刷新%ld",task.taskOrder);
-//    params[@"pagingSize"] = @(pageSize);
-//    [self getMoreData:params];
-//    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-//    [self.tableView footerEndRefreshing];
-//}
-//
-///**
-// *   上拉加载更多
-// *
-// *
-// */
-//- (void)getMoreData:(NSMutableDictionary *) params{
-//    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
-//    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        
-//        NSLog(@"上啦加载的数据%@",json);
-//        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-//            [MBProgressHUD showError:@"账号被登入"];
-//            return ;
-//        }
-//        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
-//            NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-//            if (taskArray.count > 0) {
-//                [self.taskDatas addObjectsFromArray:taskArray];
-//                [self.tableView reloadData];    //刷新数据
-//            }
-//            
-//        }
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@",[error description]);
-//    }];
-//    
-//}
+//尾部刷新
+- (void)footerRereshing{  //加载更多数据数据
+    
+    MessageFrame * task = [self.messageF lastObject];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    
+    params[@"pagingTag"] = @(task.message.messageOrder);
+    //    NSLog(@"尾部刷新%ld",task.taskOrder);
+    params[@"pagingSize"] = @(pageSize);
+    [self getMoreData:params];
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [self.tableView footerEndRefreshing];
+}
+
+
+/**
+ *   上拉加载更多
+ *
+ *
+ */
+- (void)getMoreData:(NSMutableDictionary *) params{
+    
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"messages"];
+    
+    __weak MassageCenterController * wself = self;
+    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        
+        NSLog(@"上啦加载的数据%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [MBProgressHUD showError:@"账号被登入"];
+            return ;
+        }
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            NSArray * taskArray = [Message objectArrayWithKeyValuesArray:json[@"resultData"][@"messages"]];
+            if (taskArray.count > 0) {
+                for (Message * aa in taskArray) {
+//                    NSLog(@"%@  %lld",aa.context,aa.date);
+                    MessageFrame *aas = [[MessageFrame alloc] init];
+                    aas.message = aa;
+                    [wself.messageF addObject:aas];
+                    
+                }
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",[error description]);
+    }];
+    
+}
 
 
 /**
@@ -122,7 +140,7 @@
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"messages"];//消息列表
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
-    parame[@"pagingSize"] = @(10);
+    parame[@"pagingSize"] = @(pageSize);
     parame[@"pagingTag"] = @"";
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
         NSLog(@"%@",json);
@@ -130,14 +148,19 @@
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             NSArray *messageArrays = [Message objectArrayWithKeyValuesArray:json[@"resultData"][@"messages"]];
-            for (Message *aa in messageArrays) {
-                NSLog(@"%@  %lld",aa.context,aa.date);
-                MessageFrame *aas = [[MessageFrame alloc] init];
-                aas.message = aa;
-                [aaframe addObject:aas];
+            if (messageArrays.count) {
+                
+                for (Message *aa in messageArrays) {
+                    NSLog(@"%@  %lld",aa.context,aa.date);
+                    MessageFrame *aas = [[MessageFrame alloc] init];
+                    aas.message = aa;
+                    [aaframe addObject:aas];
+                }
+                [self.messageF addObjectsFromArray:aaframe];
+                [self.tableView reloadData];
             }
-            [self.messageF addObjectsFromArray:aaframe];
-            [self.tableView reloadData];
+            
+            
         }
         
     } failure:^(NSError *error) {

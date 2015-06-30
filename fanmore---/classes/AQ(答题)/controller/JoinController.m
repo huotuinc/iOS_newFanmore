@@ -64,9 +64,6 @@
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-    
-    
-    
 }
 
 - (void)_initFeildAndButton {
@@ -153,8 +150,26 @@
             [MBProgressHUD showError:@"用户名不能为空"];
             return;
         }
+        /**正则表达式匹配*/
         taskDetail * task1 = self.questions[0];
+        NSString *regex = task1.fieldPattern;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        BOOL isValid = [predicate evaluateWithObject:self.field1.text];
+        if (!isValid) {
+            [MBProgressHUD showError:@"请输入正确的用户名"];
+            return;
+        }
+        
         taskDetail * task2 =self.questions[1];
+        NSString *regex2 = task2.fieldPattern;
+        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+        BOOL isValid2 = [predicate2 evaluateWithObject:self.field2.text];
+        if (!isValid2) {
+            [MBProgressHUD showError:@"请输入正确的联系方式"];
+            return;
+        }
+        /**正则表达式匹配*/
+        
         NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         
