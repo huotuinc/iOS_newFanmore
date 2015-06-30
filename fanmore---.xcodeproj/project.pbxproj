@@ -2389,7 +2389,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d19069e8-0347-4924-888e-79b5fce76f97";
+				PROVISIONING_PROFILE = "333e7791-9396-4a47-8ed4-a755f2d8271b";
 			};
 			name = Debug;
 		};
@@ -2447,7 +2447,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d19069e8-0347-4924-888e-79b5fce76f97";
+				PROVISIONING_PROFILE = "333e7791-9396-4a47-8ed4-a755f2d8271b";
 			};
 			name = Release;
 		};
