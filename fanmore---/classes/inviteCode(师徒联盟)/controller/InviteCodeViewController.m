@@ -91,10 +91,13 @@
 - (IBAction)shareAction:(UIButton *)sender {
     NSLog(@"分享邀请吗");
     
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK" ofType:@"png"];
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:self.shareUrl defaultContent:@"测试一下" image:[ShareSDK imageWithPath:imagePath] title:@"分享粉猫app得流量" url:self.shareUrl description:@"这是一条测试信息" mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:user.invCode defaultContent:nil image:nil title:@"分享粉猫app得流量" url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     
