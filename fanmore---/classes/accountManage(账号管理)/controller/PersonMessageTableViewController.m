@@ -217,10 +217,11 @@
                 UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:@"选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
                 UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                    }];
-                UIAlertAction * photo = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                UIAlertAction * photo = [UIAlertAction actionWithTitle:@"从本地相册选择图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     UIImagePickerController * pc = [[UIImagePickerController alloc] init];
                     pc.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
                     pc.delegate = self;
+                    pc.allowsEditing = YES;
                     [self presentViewController:pc animated:YES completion:nil];
                 }];
                 UIAlertAction * ceme  = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -520,6 +521,10 @@
 }
 
 - (IBAction)iconViewCkick:(id)sender {
+    
+    UIActionSheet * aa = [[UIActionSheet alloc] initWithTitle:@"选择图片来源" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从本地相册选择图片",@"相机", nil];
+    [aa showInView:self.view];
+    
 }
 
 
@@ -583,13 +588,14 @@
  *  @param buttonIndex <#buttonIndex description#>
  */
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) {
+    if (buttonIndex == 0) {
         UIImagePickerController * pc = [[UIImagePickerController alloc] init];
         pc.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
         pc.delegate = self;
+        pc.allowsEditing = YES;
         [self presentViewController:pc animated:YES completion:nil];
         
-    }else if(buttonIndex == 2) {
+    }else if(buttonIndex == 1) {
         
         UIImagePickerController * pc = [[UIImagePickerController alloc] init];
         pc.allowsEditing = YES;
