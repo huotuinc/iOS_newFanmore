@@ -51,10 +51,13 @@
         NSDictionary *dic = json[@"resultData"];
         
         NSLog(@"%@", dic[@"yestodayM"]);
-        self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
-        self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
-        self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
-        self.shareUrl = dic[@"shareURL"];
+        if (dic) {
+            self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
+            self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
+            self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
+            self.shareUrl = dic[@"shareURL"];
+        }
+        
     } failure:^(NSError *error) {
         
         NSLog(@"请求出错");
