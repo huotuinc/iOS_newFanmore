@@ -167,7 +167,7 @@
             
             notification.userInfo = @{@"id":@(self.task.taskId),
                                       @"key":[NSNumber numberWithInt:self.task.taskId],
-                                      @"titel":self.task.title,
+                                      @"title":self.task.title,
                                       @"type":@(self.task.type),
                                       @"detailUrl":self.task.contextURL,
                                       @"backTime":@(self.task.backTime),

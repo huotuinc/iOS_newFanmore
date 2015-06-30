@@ -30,6 +30,7 @@
 
 @property(nonatomic,strong) CLLocationManager *mgr;
 
+@property(nonatomic, strong) NSMutableDictionary *userInfo;
 
 /**apns*/
 @property(nonatomic,strong) NSString * deviceToken;
@@ -95,14 +96,20 @@
     
     
 //    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    [self presentViewControllerWithUserInfo:userInfo];
+//    NSDictionary *userInfo1 = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    
     
     
     if (launchOptions) {
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-        NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        [self presentViewControllerWithUserInfo:userInfo];
+        NSDictionary *dic = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+        if (dic) {
+            [self.userInfo removeAllObjects];
+            [self.userInfo addEntriesFromDictionary:dic];
+            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.userInfo[@"title"]] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+            [ac show];
+        }
+        
     }
     
     
@@ -116,7 +123,7 @@
     
     return YES;
     
-    
+
     
 }
 
@@ -129,7 +136,7 @@
 
 
 
-/**
+/**     
  *  获取deviceToken
  */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
@@ -147,9 +154,11 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     if (notification) {
-        NSLog(@"%@",notification);
-        [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:notification.userInfo];
-    
+        application.applicationIconBadgeNumber = 0;
+        [self.userInfo removeAllObjects];
+        [self.userInfo addEntriesFromDictionary:notification.userInfo];
+        UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你关注的活动开始了"] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+        [ac show];
     }
 }
 
@@ -160,15 +169,7 @@
     return [ShareSDK handleOpenURL:url wxDelegate:self];
 }
 
-- (void)presentViewControllerWithUserInfo:(NSDictionary *)userInfo
-{
-    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    detailViewController *detail = [story instantiateViewControllerWithIdentifier:@"detailViewController"];
-    detail.taskId = (int)userInfo[@"id"];
-    UIViewController *currentVC = [self getCurrentVC];
-    [currentVC.navigationController pushViewController:detail animated:YES];
 
-}
 
 
 
@@ -457,6 +458,13 @@
         result = window.rootViewController;
     
     return result;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:self.userInfo];
+    }
 }
 
 @end
