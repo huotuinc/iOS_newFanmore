@@ -227,6 +227,7 @@
          
      }else if (state == SSResponseStateFail){
          [MBProgressHUD showError:@"分享失败"];
+         NSLog(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
      }
      }];
                                                                                  }
