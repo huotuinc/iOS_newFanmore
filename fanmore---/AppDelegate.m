@@ -97,16 +97,24 @@
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     [self presentViewControllerWithUserInfo:userInfo];
     
+    
+    if (launchOptions) {
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+        NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        [self presentViewControllerWithUserInfo:userInfo];
+    }
+    
+    
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
     {
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     }
     
-    
     //APNS
     [self registRemoteNotification:application];
     
     return YES;
+    
     
     
 }
