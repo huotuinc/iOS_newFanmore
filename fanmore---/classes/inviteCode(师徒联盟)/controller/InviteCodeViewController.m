@@ -47,11 +47,11 @@
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"shituInfo"];
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
        
-        NSLog(@"000000%@",json);
-        NSDictionary *dic = json[@"resultData"];
-        
-        NSLog(@"%@", dic[@"yestodayM"]);
-        if (dic) {
+        if ([json[@"resultCode"] intValue] == 1 && [json[@"systemResultCode"] intValue] == 1) {
+            NSLog(@"000000%@",json);
+            NSDictionary *dic = json[@"resultData"];
+            NSLog(@"%d", dic.count);
+
             self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
             self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
             self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
