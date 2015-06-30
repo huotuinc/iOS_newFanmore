@@ -10,7 +10,7 @@
 #import "userData.h"
 #import "WebController.h"
 
-@interface UserRegisterViewController () <UITextFieldDelegate>
+@interface UserRegisterViewController () <UITextFieldDelegate,UIAlertViewDelegate>
 
 /**用户注册邀请码*/
 @property (weak, nonatomic) IBOutlet UITextField *InvitationCode;
@@ -277,15 +277,30 @@
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"phone"] = phoneNumber;
     params[@"type"] = @"1";
+    params[@"codeType"] = @(0);
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
         
         NSLog(@"dasdasd%@",json);
-        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==54001) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==53014) {
             
-            [MBProgressHUD showError:@"手机号已经被注册，请选择其他手机号"];
+            [MBProgressHUD showError:json[@"resultDescription"]];
             return ;
-        }else{
+        }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==54001) {
+            
+            [MBProgressHUD showError:json[@"resultDescription"]];
+            return ;
+        }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==55001){
+            
+            if ([json[@"resultData"][@"voiceAble"] intValue]) {
+                UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                [a show];
+            }
+            
+            
+        }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1){
+            
+            NSLog(@"%@",json);
             [self settime];
         }
         
@@ -295,6 +310,25 @@
     }];
 
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        //网络请求获取验证码
+        NSMutableDictionary * params = [NSMutableDictionary dictionary];
+        params[@"phone"] = self.phoneNumber.text;
+        params[@"type"] = @"1";
+        params[@"codeType"] = @(1);
+        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
+        [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
+            NSLog(@"学习学习%@",json);
+        } failure:^(NSError *error) {
+            
+            NSLog(@"%@",[error description]);
+        }];
+    }
 }
 
 /**

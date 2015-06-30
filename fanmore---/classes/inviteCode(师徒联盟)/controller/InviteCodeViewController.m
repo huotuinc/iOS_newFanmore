@@ -99,17 +99,33 @@
         
         if (state == SSResponseStateSuccess)
         {
-            
-            NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
+            [MBProgressHUD showMessage:@"分享成功"];
             NSString *urlStr = [MainURL stringByAppendingPathComponent:@"taskTurnedNotify"];
             NSMutableDictionary * params = [NSMutableDictionary dictionary];
-            
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
                     [MBProgressHUD showError:@"账号被登入"];
                     return ;
                 }
-                NSLog(@"%@",json);
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
+                    
+                    if ([json[@"resultData"][@"illgel"] intValue]!=0 ||[json[@"resultData"][@"reward"] floatValue] <= 0.0) {
+                        [MBProgressHUD  showSuccess:@"分享成功"];
+                    }else if([json[@"resultData"][@"reward"] floatValue]> 0){
+                        
+                        CGFloat rewad = [json[@"resultData"][@"reward"] floatValue];
+                        [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜你获得了%@M流量",[NSString xiaoshudianweishudeal:rewad]]];
+                        
+                        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                        
+                        //1、保存个人信息
+                        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                        userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+                        CGFloat current = [userInfo.balance floatValue] + rewad;
+                        userInfo.balance = [NSString stringWithFormat:@"%.1f",current];
+                        [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
+                    }
+                }
             } failure:^(NSError *error) {
                 
             }];
