@@ -187,7 +187,7 @@ int _rightQuest = 0;  //纪录正确的答题数
                     show.reward = [json[@"resultData"][@"reward"] floatValue];
                     show.chance = [json[@"resultData"][@"chance"] intValue];
                     show.illgel = [json[@"resultData"][@"illgel"] intValue];
-                    
+                    show.flay = self.flay;
                     CGFloat aabb = [json[@"resultData"][@"reward"] floatValue];
                     if (aabb > 0) {
                         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -212,22 +212,24 @@ int _rightQuest = 0;  //纪录正确的答题数
             
             
             return;
+        }else {
+            
+            taskDetail * taskdetail = self.questions[_qindex];
+            //拼接答案
+            [self.ans appendString:[NSString stringWithFormat:@"%d:",taskdetail.qid]];
+            self.tureAnswer = taskdetail.correntAid;
+            //#warning 缺展位图片
+            //1、答题图片
+            
+            //2、答案
+            [self _initButton:taskdetail];
+            //3、问题
+            self.queLable.text = taskdetail.context;  //设置答题题目
+            //4、设置题目编号
+            self.queNumber.text = [NSString stringWithFormat:@"%d/%lu",_qindex+1,(unsigned long)self.questions.count];
+            [self buttonOpenTouche];
         }
-        taskDetail * taskdetail = self.questions[_qindex];
-        //拼接答案
-        [self.ans appendString:[NSString stringWithFormat:@"%d:",taskdetail.qid]];
-        self.tureAnswer = taskdetail.correntAid;
-//#warning 缺展位图片
-        //1、答题图片
     
-        //2、答案
-        [self _initButton:taskdetail];
-        //3、问题
-        self.queLable.text = taskdetail.context;  //设置答题题目
-        //4、设置题目编号
-        self.queNumber.text = [NSString stringWithFormat:@"%d/%lu",_qindex+1,(unsigned long)self.questions.count];
-    
-    [self buttonOpenTouche];
 }
 /**
  *  答案展示按钮显示答案

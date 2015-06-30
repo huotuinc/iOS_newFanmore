@@ -21,6 +21,7 @@
 #import <AlipaySDK/AlipaySDK.h>  //支付宝接入头文件
 #import "LWNewFeatureController.h"
 #import <CoreLocation/CoreLocation.h> //定位
+#import "NSData+NSDataDeal.h"
 
 
 
@@ -141,11 +142,14 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
     NSLog(@"苹果apns返回的deviceToken%@",deviceToken);
+    NSString * aa = [deviceToken hexadecimalString];
+    NSLog(@"%@",aa);
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     self.deviceToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"deviceToken:%@", _deviceToken);
     
 }
+
 
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{

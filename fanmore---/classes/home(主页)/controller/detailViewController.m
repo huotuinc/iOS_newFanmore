@@ -51,7 +51,6 @@
     // 初始化
     [self setup];
     if (self.ishaveget) {//已答完
-        
         self.answerBtn.backgroundColor = LWColor(163, 163, 163);
         self.answerBtn.layer.cornerRadius = 6;
         self.answerBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
@@ -115,7 +114,9 @@
     NSLog(@"%@",url);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"taskId"] = @(self.taskId);
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             return ;
@@ -127,7 +128,7 @@
             [self.detailTasks addObjectsFromArray:detailTaskS];
          }
      } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUD];
         NSLog(@"xxxx%@",[error description]);
     }];
     
@@ -264,6 +265,10 @@
         return;
     }
     
+    if (!self.detailTasks.count) {
+        [MBProgressHUD showError:@"后台返回数据异常"];
+        return;
+    }
     //答题类型
     if (self.type == 1) {//答题类
         
@@ -272,6 +277,7 @@
         answer.questions = self.detailTasks;
         answer.type = @(1);
         answer.taskId = self.taskId;
+        answer.flay = self.flay;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
@@ -283,6 +289,7 @@
         answer.title = @"报名";
         answer.type = @(2);//报名
         answer.taskId = self.taskId;
+        answer.flay = self.flay;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
