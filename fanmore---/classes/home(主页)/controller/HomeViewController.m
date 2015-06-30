@@ -181,6 +181,7 @@ static NSString * homeCellidentify = @"homeCellId";
  */
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
@@ -194,7 +195,9 @@ static NSString * homeCellidentify = @"homeCellId";
             }
             
         }
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         NSLog(@"%@",[error description]);
     }];
     

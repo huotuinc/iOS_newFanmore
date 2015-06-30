@@ -176,7 +176,7 @@
    
     
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:@"测试一下" image:[ShareSDK imageWithUrl:self.pictureUrl] title:self.titless url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:nil image:[ShareSDK imageWithUrl:self.pictureUrl] title:self.titless url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
      //创建弹出菜单容器
      id<ISSContainer> container = [ShareSDK container];
                                                                                    
