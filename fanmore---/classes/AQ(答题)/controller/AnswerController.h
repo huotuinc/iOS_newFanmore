@@ -33,4 +33,8 @@
 @property(nonatomic,assign) int taskId;
 /**题目列表*/
 @property(nonatomic,strong) NSArray * questions;
+
+/**答题获得流量*/
+@property(nonatomic,assign) CGFloat flay;
+
 @end

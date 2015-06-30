@@ -11,6 +11,7 @@
 #import "RootViewController.h"
 #import <UIViewController+MMDrawerController.h>
 #import "userData.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface asignViewController ()
 /**周一*/
@@ -37,12 +38,27 @@
 /**签到的按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *asignBtn;
 
+//失败
+@property(nonatomic,assign)SystemSoundID failureSound;
+
 /**签到的按钮的点击*/
 - (IBAction)asignBtnClick:(id)sender;
 
 @end
 
 @implementation asignViewController
+
+
+- (SystemSoundID)failureSound{
+    
+    if (_failureSound == 0) {
+        
+        NSURL *url=[[NSBundle mainBundle]URLForResource:@"checkin.wav" withExtension:nil];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_failureSound);
+    }
+    
+    return _failureSound;
+}
 
 - (NSArray *)buttons{
     if (_buttons == nil) {
@@ -172,6 +188,7 @@
 - (IBAction)asignBtnClick:(UIButton *)sender {
     
     NSLog(@"dadadasdasdasdasdsa接受到签到通知");
+    AudioServicesPlayAlertSound(self.failureSound);
     NSInteger week = [self getWeek];
     for (UIButton * btn in self.buttons) { //遍历今天是周几
         if (btn.tag == week) {

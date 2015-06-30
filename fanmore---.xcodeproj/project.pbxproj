@@ -152,6 +152,7 @@
 		EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */; };
 		EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */; };
 		EFC9B7D01B3E8BE300A09686 /* HAMineLoveCarDBOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */; };
+		EFCA6D081B428A2600F92B03 /* NSData+NSDataDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCA6D071B428A2600F92B03 /* NSData+NSDataDeal.m */; };
 		EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB460B1B214499005D5026 /* FeedBackViewController.m */; };
 		EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCB460C1B214499005D5026 /* FeedBackViewController.xib */; };
 		EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */; };
@@ -459,6 +460,8 @@
 		EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
 		EFC9B7CE1B3E8BE300A09686 /* HAMineLoveCarDBOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAMineLoveCarDBOperator.h; sourceTree = "<group>"; };
 		EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAMineLoveCarDBOperator.m; sourceTree = "<group>"; };
+		EFCA6D061B428A2600F92B03 /* NSData+NSDataDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NSDataDeal.h"; sourceTree = "<group>"; };
+		EFCA6D071B428A2600F92B03 /* NSData+NSDataDeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NSDataDeal.m"; sourceTree = "<group>"; };
 		EFCB460A1B214499005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		EFCB460B1B214499005D5026 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		EFCB460C1B214499005D5026 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
@@ -804,6 +807,8 @@
 				EF565D201B16E7C500FC2D6B /* UITextField+HT.m */,
 				EFCDC8231B17F59700D28DB1 /* NSString+EXTERN.h */,
 				EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */,
+				EFCA6D061B428A2600F92B03 /* NSData+NSDataDeal.h */,
+				EFCA6D071B428A2600F92B03 /* NSData+NSDataDeal.m */,
 			);
 			path = "扩展";
 			sourceTree = "<group>";
@@ -2185,6 +2190,7 @@
 				EFF3D00A1B2EAE2A00B2F446 /* Order.m in Sources */,
 				EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */,
 				EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */,
+				EFCA6D081B428A2600F92B03 /* NSData+NSDataDeal.m in Sources */,
 				830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */,
 				EFC9B7D01B3E8BE300A09686 /* HAMineLoveCarDBOperator.m in Sources */,
 				83E263FD1B2F018500A2AC96 /* PinyinFormatter.m in Sources */,

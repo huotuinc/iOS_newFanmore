@@ -17,8 +17,7 @@
 
 //成功
 @property(nonatomic,assign)SystemSoundID successSound;
-//失败
-@property(nonatomic,assign)SystemSoundID failureSound;
+
 
 
 @end
@@ -31,23 +30,14 @@
     
     if (!_successSound) {
         
-        NSURL *url=[[NSBundle mainBundle] URLForResource:@"checkin.wav" withExtension:nil];
+        NSURL *url=[[NSBundle mainBundle] URLForResource:@"success.wav" withExtension:nil];
         AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_successSound);
     }
     
     return _successSound;
 }
 
-- (SystemSoundID)failureSound{
-    
-    if (_failureSound == 0) {
-        
-        NSURL *url=[[NSBundle mainBundle]URLForResource:@"checkin.wav" withExtension:nil];
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_failureSound);
-    }
-    
-    return _failureSound;
-}
+
 
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -97,16 +87,15 @@
         [self.webView loadRequest:request];
     }
     else{ //答题
+        AudioServicesPlayAlertSound(self.successSound);
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
         urlStr = [urlStr stringByAppendingString:self.answerType];
-        if ([self.answerType isEqualToString:@"rejected.html?"] || [self.answerType isEqualToString:@"failed.html?"] ) {
-            
-            AudioServicesPlayAlertSound(self.failureSound);
-        }else if([self.answerType isEqualToString:@"success.html?"]){
-            
-            AudioServicesPlayAlertSound(self.successSound);
-        }
+//        if ([self.answerType isEqualToString:@"rejected.html?"] || [self.answerType isEqualToString:@"failed.html?"] ) {
+//        }else if([self.answerType isEqualToString:@"success.html?"]){
+//            
+//            
+//        }
         urlStr = [NSString stringWithFormat:@"%@taskReward=%.1f&rights=%d&wrongs=%u&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
         NSLog(@"%@",urlStr);
         NSURL * urlstr = [NSURL URLWithString:urlStr];
@@ -129,6 +118,9 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    
+    
+    __weak WebController * wself = self;
     if ([request.URL.scheme isEqualToString:@"newfanmore"]) {
         if ([request.URL.host isEqualToString:@"finishgame"]) {//玩游戏结束
             NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
@@ -156,6 +148,7 @@
             }else if(self.reward>0){
                 [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜获得多少%.1fM流量",wself.flay]];
             }else if (self.chance >0 ){
                 for (UIViewController * aa in self.navigationController.childViewControllers) {
                     if ([aa isKindOfClass:[detailViewController class]]) {

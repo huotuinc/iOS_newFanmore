@@ -40,6 +40,8 @@
 /**加载网页类型*/
 @property(nonatomic,assign) int type;
 
+/**答题获得流量*/
+@property(nonatomic,assign) CGFloat flay;
 
 /**问题编号*/
 @property(assign,nonatomic)  int taskId;

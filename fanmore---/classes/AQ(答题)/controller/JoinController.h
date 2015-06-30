@@ -24,6 +24,8 @@
 /**题目列表*/
 @property(nonatomic,strong) NSArray * questions;
 
+/**答题获得流量*/
+@property(nonatomic,assign) CGFloat flay;
 
 - (IBAction)nextButtonAction:(UIButton *)sender;
 
