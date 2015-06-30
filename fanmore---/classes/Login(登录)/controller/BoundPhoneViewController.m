@@ -118,7 +118,7 @@
         
        
     } failure:^(NSError *error) {
-        NSLog(@"%@",error.description);
+//        NSLog(@"%@",error.description);
     }];
 }
 
@@ -148,7 +148,7 @@
             NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                NSLog(@"____%@",strTime);
+//                NSLog(@"____%@",strTime);
                 [self.codeButton setTitle:[NSString stringWithFormat:@"%@秒重新发送",strTime] forState:UIControlStateNormal];
                 self.codeButton.userInteractionEnabled = NO;
                 
@@ -172,7 +172,7 @@
 
 
 - (IBAction)nextButton:(id)sender {
-    NSLog(@"下部");
+//    NSLog(@"下部");
     if (self.phoneNumber.text == nil) {
         [MBProgressHUD showError:@"手机号不能为空"];
         return;

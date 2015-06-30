@@ -111,7 +111,7 @@
 - (void)getQuestion{
     
     NSString * url = [MainURL stringByAppendingPathComponent:@"taskDetail"];
-    NSLog(@"%@",url);
+//    NSLog(@"%@",url);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"taskId"] = @(self.taskId);
     [MBProgressHUD showMessage:nil];
@@ -122,14 +122,14 @@
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
-            NSLog(@"xxxxxxxxxxxxx----%@",json);
+//            NSLog(@"xxxxxxxxxxxxx----%@",json);
             NSArray * detailTaskS = [taskDetail objectArrayWithKeyValuesArray:json[@"resultData"][@"taskDetail"]];
             [self.detailTasks removeAllObjects];
             [self.detailTasks addObjectsFromArray:detailTaskS];
          }
      } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
-        NSLog(@"xxxx%@",[error description]);
+//        NSLog(@"xxxx%@",[error description]);
     }];
     
 }
@@ -228,7 +228,7 @@
          
      }else if (state == SSResponseStateFail){
          [MBProgressHUD showError:@"分享失败"];
-         NSLog(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
+//         NSLog(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
      }
      }];
                                                                                  }
@@ -326,7 +326,7 @@
     /*************倒计时************/
    
     __block int timeout= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]-1; //倒计时时间
-    NSLog(@"xxxxxxxxxxxx%d",timeout);
+//    NSLog(@"xxxxxxxxxxxx%d",timeout);
     __block int timeAll= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]; //倒计时时间
     timeout = self.backTime-1;
     timeAll = self.backTime;
@@ -351,7 +351,7 @@
             NSString *strTime = [NSString stringWithFormat:@"%d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                NSLog(@"____%@",strTime);
+//                NSLog(@"____%@",strTime);
                 
                 [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
                 wself.answerBtn.userInteractionEnabled = NO;
@@ -365,7 +365,7 @@
 
 - (void)LoginViewDelegate:(int)PushType{
 
-    NSLog(@"登入代理方法dasdasdasdasd");
+//    NSLog(@"登入代理方法dasdasdasdasd");
     [self getQuestion];
     
 }

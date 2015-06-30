@@ -109,7 +109,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             return ;
@@ -122,7 +122,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
         }
     
     } failure:^(NSError *error) {
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
     }];
     
 }
@@ -148,7 +148,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     }
     
     prenticeList * aa = self.prentices[indexPath.row];
-    NSLog(@"%@",aa);
+//    NSLog(@"%@",aa);
     [cell setHeadImage:aa.picUrl AndUserPhone:aa.showName AndeTime:aa.date AndFlow:[NSString stringWithFormat:@"%d",aa.m] AndDiscople:[NSString stringWithFormat:@"%d",aa.countOfApp]];
     
     return cell;

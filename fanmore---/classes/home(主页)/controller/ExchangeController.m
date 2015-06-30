@@ -91,7 +91,7 @@ NSString * _changeflah = nil;
                     param[@"amount"] = self.flays[indexPath.row];
                     [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
                         
-                        NSLog(@"流量兑换后返回的数据%@",json);
+//                        NSLog(@"流量兑换后返回的数据%@",json);
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
                             [MBProgressHUD showError:@"账号被登入"];
                             return ;
@@ -166,7 +166,7 @@ NSString * _changeflah = nil;
     
     self.showArray = [NSMutableArray array];
     
-    NSLog(@"%@", self.flays);
+//    NSLog(@"%@", self.flays);
     for (int i = 0; i < self.flays.count; i++) {
         NSString *str = [NSString stringWithFormat:@"%@M", self.flays[i]];
         CGFloat j = [str floatValue];
@@ -182,7 +182,7 @@ NSString * _changeflah = nil;
             [self.showArray addObject:str];
         }
     }
-    NSLog(@"show!!!!%@", self.showArray);
+//    NSLog(@"show!!!!%@", self.showArray);
 
     
     [self _initNav];

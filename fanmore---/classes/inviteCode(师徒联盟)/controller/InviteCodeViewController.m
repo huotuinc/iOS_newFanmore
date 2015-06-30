@@ -47,17 +47,17 @@
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"shituInfo"];
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
        
-        NSLog(@"000000%@",json);
+//        NSLog(@"000000%@",json);
         NSDictionary *dic = json[@"resultData"];
         
-        NSLog(@"%@", dic[@"yestodayM"]);
+//        NSLog(@"%@", dic[@"yestodayM"]);
         self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
         self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
         self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
         self.shareUrl = dic[@"shareURL"];
     } failure:^(NSError *error) {
         
-        NSLog(@"请求出错");
+//        NSLog(@"请求出错");
     }];
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -89,7 +89,7 @@
 
 
 - (IBAction)shareAction:(UIButton *)sender {
-    NSLog(@"分享邀请吗");
+//    NSLog(@"分享邀请吗");
     
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -138,17 +138,17 @@
             }];
             
         }else if (state == SSResponseStateFail){
-            NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+//            NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
         }
     }];
-    NSLog(@"分享");
+//    NSLog(@"分享");
 
 }
 
 
 //通知专跳
 - (void)operWebViewCn:(NSNotification *) notification {
-    NSLog(@"%@",notification);
+//    NSLog(@"%@",notification);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];

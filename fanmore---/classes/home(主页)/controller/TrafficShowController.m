@@ -36,7 +36,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
         NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
-            NSLog(@"xxxxxxxxx%@",json);
+//            NSLog(@"xxxxxxxxx%@",json);
             if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
                 
                 _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
@@ -119,7 +119,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
 
 
 - (void)setWaringLabel {
-    NSLog(@"self.flays:%@", self.flays);
+//    NSLog(@"self.flays:%@", self.flays);
     if (self.flays.count <= 2) {
         if ([self.userInfo.balance floatValue] >= [self.flays[1] floatValue] ) {
             self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
@@ -130,10 +130,10 @@ static NSString *collectionViewidentifier = @"collectionCell";
         }
     }else {
         for (int i = 1; i < self.flays.count - 1; i++) {
-            NSLog(@"%@",self.userInfo.balance);
-            NSLog(@"%@", self.flays[0]);
+//            NSLog(@"%@",self.userInfo.balance);
+//            NSLog(@"%@", self.flays[0]);
             if ([self.userInfo.balance floatValue] > [self.flays[0] floatValue]) {
-                NSLog(@"%@", self.flays[self.flays.count -1]);
+//                NSLog(@"%@", self.flays[self.flays.count -1]);
                 if ([self.userInfo.balance floatValue] > [self.flays[self.flays.count - 1] floatValue]) {
                     self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
                     break;
@@ -207,7 +207,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
 
 - (void)successExchange:(NSString *)userBalance{
     
-    NSLog(@"asdasdasdas%@",userBalance);
+//    NSLog(@"asdasdasdas%@",userBalance);
     CGFloat userFlow = [userBalance doubleValue];
     if (userFlow - (int)userFlow > 0) {
         self.flowNumber.text = [NSString stringWithFormat:@"%.1fM",[userBalance doubleValue]];

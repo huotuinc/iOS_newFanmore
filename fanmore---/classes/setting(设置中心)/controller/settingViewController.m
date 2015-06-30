@@ -129,7 +129,7 @@ static NSString * _num = nil;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex==0) {
-        NSLog(@"0");
+//        NSLog(@"0");
     }else{ //确定
         NSString *number=[NSString stringWithFormat:@"%@",_num];
         NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",number];
@@ -232,7 +232,7 @@ static NSString * _num = nil;
 
 //通知专跳
 - (void)operWebViewCn:(NSNotification *) notification {
-    NSLog(@"%@",notification);
+//    NSLog(@"%@",notification);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];

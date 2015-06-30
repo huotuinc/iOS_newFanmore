@@ -142,9 +142,8 @@ int _rightQuest = 0;  //纪录正确的答题数
 
 - (void)pictureClickToFindAnswer:(UITapGestureRecognizer *)tap{
     
-    NSLog(@"%d",_qindex);
+   
     taskDetail * taskdetail = self.questions[_qindex];
-    NSLog(@"%@",taskdetail.relexUrl);
     NSURL * picUrl = [NSURL URLWithString:taskdetail.relexUrl];
     [[UIApplication sharedApplication] openURL:picUrl];
 }
@@ -161,7 +160,6 @@ int _rightQuest = 0;  //纪录正确的答题数
             params[@"taskId"] = @(self.taskId);
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-                NSLog(@"%@",json);
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 56001)
                 {
                     [MBProgressHUD showError:@"账号在其它地方登入"];
@@ -206,7 +204,7 @@ int _rightQuest = 0;  //纪录正确的答题数
                 
                 [MBProgressHUD hideHUD];
             } failure:^(NSError *error) {
-                NSLog(@"%@",[error description]);
+               
                 [MBProgressHUD hideHUD];
             }];
             

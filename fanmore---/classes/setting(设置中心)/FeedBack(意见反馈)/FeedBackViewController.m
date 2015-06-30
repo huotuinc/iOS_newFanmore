@@ -49,7 +49,7 @@
 }
 
 - (IBAction)FeedBackButton:(id)sender {
-    NSLog(@"xxxxxxxxxxxxxxxxx");
+//    NSLog(@"xxxxxxxxxxxxxxxxx");
     if ([self.feedBackTextView.text isEqualToString:@"请输入你的宝贵意见"]) {
         
         [MBProgressHUD showError:@"请输入你的反馈意见"];
@@ -72,7 +72,7 @@
     
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
         
-        NSLog(@"sdasd%@",json);
+//        NSLog(@"sdasd%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             return ;
@@ -84,7 +84,7 @@
         }
         
     } failure:^(NSError *error) {
-        NSLog(@"意见反馈出错");
+//        NSLog(@"意见反馈出错");
     }];
 }
 @end

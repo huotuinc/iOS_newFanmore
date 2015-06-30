@@ -122,7 +122,7 @@ static NSString *BPCellidentify = @"BPCellId";
         }
         [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
         [MBProgressHUD hideHUD];
     }];
     
@@ -136,7 +136,7 @@ static NSString *BPCellidentify = @"BPCellId";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"details"];
     [MBProgressHUD showMessage:@""];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登陆"];
             return ;
@@ -153,7 +153,7 @@ static NSString *BPCellidentify = @"BPCellId";
         
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
     }];
 }
 
@@ -177,7 +177,7 @@ static NSString *BPCellidentify = @"BPCellId";
         cell = [[[NSBundle mainBundle] loadNibNamed:@"BPCell" owner:nil options:nil] lastObject];
     }
     Details *detail = self.details[indexPath.row];
-    NSLog(@"%f", detail.vary);
+//    NSLog(@"%f", detail.vary);
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(detail.date/1000.0)];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];

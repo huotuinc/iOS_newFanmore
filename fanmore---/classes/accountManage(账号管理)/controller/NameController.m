@@ -41,12 +41,12 @@
     [super viewWillDisappear:animated];
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
-    NSLog(@"%@",self.nameLabel.text);
+//    NSLog(@"%@",self.nameLabel.text);
     parame[@"profileType"] = @(1);
     parame[@"profileData"] = self.nameLabel.text;
     [UserLoginTool loginRequestPost:urlStr parame:parame success:^(id json) {
         
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];

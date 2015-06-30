@@ -126,7 +126,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
             }
         }
     } failure:^(NSError *error) {
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
     }];
     
 }
@@ -140,7 +140,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
     __weak TodayForesController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==5000) {//访问成果
             [MBProgressHUD showError:@"没有新的预告"];
             return ;
@@ -154,7 +154,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
     }];
 }
 
@@ -202,7 +202,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:(task.publishDate) andFlayLabel:
      [NSString stringWithFormat:@"%@", [self xiaoshudianweishudeal:task.maxBonus]] andContentLabel:[NSString stringWithFormat:@"由【%@】提供", task.merchantTitle] andOnlineImage:YES];
-    NSLog(@"sdadsasd");
+//    NSLog(@"sdadsasd");
     return cell;
 }
 
@@ -223,9 +223,9 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 - (void)ForeshowTableViewCellSetTimeAlert:(ForeshowTableViewCell *)cell{
     
     for (id aa in cell.contentView.subviews) {
-        NSLog(@"xxxxxxxxxxx");
+//        NSLog(@"xxxxxxxxxxx");
         if ([aa isKindOfClass:[UIButton class]]) {
-             NSLog(@"xxxxxxxxxxxaaa");
+//             NSLog(@"xxxxxxxxxxxaaa");
             if (cell.isWarning == NO) {
                 UIImage * image = [UIImage imageNamed:@"bian"];
                 image = [image stretchableImageWithLeftCapWidth:image.size.width* 0.5 topCapHeight:image.size.height*0.5];
@@ -247,7 +247,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 //通知专跳
 - (void)operWebViewCn:(NSNotification *) notification {
-    NSLog(@"%@",notification);
+//    NSLog(@"%@",notification);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];

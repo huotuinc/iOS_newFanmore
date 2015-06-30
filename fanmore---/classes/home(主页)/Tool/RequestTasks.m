@@ -42,7 +42,7 @@
         }
         paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
         [paramsOption removeObjectForKey:@"appSecret"];
-        NSLog(@"网络请求参数parame%@",paramsOption);
+//        NSLog(@"网络请求参数parame%@",paramsOption);
         
         [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject) {
             

@@ -61,7 +61,7 @@ static NSString * _company = nil;
         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
-            NSLog(@"购买流量明细%@",json);
+//            NSLog(@"购买流量明细%@",json);
             if ([json[@"systemResultCode"] intValue] == 1) {
                 if ([json[@"resultCode"] intValue] == 56001) {
                     [MBProgressHUD showError:@"账号在其它地方登入，请重新登入"];
@@ -77,7 +77,7 @@ static NSString * _company = nil;
             self.currentPriceLable.text = [NSString stringWithFormat:@"现价:￥%.1f",flay.price];
             
         } failure:^(NSError *error) {
-            NSLog(@"err");
+//            NSLog(@"err");
         }];
     }
     return _buyflay;
@@ -167,14 +167,14 @@ static NSString * _company = nil;
     if (scell.selected == YES) {
         
         NSString * good = self.goods[self.selected.row];
-        NSLog(@"%@",good);
+//        NSLog(@"%@",good);
     }
     
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择支付方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"支付宝", @"微信",nil];
     [actionSheet showInView:self.view];
     
     
-    NSLog(@"购买流量xxxxxxxxxxxxxxxxxxx");
+//    NSLog(@"购买流量xxxxxxxxxxxxxxxxxxx");
 }
 
 
@@ -360,10 +360,10 @@ static NSString * _company = nil;
         switch (response.errCode) {
             case WXSuccess:
                 //服务器端查询支付通知或查询API返回的结果再提示成功
-                NSLog(@"支付成功");
+//                NSLog(@"支付成功");
                 break;
             default:
-                NSLog(@"支付失败， retcode=%d",resp.errCode);
+//                NSLog(@"支付失败， retcode=%d",resp.errCode);
                 break;
         }
     }
@@ -475,7 +475,7 @@ static NSString * _company = nil;
 
 - (void)optionsButtonClick:(UIButton *)btn{
     
-    NSLog(@"%ld",(long)btn.tag);
+//    NSLog(@"%ld",(long)btn.tag);
 }
 #pragma UICollectionViewDelegate
 

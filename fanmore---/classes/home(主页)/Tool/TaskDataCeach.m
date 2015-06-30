@@ -20,7 +20,7 @@ static FMDatabaseQueue * _dbqueue;;
 {
     //获取沙河路径
     NSString * fileName = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:FanMoreDB];
-    NSLog(@"%@",fileName);
+//    NSLog(@"%@",fileName);
     //创建数据库实力对象
     _dbqueue = [FMDatabaseQueue databaseQueueWithPath:fileName];
     [_dbqueue inDatabase:^(FMDatabase *db) {
