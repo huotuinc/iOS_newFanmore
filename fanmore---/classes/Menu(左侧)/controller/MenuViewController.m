@@ -62,7 +62,7 @@
     if (_lists == nil) {
         
         _lists = [NSArray array];
-        _lists = @[@"首页",@"账号设置",@"今日预告",@"师徒联盟",@"更多设置",@"签到中心",@"送流量"];
+        _lists = @[@"首页",@"账号设置",@"今日预告",@"师徒联盟",@"更多设置",@"签到中心"];
     }
     return _lists;
 }
@@ -390,4 +390,8 @@
 //        [self.navigationController pushViewController:today animated:YES];
 //    }
 }
+
+
+
+
 @end

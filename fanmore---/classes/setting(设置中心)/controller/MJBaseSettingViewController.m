@@ -94,4 +94,7 @@
     MJSettingGroup *group = self.data[section];
     return group.footer;
 }
+
+
+
 @end

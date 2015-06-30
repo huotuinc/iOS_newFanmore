@@ -348,14 +348,6 @@ NSString *frinedCellIdentifier = @"friend";
 
 
 
-
-
-
-
-
-
-
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

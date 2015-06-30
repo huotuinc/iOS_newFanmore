@@ -44,6 +44,8 @@ static NSString * _num = nil;
     // 2.添加数据
     [self setupGroup0];
     
+    //注册转跳通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operWebViewCn:) name:ReciveTaskId object:nil];
     
 }
 
@@ -228,6 +230,35 @@ static NSString * _num = nil;
     }
 }
 
+//通知专跳
+- (void)operWebViewCn:(NSNotification *) notification {
+    NSLog(@"%@",notification);
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+    detailVc.taskId = (int)notification.userInfo[@"id"]; //获取问题编号
+    detailVc.type = (int)notification.userInfo[@"type"];  //答题类型
+    detailVc.detailUrl = notification.userInfo[@"detailUrl"];//网页详情的url
+    detailVc.backTime = (int)notification.userInfo[@"backTime"];
+    detailVc.flay = [notification.userInfo[@"flay"] floatValue];
+    detailVc.shareUrl = notification.userInfo[@"shareUrl"];
+    detailVc.titless = notification.userInfo[@"title"];
+    detailVc.pictureUrl = notification.userInfo[@"pictureUrl"];
+    if ((int)notification.userInfo[@"type"] == 1) {
+        detailVc.title = @"答题任务";
+    }else if((int)notification.userInfo[@"type"] == 2){
+        detailVc.title = @"报名任务";
+    }else if((int)notification.userInfo[@"type"] == 3){
+        detailVc.title = @"画册类任务";
+    }else{
+        detailVc.title = @"游戏类任务";
+    }
+    ([notification.userInfo[@"reward"] floatValue] > 0|(int)notification.userInfo[@"taskFailed"]>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
+    [self.navigationController pushViewController:detailVc animated:YES];
+    
+}
 
 
 
