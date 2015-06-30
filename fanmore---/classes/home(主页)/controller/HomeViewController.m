@@ -464,11 +464,8 @@ static NSString * homeCellidentify = @"homeCellId";
     
 }
 
-- (void)operWebViewCn:(NSNotification *) notification {
-    NSLog(@"%@",notification);
-    
-    
-}
+
+
 
 
 - (void)answerOverToreferch{

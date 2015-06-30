@@ -127,6 +127,7 @@
 
 
 
+
 /**
  *  获取deviceToken
  */
@@ -143,9 +144,7 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     if (notification) {
         NSLog(@"%@",notification);
-        NSDictionary *userInfo = notification.userInfo;
-        UIAlertView *alert =  [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", userInfo[@"titel"]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+        [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:notification.userInfo];
     
     }
 }
@@ -162,7 +161,8 @@
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     detailViewController *detail = [story instantiateViewControllerWithIdentifier:@"detailViewController"];
     detail.taskId = (int)userInfo[@"id"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:userInfo];
+    UIViewController *currentVC = [self getCurrentVC];
+    [currentVC.navigationController pushViewController:detail animated:YES];
 
 }
 
@@ -423,4 +423,36 @@
     }
     
 }
+
+
+//获取当前屏幕显示的viewcontroller
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *result = nil;
+    
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    
+    if ([nextResponder isKindOfClass:[UIViewController class]])
+        result = nextResponder;
+    else
+        result = window.rootViewController;
+    
+    return result;
+}
+
 @end

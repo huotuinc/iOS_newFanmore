@@ -45,6 +45,7 @@
 
 
 
+
 /**
  *  设置
  *
@@ -85,17 +86,53 @@
    
     self.timeButton.hidden = !self.onlineImage.hidden;
     
-
+//    NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
+//    if (array.count > 0) {
+//        for (int i = 0; i < array.count; i++) {
+//            UILocalNotification *loa = [array objectAtIndex:i];
+//            NSDictionary *userInfo = loa.userInfo;
+//            NSNumber *obj = userInfo[@"key"];
+//            int mytag = [obj intValue];
+//            if (self.task.taskId == mytag) {
+//                [self timeButtonSetBule];
+//                break;
+//            }
+//            [self timeButtonWite];
+//        }
+//    }
  
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self timeButtonWite];
+    
+    NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    if (array.count > 0) {
+        for (int i = 0; i < array.count; i++) {
+            UILocalNotification *loa = [array objectAtIndex:i];
+            NSDictionary *userInfo = loa.userInfo;
+            NSNumber *obj = userInfo[@"key"];
+            int mytag = [obj intValue];
+            if (self.task.taskId == mytag) {
+                [self timeButtonSetBule];
+                
+                break;
+            }
+        }
+    }
+}
+
+//设置取消提醒
 - (void)timeButtonSetBule {
+    self.timeButton.layer.cornerRadius = 5;
+    self.timeButton.layer.borderWidth = 1;
     self.timeButton.layer.borderColor = [UIColor redColor].CGColor;
     [self.timeButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.timeButton setTitle:@"取消提醒" forState:UIControlStateNormal];
-    
 }
 
+//设置提醒
 - (void)timeButtonWite {
     self.timeButton.layer.cornerRadius = 5;
     self.timeButton.layer.borderWidth = 1;
@@ -136,7 +173,9 @@
                                       @"backTime":@(self.task.backTime),
                                       @"flay":@(self.task.maxBonus),
                                       @"shareUrl":self.task.shareURL,
-                                      @"pictureUrl":self.task.pictureURL};
+                                      @"pictureUrl":self.task.pictureURL,
+                                      @"taskFailed":@(self.task.taskFailed),
+                                      @"reward":@(self.task.reward)};
             
             
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
@@ -170,9 +209,6 @@
 
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self timeButtonWite];
-}
+
 
 @end
