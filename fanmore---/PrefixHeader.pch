@@ -47,6 +47,9 @@
 //barButton
 #import <UIBarButtonItem+BlocksKit.h>
 
+//web页面
+#import "detailViewController.h"
+
 
 #import "NSString+EXTERN.h"     //验证手机号
 #import "UIViewController+FM.h"

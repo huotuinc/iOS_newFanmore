@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bbc-LE-jve">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bbc-LE-jve">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -950,27 +950,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqs-wm-Lyd">
-                                <rect key="frame" x="20" y="385" width="137" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="kAA-it-bzl"/>
-                                    <constraint firstAttribute="height" constant="40" id="tfH-9V-cOA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                <state key="normal" title="购买流量">
-                                    <color key="titleColor" red="0.0048019419269999999" green="0.55332796880000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="kAA-it-bzl"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="buyAction:" destination="Tml-jd-JxY" eventType="touchUpInside" id="d5V-LC-Vzg"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PT3-i1-kYX" customClass="FMButton">
                                 <rect key="frame" x="20" y="340" width="280" height="40"/>
                                 <constraints>
@@ -994,8 +973,29 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sW-Kx-T0g">
-                                <rect key="frame" x="163" y="385" width="137" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqs-wm-Lyd">
+                                <rect key="frame" x="20" y="385" width="280" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="kAA-it-bzl"/>
+                                    <constraint firstAttribute="height" constant="40" id="tfH-9V-cOA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                <state key="normal" title="购买流量">
+                                    <color key="titleColor" red="0.0048019419269999999" green="0.55332796880000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="kAA-it-bzl"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="buyAction:" destination="Tml-jd-JxY" eventType="touchUpInside" id="d5V-LC-Vzg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sW-Kx-T0g">
+                                <rect key="frame" x="20" y="385" width="280" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="vE5-eV-YDv"/>
@@ -1019,6 +1019,7 @@
                             <constraint firstItem="2sW-Kx-T0g" firstAttribute="width" secondItem="PT3-i1-kYX" secondAttribute="width" multiplier="0.49" id="8j9-sd-pSi"/>
                             <constraint firstItem="PT3-i1-kYX" firstAttribute="top" secondItem="rqY-pV-NGU" secondAttribute="bottom" constant="5" id="9Cu-8E-a8y"/>
                             <constraint firstAttribute="height" secondItem="a2V-q3-GOF" secondAttribute="height" multiplier="2" id="DA1-BP-ScA"/>
+                            <constraint firstItem="PT3-i1-kYX" firstAttribute="width" secondItem="wqs-wm-Lyd" secondAttribute="width" id="Epb-RA-6FX"/>
                             <constraint firstAttribute="trailing" secondItem="wqs-wm-Lyd" secondAttribute="trailing" constant="20" id="FGj-y8-j7i"/>
                             <constraint firstAttribute="centerX" secondItem="a2V-q3-GOF" secondAttribute="centerX" id="GAi-FD-7cI"/>
                             <constraint firstItem="PT3-i1-kYX" firstAttribute="leading" secondItem="5Jt-3E-QbI" secondAttribute="leading" constant="20" id="LjD-BW-70E"/>
@@ -1050,6 +1051,7 @@
                                 <exclude reference="5RJ-9m-FZh"/>
                                 <exclude reference="FGj-y8-j7i"/>
                                 <exclude reference="kLz-W2-H0J"/>
+                                <exclude reference="8j9-sd-pSi"/>
                                 <exclude reference="UEd-n2-35U"/>
                                 <exclude reference="jc6-1t-AxQ"/>
                                 <exclude reference="uXc-sf-fdY"/>
@@ -1921,7 +1923,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4IB-So-oIq">
-                                <rect key="frame" x="35" y="204" width="235" height="307"/>
+                                <rect key="frame" x="35" y="204" width="235" height="269"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me6-UL-I5A">
@@ -2053,7 +2055,7 @@
                             <constraint firstItem="Me6-UL-I5A" firstAttribute="leading" secondItem="3E2-Bc-PjE" secondAttribute="leading" id="JXN-xL-57C"/>
                             <constraint firstItem="4IB-So-oIq" firstAttribute="leading" secondItem="3E2-Bc-PjE" secondAttribute="leading" constant="35" id="LrH-WF-vfO"/>
                             <constraint firstAttribute="trailing" secondItem="Me6-UL-I5A" secondAttribute="trailing" id="SIF-DN-mOG"/>
-                            <constraint firstItem="4IB-So-oIq" firstAttribute="height" secondItem="3E2-Bc-PjE" secondAttribute="height" multiplier="0.64" id="Zb4-yP-iGh"/>
+                            <constraint firstItem="4IB-So-oIq" firstAttribute="height" secondItem="3E2-Bc-PjE" secondAttribute="height" multiplier="0.56" id="Zb4-yP-iGh"/>
                             <constraint firstAttribute="trailing" secondItem="4IB-So-oIq" secondAttribute="trailing" constant="50" id="ZxQ-LB-r6m"/>
                             <constraint firstItem="4IB-So-oIq" firstAttribute="top" secondItem="Me6-UL-I5A" secondAttribute="bottom" constant="10" id="bNM-Md-PvZ"/>
                             <constraint firstItem="4IB-So-oIq" firstAttribute="top" secondItem="Me6-UL-I5A" secondAttribute="bottom" constant="-1" id="ciX-YC-aXH"/>
