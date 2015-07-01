@@ -8,7 +8,7 @@
 
 #import "BoundPhoneViewController.h"
 
-@interface BoundPhoneViewController ()
+@interface BoundPhoneViewController ()<UIAlertViewDelegate>
 /**绑定文字说明*/
 @property (weak, nonatomic) IBOutlet UILabel *stateLable;
 /**验证码*/
@@ -115,12 +115,54 @@
     params[@"type"] = @"3";
     NSString * urlStr= [MainURL stringByAppendingPathComponent:@"sendSMS"];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
-        
+        NSLog(@"dasdasd%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==53014) {
+            
+            [MBProgressHUD showError:json[@"resultDescription"]];
+            return ;
+        }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==54001) {
+            
+            [MBProgressHUD showError:json[@"resultDescription"]];
+            return ;
+        }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==55001){
+            
+            if ([json[@"resultData"][@"voiceAble"] intValue]) {
+                UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                [a show];
+            }
+            
+            
+        }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1){
+            
+            //            NSLog(@"%@",json);
+            [self settime];
+        }
        
     } failure:^(NSError *error) {
 //        NSLog(@"%@",error.description);
     }];
 }
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        //网络请求获取验证码
+        NSMutableDictionary * params = [NSMutableDictionary dictionary];
+        params[@"phone"] = self.phoneNumber.text;
+        params[@"type"] = @"1";
+        params[@"codeType"] = @(1);
+        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
+        [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
+            //            NSLog(@"学习学习%@",json);
+        } failure:^(NSError *error) {
+            
+            //            NSLog(@"%@",[error description]);
+        }];
+    }
+}
+
 
 /**
  * 设置验证码的倒计时
