@@ -178,7 +178,7 @@
                                       @"taskFailed":@(self.task.taskFailed),
                                       @"reward":@(self.task.reward)};
             
-            
+            NSLog(@"%@",notification.userInfo);
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             self.isWarning = !self.isWarning;
             [MBProgressHUD showSuccess:@"提醒设置成功"];

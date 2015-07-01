@@ -219,10 +219,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     }
     
     
-    
-    
-    
-    self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%dM流量", 500  - [userBalance floatValue], 500];
+    [self setWaringLabel];
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {

@@ -101,10 +101,13 @@
     
     if (launchOptions) {
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-        NSDictionary *dic = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+        
+        NSNotification *dic = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dic) {
             [self.userInfo removeAllObjects];
-            [self.userInfo addEntriesFromDictionary:dic];
+            self.userInfo = [NSMutableDictionary dictionaryWithDictionary:dic.userInfo];
+            NSLog(@"self.userInfo:: %@", self.userInfo);
+            NSLog(@"!!!!CCCCC:::%@",dic.userInfo);
             UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.userInfo[@"title"]] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
             [ac show];
         }
@@ -436,6 +439,8 @@
     
     if (buttonIndex == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:self.userInfo];
+    }else if (buttonIndex == 1){
+        [[NSNotificationCenter defaultCenter] postNotificationName:ReLoad object:nil userInfo:self.userInfo];
     }
 }
 

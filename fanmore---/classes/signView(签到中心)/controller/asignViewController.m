@@ -275,7 +275,7 @@
     }else{
         detailVc.title = @"游戏类任务";
     }
-    ([notification.userInfo[@"reward"] floatValue] > 0|(int)notification.userInfo[@"taskFailed"]>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
+    
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
     [self.navigationController pushViewController:detailVc animated:YES];
