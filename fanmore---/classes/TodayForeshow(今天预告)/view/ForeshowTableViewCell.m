@@ -159,7 +159,8 @@
         UILocalNotification * notification = [[UILocalNotification alloc] init];
         if (notification != nil) {
             NSDate *now=[NSDate new];
-            notification.fireDate = [now dateByAddingTimeInterval:10];
+            notification.fireDate = [now dateByAddingTimeInterval:([self.task.publishDate doubleValue] /1000.0) - [now timeIntervalSince1970]
+];
             //([self.task.publishDate doubleValue] /1000.0) - [now timeIntervalSince1970]
             notification.timeZone = [NSTimeZone defaultTimeZone];
             notification.applicationIconBadgeNumber += 1;
@@ -177,7 +178,7 @@
                                       @"taskFailed":@(self.task.taskFailed),
                                       @"reward":@(self.task.reward)};
             
-            
+            NSLog(@"%@",notification.userInfo);
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             self.isWarning = !self.isWarning;
             [MBProgressHUD showSuccess:@"提醒设置成功"];

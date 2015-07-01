@@ -140,7 +140,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
                     self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
                     break;
                 }
-                if ([self.userInfo.balance floatValue] > [self.flays[i] floatValue]) {
+                if ([self.userInfo.balance floatValue] > [self.flays[i] floatValue] && [self.userInfo.balance floatValue] < [self.flays[i + 1] floatValue]) {
                 
                     if (self.userInfo.balance < self.flays[i + 1]) {
                         self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%dM以下流量包", [self.flays[i] intValue]] ;
@@ -221,10 +221,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     }
     
     
-    
-    
-    
-    self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%dM流量", 500  - [userBalance floatValue], 500];
+    [self setWaringLabel];
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {

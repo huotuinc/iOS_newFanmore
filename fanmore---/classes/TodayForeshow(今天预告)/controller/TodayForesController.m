@@ -12,7 +12,7 @@
 #import "taskData.h"  //任务
 
 
-#define pagesize 4
+#define pagesize 10
 
 @interface TodayForesController ()<ForeshowTableViewCellDelegate>
 /**今日预告列表*/
@@ -43,6 +43,8 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    
+    [self headerRereshing];
   
 }
 
@@ -60,6 +62,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     //注册转跳通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operWebViewCn:) name:ReciveTaskId object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(headerRereshing) name:ReLoad object:nil];
 }
 
 
@@ -247,7 +250,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 //通知专跳
 - (void)operWebViewCn:(NSNotification *) notification {
-//    NSLog(@"%@",notification);
+
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
@@ -268,7 +271,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     }else{
         detailVc.title = @"游戏类任务";
     }
-    ([notification.userInfo[@"reward"] floatValue] > 0|(int)notification.userInfo[@"taskFailed"]>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
+    
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
     [self.navigationController pushViewController:detailVc animated:YES];

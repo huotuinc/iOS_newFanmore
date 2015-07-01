@@ -104,6 +104,8 @@
 
 #define ReciveTaskId @"reciveTaskId"    //收到本地推送首页转跳
 
+#define ReLoad @"reciveTaskIdReLoad" 
+
 //通知
 #define RefreshHomeDate @"RefreshHomeDate"  //刷新home的数据
 #endif

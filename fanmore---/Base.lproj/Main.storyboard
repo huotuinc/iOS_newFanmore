@@ -973,7 +973,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqs-wm-Lyd">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqs-wm-Lyd">
                                 <rect key="frame" x="20" y="385" width="280" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -994,7 +994,7 @@
                                     <action selector="buyAction:" destination="Tml-jd-JxY" eventType="touchUpInside" id="d5V-LC-Vzg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sW-Kx-T0g">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sW-Kx-T0g">
                                 <rect key="frame" x="20" y="385" width="280" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1047,12 +1047,12 @@
                                 <exclude reference="9Cu-8E-a8y"/>
                                 <exclude reference="lYs-wo-Do5"/>
                                 <exclude reference="zMW-pn-azt"/>
+                                <exclude reference="8j9-sd-pSi"/>
+                                <exclude reference="UEd-n2-35U"/>
                                 <exclude reference="2RN-9b-9lO"/>
                                 <exclude reference="5RJ-9m-FZh"/>
                                 <exclude reference="FGj-y8-j7i"/>
                                 <exclude reference="kLz-W2-H0J"/>
-                                <exclude reference="8j9-sd-pSi"/>
-                                <exclude reference="UEd-n2-35U"/>
                                 <exclude reference="jc6-1t-AxQ"/>
                                 <exclude reference="uXc-sf-fdY"/>
                                 <exclude reference="zLu-c3-4Hi"/>
