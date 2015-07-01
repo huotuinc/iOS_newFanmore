@@ -108,6 +108,8 @@
     if ([aa isEqualToString:@"男"]) {
         a= 0;
     }
+    
+    __weak SexController * wself = self;
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     parame[@"profileType"] = @(6);

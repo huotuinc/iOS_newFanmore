@@ -131,7 +131,7 @@
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
                     [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
-                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [wself.navigationController popToRootViewControllerAnimated:YES];
                 }
           
             } failure:^(NSError *error) {
