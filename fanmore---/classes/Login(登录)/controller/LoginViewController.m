@@ -40,11 +40,16 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     //1、设置控件属性
@@ -294,6 +299,7 @@
     }
     return YES;
 }
+
 
 
 #pragma UserRegisterViewDelegate 注册成功

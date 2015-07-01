@@ -67,6 +67,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.title = @"流量兑换";
     self.flays;
     
+    self.promptLabel.adjustsFontSizeToFitWidth = YES;
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
     //1、保存全局信息
@@ -121,37 +122,42 @@ static NSString *collectionViewidentifier = @"collectionCell";
 
 
 - (void)setWaringLabel {
-//    NSLog(@"self.flays:%@", self.flays);
-    if (self.flays.count <= 2) {
-        if ([self.userInfo.balance floatValue] >= [self.flays[1] floatValue] ) {
-            self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
-        }else if ([self.userInfo.balance floatValue] < [self.flays[0] floatValue]) {
-            self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%@M流量包", [self.flays[0] floatValue] - [self.userInfo.balance floatValue], self.flays[0]];
-        }else {
-            self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%dM以下流量包", [self.flays[0] intValue]];
-        }
-    }else {
-        for (int i = 1; i < self.flays.count - 1; i++) {
-//            NSLog(@"%@",self.userInfo.balance);
-//            NSLog(@"%@", self.flays[0]);
-            if ([self.userInfo.balance floatValue] > [self.flays[0] floatValue]) {
-//                NSLog(@"%@", self.flays[self.flays.count -1]);
-                if ([self.userInfo.balance floatValue] > [self.flays[self.flays.count - 1] floatValue]) {
-                    self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
-                    break;
-                }
-                if ([self.userInfo.balance floatValue] > [self.flays[i] floatValue] && [self.userInfo.balance floatValue] < [self.flays[i + 1] floatValue]) {
-                
-                    if (self.userInfo.balance < self.flays[i + 1]) {
-                        self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%dM以下流量包", [self.flays[i] intValue]] ;
-                        break;
-                    }
-                }
-            }else {
-                self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%@M流量包", [self.flays[0] floatValue] - [self.userInfo.balance floatValue], self.flays[0]];
+    
+    int bigflay = [[self.flays lastObject] intValue];
+    
+    int smallflay = [self.flays[0] intValue];
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //1、保存全局信息
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    self.userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    CGFloat current = [self.userInfo.balance doubleValue];
+    
+    if (current > bigflay) {
+        
+        self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
+        
+    }else if(current > smallflay){
+        
+        
+        [self.flays enumerateObjectsUsingBlock:^(NSString* obj, NSUInteger idx, BOOL *stop) {
+           
+            int aaa = [obj intValue];
+            if (current < aaa) {
+            
+                self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%dM流量包,对换后还剩%.1fM流量",[self.flays[idx-1] intValue],(current - [self.flays[idx-1] intValue])];
+                                         
+                *stop = YES;
             }
-        }
+        }];
+        
+    }else{
+        
+        self.promptLabel.text = [NSString stringWithFormat:@"你还差%.1fM，可以兑换%dM流量包", [self.flays[0] floatValue] - [self.userInfo.balance floatValue], smallflay];
     }
+    
+
 }
 
 
