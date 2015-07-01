@@ -80,6 +80,7 @@ static NSString *BPCellidentify = @"BPCellId";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @"";
     params[@"pagingSize"] = @(PageSize);
+    [MBProgressHUD showMessage:@""];
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -106,6 +107,8 @@ static NSString *BPCellidentify = @"BPCellId";
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"details"];
     [MBProgressHUD showMessage:@""];
+    
+    __weak BPViewController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
@@ -115,8 +118,8 @@ static NSString *BPCellidentify = @"BPCellId";
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [Details objectArrayWithKeyValuesArray:json[@"resultData"][@"details"]];
             if (taskArray.count > 0) {
-                [self.details addObjectsFromArray:taskArray];
-                [self.tableView reloadData];    //刷新数据
+                [wself.details addObjectsFromArray:taskArray];
+                [wself.tableView reloadData];    //刷新数据
             }
             
         }
@@ -134,7 +137,8 @@ static NSString *BPCellidentify = @"BPCellId";
 -(void)getNewMoreData:(NSMutableDictionary *)params{
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"details"];
-    [MBProgressHUD showMessage:@""];
+    
+    __weak BPViewController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
 //        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
@@ -144,9 +148,9 @@ static NSString *BPCellidentify = @"BPCellId";
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [Details objectArrayWithKeyValuesArray:json[@"resultData"][@"details"]];
             if (taskArray.count > 0) {
-                [self.details removeAllObjects];
-                self.details = [NSMutableArray arrayWithArray:taskArray];
-                [self.tableView reloadData];    //刷新数据
+                [wself.details removeAllObjects];
+                wself.details = [NSMutableArray arrayWithArray:taskArray];
+                [wself.tableView reloadData];    //刷新数据
             }
         }
         [MBProgressHUD hideHUD];

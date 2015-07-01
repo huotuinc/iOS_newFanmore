@@ -107,6 +107,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
  */
 -(void)getNewMoreData:(NSMutableDictionary *)params{
     
+    __weak DiscipleViewController * wself = self;
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
 //        NSLog(@"%@",json);
@@ -117,8 +118,8 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             NSArray * plist =  [prenticeList objectArrayWithKeyValuesArray:json[@"resultData"][@"apps"]];
             
-            self.prentices  = [NSMutableArray arrayWithArray:plist];
-            [self.tableView reloadData];
+            wself.prentices  = [NSMutableArray arrayWithArray:plist];
+            [wself.tableView reloadData];
         }
     
     } failure:^(NSError *error) {

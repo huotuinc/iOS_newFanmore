@@ -150,8 +150,8 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            [self.Notices removeAllObjects];
-            self.Notices = [NSMutableArray arrayWithArray:taskArray];
+            [wself.Notices removeAllObjects];
+            wself.Notices = [NSMutableArray arrayWithArray:taskArray];
             [wself.tableView reloadData];    //刷新数据
         }
         

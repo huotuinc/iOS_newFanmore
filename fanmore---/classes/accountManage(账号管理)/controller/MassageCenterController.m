@@ -143,6 +143,8 @@
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     parame[@"pagingSize"] = @(pageSize);
     parame[@"pagingTag"] = @"";
+    
+    __weak MassageCenterController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
 //        NSLog(@"%@",json);
         NSMutableArray * aaframe = [NSMutableArray array];
@@ -157,8 +159,8 @@
                     aas.message = aa;
                     [aaframe addObject:aas];
                 }
-                [self.messageF addObjectsFromArray:aaframe];
-                [self.tableView reloadData];
+                [wself.messageF addObjectsFromArray:aaframe];
+                [wself.tableView reloadData];
             }
             
             

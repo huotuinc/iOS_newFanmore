@@ -193,6 +193,16 @@ static NSString * homeCellidentify = @"homeCellId";
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
+            [MBProgressHUD showError:@"账号被登入"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:loginUserName];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            //1、保存个人信息
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:nil toFile:fileName];
+            [wself.tableView headerBeginRefreshing];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
@@ -219,7 +229,7 @@ static NSString * homeCellidentify = @"homeCellId";
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];

@@ -44,6 +44,8 @@
     
 //    http://192.168.0.14:8080/fanmoreweb/shituInfo?appKey=b73ca64567fb49ee963477263283a1bf&cityCode=1372&operation=FM2015AP&timestamp=1435066431429&imei=54604120-5BF8-4A37-96F1-1C6BA6AA881A&version=3.0.0&lat=37.785834&token=353a64340c2a4a1a864396a0c2eccd82&sign=6333bb24a4dc5e10cbf92f3f310d2902&lng=116.406417&cpaCode=default
 //    NSString *urlStr = [NSString stringWithFormat:@"http://192.168.0.14:8080/fanmoreweb/shituInfo"];
+    
+    __weak InviteCodeViewController * wself = self;
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"shituInfo"];
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
        
@@ -52,10 +54,10 @@
             NSDictionary *dic = json[@"resultData"];
             NSLog(@"%d", dic.count);
 
-            self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
-            self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
-            self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
-            self.shareUrl = dic[@"shareURL"];
+            wself.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
+            wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
+            wself.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
+            wself.shareUrl = dic[@"shareURL"];
         }
         
 ////        NSLog(@"%@", dic[@"yestodayM"]);

@@ -168,6 +168,8 @@
     params[@"password"] = [MD5Encryption md5by32:self.passwdTextField.text];
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"login"];
     //发送网络请求
+    
+    __weak LoginViewController * wself = self;
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
 //        NSLog(@"login========%@",json);
@@ -208,9 +210,9 @@
             }else{
                 [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
                 
-                if ([self.delegate respondsToSelector:@selector(LoginViewDelegate:)]) {
+                if ([wself.delegate respondsToSelector:@selector(LoginViewDelegate:)]) {
                     
-                    [self.delegate LoginViewDelegate:self.loginType];
+                    [wself.delegate LoginViewDelegate:self.loginType];
                 }
                 [MBProgressHUD showSuccess:userInfo.welcomeTip];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

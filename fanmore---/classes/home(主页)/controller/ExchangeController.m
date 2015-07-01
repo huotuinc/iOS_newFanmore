@@ -80,7 +80,7 @@ NSString * _changeflah = nil;
                 return;
             }
         
-            NSString *flaycount = [NSString stringWithFormat:@"是否兑换流量%@M",self.showArray[indexPath.row]];
+            NSString *flaycount = [NSString stringWithFormat:@"是否兑换流量%@",self.showArray[indexPath.row]];
             if (IsIos8) {
                 UIAlertController * alertVc = [UIAlertController alertControllerWithTitle:nil message:flaycount preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
