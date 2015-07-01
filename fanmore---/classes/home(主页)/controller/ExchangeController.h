@@ -15,6 +15,8 @@
 /**兑换流量成功*/
 - (void)successExchange:(NSString* ) userBalance;
 
+
+
 @end
 
 

@@ -38,7 +38,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
             [MBProgressHUD hideHUD];
-//            NSLog(@"xxxxxxxxx%@",json);
+            NSLog(@"xxxxxxxxx%@",json);
             if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
                 
                 _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
@@ -66,6 +66,10 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     self.title = @"流量兑换";
     self.flays;
+    
+    if (self.flays.count != 0) {
+        [self setWaringLabel];
+    }
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
@@ -168,6 +172,10 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [self.navigationController setNavigationBarHidden:NO];
     
+//    if (self.flays.count != 0) {
+//        [self setWaringLabel];
+//    }
+    
 
     
 //    NSLog(@"%@", self.flays);
@@ -221,9 +229,6 @@ static NSString *collectionViewidentifier = @"collectionCell";
     }
     
     
-    [self setWaringLabel];
-    
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         BPViewController *bpView = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
@@ -240,6 +245,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.friendButton.layer.borderWidth = 0.5;
     self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
     self.friendButton.layer.cornerRadius = 2;
+    
+    [self setWaringLabel];
 }
 
 @end
