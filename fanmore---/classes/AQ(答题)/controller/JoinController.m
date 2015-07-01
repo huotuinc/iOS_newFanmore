@@ -13,6 +13,14 @@
 #import "WebController.h"
 
 
+
+@interface JoinController ()
+
+/**答案*/
+@property(nonatomic,strong)NSMutableString * answers;
+
+@end
+
 @implementation JoinController
 
 - (void)registerForKeyboardNotifications
@@ -174,7 +182,8 @@
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
         
         params[@"taskId"] = @(self.taskId);
-        params[@"answers"] = [NSString stringWithFormat:@"%d:%@|%d:%@",task1.qid,self.field1.text,task2.qid,self.field2.text];
+        self.answers = [NSMutableString stringWithFormat:@"%d:%@|%d:%@",task1.qid,self.field1.text,task2.qid,self.field2.text];
+        params[@"answers"] = self.answers;
         [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 56001)
             {
@@ -213,8 +222,14 @@
         
     }else if(self.questions.count > 2){
         
+        [self.questions removeObjectAtIndex:0];
+        [self.questions removeObjectAtIndex:0];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         JoinNextController *joinNext = [storyboard instantiateViewControllerWithIdentifier:@"JoinNextController"];
+        joinNext.questions = self.questions;
+        joinNext.answers = self.answers;
+        joinNext.taskId = self.taskId;
+        joinNext.flay = self.flay;
         [self.navigationController pushViewController:joinNext animated:YES];
     }
     

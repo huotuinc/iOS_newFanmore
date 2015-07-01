@@ -1948,6 +1948,7 @@
 				TargetAttributes = {
 					EF49ECEA1B0D81A40038A203 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = Q3B3AD6JJH;
 					};
 					EF49ED031B0D81A40038A203 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -2347,6 +2348,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2395,7 +2398,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "333e7791-9396-4a47-8ed4-a755f2d8271b";
+				PROVISIONING_PROFILE = "a58045c1-e18f-4c85-84ea-9673bb81210c";
 			};
 			name = Debug;
 		};
@@ -2405,6 +2408,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2453,7 +2458,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "333e7791-9396-4a47-8ed4-a755f2d8271b";
+				PROVISIONING_PROFILE = "6b42007f-8243-46ab-955b-b49f3e7e96b5";
 			};
 			name = Release;
 		};
