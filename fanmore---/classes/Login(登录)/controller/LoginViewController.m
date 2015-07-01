@@ -80,11 +80,11 @@
 -(void)keyboardWasShown:(NSNotification *) note{
     
     NSDictionary* info = [note userInfo];
-    NSLog(@"%@",info);
+//    NSLog(@"%@",info);
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    NSLog(@"kbsize == %f ----- y == %f",kbSize.height,CGRectGetMaxY(self.loginBtn.frame));
+//    NSLog(@"kbsize == %f ----- y == %f",kbSize.height,CGRectGetMaxY(self.loginBtn.frame));
     CGFloat sizesss = CGRectGetMaxY(self.loginBtn.frame) - (ScreenHeight - kbSize.height);
-    NSLog(@"--------------size%f",sizesss);
+//    NSLog(@"--------------size%f",sizesss);
     if (sizesss > 0) {
         
         [UIView animateWithDuration:0.15 animations:^{
@@ -170,7 +170,7 @@
     //发送网络请求
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
-        NSLog(@"login========%@",json);
+//        NSLog(@"login========%@",json);
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 54003) {
             [MBProgressHUD hideHUD];
@@ -185,7 +185,7 @@
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             [MBProgressHUD hideHUD];
-            NSLog(@"登录成功=========== %@",json);
+//            NSLog(@"登录成功=========== %@",json);
             userData * userInfo = [userData objectWithKeyValues:(json[@"resultData"][@"user"])];
             //1、登入成功用户数据本地化
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -219,13 +219,13 @@
             }
             
         }
-        
+        [MBProgressHUD hideHUD];
         
     } failure:^(NSError *error) {
         
         [MBProgressHUD hideHUD];
-        NSLog(@"登录失败%@",[error localizedDescription]);
-//        [MBProgressHUD showError:@"无法连接到服务器"];
+//        NSLog(@"登录失败%@",[error localizedDescription]);
+        [MBProgressHUD showError:@"无法连接到服务器"];
         
     }];
 }

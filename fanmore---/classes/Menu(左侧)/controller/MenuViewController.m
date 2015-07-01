@@ -52,7 +52,7 @@
 
     //1、判断是否要登录
     NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
-    NSLog(@"========xxxxx====%@",flag);
+//    NSLog(@"========xxxxx====%@",flag);
     _isLogin = [flag isEqualToString:@"right"];
     return _isLogin;
 }

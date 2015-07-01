@@ -107,7 +107,7 @@
     __weak MassageCenterController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
-        NSLog(@"上啦加载的数据%@",json);
+//        NSLog(@"上啦加载的数据%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             return ;
@@ -122,11 +122,12 @@
                     [wself.messageF addObject:aas];
                     
                 }
+                [wself.tableView reloadData];
             }
             
         }
     } failure:^(NSError *error) {
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
     }];
     
 }
@@ -143,7 +144,7 @@
     parame[@"pagingSize"] = @(pageSize);
     parame[@"pagingTag"] = @"";
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         NSMutableArray * aaframe = [NSMutableArray array];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
@@ -151,7 +152,7 @@
             if (messageArrays.count) {
                 
                 for (Message *aa in messageArrays) {
-                    NSLog(@"%@  %lld",aa.context,aa.date);
+//                    NSLog(@"%@  %lld",aa.context,aa.date);
                     MessageFrame *aas = [[MessageFrame alloc] init];
                     aas.message = aa;
                     [aaframe addObject:aas];

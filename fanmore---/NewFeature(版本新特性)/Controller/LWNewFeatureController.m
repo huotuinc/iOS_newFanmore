@@ -144,7 +144,7 @@
  */
 -(void)startButtonClick
 {
-    NSLog(@"dasdasdasdasdasd");
+//    NSLog(@"dasdasdasdasdasd");
     [UIApplication sharedApplication].statusBarHidden = NO;
     UIWindow * win = [UIApplication sharedApplication].keyWindow;
     RootViewController * roots = [[RootViewController alloc] init];
@@ -176,6 +176,6 @@
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     
-    NSLog(@"结束滚蛋");
+//    NSLog(@"结束滚蛋");
 }
 @end

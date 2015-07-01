@@ -137,7 +137,7 @@
 
 - (void)qiandao:(NSNotification *) not{
     
-    NSLog(@"接受到签到通知");
+    
     [self asignBtnClick:self.asignBtn];
 }
 
@@ -178,7 +178,7 @@
 
 - (void)btnclick:(UIButton *) btn{
     
-    NSLog(@"xxxxxxx%ld",(long)btn.tag);
+    
 }
 /**
  *  签到按钮点击
@@ -187,7 +187,7 @@
  */
 - (IBAction)asignBtnClick:(UIButton *)sender {
     
-    NSLog(@"dadadasdasdasdasdsa接受到签到通知");
+   
     AudioServicesPlayAlertSound(self.failureSound);
     NSInteger week = [self getWeek];
     for (UIButton * btn in self.buttons) { //遍历今天是周几
@@ -201,7 +201,7 @@
     [MBProgressHUD showMessage:nil];
     NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
     [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
-        NSLog(@"%@",json);
+       
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==56001) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"账号在其它地方登入"];
@@ -244,7 +244,7 @@
             [MBProgressHUD hideHUD];
         });
     } failure:^(NSError *error) {
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
         [MBProgressHUD hideHUD];
     }];
    
@@ -252,7 +252,7 @@
 
 //通知专跳
 - (void)operWebViewCn:(NSNotification *) notification {
-    NSLog(@"%@",notification);
+//    NSLog(@"%@",notification);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];

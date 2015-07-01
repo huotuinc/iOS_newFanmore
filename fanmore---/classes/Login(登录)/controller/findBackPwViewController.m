@@ -118,15 +118,15 @@
     params[@"type"] = @(2);
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
     //发送网络请求
-    NSLog(@"sssssss====%@",urlStr);
+//    NSLog(@"sssssss====%@",urlStr);
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
         
-        NSLog(@"忘记密码请求成功%@",json);
+//        NSLog(@"忘记密码请求成功%@",json);
         //验证码的倒计时
         [self settime];
     } failure:^(NSError *error) {
         
-        NSLog(@"注册失败%@",[error localizedDescription]);
+//        NSLog(@"注册失败%@",[error localizedDescription]);
     }];
     
 }
@@ -157,7 +157,7 @@
             NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                NSLog(@"____%@",strTime);
+//                NSLog(@"____%@",strTime);
                 [self.verificationBtn setTitle:[NSString stringWithFormat:@"%@秒重新发送",strTime] forState:UIControlStateNormal];
                 self.verificationBtn.userInteractionEnabled = NO;
                 
@@ -190,12 +190,12 @@
     
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"forgetPassword"];
     //发送网络请求
-    NSLog(@"sssssss====%@",urlStr);
+//    NSLog(@"sssssss====%@",urlStr);
     __weak findBackPwViewController *wself = self;
     
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
         
-        NSLog(@"找回密码成功%@",json);
+//        NSLog(@"找回密码成功%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             return ;
@@ -213,7 +213,7 @@
         
         
     } failure:^(NSError *error) {
-         NSLog(@"找回密码失败%@",[error localizedDescription]);
+//         NSLog(@"找回密码失败%@",[error localizedDescription]);
     }];
 
     

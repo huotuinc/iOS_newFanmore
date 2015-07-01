@@ -71,7 +71,6 @@
     
     
     NSString * appVersion = [[NSUserDefaults standardUserDefaults] stringForKey:LocalAppVersion];
-    NSLog(@"aaaa%@",appVersion);
     if (appVersion) {
         
         if ([appVersion isEqualToString:AppVersion]) {//相等
@@ -141,7 +140,6 @@
  */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
-    NSLog(@"苹果apns返回的deviceToken%@",deviceToken);
     NSString * aa = [deviceToken hexadecimalString];
     NSLog(@"%@",aa);
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
@@ -182,11 +180,11 @@
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
-                                                      NSLog(@"result = %@",resultDic);
+//                                                      NSLog(@"result = %@",resultDic);
                                                   }]; }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+//            NSLog(@"result = %@",resultDic);
         }];
     }
     
@@ -208,50 +206,43 @@
     params[@"appKey"] = APPKEY;
     NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
     NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-    NSLog(@"lat = %@  log = %@",lat,lng);
-    params[@"lat"] = @(116.0);
-    params[@"lng"] =@(40.0);
+//    NSLog(@"lat = %@  log = %@",lat,lng);
+    params[@"lat"] = ([lat isEqualToString:@""]?(@(116.0)):(@([lat floatValue])));
+    params[@"lng"] = ([lng isEqualToString:@""]?(@(116.0)):(@([lng floatValue])));
     params[@"timestamp"] = apptimesSince1970;
     params[@"operation"] = OPERATION_parame;
     params[@"version"] = AppVersion;
     NSString * aaatoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
-    NSLog(@"aaatoken === %@",aaatoken);
     params[@"token"] = aaatoken?aaatoken:@"";
     params[@"imei"] = DeviceNo;
     params[@"cityCode"] = @"123";
     params[@"cpaCode"] = @"default";
     params[@"sign"] = [NSDictionary asignWithMutableDictionary:params];
     [params removeObjectForKey:@"appSecret"];
-    NSLog(@"init---prame===%@",params);
+    
     
     //网络请求借口
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
     __block LoginResultData * resultData = [[LoginResultData alloc] init];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
         
-        NSLog(@"init 借口返回的数据%@",responseObject);
-        
         if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {//返回数据成功
             
             
             
             resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];//数据对象话
-            NSLog(@"%@",responseObject[@"resultData"]);
             
             //保存答题能阅读的时间
             [[NSUserDefaults standardUserDefaults] setObject: @(resultData.global.lessReadSeconds) forKey:AppReadSeconds];
 
             //取出本地token
             NSString *localToken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
-            NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",localToken);
-            NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",resultData.user.token);
             if (![localToken isEqualToString:resultData.user.token]) {
                 //保存新的token
                 [[NSUserDefaults standardUserDefaults] setObject:resultData.user.token forKey:AppToken];
                 NSString * flag = @"wrong";
                 [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
                 
-                NSLog(@"zzzzzzzzzzzzzzzzzzzzzzz%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppToken]);
                 NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
                 
                 //1、保存全局信息
@@ -281,13 +272,13 @@
             }
         }else{
             
-            NSLog(@"网络请求出错了。。。。。。。。。。。。。。。。");
+            
         }
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"xxxxxxx=%@",error.description);
+       
     }];
 
    
@@ -330,28 +321,6 @@
 }
 
 
-
-
-/**
- *  开启定位功能
- */
-- (void)setupLocal{
-    /**定位*/
-    INTULocationManager * locMgr = [INTULocationManager sharedInstance];
-    [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity timeout:20 delayUntilAuthorized:YES     block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-        if (status == INTULocationStatusSuccess) {
-            NSLog(@"定位成功纬度 %f 精度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
-            NSString * lat = [NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude];
-            NSString * lg = [NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude];
-            [[NSUserDefaults standardUserDefaults] setObject:lat forKey:DWLatitude]; //保存纬度
-            [[NSUserDefaults standardUserDefaults] setObject:lg forKey:DWLongitude];//保存精度
-        }
-        else{
-            [MBProgressHUD showError:@"定位失败"];
-        }
-        
-    }];
-}
 
 
 /**
@@ -408,13 +377,11 @@
  */
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
-    NSLog(@"adsdasdasdasdasdasd%s",__func__);
     CLLocation * loc = [locations lastObject];
     NSString * lat = [NSString stringWithFormat:@"%f",loc.coordinate.latitude];
     NSString * lg = [NSString stringWithFormat:@"%f",loc.coordinate.longitude];
     [[NSUserDefaults standardUserDefaults] setObject:lat forKey:DWLatitude]; //保存纬度
     [[NSUserDefaults standardUserDefaults] setObject:lg forKey:DWLongitude];//保存精度
-    NSLog(@"sdasdads %@   xxxxx ---- %@  ",lat,lg);
     [self.mgr stopUpdatingLocation];
 }
 

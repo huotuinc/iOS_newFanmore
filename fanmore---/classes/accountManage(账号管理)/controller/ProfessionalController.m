@@ -88,9 +88,9 @@ static NSString *professionalIdentify = @"pfCellId";
         cell = [[UITableViewCell alloc] init];
     }
     
-    NSLog(@"xxxxxx收入和职业%@",self.currentCareer);
+//    NSLog(@"xxxxxx收入和职业%@",self.currentCareer);
     
-    NSLog(@"%lu",(unsigned long)[self.careers indexOfObject:self.currentCareer]);
+//    NSLog(@"%lu",(unsigned long)[self.careers indexOfObject:self.currentCareer]);
     if (_isSelect == indexPath.row) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }else{
@@ -107,7 +107,7 @@ static NSString *professionalIdentify = @"pfCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     twoOption * op = self.careers[indexPath.row];
-    NSLog(@"%d-----%@",op.value,op.name);
+//    NSLog(@"%d-----%@",op.value,op.name);
     if ([self.delegate respondsToSelector:@selector(ProfessionalControllerBringBackCareer:isFlag:)]) {
        [self.delegate ProfessionalControllerBringBackCareer:op isFlag:_isPrefessional];
      }

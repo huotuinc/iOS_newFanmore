@@ -172,7 +172,7 @@
     }
     if (favStr.length != 0) {
         NSString * aa = [favStr substringToIndex:(favStr.length -1)];
-        NSLog(@"%@",aa);
+//        NSLog(@"%@",aa);
         self.favLable.text = aa;//7
     }
     
@@ -290,9 +290,9 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
-    NSLog(@"%@",info);
+//    NSLog(@"%@",info);
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    NSLog(@"%@",mediaType);
+//    NSLog(@"%@",mediaType);
     // 判断获取类型：图片
     UIImage *photoImage = nil;
     if ([mediaType isEqualToString:( NSString *)kUTTypeImage]){
@@ -334,7 +334,7 @@
             [self setupPersonMessage];
         } failure:^(NSError *error) {
             [MBProgressHUD hideHUD];
-            NSLog(@"%@",error.description);
+//            NSLog(@"%@",error.description);
         }];
         
     }];
@@ -381,7 +381,7 @@
         
         [aa appendString:[NSString stringWithFormat:@"%@=%@&",key,[paramsOption objectForKey:key]]];
     }
-    NSLog(@"%@",aa);
+//    NSLog(@"%@",aa);
     NSData *data = [[aa substringToIndex:aa.length -1] dataUsingEncoding:NSUTF8StringEncoding];
     
     
@@ -396,7 +396,7 @@
             return ;
         }
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"服务返回数据%@",dict);
+//        NSLog(@"服务返回数据%@",dict);
         NSString *error = dict[@"error"];
         if(error){
             
@@ -433,7 +433,7 @@
     
     
     
-    NSLog(@"------%@",datePick.date);
+//    NSLog(@"------%@",datePick.date);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [datePick removeFromSuperview];
@@ -453,9 +453,9 @@
 
     [UserLoginTool loginRequestPost:urlStr parame:paremes success:^(id json) {
         
-        NSLog(@"大大叔大叔大叔大叔大叔大叔大叔的时代%@",json);
+//        NSLog(@"大大叔大叔大叔大叔大叔大叔大叔的时代%@",json);
         [MBProgressHUD showSuccess:nn];
-        NSLog(@"dadasd%@",json);
+//        NSLog(@"dadasd%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
@@ -487,7 +487,7 @@
  */
 - (void)ProfessionalControllerBringBackCareer:(twoOption *)career isFlag:(BOOL)flag {
     
-    NSLog(@"个人sasa时dadasdasdasd");
+//    NSLog(@"个人sasa时dadasdasdasd");
      NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     if (flag) {//职业
          self.careerLable.text = career.name;
@@ -499,7 +499,7 @@
     //把职业上传到服务器
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
     parame[@"profileData"] = @(career.value);
-    NSLog(@"%d",career.value);
+//    NSLog(@"%d",career.value);
     NSString * ak = nil;
     if (flag) {
        ak = @"职业上传成功";
@@ -536,7 +536,7 @@
  */
 - (void)reverseGeocode:(CLLocation *)loc{
     
-    NSLog(@"%f ---sssss-- %f" ,loc.coordinate.longitude ,loc.coordinate.latitude);
+//    NSLog(@"%f ---sssss-- %f" ,loc.coordinate.longitude ,loc.coordinate.latitude);
     [self.geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
         
         CLPlacemark *pm = [placemarks firstObject];
@@ -553,7 +553,7 @@
  *  @param option <#option description#>
  */
 - (void)pickOVerhobby:(NSString *)parame andOption:(NSString *)option{
-    NSLog(@"dadasdasd%@---%@",parame,option);
+//    NSLog(@"dadasdasd%@---%@",parame,option);
     
     //把职业上传到服务器
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
@@ -561,7 +561,7 @@
     parames[@"profileType"] = @(5);
     parames[@"profileData"] = parame;
     [UserLoginTool loginRequestPost:urlStr parame:parames success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
@@ -571,7 +571,7 @@
             
         }
     } failure:^(NSError *error) {
-        NSLog(@"%@",error.description);
+//        NSLog(@"%@",error.description);
         
     }];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

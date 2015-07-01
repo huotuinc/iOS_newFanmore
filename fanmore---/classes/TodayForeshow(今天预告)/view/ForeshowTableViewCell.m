@@ -75,7 +75,7 @@
     self.timeLable.text = [NSString stringWithFormat:@"%@",publishtime];
     
     NSComparisonResult comper = [now compare:ptime];
-    NSLog(@"%ld",(long)comper);
+//    NSLog(@"%ld",(long)comper);
     
 
     if ((long)comper < 0) {

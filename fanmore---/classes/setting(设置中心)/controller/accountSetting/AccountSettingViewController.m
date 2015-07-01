@@ -121,11 +121,6 @@
 
     
 }
-- (void)backAction:(UIButton *)btn{
-    
-//    NSLog(@"xccasdasd");
-//    [self.navigationController popViewControllerAnimated:YES];
-}
 
 /**
  *  退出账号提示按钮
@@ -151,7 +146,7 @@
 
 //通知专跳
 - (void)operWebViewCn:(NSNotification *) notification {
-    NSLog(@"%@",notification);
+   
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];

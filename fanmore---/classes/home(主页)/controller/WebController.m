@@ -97,7 +97,7 @@
 //            
 //        }
         urlStr = [NSString stringWithFormat:@"%@taskReward=%.1f&rights=%d&wrongs=%u&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
-        NSLog(@"%@",urlStr);
+//        NSLog(@"%@",urlStr);
         NSURL * urlstr = [NSURL URLWithString:urlStr];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
@@ -127,7 +127,7 @@
             NSMutableDictionary * params = [NSMutableDictionary dictionary];
             params[@"taskId"] = @(self.taskId);
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-                NSLog(@"拦截服务器回调地址%@",json);
+//                NSLog(@"拦截服务器回调地址%@",json);
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
                     [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
@@ -135,13 +135,13 @@
                 }
           
             } failure:^(NSError *error) {
-                NSLog(@"%@",[error description]);
+//                NSLog(@"%@",[error description]);
                
             }];
         }
         if ([request.URL.host isEqualToString:@"appanswercallback"]) { //答题完成
             
-            NSLog(@"答题完成了");
+//            NSLog(@"答题完成了");
             if (self.illgel>0) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];

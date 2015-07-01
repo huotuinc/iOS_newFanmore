@@ -198,7 +198,7 @@ static NSString * homeCellidentify = @"homeCellId";
         [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
     }];
     
 }
@@ -230,7 +230,7 @@ static NSString * homeCellidentify = @"homeCellId";
         
     } failure:^(NSError *error) {
         
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
     }];
     
 }
@@ -373,7 +373,7 @@ static NSString * homeCellidentify = @"homeCellId";
         
         NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
         [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
-            NSLog(@"%@",json);
+//            NSLog(@"%@",json);
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:@"今日已签到，请明天来签到"];
@@ -397,7 +397,7 @@ static NSString * homeCellidentify = @"homeCellId";
             });
             
         } failure:^(NSError *error) {
-            NSLog(@"%@",[error description]);
+//            NSLog(@"%@",[error description]);
             [MBProgressHUD hideHUD];
         }];
     }
@@ -469,7 +469,7 @@ static NSString * homeCellidentify = @"homeCellId";
 }
 
 - (void)operWebViewCn:(NSNotification *) notification {
-    NSLog(@"%@",notification);
+//    NSLog(@"%@",notification);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];

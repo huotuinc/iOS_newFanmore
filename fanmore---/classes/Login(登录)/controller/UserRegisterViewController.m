@@ -52,6 +52,13 @@
     
     [self registerForKeyboardNotifications];
     
+    self.verification.layer.borderWidth = 1;
+    self.verification.layer.cornerRadius = 4;
+    self.verification.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1].CGColor;
+    self.verification.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1];
+    [self.verification setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    self.verification.layer.masksToBounds = YES;
+    
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.privacyLabel.text];
     NSRange strRange = {0,[str length]};
@@ -106,7 +113,7 @@
     if ([self.phoneNumber isFirstResponder]) {
         return;
     }else{
-    NSLog(@"dadadasdasdasdasdasdasdasdas");
+//    NSLog(@"dadadasdasdasdasdasdasdasdas");
     NSDictionary* info = [note userInfo];
     NSLog(@"%@",note);
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
@@ -193,12 +200,12 @@
     self.InvitationCode.text.length?(parame[@"invcode"] = self.InvitationCode.text):(parame[@"invcode"] = [NSString stringWithFormat:@""]);
     //发送网络请求
     
-    NSLog(@"par======xxxxxxxxxxx================%@",parame);
+//    NSLog(@"par======xxxxxxxxxxx================%@",parame);
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"reg"];
     __weak UserRegisterViewController *wself = self;
     [UserLoginTool loginRequestPost:urlStr parame:parame success:^(NSDictionary* json) {
         
-        NSLog(@"注册＝＝＝＝＝＝%@",json);
+//        NSLog(@"注册＝＝＝＝＝＝%@",json);
         
         //手机号是否被注册
         if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue] ==  54004) {
@@ -230,14 +237,14 @@
             
            //比较反回的token和本地的token比较
             NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
-            NSLog(@"注册前的%@",token);
+//            NSLog(@"注册前的%@",token);
             [MBProgressHUD showSuccess:@"注册成功"];
             [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
             if (![token isEqualToString:userInfo.token]) {
                 
                 [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:AppToken];
                 
-                NSLog(@"注册后的%@", [[NSUserDefaults standardUserDefaults] objectForKey:AppToken]);
+//                NSLog(@"注册后的%@", [[NSUserDefaults standardUserDefaults] objectForKey:AppToken]);
             }
             if ([wself.delegate respondsToSelector:@selector(UserRegisterViewSuccess:)]) {
                 
@@ -249,17 +256,17 @@
         
     } failure:^(NSError *error) {
         
-        NSLog(@"注册失败%@",[error localizedDescription]);
+//        NSLog(@"注册失败%@",[error localizedDescription]);
     }];
    
 }
 
 - (IBAction)verification:(UIButton *)sender {
     
-    NSLog(@"xxxxxxxxxxxxxxxxxx");
+//    NSLog(@"xxxxxxxxxxxxxxxxxx");
     //判断手机号是否输入正确
     NSString * phoneNumber= self.phoneNumber.text;
-    NSLog(@"%@",phoneNumber);
+//    NSLog(@"%@",phoneNumber);
     if ([phoneNumber isEqualToString:@""]) {
         
         [MBProgressHUD showError:@"手机号不能为空"];
@@ -281,7 +288,7 @@
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
         
-        NSLog(@"dasdasd%@",json);
+//        NSLog(@"dasdasd%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==53014) {
             
             [MBProgressHUD showError:json[@"resultDescription"]];
@@ -300,13 +307,13 @@
             
         }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1){
             
-            NSLog(@"%@",json);
+//            NSLog(@"%@",json);
             [self settime];
         }
         
     } failure:^(NSError *error) {
         
-        NSLog(@"%@",[error description]);
+//        NSLog(@"%@",[error description]);
     }];
 
     
@@ -323,10 +330,10 @@
         params[@"codeType"] = @(1);
         NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
         [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
-            NSLog(@"学习学习%@",json);
+//            NSLog(@"学习学习%@",json);
         } failure:^(NSError *error) {
             
-            NSLog(@"%@",[error description]);
+//            NSLog(@"%@",[error description]);
         }];
     }
 }
@@ -350,6 +357,7 @@
                 //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
                 self.verification.userInteractionEnabled = YES;
+                [self.verificationCode setBackgroundColor:[UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1]];
             });
             
         }else{
@@ -358,7 +366,8 @@
             NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                NSLog(@"____%@",strTime);
+//                NSLog(@"____%@",strTime);
+                [self.verificationCode setBackgroundColor:[UIColor grayColor]];
                 [self.verification setTitle:[NSString stringWithFormat:@"%@",strTime] forState:UIControlStateNormal];
                 self.verification.userInteractionEnabled = NO;
                 

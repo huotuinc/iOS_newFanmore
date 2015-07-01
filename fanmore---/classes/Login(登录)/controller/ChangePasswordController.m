@@ -74,7 +74,7 @@
         }
     } failure:^(NSError *error) {
         
-        NSLog(@"%@",error.localizedDescription);
+//        NSLog(@"%@",error.localizedDescription);
     }];
 }
 @end
