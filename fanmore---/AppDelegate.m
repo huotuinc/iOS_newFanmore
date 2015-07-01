@@ -206,7 +206,7 @@
     params[@"appKey"] = APPKEY;
     NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
     NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-    NSLog(@"lat = %@  log = %@",lat,lng);
+//    NSLog(@"lat = %@  log = %@",lat,lng);
     params[@"lat"] = ([lat isEqualToString:@""]?(@(116.0)):(@([lat floatValue])));
     params[@"lng"] = ([lng isEqualToString:@""]?(@(116.0)):(@([lng floatValue])));
     params[@"timestamp"] = apptimesSince1970;

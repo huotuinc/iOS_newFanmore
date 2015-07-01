@@ -219,13 +219,13 @@
             }
             
         }
-        
+        [MBProgressHUD hideHUD];
         
     } failure:^(NSError *error) {
         
         [MBProgressHUD hideHUD];
 //        NSLog(@"登录失败%@",[error localizedDescription]);
-//        [MBProgressHUD showError:@"无法连接到服务器"];
+        [MBProgressHUD showError:@"无法连接到服务器"];
         
     }];
 }
