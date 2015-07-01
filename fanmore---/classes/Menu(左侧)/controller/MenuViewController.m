@@ -119,7 +119,13 @@
 //        }];
 //    }
     
-    if (self.isLogin) {
+    //1、判断是否要登录
+    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    //    NSLog(@"========xxxxx====%@",flag);
+    BOOL gl  = [flag isEqualToString:@"right"];
+    
+    NSLog(@"aaaaa%d",gl);
+    if (gl) {//登入
         
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
@@ -157,7 +163,7 @@
             self.flowLable.text = [NSString stringWithFormat:@"%.0fM",[user.balance doubleValue]];
         }
         if (userFlow > 1024) {
-            self.flowLable.text = [NSString stringWithFormat:@"%.1fG",[user.balance doubleValue] / 1024];
+            self.flowLable.text = [NSString stringWithFormat:@"%.3fG",[user.balance doubleValue] / 1024];
         }
         
         

@@ -162,6 +162,7 @@ static NSString * homeCellidentify = @"homeCellId";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @"";
     params[@"pagingSize"] = @(pageSize);
+    [MBProgressHUD showMessage:nil];
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -188,6 +189,7 @@ static NSString * homeCellidentify = @"homeCellId";
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     [MBProgressHUD showMessage:nil];
+    __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
@@ -196,8 +198,8 @@ static NSString * homeCellidentify = @"homeCellId";
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             if (taskArray.count > 0) {
-                [self.taskDatas addObjectsFromArray:taskArray];
-                [self.tableView reloadData];    //刷新数据
+                [wself.taskDatas addObjectsFromArray:taskArray];
+                [wself.tableView reloadData];    //刷新数据
             }
             
         }
@@ -214,11 +216,21 @@ static NSString * homeCellidentify = @"homeCellId";
 -(void)getNewMoreData:(NSMutableDictionary *)params{
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
-    
-
+    __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        [MBProgressHUD hideHUD];
+        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:loginUserName];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            //1、保存个人信息
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            [NSKeyedArchiver archiveRootObject:nil toFile:fileName];
+            [wself.tableView headerBeginRefreshing];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56000){
@@ -227,15 +239,17 @@ static NSString * homeCellidentify = @"homeCellId";
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            [MBProgressHUD hideHUD];
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             [self.taskDatas removeAllObjects];
             self.taskDatas = [NSMutableArray arrayWithArray:taskArray];
             [self showHomeRefershCount];
             [self.tableView reloadData];    //刷新数据
         }
+        [MBProgressHUD hideHUD];
         
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUD];
 //        NSLog(@"%@",[error description]);
     }];
     
