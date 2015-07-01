@@ -84,7 +84,7 @@
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(mess.date/1000.0)];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy/MM/dd"];
+    [formatter setDateFormat:@"yyyy/MM/dd hh:mm:ss"];
     NSString * publishtime = [formatter stringFromDate:ptime];
     self.timeLable.text = publishtime;
     self.timeLable.frame = messageF.timeF;
