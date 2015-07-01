@@ -276,6 +276,7 @@
         detailVc.title = @"游戏类任务";
     }
     
+    detailVc.ishaveget=YES;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
     [self.navigationController pushViewController:detailVc animated:YES];
