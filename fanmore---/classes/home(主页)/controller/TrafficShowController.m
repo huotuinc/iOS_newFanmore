@@ -33,9 +33,11 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     if (_flays == nil) {
         _flays = [NSArray array];
+        [MBProgressHUD showMessage:nil];
         NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
+            [MBProgressHUD hideHUD];
 //            NSLog(@"xxxxxxxxx%@",json);
             if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
                 
@@ -46,7 +48,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
             [self setWaringLabel];
 
         } failure:^(NSError *error) {
-            
+             [MBProgressHUD hideHUD];
         }];
     }
     _flays = [_flays sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {

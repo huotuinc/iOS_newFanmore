@@ -229,6 +229,7 @@
     __block LoginResultData * resultData = [[LoginResultData alloc] init];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
         
+        NSLog(@"%@",responseObject);
         if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {//返回数据成功
             
             

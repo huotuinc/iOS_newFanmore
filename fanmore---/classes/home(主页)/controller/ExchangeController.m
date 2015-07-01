@@ -89,11 +89,15 @@ NSString * _changeflah = nil;
                     NSString *url = [MainURL stringByAppendingPathComponent:@"checkout"];
                     NSMutableDictionary *param = [NSMutableDictionary dictionary];
                     param[@"amount"] = self.flays[indexPath.row];
+                    [MBProgressHUD showMessage:nil];
+                    __weak ExchangeController * wself = self;
                     [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
-                        
-//                        NSLog(@"流量兑换后返回的数据%@",json);
+                        [MBProgressHUD hideHUD];
+                        NSLog(@"%@",json);
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
                             [MBProgressHUD showError:@"账号被登入"];
+                            LoginViewController * aa = [[LoginViewController alloc] init];
+                            [wself presentViewController:aa animated:YES completion:nil];
                             return ;
                         }
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
@@ -105,19 +109,25 @@ NSString * _changeflah = nil;
                             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                             [NSKeyedArchiver archiveRootObject:user toFile:fileName]; //保存用户信息
                             
-                            if ([self.delegate respondsToSelector:@selector(successExchange:)]) {
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                if ([self.delegate respondsToSelector:@selector(successExchange:)]) {
+                                    [MBProgressHUD showSuccess:@"兑换流量成功"];
+                                    [self.delegate successExchange:user.balance];
+                                }
                                 
-                                [self.delegate successExchange:user.balance];
-                            }
-                            [MBProgressHUD showSuccess:@"兑换流量成功"];
+                            });
+                            
+                            [self dismissViewControllerAnimated:YES completion:nil];
         
                         }
-        
+                        
+                        
                     } failure:^(NSError *error) {
-        
+                        [MBProgressHUD hideHUD];
                     }];
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    
                 }];
+                
                 UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 //                    [self dismissViewControllerAnimated:YES completion:nil];
                 }];
