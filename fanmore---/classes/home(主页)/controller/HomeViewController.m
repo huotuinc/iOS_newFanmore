@@ -20,6 +20,7 @@
 #import "JoinController.h"
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define pageSize 5
 
@@ -28,6 +29,11 @@
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
 @property(nonatomic,assign) BOOL isLogin;
+
+
+//失败
+@property(nonatomic,assign)SystemSoundID failureSound;
+
 @end
 
 
@@ -387,8 +393,10 @@ static NSString * homeCellidentify = @"homeCellId";
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
                 if ([self getWeek] == 7 && user.signInfo == 127) {
+                    AudioServicesPlayAlertSound(self.failureSound);
                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量", user.signtoday]];
                 }else {
+                    AudioServicesPlayAlertSound(self.failureSound);
                     [MBProgressHUD showSuccess:@"签到成功"];
                 }
             }
@@ -505,6 +513,18 @@ static NSString * homeCellidentify = @"homeCellId";
 - (void)dealloc{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (SystemSoundID)failureSound{
+    
+    if (_failureSound == 0) {
+        
+        NSURL *url=[[NSBundle mainBundle]URLForResource:@"checkin.wav" withExtension:nil];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_failureSound);
+    }
+    
+    return _failureSound;
 }
 
 @end

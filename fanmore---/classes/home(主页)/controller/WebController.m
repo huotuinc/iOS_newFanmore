@@ -148,7 +148,7 @@
             }else if(self.reward>0){
                 [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
-                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜获得多少%.1fM流量",wself.flay]];
+                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜获得%.1fM流量",wself.flay]];
             }else if (self.chance >0 ){
                 for (UIViewController * aa in self.navigationController.childViewControllers) {
                     if ([aa isKindOfClass:[detailViewController class]]) {

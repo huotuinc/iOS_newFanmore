@@ -67,7 +67,27 @@
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         NSString *ml = [self xiaoshudianweishudeal:self.flay];
-        [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
+        
+        if (self.type == 1) {//答题类
+            
+            [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
+        }
+        
+        if (self.type == 2) {//报名类
+            
+            [self.answerBtn setTitle:[NSString stringWithFormat:@"报名领取%@M流量",ml] forState:UIControlStateNormal];
+        }
+        
+        if (self.type == 3) {//画册类
+            
+            [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
+        }
+        
+        if (self.type  == 4) {//游戏类
+            
+            [self.answerBtn setTitle:[NSString stringWithFormat:@"玩游戏领取%@M流量",ml] forState:UIControlStateNormal];
+        }
+        
         
         //获取题目s
         [self getQuestion];
@@ -209,6 +229,7 @@
                  }else if([json[@"resultData"][@"reward"] floatValue]> 0){
                      
                      CGFloat rewad = [json[@"resultData"][@"reward"] floatValue];
+                     NSLog(@"%@",[NSString xiaoshudianweishudeal:rewad]);
                      [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜你获得了%@M流量",[NSString xiaoshudianweishudeal:rewad]]];
                      
                      NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -339,11 +360,42 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
 //                NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
-                NSString * butTitle = [NSString stringWithFormat:@"答题领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
-                [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
-                //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
-                //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
-                wself.answerBtn.userInteractionEnabled = YES;
+                if (self.type == 1) {//答题类
+                    NSString * butTitle = [NSString stringWithFormat:@"答题领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
+                    [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
+                    //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
+                    //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = YES;
+                }
+                
+                if (self.type == 2) {//报名类
+                    
+                    NSString * butTitle = [NSString stringWithFormat:@"报名领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
+                    [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
+                    //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
+                    //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = YES;
+                }
+                
+                if (self.type == 3) {//画册类
+                    
+                    NSString * butTitle = [NSString stringWithFormat:@"答题领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
+                    [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
+                    //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
+                    //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = YES;
+                }
+                
+                if (self.type  == 4) {//游戏类
+                    
+                    NSString * butTitle = [NSString stringWithFormat:@"玩游戏领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
+                    [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
+                    //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
+                    //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = YES;
+                }
+                
+                
 
             });
         }else{
@@ -353,8 +405,27 @@
                 //设置界面的按钮显示 根据自己需求设置
 //                NSLog(@"____%@",strTime);
                 
-                [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
-                wself.answerBtn.userInteractionEnabled = NO;
+                if (self.type == 1) {//答题类
+                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = NO;
+                }
+                
+                if (self.type == 2) {//报名类
+                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = NO;
+                }
+                
+                if (self.type == 3) {//画册类
+                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = NO;
+                }
+                
+                if (self.type  == 4) {//游戏类
+                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = NO;
+                }
+
+                
                 
             });
             timeout--;

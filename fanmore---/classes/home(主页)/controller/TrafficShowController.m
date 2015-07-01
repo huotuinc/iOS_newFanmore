@@ -138,7 +138,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
                     self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换所有流量包"];
                     break;
                 }
-                if ([self.userInfo.balance floatValue] > [self.flays[i] floatValue]) {
+                if ([self.userInfo.balance floatValue] > [self.flays[i] floatValue] && [self.userInfo.balance floatValue] < [self.flays[i + 1] floatValue]) {
                 
                     if (self.userInfo.balance < self.flays[i + 1]) {
                         self.promptLabel.text = [NSString stringWithFormat:@"你可以兑换%dM以下流量包", [self.flays[i] intValue]] ;
