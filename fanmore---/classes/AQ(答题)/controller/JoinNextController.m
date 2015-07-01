@@ -7,9 +7,13 @@
 //
 
 #import "JoinNextController.h"
+#import "taskDetail.h"
+#import "WebController.h"
 
 @interface JoinNextController ()
 
+
+@property(nonatomic,strong)taskDetail * task;
 @end
 
 @implementation JoinNextController
@@ -34,6 +38,14 @@
     [self registerForKeyboardNotifications];
     
     [self.field becomeFirstResponder];
+    
+    [self.nextButton setTitle:((self.questions.count>1)?@"下一步":@"提交") forState:UIControlStateNormal];
+    
+    
+    self.task =self.questions[0];
+    [self.questions removeObjectAtIndex:0];
+    self.field.placeholder = self.task.fieldName;
+    
     
 }
 
@@ -99,21 +111,70 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)nextButtonAction:(UIButton *)sender {
+    
+    if (!self.questions.count) {
+        NSString *regex2 = self.task.fieldPattern;
+        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+        BOOL isValid2 = [predicate2 evaluateWithObject:self.field.text];
+        if (!isValid2) {
+            [MBProgressHUD showError:self.task.fieldName];
+            return;
+        }
+        self.answers = [NSMutableString stringWithFormat:@"%@:%d:%@",self.answers,self.task.qid,self.field.text];
+        
+        [self toUpdateanswer:self.answers];
+        
+    }else{
+        
+        self.task =self.questions[0];
+        [self.questions removeObjectAtIndex:0];
+        self.field.placeholder = self.task.fieldName;
+        self.answers = [NSMutableString stringWithFormat:@"%@:%d:%@",self.answers,self.task.qid,self.field.text];
+    }
+}
+
+- (void)toUpdateanswer:(NSMutableString *) ans{
+    
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"answer"];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"taskId"] = @(self.taskId);
+    params[@"answers"] = ans;
+    [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 56001)
+        {
+            [MBProgressHUD showError:@"账号在其它地方登入"];
+            return;
+        }
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
+        {
+            NSString * answerResultType = nil;
+            if ([json[@"resultData"][@"illgel"] intValue] >0) {
+                answerResultType = @"rejected.html?";
+            }else if ([json[@"resultData"][@"reward"] intValue] > 0){
+                answerResultType = @"success.html?";
+                
+            }else {
+                answerResultType = @"failed.html?";
+            }
+            //adasdasdasd
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            WebController * show = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
+            show.totleQuestion = self.questions.count;
+            show.ritghtAnswer = 2;
+            show.answerType = answerResultType;
+            show.reward = [json[@"resultData"][@"chance"] intValue];
+            show.chance = [json[@"resultData"][@"reward"] intValue];
+            show.illgel = [json[@"resultData"][@"illgel"] intValue];
+            show.flay = self.flay;
+            [self.navigationController pushViewController:show animated:YES];
+        }else{
+            [self.navigationController  popToRootViewControllerAnimated:YES];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 @end

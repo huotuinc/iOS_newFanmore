@@ -17,6 +17,20 @@
 @property (weak, nonatomic) IBOutlet UITextField *field;
 
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
+
+
+
+/**最先2题答案*/
+@property(nonatomic,strong) NSMutableString * answers;
+/**题目列表*/
+@property(nonatomic,strong) NSMutableArray * questions;
+
+/**题目类型编号*/
+@property(nonatomic,assign) int taskId;
+
+/**答题获得流量*/
+@property(nonatomic,assign) CGFloat flay;
+
 - (IBAction)nextButtonAction:(UIButton *)sender;
 
 @end

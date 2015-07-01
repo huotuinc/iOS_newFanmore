@@ -22,7 +22,7 @@
 /**题目类型编号*/
 @property(nonatomic,assign) int taskId;
 /**题目列表*/
-@property(nonatomic,strong) NSArray * questions;
+@property(nonatomic,strong) NSMutableArray * questions;
 
 /**答题获得流量*/
 @property(nonatomic,assign) CGFloat flay;

@@ -65,6 +65,10 @@
 	<string>是否允许定位</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>是否允许定位</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
