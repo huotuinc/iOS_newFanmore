@@ -122,6 +122,7 @@
                     [wself.messageF addObject:aas];
                     
                 }
+                [wself.tableView reloadData];
             }
             
         }

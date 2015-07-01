@@ -52,6 +52,13 @@
     
     [self registerForKeyboardNotifications];
     
+    self.verification.layer.borderWidth = 1;
+    self.verification.layer.cornerRadius = 4;
+    self.verification.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1].CGColor;
+    self.verification.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1];
+    [self.verification setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    self.verification.layer.masksToBounds = YES;
+    
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.privacyLabel.text];
     NSRange strRange = {0,[str length]};
@@ -350,6 +357,7 @@
                 //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
                 self.verification.userInteractionEnabled = YES;
+                [self.verificationCode setBackgroundColor:[UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1]];
             });
             
         }else{
@@ -359,6 +367,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
 //                NSLog(@"____%@",strTime);
+                [self.verificationCode setBackgroundColor:[UIColor grayColor]];
                 [self.verification setTitle:[NSString stringWithFormat:@"%@",strTime] forState:UIControlStateNormal];
                 self.verification.userInteractionEnabled = NO;
                 

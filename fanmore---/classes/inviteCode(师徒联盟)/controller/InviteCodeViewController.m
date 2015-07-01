@@ -47,14 +47,22 @@
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"shituInfo"];
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
        
-//        NSLog(@"000000%@",json);
-        NSDictionary *dic = json[@"resultData"];
+        if ([json[@"resultCode"] intValue] == 1 && [json[@"systemResultCode"] intValue] == 1) {
+            NSLog(@"000000%@",json);
+            NSDictionary *dic = json[@"resultData"];
+            NSLog(@"%d", dic.count);
+
+            self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
+            self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
+            self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
+            self.shareUrl = dic[@"shareURL"];
+        }
         
-//        NSLog(@"%@", dic[@"yestodayM"]);
-        self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
-        self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
-        self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
-        self.shareUrl = dic[@"shareURL"];
+////        NSLog(@"%@", dic[@"yestodayM"]);
+//        self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
+//        self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
+//        self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
+//        self.shareUrl = dic[@"shareURL"];
     } failure:^(NSError *error) {
         
 //        NSLog(@"请求出错");

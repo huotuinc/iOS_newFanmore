@@ -40,12 +40,10 @@
         
         
         self.backgroundColor = [UIColor lightGrayColor];
-        self.contentView.layer.cornerRadius = 2;
-        self.contentView.layer.masksToBounds = YES;
+        self.layer.cornerRadius = 4;
+//        self.contentView.layer.masksToBounds = YES;
         //1外部的view
         UIImageView * aview = [[UIImageView alloc] init];
-        aview.layer.cornerRadius = 8;
-        aview.layer.masksToBounds = YES;
         self.wView = aview;
         [self addSubview:aview];
         
@@ -84,7 +82,7 @@
     
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:(mess.date/1000.0)];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy/MM/dd"];
+    [formatter setDateFormat:@"yyyy/MM/dd hh:mm:ss"];
     NSString * publishtime = [formatter stringFromDate:ptime];
     self.timeLable.text = publishtime;
     self.timeLable.frame = messageF.timeF;
