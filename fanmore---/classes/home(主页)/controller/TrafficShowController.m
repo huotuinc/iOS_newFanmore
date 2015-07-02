@@ -197,10 +197,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [self flaysFromeWeb];
     
-
-    
-//    NSLog(@"%@", self.flays);
-//
+    [self saveControllerToAppDelegate:self];
 
 }
 

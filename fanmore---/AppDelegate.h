@@ -22,6 +22,14 @@
 //当前控制器
 @property (nonatomic, strong) UIViewController *currentVC;
 
+//yes 去 no 不去 去消息中心
+@property (nonatomic, assign) BOOL goMessage;
+
+//yes 去 no 不去 去任务详情
+@property (nonatomic, assign) BOOL goDetail;
+
+/**题目id**/
+@property(nonatomic, strong) NSNumber *taskId;
 
 @end
 

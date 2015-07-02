@@ -47,6 +47,13 @@ static NSString *BPCellidentify = @"BPCellId";
     [self.tableView removeSpaces];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self saveControllerToAppDelegate:self];
+}
+
 
 /**
  *  集成刷新控件
