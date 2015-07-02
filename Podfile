@@ -7,7 +7,7 @@ pod 'BlocksKit', :git => 'https://github.com/zwaldowski/BlocksKit.git', :branch 
 #pod 'MBProgressHUD','0.8'
 pod 'CWPopup','1.2.4'
 pod 'iRate', '~> 1.10.3'
-#pod 'iVersion','1.11.4'
+pod 'iVersion','1.11.4'
 pod 'TPKeyboardAvoiding','1.2.3'
 pod 'SWTableViewCell', '~> 0.3.7'
 pod 'AFNetworking','~>2.0'

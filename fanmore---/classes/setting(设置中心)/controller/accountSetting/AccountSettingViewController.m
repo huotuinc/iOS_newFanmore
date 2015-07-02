@@ -151,13 +151,13 @@
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     detailVc.taskId = (int)notification.userInfo[@"id"]; //获取问题编号
-    detailVc.type = (int)notification.userInfo[@"type"];  //答题类型
-    detailVc.detailUrl = notification.userInfo[@"detailUrl"];//网页详情的url
-    detailVc.backTime = (int)notification.userInfo[@"backTime"];
-    detailVc.flay = [notification.userInfo[@"flay"] floatValue];
-    detailVc.shareUrl = notification.userInfo[@"shareUrl"];
-    detailVc.titless = notification.userInfo[@"title"];
-    detailVc.pictureUrl = notification.userInfo[@"pictureUrl"];
+//    detailVc.type = (int)notification.userInfo[@"type"];  //答题类型
+//    detailVc.detailUrl = notification.userInfo[@"detailUrl"];//网页详情的url
+//    detailVc.backTime = (int)notification.userInfo[@"backTime"];
+//    detailVc.flay = [notification.userInfo[@"flay"] floatValue];
+//    detailVc.shareUrl = notification.userInfo[@"shareUrl"];
+//    detailVc.titless = notification.userInfo[@"title"];
+//    detailVc.pictureUrl = notification.userInfo[@"pictureUrl"];
     if ((int)notification.userInfo[@"type"] == 1) {
         detailVc.title = @"答题任务";
     }else if((int)notification.userInfo[@"type"] == 2){

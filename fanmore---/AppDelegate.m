@@ -1,4 +1,4 @@
-//
+ //
 //  AppDelegate.m
 //  fanmore---
 //
@@ -176,6 +176,7 @@
  */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
+    NSLog(@"%@",deviceToken);
     NSString * aa = [deviceToken hexadecimalString];
     NSLog(@"%@",aa);
     

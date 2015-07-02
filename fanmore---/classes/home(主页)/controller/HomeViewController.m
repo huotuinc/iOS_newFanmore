@@ -192,8 +192,7 @@ static NSString * homeCellidentify = @"homeCellId";
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-            [MBProgressHUD showError:@"账号被登入"];
-            [MBProgressHUD showError:@"账号被登入"];
+            [MBProgressHUD showError:json[@"resultDescription"]];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
             
@@ -353,22 +352,22 @@ static NSString * homeCellidentify = @"homeCellId";
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     detailVc.taskId = task.taskId; //获取问题编号
-    detailVc.type = task.type;  //答题类型
-    detailVc.detailUrl = task.contextURL;//网页详情的url
-    detailVc.backTime = task.backTime;
-    detailVc.flay = task.maxBonus;
-    detailVc.shareUrl = task.shareURL;
-    detailVc.titless = task.title;
-    detailVc.pictureUrl = task.pictureURL;
-    if (task.type == 1) {
-        detailVc.title = @"答题任务";
-    }else if(task.type == 2){
-        detailVc.title = @"报名任务";
-    }else if(task.type == 3){
-        detailVc.title = @"画册类任务";
-    }else{
-        detailVc.title = @"游戏类任务";
-    }
+//    detailVc.type = task.type;  //答题类型
+//    detailVc.detailUrl = task.contextURL;//网页详情的url
+//    detailVc.backTime = task.backTime;
+//    detailVc.flay = task.maxBonus;
+//    detailVc.shareUrl = task.shareURL;
+//    detailVc.titless = task.title;
+//    detailVc.pictureUrl = task.pictureURL;
+//    if (task.type == 1) {
+//        detailVc.title = @"答题任务";
+//    }else if(task.type == 2){
+//        detailVc.title = @"报名任务";
+//    }else if(task.type == 3){
+//        detailVc.title = @"画册类任务";
+//    }else{
+//        detailVc.title = @"游戏类任务";
+//    }
     (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
 
     [self.navigationController pushViewController:detailVc animated:YES];
@@ -506,13 +505,13 @@ static NSString * homeCellidentify = @"homeCellId";
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     detailVc.taskId = (int)notification.userInfo[@"id"]; //获取问题编号
-    detailVc.type = (int)notification.userInfo[@"type"];  //答题类型
-    detailVc.detailUrl = notification.userInfo[@"detailUrl"];//网页详情的url
-    detailVc.backTime = (int)notification.userInfo[@"backTime"];
-    detailVc.flay = [notification.userInfo[@"flay"] floatValue];
-    detailVc.shareUrl = notification.userInfo[@"shareUrl"];
-    detailVc.titless = notification.userInfo[@"title"];
-    detailVc.pictureUrl = notification.userInfo[@"pictureUrl"];
+//    detailVc.type = (int)notification.userInfo[@"type"];  //答题类型
+//    detailVc.detailUrl = notification.userInfo[@"detailUrl"];//网页详情的url
+//    detailVc.backTime = (int)notification.userInfo[@"backTime"];
+//    detailVc.flay = [notification.userInfo[@"flay"] floatValue];
+//    detailVc.shareUrl = notification.userInfo[@"shareUrl"];
+//    detailVc.titless = notification.userInfo[@"title"];
+//    detailVc.pictureUrl = notification.userInfo[@"pictureUrl"];
     if ((int)notification.userInfo[@"type"] == 1) {
         detailVc.title = @"答题任务";
     }else if((int)notification.userInfo[@"type"] == 2){
