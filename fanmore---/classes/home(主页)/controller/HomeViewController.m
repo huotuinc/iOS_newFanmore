@@ -20,6 +20,7 @@
 #import "JoinController.h"
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
+#import "MassageCenterController.h"
 #import <AVFoundation/AVFoundation.h>
 
 #define pageSize 10
@@ -76,7 +77,20 @@ static NSString * homeCellidentify = @"homeCellId";
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     
     [self saveControllerToAppDelegate:self];
-
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.goMessage) {
+        app.goMessage = NO;
+        UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MassageCenterController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
+        [self.navigationController pushViewController:massage animated:YES];
+    }
+    if (app.goDetail) {
+        UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+        detail.taskId = [app.taskId intValue];
+        [self.navigationController pushViewController:detail animated:YES];
+    }
 }
 
 - (void)loadView

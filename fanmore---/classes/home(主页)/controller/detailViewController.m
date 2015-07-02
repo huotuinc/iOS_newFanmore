@@ -68,7 +68,7 @@
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     
-    
+    [self saveControllerToAppDelegate:self];
 }
 
 
