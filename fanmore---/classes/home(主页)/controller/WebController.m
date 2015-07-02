@@ -18,13 +18,24 @@
 //成功
 @property(nonatomic,assign)SystemSoundID successSound;
 
-
+//成功
+@property(nonatomic,assign)SystemSoundID failedSound;
 
 @end
 
 @implementation WebController
 
 
+
+
+- (SystemSoundID)failedSound{
+    
+    if (!_failedSound) {
+        NSURL *url=[[NSBundle mainBundle] URLForResource:@"failed.wav" withExtension:nil];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &_failedSound);
+    }
+    return _failedSound;
+}
 
 - (SystemSoundID)successSound{
     
@@ -87,17 +98,16 @@
         [self.webView loadRequest:request];
     }
     else{ //答题
-        AudioServicesPlayAlertSound(self.successSound);
+        
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
         urlStr = [urlStr stringByAppendingString:self.answerType];
-//        if ([self.answerType isEqualToString:@"rejected.html?"] || [self.answerType isEqualToString:@"failed.html?"] ) {
-//        }else if([self.answerType isEqualToString:@"success.html?"]){
-//            
-//            
-//        }
+        if ([self.answerType isEqualToString:@"rejected.html?"] || [self.answerType isEqualToString:@"failed.html?"] ) {
+            AudioServicesPlayAlertSound(self.failedSound);
+        }else if([self.answerType isEqualToString:@"success.html?"]){
+            AudioServicesPlayAlertSound(self.successSound);
+        }
         urlStr = [NSString stringWithFormat:@"%@taskReward=%.1f&rights=%d&wrongs=%u&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
-//        NSLog(@"%@",urlStr);
         NSURL * urlstr = [NSURL URLWithString:urlStr];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
@@ -143,6 +153,7 @@
             
 //            NSLog(@"答题完成了");
             if (self.illgel>0) {
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else if(self.reward>0){

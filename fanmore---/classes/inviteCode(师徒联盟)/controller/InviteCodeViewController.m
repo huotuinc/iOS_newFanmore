@@ -36,51 +36,6 @@
     
 }
 
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self _initNav];
-    
-//    http://192.168.0.14:8080/fanmoreweb/shituInfo?appKey=b73ca64567fb49ee963477263283a1bf&cityCode=1372&operation=FM2015AP&timestamp=1435066431429&imei=54604120-5BF8-4A37-96F1-1C6BA6AA881A&version=3.0.0&lat=37.785834&token=353a64340c2a4a1a864396a0c2eccd82&sign=6333bb24a4dc5e10cbf92f3f310d2902&lng=116.406417&cpaCode=default
-//    NSString *urlStr = [NSString stringWithFormat:@"http://192.168.0.14:8080/fanmoreweb/shituInfo"];
-    
-    __weak InviteCodeViewController * wself = self;
-    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"shituInfo"];
-    [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-       
-        if ([json[@"resultCode"] intValue] == 1 && [json[@"systemResultCode"] intValue] == 1) {
-            NSLog(@"000000%@",json);
-            NSDictionary *dic = json[@"resultData"];
-            NSLog(@"%d", dic.count);
-
-            wself.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
-            wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
-            wself.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
-            wself.shareUrl = dic[@"shareURL"];
-        }
-        
-////        NSLog(@"%@", dic[@"yestodayM"]);
-//        self.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
-//        self.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
-//        self.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
-//        self.shareUrl = dic[@"shareURL"];
-    } failure:^(NSError *error) {
-        
-//        NSLog(@"请求出错");
-    }];
-    
-    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-    userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-    
-    [self.shareButton setTitle:[NSString stringWithFormat:@"分享邀请码%@", user.invCode] forState:UIControlStateNormal];
-    
-    
-    //注册转跳通知
-    
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -91,6 +46,53 @@
 
 
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self _initNav];
+
+    
+    //获取网络数据
+    [self setupLables];
+    
+    //分享码按钮
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    [self.shareButton setTitle:[NSString stringWithFormat:@"分享邀请码%@", user.invCode] forState:UIControlStateNormal];
+    
+    
+    //注册转跳通知
+    
+}
+
+
+
+
+
+
+- (void)setupLables{
+    
+    __weak InviteCodeViewController * wself = self;
+    NSString *urlStr = [MainURL stringByAppendingPathComponent:@"shituInfo"];
+    [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
+        NSLog(@"%@",json);
+        if ([json[@"resultCode"] intValue] == 1 && [json[@"systemResultCode"] intValue] == 1) {
+            NSLog(@"000000%@",json);
+            NSDictionary *dic = json[@"resultData"];
+            NSLog(@"%lu", (unsigned long)dic.count);
+            
+            wself.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
+            wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
+            wself.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
+            wself.shareUrl = dic[@"shareURL"];
+        }
+    } failure:^(NSError *error) {
+        
+        //        NSLog(@"请求出错");
+    }];
+    
+}
 
 
 
@@ -108,7 +110,7 @@
     
     
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] defaultContent:nil image:nil title:@"分享粉猫app得流量" url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] defaultContent:nil image:nil title:@"分享粉猫app得流量" url:nil description:nil mediaType:SSPublishContentMediaTypeText];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     
@@ -152,43 +154,11 @@
             }];
             
         }else if (state == SSResponseStateFail){
-//            NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+            NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
         }
     }];
 //    NSLog(@"分享");
 
-}
-
-
-//通知专跳
-- (void)operWebViewCn:(NSNotification *) notification {
-//    NSLog(@"%@",notification);
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
-    detailVc.taskId = (int)notification.userInfo[@"id"]; //获取问题编号
-//    detailVc.type = (int)notification.userInfo[@"type"];  //答题类型
-//    detailVc.detailUrl = notification.userInfo[@"detailUrl"];//网页详情的url
-//    detailVc.backTime = (int)notification.userInfo[@"backTime"];
-//    detailVc.flay = [notification.userInfo[@"flay"] floatValue];
-//    detailVc.shareUrl = notification.userInfo[@"shareUrl"];
-//    detailVc.titless = notification.userInfo[@"title"];
-//    detailVc.pictureUrl = notification.userInfo[@"pictureUrl"];
-    if ((int)notification.userInfo[@"type"] == 1) {
-        detailVc.title = @"答题任务";
-    }else if((int)notification.userInfo[@"type"] == 2){
-        detailVc.title = @"报名任务";
-    }else if((int)notification.userInfo[@"type"] == 3){
-        detailVc.title = @"画册类任务";
-    }else{
-        detailVc.title = @"游戏类任务";
-    }
-    
-    detailVc.ishaveget=NO;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
-    [self.navigationController pushViewController:detailVc animated:YES];
-    
 }
 
 @end

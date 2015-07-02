@@ -68,6 +68,7 @@
 		EF2E543F1B2857800060E965 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E543E1B2857800060E965 /* MessageTableViewCell.m */; };
 		EF2E54421B285E6A0060E965 /* MessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E54411B285E6A0060E965 /* MessageFrame.m */; };
 		EF3B551D1B37A0CB0045ADEB /* LWNewFeatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */; };
+		EF40C31D1B456352003C2E32 /* failed.wav in Resources */ = {isa = PBXBuildFile; fileRef = EF40C31C1B456352003C2E32 /* failed.wav */; };
 		EF440E181B383A1400761A9C /* ApiXml.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF440E131B383A1400761A9C /* ApiXml.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF440E191B383A1400761A9C /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF440E151B383A1400761A9C /* payRequsestHandler.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF440E1A1B383A1400761A9C /* WXUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF440E171B383A1400761A9C /* WXUtil.mm */; };
@@ -328,6 +329,7 @@
 		EF2E54411B285E6A0060E965 /* MessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageFrame.m; sourceTree = "<group>"; };
 		EF3B55191B37A0CB0045ADEB /* LWNewFeatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWNewFeatureController.h; sourceTree = "<group>"; };
 		EF3B551A1B37A0CB0045ADEB /* LWNewFeatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWNewFeatureController.m; sourceTree = "<group>"; };
+		EF40C31C1B456352003C2E32 /* failed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = failed.wav; sourceTree = "<group>"; };
 		EF440E121B383A1400761A9C /* ApiXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiXml.h; sourceTree = "<group>"; };
 		EF440E131B383A1400761A9C /* ApiXml.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApiXml.mm; sourceTree = "<group>"; };
 		EF440E141B383A1400761A9C /* payRequsestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payRequsestHandler.h; sourceTree = "<group>"; };
@@ -1397,6 +1399,7 @@
 		EFC46B421B4175180060DB5C /* wav */ = {
 			isa = PBXGroup;
 			children = (
+				EF40C31C1B456352003C2E32 /* failed.wav */,
 				EFC46B4B1B417C7F0060DB5C /* right.wav */,
 				EFC46B4C1B417C7F0060DB5C /* wrong.wav */,
 				EFC46B431B4175180060DB5C /* checkin.wav */,
@@ -2026,6 +2029,7 @@
 				83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */,
 				836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */,
 				83E263FF1B2F018500A2AC96 /* unicode_to_hanyu_pinyin.txt in Resources */,
+				EF40C31D1B456352003C2E32 /* failed.wav in Resources */,
 				EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				EF565D441B17091F00FC2D6B /* LoginViewController.xib in Resources */,
 				EFC86AF61B1EFD700081BBC8 /* Resource.bundle in Resources */,

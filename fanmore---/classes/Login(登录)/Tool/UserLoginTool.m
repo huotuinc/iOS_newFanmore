@@ -41,16 +41,16 @@
     paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
     [paramsOption removeObjectForKey:@"appSecret"];
 //    
-//    NSArray * parameaaa = [paramsOption allKeys];
-//    NSMutableString * aaa = [[NSMutableString alloc] init];
-//    
-//    for (NSString * a in parameaaa) {
-//        [aaa appendString:[NSString stringWithFormat:@"%@=%@&",a,[paramsOption objectForKey:a]]];
-//    }
-//    aaa = [aaa substringToIndex:(int)(aaa.length-1)];
-//    NSLog(@"--------------------%@",aaa);
-//    
-//    NSLog(@"dasdasdas-------parame--get%@",paramsOption);
+    NSArray * parameaaa = [paramsOption allKeys];
+    NSMutableString * aaa = [[NSMutableString alloc] init];
+    
+    for (NSString * a in parameaaa) {
+        [aaa appendString:[NSString stringWithFormat:@"%@=%@&",a,[paramsOption objectForKey:a]]];
+    }
+    aaa = [aaa substringToIndex:(int)(aaa.length-1)];
+    NSLog(@"--------------------%@",aaa);
+    
+    NSLog(@"dasdasdas-------parame--get%@",paramsOption);
     
     [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject){
         success(responseObject);

@@ -210,66 +210,64 @@
         [self presentViewController:bb animated:YES completion:nil];
         
     }else{
-   
-    
-    //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:@"分享得链接得粉猫流量" image:[ShareSDK imageWithUrl:self.sampleData.pictureURL] title:self.sampleData.title url:self.sampleData.shareURL description:nil mediaType:SSPublishContentMediaTypeNews];
-     //创建弹出菜单容器
-     id<ISSContainer> container = [ShareSDK container];
-                                                                                   
-    //弹出分享菜单
-    [ShareSDK showShareActionSheet:container shareList:nil content:publishContent statusBarTips:YES authOptions:nil shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-     if (state == SSResponseStateSuccess)
-     {
-         [MBProgressHUD showSuccess:@"分享成功"];
-         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"taskTurnedNotify"];
-         NSMutableDictionary * params = [NSMutableDictionary dictionary];
-         params[@"taskId"] = @(self.taskId);
-         int sType = 0;
-         if (type == 1) {
-             sType = 2;  //新浪微博
-         }else if(type == 6){
-             sType = 3;  //qq 空间
-         }else if(type == 23){
-             sType = 1;  //qq 空间
-         }
-         params[@"channel"] = @(sType);
-         [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-                 [MBProgressHUD showError:@"账号被登入"];
-                 return ;
-             }
-             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
-                 
-                 if ([json[@"resultData"][@"illgel"] intValue]!=0 ||[json[@"resultData"][@"reward"] floatValue] <= 0.0) {
-                     [MBProgressHUD  showSuccess:@"分享成功"];
-                 }else if([json[@"resultData"][@"reward"] floatValue]> 0){
-                     
-                     CGFloat rewad = [json[@"resultData"][@"reward"] floatValue];
-                     NSLog(@"%@",[NSString xiaoshudianweishudeal:rewad]);
-                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜你获得了%@M流量",[NSString xiaoshudianweishudeal:rewad]]];
-                     
-                     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-                     
-                     //1、保存个人信息
-                     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-                     userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-                     CGFloat current = [userInfo.balance floatValue] + rewad;
-                     userInfo.balance = [NSString stringWithFormat:@"%.1f",current];
-                     [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
-                 }
-             }
-            
-         } failure:^(NSError *error) {
-             
-         }];
-         
-     }else if (state == SSResponseStateFail){
-         [MBProgressHUD showError:@"分享失败"];
-
-     }
-     }];
-                                                                                 }
+//    //构造分享内容
+//    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:@"分享得链接得粉猫流量" image:[ShareSDK imageWithUrl:self.sampleData.pictureURL] title:self.sampleData.title url:self.sampleData.shareURL description:nil mediaType:SSPublishContentMediaTypeNews];
+//     //创建弹出菜单容器
+//     id<ISSContainer> container = [ShareSDK container];
+//                                                                                   
+//    //弹出分享菜单
+//    [ShareSDK showShareActionSheet:container shareList:nil content:publishContent statusBarTips:YES authOptions:nil shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//     if (state == SSResponseStateSuccess)
+//     {
+//         [MBProgressHUD showSuccess:@"分享成功"];
+//         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"taskTurnedNotify"];
+//         NSMutableDictionary * params = [NSMutableDictionary dictionary];
+//         params[@"taskId"] = @(self.taskId);
+//         int sType = 0;
+//         if (type == 1) {
+//             sType = 2;  //新浪微博
+//         }else if(type == 6){
+//             sType = 3;  //qq 空间
+//         }else if(type == 23){
+//             sType = 1;  //qq 空间
+//         }
+//         params[@"channel"] = @(sType);
+//         [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+//             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+//                 [MBProgressHUD showError:@"账号被登入"];
+//                 return ;
+//             }
+//             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
+//                 
+//                 if ([json[@"resultData"][@"illgel"] intValue]!=0 ||[json[@"resultData"][@"reward"] floatValue] <= 0.0) {
+//                     [MBProgressHUD  showSuccess:@"分享成功"];
+//                 }else if([json[@"resultData"][@"reward"] floatValue]> 0){
+//                     
+//                     CGFloat rewad = [json[@"resultData"][@"reward"] floatValue];
+//                     NSLog(@"%@",[NSString xiaoshudianweishudeal:rewad]);
+//                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜你获得了%@M流量",[NSString xiaoshudianweishudeal:rewad]]];
+//                     
+//                     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//                     
+//                     //1、保存个人信息
+//                     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+//                     userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+//                     CGFloat current = [userInfo.balance floatValue] + rewad;
+//                     userInfo.balance = [NSString stringWithFormat:@"%.1f",current];
+//                     [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
+//                 }
+//             }
+//            
+//         } failure:^(NSError *error) {
+//             
+//         }];
+//         
+//     }else if (state == SSResponseStateFail){
+//         [MBProgressHUD showError:@"分享失败"];
+//
+//     }
+//     }];
+    }
      }];
                                                                                
 }

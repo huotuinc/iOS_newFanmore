@@ -27,7 +27,7 @@
 
 
 
-@interface AppDelegate ()
+@interface AppDelegate () <CLLocationManagerDelegate>
 
 @property(nonatomic,strong) CLLocationManager *mgr;
 
@@ -551,7 +551,6 @@ static NSString *message = @"有一条新消息";
 
 
 
-        
 /**
  *  推送
  *
