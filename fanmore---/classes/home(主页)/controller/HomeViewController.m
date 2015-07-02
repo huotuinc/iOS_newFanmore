@@ -506,7 +506,7 @@ static NSString * homeCellidentify = @"homeCellId";
 }
 
 
-}
+
 
 - (void)answerOverToreferch{
    [self.tableView headerBeginRefreshing];
