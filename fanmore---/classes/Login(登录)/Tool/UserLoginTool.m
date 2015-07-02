@@ -40,7 +40,7 @@
     }
     paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
     [paramsOption removeObjectForKey:@"appSecret"];
-    
+//    
 //    NSArray * parameaaa = [paramsOption allKeys];
 //    NSMutableString * aaa = [[NSMutableString alloc] init];
 //    

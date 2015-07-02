@@ -254,7 +254,7 @@ static NSString * _num = nil;
         detailVc.title = @"游戏类任务";
     }
     
-    detailVc.ishaveget=YES;
+    detailVc.ishaveget=NO;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
     [self.navigationController pushViewController:detailVc animated:YES];

@@ -272,7 +272,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         detailVc.title = @"游戏类任务";
     }
     
-    detailVc.ishaveget=YES;
+    detailVc.ishaveget=NO;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
     [self.navigationController pushViewController:detailVc animated:YES];

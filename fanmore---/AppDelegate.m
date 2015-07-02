@@ -112,6 +112,16 @@
             [ac show];
         }
         
+        NSNotification *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (dicRemote) {
+            [self.userInfo removeAllObjects];
+            self.userInfo = [NSMutableDictionary dictionaryWithDictionary:dic.userInfo];
+            NSLog(@"self.userInfo:: %@", self.userInfo);
+            NSLog(@"!!!!CCCCC:::%@",dic.userInfo);
+            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.userInfo[@"title"]] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+            [ac show];
+        }
+        
     }
     
     
@@ -129,12 +139,27 @@
     
 }
 
+/**
+ *  ios8 远程通知方法
+ *
+ *  @param application       <#application description#>
+ *  @param userInfo          <#userInfo description#>
+ *  @param completionHandler <#completionHandler description#>
+ */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     NSLog(@"didReceiveRemoteNotification:%@",userInfo);
 }
 
-
+/**
+ *  ios7 远程通知方法
+ *
+ *  @param application <#application description#>
+ *  @param userInfo    <#userInfo description#>
+ */
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"didReceiveRemoteNotification:%@",userInfo);
+}
 
 
 -(void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
@@ -148,9 +173,14 @@
     
     NSString * aa = [deviceToken hexadecimalString];
     NSLog(@"%@",aa);
-    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    self.deviceToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"deviceToken:%@", _deviceToken);
+    
+    NSString * urlstr = [MainURL stringByAppendingPathComponent:@"updateDeviceToken"];
+    NSMutableDictionary * parame = [NSMutableDictionary dictionary];
+    parame[@"deviceToken"] = aa;
+    [UserLoginTool loginRequestGet:urlstr parame:parame success:^(id json) {
+    } failure:^(NSError *error) {
+        
+    }];
     
 }
 
