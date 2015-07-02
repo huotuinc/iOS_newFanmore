@@ -533,7 +533,7 @@ static NSString * homeCellidentify = @"homeCellId";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
     [self.navigationController pushViewController:detailVc animated:YES];
 
-
+}
 
 - (void)answerOverToreferch{
    [self.tableView headerBeginRefreshing];
