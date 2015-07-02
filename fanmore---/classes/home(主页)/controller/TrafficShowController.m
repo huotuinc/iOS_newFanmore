@@ -29,35 +29,57 @@ static NSString *collectionViewidentifier = @"collectionCell";
  *
  *  @return <#return value description#>
  */
-- (NSArray *)flays{
-    
-    if (_flays == nil) {
-        _flays = [NSArray array];
-        [MBProgressHUD showMessage:nil];
-        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
-        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-            
-            [MBProgressHUD hideHUD];
-            NSLog(@"xxxxxxxxx%@",json);
-            if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
-                
-                _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
-                
-            }
-            
-            [self setWaringLabel];
+//- (NSArray *)flays{
+//    
+//    if (_flays == nil) {
+//        _flays = [NSArray array];
+//        [MBProgressHUD showMessage:nil];
+//        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+//        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
+//            
+//            [MBProgressHUD hideHUD];
+//            NSLog(@"xxxxxxxxx%@",json);
+//            if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
+//                
+//                _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
+//                
+//            }
+//            
+//            [self setWaringLabel];
+//
+//        } failure:^(NSError *error) {
+//             [MBProgressHUD hideHUD];
+//        }];
+//    }
+//    _flays = [_flays sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        
+//        return [obj1 compare:obj2];
+//    }];
+//    
+//    
+//    return _flays;
+//}
 
-        } failure:^(NSError *error) {
-             [MBProgressHUD hideHUD];
-        }];
-    }
-    _flays = [_flays sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+- (void)flaysFromeWeb {
+    _flays = [NSArray array];
+    [MBProgressHUD showMessage:nil];
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+    [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
         
-        return [obj1 compare:obj2];
+        [MBProgressHUD hideHUD];
+        NSLog(@"xxxxxxxxx%@",json);
+        if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
+            
+            _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
+            
+        }
+        
+        [self setWaringLabel];
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
     }];
-    
-    
-    return _flays;
+
 }
 
 - (void)viewDidLoad {
@@ -65,12 +87,10 @@ static NSString *collectionViewidentifier = @"collectionCell";
     // Do any additional setup after loading the view.
     
     self.title = @"流量兑换";
-    self.flays;
     
-    if (self.flays.count != 0) {
-        [self setWaringLabel];
-    }
     
+
+
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
     //1、保存全局信息
@@ -172,9 +192,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [self.navigationController setNavigationBarHidden:NO];
     
-//    if (self.flays.count != 0) {
-//        [self setWaringLabel];
-//    }
+    [self flaysFromeWeb];
     
 
     

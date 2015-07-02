@@ -157,7 +157,7 @@ static NSString * _num = nil;
             LoginViewController * aa = [[LoginViewController alloc] init];
             UINavigationController *ab = [[UINavigationController alloc] initWithRootViewController:aa];
             [self presentViewController:ab animated:YES completion:nil];
-            
+            return;
         }
     }
     if (indexPath.row == 1) {
