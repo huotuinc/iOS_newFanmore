@@ -46,6 +46,14 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self saveControllerToAppDelegate:self];
+}
+
+
 /**
  *  集成刷新控件
  */
