@@ -14,6 +14,7 @@
 #import "userData.h"
 #import "HAMineLoveCarDBOperator.h"
 #import "SDWebImageManager.h"
+#import "taskData.h"
 
 
 @interface detailViewController ()<LoginViewDelegate>
@@ -27,6 +28,10 @@
 
 /**几道答题*/
 @property(nonatomic,strong) NSMutableArray * detailTasks;
+
+
+/**几道答题*/
+@property(nonatomic,strong) taskData * sampleData;
 
 @end
 
@@ -43,13 +48,33 @@
     
     return _detailTasks;
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     self.view.backgroundColor = [UIColor whiteColor];
-    // 初始化
-    [self setup];
+
+    //获取题目s
+    [self getQuestion];
+    
+    [MBProgressHUD showMessage:nil];
+    
+}
+
+
+- (void)viewdidAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    RootViewController * root = (RootViewController *)self.mm_drawerController;
+    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    
+    
+}
+
+
+- (void)setupview{
+    
+   
     if (self.ishaveget) {//已答完
         self.answerBtn.backgroundColor = LWColor(163, 163, 163);
         self.answerBtn.layer.cornerRadius = 6;
@@ -57,74 +82,62 @@
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.answerBtn.userInteractionEnabled = NO;
-//        NSString *ml = [self xiaoshudianweishudeal:self.flay];
+        //        NSString *ml = [self xiaoshudianweishudeal:self.flay];
         [self.answerBtn setTitle:[NSString stringWithFormat:@"已答完"] forState:UIControlStateNormal];
         self.answerBtn.backgroundColor = [UIColor grayColor];
+        
     }else{//未答
+        
         self.answerBtn.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
         self.answerBtn.layer.cornerRadius = 6;
         self.answerBtn.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        NSString *ml = [self xiaoshudianweishudeal:self.flay];
-        
-        if (self.type == 1) {//答题类
-            
-            [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
-        }
-        
-        if (self.type == 2) {//报名类
-            
-            [self.answerBtn setTitle:[NSString stringWithFormat:@"报名领取%@M流量",ml] forState:UIControlStateNormal];
-        }
-        
-        if (self.type == 3) {//画册类
-            
-            [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
-        }
-        
-        if (self.type  == 4) {//游戏类
-            
-            [self.answerBtn setTitle:[NSString stringWithFormat:@"玩游戏领取%@M流量",ml] forState:UIControlStateNormal];
-        }
         
         
-        //获取题目s
-        [self getQuestion];
-        
+        //判读登入状态下是否已读过题
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         //1、保存个人信息
         NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
         userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
         BOOL aa = [HAMineLoveCarDBOperator exqueryFMDBWithCondition:userInfo.name withTaskId:self.taskId];
-        if (aa) {
-            
-        }else{
+        if (!aa) {
             [HAMineLoveCarDBOperator insertIntoFMDBWithSql:userInfo.name withTaskId:self.taskId];
-           [self settime];
+            [self settime];
         }
         
+        
+        //设置按钮标题
+        NSString *ml = [NSString xiaoshudianweishudeal:self.sampleData.maxBonus];
+        
+        if (self.sampleData.type == 1) {//答题类
+             self.title = @"答题类";
+            [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
+        }
+        
+        if (self.sampleData.type == 2) {//报名类
+             self.title = @"报名类";
+            [self.answerBtn setTitle:[NSString stringWithFormat:@"报名领取%@M流量",ml] forState:UIControlStateNormal];
+        }
+        
+        if (self.sampleData.type == 3) {//画册类
+             self.title = @"画册类";
+            [self.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量",ml] forState:UIControlStateNormal];
+        }
+        
+        if (self.sampleData.type  == 4) {//游戏类
+             self.title = @"游戏类";
+            [self.answerBtn setTitle:[NSString stringWithFormat:@"玩游戏领取%@M流量",ml] forState:UIControlStateNormal];
+        }
     }
     
-    NSURL* url =  [NSURL URLWithString:self.detailUrl];
+    NSURL* url =  [NSURL URLWithString:self.sampleData.contextURL];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     self.detailWebView.backgroundColor = [UIColor whiteColor];
     self.detailWebView.scrollView.backgroundColor = [UIColor whiteColor];
     [self.detailWebView loadRequest:request];
 }
 
-
-- (NSString *)xiaoshudianweishudeal:(CGFloat)aac
-{
-    //设置cell样式
-    NSString * ml = [NSString stringWithFormat:@"%.1f",aac];
-    NSRange aa = [ml rangeOfString:@"."];
-    NSString * bb = [ml substringWithRange:NSMakeRange(aa.location+1, 1)];
-    if ([bb isEqualToString:@"0"]) {
-        ml = [NSString stringWithFormat:@"%.f",aac];
-    }
-    return ml;
-}
 /**
  *  获取题目s
  */
@@ -134,36 +147,36 @@
 //    NSLog(@"%@",url);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"taskId"] = @(self.taskId);
-    [MBProgressHUD showMessage:nil];
+    
+    __weak detailViewController * wself = self;
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
+            LoginViewController * login = [[LoginViewController alloc] init];
+            UINavigationController * aa = [[UINavigationController alloc] initWithRootViewController:login];
+            [wself presentViewController:aa animated:YES completion:^{
+                [wself setupview];
+            }];
+            
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
-//            NSLog(@"xxxxxxxxxxxxx----%@",json);
             NSArray * detailTaskS = [taskDetail objectArrayWithKeyValuesArray:json[@"resultData"][@"taskDetail"]];
-            [self.detailTasks removeAllObjects];
-            [self.detailTasks addObjectsFromArray:detailTaskS];
+            wself.sampleData = [taskData objectWithKeyValues:json[@"resultData"][@"task"]];
+            [wself.detailTasks removeAllObjects];
+            [wself.detailTasks addObjectsFromArray:detailTaskS];
+            [wself setupview];
+            // 初始化
+            [wself setup];
          }
      } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
-//        NSLog(@"xxxx%@",[error description]);
+
     }];
     
 }
 
-
-- (void)viewDidAppear:(BOOL)animated{
-    
-    [super viewDidAppear:animated];
-//    [self settime];
-    
-    [self.navigationController setNavigationBarHidden:NO];
-    RootViewController * root = (RootViewController *)self.mm_drawerController;
-    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-}
 
 
 
@@ -200,7 +213,7 @@
    
     
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:@"分享得链接得粉猫流量" image:[ShareSDK imageWithUrl:self.pictureUrl] title:self.titless url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:@"分享得链接得粉猫流量" image:[ShareSDK imageWithUrl:self.sampleData.pictureURL] title:self.sampleData.title url:self.sampleData.shareURL description:nil mediaType:SSPublishContentMediaTypeNews];
      //创建弹出菜单容器
      id<ISSContainer> container = [ShareSDK container];
                                                                                    
@@ -253,7 +266,7 @@
          
      }else if (state == SSResponseStateFail){
          [MBProgressHUD showError:@"分享失败"];
-//         NSLog(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
+
      }
      }];
                                                                                  }
@@ -261,20 +274,6 @@
                                                                                
 }
 
-/**
- *  关闭手势
- */
-- (void)viewWillAppear:(BOOL)animated{
-    
-    [super viewWillAppear:animated];
-    
-    //    myTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
-    
-    RootViewController * root = (RootViewController *)self.mm_drawerController;
-    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-    [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
-    
-}
 
 
 - (IBAction)goQusetionAction:(id)sender {
@@ -295,18 +294,18 @@
         return;
     }
     //答题类型
-    if (self.type == 1) {//答题类
+    if (self.sampleData.type== 1) {//答题类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
         answer.questions = self.detailTasks;
         answer.type = @(1);
         answer.taskId = self.taskId;
-        answer.flay = self.flay;
+        answer.flay = self.sampleData.maxBonus;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
-    if (self.type == 2) {//报名类
+    if (self.sampleData.type == 2) {//报名类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         JoinController *answer = [storyboard instantiateViewControllerWithIdentifier:@"JoinController"];
@@ -314,11 +313,11 @@
         answer.title = @"报名";
         answer.type = @(2);//报名
         answer.taskId = self.taskId;
-        answer.flay = self.flay;
+        answer.flay = self.sampleData.maxBonus;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
-    if (self.type == 3) {//画册类
+    if (self.sampleData.type == 3) {//画册类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         AnswerController *answer = [storyboard instantiateViewControllerWithIdentifier:@"AnswerController"];
@@ -328,7 +327,7 @@
         [self.navigationController pushViewController:answer animated:YES];
     }
     
-    if (self.type  == 4) {//游戏类
+    if (self.sampleData.type  == 4) {//游戏类
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WebController *answer = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
@@ -349,12 +348,8 @@
     __weak detailViewController * wself = self;
     
     /*************倒计时************/
-   
-    __block int timeout= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]-1; //倒计时时间
-//    NSLog(@"xxxxxxxxxxxx%d",timeout);
-    __block int timeAll= [[[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds] intValue]; //倒计时时间
-    timeout = self.backTime-1;
-    timeAll = self.backTime;
+    __block int timeout = self.sampleData.backTime-1;
+    __block int timeAll = self.sampleData.backTime;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
@@ -362,37 +357,36 @@
         if(timeout<=0){ //倒计时结束，关闭
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
-                //设置界面的按钮显示 根据自己需求设置
-//                NSString * time = [[NSUserDefaults standardUserDefaults] stringForKey:AppReadSeconds];
-                if (self.type == 1) {//答题类
-                    NSString * butTitle = [NSString stringWithFormat:@"答题领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
+                //设置界面的按钮显示 根据自己需求设
+                 wself.answerBtn.layer.borderColor = [UIColor colorWithRed:1 green:141 blue:255 alpha:1].CGColor;
+                self.answerBtn.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
+                if (self.sampleData.type == 1) {//答题类
+                    NSString * butTitle = [NSString stringWithFormat:@"答题领取%@M流量",[NSString xiaoshudianweishudeal:self.sampleData.maxBonus]];
+                    [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
+                    wself.answerBtn.userInteractionEnabled = YES;
+                }
+                
+                if (self.sampleData.type == 2) {//报名类
+                    
+                    NSString * butTitle = [NSString stringWithFormat:@"报名领取%@M流量",[NSString xiaoshudianweishudeal:self.sampleData.maxBonus]];
                     [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
                     //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                     //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
                     wself.answerBtn.userInteractionEnabled = YES;
                 }
                 
-                if (self.type == 2) {//报名类
+                if (self.sampleData.type == 3) {//画册类
                     
-                    NSString * butTitle = [NSString stringWithFormat:@"报名领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
+                    NSString * butTitle = [NSString stringWithFormat:@"答题领取%@M流量",[NSString xiaoshudianweishudeal:self.sampleData.maxBonus]];
                     [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
                     //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                     //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
                     wself.answerBtn.userInteractionEnabled = YES;
                 }
                 
-                if (self.type == 3) {//画册类
+                if (self.sampleData.type  == 4) {//游戏类
                     
-                    NSString * butTitle = [NSString stringWithFormat:@"答题领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
-                    [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
-                    //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
-                    //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
-                    wself.answerBtn.userInteractionEnabled = YES;
-                }
-                
-                if (self.type  == 4) {//游戏类
-                    
-                    NSString * butTitle = [NSString stringWithFormat:@"玩游戏领取%@M流量",[NSString xiaoshudianweishudeal:self.flay]];
+                    NSString * butTitle = [NSString stringWithFormat:@"玩游戏领取%@M流量",[NSString xiaoshudianweishudeal:self.sampleData.maxBonus]];
                     [wself.answerBtn setTitle:butTitle forState:UIControlStateNormal];
                     //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                     //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
@@ -409,27 +403,28 @@
                 //设置界面的按钮显示 根据自己需求设置
 //                NSLog(@"____%@",strTime);
                 
-                if (self.type == 1) {//答题类
-                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
+                if (self.sampleData.type == 1) {//答题类
+                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.sampleData.maxBonus],strTime] forState:UIControlStateNormal];
                     wself.answerBtn.userInteractionEnabled = NO;
                 }
                 
-                if (self.type == 2) {//报名类
-                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
+                if (self.sampleData.type == 2) {//报名类
+                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.sampleData.maxBonus],strTime] forState:UIControlStateNormal];
                     wself.answerBtn.userInteractionEnabled = NO;
                 }
                 
-                if (self.type == 3) {//画册类
-                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
+                if (self.sampleData.type == 3) {//画册类
+                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.sampleData.maxBonus],strTime] forState:UIControlStateNormal];
                     wself.answerBtn.userInteractionEnabled = NO;
                 }
                 
-                if (self.type  == 4) {//游戏类
-                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.flay],strTime] forState:UIControlStateNormal];
+                if (self.sampleData.type  == 4) {//游戏类
+                    [wself.answerBtn setTitle:[NSString stringWithFormat:@"答题领取%@M流量(%@)",[NSString xiaoshudianweishudeal:self.sampleData.maxBonus],strTime] forState:UIControlStateNormal];
                     wself.answerBtn.userInteractionEnabled = NO;
                 }
 
-                
+                [wself.answerBtn setBackgroundColor:[UIColor grayColor]];
+                wself.answerBtn.layer.borderColor = [UIColor grayColor].CGColor;
                 
             });
             timeout--;
