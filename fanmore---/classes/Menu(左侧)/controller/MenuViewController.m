@@ -216,6 +216,9 @@
         }];
         
     }
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.currentVC = self;
 
 }
 

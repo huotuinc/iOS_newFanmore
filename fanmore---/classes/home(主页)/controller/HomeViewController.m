@@ -74,6 +74,9 @@ static NSString * homeCellidentify = @"homeCellId";
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    
+    [self saveControllerToAppDelegate:self];
+
 }
 
 - (void)loadView
@@ -88,7 +91,7 @@ static NSString * homeCellidentify = @"homeCellId";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首页";
+    self.title = @"粉猫";
     
 //    [self _initView];
     
@@ -104,26 +107,29 @@ static NSString * homeCellidentify = @"homeCellId";
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
-    UILabel * welable = [[UILabel alloc] init];
-    welable.layer.cornerRadius = 5;
-    welable.layer.masksToBounds = YES;
-    welable.alpha = 0.8;
-    welable.textAlignment  = NSTextAlignmentCenter;
-    welable.backgroundColor = [UIColor grayColor];
-    [welable setTextColor:[UIColor blackColor]];
-    welable.font = [UIFont systemFontOfSize:18];
-    welable.text = user.welcomeTip?user.welcomeTip:@"欢迎使用粉猫";
-    welable.center = self.view.center;
-    welable.bounds = CGRectMake(0, 0, ScreenWidth * 2 /3, 100);
-    [self.view addSubview:welable];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [welable removeFromSuperview];
-    });
+    if (user.welcomeTip) {
+        UILabel * welable = [[UILabel alloc] init];
+        welable.layer.cornerRadius = 5;
+        welable.layer.masksToBounds = YES;
+        welable.alpha = 0.8;
+        welable.textAlignment  = NSTextAlignmentCenter;
+        welable.backgroundColor = [UIColor grayColor];
+        [welable setTextColor:[UIColor blackColor]];
+        welable.font = [UIFont systemFontOfSize:18];
+        welable.text = user.welcomeTip;
+        welable.center = self.view.center;
+        welable.bounds = CGRectMake(0, 0, ScreenWidth * 2 /3, 100);
+        
+        [self.view addSubview:welable];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [welable removeFromSuperview];
+        });
+    }
+    
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
-    //注册转跳通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operWebViewCn:) name:ReciveTaskId object:nil];
+
 }
 
 
@@ -353,23 +359,23 @@ static NSString * homeCellidentify = @"homeCellId";
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     detailVc.taskId = task.taskId; //获取问题编号
-    detailVc.type = task.type;  //答题类型
-    detailVc.detailUrl = task.contextURL;//网页详情的url
-    detailVc.backTime = task.backTime;
-    detailVc.flay = task.maxBonus;
-    detailVc.shareUrl = task.shareURL;
-    detailVc.titless = task.title;
-    detailVc.pictureUrl = task.pictureURL;
-    if (task.type == 1) {
-        detailVc.title = @"答题任务";
-    }else if(task.type == 2){
-        detailVc.title = @"报名任务";
-    }else if(task.type == 3){
-        detailVc.title = @"画册类任务";
-    }else{
-        detailVc.title = @"游戏类任务";
-    }
-    (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
+//    detailVc.type = task.type;  //答题类型
+//    detailVc.detailUrl = task.contextURL;//网页详情的url
+//    detailVc.backTime = task.backTime;
+//    detailVc.flay = task.maxBonus;
+//    detailVc.shareUrl = task.shareURL;
+//    detailVc.titless = task.title;
+//    detailVc.pictureUrl = task.pictureURL;
+//    if (task.type == 1) {
+//        detailVc.title = @"答题任务";
+//    }else if(task.type == 2){
+//        detailVc.title = @"报名任务";
+//    }else if(task.type == 3){
+//        detailVc.title = @"画册类任务";
+//    }else{
+//        detailVc.title = @"游戏类任务";
+//    }
+//    (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
 
     [self.navigationController pushViewController:detailVc animated:YES];
 }
@@ -500,35 +506,7 @@ static NSString * homeCellidentify = @"homeCellId";
     
 }
 
-- (void)operWebViewCn:(NSNotification *) notification {
-//    NSLog(@"%@",notification);
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
-    detailVc.taskId = (int)notification.userInfo[@"id"]; //获取问题编号
-    detailVc.type = (int)notification.userInfo[@"type"];  //答题类型
-    detailVc.detailUrl = notification.userInfo[@"detailUrl"];//网页详情的url
-    detailVc.backTime = (int)notification.userInfo[@"backTime"];
-    detailVc.flay = [notification.userInfo[@"flay"] floatValue];
-    detailVc.shareUrl = notification.userInfo[@"shareUrl"];
-    detailVc.titless = notification.userInfo[@"title"];
-    detailVc.pictureUrl = notification.userInfo[@"pictureUrl"];
-    if ((int)notification.userInfo[@"type"] == 1) {
-        detailVc.title = @"答题任务";
-    }else if((int)notification.userInfo[@"type"] == 2){
-        detailVc.title = @"报名任务";
-    }else if((int)notification.userInfo[@"type"] == 3){
-        detailVc.title = @"画册类任务";
-    }else{
-        detailVc.title = @"游戏类任务";
-    }
-    
-    detailVc.ishaveget=NO;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
-    [self.navigationController pushViewController:detailVc animated:YES];
 
-}
 
 
 - (void)answerOverToreferch{

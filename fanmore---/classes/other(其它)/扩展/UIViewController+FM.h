@@ -12,4 +12,6 @@
 
 - (void)initBackAndTitle:(NSString *)title;
 
+- (void)saveControllerToAppDelegate:(UIViewController *)controller;
+
 @end
