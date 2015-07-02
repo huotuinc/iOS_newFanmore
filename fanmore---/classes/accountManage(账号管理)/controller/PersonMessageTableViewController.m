@@ -89,6 +89,8 @@
     [super viewWillAppear:animated];
     //初始化个人信息
     
+    [self saveControllerToAppDelegate:self];
+    
 }
 
 - (void)viewDidLoad {

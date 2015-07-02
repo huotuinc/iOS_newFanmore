@@ -56,6 +56,8 @@
     [super viewWillAppear:animated];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    
+    [self saveControllerToAppDelegate:self];
 }
 
 - (void)_initNav
