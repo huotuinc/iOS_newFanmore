@@ -11,7 +11,7 @@
 #import "Message.h"
 #import "MessageFrame.h"
 
-#define pageSize 8
+#define pageSize 10
 
 @interface MassageCenterController ()
 

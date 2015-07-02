@@ -147,8 +147,13 @@
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else if(self.reward>0){
                 [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                
                 [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜获得%.1fM流量",wself.flay]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                });
+                
             }else if (self.chance >0 ){
                 for (UIViewController * aa in self.navigationController.childViewControllers) {
                     if ([aa isKindOfClass:[detailViewController class]]) {
