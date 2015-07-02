@@ -235,17 +235,12 @@
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
             
-           //比较反回的token和本地的token比较
-            NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
-//            NSLog(@"注册前的%@",token);
             [MBProgressHUD showSuccess:@"注册成功"];
+            
             [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
-            if (![token isEqualToString:userInfo.token]) {
-                
-                [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:AppToken];
-                
-//                NSLog(@"注册后的%@", [[NSUserDefaults standardUserDefaults] objectForKey:AppToken]);
-            }
+            
+            [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:AppToken];
+
             if ([wself.delegate respondsToSelector:@selector(UserRegisterViewSuccess:)]) {
                 
                 [wself.delegate UserRegisterViewSuccess:userInfo];

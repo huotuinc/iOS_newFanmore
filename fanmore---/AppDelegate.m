@@ -98,9 +98,8 @@
 //    NSDictionary *userInfo1 = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     
     
-    
+    NSLog(@"%@",launchOptions);
     if (launchOptions) {
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
         
         NSNotification *dic = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dic) {
@@ -149,6 +148,10 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     NSLog(@"didReceiveRemoteNotification:%@",userInfo);
+    UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你关注的活动开始了"] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+    [ac show];
+    [application completeStateRestoration];
+    
 }
 
 /**
@@ -159,6 +162,8 @@
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"didReceiveRemoteNotification:%@",userInfo);
+    UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你关注的活动开始了"] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+    [ac show];
 }
 
 
@@ -373,7 +378,7 @@
         [application registerUserNotificationSettings:settings];
     }else{
         
-        UIRemoteNotificationType type = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert;
+        UIRemoteNotificationType type = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeNewsstandContentAvailability;
         [application registerForRemoteNotificationTypes:type];
         
     }
@@ -466,6 +471,13 @@
     return result;
 }
 
+
+/**
+ *  推送
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex == 0) {

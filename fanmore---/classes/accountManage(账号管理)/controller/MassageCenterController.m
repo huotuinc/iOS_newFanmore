@@ -74,6 +74,7 @@
 - (void)headerRereshing  //加载最新数据
 {
     //    startIndex = @1;
+    [MBProgressHUD showMessage:nil];
     [self getNewMoreData];
     //    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -147,6 +148,7 @@
     __weak MassageCenterController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
 //        NSLog(@"%@",json);
+        [MBProgressHUD hideHUD];
         NSMutableArray * aaframe = [NSMutableArray array];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
@@ -167,7 +169,7 @@
         }
         
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUD];
     }];
     
 }

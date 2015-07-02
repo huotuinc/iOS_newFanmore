@@ -106,8 +106,9 @@
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
+    
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:user.invCode defaultContent:nil image:nil title:@"分享粉猫app得流量" url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] defaultContent:nil image:nil title:@"分享粉猫app得流量" url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     
@@ -122,6 +123,9 @@
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
                     [MBProgressHUD showError:@"账号被登入"];
+                    LoginViewController * aa = [[LoginViewController alloc] init];
+                    UINavigationController * cc = [[UINavigationController alloc] initWithRootViewController:aa];
+                    [self presentViewController:cc animated:YES completion:nil];
                     return ;
                 }
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
