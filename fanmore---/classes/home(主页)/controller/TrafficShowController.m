@@ -88,9 +88,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     self.title = @"流量兑换";
     
-    
-
-
+    self.promptLabel.adjustsFontSizeToFitWidth = YES;
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
     //1、保存全局信息
