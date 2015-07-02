@@ -29,35 +29,57 @@ static NSString *collectionViewidentifier = @"collectionCell";
  *
  *  @return <#return value description#>
  */
-- (NSArray *)flays{
-    
-    if (_flays == nil) {
-        _flays = [NSArray array];
-        [MBProgressHUD showMessage:nil];
-        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
-        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-            
-            [MBProgressHUD hideHUD];
+//- (NSArray *)flays{
+//    
+//    if (_flays == nil) {
+//        _flays = [NSArray array];
+//        [MBProgressHUD showMessage:nil];
+//        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+//        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
+//            
+//            [MBProgressHUD hideHUD];
 //            NSLog(@"xxxxxxxxx%@",json);
-            if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
-                
-                _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
-                
-            }
-            
-            [self setWaringLabel];
+//            if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
+//                
+//                _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
+//                
+//            }
+//            
+//            [self setWaringLabel];
+//
+//        } failure:^(NSError *error) {
+//             [MBProgressHUD hideHUD];
+//        }];
+//    }
+//    _flays = [_flays sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        
+//        return [obj1 compare:obj2];
+//    }];
+//    
+//    
+//    return _flays;
+//}
 
-        } failure:^(NSError *error) {
-             [MBProgressHUD hideHUD];
-        }];
-    }
-    _flays = [_flays sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+- (void)flaysFromeWeb {
+    _flays = [NSArray array];
+    [MBProgressHUD showMessage:nil];
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
+    [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
         
-        return [obj1 compare:obj2];
+        [MBProgressHUD hideHUD];
+        NSLog(@"xxxxxxxxx%@",json);
+        if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
+            
+            _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
+            
+        }
+        
+        [self setWaringLabel];
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
     }];
-    
-    
-    return _flays;
+
 }
 
 - (void)viewDidLoad {
@@ -65,7 +87,6 @@ static NSString *collectionViewidentifier = @"collectionCell";
     // Do any additional setup after loading the view.
     
     self.title = @"流量兑换";
-    self.flays;
     
     self.promptLabel.adjustsFontSizeToFitWidth = YES;
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -174,6 +195,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [self.navigationController setNavigationBarHidden:NO];
     
+    [self flaysFromeWeb];
+    
 
     
 //    NSLog(@"%@", self.flays);
@@ -227,9 +250,6 @@ static NSString *collectionViewidentifier = @"collectionCell";
     }
     
     
-    [self setWaringLabel];
-    
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         BPViewController *bpView = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
@@ -246,6 +266,8 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.friendButton.layer.borderWidth = 0.5;
     self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
     self.friendButton.layer.cornerRadius = 2;
+    
+    [self setWaringLabel];
 }
 
 @end

@@ -71,7 +71,7 @@
 
 #define loginUserName  @"username" //用户名
 #define loginPassword @"password"  //密码
-#define loginFlag @"loginFlag"  // 是否需要等人标志
+#define loginFlag @"loginFlag"  // 是否需要登录标志
 
 #define UserLoginNumber [NSUserDefaults standardUserDefaults] stringForKey:@"username"]
 

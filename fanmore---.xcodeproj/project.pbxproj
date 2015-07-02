@@ -16,6 +16,7 @@
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD651B1854C100FAC712 /* MassageCenterController.m */; };
 		833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC76D1B2689A0008DA984 /* HobbyController.m */; };
+		83466BF21B4502910089A326 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83466BF11B4502910089A326 /* InfoPlist.strings */; };
 		8360169A1B37EF1D00B076DD /* ConversionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836016981B37EF1D00B076DD /* ConversionCell.m */; };
 		8360169B1B37EF1D00B076DD /* ConversionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836016991B37EF1D00B076DD /* ConversionCell.xib */; };
 		836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 836A0AA01B22E97600C8E765 /* 未命名.tiff */; };
@@ -233,6 +234,7 @@
 		8339BD651B1854C100FAC712 /* MassageCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassageCenterController.m; sourceTree = "<group>"; };
 		833CC76C1B2689A0008DA984 /* HobbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HobbyController.h; sourceTree = "<group>"; };
 		833CC76D1B2689A0008DA984 /* HobbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HobbyController.m; sourceTree = "<group>"; };
+		83466BF11B4502910089A326 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		836016971B37EF1D00B076DD /* ConversionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversionCell.h; path = "classes/home(主页)/view/ConversionCell.h"; sourceTree = "<group>"; };
 		836016981B37EF1D00B076DD /* ConversionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConversionCell.m; path = "classes/home(主页)/view/ConversionCell.m"; sourceTree = "<group>"; };
 		836016991B37EF1D00B076DD /* ConversionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConversionCell.xib; path = "classes/home(主页)/view/ConversionCell.xib"; sourceTree = "<group>"; };
@@ -1175,6 +1177,7 @@
 				EFD9316C1B0EBC8E0058F525 /* GlobalUICommont.h */,
 				EF49ECEF1B0D81A40038A203 /* Info.plist */,
 				EF49ECF01B0D81A40038A203 /* main.m */,
+				83466BF11B4502910089A326 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2030,6 +2033,7 @@
 				EF565D441B17091F00FC2D6B /* LoginViewController.xib in Resources */,
 				EFC86AF61B1EFD700081BBC8 /* Resource.bundle in Resources */,
 				836D6AB61B1C872300119B3F /* DiscipleCell.xib in Resources */,
+				83466BF21B4502910089A326 /* InfoPlist.strings in Resources */,
 				83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

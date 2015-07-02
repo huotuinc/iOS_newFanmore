@@ -113,6 +113,7 @@ NSString * _changeflah = nil;
                                 if ([self.delegate respondsToSelector:@selector(successExchange:)]) {
                                     [MBProgressHUD showSuccess:@"兑换流量成功"];
                                     [self.delegate successExchange:user.balance];
+//                                    [self.delegate setWaringLabel];
                                 }
                                 
                             });
