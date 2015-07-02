@@ -76,6 +76,8 @@
     
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    
+    [self saveControllerToAppDelegate:self];
 }
 
 
@@ -130,8 +132,7 @@
         btn.layer.masksToBounds = YES;
         [btn addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
     }
-    //注册通知中心
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qiandao:) name:TodaySignNot object:nil];
+    
 }
 
 

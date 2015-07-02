@@ -30,7 +30,8 @@
 
 @property(nonatomic,strong) CLLocationManager *mgr;
 
-@property(nonatomic, strong) NSMutableDictionary *userInfo;
+@property(nonatomic, strong) NSMutableString *taskId;
+
 
 /**apns*/
 @property(nonatomic,strong) NSString * deviceToken;
@@ -103,22 +104,39 @@
         
         NSNotification *dic = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dic) {
-            [self.userInfo removeAllObjects];
-            self.userInfo = [NSMutableDictionary dictionaryWithDictionary:dic.userInfo];
-            NSLog(@"self.userInfo:: %@", self.userInfo);
-            NSLog(@"!!!!CCCCC:::%@",dic.userInfo);
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.userInfo[@"title"]] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-            [ac show];
+            self.taskId = dic.userInfo[@"id"];
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:self.taskId forKey:@"taskId"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:userInfo];
+            });
+            
         }
         
         NSNotification *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
         if (dicRemote) {
-            [self.userInfo removeAllObjects];
-            self.userInfo = [NSMutableDictionary dictionaryWithDictionary:dic.userInfo];
-            NSLog(@"self.userInfo:: %@", self.userInfo);
-            NSLog(@"!!!!CCCCC:::%@",dic.userInfo);
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.userInfo[@"title"]] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-            [ac show];
+            switch ((int)dicRemote.userInfo[@"type"]) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+
+                default:
+                    break;
+            }
+            
+            
+//            NSLog(@"self.userInfo:: %@", self.userInfo);
+//            NSLog(@"!!!!CCCCC:::%@",dic.userInfo);
+//            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.userInfo[@"title"]] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+//            [ac show];
         }
         
     }
@@ -195,8 +213,8 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     if (notification) {
         application.applicationIconBadgeNumber = 0;
-        [self.userInfo removeAllObjects];
-        [self.userInfo addEntriesFromDictionary:notification.userInfo];
+//        [self.userInfo removeAllObjects];
+//        [self.userInfo addEntriesFromDictionary:notification.userInfo];
         UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你关注的活动开始了"] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
         [ac show];
     }
@@ -442,6 +460,29 @@
 }
 
 
+
+
+        
+/**
+ *  推送
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+       
+        [self.currentVC.navigationController pushViewController:detail animated:YES];
+//        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:self.taskId forKey:@"taskId"];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:userInfo];
+    }else if (buttonIndex == 1){
+        [[NSNotificationCenter defaultCenter] postNotificationName:ReLoad object:nil userInfo:nil];
+    }
+}
+
 //获取当前屏幕显示的viewcontroller
 - (UIViewController *)getCurrentVC
 {
@@ -470,22 +511,6 @@
         result = window.rootViewController;
     
     return result;
-}
-
-
-/**
- *  推送
- *
- *  @param alertView   <#alertView description#>
- *  @param buttonIndex <#buttonIndex description#>
- */
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if (buttonIndex == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:ReciveTaskId object:nil userInfo:self.userInfo];
-    }else if (buttonIndex == 1){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ReLoad object:nil userInfo:self.userInfo];
-    }
 }
 
 @end

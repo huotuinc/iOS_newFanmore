@@ -87,7 +87,7 @@
     
     
     //注册转跳通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operWebViewCn:) name:ReciveTaskId object:nil];
+    
 }
 
 

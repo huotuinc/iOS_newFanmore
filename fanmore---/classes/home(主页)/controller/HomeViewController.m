@@ -74,6 +74,9 @@ static NSString * homeCellidentify = @"homeCellId";
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    
+    [self saveControllerToAppDelegate:self];
+
 }
 
 - (void)loadView
@@ -88,7 +91,7 @@ static NSString * homeCellidentify = @"homeCellId";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首页";
+    self.title = @"粉猫";
     
 //    [self _initView];
     
@@ -104,26 +107,29 @@ static NSString * homeCellidentify = @"homeCellId";
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
-    UILabel * welable = [[UILabel alloc] init];
-    welable.layer.cornerRadius = 5;
-    welable.layer.masksToBounds = YES;
-    welable.alpha = 0.8;
-    welable.textAlignment  = NSTextAlignmentCenter;
-    welable.backgroundColor = [UIColor grayColor];
-    [welable setTextColor:[UIColor blackColor]];
-    welable.font = [UIFont systemFontOfSize:18];
-    welable.text = user.welcomeTip?user.welcomeTip:@"欢迎使用粉猫";
-    welable.center = self.view.center;
-    welable.bounds = CGRectMake(0, 0, ScreenWidth * 2 /3, 100);
-    [self.view addSubview:welable];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [welable removeFromSuperview];
-    });
+    if (user.welcomeTip) {
+        UILabel * welable = [[UILabel alloc] init];
+        welable.layer.cornerRadius = 5;
+        welable.layer.masksToBounds = YES;
+        welable.alpha = 0.8;
+        welable.textAlignment  = NSTextAlignmentCenter;
+        welable.backgroundColor = [UIColor grayColor];
+        [welable setTextColor:[UIColor blackColor]];
+        welable.font = [UIFont systemFontOfSize:18];
+        welable.text = user.welcomeTip;
+        welable.center = self.view.center;
+        welable.bounds = CGRectMake(0, 0, ScreenWidth * 2 /3, 100);
+        
+        [self.view addSubview:welable];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [welable removeFromSuperview];
+        });
+    }
+    
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
-    //注册转跳通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operWebViewCn:) name:ReciveTaskId object:nil];
+
 }
 
 
@@ -527,7 +533,6 @@ static NSString * homeCellidentify = @"homeCellId";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ReciveTaskId object:nil];
     [self.navigationController pushViewController:detailVc animated:YES];
 
-}
 
 
 - (void)answerOverToreferch{

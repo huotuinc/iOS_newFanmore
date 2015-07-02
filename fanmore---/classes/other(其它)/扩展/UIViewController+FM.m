@@ -18,6 +18,10 @@
     self.navigationItem.title = title;
 }
 
+- (void)saveControllerToAppDelegate:(UIViewController *)controller {
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.currentVC = controller;
+}
 
 
 @end

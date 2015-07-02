@@ -30,6 +30,8 @@ static NSString * _num = nil;
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    
+    [self saveControllerToAppDelegate:self];
 }
 
 
@@ -44,8 +46,6 @@ static NSString * _num = nil;
     // 2.添加数据
     [self setupGroup0];
     
-    //注册转跳通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operWebViewCn:) name:ReciveTaskId object:nil];
     
 }
 

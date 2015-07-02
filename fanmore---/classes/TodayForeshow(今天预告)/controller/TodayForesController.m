@@ -45,6 +45,8 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
     
     [self headerRereshing];
+    
+    [self saveControllerToAppDelegate:self];
   
 }
 
@@ -60,8 +62,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     //集成刷新控件
     [self setupRefresh];
     
-    //注册转跳通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operWebViewCn:) name:ReciveTaskId object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(headerRereshing) name:ReLoad object:nil];
 }
 
@@ -248,8 +249,6 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 }
 
 
-//通知专跳
-- (void)operWebViewCn:(NSNotification *) notification {
 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
