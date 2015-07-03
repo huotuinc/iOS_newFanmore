@@ -126,7 +126,7 @@ static NSString *message = @"有一条新消息";
             if (dicRemote) {
                 NSLog(@"didFinishLaunchingWithOptions:%@", dicRemote);
                 NSNumber *num = dicRemote[@"type"];
-                NSLog(@"%@", num);
+//                NSLog(@"%@", num);
                 switch ([num intValue]) {
                     case 1:
                         break;

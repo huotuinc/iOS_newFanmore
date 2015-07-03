@@ -52,4 +52,7 @@
 /**商户标题*/
 @property(nonatomic,strong) NSString * merchantTitle;
 
+/**距离答题开始时间*/
+@property(nonatomic,strong) NSString * timeToStart;
+
 @end
