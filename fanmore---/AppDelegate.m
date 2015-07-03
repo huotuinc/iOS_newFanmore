@@ -138,7 +138,7 @@ static NSString *message = @"有一条新消息";
                     {
                         //任务推送
                         self.titleString = dicRemote[@"aps"][@"alert"][@"title"];
-                        self.taskId =  dicRemote[@"date"];
+                        self.taskId =  dicRemote[@"data"];
                         self.goDetail = YES;
                     }
                         break;
@@ -204,7 +204,7 @@ static NSString *message = @"有一条新消息";
             {
                 //任务推送
                 self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-                self.taskId =  userInfo[@"date"];
+                self.taskId =  userInfo[@"data"];
                 self.goDetail = YES;
             }
                 break;
@@ -241,7 +241,7 @@ static NSString *message = @"有一条新消息";
             {
                 //任务推送
                 self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-                self.taskId = userInfo[@"date"];
+                self.taskId = userInfo[@"data"];
                 UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
                 [ac show];
             }
@@ -288,7 +288,7 @@ static NSString *message = @"有一条新消息";
         case 4:
         {
             self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-            self.taskId = userInfo[@"date"];
+            self.taskId = userInfo[@"data"];
             UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
             [ac show];
         }
@@ -328,7 +328,7 @@ static NSString *message = @"有一条新消息";
     NSString * aa = [deviceToken hexadecimalString];
     NSLog(@"%@",aa);
     
-    NSString * urlstr = [MainURL stringByAppendingPathComponent:@"updateDeviceToken"];
+    NSString * urlstr = [MainURL stringByAppendingPathComponent:@"updataDeviceToken"];
     NSMutableDictionary * parame = [NSMutableDictionary dictionary];
     parame[@"deviceToken"] = aa;
     [UserLoginTool loginRequestGet:urlstr parame:parame success:^(id json) {
@@ -569,7 +569,7 @@ static NSString *message = @"有一条新消息";
  *  @param manager   <#manager description#>
  *  @param locations <#locations description#>
  */
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+- (void)locationManager:(CLLocationManager *)manager didUpdataLocations:(NSArray *)locations{
     
     CLLocation * loc = [locations lastObject];
     NSString * lat = [NSString stringWithFormat:@"%f",loc.coordinate.latitude];
