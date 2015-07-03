@@ -18,6 +18,9 @@
 
 @property (nonatomic, strong) NSString *shareUrl;
 
+@property (nonatomic, strong) NSString *shareDes;
+
+
 @end
 
 @implementation InviteCodeViewController
@@ -42,6 +45,8 @@
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    [self setupLables];
+    
 }
 
 
@@ -49,19 +54,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self _initNav];
-
-    
     //获取网络数据
-    [self setupLables];
     
+    [self _initNav];
     //分享码按钮
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     [self.shareButton setTitle:[NSString stringWithFormat:@"分享邀请码%@", user.invCode] forState:UIControlStateNormal];
-    
-    
+    self.shareDes = [NSString stringWithFormat:@"分享师徒验证码%@",user.invCode];
     //注册转跳通知
     
 }
@@ -78,39 +79,64 @@
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
         NSLog(@"%@",json);
-        
-        if ([json[@"resultCode"] intValue] == 1 && [json[@"systemResultCode"] intValue] == 1) {
-            NSLog(@"000000%@",json);
-            NSDictionary *dic = json[@"resultData"];
-            NSLog(@"%lu", (unsigned long)dic.count);
-            
-            wself.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", dic[@"yestodayM"]];
-            wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
-            wself.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
-            wself.shareUrl = dic[@"shareURL"];
-//            if (dic[@"aboutURL"]) {
-//                wself.rulesLabel.text = dic[@"aboutURL"];
-//            }
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
+            return ;
         }
         
+        if ([json[@"resultCode"] intValue] == 1 && [json[@"systemResultCode"] intValue] == 1) {
+            
+            NSDictionary *dic = json[@"resultData"];
+            wself.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", [NSString xiaoshudianweishudeal:[dic[@"yestodayM"] floatValue]]];
+            wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", [NSString xiaoshudianweishudeal:[dic[@"totalM"] floatValue]]];
+            wself.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
+            wself.shareUrl = dic[@"shareURL"];
+            wself.shareDes = dic[@"shareDescription"];
+            if (![dic[@"about"] isEqualToString:@""]) {
+                wself.rulesLabel.text = dic[@"about"];
+            }
+           
+        }
         [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
-        //        NSLog(@"请求出错");
     }];
     
 }
 
 
 
-
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    __weak InviteCodeViewController * wself = self;
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [wself setupLables];
+            
+        }];
+    }else{
+        
+    }
+}
 
 
 
 - (IBAction)shareAction:(UIButton *)sender {
 //    NSLog(@"分享邀请吗");
     
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"master" ofType:nil];
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"master" ofType:@"jpg"];
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
@@ -118,7 +144,7 @@
     
     
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] defaultContent:nil image:[ShareSDK imageWithPath:imagePath] title:@"分享粉猫app得流量" url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] image:[ShareSDK imageWithPath:imagePath] title:self.shareDes url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     
@@ -127,17 +153,10 @@
         
         if (state == SSResponseStateSuccess)
         {
-            [MBProgressHUD showMessage:@"分享成功"];
+            [MBProgressHUD showSuccess:@"分享成功"];
             NSString *urlStr = [MainURL stringByAppendingPathComponent:@"taskTurnedNotify"];
             NSMutableDictionary * params = [NSMutableDictionary dictionary];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-                    [MBProgressHUD showError:@"账号被登入"];
-                    LoginViewController * aa = [[LoginViewController alloc] init];
-                    UINavigationController * cc = [[UINavigationController alloc] initWithRootViewController:aa];
-                    [self presentViewController:cc animated:YES completion:nil];
-                    return ;
-                }
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
                     
                     if ([json[@"resultData"][@"illgel"] intValue]!=0 ||[json[@"resultData"][@"reward"] floatValue] <= 0.0) {

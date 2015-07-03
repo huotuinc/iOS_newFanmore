@@ -120,7 +120,12 @@
         
 //        NSLog(@"上啦加载的数据%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-            [MBProgressHUD showError:@"账号被登入"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            aaa.tag = 1;
+            [aaa show];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
@@ -159,6 +164,15 @@
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
 //        NSLog(@"%@",json);
         [MBProgressHUD hideHUD];
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            aaa.tag = 1;
+            [aaa show];
+            return ;
+        }
         NSMutableArray * aaframe = [NSMutableArray array];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
@@ -182,6 +196,27 @@
         [MBProgressHUD hideHUD];
     }];
     
+}
+
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [self.tableView headerBeginRefreshing];
+            
+        }];
+    }else{
+        
+    }
 }
 
 #pragma tableView

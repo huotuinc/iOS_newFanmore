@@ -160,11 +160,14 @@ int _rightQuest = 0;  //纪录正确的答题数
             params[@"taskId"] = @(self.taskId);
             params[@"answers"] = [self.ans substringToIndex:self.ans.length-1];
             [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
-                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 56001)
-                {
-                    [MBProgressHUD showError:@"账号在其它地方登入"];
-                    return;
+                if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+                    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+                    [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+                    UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                    [aaa show];
+                    return ;
                 }
+                
                 if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1)
                 {
                     NSString * answerResultType = nil;
@@ -229,6 +232,30 @@ int _rightQuest = 0;  //纪录正确的答题数
         }
     
 }
+
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
+    __weak AnswerController * wself = self;
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            
+            [wself showQuestion];
+        }];
+    }else{
+        
+    }
+}
+
 /**
  *  答案展示按钮显示答案
  *

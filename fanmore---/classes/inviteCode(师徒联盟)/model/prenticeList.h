@@ -20,11 +20,13 @@
 @property(nonatomic,assign) long long date;
 
 /**贡献流量(M)*/
-@property(nonatomic,assign) int m;
+@property(nonatomic,assign) CGFloat m;
 
 /**头像URL*/
 @property(nonatomic,strong) NSString * picUrl;
 /**展示的名称*/
 @property(nonatomic,strong) NSString * showName;
 
+
+@property(nonatomic,assign)long long appOrder;
 @end

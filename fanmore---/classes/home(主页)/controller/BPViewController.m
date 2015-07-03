@@ -101,6 +101,7 @@ static NSString *BPCellidentify = @"BPCellId";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",fladetail.detailOrder];
     params[@"pagingSize"] = @(PageSize);
+    [MBProgressHUD showMessage:@""];
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView footerEndRefreshing];
@@ -113,13 +114,17 @@ static NSString *BPCellidentify = @"BPCellId";
  */
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"details"];
-    [MBProgressHUD showMessage:@""];
+    
     
     __weak BPViewController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-            [MBProgressHUD showError:@"账号被登入"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:json[@"resultDescription"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
@@ -148,8 +153,13 @@ static NSString *BPCellidentify = @"BPCellId";
     __weak BPViewController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
 //        NSLog(@"%@",json);
+        
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-            [MBProgressHUD showError:@"账号被登陆"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:json[@"resultDescription"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
@@ -166,6 +176,27 @@ static NSString *BPCellidentify = @"BPCellId";
         [MBProgressHUD hideHUD];
 //        NSLog(@"%@",[error description]);
     }];
+}
+
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [self.tableView headerBeginRefreshing];
+            
+        }];
+    }else{
+        
+    }
 }
 
 

@@ -157,6 +157,7 @@
 		EFCA6D081B428A2600F92B03 /* NSData+NSDataDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCA6D071B428A2600F92B03 /* NSData+NSDataDeal.m */; };
 		EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB460B1B214499005D5026 /* FeedBackViewController.m */; };
 		EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCB460C1B214499005D5026 /* FeedBackViewController.xib */; };
+		EFCC8DBF1B46282200EFD5A7 /* master.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EFCC8DBE1B46282200EFD5A7 /* master.jpg */; };
 		EFCCA49A1B12C53700C015A7 /* PersonMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */; };
 		EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AD1B12D6E400C015A7 /* MJArgument.m */; };
 		EFCCA4C41B12D6E400C015A7 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4AF1B12D6E400C015A7 /* MJConst.m */; };
@@ -469,6 +470,7 @@
 		EFCB460A1B214499005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		EFCB460B1B214499005D5026 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		EFCB460C1B214499005D5026 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedBackViewController.xib; sourceTree = "<group>"; };
+		EFCC8DBE1B46282200EFD5A7 /* master.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = master.jpg; path = Images.xcassets/master.imageset/master.jpg; sourceTree = "<group>"; };
 		EFCCA4981B12C53700C015A7 /* PersonMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessageTableViewController.h; sourceTree = "<group>"; };
 		EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMessageTableViewController.m; sourceTree = "<group>"; };
 		EFCCA4AC1B12D6E400C015A7 /* MJArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJArgument.h; sourceTree = "<group>"; };
@@ -1171,6 +1173,7 @@
 		EF49ECEE1B0D81A40038A203 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EFCC8DBE1B46282200EFD5A7 /* master.jpg */,
 				EFC46B421B4175180060DB5C /* wav */,
 				EF8D673A1B0DE436008B6909 /* PrefixHeader.pch */,
 				EFD9316C1B0EBC8E0058F525 /* GlobalUICommont.h */,
@@ -2027,6 +2030,7 @@
 				EF49ECFC1B0D81A40038A203 /* Images.xcassets in Resources */,
 				EF565D461B17091F00FC2D6B /* UserRegisterViewController.xib in Resources */,
 				83DBD92E1B13128800B62830 /* HomeCell.xib in Resources */,
+				EFCC8DBF1B46282200EFD5A7 /* master.jpg in Resources */,
 				836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */,
 				83E263FF1B2F018500A2AC96 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				EF40C31D1B456352003C2E32 /* failed.wav in Resources */,
