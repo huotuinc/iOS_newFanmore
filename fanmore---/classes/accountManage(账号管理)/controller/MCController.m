@@ -84,7 +84,7 @@
 - (void)headerRereshing  //加载最新数据
 {
     //    startIndex = @1;
-    [MBProgressHUD showMessage:nil];
+   
     [self getNewMoreData];
     //    // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -114,7 +114,7 @@
 - (void)getMoreData:(NSMutableDictionary *) params{
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"messages"];
-    
+    [MBProgressHUD showMessage:nil];
     __weak MCController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
@@ -154,7 +154,7 @@
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     parame[@"pagingSize"] = @(pageSize);
     parame[@"pagingTag"] = @"";
-    
+    [MBProgressHUD showMessage:nil];
     __weak MCController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
         //        NSLog(@"%@",json);

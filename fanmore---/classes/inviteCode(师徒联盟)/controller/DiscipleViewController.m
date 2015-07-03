@@ -98,7 +98,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     params[@"pagingSize"] = @(pageSize);
     params[@"pagingTag"] = @"";
     params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
-    [MBProgressHUD showMessage:nil];
+    
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -114,7 +114,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     //    NSLog(@"尾部刷新%ld",task.taskOrder);
     params[@"pagingSize"] = @(pageSize);
     params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
-    [MBProgressHUD showMessage:nil];
+    
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView footerEndRefreshing];
@@ -128,6 +128,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     
     __weak DiscipleViewController * wself = self;
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
@@ -161,6 +162,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
     
     __weak DiscipleViewController *wself = self;
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
         [MBProgressHUD hideHUD];

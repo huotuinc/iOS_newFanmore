@@ -225,6 +225,7 @@ static NSString * homeCellidentify = @"homeCellId";
  */
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
+    
     [MBProgressHUD showMessage:nil];
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {

@@ -98,7 +98,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @"";
     params[@"pagingSize"] = @(pagesize);
-    [MBProgressHUD showMessage:nil];
+    
     [self getNewMoreData:params];
     
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
@@ -112,7 +112,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @(task.taskOrder);
     params[@"pagingSize"] = @(pagesize);
-    [MBProgressHUD showMessage:nil];
+    
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView footerEndRefreshing];
@@ -121,6 +121,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001) {//访问成果
@@ -155,6 +156,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
     __weak TodayForesController * wself = self;
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001) {//访问成果

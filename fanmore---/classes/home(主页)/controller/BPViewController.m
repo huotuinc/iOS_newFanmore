@@ -87,7 +87,7 @@ static NSString *BPCellidentify = @"BPCellId";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @"";
     params[@"pagingSize"] = @(PageSize);
-    [MBProgressHUD showMessage:@""];
+   
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -101,7 +101,7 @@ static NSString *BPCellidentify = @"BPCellId";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",fladetail.detailOrder];
     params[@"pagingSize"] = @(PageSize);
-    [MBProgressHUD showMessage:@""];
+    
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView footerEndRefreshing];
@@ -117,6 +117,7 @@ static NSString *BPCellidentify = @"BPCellId";
     
     
     __weak BPViewController * wself = self;
+    [MBProgressHUD showMessage:@""];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
@@ -151,6 +152,7 @@ static NSString *BPCellidentify = @"BPCellId";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"details"];
     
     __weak BPViewController * wself = self;
+    [MBProgressHUD showMessage:@""];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
 //        NSLog(@"%@",json);
         [MBProgressHUD hideHUD];
