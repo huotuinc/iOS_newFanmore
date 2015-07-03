@@ -1492,10 +1492,10 @@
             </objects>
             <point key="canvasLocation" x="-577" y="986"/>
         </scene>
-        <!--Massage Center Controller-->
+        <!--Controller-->
         <scene sceneID="HCk-nD-GQb">
             <objects>
-                <viewController storyboardIdentifier="MassageCenterController" id="oc3-LP-JfW" customClass="MassageCenterController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MCController" id="oc3-LP-JfW" customClass="MCController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Af-sD-fBY"/>
                         <viewControllerLayoutGuide type="bottom" id="I5d-tE-j77"/>
@@ -1522,7 +1522,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="QHn-mF-Bdu" id="YdA-aE-0ui"/>
+                        <outlet property="tableView" destination="QHn-mF-Bdu" id="dq8-xh-mRB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvy-1n-ewY" userLabel="First Responder" sceneMemberID="firstResponder"/>

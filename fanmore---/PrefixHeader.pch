@@ -50,6 +50,8 @@
 //web页面
 #import "detailViewController.h"
 
+#import "MCController.h"
+
 // appdelegate
 #import "AppDelegate.h"
 

@@ -22,7 +22,7 @@
 #import "LWNewFeatureController.h"
 #import <CoreLocation/CoreLocation.h> //定位
 #import "NSData+NSDataDeal.h"
-#import "MassageCenterController.h"
+
 
 
 
@@ -61,6 +61,8 @@ static NSString *message = @"有一条新消息";
     //定位
     [self test];
     
+    //测试
+//    self.goMessage = YES;
     
     application.applicationIconBadgeNumber = 0;
     
@@ -109,17 +111,20 @@ static NSString *message = @"有一条新消息";
     NSLog(@"%@",launchOptions);
     if (launchOptions) {
         
-        NSNotification *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+        NSDictionary *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dicLocal) {
             NSLog(@"%@", dicLocal);
-            self.titleString = dicLocal.userInfo[@"title"];
-            self.taskId = dicLocal.userInfo[@"id"];
+            self.titleString = dicLocal[@"title"];
+            self.taskId = dicLocal[@"id"];
             self.goDetail = YES;
         }
         
-        NSNotification *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        
+        NSDictionary *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
         if (dicRemote) {
-            NSNumber *num = dicRemote.userInfo[@"type"];
+            
+            NSNumber *num = dicRemote[@"type"];
+            NSLog(@"%@", num);
             switch ([num intValue]) {
                 case 1:
                     break;
@@ -130,21 +135,21 @@ static NSString *message = @"有一条新消息";
                 case 4:
                 {
                     //任务推送
-                    self.titleString = dicRemote.userInfo[@"aps"][@"alert"][@"title"];
-                    self.taskId =  dicRemote.userInfo[@"date"];
+                    self.titleString = dicRemote[@"aps"][@"alert"][@"title"];
+                    self.taskId =  dicRemote[@"date"];
                     self.goDetail = YES;
                 }
                     break;
                 case 5:{
-                    NSLog(@"消息列表");
+
                     self.goMessage = YES;
                 }
                     break;
                 case 6:
                 {
                     //通知
-                    self.titleString = dicRemote.userInfo[@"aps"][@"alert"][@"title"];
-                    
+                    self.titleString = dicRemote[@"aps"][@"alert"][@"title"];
+                    self.getMessage = YES;
                 }
                     break;
 
@@ -188,6 +193,7 @@ static NSString *message = @"有一条新消息";
     
    
     NSNumber *num = userInfo[@"type"];
+    NSLog(@"%@", userInfo);
     switch ([num intValue]) {
         case 1:
             break;
@@ -575,7 +581,8 @@ static NSString *message = @"有一条新消息";
 - (void)gotoDetailController {
     UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
-    detail.taskId = [self.taskId intValue];
+    detail.taskId = self.taskId;
+    detail.ishaveget = NO;
     [self.currentVC.navigationController pushViewController:detail animated:YES];
 }
 
@@ -590,8 +597,8 @@ static NSString *message = @"有一条新消息";
         UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
         [self.currentVC presentViewController:na animated:YES completion:nil];
     }else {
-        
-        MassageCenterController *massage = [[MassageCenterController alloc] init];;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MCController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MCController"];
         [self.currentVC.navigationController pushViewController:massage animated:YES];
     }
 
