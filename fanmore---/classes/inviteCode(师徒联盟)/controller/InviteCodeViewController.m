@@ -88,7 +88,7 @@
             wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", dic[@"totalM"]];
             wself.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
             wself.shareUrl = dic[@"shareURL"];
-//            wself.rulesLabel.text = dic[@""]
+            wself.rulesLabel.text = dic[@"aboutURL"];
         }
         
         [MBProgressHUD hideHUD];
