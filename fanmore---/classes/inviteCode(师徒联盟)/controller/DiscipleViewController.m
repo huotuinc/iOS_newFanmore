@@ -10,7 +10,7 @@
 #import "DiscipleCell.h"
 #import "prenticeList.h"
 
-
+#define pageSize 10
 @interface DiscipleViewController()
 
 /**时间  贡献度*/
@@ -20,6 +20,8 @@
 @property(nonatomic,strong) NSMutableArray * prentices;
 
 @end
+
+
 @implementation DiscipleViewController
 
 static NSString *discipleCellidentify = @"DiscipleCellid";
@@ -34,12 +36,6 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     if (_prentices == nil) {
         
         _prentices = [NSMutableArray array];
-        NSMutableDictionary * params= [NSMutableDictionary dictionary];
-        params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
-        params[@"pagingSize"] = @(10);
-        params[@"pagingTag"] = @"";
-        [self getNewMoreData:params];
-
     }
     return _prentices;
 }
@@ -78,11 +74,18 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
-    //    [self.tableView headerBeginRefreshing];
+    [self.tableView headerBeginRefreshing];
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
     self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
     self.tableView.headerRefreshingText = @"正在刷新最新数据,请稍等";
+    
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"正在加载更多数据,请稍等";
     
 }
 
@@ -92,13 +95,29 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 {
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     
-    params[@"pagingSize"] = @(10);
+    params[@"pagingSize"] = @(pageSize);
     params[@"pagingTag"] = @"";
     params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
-    
+    [MBProgressHUD showMessage:nil];
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
+}
+
+
+//尾部刷新
+- (void)footerRereshing{  //加载更多数据数据
+    
+    prenticeList * prentice = [self.prentices lastObject];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"pagingTag"] = [NSString stringWithFormat:@"%lld",prentice.appOrder];
+    //    NSLog(@"尾部刷新%ld",task.taskOrder);
+    params[@"pagingSize"] = @(pageSize);
+    params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
+    [MBProgressHUD showMessage:nil];
+    [self getMoreData:params];
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [self.tableView footerEndRefreshing];
 }
 
 
@@ -110,9 +129,12 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     __weak DiscipleViewController * wself = self;
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        NSLog(@"%@",json);
+        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-            [MBProgressHUD showError:@"账号被登入"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
@@ -121,12 +143,74 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
             wself.prentices  = [NSMutableArray arrayWithArray:plist];
             [wself.tableView reloadData];
         }
+        [MBProgressHUD hideHUD];
     
     } failure:^(NSError *error) {
-//        NSLog(@"%@",[error description]);
+         [MBProgressHUD hideHUD];
     }];
     
 }
+
+
+/**
+ *   上拉加载更多
+ *
+ *
+ */
+- (void)getMoreData:(NSMutableDictionary *) params{
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
+    
+    __weak DiscipleViewController *wself = self;
+    [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        
+        NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            aaa.tag = 1;
+            [aaa show];
+            return ;
+        }
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            NSArray * taskArray = [prenticeList objectArrayWithKeyValuesArray:json[@"resultData"][@"apps"]];
+            if (taskArray.count > 0) {
+                [wself.prentices addObjectsFromArray:taskArray];
+                [wself.tableView reloadData];    //刷新数据
+            }
+            
+        }
+        [MBProgressHUD hideHUD];
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        //        NSLog(@"%@",[error description]);
+    }];
+    
+}
+
+
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [self.tableView headerBeginRefreshing];
+            
+        }];
+    }else{
+        
+    }
+}
+
 #pragma mark - tableView
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,7 +234,8 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     
     prenticeList * aa = self.prentices[indexPath.row];
 //    NSLog(@"%@",aa);
-    [cell setHeadImage:aa.picUrl AndUserPhone:aa.showName AndeTime:aa.date AndFlow:[NSString stringWithFormat:@"%d",aa.m] AndDiscople:[NSString stringWithFormat:@"%d",aa.countOfApp]];
+    
+    [cell setHeadImage:aa.picUrl AndUserPhone:aa.showName AndeTime:aa.date AndFlow:[NSString xiaoshudianweishudeal:aa.m] AndDiscople:[NSString stringWithFormat:@"%d",aa.countOfApp]];
     
     return cell;
 }
@@ -160,7 +245,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
 {
     NSMutableDictionary * params= [NSMutableDictionary dictionary];
     params[@"orderBy"] = @(self.segment.selectedSegmentIndex);
-    params[@"pagingSize"] = @(10);
+    params[@"pagingSize"] = @(pageSize);
     params[@"pagingTag"] = @"";
     //清楚远有数据
     [self.prentices removeAllObjects];

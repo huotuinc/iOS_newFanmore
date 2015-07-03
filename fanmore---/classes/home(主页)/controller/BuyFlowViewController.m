@@ -64,7 +64,10 @@ static NSString * _company = nil;
 //            NSLog(@"购买流量明细%@",json);
             if ([json[@"systemResultCode"] intValue] == 1) {
                 if ([json[@"resultCode"] intValue] == 56001) {
-                    [MBProgressHUD showError:@"账号在其它地方登入，请重新登入"];
+                    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+                    [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+                    UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                    [aaa show];
                     return ;
                 }else if([json[@"resultCode"] intValue] == 1){
                     _buyflay = [buyflay objectWithKeyValues:json[@"resultData"]];
@@ -81,6 +84,30 @@ static NSString * _company = nil;
         }];
     }
     return _buyflay;
+}
+
+
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
+    __weak BuyFlowViewController * wself = self;
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [wself buyflay];
+            
+        }];
+    }else{
+        
+    }
 }
 
 - (UICollectionView *)collection{

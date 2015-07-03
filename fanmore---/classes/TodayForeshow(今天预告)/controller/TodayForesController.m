@@ -98,6 +98,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @"";
     params[@"pagingSize"] = @(pagesize);
+    [MBProgressHUD showMessage:nil];
     [self getNewMoreData:params];
     
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
@@ -111,6 +112,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @(task.taskOrder);
     params[@"pagingSize"] = @(pagesize);
+    [MBProgressHUD showMessage:nil];
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView footerEndRefreshing];
@@ -120,6 +122,15 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        [MBProgressHUD hideHUD];
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001) {//访问成果
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
+            return ;
+        }
+        
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             if (taskArray.count) {
@@ -130,7 +141,8 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
             }
         }
     } failure:^(NSError *error) {
-//        NSLog(@"%@",[error description]);
+        [MBProgressHUD hideHUD];
+
     }];
     
 }
@@ -144,7 +156,14 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
     __weak TodayForesController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        NSLog(@"%@",json);
+        [MBProgressHUD hideHUD];
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001) {//访问成果
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==5000) {//访问成果
             [MBProgressHUD showError:@"没有新的预告"];
             return ;
@@ -162,7 +181,31 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     }];
 }
 
-
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
+    
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [self.tableView headerBeginRefreshing];
+            
+        }];
+    }else{
+        
+    }
+    
+    
+    
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

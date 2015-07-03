@@ -67,19 +67,46 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
         
         [MBProgressHUD hideHUD];
-        NSLog(@"xxxxxxxxx%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
             
             _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
-            
+            [self setWaringLabel];
         }
         
-        [self setWaringLabel];
+        
         
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
     }];
 
+}
+
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [self flaysFromeWeb];
+            
+        }];
+    }else{
+        
+    }
 }
 
 - (void)viewDidLoad {

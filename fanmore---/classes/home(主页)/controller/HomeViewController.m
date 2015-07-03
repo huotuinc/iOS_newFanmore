@@ -25,7 +25,7 @@
 
 #define pageSize 10
 
-@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate,LoginViewDelegate>
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate,LoginViewDelegate,UIAlertViewDelegate>
 /**任s务列表*/
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
@@ -59,10 +59,11 @@ static NSString * homeCellidentify = @"homeCellId";
     if (_taskDatas == nil) {
         
         _taskDatas = [NSMutableArray array];
-        NSMutableDictionary * params = [NSMutableDictionary dictionary];
-        params[@"pagingTag"] = @"";
-        params[@"pagingSize"] = @(pageSize);
-        [self getNewMoreData:params];
+//        NSMutableDictionary * params = [NSMutableDictionary dictionary];
+////        params[@"pagingTag"] = @"";
+////        params[@"pagingSize"] = @(pageSize);
+////        [MBProgressHUD showMessage:nil];
+////        [self getNewMoreData:params];
     }
     return _taskDatas;
 }
@@ -210,6 +211,7 @@ static NSString * homeCellidentify = @"homeCellId";
     params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
 //    NSLog(@"尾部刷新%ld",task.taskOrder);
     params[@"pagingSize"] = @(pageSize);
+    [MBProgressHUD showMessage:nil];
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView footerEndRefreshing];
@@ -226,16 +228,12 @@ static NSString * homeCellidentify = @"homeCellId";
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-            [MBProgressHUD showError:json[@"resultDescription"]];
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:loginUserName];
-            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-            //1、保存个人信息
-            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-            [NSKeyedArchiver archiveRootObject:nil toFile:fileName];
-            [wself.tableView headerBeginRefreshing];
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            aaa.tag = 1;
+            [aaa show];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
@@ -262,44 +260,56 @@ static NSString * homeCellidentify = @"homeCellId";
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
-//        NSLog(@"%@",json);
+        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
-            [MBProgressHUD showError:@"账号被登入"];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:loginUserName];
-            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-            //1、保存个人信息
-            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-            [NSKeyedArchiver archiveRootObject:nil toFile:fileName];
-            [wself.tableView headerBeginRefreshing];
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56000){
-            [MBProgressHUD showSuccess:@"没有数据"];
+            [MBProgressHUD showSuccess:json[@"resultDescription"]];
             [self.taskDatas removeAllObjects];
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             [MBProgressHUD hideHUD];
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            [self.taskDatas removeAllObjects];
-            self.taskDatas = [NSMutableArray arrayWithArray:taskArray];
-            [self showHomeRefershCount];
-            [self.tableView reloadData];    //刷新数据
+            [wself.taskDatas removeAllObjects];
+            wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
+            [wself showHomeRefershCount];
+            [wself.tableView reloadData];    //刷新数据
         }
         [MBProgressHUD hideHUD];
         
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
-//        NSLog(@"%@",[error description]);
+
     }];
     
 }
 
-
-
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView   <#alertView description#>
+ *  @param buttonIndex <#buttonIndex description#>
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [self.tableView headerBeginRefreshing];
+            
+        }];
+    }else{
+        
+    }
+}
 - (void)_initNav
 {
     //根视图控制器转跳
@@ -386,22 +396,6 @@ static NSString * homeCellidentify = @"homeCellId";
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     detailVc.taskId = task.taskId; //获取问题编号
-//    detailVc.type = task.type;  //答题类型
-//    detailVc.detailUrl = task.contextURL;//网页详情的url
-//    detailVc.backTime = task.backTime;
-//    detailVc.flay = task.maxBonus;
-//    detailVc.shareUrl = task.shareURL;
-//    detailVc.titless = task.title;
-//    detailVc.pictureUrl = task.pictureURL;
-//    if (task.type == 1) {
-//        detailVc.title = @"答题任务";
-//    }else if(task.type == 2){
-//        detailVc.title = @"报名任务";
-//    }else if(task.type == 3){
-//        detailVc.title = @"画册类任务";
-//    }else{
-//        detailVc.title = @"游戏类任务";
-//    }
     (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
 
     [self.navigationController pushViewController:detailVc animated:YES];
