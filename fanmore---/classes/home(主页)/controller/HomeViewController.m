@@ -96,6 +96,7 @@ static NSString * homeCellidentify = @"homeCellId";
         }
     }
     if (app.goDetail) {
+        app.goDetail = NO;
         UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
         detail.taskId = [app.taskId intValue];
