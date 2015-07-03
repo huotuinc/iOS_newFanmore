@@ -25,7 +25,7 @@
 
 #define pageSize 10
 
-@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate>
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate,LoginViewDelegate>
 /**任s务列表*/
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
@@ -81,9 +81,19 @@ static NSString * homeCellidentify = @"homeCellId";
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (app.goMessage) {
         app.goMessage = NO;
-        UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        MassageCenterController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
-        [self.navigationController pushViewController:massage animated:YES];
+        //判断是否需要登入
+        NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+        if ([flag isEqualToString:@"wrong"]) {//如果没有登入要登入
+            
+            LoginViewController * loginVc = [[LoginViewController alloc] init];
+            loginVc.delegate = self;
+            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
+            [self presentViewController:na animated:YES completion:nil];
+        }else {
+            UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MassageCenterController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
+            [self.navigationController pushViewController:massage animated:YES];
+        }
     }
     if (app.goDetail) {
         UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];

@@ -581,9 +581,19 @@ static NSString *message = @"有一条新消息";
 
 //去消息列表
 - (void)gotoMessageCenter {
-    UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MassageCenterController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
-    [self.currentVC.navigationController pushViewController:massage animated:YES];
+    //判断是否需要登入
+    NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
+    if ([flag isEqualToString:@"wrong"]) {//如果没有登入要登入
+        
+        LoginViewController * loginVc = [[LoginViewController alloc] init];
+        loginVc.delegate = self;
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
+        [self.currentVC presentViewController:na animated:YES completion:nil];
+    }else {
+        UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MassageCenterController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
+        [self.currentVC.navigationController pushViewController:massage animated:YES];
+    }
 
 }
 

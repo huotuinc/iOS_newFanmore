@@ -112,7 +112,7 @@
         for (int i = 0; i < array.count; i++) {
             UILocalNotification *loa = [array objectAtIndex:i];
             NSDictionary *userInfo = loa.userInfo;
-            NSNumber *obj = userInfo[@"key"];
+            NSNumber *obj = userInfo[@"id"];
             int mytag = [obj intValue];
             if (self.task.taskId == mytag) {
                 [self timeButtonSetBule];
@@ -182,7 +182,7 @@
             for (int i = 0; i < array.count; i++) {
                 UILocalNotification *loa = [array objectAtIndex:i];
                 NSDictionary *userInfo = loa.userInfo;
-                NSNumber *obj = userInfo[@"key"];
+                NSNumber *obj = userInfo[@"id"];
                 int mytag = [obj intValue];
                 if (self.task.taskId == mytag) {
 //                    loa.applicationIconBadgeNumber = 0;
