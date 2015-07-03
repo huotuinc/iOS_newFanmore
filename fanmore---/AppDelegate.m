@@ -122,7 +122,7 @@ static NSString *message = @"有一条新消息";
         
         NSDictionary *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
         if (dicRemote) {
-            
+            NSLog(@"didFinishLaunchingWithOptions:%@", dicRemote);
             NSNumber *num = dicRemote[@"type"];
             NSLog(@"%@", num);
             switch ([num intValue]) {
@@ -193,7 +193,7 @@ static NSString *message = @"有一条新消息";
     
    
     NSNumber *num = userInfo[@"type"];
-    NSLog(@"%@", userInfo);
+    NSLog(@"didReceiveRemoteNotification:%@", userInfo);
     switch ([num intValue]) {
         case 1:
             break;
