@@ -32,7 +32,7 @@
 @property (nonatomic, assign) BOOL getMessage;
 
 /**题目id**/
-@property(nonatomic, strong) NSNumber *taskId;
+@property(nonatomic, strong) NSString *taskId;
 
 /**题目名字**/
 @property (nonatomic, strong) NSString *titleString;

@@ -620,7 +620,7 @@ static NSString *message = @"有一条新消息";
 - (void)gotoDetailController {
     UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
-    detail.taskId = self.taskId;
+    detail.taskId = [self.taskId intValue];
     detail.ishaveget = NO;
     [self.currentVC.navigationController pushViewController:detail animated:YES];
 }
