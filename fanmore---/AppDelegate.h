@@ -28,8 +28,15 @@
 //yes 去 no 不去 去任务详情
 @property (nonatomic, assign) BOOL goDetail;
 
+//yes 有 no 无
+@property (nonatomic, assign) BOOL getMessage;
+
 /**题目id**/
 @property(nonatomic, strong) NSNumber *taskId;
+
+/**题目名字**/
+@property (nonatomic, strong) NSString *titleString;
+
 
 @end
 

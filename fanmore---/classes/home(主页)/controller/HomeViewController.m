@@ -91,6 +91,10 @@ static NSString * homeCellidentify = @"homeCellId";
         detail.taskId = [app.taskId intValue];
         [self.navigationController pushViewController:detail animated:YES];
     }
+    if (app.getMessage) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:app.titleString delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void)loadView
