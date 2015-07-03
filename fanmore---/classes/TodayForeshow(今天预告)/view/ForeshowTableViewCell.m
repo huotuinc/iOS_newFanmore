@@ -166,7 +166,7 @@
             notification.applicationIconBadgeNumber += 1;
             notification.alertBody = @"任务答题将要开始";
             
-            notification.userInfo = @{@"id":@(self.task.taskId)};
+            notification.userInfo = @{@"id":@(self.task.taskId),@"title":self.task.title};
             
             NSLog(@"%@",notification.userInfo);
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];

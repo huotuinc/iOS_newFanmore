@@ -80,6 +80,7 @@ static NSString * homeCellidentify = @"homeCellId";
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (app.goMessage) {
+        NSLog(@"首页打印");
         app.goMessage = NO;
         //判断是否需要登入
         NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
@@ -90,8 +91,7 @@ static NSString * homeCellidentify = @"homeCellId";
             UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
             [self presentViewController:na animated:YES completion:nil];
         }else {
-            UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            MassageCenterController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
+            MassageCenterController *massage = [[MassageCenterController alloc] init];;
             [self.navigationController pushViewController:massage animated:YES];
         }
     }

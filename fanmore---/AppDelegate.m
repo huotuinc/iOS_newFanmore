@@ -109,12 +109,12 @@ static NSString *message = @"有一条新消息";
     NSLog(@"%@",launchOptions);
     if (launchOptions) {
         
-        NSNotification *dic = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-        if (dic) {
-            self.titleString = dic.userInfo[@"titel"];
-            self.taskId = dic.userInfo[@"id"];
+        NSNotification *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+        if (dicLocal) {
+            NSLog(@"%@", dicLocal);
+            self.titleString = dicLocal.userInfo[@"title"];
+            self.taskId = dicLocal.userInfo[@"id"];
             self.goDetail = YES;
-            
         }
         
         NSNotification *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -136,7 +136,7 @@ static NSString *message = @"有一条新消息";
                 }
                     break;
                 case 5:{
-                    
+                    NSLog(@"消息列表");
                     self.goMessage = YES;
                 }
                     break;
@@ -299,7 +299,7 @@ static NSString *message = @"有一条新消息";
     if (notification) {
         application.applicationIconBadgeNumber = 0;
         
-        self.titleString = notification.userInfo[@"titel"];
+        self.titleString = notification.userInfo[@"title"];
         self.taskId = notification.userInfo[@"id"];
         UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你关注的%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
         [ac show];
@@ -590,8 +590,8 @@ static NSString *message = @"有一条新消息";
         UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
         [self.currentVC presentViewController:na animated:YES completion:nil];
     }else {
-        UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        MassageCenterController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
+        
+        MassageCenterController *massage = [[MassageCenterController alloc] init];;
         [self.currentVC.navigationController pushViewController:massage animated:YES];
     }
 
