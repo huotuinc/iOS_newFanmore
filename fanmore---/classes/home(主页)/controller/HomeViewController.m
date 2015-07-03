@@ -20,7 +20,6 @@
 #import "JoinController.h"
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
-#import "MassageCenterController.h"
 #import <AVFoundation/AVFoundation.h>
 
 #define pageSize 10
@@ -81,8 +80,9 @@ static NSString * homeCellidentify = @"homeCellId";
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (app.goMessage) {
+        NSLog(@"首页打印!!!!!!!!!!!!!!!!!!!!!");
         app.goMessage = NO;
-        //判断是否需要登入
+//        判断是否需要登入
         NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
         if ([flag isEqualToString:@"wrong"]) {//如果没有登入要登入
             
@@ -91,18 +91,21 @@ static NSString * homeCellidentify = @"homeCellId";
             UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
             [self presentViewController:na animated:YES completion:nil];
         }else {
-            UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            MassageCenterController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MCController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MCController"];
             [self.navigationController pushViewController:massage animated:YES];
         }
     }
     if (app.goDetail) {
+        app.goDetail = NO;
         UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
         detail.taskId = [app.taskId intValue];
+        detail.ishaveget = NO;
         [self.navigationController pushViewController:detail animated:YES];
     }
     if (app.getMessage) {
+        app.getMessage = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:app.titleString delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     }

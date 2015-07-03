@@ -14,7 +14,6 @@
 		830B4D071B2196DC00BBE276 /* BPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B4D051B2196DC00BBE276 /* BPCell.xib */; };
 		832C1DF91B3699FA004A8774 /* FMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 832C1DF81B3699FA004A8774 /* FMButton.m */; };
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
-		8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD651B1854C100FAC712 /* MassageCenterController.m */; };
 		833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC76D1B2689A0008DA984 /* HobbyController.m */; };
 		83466BF21B4502910089A326 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83466BF11B4502910089A326 /* InfoPlist.strings */; };
 		8360169A1B37EF1D00B076DD /* ConversionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836016981B37EF1D00B076DD /* ConversionCell.m */; };
@@ -26,6 +25,7 @@
 		836D6AB61B1C872300119B3F /* DiscipleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836D6AB41B1C872300119B3F /* DiscipleCell.xib */; };
 		8378CEEE1B3A89AF00C466D2 /* Details.m in Sources */ = {isa = PBXBuildFile; fileRef = 8378CEED1B3A89AF00C466D2 /* Details.m */; };
 		837DF5DC1B14691200A5E2FA /* InviteCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */; };
+		837E6DEA1B46382200C8DC7F /* MCController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E6DE91B46382200C8DC7F /* MCController.m */; };
 		8381167C1B2591AF00261F51 /* NameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8381167B1B2591AF00261F51 /* NameController.m */; };
 		838116821B25AC5A00261F51 /* SexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838116811B25AC5A00261F51 /* SexController.m */; };
 		8382FF981B33A5C5003A7CB9 /* JoinNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8382FF971B33A5C5003A7CB9 /* JoinNextController.m */; };
@@ -231,8 +231,6 @@
 		832C1DF81B3699FA004A8774 /* FMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMButton.m; sourceTree = "<group>"; };
 		8339BD611B18510E00FAC712 /* ChangePasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordController.h; sourceTree = "<group>"; };
 		8339BD621B18510E00FAC712 /* ChangePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordController.m; sourceTree = "<group>"; };
-		8339BD641B1854C100FAC712 /* MassageCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MassageCenterController.h; sourceTree = "<group>"; };
-		8339BD651B1854C100FAC712 /* MassageCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MassageCenterController.m; sourceTree = "<group>"; };
 		833CC76C1B2689A0008DA984 /* HobbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HobbyController.h; sourceTree = "<group>"; };
 		833CC76D1B2689A0008DA984 /* HobbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HobbyController.m; sourceTree = "<group>"; };
 		83466BF11B4502910089A326 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -251,6 +249,8 @@
 		8378CEED1B3A89AF00C466D2 /* Details.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Details.m; sourceTree = "<group>"; };
 		837DF5DA1B14691200A5E2FA /* InviteCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeViewController.h; sourceTree = "<group>"; };
 		837DF5DB1B14691200A5E2FA /* InviteCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeViewController.m; sourceTree = "<group>"; };
+		837E6DE81B46382200C8DC7F /* MCController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCController.h; sourceTree = "<group>"; };
+		837E6DE91B46382200C8DC7F /* MCController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCController.m; sourceTree = "<group>"; };
 		8381167A1B2591AF00261F51 /* NameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameController.h; sourceTree = "<group>"; };
 		8381167B1B2591AF00261F51 /* NameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameController.m; sourceTree = "<group>"; };
 		838116801B25AC5A00261F51 /* SexController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexController.h; sourceTree = "<group>"; };
@@ -1533,10 +1533,10 @@
 				EF565D0F1B16B7AB00FC2D6B /* AccountSettingViewController.m */,
 				EFCCA4981B12C53700C015A7 /* PersonMessageTableViewController.h */,
 				EFCCA4991B12C53700C015A7 /* PersonMessageTableViewController.m */,
-				8339BD641B1854C100FAC712 /* MassageCenterController.h */,
-				8339BD651B1854C100FAC712 /* MassageCenterController.m */,
 				8381167A1B2591AF00261F51 /* NameController.h */,
 				8381167B1B2591AF00261F51 /* NameController.m */,
+				837E6DE81B46382200C8DC7F /* MCController.h */,
+				837E6DE91B46382200C8DC7F /* MCController.m */,
 				838116801B25AC5A00261F51 /* SexController.h */,
 				838116811B25AC5A00261F51 /* SexController.m */,
 				83833EFF1B267A7B00D93079 /* ProfessionalController.h */,
@@ -2122,6 +2122,7 @@
 				EF565D091B16AA6000FC2D6B /* MJRefreshHeaderView.m in Sources */,
 				EF2E543B1B2853F30060E965 /* Message.m in Sources */,
 				EF565D481B17091F00FC2D6B /* UserLoginTool.m in Sources */,
+				837E6DEA1B46382200C8DC7F /* MCController.m in Sources */,
 				EFC84F881B3BCA0000392A4B /* buyflay.m in Sources */,
 				EFE76B811B26DC4100C956A5 /* taskData.m in Sources */,
 				EFF3D0D11B2EB4A800B2F446 /* DataVerifier.m in Sources */,
@@ -2184,7 +2185,6 @@
 				EF565D541B170C2100FC2D6B /* userData.m in Sources */,
 				83E263FC1B2F018500A2AC96 /* NSString+PinYin4Cocoa.m in Sources */,
 				EFF3D0D01B2EB4A800B2F446 /* DataSigner.m in Sources */,
-				8339BD661B1854C100FAC712 /* MassageCenterController.m in Sources */,
 				8382FF981B33A5C5003A7CB9 /* JoinNextController.m in Sources */,
 				83EAD9131B2AB8C7006870D3 /* BegController.m in Sources */,
 				EFF3D0CF1B2EB4A800B2F446 /* base64.m in Sources */,

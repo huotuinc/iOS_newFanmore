@@ -106,6 +106,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self timeButtonWite];
+    self.isWarning = NO;
     
     NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
     if (array.count > 0) {
@@ -116,7 +117,7 @@
             int mytag = [obj intValue];
             if (self.task.taskId == mytag) {
                 [self timeButtonSetBule];
-                
+                self.isWarning = YES;
                 break;
             }
         }
@@ -164,9 +165,9 @@
             //([self.task.publishDate doubleValue] /1000.0) - [now timeIntervalSince1970]
             notification.timeZone = [NSTimeZone defaultTimeZone];
             notification.applicationIconBadgeNumber += 1;
-            notification.alertBody = @"任务答题将要开始";
+            notification.alertBody = [NSString stringWithFormat:@"%@任务将要开始",self.task.title];
             
-            notification.userInfo = @{@"id":@(self.task.taskId)};
+            notification.userInfo = @{@"id":@(self.task.taskId),@"title":self.task.title};
             
             NSLog(@"%@",notification.userInfo);
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];

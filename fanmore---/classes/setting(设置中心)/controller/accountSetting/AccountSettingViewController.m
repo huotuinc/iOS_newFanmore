@@ -13,7 +13,7 @@
 #import "MJSettingItem.h"
 #import "PersonMessageTableViewController.h"
 #import "ChangePasswordController.h"
-#import "MassageCenterController.h"
+
 #import "userData.h"
 #import "FMButton.h"
 
@@ -109,7 +109,7 @@
     }
     
     if (indexPath.row == 3) {
-        MassageCenterController *messageVC = [storyboard instantiateViewControllerWithIdentifier:@"MassageCenterController"];
+        MCController *messageVC = [storyboard instantiateViewControllerWithIdentifier:@"MCController"];
         [self.navigationController pushViewController:messageVC animated:YES];
     }
 }
