@@ -200,7 +200,6 @@ static NSString * homeCellidentify = @"homeCellId";
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] = @"";
     params[@"pagingSize"] = @(pageSize);
-    [MBProgressHUD showMessage:nil];
     [self getNewMoreData:params];
     // 2.(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView headerEndRefreshing];
@@ -214,7 +213,6 @@ static NSString * homeCellidentify = @"homeCellId";
     params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
 //    NSLog(@"尾部刷新%ld",task.taskOrder);
     params[@"pagingSize"] = @(pageSize);
-    [MBProgressHUD showMessage:nil];
     [self getMoreData:params];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [self.tableView footerEndRefreshing];
@@ -262,6 +260,7 @@ static NSString * homeCellidentify = @"homeCellId";
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     __weak HomeViewController *wself = self;
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){

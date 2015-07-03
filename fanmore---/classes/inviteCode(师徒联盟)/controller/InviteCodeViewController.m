@@ -62,7 +62,8 @@
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     [self.shareButton setTitle:[NSString stringWithFormat:@"分享邀请码%@", user.invCode] forState:UIControlStateNormal];
-    self.shareDes = [NSString stringWithFormat:@"分享师徒验证码%@",user.invCode];
+    
+   
     //注册转跳通知
     
 }
@@ -94,7 +95,10 @@
             wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", [NSString xiaoshudianweishudeal:[dic[@"totalM"] floatValue]]];
             wself.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
             wself.shareUrl = dic[@"shareURL"];
-            wself.shareDes = dic[@"shareDescription"];
+            if (![dic[@"shareDescription"] isEqualToString:@""]) {
+                 wself.shareDes = dic[@"shareDescription"];
+            }
+           
             if (![dic[@"about"] isEqualToString:@""]) {
                 wself.rulesLabel.text = dic[@"about"];
             }
@@ -143,8 +147,9 @@
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
     
+    
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] image:[ShareSDK imageWithPath:imagePath] title:self.shareDes url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] image:[ShareSDK imageWithPath:imagePath] title:@"师徒邀请码" url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     

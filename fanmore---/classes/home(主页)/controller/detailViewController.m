@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    NSLog(@"3123123123123123123----------------%d",self.taskId);
     //获取题目s
     [self getQuestion];
     
