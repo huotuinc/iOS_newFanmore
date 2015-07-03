@@ -129,7 +129,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     __weak DiscipleViewController * wself = self;
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"appsList"];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        NSLog(@"%@",json);
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -143,7 +143,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
             wself.prentices  = [NSMutableArray arrayWithArray:plist];
             [wself.tableView reloadData];
         }
-        [MBProgressHUD hideHUD];
+        
     
     } failure:^(NSError *error) {
          [MBProgressHUD hideHUD];
@@ -163,7 +163,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     __weak DiscipleViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
-        NSLog(@"%@",json);
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -181,7 +181,7 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
             }
             
         }
-        [MBProgressHUD hideHUD];
+        
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
         //        NSLog(@"%@",[error description]);

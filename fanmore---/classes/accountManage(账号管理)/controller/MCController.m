@@ -118,7 +118,7 @@
     __weak MCController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         
-        //        NSLog(@"上啦加载的数据%@",json);
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [MBProgressHUD showError:@"账号被登入"];
             return ;

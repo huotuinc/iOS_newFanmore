@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
     //获取题目s
     [self getQuestion];
     
@@ -94,7 +94,6 @@
         self.answerBtn.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;
         self.answerBtn.layer.borderWidth = 0.5;
         [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
         
         //判读登入状态下是否已读过题
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -211,7 +210,7 @@
 
 
 /**
- *   初始化
+ *   初始化导航栏
  */
 - (void)setup{
     

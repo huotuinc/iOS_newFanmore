@@ -118,7 +118,7 @@ static NSString *BPCellidentify = @"BPCellId";
     
     __weak BPViewController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -135,7 +135,7 @@ static NSString *BPCellidentify = @"BPCellId";
             }
             
         }
-        [MBProgressHUD hideHUD];
+        
     } failure:^(NSError *error) {
 //        NSLog(@"%@",[error description]);
         [MBProgressHUD hideHUD];
@@ -153,7 +153,7 @@ static NSString *BPCellidentify = @"BPCellId";
     __weak BPViewController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
 //        NSLog(@"%@",json);
-        
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -170,7 +170,7 @@ static NSString *BPCellidentify = @"BPCellId";
                 [wself.tableView reloadData];    //刷新数据
             }
         }
-        [MBProgressHUD hideHUD];
+        
         
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];

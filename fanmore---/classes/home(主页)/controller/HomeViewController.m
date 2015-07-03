@@ -230,6 +230,7 @@ static NSString * homeCellidentify = @"homeCellId";
     [MBProgressHUD showMessage:nil];
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -247,7 +248,7 @@ static NSString * homeCellidentify = @"homeCellId";
             }
             
         }
-        [MBProgressHUD hideHUD];
+        
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
 //        NSLog(@"%@",[error description]);
@@ -263,7 +264,6 @@ static NSString * homeCellidentify = @"homeCellId";
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
-        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -274,6 +274,7 @@ static NSString * homeCellidentify = @"homeCellId";
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56000){
             [MBProgressHUD showSuccess:json[@"resultDescription"]];
             [self.taskDatas removeAllObjects];
+            
             return ;
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
@@ -284,7 +285,7 @@ static NSString * homeCellidentify = @"homeCellId";
             [wself showHomeRefershCount];
             [wself.tableView reloadData];    //刷新数据
         }
-        [MBProgressHUD hideHUD];
+        
         
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
