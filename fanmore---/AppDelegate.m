@@ -188,49 +188,50 @@ static NSString *message = @"有一条新消息";
  *  @param userInfo          <#userInfo description#>
  *  @param completionHandler <#completionHandler description#>
  */
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-    
-   
-    NSNumber *num = userInfo[@"type"];
-    NSLog(@"didReceiveRemoteNotification:%@", userInfo);
-    switch ([num intValue]) {
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-        {
-            //任务推送
-            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-            self.taskId = userInfo[@"date"];
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-            [ac show];
-        }
-            break;
-        case 5:
-        {
-            //消息
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"去看看" otherButtonTitles:@"不去了", nil];
-            [ac show];
-        }
-            break;
-        case 6:
-        {
-            //通知
-            
-            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+//{
+//    
+//   
+//    NSNumber *num = userInfo[@"type"];
+//    NSLog(@"didReceiveRemoteNotification:%@", userInfo);
+//    switch ([num intValue]) {
+//        case 1:
+//            break;
+//        case 2:
+//            break;
+//        case 3:
+//            break;
+//        case 4:
+//        {
+//            //任务推送
+//            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+//            self.taskId = userInfo[@"date"];
+//            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+//            [ac show];
+//        }
+//            break;
+//        case 5:
+//        {
+//            //消息
+//            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"去看看" otherButtonTitles:@"不去了", nil];
+//            [ac show];
+//        }
+//            break;
+//        case 6:
+//        {
+//            //通知
+//            
+//            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            [alert show];
+//        }
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//
+//}
 
 /**
  *  ios7 远程通知方法
@@ -273,6 +274,7 @@ static NSString *message = @"有一条新消息";
         default:
             break;
     }
+//    completionHandler(UIBackgroundFetchResultNewData);3123123
 }
 
 
