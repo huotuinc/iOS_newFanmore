@@ -79,23 +79,6 @@ static NSString * homeCellidentify = @"homeCellId";
     [self saveControllerToAppDelegate:self];
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (app.goMessage) {
-        NSLog(@"首页打印!!!!!!!!!!!!!!!!!!!!!");
-        app.goMessage = NO;
-//        判断是否需要登入
-        NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
-        if ([flag isEqualToString:@"wrong"]) {//如果没有登入要登入
-            
-            LoginViewController * loginVc = [[LoginViewController alloc] init];
-            loginVc.delegate = self;
-            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
-            [self presentViewController:na animated:YES completion:nil];
-        }else {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            MCController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MCController"];
-            [self.navigationController pushViewController:massage animated:YES];
-        }
-    }
     if (app.goDetail) {
         app.goDetail = NO;
         UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];

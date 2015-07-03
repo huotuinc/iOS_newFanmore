@@ -108,12 +108,12 @@ static NSString *message = @"有一条新消息";
 //    NSDictionary *userInfo1 = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     
     
-    NSLog(@"%@",launchOptions);
+//    NSLog(@"%@",launchOptions);
     if (launchOptions) {
         
         NSDictionary *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dicLocal) {
-            NSLog(@"%@", dicLocal);
+//            NSLog(@"%@", dicLocal);
             self.titleString = dicLocal[@"title"];
             self.taskId = dicLocal[@"id"];
             self.goDetail = YES;
@@ -124,7 +124,7 @@ static NSString *message = @"有一条新消息";
         }else {
             NSDictionary *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
             if (dicRemote) {
-                NSLog(@"didFinishLaunchingWithOptions:%@", dicRemote);
+//                NSLog(@"didFinishLaunchingWithOptions:%@", dicRemote);
                 NSNumber *num = dicRemote[@"type"];
 //                NSLog(@"%@", num);
                 switch ([num intValue]) {
@@ -144,7 +144,8 @@ static NSString *message = @"有一条新消息";
                         break;
                     case 5:{
                         
-                        self.goMessage = YES;
+                        UIAlertView * ac = [[UIAlertView alloc] initWithTitle:@"系统消息" message:dicRemote[@"data"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                        [ac show];
                     }
                         break;
                     case 6:
@@ -192,7 +193,7 @@ static NSString *message = @"有一条新消息";
     if (self.isLauching) {
         self.isLauching = NO;
         NSNumber *num = userInfo[@"type"];
-        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
+//        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
         switch ([num intValue]) {
             case 1:
                 break;
@@ -211,7 +212,8 @@ static NSString *message = @"有一条新消息";
             case 5:
             {
                 //消息
-                self.goMessage = YES;
+                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:@"系统消息" message:userInfo[@"data"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [ac show];
             }
                 break;
             case 6:
@@ -229,7 +231,7 @@ static NSString *message = @"有一条新消息";
         
     }else {
         NSNumber *num = userInfo[@"type"];
-        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
+//        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
         switch ([num intValue]) {
             case 1:
                 break;
@@ -316,7 +318,7 @@ static NSString *message = @"有一条新消息";
 
 
 -(void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
-    NSLog(@"didFailToRegisterForRemoteNotificationsWithError:%@",error);
+//    NSLog(@"didFailToRegisterForRemoteNotificationsWithError:%@",error);
 }
 
 /**     
@@ -324,9 +326,9 @@ static NSString *message = @"有一条新消息";
  */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
-    NSLog(@"%@",deviceToken);
+//    NSLog(@"%@",deviceToken);
     NSString * aa = [deviceToken hexadecimalString];
-    NSLog(@"%@",aa);
+//    NSLog(@"%@",aa);
     
     NSString * urlstr = [MainURL stringByAppendingPathComponent:@"updataDeviceToken"];
     NSMutableDictionary * parame = [NSMutableDictionary dictionary];
