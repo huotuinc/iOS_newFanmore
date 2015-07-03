@@ -115,7 +115,7 @@
     params[@"type"] = @"3";
     NSString * urlStr= [MainURL stringByAppendingPathComponent:@"sendSMS"];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
-        NSLog(@"dasdasd%@",json);
+//        NSLog(@"dasdasd%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==53014) {
             
             [MBProgressHUD showError:json[@"resultDescription"]];
