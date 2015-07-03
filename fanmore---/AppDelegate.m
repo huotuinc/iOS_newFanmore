@@ -33,8 +33,6 @@
 
 
 
-/**题目名字**/
-@property (nonatomic, strong) NSString *titleString;
 
 
 /**apns*/
@@ -146,8 +144,7 @@ static NSString *message = @"有一条新消息";
                 {
                     //通知
                     self.titleString = dicRemote.userInfo[@"aps"][@"alert"][@"title"];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
+                    
                 }
                     break;
 
