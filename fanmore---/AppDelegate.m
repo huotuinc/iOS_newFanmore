@@ -105,21 +105,21 @@ static NSString *message = @"有一条新消息";
     
     if (launchOptions) {
         
-        NSDictionary *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+        NSNotification *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dicLocal) {
-            self.titleString = dicLocal[@"title"];
-            self.taskId = dicLocal[@"id"];
+            NSLog(@"%@",dicLocal);
+            self.titleString = dicLocal.userInfo[@"title"];
+            self.taskId = dicLocal.userInfo[@"id"];
             self.goDetail = YES;
         }
         
-        if (IsIos8) {
-            self.isLauching = YES;
-        }else {
-            NSDictionary *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-            if (dicRemote) {
-                [self getRemoteNotifocationFristLauchWithUserInfo:dicLocal];
+        NSDictionary *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (dicRemote) {
+            if (IsIos8) {
+                self.isLauching = YES;
+            }else {
+              [self getRemoteNotifocationFristLauchWithUserInfo:dicRemote];
             }
-    
         }
         
     }
