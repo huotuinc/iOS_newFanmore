@@ -1233,7 +1233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z7j-cJ-TBK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="986"/>
+            <point key="canvasLocation" x="-577" y="2383"/>
         </scene>
         <!--Change Password Controller-->
         <scene sceneID="WaD-5U-dKh">
@@ -1395,7 +1395,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1yJ-pr-VY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="1672"/>
+            <point key="canvasLocation" x="-1230" y="1666"/>
         </scene>
         <!--Finish Controller-->
         <scene sceneID="y1H-qk-aQ2">
@@ -1431,6 +1431,22 @@
             </objects>
             <point key="canvasLocation" x="-1230" y="2323"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DAU-iT-ovd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f7s-Z2-h9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="HvP-d7-j16" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k7Q-FG-OKJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qbC-gr-fT1" kind="relationship" relationship="rootViewController" id="Eww-Z5-pMm"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-1230" y="986"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="Uyx-m8-UTq">
             <objects>
@@ -1443,7 +1459,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="wun-CQ-LHz">
+                            <webView contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wun-CQ-LHz">
                                 <rect key="frame" x="0.0" y="-44" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -1481,6 +1497,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="kjs-hg-ugI"/>
                     <connections>
                         <outlet property="answerBtn" destination="Ux7-lE-E72" id="4A6-ia-MWy"/>
                         <outlet property="detailWebView" destination="wun-CQ-LHz" id="zRf-Og-hra"/>

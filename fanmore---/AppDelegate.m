@@ -107,7 +107,7 @@ static NSString *message = @"有一条新消息";
         
         NSNotification *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dicLocal) {
-            NSLog(@"%@",dicLocal);
+//            NSLog(@"%@",dicLocal);
             self.titleString = dicLocal.userInfo[@"title"];
             self.taskId = dicLocal.userInfo[@"id"];
             self.goDetail = YES;
@@ -446,7 +446,7 @@ static NSString *message = @"有一条新消息";
         if (buttonIndex == 0) {
             [self gotoDetailController];
         }
-    }else if (alertView.tag) {
+    }else if (alertView.tag == 102) {
         if (buttonIndex == 0) {
             [self gotoMessageCenter];
         }
@@ -474,17 +474,17 @@ static NSString *message = @"有一条新消息";
             break;
         case 5:
         {
-            //消息
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:userInfo[@"aps"][@"alert"][@"title"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
-            [ac show];
+            //通知
+            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+            self.getMessage = YES;
         }
             break;
         case 6:
         {
-            //通知
+            //消息
+            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:userInfo[@"aps"][@"alert"][@"title"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
+            [ac show];
             
-            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-            self.getMessage = YES;
         }
             break;
             
@@ -521,7 +521,7 @@ static NSString *message = @"有一条新消息";
             case 5:
             {
                 NSString *title = userInfo[@"aps"][@"alert"][@"title"];
-                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:title delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
+                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:title delegate:self cancelButtonTitle:@"去看看" otherButtonTitles:@"取消",nil];
                 ac.tag = 102;
                 [ac show];
             }
