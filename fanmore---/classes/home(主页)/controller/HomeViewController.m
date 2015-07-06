@@ -89,8 +89,17 @@ static int refreshCount = 0;
     }
     if (app.getMessage) {
         app.getMessage = NO;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:app.titleString delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alert show];
+        
+        if (![self isLogin]) {
+            LoginViewController * aa = [[LoginViewController alloc] init];
+            UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+            [self presentViewController:bb animated:YES completion:^{
+            }];
+        }else {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MCController *mcc = [storyboard instantiateViewControllerWithIdentifier:@"MCController"];
+            [self.navigationController pushViewController:mcc animated:YES];
+        }
     }
 }
 
@@ -295,7 +304,7 @@ static int refreshCount = 0;
             
         }];
     }else{
-        
+
     }
 }
 - (void)_initNav

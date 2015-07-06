@@ -1188,7 +1188,7 @@
                                             <action selector="shareAction:" destination="hbF-Gx-08w" eventType="touchUpInside" id="KjD-hg-2la"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击分享此页，好友注册并填入邀请码即可成为你的徒弟，徒弟赚取流量同时会贡献5%给师傅。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BqW-dn-KNs">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击分享此页，好友注册并填入邀请码即可成为你的徒弟，徒弟赚取流量同时会贡献5%给师傅。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BqW-dn-KNs">
                                         <rect key="frame" x="63" y="329" width="474" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="8v0-FY-YaQ"/>
