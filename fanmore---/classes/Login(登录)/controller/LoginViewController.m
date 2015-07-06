@@ -184,6 +184,11 @@
             [MBProgressHUD showError:[NSString stringWithFormat:@"%@", json[@"resultDescription"]]];
             return ;
         }
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 57001) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:[NSString stringWithFormat:@"%@", json[@"resultDescription"]]];
+            return ;
+        }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 53011) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:[NSString stringWithFormat:@"%@", json[@"resultDescription"]]];

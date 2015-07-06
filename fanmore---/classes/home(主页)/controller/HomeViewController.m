@@ -40,7 +40,7 @@
 @implementation HomeViewController
 
 static NSString * homeCellidentify = @"homeCellId";
-
+static int refreshCount = 0;
 - (BOOL)isLogin{
     
     //1、判断是否要登录
@@ -265,6 +265,7 @@ static NSString * homeCellidentify = @"homeCellId";
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             [wself.taskDatas removeAllObjects];
             wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
+            refreshCount = (int)[taskArray count];
             [wself showHomeRefershCount];
             [wself.tableView reloadData];    //刷新数据
         }
@@ -491,7 +492,7 @@ static NSString * homeCellidentify = @"homeCellId";
     showBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [showBtn setTitleColor:[UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
     [showBtn setBackgroundColor:[UIColor colorWithWhite:0.878 alpha:1.000]];
-    [showBtn setTitle:[NSString stringWithFormat:@"刷新%d条数据",pageSize] forState:UIControlStateNormal];
+    [showBtn setTitle:[NSString stringWithFormat:@"刷新%d条数据",refreshCount] forState:UIControlStateNormal];
     CGFloat btnX = 0;
     CGFloat btnH = 44;
     CGFloat btnY = 64 - btnH - 2;
