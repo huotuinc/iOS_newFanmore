@@ -204,7 +204,7 @@ static NSString *message = @"有一条新消息";
         self.titleString = notification.userInfo[@"title"];
         self.taskId = notification.userInfo[@"id"];
         UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你关注的%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-        ac.tag == 101;
+        ac.tag = 101;
         [ac show];
     }
 }
