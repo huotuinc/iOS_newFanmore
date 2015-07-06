@@ -471,11 +471,9 @@ static int refreshCount = 0;
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
-    NSDateComponents *comps = [[NSDateComponents alloc] init] ;
-    
     NSInteger unitFlags = NSWeekdayCalendarUnit;
     
-    comps = [calendar components:unitFlags fromDate:date];
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
     
     NSInteger week = [comps weekday] - 1;
     if (week == 0) {

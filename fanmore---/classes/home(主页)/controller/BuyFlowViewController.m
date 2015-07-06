@@ -113,12 +113,12 @@ static NSString * _company = nil;
 - (UICollectionView *)collection{
     
     if (_collection == nil) {
-        CGFloat collectionHeight = 0;
-        if (self.goods.count / self.num) {
-            collectionHeight = (self.goods.count / self.num + 1) * 65 + 5;
-        }else {
-            collectionHeight = self.goods.count / self.num * (60 + 5) + 5;
-        }
+//        CGFloat collectionHeight = 0;
+//        if (self.goods.count / self.num) {
+//            collectionHeight = (self.goods.count / self.num + 1) * 65 + 5;
+//        }else {
+//            collectionHeight = self.goods.count / self.num * (60 + 5) + 5;
+//        }
         
         UICollectionViewFlowLayout *flowL = [[UICollectionViewFlowLayout alloc] init];
         [flowL setScrollDirection:UICollectionViewScrollDirectionVertical];
@@ -191,11 +191,11 @@ static NSString * _company = nil;
 - (IBAction)buyButtonClick:(id)sender {
     
     UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
-    if (scell.selected == YES) {
-        
-        NSString * good = self.goods[self.selected.row];
-//        NSLog(@"%@",good);
-    }
+//    if (scell.selected == YES) {
+//        
+//        NSString * good = self.goods[self.selected.row];
+////        NSLog(@"%@",good);
+//    }
     
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择支付方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"支付宝", @"微信",nil];
     [actionSheet showInView:self.view];

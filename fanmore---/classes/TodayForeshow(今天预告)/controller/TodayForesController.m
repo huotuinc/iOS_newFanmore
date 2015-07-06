@@ -52,6 +52,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     [self initBackAndTitle:@"今日预告"];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ForeshowTableViewCell.h" bundle:nil] forCellReuseIdentifier:homeCellidentify];
