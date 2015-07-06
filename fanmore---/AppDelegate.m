@@ -119,14 +119,13 @@ static NSString *message = @"有一条新消息";
             self.goDetail = YES;
         }
         
-        if (IsIos8) {
-            self.isLauching = YES;
-        }else {
-            NSDictionary *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-            if (dicRemote) {
-                [self getRemoteNotifocationFristLauchWithUserInfo:dicRemote];
+        NSDictionary *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (dicRemote) {
+            if (IsIos8) {
+                self.isLauching = YES;
+            }else {
+              [self getRemoteNotifocationFristLauchWithUserInfo:dicRemote];
             }
-    
         }
         
     }
