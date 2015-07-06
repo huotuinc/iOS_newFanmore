@@ -31,7 +31,7 @@
 
 @property(nonatomic,strong) CLLocationManager *mgr;
 
-
+//是app直接进入
 @property (nonatomic, assign) BOOL isLauching;
 
 
@@ -113,7 +113,6 @@ static NSString *message = @"有一条新消息";
         
         NSDictionary *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dicLocal) {
-//            NSLog(@"%@", dicLocal);
             self.titleString = dicLocal[@"title"];
             self.taskId = dicLocal[@"id"];
             self.goDetail = YES;
@@ -124,42 +123,7 @@ static NSString *message = @"有一条新消息";
         }else {
             NSDictionary *dicRemote = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
             if (dicRemote) {
-//                NSLog(@"didFinishLaunchingWithOptions:%@", dicRemote);
-                NSNumber *num = dicRemote[@"type"];
-//                NSLog(@"%@", num);
-                switch ([num intValue]) {
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                    {
-                        //任务推送
-                        self.titleString = dicRemote[@"aps"][@"alert"][@"title"];
-                        self.taskId =  dicRemote[@"data"];
-                        self.goDetail = YES;
-                    }
-                        break;
-                    case 5:{
-                        
-                        UIAlertView * ac = [[UIAlertView alloc] initWithTitle:@"系统消息" message:dicRemote[@"data"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                        [ac show];
-                    }
-                        break;
-                    case 6:
-                    {
-                        //通知
-                        self.titleString = dicRemote[@"aps"][@"alert"][@"title"];
-                        self.getMessage = YES;
-                    }
-                        break;
-                        
-                    default:
-                        break;
-                }
-
+                [self getRemoteNotifocationFristLauchWithUserInfo:dicLocal];
             }
     
         }
@@ -190,85 +154,8 @@ static NSString *message = @"有一条新消息";
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    if (self.isLauching) {
-        self.isLauching = NO;
-        NSNumber *num = userInfo[@"type"];
-//        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
-        switch ([num intValue]) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-            {
-                //任务推送
-                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-                self.taskId =  userInfo[@"data"];
-                self.goDetail = YES;
-            }
-                break;
-            case 5:
-            {
-                //消息
-                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:@"系统消息" message:userInfo[@"data"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [ac show];
-            }
-                break;
-            case 6:
-            {
-                //通知
-                
-                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-                self.getMessage = YES;
-            }
-                break;
-                
-            default:
-                break;
-        }
-        
-    }else {
-        NSNumber *num = userInfo[@"type"];
-//        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
-        switch ([num intValue]) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-            {
-                //任务推送
-                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-                self.taskId = userInfo[@"data"];
-                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-                [ac show];
-            }
-                break;
-            case 5:
-            {
-                //消息
-                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"去看看" otherButtonTitles:@"不去了", nil];
-                [ac show];
-            }
-                break;
-            case 6:
-            {
-                //通知
-                
-                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
-            }
-                break;
-                
-            default:
-                break;
-        }
-    }
+
+    [self getRemoteNotificationWithUserInfo:userInfo];
 
 }
 
@@ -279,41 +166,9 @@ static NSString *message = @"有一条新消息";
  *  @param userInfo    <#userInfo description#>
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    NSNumber *num = userInfo[@"type"];
-    switch ([num intValue]) {
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-        {
-            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-            self.taskId = userInfo[@"data"];
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-            [ac show];
-        }
-            break;
-        case 5:
-        {
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"去看看" otherButtonTitles:@"不去了", nil];
-            [ac show];
-        }
-            break;
-        case 6:
-        {
-            //通知
-            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
-        }
-            break;
-            
-        default:
-            break;
-    }
-//    completionHandler(UIBackgroundFetchResultNewData);3123123
+    
+    [self getRemoteNotificationWithUserInfo:userInfo];
+    
 }
 
 
@@ -349,6 +204,7 @@ static NSString *message = @"有一条新消息";
         self.titleString = notification.userInfo[@"title"];
         self.taskId = notification.userInfo[@"id"];
         UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"你关注的%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+        ac.tag == 101;
         [ac show];
     }
 }
@@ -602,21 +458,108 @@ static NSString *message = @"有一条新消息";
  *  @param buttonIndex <#buttonIndex description#>
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if (buttonIndex == 0) {
-        
-        if (![alertView.message isEqualToString:self.titleString]) {
-            if ([alertView.message isEqualToString:message]) {
-                [self gotoMessageCenter];
-            }else {
-                [self gotoDetailController];
-            }
+    if (alertView.tag == 101) {
+        if (buttonIndex == 0) {
+            [self gotoDetailController];
         }
-        
-    }else if (buttonIndex == 1){
-        [[NSNotificationCenter defaultCenter] postNotificationName:ReLoad object:nil userInfo:nil];
+    }else if (alertView.tag) {
+        if (buttonIndex == 0) {
+            [self gotoMessageCenter];
+        }
     }
 }
+
+// 点击通知进入APP应用
+- (void)getRemoteNotifocationFristLauchWithUserInfo:(NSDictionary *)userInfo {
+    NSNumber *num = userInfo[@"type"];
+    //        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
+    switch ([num intValue]) {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+        {
+            //任务推送
+            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+            self.taskId =  userInfo[@"data"];
+            self.goDetail = YES;
+        }
+            break;
+        case 5:
+        {
+            //消息
+            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:userInfo[@"aps"][@"alert"][@"title"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
+            [ac show];
+        }
+            break;
+        case 6:
+        {
+            //通知
+            
+            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+            self.getMessage = YES;
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+//远程通知方法iOS
+- (void)getRemoteNotificationWithUserInfo:(NSDictionary *)userInfo {
+    
+    if (self.isLauching) {
+        self.isLauching = NO;
+        [self getRemoteNotifocationFristLauchWithUserInfo:userInfo];
+    }else {
+        NSNumber *num = userInfo[@"type"];
+        switch ([num intValue]) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+            {
+                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+                self.taskId = userInfo[@"data"];
+                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+                ac.tag = 101;
+                [ac show];
+            }
+                break;
+            case 5:
+            {
+                NSString *title = userInfo[@"aps"][@"alert"][@"title"];
+                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:title delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
+                ac.tag = 102;
+                [ac show];
+            }
+                break;
+            case 6:
+            {
+                //通知
+                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+            
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+                break;
+            
+            default:
+                break;
+        }
+    }
+
+}
+
+
 
 //当前控制器转跳方法
 - (void)gotoDetailController {
