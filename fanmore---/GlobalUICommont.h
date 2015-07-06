@@ -10,21 +10,9 @@
 #define fanmore____GlobalUICommont_h
 
 /**服务器地址*/
-#define  MainURL  @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+#define  MainURL @"http://newtask.fanmore.cn"
+//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
 //@"http://192.168.0.23:8080/fanmoreweb/app"
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//
-//
-//
-//""
-//
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//@"http://192.168.0.14:8080/fanmoreweb/app"
-//http://192.168.0.14:8080/fanmoreweb/
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//192.168.0.14
-
-
 
 /**微信支付*/
 #define WeiXinAppID @"wxadee5477e854a778"

@@ -103,12 +103,6 @@ static NSString *message = @"有一条新消息";
         [self.window makeKeyAndVisible];
     }
     
-    
-//    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-//    NSDictionary *userInfo1 = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    
-    
-//    NSLog(@"%@",launchOptions);
     if (launchOptions) {
         
         NSNotification *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
@@ -172,25 +166,21 @@ static NSString *message = @"有一条新消息";
 }
 
 
--(void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
-//    NSLog(@"didFailToRegisterForRemoteNotificationsWithError:%@",error);
-}
 
 /**     
  *  获取deviceToken
  */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
-//    NSLog(@"%@",deviceToken);
-    NSString * aa = [deviceToken hexadecimalString];
-//    NSLog(@"%@",aa);
-    
-    NSString * urlstr = [MainURL stringByAppendingPathComponent:@"updataDeviceToken"];
+   
+    NSString * aa = [[deviceToken hexadecimalString] copy];
+    NSString * urlstr = [MainURL stringByAppendingPathComponent:@"updateDeviceToken"];
     NSMutableDictionary * parame = [NSMutableDictionary dictionary];
     parame[@"deviceToken"] = aa;
     [UserLoginTool loginRequestGet:urlstr parame:parame success:^(id json) {
+
     } failure:^(NSError *error) {
-        
+
     }];
     
 }
@@ -210,7 +200,14 @@ static NSString *message = @"有一条新消息";
 }
 
 
-
+/**
+ *  app 回调
+ *
+ *  @param application <#application description#>
+ *  @param url         <#url description#>
+ *
+ *  @return <#return value description#>
+ */
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     return [ShareSDK handleOpenURL:url wxDelegate:self];
@@ -391,19 +388,6 @@ static NSString *message = @"有一条新消息";
         
     }
 }
-
-
-
-/**
- *  内存警告
- *
- *  @param application <#application description#>
- */
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
-    
-    
-}
-
 
 
 /**
