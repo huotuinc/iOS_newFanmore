@@ -61,16 +61,18 @@
     
 }
 
-
-- (void)viewdidAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO];
+    
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     
     [self saveControllerToAppDelegate:self];
 }
+
 
 
 - (void)setupview{

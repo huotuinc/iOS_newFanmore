@@ -106,7 +106,7 @@
 
 
 #ifdef CCQ
-#define LWLog(...) NSLog(__VA_ARGS__);
+#define Log(...) NSLog(__VA_ARGS__);
 //#define LOG_METHOD NSLog(@&quot;%s&quot;, __func__);
 #else
 #define LOG(...);

@@ -99,7 +99,7 @@ NSString *frinedCellIdentifier = @"friend";
             NSInteger valuesCount = 0;
             if (valuesRef != nil) valuesCount = ABMultiValueGetCount(valuesRef);
             
-            if (valuesCount == 0) {
+            if (valuesRef!=nil && valuesCount == 0) {
                 CFRelease(valuesRef);
                 continue;
             }

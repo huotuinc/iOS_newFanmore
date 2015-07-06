@@ -156,9 +156,7 @@
     //获取日期
     NSDate *date = [NSDate date];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [[NSDateComponents alloc] init] ;
-    NSInteger unitFlags = NSWeekdayCalendarUnit;
-    comps = [calendar components:unitFlags fromDate:date];
+    NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:date];
     long week = [comps weekday] - 1;
     if (week == 0) {
         return 7;
