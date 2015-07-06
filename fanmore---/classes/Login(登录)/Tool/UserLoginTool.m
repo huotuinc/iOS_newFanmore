@@ -40,7 +40,7 @@
     }
     paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
     [paramsOption removeObjectForKey:@"appSecret"];
-//    
+    
 //    NSArray * parameaaa = [paramsOption allKeys];
 //    NSMutableString * aaa = [[NSMutableString alloc] init];
 //    
@@ -51,10 +51,14 @@
 //    NSLog(@"--------------------%@",aaa);
 //    
 //    NSLog(@"dasdasdas-------parame--get%@",paramsOption);
-    
+//    manager.responseSerializer=[AFHTTPResponseSerializer serializer];
     [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject){
+//        NSLog(@"xxxxxxxx%@",operation);
+    
         success(responseObject);
+        
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@",operation);
         failure(error);
     }];
 }
