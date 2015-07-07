@@ -90,7 +90,7 @@
     //初始化个人信息
     
     [self saveControllerToAppDelegate:self];
-    self.title = @"个人信息";
+    self.title = @"用户资料";
 }
 
 - (void)viewDidLoad {
