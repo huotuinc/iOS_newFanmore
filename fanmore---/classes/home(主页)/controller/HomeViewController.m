@@ -119,6 +119,7 @@ static int refreshCount = 0;
     
 //    [self _initView];
     
+
     [self _initNav];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homerefresh) name:RefreshHomeDate object:nil];
@@ -482,7 +483,6 @@ static int refreshCount = 0;
     
     return week;
 }
-
 
 
 /**

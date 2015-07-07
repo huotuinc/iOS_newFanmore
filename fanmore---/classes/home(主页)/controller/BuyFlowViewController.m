@@ -4,7 +4,7 @@
 //
 //  Created by lhb on 15/6/3.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//  购买流量页面
+//  购买流量
 
 #import "Order.h"
 #import "DataSigner.h"
@@ -47,6 +47,8 @@
 - (IBAction)buyButtonClick:(UIButton *)sender;
 
 
+/***/
+@property(nonatomic,strong) NSMutableString * debugInfo;
 
 @end
 
@@ -190,7 +192,7 @@ static NSString * _company = nil;
 
 - (IBAction)buyButtonClick:(id)sender {
     
-    UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
+//    UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
 //    if (scell.selected == YES) {
 //        
 //        NSString * good = self.goods[self.selected.row];
@@ -218,7 +220,7 @@ static NSString * _company = nil;
         [self PayByAlipay]; // 支付宝
     }
     if (buttonIndex == 1) {
-        [self PayByWeiXin]; // 微信支付
+        [self PayByWeiXinParame]; // 微信支付
     }
 }
 
@@ -258,8 +260,8 @@ static NSString * _company = nil;
     Order *order = [[Order alloc] init];
     order.partner = partner;
     order.seller = seller;
-    order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
-    order.productName = @"粉毛流量"; //商品标题
+    order.tradeNO = [self caluTransactionCode]; //订单ID（由商家自行制定）
+    order.productName = @"粉猫流量包"; //商品标题
     order.productDescription = @"通过粉猫购买手机流量"; //商品描述
     NSArray * aa = self.buyflay.purchases;
     
@@ -295,31 +297,32 @@ static NSString * _company = nil;
 }
 
 /**
- *  微信支付
+ *  微信支付预zhifu
  */
-- (void)PayByWeiXin{
+- (NSMutableDictionary *)PayByWeiXinParame{
     
     
-    payRequsestHandler * repay = [[payRequsestHandler alloc] init];
-    BOOL aa = [repay init:@"3123" mch_id:@"31312"];
-    //1 先调统一下单
-    NSString * url = @"https://api.mch.weixin.qq.com/pay/unifiedorder";
+    payRequsestHandler *payManager = [[payRequsestHandler alloc] init];
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"appid"] = @"wx8888888888888888";
-    params[@"mch_id"] = @"wx8888888888888888";
-    params[@"nonce_str"] = @"wx8888888888888888";
-    params[@"body"] = @"wx8888888888888888";
-    params[@"out_trade_no"] = @"wx8888888888888888";
-    params[@"total_fee"] = @"wx8888888888888888";
-    params[@"spbill_create_ip"] = @"wx8888888888888888";
-    params[@"notify_url"] = @"wx8888888888888888";
-    params[@"trade_type"] = @"APP";
-    params[@"sign"] = [repay createMd5Sign:params];
-    NSLog(@"微信支付参数%@",params);
+    params[@"mch_id"] = @"wx8888888888888888";     //微信支付分配的商户号
+    params[@"device_info"] = @"APP-001"; //支付设备号或门店号
+    time_t now;
+    time(&now);
+    NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
+    NSString * nonce_str	= [WXUtil md5:time_stamp];
+    params[@"nonce_str"] = nonce_str; //随机字符串，不长于32位。推荐随机数生成算法
+    params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
+    params[@"body"] = @"wx8888888888888888"; //商品或支付单简要描述
+    params[@"notify_url"] = @"wx8888888888888888";  //接收微信支付异步通知回调地址
+    params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
+    params[@"spbill_create_ip"] = @"196.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
+    params[@"total_fee"] = @"wx8888888888888888";  //订单总金额，只能为整数，详见支付金额
     
     //获取prepayId（预支付交易会话标识）
     NSString * prePayid = nil;
-    prePayid  = [repay sendPrepay:params];
+    prePayid  = [payManager sendPrepay:params];
     
     
     
@@ -345,40 +348,60 @@ static NSString * _company = nil;
         [signParams setObject: prePayid     forKey:@"prepayid"];
         //[signParams setObject: @"MD5"       forKey:@"signType"];
         //生成签名
-        NSString *sign  = [repay createMd5Sign:signParams];
+        NSString *sign  = [payManager createMd5Sign:signParams];
         
         //添加签名
         [signParams setObject: sign         forKey:@"sign"];
         
-//        [debugInfo appendFormat:@"第二步签名成功，sign＝%@\n",sign];
+        [_debugInfo appendFormat:@"第二步签名成功，sign＝%@\n",sign];
         
         //返回参数列表
-//        return signParams;
+        return signParams;
         
     }else{
-//        [debugInfo appendFormat:@"获取prepayid失败！\n"];
+        [_debugInfo appendFormat:@"获取prepayid失败！\n"];
     }
+    return nil;
+}
+
+
+/**
+ *  微信pay
+ */
+- (void)WeiChatPay{
+    //创建支付签名对象
+    payRequsestHandler *req = [[payRequsestHandler alloc] init];
+    //初始化支付签名对象
+    [req init:APP_ID mch_id:MCH_ID];
+    //设置密钥
+    [req setKey:PARTNER_ID];
     
-    
-    
-    PayReq *request = [[PayReq alloc] init];
-    /**公众账号ID*/
-    request.partnerId = @"10000100";
-    /**商户号*/
-    request.prepayId= @"1101000000140415649af9fc314aa427";
-    /**预支付交易会话ID*/
-    request.package = @"Sign=WXPay";
-    /**扩展字段*/
-    request.nonceStr= @"a462b76e7436e98e0ed6e13c64b4fd1c";
-    /**随机字符串*/
-    request.timeStamp= 1397527777;
-    /**签名*/
-    request.sign= @"582282D72DD2B03AD892830965F428CB16E7A256";
-    [WXApi sendReq:request];
+    //获取到实际调起微信支付的参数后，在app端调起支付
+    NSMutableDictionary *dict = [req sendPay_demo];
+    if(dict == nil){
+        //错误提示
+        NSString *debug = [req getDebugifo];
+        NSLog(@"%@\n\n",debug);
+    }else{
+        NSLog(@"%@\n\n",[req getDebugifo]);
+        //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
+        
+        NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+        
+        //调起微信支付
+        PayReq* req             = [[PayReq alloc] init];
+        req.openID              = [dict objectForKey:@"appid"];
+        req.partnerId           = [dict objectForKey:@"partnerid"];
+        req.prepayId            = [dict objectForKey:@"prepayid"];
+        req.nonceStr            = [dict objectForKey:@"noncestr"];
+        req.timeStamp           = stamp.intValue;
+        req.package             = [dict objectForKey:@"package"];
+        req.sign                = [dict objectForKey:@"sign"];
+        
+        [WXApi sendReq:req];
+    }
 
     
-   
-
 }
 
 - (void)onResp:(BaseResp *)resp {
@@ -394,6 +417,21 @@ static NSString * _company = nil;
                 break;
         }
     }
+}
+
+
+/**
+ *  随即生成订单号
+ *
+ *  @return <#return value description#>
+ */
+- (NSString *)caluTransactionCode{
+    
+    NSDate * date = [[NSDate alloc] init];
+    NSDateFormatter * form = [[NSDateFormatter alloc] init];
+    [form setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *cal =  [NSString stringWithFormat:@"%@000iOS%d",[form stringFromDate:date],arc4random()%10000+10000];
+    return cal;
 }
 
 /**
