@@ -354,6 +354,8 @@
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
                 self.verification.userInteractionEnabled = YES;
                 [self.verification setBackgroundColor:[UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1]];
+                UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                [a show];
             });
             
         }else{
