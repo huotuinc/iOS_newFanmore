@@ -142,6 +142,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
                 [MBProgressHUD showSuccess:@"加载成功,没有更多数据"];
             }
         }
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
 
@@ -177,7 +178,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
             wself.Notices = [NSMutableArray arrayWithArray:taskArray];
             [wself.tableView reloadData];    //刷新数据
         }
-        
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
 //        NSLog(@"%@",[error description]);
