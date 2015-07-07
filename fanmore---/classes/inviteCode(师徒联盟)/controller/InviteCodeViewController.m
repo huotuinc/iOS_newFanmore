@@ -12,7 +12,10 @@
 #import "RootViewController.h"
 #import "DiscipleViewController.h"
 #import "userData.h"
+#import "Master.h"
 
+
+#define MASTER @"master"
 
 @interface InviteCodeViewController ()
 
@@ -20,6 +23,8 @@
 
 @property (nonatomic, strong) NSString *shareDes;
 
+/**师徒联盟接口返回数据*/
+@property (nonatomic,strong) Master * master;
 
 @end
 
@@ -45,7 +50,7 @@
     [self.navigationController setNavigationBarHidden:NO];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-    [self setupLables];
+    
     
 }
 
@@ -63,21 +68,23 @@
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     [self.shareButton setTitle:[NSString stringWithFormat:@"分享邀请码%@", user.invCode] forState:UIControlStateNormal];
     
-   
+    [self setupLables];
     //注册转跳通知
     
 }
-
-
-
-
 
 
 - (void)setupLables{
     
     __weak InviteCodeViewController * wself = self;
     NSString *urlStr = [MainURL stringByAppendingPathComponent:@"shituInfo"];
-    [MBProgressHUD showMessage:nil];
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:MASTER];
+    self.master = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    if (!self.master) {
+        [MBProgressHUD showMessage:nil];
+    }
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
         NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
@@ -90,18 +97,18 @@
         
         if ([json[@"resultCode"] intValue] == 1 && [json[@"systemResultCode"] intValue] == 1) {
             
-            NSDictionary *dic = json[@"resultData"];
-            wself.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", [NSString xiaoshudianweishudeal:[dic[@"yestodayM"] floatValue]]];
-            wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", [NSString xiaoshudianweishudeal:[dic[@"totalM"] floatValue]]];
-            wself.discipleCount.text = [NSString stringWithFormat:@"%@人", dic[@"apprNum"]];
-            wself.shareUrl = dic[@"shareURL"];
-            if (![dic[@"shareDescription"] isEqualToString:@""]) {
-                 wself.shareDes = dic[@"shareDescription"];
-            }
-           
-            if (![dic[@"about"] isEqualToString:@""]) {
-                wself.rulesLabel.text = dic[@"about"];
-            }
+            wself.master = [Master objectWithKeyValues:json[@"resultData"]];
+            wself.yesterdayLabel.text = [NSString stringWithFormat:@"%@M", [NSString xiaoshudianweishudeal:wself.master.yestodayM]];
+            wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", [NSString xiaoshudianweishudeal:wself.master.totalM]];
+            wself.discipleCount.text = [NSString stringWithFormat:@"%d人",wself.master.apprNum];
+            wself.shareUrl = wself.master.shareURL;
+            wself.shareDes = wself.master.debugDescription;
+            wself.rulesLabel.text = wself.master.about;
+            
+            
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:MASTER];
+            [NSKeyedArchiver archiveRootObject:wself.master toFile:fileName];
            
         }
         [MBProgressHUD hideHUD];

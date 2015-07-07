@@ -183,6 +183,7 @@
 		EFD02B471B155CDA00D11D6D /* MJSettingSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B3E1B155CDA00D11D6D /* MJSettingSwitchItem.m */; };
 		EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B411B155CDA00D11D6D /* MJSettingCell.m */; };
 		EFD02B4B1B155D1E00D11D6D /* settingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B4A1B155D1E00D11D6D /* settingViewController.m */; };
+		EFD4B6411B4BD19000CE94B9 /* Master.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD4B6401B4BD19000CE94B9 /* Master.m */; };
 		EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD7A9C31B1D9DE30004A9A4 /* view-new.html */; };
 		EFD8C4E81B2EA265002D2CB2 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFD8C4E61B2EA265002D2CB2 /* AlipaySDK.bundle */; };
 		EFD8C4E91B2EA265002D2CB2 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD8C4E71B2EA265002D2CB2 /* AlipaySDK.framework */; };
@@ -522,6 +523,8 @@
 		EFD02B411B155CDA00D11D6D /* MJSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJSettingCell.m; sourceTree = "<group>"; };
 		EFD02B491B155D1E00D11D6D /* settingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingViewController.h; sourceTree = "<group>"; };
 		EFD02B4A1B155D1E00D11D6D /* settingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingViewController.m; sourceTree = "<group>"; };
+		EFD4B63F1B4BD19000CE94B9 /* Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Master.h; sourceTree = "<group>"; };
+		EFD4B6401B4BD19000CE94B9 /* Master.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Master.m; sourceTree = "<group>"; };
 		EFD7A9C31B1D9DE30004A9A4 /* view-new.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "view-new.html"; sourceTree = "<group>"; };
 		EFD8C4E61B2EA265002D2CB2 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		EFD8C4E71B2EA265002D2CB2 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
@@ -1647,6 +1650,8 @@
 			children = (
 				EFCFB7741B3A5BA200D3A47D /* prenticeList.h */,
 				EFCFB7751B3A5BA200D3A47D /* prenticeList.m */,
+				EFD4B63F1B4BD19000CE94B9 /* Master.h */,
+				EFD4B6401B4BD19000CE94B9 /* Master.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2194,6 +2199,7 @@
 				EF49ECF11B0D81A40038A203 /* main.m in Sources */,
 				83E263FB1B2F018500A2AC96 /* HanyuPinyinOutputFormat.m in Sources */,
 				83DBD8E31B12FD2800B62830 /* RootViewController.m in Sources */,
+				EFD4B6411B4BD19000CE94B9 /* Master.m in Sources */,
 				EFD02B451B155CDA00D11D6D /* MJSettingItem.m in Sources */,
 				EFF3D0D31B2EB4A800B2F446 /* NSDataEx.m in Sources */,
 				EF565D211B16E7C500FC2D6B /* UITextField+HT.m in Sources */,
