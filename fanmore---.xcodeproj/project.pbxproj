@@ -2411,6 +2411,7 @@
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a58045c1-e18f-4c85-84ea-9673bb81210c";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2471,6 +2472,7 @@
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6b42007f-8243-46ab-955b-b49f3e7e96b5";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
