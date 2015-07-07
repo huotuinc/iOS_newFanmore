@@ -44,6 +44,8 @@
 //    NSLog(@"%@",self.nameLabel.text);
     parame[@"profileType"] = @(1);
     parame[@"profileData"] = self.nameLabel.text;
+
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestPost:urlStr parame:parame success:^(id json) {
         
 //        NSLog(@"%@",json);
@@ -54,9 +56,10 @@
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
             
         }
+        [MBProgressHUD hideHUD];
         
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUD];
     }];
     
     if ([self.delegate respondsToSelector:@selector(NameControllerpickName:)]) {

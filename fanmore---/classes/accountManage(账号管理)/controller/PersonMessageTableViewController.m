@@ -90,7 +90,7 @@
     //初始化个人信息
     
     [self saveControllerToAppDelegate:self];
-    
+    self.title = @"个人信息";
 }
 
 - (void)viewDidLoad {
@@ -101,7 +101,7 @@
         [self.iconView setBackgroundImage:iconImage forState:UIControlStateNormal];
     }
     [self setupPersonMessage];
-    self.title = @"个人信息";
+    
 }
 /**
  *  初始化个人信息
