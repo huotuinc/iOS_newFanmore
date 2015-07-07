@@ -111,9 +111,9 @@
             [NSKeyedArchiver archiveRootObject:wself.master toFile:fileName];
            
         }
-//        [MBProgressHUD hideHUD];
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
-//        [MBProgressHUD hideHUD];
+        [MBProgressHUD hideHUD];
     }];
     
 }
