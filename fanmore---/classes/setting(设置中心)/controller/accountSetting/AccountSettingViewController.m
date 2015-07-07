@@ -43,13 +43,7 @@
     [self.data addObject:group];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
-    RootViewController * root = (RootViewController *)self.mm_drawerController;
-    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -68,7 +62,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController setNavigationBarHidden:YES];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.tableView.scrollEnabled = NO;

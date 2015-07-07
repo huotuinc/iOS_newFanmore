@@ -73,6 +73,12 @@
     [self.phoneNumber becomeFirstResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
+
 - (void)tapViewAction:(UITapGestureRecognizer *)ges{
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

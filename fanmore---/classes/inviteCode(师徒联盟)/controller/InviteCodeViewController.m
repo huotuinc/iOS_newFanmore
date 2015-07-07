@@ -86,7 +86,7 @@
         [MBProgressHUD showMessage:nil];
     }
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -111,9 +111,9 @@
             [NSKeyedArchiver archiveRootObject:wself.master toFile:fileName];
            
         }
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
     }];
     
 }

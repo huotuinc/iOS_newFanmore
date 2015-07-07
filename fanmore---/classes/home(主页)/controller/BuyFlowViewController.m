@@ -164,9 +164,9 @@ static NSString * _company = nil;
     self.currentPriceLable.adjustsFontSizeToFitWidth = YES;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     RootViewController * root = (RootViewController *)self.mm_drawerController;
 //    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
