@@ -332,6 +332,7 @@
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
             }
+            [MBProgressHUD hideHUD];
             [MBProgressHUD showSuccess:@"上传成功"];
             [self setupPersonMessage];
         } failure:^(NSError *error) {

@@ -86,7 +86,7 @@
         [MBProgressHUD showMessage:nil];
     }
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-//        NSLog(@"%@",json);
+        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -102,7 +102,7 @@
             wself.discipleContribution.text = [NSString stringWithFormat:@"%@M", [NSString xiaoshudianweishudeal:wself.master.totalM]];
             wself.discipleCount.text = [NSString stringWithFormat:@"%d人",wself.master.apprNum];
             wself.shareUrl = wself.master.shareURL;
-            wself.shareDes = wself.master.debugDescription;
+            wself.shareDes = wself.master.shareDescription;
             wself.rulesLabel.text = wself.master.about;
             
             
@@ -152,11 +152,9 @@
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-    
-    
-    
+
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] image:[ShareSDK imageWithPath:imagePath] title:@"师徒邀请码" url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] image:[ShareSDK imageWithPath:imagePath] title:self.shareDes url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     

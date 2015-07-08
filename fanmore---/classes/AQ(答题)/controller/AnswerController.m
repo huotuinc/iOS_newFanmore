@@ -189,6 +189,7 @@ int _rightQuest = 0;  //纪录正确的答题数
                     show.chance = [json[@"resultData"][@"chance"] intValue];
                     show.illgel = [json[@"resultData"][@"illgel"] intValue];
                     show.flay = self.flay;
+                    show.taskId = self.taskId;
                     CGFloat aabb = [json[@"resultData"][@"reward"] floatValue];
                     if (aabb > 0) {
                         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
