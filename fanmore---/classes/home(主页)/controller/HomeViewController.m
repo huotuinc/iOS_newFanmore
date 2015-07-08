@@ -24,7 +24,7 @@
 
 #define pageSize 10
 
-@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate,LoginViewDelegate,UIAlertViewDelegate>
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,WebControllerDelegate,LoginViewDelegate,UIAlertViewDelegate,detailViewDelegate>
 /**任s务列表*/
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
@@ -41,6 +41,8 @@
 
 static NSString * homeCellidentify = @"homeCellId";
 static int refreshCount = 0;
+
+
 - (BOOL)isLogin{
     
     //1、判断是否要登录
@@ -58,11 +60,6 @@ static int refreshCount = 0;
     if (_taskDatas == nil) {
         
         _taskDatas = [NSMutableArray array];
-//        NSMutableDictionary * params = [NSMutableDictionary dictionary];
-////        params[@"pagingTag"] = @"";
-////        params[@"pagingSize"] = @(pageSize);
-////        [MBProgressHUD showMessage:nil];
-////        [self getNewMoreData:params];
     }
     return _taskDatas;
 }
@@ -84,6 +81,7 @@ static int refreshCount = 0;
         UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
         detail.taskId = [app.taskId intValue];
+        detail.delegate = self;
         detail.ishaveget = NO;
         [self.navigationController pushViewController:detail animated:YES];
     }
@@ -119,8 +117,8 @@ static int refreshCount = 0;
 
     [self _initNav];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homerefresh) name:RefreshHomeDate object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homerefresh:) name:RefreshHomeDate object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeBeginrefresh:) name:RefreshHomeDateLeft object:nil];
     //集成刷新控件
     [self setupRefresh];
     [self.tableView removeSpaces];
@@ -178,10 +176,22 @@ static int refreshCount = 0;
 
 }
 
-- (void) homerefresh{
+
+/*
+ * 通知结果通知
+ */
+-(void)homerefresh:(NSNotification *)note{
     
+    int task  = [note.userInfo[@"hTaskId"] intValue];
+    [self detailViewBackToHome:task];
+}
+
+- (void)homeBeginrefresh:(NSNotification *)note{
+
     [self.tableView headerBeginRefreshing];
 }
+
+
 
 #pragma mark 开始进入刷新状态
 //头部刷新
@@ -216,10 +226,10 @@ static int refreshCount = 0;
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     
-    [MBProgressHUD showMessage:nil];
+//    [MBProgressHUD showMessage:nil];
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -239,7 +249,7 @@ static int refreshCount = 0;
         }
         
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
+       [MBProgressHUD showError:@"粉猫服务器连接异常"];
 //        NSLog(@"%@",[error description]);
     }];
     
@@ -251,9 +261,9 @@ static int refreshCount = 0;
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     __weak HomeViewController *wself = self;
-    [MBProgressHUD showMessage:nil];
+//    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -273,13 +283,13 @@ static int refreshCount = 0;
             [wself.taskDatas removeAllObjects];
             wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
             refreshCount = (int)[taskArray count];
-            [wself showHomeRefershCount];
+//            [wself showHomeRefershCount];
             [wself.tableView reloadData];    //刷新数据
         }
         
         
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"粉猫服务器连接异常"];
 
     }];
     
@@ -391,6 +401,7 @@ static int refreshCount = 0;
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     detailVc.taskId = task.taskId; //获取问题编号
+    detailVc.delegate = self;
     (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
 
     [self.navigationController pushViewController:detailVc animated:YES];
@@ -541,6 +552,54 @@ static int refreshCount = 0;
     }
     
     return _failureSound;
+}
+
+
+
+/*
+ * 详情返回后的代理方法
+ */
+- (void)detailViewBackToHome:(int)taskId{
+    
+    NSString * url = [MainURL stringByAppendingPathComponent:@"taskDetail"];
+    //    NSLog(@"%@",url);
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"taskId"] = @(taskId);
+    
+    __weak HomeViewController * wself = self;
+    [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+            [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+            UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [aaa show];
+            return ;
+            
+        }
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
+            
+            __block taskData *task = [taskData objectWithKeyValues:json[@"resultData"][@"task"]];
+            for (int index = 0; index < wself.taskDatas.count; index++) {
+                taskData * cc = wself.taskDatas[index];
+                if (task.taskId == cc.taskId) {
+                    
+                    wself.taskDatas[index] = task;
+                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
+                    [wself.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+                    break;
+                }
+            }
+           
+            
+        }
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
+    
+    
+    
 }
 
 @end

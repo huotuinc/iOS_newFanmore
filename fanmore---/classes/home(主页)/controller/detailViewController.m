@@ -146,22 +146,20 @@
 - (void)getQuestion{
     
     NSString * url = [MainURL stringByAppendingPathComponent:@"taskDetail"];
-//    NSLog(@"%@",url);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"taskId"] = @(self.taskId);
     
     __weak detailViewController * wself = self;
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
-        
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
             UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
             [aaa show];
             return ;
-            
-            return ;
+           
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * detailTaskS = [taskDetail objectArrayWithKeyValuesArray:json[@"resultData"][@"taskDetail"]];
@@ -463,6 +461,17 @@
 
 //    NSLog(@"登入代理方法dasdasdasdasd");
     [self getQuestion];
+    
+}
+
+
+
+- (void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if ([self.delegate respondsToSelector:@selector(detailViewBackToHome:)]) {
+        
+        [self.delegate detailViewBackToHome:self.taskId];
+    }
     
 }
 @end

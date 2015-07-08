@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+@protocol detailViewDelegate <NSObject>
+
+@optional
+
+/**详情返回首页*/
+- (void)detailViewBackToHome:(int) taskId;
+
+@end
+
+
+
 @interface detailViewController : UIViewController
 
 /**网页webView*/
@@ -19,30 +32,16 @@
 /**问题编号*/
 @property(assign,nonatomic)  int taskId;
 
-/**答题类型*/
-//@property(assign,nonatomic) int type;
-
-/**首页详情*/
-//@property(strong,nonatomic) NSString * detailUrl;
-
-/**答题倒计时时间*/
-//@property(nonatomic,assign) int backTime;
-
-/**答题获取多少流量*/
-//@property(nonatomic,assign) CGFloat flay;
-
-/**分享的url*/
-//@property(nonatomic,strong)NSString *shareUrl;
-
-/**分享标题*/
-//@property(nonatomic,strong)NSString *titless;
-
 /**判断是否已答过题*/
 @property(nonatomic,assign)BOOL ishaveget;
 
 /**任务的图标*/
 /**分享标题*/
 @property(nonatomic,strong)NSString *pictureUrl;
+
+
+/**详情代理方法*/
+@property(nonatomic,weak)id <detailViewDelegate>delegate;
 
 - (IBAction)goQusetionAction:(id)sender;
 

@@ -10,7 +10,8 @@
 #define fanmore____GlobalUICommont_h
 
 /**服务器地址*/
-#define  MainURL @"http://newtask.fanmore.cn/app"
+#define  MainURL @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+//@"http://newtask.fanmore.cn/app"
 //@"http://newtask.fanmore.cn/app"
 //
 //@"http://192.168.0.23:8080/fanmoreweb/app"
@@ -101,6 +102,7 @@
 
 //通知
 #define RefreshHomeDate @"RefreshHomeDate"  //刷新home的数据
+#define RefreshHomeDateLeft @"RefreshHomeDateleft"  //刷新home的数据
 #endif
 
 

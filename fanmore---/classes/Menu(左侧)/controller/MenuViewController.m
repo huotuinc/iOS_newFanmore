@@ -279,7 +279,7 @@
         case 0:{
             RootViewController * root = (RootViewController *)self.mm_drawerController;
             [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-            [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDateLeft object:nil];
             [root toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
             break;
         }
