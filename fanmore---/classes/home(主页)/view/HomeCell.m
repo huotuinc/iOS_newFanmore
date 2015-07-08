@@ -43,6 +43,7 @@
     self.receiveLabel.layer.cornerRadius = 5.0;
 }
 
+
 - (void)setGetimageWithSection: (int) selection {
     if (selection == 0) {
         self.getImage.image = nil;
