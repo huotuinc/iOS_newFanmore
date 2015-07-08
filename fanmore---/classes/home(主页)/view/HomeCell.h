@@ -37,6 +37,7 @@
 
 - (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *) time andReceiveLabel:(NSString *) receiveLabel andJoinLabel:(NSString *) join andIntroduceLabel:(NSString *) introduce andGetImage:(int) selection;
 
+- (void)setGetimageWithSection: (int) selection;
 
 - (void)setSelection:(int)selection;
 

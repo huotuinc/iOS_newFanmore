@@ -29,7 +29,6 @@
 }
 
 
-
 -(void) layoutSubviews{
     [super layoutSubviews];
 //    if (self.selection == 0) {
@@ -44,6 +43,15 @@
     self.receiveLabel.layer.cornerRadius = 5.0;
 }
 
+- (void)setGetimageWithSection: (int) selection {
+    if (selection == 0) {
+        self.getImage.image = nil;
+    }else if (selection == 1) {
+        self.getImage.image = [UIImage imageNamed:@"received"];
+    }else if (selection == 2) {
+        self.getImage.image = [UIImage imageNamed:@"broughtOut"];
+    }
+}
 
 
 - (void)awakeFromNib {
