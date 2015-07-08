@@ -54,16 +54,16 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupWebview];
+//    [self setupWebview];
     self.webView.delegate = self;
     
     
-    self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target: self action:@selector(backAction:)];
+//    self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target: self action:@selector(backAction:)];
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     //1、保存全局信息
@@ -99,6 +99,8 @@
     }
     else{ //答题
         
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        
         NSString * urlStr = [NSString stringWithFormat:@"http://apitest.51flashmall.com:8080/fanmoreweb"];
         urlStr = [urlStr stringByAppendingPathComponent:@"appanswer"];
         urlStr = [urlStr stringByAppendingString:self.answerType];
@@ -113,13 +115,13 @@
         [self.webView loadRequest:request];
     }
 }
-- (void)setupWebview{
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    backButton.frame=CGRectMake(0, 0, 11, 20);
-    [backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:backButton];
-}
+//- (void)setupWebview{
+//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+//    backButton.frame=CGRectMake(0, 0, 11, 20);
+//    [backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:backButton];
+//}
 
 - (void)backAction:(UIButton *)btn{
     

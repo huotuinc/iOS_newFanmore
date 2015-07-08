@@ -44,15 +44,24 @@
 }
 
 
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-    
     [self saveControllerToAppDelegate:self];
+    
+    
 }
+
+
+
+
+
+
 
 - (void)_initNav
 {
@@ -72,6 +81,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     // 2.添加数据
     [self setupGroup0];
+    
+    
     
     FMButton * quiteAccount = [[FMButton alloc] initWithFrame:CGRectMake(5, ScreenHeight - 140 -20, ScreenWidth - 10, 44)];
     [quiteAccount setTitle:@"退出账号" forState:UIControlStateNormal];
@@ -95,6 +106,7 @@
     if (indexPath.row == 1) {
         
         PersonMessageTableViewController *person = [storyboard instantiateViewControllerWithIdentifier:@"PersonMessageTableViewController"];
+        person.title = @"用户资料";
         [self.navigationController pushViewController:person animated:YES];
     }
     if (indexPath.row == 2) {

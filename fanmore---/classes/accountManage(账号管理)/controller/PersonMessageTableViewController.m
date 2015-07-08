@@ -89,8 +89,11 @@
     [super viewWillAppear:animated];
     //初始化个人信息
     
+    
+    self.navigationController.navigationBarHidden = NO;
+    
     [self saveControllerToAppDelegate:self];
-    self.title = @"用户资料";
+//    self.title = @"用户资料";
 }
 
 - (void)viewDidLoad {
