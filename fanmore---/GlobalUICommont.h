@@ -17,7 +17,8 @@
 //@"http://192.168.0.23:8080/fanmoreweb/app"
 
 /**微信支付*/
-#define WeiXinAppID @"wxadee5477e854a778"
+#define WeiXinAppID @"wxaeda2d5603b12302"
+
 #define WeiXinppSecrrt @"8ad99de44bd96a323eb40dc161e7d8e8"
 #define WeiXinPaySigNkey @"NzfP6pfeljyHeY08LO9p8YAKZCGLz8akO4lCGdXZOGnVsJqfo8jeuYB7C0GoFJGEKZMDVGKWYnbbJj3pCpvJzd4iY7bVglaNz54XAD26tiCr5DZGLjZFoRxbqe8i3HT5"
 #define WeiXinPARTNERKEY @"18076bf2a8bf9479f2cddeec13fd2ec0"
@@ -37,7 +38,7 @@
 #define QQAppKey @"101066212"
 #define QQappSecret @"09ef5bfed097b682a83b147d46e46a5a"
 /**微信*/
-#define WeiXinAppKey @"wxadee5477e854a778"
+#define WeiXinAppKey @"wxaeda2d5603b12302"
 /**shareSDK */
 
 

@@ -361,7 +361,7 @@ static NSString *message = @"有一条新消息";
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     //5微信登陆的时候需要初始化
-    [ShareSDK connectWeChatTimelineWithAppId:@"WeiXinAppKey"
+    [ShareSDK connectWeChatTimelineWithAppId:@"wxaeda2d5603b12302"
                                    appSecret:@"8c3b660de36a3b3fb678ca865e31f0f3"
                                    wechatCls:[WXApi class]];
     /**shareSdK*/

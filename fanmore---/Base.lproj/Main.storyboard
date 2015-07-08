@@ -391,23 +391,29 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKX-9m-1i3">
-                                                    <rect key="frame" x="317" y="7" width="250" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7WP-KT-PZR">
+                                                    <rect key="frame" x="417" y="2" width="150" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="7ee-KI-nXT"/>
-                                                        <constraint firstAttribute="width" constant="250" id="NeU-rW-hQd"/>
+                                                        <constraint firstAttribute="height" constant="40" id="gQh-Bd-yhK"/>
+                                                        <constraint firstAttribute="width" constant="150" id="u4g-Du-ogP"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="GKX-9m-1i3" secondAttribute="trailing" id="KcA-SI-su3"/>
+                                                <constraint firstAttribute="centerY" secondItem="7WP-KT-PZR" secondAttribute="centerY" id="7il-6W-tuU"/>
                                                 <constraint firstItem="KlL-GZ-ePM" firstAttribute="leading" secondItem="TCY-Mx-P4U" secondAttribute="leading" constant="30" id="Yr8-9Y-8W0"/>
                                                 <constraint firstAttribute="centerY" secondItem="KlL-GZ-ePM" secondAttribute="centerY" id="aPM-pg-0wJ"/>
-                                                <constraint firstAttribute="centerY" secondItem="GKX-9m-1i3" secondAttribute="centerY" id="q7r-Y3-Afs"/>
+                                                <constraint firstItem="KlL-GZ-ePM" firstAttribute="leading" secondItem="7WP-KT-PZR" secondAttribute="trailing" id="kL0-K1-upc"/>
+                                                <constraint firstAttribute="trailing" secondItem="7WP-KT-PZR" secondAttribute="trailing" id="tbY-rC-vIM"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="kL0-K1-upc"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -653,7 +659,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="birthDayLable" destination="GKX-9m-1i3" id="JUt-C9-GIC"/>
+                        <outlet property="birDate" destination="7WP-KT-PZR" id="Xko-5n-ZAL"/>
                         <outlet property="careerLable" destination="5P4-1h-iUX" id="xDJ-wk-tmz"/>
                         <outlet property="favLable" destination="TQy-Bz-NCQ" id="J77-dJ-2Iu"/>
                         <outlet property="iconView" destination="4QD-jY-aQf" id="pNQ-In-fog"/>

@@ -42,6 +42,8 @@
 /**9用户账号时间*/
 @property (weak, nonatomic) IBOutlet UILabel *registTimeLable;
 
+/**生日*/
+@property (weak, nonatomic) IBOutlet UITextField *birDate;
 
 /**自己的性别*/
 @property(assign,nonatomic) int selfsex;
@@ -105,6 +107,9 @@
     }
     [self setupPersonMessage];
     
+    self.birDate.inputView = self.datePicker;
+    [self setupDatePicker];
+    
 }
 /**
  *  初始化个人信息
@@ -147,7 +152,7 @@
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString * publishtime = [formatter stringFromDate:ptime]; //唯独
-    self.birthDayLable.text = publishtime;  //4
+    self.birDate.text = publishtime;  //4
     
     for (twoOption * aa in glo.career) {
         if (aa.value == self.userinfo.career) {
@@ -205,11 +210,12 @@
 {
     
     UIToolbar * toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    toolBar.backgroundColor = [UIColor grayColor];
     UIBarButtonItem * item1 = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancleClick)];
     UIBarButtonItem * item2 = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(selectClick)];
     UIBarButtonItem * item3 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     toolBar.items = @[item1,item3,item2];
-    
+    self.birDate.inputAccessoryView = toolBar;
 }
 
 
@@ -228,21 +234,41 @@
 - (void)selectClick
 {
     [self.view endEditing:YES];
-    NSLog(@"%@",self.datePicker.date);
+    
     NSDate * dateS = self.datePicker.date;
-    if (self.datePicker.tag == 2) {
+    
         
-        NSTimeInterval  interval = [dateS timeIntervalSinceNow];
-        if (interval>0) {
+    NSTimeInterval  interval = [dateS timeIntervalSinceNow];
+    
+    if (interval>0) {
             
-            [MBProgressHUD showError:@"不能选择比当前大的日期"];
-            return;
-        }
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        //购车日期
-        
+        [MBProgressHUD showError:@"不能选择比当前大的日期"];
+        return;
     }
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+//    NSLog(@"%.f", [dateS timeIntervalSince1970] * 1000);
+    NSString * time =  [dateFormatter stringFromDate:dateS];
+    //购车日期
+    self.birDate.text = time;
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    parame[@"profileType"] = @(2);
+    parame[@"profileData"] = [NSString stringWithFormat:@"%.f", [dateS timeIntervalSince1970] * 1000];
+    [MBProgressHUD showMessage:@"生日资料上传中"];
+    [UserLoginTool loginRequestGet:urlStr parame:parame success:^(id json) {
+        [MBProgressHUD hideHUD];
+        userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
+        NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+        [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        NSLog(@"%@",error.description);
+    }];
+    
+    
 }
 
 
@@ -315,10 +341,10 @@
             [self.navigationController pushViewController:nameVC animated:YES];
         }
         if (indexPath.row == 3) {//生日
-            self.datePicker.center = self.view.center;
-             [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
-//            [tableView becomeFirstResponder];
-            [self.view addSubview:self.datePicker];
+//            self.datePicker.center = self.view.center;
+//             [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+            [self.birDate becomeFirstResponder];
+//            [self.view addSubview:self.datePicker];
         }
     }
     if (indexPath.section == 1) {
@@ -479,44 +505,18 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-/**
- *  修改个人生日资料
- *
- *  @param datePick datePick description
- */
-- (void)dateChanged:(UIDatePicker *) datePick{
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString * birthtime = [dateFormatter stringFromDate:datePick.date];
-    
-    
-    
-//    NSLog(@"------%@",datePick.date);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [datePick removeFromSuperview];
-        
-    });
-    self.birthDayLable.text = birthtime;
-    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"]; //保存到服务器
-    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
-    parame[@"profileType"] = @(2);
-    parame[@"profileData"] =@((long long)[datePick.date timeIntervalSince1970] * 1000);
-    [self toupDatePersonMessageWithApi:urlStr withParame:parame withOptin:@"生日上传成功"];
-    
-}
 
 
 - (void)toupDatePersonMessageWithApi:(NSString *)urlStr withParame:(NSMutableDictionary *)paremes withOptin:(NSString *)nn{
-
+    
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestPost:urlStr parame:paremes success:^(id json) {
-        
+        [MBProgressHUD hideHUD];
 //        NSLog(@"大大叔大叔大叔大叔大叔大叔大叔的时代%@",json);
-        [MBProgressHUD showSuccess:nn];
-//        NSLog(@"dadasd%@",json);
+        //        NSLog(@"dadasd%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
-            
+            [MBProgressHUD showSuccess:nn];
+            NSLog(@"%@",json);
             userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
@@ -524,8 +524,9 @@
             
         }
        
-        
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showError:@"生日资料上传失败"];
     }];
     
