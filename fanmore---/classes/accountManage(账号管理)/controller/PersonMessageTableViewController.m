@@ -193,6 +193,58 @@
     [self.navigationController setNavigationBarHidden:NO];
 }
 
+
+
+/**
+ *  设置datepicker的工具条
+ */
+- (void)setupDatePicker
+{
+    
+    UIToolbar * toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIBarButtonItem * item1 = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancleClick)];
+    UIBarButtonItem * item2 = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(selectClick)];
+    UIBarButtonItem * item3 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    toolBar.items = @[item1,item3,item2];
+    
+}
+
+
+/**
+ *  日期取消
+ */
+- (void)cancleClick
+{
+    [self.view endEditing:YES];
+    
+}
+
+/**
+ *  日期确定
+ */
+- (void)selectClick
+{
+    [self.view endEditing:YES];
+    NSLog(@"%@",self.datePicker.date);
+    NSDate * dateS = self.datePicker.date;
+    if (self.datePicker.tag == 2) {
+        
+        NSTimeInterval  interval = [dateS timeIntervalSinceNow];
+        if (interval>0) {
+            
+            [MBProgressHUD showError:@"不能选择比当前大的日期"];
+            return;
+        }
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        //购车日期
+        
+    }
+}
+
+
+
+
 #pragma tableview
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -262,6 +314,7 @@
         if (indexPath.row == 3) {//生日
             self.datePicker.center = self.view.center;
              [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+//            [tableView becomeFirstResponder];
             [self.view addSubview:self.datePicker];
         }
     }
@@ -437,7 +490,7 @@
     
     
 //    NSLog(@"------%@",datePick.date);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [datePick removeFromSuperview];
         

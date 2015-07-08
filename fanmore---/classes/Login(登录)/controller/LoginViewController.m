@@ -197,6 +197,7 @@
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             [MBProgressHUD hideHUD];
+            [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDateLeft object:nil];
 //            NSLog(@"登录成功=========== %@",json);
             userData * userInfo = [userData objectWithKeyValues:(json[@"resultData"][@"user"])];
             //1、登入成功用户数据本地化

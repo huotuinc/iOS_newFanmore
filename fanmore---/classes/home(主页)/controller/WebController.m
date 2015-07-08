@@ -107,7 +107,7 @@
         }else if([self.answerType isEqualToString:@"success.html?"]){
             AudioServicesPlayAlertSound(self.successSound);
         }
-        urlStr = [NSString stringWithFormat:@"%@taskReward=%.1f&rights=%d&wrongs=%u&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
+        urlStr = [NSString stringWithFormat:@"%@taskReward=%.1f&rights=%d&wrongs=%lu&chance=%d",urlStr,self.reward,_ritghtAnswer,(_totleQuestion-_ritghtAnswer),_chance];
         NSURL * urlstr = [NSURL URLWithString:urlStr];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
         [self.webView loadRequest:request];
