@@ -137,8 +137,9 @@
             }
             
         }
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
-        //        NSLog(@"%@",[error description]);
+        [MBProgressHUD hideHUD];
     }];
     
 }
@@ -177,7 +178,7 @@
             
             
         }
-        
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
     }];
