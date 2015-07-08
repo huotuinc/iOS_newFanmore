@@ -110,7 +110,7 @@ static int refreshCount = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"粉猫";
+    self.title = @"粉猫流量宝";
     
 //    [self _initView];
     
