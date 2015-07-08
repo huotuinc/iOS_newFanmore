@@ -93,7 +93,7 @@ NSString * _changeflah = nil;
                     __weak ExchangeController * wself = self;
                     [UserLoginTool loginRequestPost:url parame:param success:^(id json) {
                         [MBProgressHUD hideHUD];
-                        NSLog(@"%@",json);
+//                        NSLog(@"%@",json);
                         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
                             [MBProgressHUD showError:@"账号被登入"];
                             LoginViewController * aa = [[LoginViewController alloc] init];
