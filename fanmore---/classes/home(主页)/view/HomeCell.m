@@ -29,7 +29,6 @@
 }
 
 
-
 -(void) layoutSubviews{
     [super layoutSubviews];
 //    if (self.selection == 0) {
