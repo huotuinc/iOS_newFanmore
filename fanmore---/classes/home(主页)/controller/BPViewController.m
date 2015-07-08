@@ -4,7 +4,7 @@
 //
 //  Created by HuoTu-Mac on 15/6/5.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  流量详细页面
 
 #import "BPViewController.h"
 #import "Details.h"
@@ -40,11 +40,11 @@ static NSString *BPCellidentify = @"BPCellId";
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"BPCell" bundle:nil] forCellReuseIdentifier:BPCellidentify];
-    
+    [self.tableView removeSpaces];
     //集成刷新控件
     [self setupRefresh];
     
-    [self.tableView removeSpaces];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

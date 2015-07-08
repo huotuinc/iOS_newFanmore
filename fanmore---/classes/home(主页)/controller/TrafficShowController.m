@@ -13,6 +13,8 @@
 #import "FriendMessageController.h"
 #import "ExchangeController.h"
 
+
+#define FLAYSMESSAGE @"flaymess"
 @interface TrafficShowController ()<ExchangeControllerdelegate>
 
 @property (assign, nonatomic) int num;
@@ -62,10 +64,15 @@ static NSString *collectionViewidentifier = @"collectionCell";
 
 - (void)flaysFromeWeb {
     _flays = [NSArray array];
-    [MBProgressHUD showMessage:nil];
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:FLAYSMESSAGE];
+    _flays = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    if (!_flays.count) {
+        [MBProgressHUD showMessage:nil];
+    }
+    
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
     [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-        
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -77,6 +84,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
         if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
             
             _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:FLAYSMESSAGE];
+            [NSKeyedArchiver archiveRootObject:_flays toFile:fileName];
             [self setWaringLabel];
         }
         
