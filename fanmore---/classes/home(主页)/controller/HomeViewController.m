@@ -67,7 +67,7 @@ static int refreshCount = 0;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO];
+    
     
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
@@ -99,14 +99,11 @@ static int refreshCount = 0;
             [self.navigationController pushViewController:mcc animated:YES];
         }
     }
+    
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
-- (void)loadView
-{
-    [super loadView];
-    
-    
-}
+
 
 
 

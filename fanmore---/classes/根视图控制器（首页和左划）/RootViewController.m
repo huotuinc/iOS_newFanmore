@@ -39,7 +39,7 @@
     [self setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
     [self setShowsShadow:NO];
-    [MMExampleDrawerVisualStateManager sharedManager].leftDrawerAnimationType = MMDrawerAnimationTypeSwingingDoor;
+    [MMExampleDrawerVisualStateManager sharedManager].leftDrawerAnimationType = MMDrawerAnimationTypeSlide;
     
     
 }

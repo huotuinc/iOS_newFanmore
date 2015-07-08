@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+FM.h"
+#import "MenuViewController.h"
 
 @implementation UIViewController (FM)
 
@@ -21,6 +22,7 @@
 - (void)saveControllerToAppDelegate:(UIViewController *)controller {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     app.currentVC = controller;
+    
 }
 
 

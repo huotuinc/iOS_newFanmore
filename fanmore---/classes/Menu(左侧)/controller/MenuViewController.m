@@ -21,7 +21,7 @@
 #import "BegController.h"
 #import <SDWebImageManager.h>
 
-@interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource,LoginViewDelegate>
+@interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource,LoginViewDelegate,UINavigationControllerDelegate>
 /**
  
  */
@@ -93,38 +93,34 @@
     self.optionList.tableFooterView = [[UIView alloc] init];
     self.optionList.tableHeaderView = [[UIView alloc] init];
     
+    
+    
   
 
-    
+    self.navigationController.delegate = self;
     
     
 }
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
         //隐藏导航条
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    
     RootViewController * root = (RootViewController *)self.mm_drawerController;
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
-//    if ([[[NSUserDefaults standardUserDefaults] stringForKey:loginFlag] isEqualToString:@"right"]) {
-//        self.nameLable.userInteractionEnabled = NO;
-//    }else {
-//        self.nameLable.userInteractionEnabled = YES;
-//        [self.nameLable bk_whenTapped:^{//登入按钮
-//            
-//            LoginViewController * login = [[LoginViewController alloc] init];
-//            [self presentViewController:login animated:YES completion:nil];
-//        }];
-//    }
     
     //1、判断是否要登录
     NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
     //    NSLog(@"========xxxxx====%@",flag);
     BOOL gl  = [flag isEqualToString:@"right"];
     
-    NSLog(@"aaaaa%d",gl);
+//    NSLog(@"aaaaa%d",gl);
     if (gl) {//登入
         
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -218,7 +214,21 @@
     }
     
     [self saveControllerToAppDelegate:self];
+    
+    
 
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+//    [self.navigationController setNavigationBarHidden:NO];
 }
 
 #pragma TableViewDelegate dateSource
@@ -276,6 +286,7 @@
             
             if (self.isLogin) {
                 AccountSettingViewController* Account = [[AccountSettingViewController alloc] init];
+                
                 [self.navigationController pushViewController:Account animated:YES];
             }else{
                 LoginViewController * login = [[LoginViewController alloc] init];

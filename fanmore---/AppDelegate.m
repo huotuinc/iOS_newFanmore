@@ -565,9 +565,14 @@ static NSString *message = @"有一条新消息";
         UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:loginVc];
         [self.currentVC presentViewController:na animated:YES completion:nil];
     }else {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        MCController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MCController"];
-        [self.currentVC.navigationController pushViewController:massage animated:YES];
+        if (![self.currentVC isKindOfClass:[MCController class]]) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MCController *massage = [storyboard instantiateViewControllerWithIdentifier:@"MCController"];
+            [self.currentVC.navigationController pushViewController:massage animated:YES];
+        }else {
+            [(MCController *)self.currentVC getNewMoreData];
+        }
+        
     }
 
 }
