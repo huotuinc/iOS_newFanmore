@@ -264,7 +264,7 @@
                  }else if([json[@"resultData"][@"reward"] floatValue]> 0){
                      
                      CGFloat rewad = [json[@"resultData"][@"reward"] floatValue];
-                     NSLog(@"%@",[NSString xiaoshudianweishudeal:rewad]);
+//                     NSLog(@"%@",[NSString xiaoshudianweishudeal:rewad]);
                      [MBProgressHUD showSuccess:[NSString stringWithFormat:@"恭喜你获得了%@M流量",[NSString xiaoshudianweishudeal:rewad]]];
                      
                      NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
