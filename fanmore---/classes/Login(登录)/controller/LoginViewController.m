@@ -230,7 +230,10 @@
                     
                     [wself.delegate LoginViewDelegate:self.loginType];
                 }
-                [MBProgressHUD showSuccess:userInfo.welcomeTip];
+                if (![userInfo.welcomeTip isEqualToString:@""]) {
+                    [MBProgressHUD showSuccess:userInfo.welcomeTip];
+                }
+                
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self dismissViewControllerAnimated:YES completion:nil];
                 });

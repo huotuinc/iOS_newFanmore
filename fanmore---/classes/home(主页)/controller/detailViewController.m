@@ -226,6 +226,7 @@
         UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
         
         [self presentViewController:bb animated:YES completion:nil];
+        return;
         
     }else{
     //构造分享内容
