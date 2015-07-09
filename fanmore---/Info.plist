@@ -51,6 +51,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>wxadee5477e854a778</string>
 				<string>wx8ba33b7341047b58</string>
 			</array>
 		</dict>
