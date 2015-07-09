@@ -152,7 +152,7 @@
     __weak detailViewController * wself = self;
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
-//        NSLog(@"%@",json);
+//        NSLog(@"xxxxx%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -223,8 +223,8 @@
     if ([login isEqualToString:@"wrong"]) {
         [MBProgressHUD showError:@"未登录"];
         LoginViewController * aa= [[LoginViewController alloc] init];
+        aa.delegate = self;
         UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
-        
         [self presentViewController:bb animated:YES completion:nil];
         return;
         
@@ -460,7 +460,7 @@
 
 - (void)LoginViewDelegate:(int)PushType{
 
-//    NSLog(@"登入代理方法dasdasdasdasd");
+
     [self getQuestion];
     
 }
