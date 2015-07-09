@@ -306,7 +306,7 @@ static NSString * _company = nil;
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"appid"] = @"wx8888888888888888";
-    params[@"mch_id"] = @"wx8888888888888888";     //微信支付分配的商户号
+    params[@"mch_id"] = @"1251040401";     //微信支付分配的商户号
     params[@"device_info"] = @"APP-001"; //支付设备号或门店号
     time_t now;
     time(&now);
