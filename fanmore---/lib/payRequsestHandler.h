@@ -44,7 +44,7 @@
 #define APP_ID          @""               //APPID
 #define APP_SECRET      @"" //appsecret
 //商户号，填写商户对应参数
-#define MCH_ID          @""
+#define MCH_ID          @"1251040401"
 //商户API密钥，填写相应参数
 #define PARTNER_ID      @""
 //支付结果回调页面
