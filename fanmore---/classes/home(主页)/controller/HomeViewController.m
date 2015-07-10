@@ -9,7 +9,7 @@
 #import "HomeViewController.h"
 #import "TrafficShowController.h"
 #import "RootViewController.h"
-#import <UIViewController+MMDrawerController.h>
+#import "UIViewController+MMDrawerController.h"
 #import "HomeCell.h"
 #import "detailViewController.h"
 #import "BuyFlowViewController.h"
@@ -149,9 +149,20 @@ static int refreshCount = 0;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeViewControllerGetNot) name:@"homeViewControllerShow" object:nil];
+    
 
 }
 
+/**
+ *  接受通知方法
+ *
+ *  @return
+ */
+- (void)homeViewControllerGetNot
+{
+    [self saveControllerToAppDelegate:self];
+}
 
 /**
  *  集成刷新控件
@@ -312,7 +323,7 @@ static int refreshCount = 0;
             
         }];
     }else{
-
+        [self.tableView headerBeginRefreshing];
     }
 }
 - (void)_initNav

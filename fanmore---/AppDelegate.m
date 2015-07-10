@@ -549,7 +549,9 @@ static NSString *message = @"有一条新消息";
 //当前控制器转跳方法
 - (void)gotoDetailController {
     if ([self.currentVC isKindOfClass:[detailViewController class]]) {
+        
         detailViewController *detail = (detailViewController *)self.currentVC;
+        
         if (detail.taskId == [self.taskId intValue]) {
         }else {
             UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];

@@ -195,6 +195,12 @@
 		EFE837B51B12F62A0093E14E /* purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837B41B12F62A0093E14E /* purchase.m */; };
 		EFE837B91B12FA3C0093E14E /* app.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837B81B12FA3C0093E14E /* app.m */; };
 		EFE837BD1B12FADB0093E14E /* question.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837BC1B12FADB0093E14E /* question.m */; };
+		EFEA0EA21B4FBCFE0027181A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EFEA0E961B4FBCFE0027181A /* LICENSE */; };
+		EFEA0EA31B4FBCFE0027181A /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA0E991B4FBCFE0027181A /* MMDrawerBarButtonItem.m */; };
+		EFEA0EA41B4FBCFE0027181A /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA0E9C1B4FBCFE0027181A /* MMDrawerController.m */; };
+		EFEA0EA51B4FBCFE0027181A /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA0E9E1B4FBCFE0027181A /* MMDrawerVisualState.m */; };
+		EFEA0EA61B4FBCFE0027181A /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEA0EA01B4FBCFE0027181A /* UIViewController+MMDrawerController.m */; };
+		EFEA0EA71B4FBCFE0027181A /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = EFEA0EA11B4FBCFE0027181A /* README.md */; };
 		EFF3D00A1B2EAE2A00B2F446 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3D0091B2EAE2A00B2F446 /* Order.m */; };
 		EFF3D0CF1B2EB4A800B2F446 /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3D0BF1B2EB4A800B2F446 /* base64.m */; };
 		EFF3D0D01B2EB4A800B2F446 /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF3D0C21B2EB4A800B2F446 /* DataSigner.m */; };
@@ -550,6 +556,17 @@
 		EFE837CA1B12FEFF0093E14E /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		EFE837CB1B12FEFF0093E14E /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
 		EFE837CC1B12FEFF0093E14E /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
+		EFEA0E961B4FBCFE0027181A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		EFEA0E981B4FBCFE0027181A /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
+		EFEA0E991B4FBCFE0027181A /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		EFEA0E9A1B4FBCFE0027181A /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
+		EFEA0E9B1B4FBCFE0027181A /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
+		EFEA0E9C1B4FBCFE0027181A /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
+		EFEA0E9D1B4FBCFE0027181A /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
+		EFEA0E9E1B4FBCFE0027181A /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
+		EFEA0E9F1B4FBCFE0027181A /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		EFEA0EA01B4FBCFE0027181A /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		EFEA0EA11B4FBCFE0027181A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EFF3D0081B2EAE2A00B2F446 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		EFF3D0091B2EAE2A00B2F446 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		EFF3D0721B2EB4A800B2F446 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -1339,6 +1356,7 @@
 		EF8D672C1B0DD07E008B6909 /* other(其它) */ = {
 			isa = PBXGroup;
 			children = (
+				EFEA0E951B4FBCFE0027181A /* MMDrawerController */,
 				EFC9B7CD1B3E8BE300A09686 /* MineLoveCar */,
 				832C1DF61B3699E1004A8774 /* fanmoreButton */,
 				83D495411B15998C00935889 /* 扩展 */,
@@ -1805,6 +1823,32 @@
 			path = ViewDeck;
 			sourceTree = "<group>";
 		};
+		EFEA0E951B4FBCFE0027181A /* MMDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				EFEA0E961B4FBCFE0027181A /* LICENSE */,
+				EFEA0E971B4FBCFE0027181A /* MMDrawerController */,
+				EFEA0EA11B4FBCFE0027181A /* README.md */,
+			);
+			path = MMDrawerController;
+			sourceTree = "<group>";
+		};
+		EFEA0E971B4FBCFE0027181A /* MMDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				EFEA0E981B4FBCFE0027181A /* MMDrawerBarButtonItem.h */,
+				EFEA0E991B4FBCFE0027181A /* MMDrawerBarButtonItem.m */,
+				EFEA0E9A1B4FBCFE0027181A /* MMDrawerController+Subclass.h */,
+				EFEA0E9B1B4FBCFE0027181A /* MMDrawerController.h */,
+				EFEA0E9C1B4FBCFE0027181A /* MMDrawerController.m */,
+				EFEA0E9D1B4FBCFE0027181A /* MMDrawerVisualState.h */,
+				EFEA0E9E1B4FBCFE0027181A /* MMDrawerVisualState.m */,
+				EFEA0E9F1B4FBCFE0027181A /* UIViewController+MMDrawerController.h */,
+				EFEA0EA01B4FBCFE0027181A /* UIViewController+MMDrawerController.m */,
+			);
+			path = MMDrawerController;
+			sourceTree = "<group>";
+		};
 		EFF3D0711B2EB4A800B2F446 /* openssl */ = {
 			isa = PBXGroup;
 			children = (
@@ -2038,6 +2082,7 @@
 				EFCC8DBF1B46282200EFD5A7 /* master.jpg in Resources */,
 				836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */,
 				83E263FF1B2F018500A2AC96 /* unicode_to_hanyu_pinyin.txt in Resources */,
+				EFEA0EA21B4FBCFE0027181A /* LICENSE in Resources */,
 				EF40C31D1B456352003C2E32 /* failed.wav in Resources */,
 				EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				EF565D441B17091F00FC2D6B /* LoginViewController.xib in Resources */,
@@ -2099,6 +2144,7 @@
 				EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */,
 				EF565D1A1B16DD9900FC2D6B /* ForeshowTableViewCell.m in Sources */,
 				EFCCA4C51B12D6E400C015A7 /* MJFoundation.m in Sources */,
+				EFEA0EA41B4FBCFE0027181A /* MMDrawerController.m in Sources */,
 				83E490051B1D749A00A44FC8 /* detailViewController.m in Sources */,
 				EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */,
 				EFAEB32A1B29557100855D25 /* taskDetail.m in Sources */,
@@ -2117,6 +2163,8 @@
 				EFAEB3271B291DDD00855D25 /* FSMediaPicker.m in Sources */,
 				836D6AB51B1C872300119B3F /* DiscipleCell.m in Sources */,
 				83D495471B159AC300935889 /* UIViewController+FM.m in Sources */,
+				EFEA0EA61B4FBCFE0027181A /* UIViewController+MMDrawerController.m in Sources */,
+				EFEA0EA51B4FBCFE0027181A /* MMDrawerVisualState.m in Sources */,
 				EF49ECF41B0D81A40038A203 /* AppDelegate.m in Sources */,
 				EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */,
 				EFCCA4C81B12D6E400C015A7 /* MJMethod.m in Sources */,
@@ -2173,6 +2221,7 @@
 				83AB70911B2A762000B2D09A /* SendController.m in Sources */,
 				83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */,
 				83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */,
+				EFEA0EA31B4FBCFE0027181A /* MMDrawerBarButtonItem.m in Sources */,
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
 				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
@@ -2192,6 +2241,7 @@
 				EFF3D0D01B2EB4A800B2F446 /* DataSigner.m in Sources */,
 				8382FF981B33A5C5003A7CB9 /* JoinNextController.m in Sources */,
 				83EAD9131B2AB8C7006870D3 /* BegController.m in Sources */,
+				EFEA0EA71B4FBCFE0027181A /* README.md in Sources */,
 				EFF3D0CF1B2EB4A800B2F446 /* base64.m in Sources */,
 				EFD02B431B155CDA00D11D6D /* MJSettingGroup.m in Sources */,
 				EF2E54421B285E6A0060E965 /* MessageFrame.m in Sources */,
