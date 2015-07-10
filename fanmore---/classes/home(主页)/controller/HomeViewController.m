@@ -127,7 +127,7 @@ static int refreshCount = 0;
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
-    if (![user.welcomeTip isEqualToString:@""]) {
+    if (user.welcomeTip.length) {
         UILabel * welable = [[UILabel alloc] init];
         welable.layer.cornerRadius = 5;
         welable.layer.masksToBounds = YES;

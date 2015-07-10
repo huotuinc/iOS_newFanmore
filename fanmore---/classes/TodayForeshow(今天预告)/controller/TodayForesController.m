@@ -27,10 +27,10 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     if (_Notices == nil) {
         _Notices = [NSMutableArray array];
-        NSMutableDictionary * params = [NSMutableDictionary dictionary];
-        params[@"pagingTag"] = @"";
-        params[@"pagingSize"] = @(pagesize);
-        [self getNewMoreData:params];
+//        NSMutableDictionary * params = [NSMutableDictionary dictionary];
+//        params[@"pagingTag"] = @"";
+//        params[@"pagingSize"] = @(pagesize);
+//        [self getNewMoreData:params];
        
     }
     return _Notices;
@@ -63,6 +63,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     //集成刷新控件
     [self setupRefresh];
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"ForeshowTableViewCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(headerRereshing) name:ReLoad object:nil];
 }
@@ -76,7 +77,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     //#warning 自动刷新(一进入程序就下拉刷新)
-//    [self.tableView headerBeginRefreshing];
+    [self.tableView headerBeginRefreshing];
     
    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
@@ -122,9 +123,9 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 - (void)getMoreData:(NSMutableDictionary *) params{
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
-    [MBProgressHUD showMessage:nil];
+//    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001) {//访问成果
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -142,9 +143,9 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
                 [MBProgressHUD showSuccess:@"加载成功,没有更多数据"];
             }
         }
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
 
     }];
     
@@ -158,9 +159,9 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
     __weak TodayForesController * wself = self;
-    [MBProgressHUD showMessage:nil];
+//    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001) {//访问成果
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -178,9 +179,9 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
             wself.Notices = [NSMutableArray arrayWithArray:taskArray];
             [wself.tableView reloadData];    //刷新数据
         }
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
 //        NSLog(@"%@",[error description]);
     }];
 }
@@ -225,7 +226,7 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 {
     
     
-    ForeshowTableViewCell *cell = nil;
+    ForeshowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:homeCellidentify];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ForeshowTableViewCell" owner:nil options:nil] lastObject];
         cell.delegate = self;

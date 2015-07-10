@@ -150,7 +150,8 @@ static NSString *message = @"有一条新消息";
 {
 
     [self getRemoteNotificationWithUserInfo:userInfo];
-
+    
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 /**
@@ -547,11 +548,24 @@ static NSString *message = @"有一条新消息";
 
 //当前控制器转跳方法
 - (void)gotoDetailController {
-    UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
-    detail.taskId = [self.taskId intValue];
-    detail.ishaveget = NO;
-    [self.currentVC.navigationController pushViewController:detail animated:YES];
+    if ([self.currentVC isKindOfClass:[detailViewController class]]) {
+        detailViewController *detail = (detailViewController *)self.currentVC;
+        if (detail.taskId == [self.taskId intValue]) {
+        }else {
+            UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+            detail.taskId = [self.taskId intValue];
+            detail.ishaveget = NO;
+            [self.currentVC.navigationController pushViewController:detail animated:YES];
+        }
+    }else {
+        UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+        detail.taskId = [self.taskId intValue];
+        detail.ishaveget = NO;
+        [self.currentVC.navigationController pushViewController:detail animated:YES];
+    }
+    
 }
 
 //去消息列表
