@@ -514,6 +514,7 @@ static NSString *message = @"有一条新消息";
             {
                 self.titleString = userInfo[@"aps"][@"alert"][@"title"];
                 self.taskId = userInfo[@"data"];
+                NSLog(@"%@",self.taskId);
                 UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
                 ac.tag = 101;
                 [ac show];
@@ -550,9 +551,9 @@ static NSString *message = @"有一条新消息";
 - (void)gotoDetailController {
     if ([self.currentVC isKindOfClass:[detailViewController class]]) {
         
-        detailViewController *detail = (detailViewController *)self.currentVC;
+        detailViewController *detail1 = (detailViewController *)self.currentVC;
         
-        if (detail.taskId == [self.taskId intValue]) {
+        if (detail1.taskId == [self.taskId intValue]) {
         }else {
             UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
             detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
