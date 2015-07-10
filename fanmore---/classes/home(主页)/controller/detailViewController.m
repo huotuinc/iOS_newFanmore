@@ -77,8 +77,26 @@
 
 - (void)setupview{
     
-   
-    if (self.ishaveget) {//已答完
+    if(self.sampleData.type == 1){
+        self.title = @"答题类";
+    }else if(self.sampleData.type == 2){
+        self.title = @"报名类";
+    }else if (self.sampleData.type == 3){
+        self.title = @"画册类";
+    }else{
+        self.title = @"游戏类";
+    }
+    if(self.sampleData.last <= 0){
+        self.answerBtn.backgroundColor = LWColor(163, 163, 163);
+        self.answerBtn.layer.cornerRadius = 6;
+        self.answerBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+        self.answerBtn.layer.borderWidth = 0.5;
+        [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.answerBtn.userInteractionEnabled = NO;
+        //        NSString *ml = [self xiaoshudianweishudeal:self.flay];
+        [self.answerBtn setTitle:[NSString stringWithFormat:@"已抢完"] forState:UIControlStateNormal];
+        self.answerBtn.backgroundColor = [UIColor grayColor];
+    }else if (self.ishaveget) {//已答完
         self.answerBtn.backgroundColor = LWColor(163, 163, 163);
         self.answerBtn.layer.cornerRadius = 6;
         self.answerBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
@@ -166,6 +184,7 @@
             wself.sampleData = [taskData objectWithKeyValues:json[@"resultData"][@"task"]];
             [wself.detailTasks removeAllObjects];
             [wself.detailTasks addObjectsFromArray:detailTaskS];
+            
             [wself setupview];
             // 初始化
             [wself setup];

@@ -402,8 +402,8 @@ static int refreshCount = 0;
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     detailVc.taskId = task.taskId; //获取问题编号
     detailVc.delegate = self;
-    (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
-
+    detailVc.ishaveget = (task.reward>0|task.taskFailed>0)?(YES):(NO);
+    
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 /**
