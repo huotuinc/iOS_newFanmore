@@ -155,8 +155,8 @@
             
 //            NSLog(@"答题完成了");
             if (self.illgel>0) {
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
+                NSDictionary * aa = @{@"hTaskId":@(wself.taskId)};
+                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil userInfo:aa];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else if(self.reward>0){
                 
@@ -181,7 +181,8 @@
                     }
                 }
             }else{
-                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
+                NSDictionary * aa = @{@"hTaskId":@(wself.taskId)};
+                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil userInfo:aa];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
             
