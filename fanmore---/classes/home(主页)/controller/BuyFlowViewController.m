@@ -332,13 +332,6 @@ static NSString * _company = nil;
         
         params[@"sign"] = [payManager createMd5Sign:params];
         
-        [UserLoginTool loginRequestGet:@"https://api.mch.weixin.qq.com/pay/unifiedorder" parame:params success:^(id json) {
-            NSLog(@"%@",json);
-        } failure:^(NSError *error) {
-            NSLog(@"%@",error.description);
-        }];
-        
-
         //获取prepayId（预支付交易会话标识）
         NSString * prePayid = nil;
         prePayid  = [payManager sendPrepay:params];
