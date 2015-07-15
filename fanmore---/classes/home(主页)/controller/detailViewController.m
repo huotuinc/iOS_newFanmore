@@ -369,6 +369,8 @@
         WebController *answer = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
         answer.type = 4;
         answer.taskId = self.taskId;
+        taskDetail * tas = self.detailTasks[0];
+        answer.relexUrl = tas.relexUrl;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
