@@ -17,6 +17,10 @@
 #import "buyflay.h"
 #import "flayModel.h"
 
+#define WeiXinPayId @"wxaeda2d5603b12302"
+#define WeiXinPayMerchantId @"1251040401"
+#define wxpayNotifyUri @"http://newtask.fanmore.cn/callbackWxpay"
+#define wxpayKey @"8c3b660de36a3b3fb678ca865e31f0f3"
 
 @interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
 /**手机运行商*/
@@ -41,7 +45,6 @@
 @property(nonatomic,strong) NSArray * goods;
 
 
-
 @property(nonatomic,strong)buyflay * buyflay;
 /**购买按钮*/
 - (IBAction)buyButtonClick:(UIButton *)sender;
@@ -63,7 +66,7 @@ static NSString * _company = nil;
         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
-//            NSLog(@"购买流量明细%@",json);
+            NSLog(@"购买流量明细%@",json);
             if ([json[@"systemResultCode"] intValue] == 1) {
                 if ([json[@"resultCode"] intValue] == 56001) {
                     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -149,6 +152,9 @@ static NSString * _company = nil;
     
     [super viewDidLoad];
     self.title = @"购买流量";
+    
+    [WXApi registerApp:@"wxaeda2d5603b12302" withDescription:@"fanmore--3.0.0"]; //像微信支付注册
+    
     _company = self.buyflay.mobileMsg;
     
     [self.currentPriceLable setTintColor:[UIColor redColor]];
@@ -301,65 +307,80 @@ static NSString * _company = nil;
  */
 - (NSMutableDictionary *)PayByWeiXinParame{
     
-    
-    payRequsestHandler *payManager = [[payRequsestHandler alloc] init];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"appid"] = @"wx8888888888888888";
-    params[@"mch_id"] = @"1251040401";     //微信支付分配的商户号
-    params[@"device_info"] = @"APP-001"; //支付设备号或门店号
-    time_t now;
-    time(&now);
-    NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
-    NSString * nonce_str	= [WXUtil md5:time_stamp];
-    params[@"nonce_str"] = nonce_str; //随机字符串，不长于32位。推荐随机数生成算法
-    params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
-    params[@"body"] = @"wx8888888888888888"; //商品或支付单简要描述
-    params[@"notify_url"] = @"wx8888888888888888";  //接收微信支付异步通知回调地址
-    params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
-    params[@"spbill_create_ip"] = @"196.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
-    params[@"total_fee"] = @"wx8888888888888888";  //订单总金额，只能为整数，详见支付金额
-    
-    //获取prepayId（预支付交易会话标识）
-    NSString * prePayid = nil;
-    prePayid  = [payManager sendPrepay:params];
-    
-    
-    
-    if ( prePayid != nil) {
-        //获取到prepayid后进行第二次签名
+    payRequsestHandler * payManager = [[payRequsestHandler alloc] init];
+    [payManager setKey:wxpayKey];
+    BOOL isOk = [payManager init:WeiXinPayId mch_id:WeiXinPayMerchantId];
+    if (isOk) {
         
-        NSString    *package, *time_stamp, *nonce_str;
-        //设置支付参数
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        params[@"appid"] = WeiXinPayId;
+        params[@"mch_id"] = WeiXinPayMerchantId;     //微信支付分配的商户号
+//        params[@"device_info"] = @"APP-001"; //支付设备号或门店号
         time_t now;
         time(&now);
-        time_stamp  = [NSString stringWithFormat:@"%ld", now];
-        nonce_str	= [WXUtil md5:time_stamp];
-        //重新按提交格式组包，微信客户端暂只支持package=Sign=WXPay格式，须考虑升级后支持携带package具体参数的情况
-        //package       = [NSString stringWithFormat:@"Sign=%@",package];
-        package         = @"Sign=WXPay";
-        //第二次签名参数列表
-        NSMutableDictionary *signParams = [NSMutableDictionary dictionary];
-        [signParams setObject: @"1123213"        forKey:@"appid"];
-        [signParams setObject: nonce_str    forKey:@"noncestr"];
-        [signParams setObject: package      forKey:@"package"];
-        [signParams setObject: @"1233213"        forKey:@"partnerid"];
-        [signParams setObject: time_stamp   forKey:@"timestamp"];
-        [signParams setObject: prePayid     forKey:@"prepayid"];
-        //[signParams setObject: @"MD5"       forKey:@"signType"];
-        //生成签名
-        NSString *sign  = [payManager createMd5Sign:signParams];
+        NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
+        NSString * nonce_str	= [WXUtil md5:time_stamp];
+        params[@"nonce_str"] = nonce_str; //随机字符串，不长于32位。推荐随机数生成算法
+        params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
+        params[@"body"] = @"31231233131"; //商品或支付单简要描述
+        params[@"notify_url"] = wxpayNotifyUri;  //接收微信支付异步通知回调地址
+        params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
+        params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
+        params[@"total_fee"] = @"1";  //订单总金额，只能为整数，详见支付金额
         
-        //添加签名
-        [signParams setObject: sign         forKey:@"sign"];
+    
         
-        [_debugInfo appendFormat:@"第二步签名成功，sign＝%@\n",sign];
+        params[@"sign"] = [payManager createMd5Sign:params];
         
-        //返回参数列表
-        return signParams;
+        [UserLoginTool loginRequestGet:@"https://api.mch.weixin.qq.com/pay/unifiedorder" parame:params success:^(id json) {
+            NSLog(@"%@",json);
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error.description);
+        }];
         
-    }else{
-        [_debugInfo appendFormat:@"获取prepayid失败！\n"];
+
+        //获取prepayId（预支付交易会话标识）
+        NSString * prePayid = nil;
+        prePayid  = [payManager sendPrepay:params];
+    
+        NSString * deInfo = [payManager getDebugifo];
+        NSLog(@"xxxx----%@",deInfo);
+        if ( prePayid != nil) {
+            //获取到prepayid后进行第二次签名
+            
+            NSString    *package, *time_stamp, *nonce_str;
+            //设置支付参数
+            time_t now;
+            time(&now);
+            time_stamp  = [NSString stringWithFormat:@"%ld", now];
+            nonce_str	= [WXUtil md5:time_stamp];
+            //重新按提交格式组包，微信客户端暂只支持package=Sign=WXPay格式，须考虑升级后支持携带package具体参数的情况
+            //package       = [NSString stringWithFormat:@"Sign=%@",package];
+            package         = @"Sign=WXPay";
+            //第二次签名参数列表
+            NSMutableDictionary *signParams = [NSMutableDictionary dictionary];
+            [signParams setObject: @"1123213"        forKey:@"appid"];
+            [signParams setObject: nonce_str    forKey:@"noncestr"];
+            [signParams setObject: package      forKey:@"package"];
+            [signParams setObject: @"1233213"        forKey:@"partnerid"];
+            [signParams setObject: time_stamp   forKey:@"timestamp"];
+            [signParams setObject: prePayid     forKey:@"prepayid"];
+            //[signParams setObject: @"MD5"       forKey:@"signType"];
+            //生成签名
+            NSString *sign  = [payManager createMd5Sign:signParams];
+            
+            //添加签名
+            [signParams setObject: sign         forKey:@"sign"];
+            
+            [_debugInfo appendFormat:@"第二步签名成功，sign＝%@\n",sign];
+            
+            //返回参数列表
+            return signParams;
+            
+        }else{
+            [_debugInfo appendFormat:@"获取prepayid失败！\n"];
+        }
+        
     }
     return nil;
 }
