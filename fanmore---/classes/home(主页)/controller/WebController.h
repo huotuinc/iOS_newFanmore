@@ -46,6 +46,8 @@
 /**问题编号*/
 @property(assign,nonatomic)  int taskId;
 
+/**游戏外链*/
+@property(nonatomic,copy) NSString * relexUrl;
 
 @property(nonatomic,strong) id <WebControllerDelegate> delegate;
 @end
