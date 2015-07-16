@@ -23,7 +23,8 @@
 #define wxpayNotifyUri @"http://newtask.fanmore.cn/callbackWxpay"
 //#define wxpayKey @"8c3b660de36a3b3fb678ca865e31f0f3"
 //#define wxpayKey @"10101010101010101010101010101010"
-#define wxpayKey @"0db0d6908d6ae6a09b0a3727888f0da6"
+//#define wxpayKey @"0db0d6908d6ae6a09b0a3727888f0da6"
+#define wxpayKey @"0db0d4908a6ae6a09b0a7727878f0ca6"
 
 @interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
 /**手机运行商*/
