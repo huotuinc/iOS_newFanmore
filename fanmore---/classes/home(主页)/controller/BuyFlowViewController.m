@@ -357,7 +357,7 @@ static NSString * _company = nil;
             [signParams setObject: WeiXinPayId  forKey:@"appid"];
             [signParams setObject: nonce_str    forKey:@"noncestr"];
             [signParams setObject: package      forKey:@"package"];
-            [signParams setObject: @"1233213"   forKey:@"partnerid"];
+            [signParams setObject: WeiXinPayMerchantId   forKey:@"partnerid"];
             [signParams setObject: time_stamp   forKey:@"timestamp"];
             [signParams setObject: prePayid     forKey:@"prepayid"];
             //[signParams setObject: @"MD5"       forKey:@"signType"];
