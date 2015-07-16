@@ -226,7 +226,7 @@ static NSString * _company = nil;
         [self PayByAlipay]; // 支付宝
     }
     if (buttonIndex == 1) {
-        [self PayByWeiXinParame]; // 微信支付
+        [self WeiChatPay]; // 微信支付
     }
 }
 
@@ -302,7 +302,6 @@ static NSString * _company = nil;
 
 }
 
-
 /**
  *  微信支付预zhifu
  */
@@ -330,7 +329,7 @@ static NSString * _company = nil;
         params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
         params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
         params[@"total_fee"] = @"1";  //订单总金额，只能为整数，详见支付金额
-        params[@"device_info"] = @"CJ";
+        params[@"device_info"] = DeviceNo;
         
     
         
@@ -340,8 +339,7 @@ static NSString * _company = nil;
         NSString * prePayid = nil;
         prePayid  = [payManager sendPrepay:params];
     
-        NSString * deInfo = [payManager getDebugifo];
-        NSLog(@"xxxx----%@",deInfo);
+       
         if ( prePayid != nil) {
             //获取到prepayid后进行第二次签名
             
@@ -356,10 +354,10 @@ static NSString * _company = nil;
             package         = @"Sign=WXPay";
             //第二次签名参数列表
             NSMutableDictionary *signParams = [NSMutableDictionary dictionary];
-            [signParams setObject: @"1123213"        forKey:@"appid"];
+            [signParams setObject: WeiXinPayId  forKey:@"appid"];
             [signParams setObject: nonce_str    forKey:@"noncestr"];
             [signParams setObject: package      forKey:@"package"];
-            [signParams setObject: @"1233213"        forKey:@"partnerid"];
+            [signParams setObject: @"1233213"   forKey:@"partnerid"];
             [signParams setObject: time_stamp   forKey:@"timestamp"];
             [signParams setObject: prePayid     forKey:@"prepayid"];
             //[signParams setObject: @"MD5"       forKey:@"signType"];
@@ -387,36 +385,31 @@ static NSString * _company = nil;
  *  微信pay
  */
 - (void)WeiChatPay{
-    //创建支付签名对象
-    payRequsestHandler *req = [[payRequsestHandler alloc] init];
-    //初始化支付签名对象
-    [req init:APP_ID mch_id:MCH_ID];
-    //设置密钥
-    [req setKey:PARTNER_ID];
+    
     
     //获取到实际调起微信支付的参数后，在app端调起支付
-    NSMutableDictionary *dict = [req sendPay_demo];
-    if(dict == nil){
-        //错误提示
-        NSString *debug = [req getDebugifo];
-        NSLog(@"%@\n\n",debug);
+    NSMutableDictionary *dict = [self PayByWeiXinParame];
+    if(dict != nil){
+        NSMutableString *retcode = [dict objectForKey:@"retcode"];
+        if (retcode.intValue == 0){
+            NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+            //调起微信支付
+            PayReq* req             = [[PayReq alloc] init];
+            req.openID              = [dict objectForKey:@"appid"];
+            req.partnerId           = [dict objectForKey:@"partnerid"];
+            req.prepayId            = [dict objectForKey:@"prepayid"];
+            req.nonceStr            = [dict objectForKey:@"noncestr"];
+            req.timeStamp           = stamp.intValue;
+            req.package             = [dict objectForKey:@"package"];
+            req.sign                = [dict objectForKey:@"sign"];
+            [WXApi sendReq:req];
+        }else{
+            NSLog(@"提示信息%@",[dict objectForKey:@"retmsg"]);
+        }
+        
     }else{
-        NSLog(@"%@\n\n",[req getDebugifo]);
-        //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
-        
-        NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
-        
-        //调起微信支付
-        PayReq* req             = [[PayReq alloc] init];
-        req.openID              = [dict objectForKey:@"appid"];
-        req.partnerId           = [dict objectForKey:@"partnerid"];
-        req.prepayId            = [dict objectForKey:@"prepayid"];
-        req.nonceStr            = [dict objectForKey:@"noncestr"];
-        req.timeStamp           = stamp.intValue;
-        req.package             = [dict objectForKey:@"package"];
-        req.sign                = [dict objectForKey:@"sign"];
-        
-        [WXApi sendReq:req];
+        NSLog(@"提示信息返回错误");
+
     }
 
     
