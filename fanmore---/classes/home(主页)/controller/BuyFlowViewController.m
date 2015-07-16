@@ -17,10 +17,13 @@
 #import "buyflay.h"
 #import "flayModel.h"
 
+//#define WeiXinPayId @"wxd8c58460d0199dd5"
 #define WeiXinPayId @"wxaeda2d5603b12302"
 #define WeiXinPayMerchantId @"1251040401"
 #define wxpayNotifyUri @"http://newtask.fanmore.cn/callbackWxpay"
-#define wxpayKey @"8c3b660de36a3b3fb678ca865e31f0f3"
+//#define wxpayKey @"8c3b660de36a3b3fb678ca865e31f0f3"
+//#define wxpayKey @"10101010101010101010101010101010"
+#define wxpayKey @"0db0d6908d6ae6a09b0a3727888f0da6"
 
 @interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
 /**手机运行商*/
@@ -153,7 +156,8 @@ static NSString * _company = nil;
     [super viewDidLoad];
     self.title = @"购买流量";
     
-    [WXApi registerApp:@"wxaeda2d5603b12302" withDescription:@"fanmore--3.0.0"]; //像微信支付注册
+    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
+    NSLog(@"wxRegistered:%d",wxRegistered);
     
     _company = self.buyflay.mobileMsg;
     
@@ -313,24 +317,27 @@ static NSString * _company = nil;
     if (isOk) {
         
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        
+        NSString *noncestr  = [NSString stringWithFormat:@"%d", rand()];
         params[@"appid"] = WeiXinPayId;
         params[@"mch_id"] = WeiXinPayMerchantId;     //微信支付分配的商户号
 //        params[@"device_info"] = @"APP-001"; //支付设备号或门店号
-        time_t now;
-        time(&now);
-        NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
-        NSString * nonce_str	= [WXUtil md5:time_stamp];
-        params[@"nonce_str"] = nonce_str; //随机字符串，不长于32位。推荐随机数生成算法
+//        time_t now;
+//        time(&now);
+//        NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
+//        NSString * nonce_str	= [WXUtil md5:time_stamp];
+        params[@"nonce_str"] = noncestr; //随机字符串，不长于32位。推荐随机数生成算法
         params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
         params[@"body"] = @"31231233131"; //商品或支付单简要描述
         params[@"notify_url"] = wxpayNotifyUri;  //接收微信支付异步通知回调地址
         params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
         params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
         params[@"total_fee"] = @"1";  //订单总金额，只能为整数，详见支付金额
+        params[@"device_info"] = @"CJ";
         
     
         
-        params[@"sign"] = [payManager createMd5Sign:params];
+//        params[@"sign"] = [payManager createMd5Sign:params];
         
         //获取prepayId（预支付交易会话标识）
         NSString * prePayid = nil;
