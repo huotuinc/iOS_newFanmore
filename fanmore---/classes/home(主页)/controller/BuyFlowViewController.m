@@ -196,20 +196,15 @@ static NSString * _company = nil;
 }
 
 
+/**
+ *  购买按钮点击
+ *
+ *  @param sender <#sender description#>
+ */
 - (IBAction)buyButtonClick:(id)sender {
-    
-//    UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
-//    if (scell.selected == YES) {
-//        
-//        NSString * good = self.goods[self.selected.row];
-////        NSLog(@"%@",good);
-//    }
     
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择支付方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"支付宝", @"微信",nil];
     [actionSheet showInView:self.view];
-    
-    
-//    NSLog(@"购买流量xxxxxxxxxxxxxxxxxxx");
 }
 
 
@@ -302,6 +297,7 @@ static NSString * _company = nil;
 
 }
 
+
 /**
  *  微信支付预zhifu
  */
@@ -322,7 +318,7 @@ static NSString * _company = nil;
         NSString * nonce_str	= [WXUtil md5:time_stamp];
         params[@"nonce_str"] = nonce_str; //随机字符串，不长于32位。推荐随机数生成算法
         params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
-        params[@"body"] = @"31231233131"; //商品或支付单简要描述
+        params[@"body"] = @"大三大四的"; //商品或支付单简要描述
         params[@"notify_url"] = wxpayNotifyUri;  //接收微信支付异步通知回调地址
         params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
         params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
