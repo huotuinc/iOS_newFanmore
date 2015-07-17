@@ -122,6 +122,7 @@ static int refreshCount = 0;
     //集成刷新控件
     [self setupRefresh];
     [self.tableView removeSpaces];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
