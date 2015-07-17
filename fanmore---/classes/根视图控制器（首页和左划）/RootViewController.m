@@ -48,7 +48,7 @@
     }];
     
     [self setShowsShadow:NO];
-    [MMExampleDrawerVisualStateManager sharedManager].leftDrawerAnimationType = MMDrawerAnimationTypeSwingingDoor;
+    [MMExampleDrawerVisualStateManager sharedManager].leftDrawerAnimationType = MMDrawerAnimationTypeSlideAndScale ;
     
     
 }
