@@ -92,6 +92,10 @@
         
     } else if(self.type == 4){ //游戏类
         
+        NSURL * urlstr = [NSURL URLWithString:self.relexUrl];
+        NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
+        [self.webView loadRequest:request];
+        
     }else if(self.type == 5){
         NSURL * urlstr = [NSURL URLWithString:glob.aboutURL];
         NSURLRequest * request = [NSURLRequest requestWithURL:urlstr];
@@ -155,8 +159,8 @@
             
 //            NSLog(@"答题完成了");
             if (self.illgel>0) {
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
+                NSDictionary * aa = @{@"hTaskId":@(wself.taskId)};
+                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil userInfo:aa];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else if(self.reward>0){
                 
@@ -181,7 +185,8 @@
                     }
                 }
             }else{
-                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil];
+                NSDictionary * aa = @{@"hTaskId":@(wself.taskId)};
+                [[NSNotificationCenter defaultCenter] postNotificationName:RefreshHomeDate object:nil userInfo:aa];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
             

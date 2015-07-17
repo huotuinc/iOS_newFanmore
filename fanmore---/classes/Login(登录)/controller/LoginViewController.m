@@ -177,7 +177,7 @@
     __weak LoginViewController * wself = self;
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
-        NSLog(@"login========%@",json);
+//        NSLog(@"login========%@",json);
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 54003) {
             [MBProgressHUD hideHUD];

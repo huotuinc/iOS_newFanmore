@@ -4,7 +4,7 @@
 //
 //  Created by lhb on 15/5/21.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  adasd
 
 #import "AppDelegate.h"
 #import "MobClick.h"
@@ -150,7 +150,8 @@ static NSString *message = @"有一条新消息";
 {
 
     [self getRemoteNotificationWithUserInfo:userInfo];
-
+    
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 /**
@@ -226,11 +227,11 @@ static NSString *message = @"有一条新消息";
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
-//                                                      NSLog(@"result = %@",resultDic);
+                                                      NSLog(@"aliPay ----- result = %@",resultDic);
                                                   }]; }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-//            NSLog(@"result = %@",resultDic);
+            NSLog(@"aliPay ----- result = %@",resultDic);
         }];
     }
     
@@ -513,6 +514,7 @@ static NSString *message = @"有一条新消息";
             {
                 self.titleString = userInfo[@"aps"][@"alert"][@"title"];
                 self.taskId = userInfo[@"data"];
+                NSLog(@"%@",self.taskId);
                 UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
                 ac.tag = 101;
                 [ac show];
@@ -547,11 +549,26 @@ static NSString *message = @"有一条新消息";
 
 //当前控制器转跳方法
 - (void)gotoDetailController {
-    UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
-    detail.taskId = [self.taskId intValue];
-    detail.ishaveget = NO;
-    [self.currentVC.navigationController pushViewController:detail animated:YES];
+    if ([self.currentVC isKindOfClass:[detailViewController class]]) {
+        
+        detailViewController *detail1 = (detailViewController *)self.currentVC;
+        
+        if (detail1.taskId == [self.taskId intValue]) {
+        }else {
+            UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+            detail.taskId = [self.taskId intValue];
+            detail.ishaveget = NO;
+            [self.currentVC.navigationController pushViewController:detail animated:YES];
+        }
+    }else {
+        UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+        detail.taskId = [self.taskId intValue];
+        detail.ishaveget = NO;
+        [self.currentVC.navigationController pushViewController:detail animated:YES];
+    }
+    
 }
 
 //去消息列表

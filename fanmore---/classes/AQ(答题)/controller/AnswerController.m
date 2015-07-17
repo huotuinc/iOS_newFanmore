@@ -106,21 +106,23 @@ int _rightQuest = 0;  //纪录正确的答题数
                 self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wailian6401136"]];
             }
         }
-    }
-    
-    if (ScreenWidth == 375) {
-        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt7501334"]];
-    }
-    if (ScreenWidth == 414) {
-        self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt12422208"]];
-    }
-    if (ScreenWidth == 320) {
-        if (ScreenHeight <= 480) {
-            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt640960"]];
-        }else {
-            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt6401136"]];
+    }else{
+        if (ScreenWidth == 375) {
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt7501334"]];
+        }
+        if (ScreenWidth == 414) {
+            self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt12422208"]];
+        }
+        if (ScreenWidth == 320) {
+            if (ScreenHeight <= 480) {
+                self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt640960"]];
+            }else {
+                self.bgView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dt6401136"]];
+            }
         }
     }
+    
+    
 }
 
 - (void)_setBgImageWrong

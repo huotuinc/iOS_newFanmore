@@ -77,8 +77,26 @@
 
 - (void)setupview{
     
-   
-    if (self.ishaveget) {//已答完
+    if(self.sampleData.type == 1){
+        self.title = @"答题类";
+    }else if(self.sampleData.type == 2){
+        self.title = @"报名类";
+    }else if (self.sampleData.type == 3){
+        self.title = @"画册类";
+    }else{
+        self.title = @"游戏类";
+    }
+    if(self.sampleData.last <= 0){
+        self.answerBtn.backgroundColor = LWColor(163, 163, 163);
+        self.answerBtn.layer.cornerRadius = 6;
+        self.answerBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+        self.answerBtn.layer.borderWidth = 0.5;
+        [self.answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.answerBtn.userInteractionEnabled = NO;
+        //        NSString *ml = [self xiaoshudianweishudeal:self.flay];
+        [self.answerBtn setTitle:[NSString stringWithFormat:@"已抢完"] forState:UIControlStateNormal];
+        self.answerBtn.backgroundColor = [UIColor grayColor];
+    }else if (self.ishaveget) {//已答完
         self.answerBtn.backgroundColor = LWColor(163, 163, 163);
         self.answerBtn.layer.cornerRadius = 6;
         self.answerBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
@@ -152,7 +170,7 @@
     __weak detailViewController * wself = self;
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
-//        NSLog(@"%@",json);
+//        NSLog(@"xxxxx%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -166,6 +184,7 @@
             wself.sampleData = [taskData objectWithKeyValues:json[@"resultData"][@"task"]];
             [wself.detailTasks removeAllObjects];
             [wself.detailTasks addObjectsFromArray:detailTaskS];
+            
             [wself setupview];
             // 初始化
             [wself setup];
@@ -223,8 +242,8 @@
     if ([login isEqualToString:@"wrong"]) {
         [MBProgressHUD showError:@"未登录"];
         LoginViewController * aa= [[LoginViewController alloc] init];
+        aa.delegate = self;
         UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
-        
         [self presentViewController:bb animated:YES completion:nil];
         return;
         
@@ -350,6 +369,8 @@
         WebController *answer = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
         answer.type = 4;
         answer.taskId = self.taskId;
+        taskDetail * tas = self.detailTasks[0];
+        answer.relexUrl = tas.relexUrl;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
@@ -460,7 +481,7 @@
 
 - (void)LoginViewDelegate:(int)PushType{
 
-//    NSLog(@"登入代理方法dasdasdasdasd");
+
     [self getQuestion];
     
 }

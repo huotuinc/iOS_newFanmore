@@ -9,7 +9,7 @@
 #import "HomeViewController.h"
 #import "TrafficShowController.h"
 #import "RootViewController.h"
-#import <UIViewController+MMDrawerController.h>
+#import "UIViewController+MMDrawerController.h"
 #import "HomeCell.h"
 #import "detailViewController.h"
 #import "BuyFlowViewController.h"
@@ -128,7 +128,7 @@ static int refreshCount = 0;
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData * user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     
-    if (![user.welcomeTip isEqualToString:@""]) {
+    if (user.welcomeTip.length) {
         UILabel * welable = [[UILabel alloc] init];
         welable.layer.cornerRadius = 5;
         welable.layer.masksToBounds = YES;
@@ -150,9 +150,20 @@ static int refreshCount = 0;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeViewControllerGetNot) name:@"homeViewControllerShow" object:nil];
+    
 
 }
 
+/**
+ *  接受通知方法
+ *
+ *  @return
+ */
+- (void)homeViewControllerGetNot
+{
+    [self saveControllerToAppDelegate:self];
+}
 
 /**
  *  集成刷新控件
@@ -313,7 +324,7 @@ static int refreshCount = 0;
             
         }];
     }else{
-
+        [self.tableView headerBeginRefreshing];
     }
 }
 - (void)_initNav
@@ -403,8 +414,8 @@ static int refreshCount = 0;
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     detailVc.taskId = task.taskId; //获取问题编号
     detailVc.delegate = self;
-    (task.reward>0|task.taskFailed>0)?(detailVc.ishaveget=YES):(detailVc.ishaveget=NO);
-
+    detailVc.ishaveget = (task.reward>0|task.taskFailed>0)?(YES):(NO);
+    
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 /**
