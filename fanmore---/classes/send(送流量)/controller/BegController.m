@@ -25,7 +25,13 @@
     [self.trafficField.layer setMasksToBounds:YES];
     self.trafficField.layer.borderWidth = 0.5;
     self.trafficField.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.trafficField.layer.cornerRadius = 2;
+    self.trafficField.layer.cornerRadius = 6;
+    
+    self.begButton.layer.cornerRadius = 6;
+    self.begButton.layer.borderWidth = 0.5;
+    self.begButton.layer.borderColor = self.begButton.backgroundColor.CGColor;
+    
+    [self registerForKeyboardNotifications];
 }
 
 - (void)registerForKeyboardNotifications
@@ -46,7 +52,7 @@
     
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGFloat sizesss = CGRectGetMaxY(self.sendButton.frame) - (ScreenHeight - kbSize.height);
+    CGFloat sizesss = CGRectGetMaxY(self.begButton.frame) - (ScreenHeight - kbSize.height);
     
     if (sizesss > 0) {
         
@@ -100,6 +106,8 @@
         
         [self.userHeadBtu setBackgroundImage:image forState:UIControlStateNormal];
     }];
+    
+    [self.trafficField becomeFirstResponder];
 }
 /*
 #pragma mark - Navigation

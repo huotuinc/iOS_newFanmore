@@ -36,6 +36,7 @@
 		83A085981B31653E00FDFA2B /* WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A085971B31653E00FDFA2B /* WebController.m */; };
 		83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */; };
 		83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */; };
+		83A1503D1B58E48000AEC0DD /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1503C1B58E48000AEC0DD /* ContactsModel.m */; };
 		83AB70911B2A762000B2D09A /* SendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AB70901B2A762000B2D09A /* SendController.m */; };
 		83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B61B781B1713F000B027E0 /* TodayForesController.m */; };
 		83CA8FB51B2932C2008D37C6 /* UITableView+CJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA8FB41B2932C2008D37C6 /* UITableView+CJ.m */; };
@@ -276,6 +277,8 @@
 		83A0E9F91B155BCE009708FB /* InviteCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeCell.h; sourceTree = "<group>"; };
 		83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeCell.m; sourceTree = "<group>"; };
 		83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCodeCell.xib; sourceTree = "<group>"; };
+		83A1503B1B58E48000AEC0DD /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
+		83A1503C1B58E48000AEC0DD /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
 		83AB708F1B2A762000B2D09A /* SendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendController.h; sourceTree = "<group>"; };
 		83AB70901B2A762000B2D09A /* SendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendController.m; sourceTree = "<group>"; };
 		83B61B771B1713F000B027E0 /* TodayForesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayForesController.h; sourceTree = "<group>"; };
@@ -799,6 +802,8 @@
 			children = (
 				83E263E81B2EAEA700A2AC96 /* FriendModel.h */,
 				83E263E91B2EAEA700A2AC96 /* FriendModel.m */,
+				83A1503B1B58E48000AEC0DD /* ContactsModel.h */,
+				83A1503C1B58E48000AEC0DD /* ContactsModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2175,6 +2180,7 @@
 				EF565D091B16AA6000FC2D6B /* MJRefreshHeaderView.m in Sources */,
 				EF2E543B1B2853F30060E965 /* Message.m in Sources */,
 				EF565D481B17091F00FC2D6B /* UserLoginTool.m in Sources */,
+				83A1503D1B58E48000AEC0DD /* ContactsModel.m in Sources */,
 				837E6DEA1B46382200C8DC7F /* MCController.m in Sources */,
 				EFC84F881B3BCA0000392A4B /* buyflay.m in Sources */,
 				EFE76B811B26DC4100C956A5 /* taskData.m in Sources */,

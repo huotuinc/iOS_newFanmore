@@ -1949,7 +1949,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4IB-So-oIq">
-                                <rect key="frame" x="35" y="204" width="235" height="269"/>
+                                <rect key="frame" x="35" y="204" width="235" height="307"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me6-UL-I5A">
@@ -2081,7 +2081,7 @@
                             <constraint firstItem="Me6-UL-I5A" firstAttribute="leading" secondItem="3E2-Bc-PjE" secondAttribute="leading" id="JXN-xL-57C"/>
                             <constraint firstItem="4IB-So-oIq" firstAttribute="leading" secondItem="3E2-Bc-PjE" secondAttribute="leading" constant="35" id="LrH-WF-vfO"/>
                             <constraint firstAttribute="trailing" secondItem="Me6-UL-I5A" secondAttribute="trailing" id="SIF-DN-mOG"/>
-                            <constraint firstItem="4IB-So-oIq" firstAttribute="height" secondItem="3E2-Bc-PjE" secondAttribute="height" multiplier="0.56" id="Zb4-yP-iGh"/>
+                            <constraint firstItem="4IB-So-oIq" firstAttribute="height" secondItem="3E2-Bc-PjE" secondAttribute="height" multiplier="0.64" id="Zb4-yP-iGh"/>
                             <constraint firstAttribute="trailing" secondItem="4IB-So-oIq" secondAttribute="trailing" constant="50" id="ZxQ-LB-r6m"/>
                             <constraint firstItem="4IB-So-oIq" firstAttribute="top" secondItem="Me6-UL-I5A" secondAttribute="bottom" constant="10" id="bNM-Md-PvZ"/>
                             <constraint firstItem="4IB-So-oIq" firstAttribute="top" secondItem="Me6-UL-I5A" secondAttribute="bottom" constant="-1" id="ciX-YC-aXH"/>
@@ -2447,7 +2447,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="粉猫剩余" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNq-PP-U73">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="流量剩余" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNq-PP-U73">
                                         <rect key="frame" x="85" y="123" width="80" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="FTF-JG-Mhc"/>
@@ -2467,6 +2467,9 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiantou" translatesAutoresizingMaskIntoConstraints="NO" id="2P1-eP-pFB">
+                                        <rect key="frame" x="130" y="54" width="61" height="31"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2474,6 +2477,7 @@
                                     <constraint firstItem="5ib-e1-O02" firstAttribute="top" secondItem="9io-VG-kNp" secondAttribute="bottom" constant="5" id="73P-zJ-f3N"/>
                                     <constraint firstAttribute="centerX" secondItem="PNq-PP-U73" secondAttribute="centerX" constant="35" id="BoO-O7-QaH"/>
                                     <constraint firstItem="5ib-e1-O02" firstAttribute="top" secondItem="apf-RA-DY9" secondAttribute="bottom" constant="5" id="LqZ-q6-LE7"/>
+                                    <constraint firstItem="2P1-eP-pFB" firstAttribute="centerY" secondItem="5EY-BP-feA" secondAttribute="centerY" id="Obb-6A-2HC"/>
                                     <constraint firstItem="PNq-PP-U73" firstAttribute="top" secondItem="5EY-BP-feA" secondAttribute="bottom" constant="8" id="TwN-i3-Af0"/>
                                     <constraint firstAttribute="centerX" secondItem="5ib-e1-O02" secondAttribute="centerX" constant="-40" id="Wna-zf-I7s"/>
                                     <constraint firstItem="9io-VG-kNp" firstAttribute="top" secondItem="PNq-PP-U73" secondAttribute="bottom" constant="5" id="XBb-kW-J9j"/>
@@ -2485,6 +2489,7 @@
                                     <constraint firstItem="5EY-BP-feA" firstAttribute="top" secondItem="apf-RA-DY9" secondAttribute="top" id="uSf-yT-dcq"/>
                                     <constraint firstAttribute="centerX" secondItem="9io-VG-kNp" secondAttribute="centerX" id="wb7-21-bgw"/>
                                     <constraint firstItem="5EY-BP-feA" firstAttribute="height" secondItem="apf-RA-DY9" secondAttribute="height" id="xwy-a2-iFs"/>
+                                    <constraint firstAttribute="centerX" secondItem="2P1-eP-pFB" secondAttribute="centerX" id="zdE-I7-2cN"/>
                                     <constraint firstItem="PNq-PP-U73" firstAttribute="top" secondItem="9io-VG-kNp" secondAttribute="bottom" constant="5" id="zeX-es-PgW"/>
                                 </constraints>
                                 <variation key="default">
@@ -2505,7 +2510,7 @@
                                             <constraint firstAttribute="height" constant="30" id="xQS-zs-Wjz"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="kdy-bT-SQI"/>
@@ -2528,13 +2533,15 @@
                                             <action selector="sendFlow:" destination="xgT-hq-atK" eventType="touchUpInside" id="ujv-7N-tSs"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Z0-nI-Shg" customClass="FMButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Z0-nI-Shg">
                                         <rect key="frame" x="20" y="140" width="280" height="40"/>
+                                        <color key="backgroundColor" red="1" green="0.32191954041509441" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2Xu-PU-5av"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="求流量">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -2587,6 +2594,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="begButton" destination="6Z0-nI-Shg" id="ozb-T6-bam"/>
                         <outlet property="flowField" destination="Eyl-DV-t0d" id="Pxn-nt-xVR"/>
                         <outlet property="friendHeadBtu" destination="apf-RA-DY9" id="sDl-KT-XZK"/>
                         <outlet property="friendPhone" destination="9io-VG-kNp" id="x32-vb-Qev"/>
@@ -2791,6 +2799,7 @@
         <image name="asignGray" width="400" height="397"/>
         <image name="button-BR" width="480" height="80"/>
         <image name="headImage" width="138" height="138"/>
+        <image name="jiantou" width="61" height="31"/>
         <image name="mrtou_h" width="150" height="150"/>
         <image name="right" width="20" height="34"/>
         <image name="yqmao" width="252" height="134"/>

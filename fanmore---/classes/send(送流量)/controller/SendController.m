@@ -181,11 +181,11 @@ NSString *frinedCellIdentifier = @"friend";
     self.titleArray = [[NSMutableArray alloc] init];
     self.searchArray = [[NSMutableArray alloc] init];
     
+    
     for (int i = 0; i < 26; i++) {
         NSString *str = [[NSString alloc] initWithFormat:@"%c", 65 + i];
         [self.titleArray addObject:str];
     }
-
     
 }
 
@@ -228,7 +228,19 @@ NSString *frinedCellIdentifier = @"friend";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
     if (tableView == self.tableView) {
+        for (int j = 0 ; j < self.titleArray.count; j++) {
+            NSInteger i = 0;
+            for (FriendModel *model in self.personArray) {
+                if ([model.fristLetter isEqualToString:self.titleArray[j]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[j]]) {
+                    i++;
+                }
+            }
+            if (i == 0) {
+                [self.titleArray removeObject:self.titleArray[j]];
+            }
+        }
         return self.titleArray.count;
     }else {
         return 1;
@@ -244,6 +256,19 @@ NSString *frinedCellIdentifier = @"friend";
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
+//        for (int j = 0 ; j < 26; j++) {
+//            NSInteger i = 0;
+//            for (FriendModel *model in self.personArray) {
+//                if ([model.fristLetter isEqualToString:self.titleArray[section]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[section]]) {
+//                    i++;
+//                }
+//            }
+//            if (i == 0) {
+//                [self.titleArray removeObject:self.titleArray[j]];
+//            }
+//        }
+        
+        
         return self.titleArray[section];
     }else {
         return nil;
@@ -258,6 +283,7 @@ NSString *frinedCellIdentifier = @"friend";
                 i++;
             }
         }
+        NSLog(@"FriendModel%d",i);
         return i;
     }else {
         [self.searchArray removeAllObjects];
@@ -286,7 +312,7 @@ NSString *frinedCellIdentifier = @"friend";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:frinedCellIdentifier];
+    FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:frinedCellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"FriendCell" owner:nil options:nil] lastObject];
     }
