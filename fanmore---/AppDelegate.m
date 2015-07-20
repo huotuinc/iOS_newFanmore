@@ -38,7 +38,7 @@
 /**apns*/
 @property(nonatomic,strong) NSString * deviceToken;
 
-
+@property(nonatomic, strong) NSMutableArray *notifationArray;
 
 
 @end
