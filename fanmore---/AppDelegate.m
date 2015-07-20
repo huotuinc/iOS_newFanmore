@@ -103,6 +103,8 @@ static NSString *message = @"有一条新消息";
         [self.window makeKeyAndVisible];
     }
     
+    self.notifationArray = [NSMutableArray array];
+    
     if (launchOptions) {
         
         NSNotification *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
@@ -544,7 +546,14 @@ static NSString *message = @"有一条新消息";
     }
 
 }
-
+//通知内容调用alert方法
+- (void)showAlertView {
+    self.titleString = self.notifationArray[0][@"aps"][@"alert"][@"title"];
+    self.taskId = self.notifationArray[0][@"data"];
+    UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+    ac.tag = 101;
+    [ac show];
+}
 
 
 //当前控制器转跳方法
