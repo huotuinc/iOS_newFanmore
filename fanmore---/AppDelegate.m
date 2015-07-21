@@ -27,7 +27,7 @@
 
 
 
-@interface AppDelegate () <CLLocationManagerDelegate>
+@interface AppDelegate () <CLLocationManagerDelegate,WXApiDelegate>
 
 @property(nonatomic,strong) CLLocationManager *mgr;
 
@@ -235,6 +235,7 @@ static NSString *message = @"有一条新消息";
         }];
     }
     
+    [WXApi handleOpenURL:url delegate:self];
     return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
     
 }
@@ -593,5 +594,8 @@ static NSString *message = @"有一条新消息";
     }
 
 }
+
+
+
 
 @end

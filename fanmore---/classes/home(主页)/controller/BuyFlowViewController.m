@@ -122,12 +122,7 @@ static NSString * _company = nil;
 - (UICollectionView *)collection{
     
     if (_collection == nil) {
-//        CGFloat collectionHeight = 0;
-//        if (self.goods.count / self.num) {
-//            collectionHeight = (self.goods.count / self.num + 1) * 65 + 5;
-//        }else {
-//            collectionHeight = self.goods.count / self.num * (60 + 5) + 5;
-//        }
+
         
         UICollectionViewFlowLayout *flowL = [[UICollectionViewFlowLayout alloc] init];
         [flowL setScrollDirection:UICollectionViewScrollDirectionVertical];
@@ -160,6 +155,7 @@ static NSString * _company = nil;
     BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
     NSLog(@"wxRegistered:%d",wxRegistered);
     
+
     _company = self.buyflay.mobileMsg;
     
     [self.currentPriceLable setTintColor:[UIColor redColor]];
@@ -322,15 +318,18 @@ static NSString * _company = nil;
 //        time(&now);
 //        NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
 //        NSString * nonce_str	= [WXUtil md5:time_stamp];
-        params[@"nonce_str"] = noncestr; //随机字符串，不长于32位。推荐随机数生成算法
-        params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
-        params[@"body"] = @"大三大四的"; //商品或支付单简要描述
-        params[@"notify_url"] = wxpayNotifyUri;  //接收微信支付异步通知回调地址
-        params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
-        params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
+        
         NSArray * aa = self.buyflay.purchases;
         //商品价格
         flayModel * bb = aa[self.selected.row];
+        
+        params[@"nonce_str"] = noncestr; //随机字符串，不长于32位。推荐随机数生成算法
+        params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
+        params[@"body"] = [NSString stringWithFormat:@"购买粉猫%dM流量包",bb.m];; //商品或支付单简要描述
+        params[@"notify_url"] = wxpayNotifyUri;  //接收微信支付异步通知回调地址
+        params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
+        params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
+        
         NSString * a  = [NSString stringWithFormat:@"%.f",bb.price * 100];
         
         
@@ -421,20 +420,7 @@ static NSString * _company = nil;
     
 }
 
-- (void)onResp:(BaseResp *)resp {
-    if ([resp isKindOfClass:[PayResp class]]) {
-        PayResp *response = (PayResp *)resp;
-        switch (response.errCode) {
-            case WXSuccess:
-                //服务器端查询支付通知或查询API返回的结果再提示成功
-//                NSLog(@"支付成功");
-                break;
-            default:
-//                NSLog(@"支付失败， retcode=%d",resp.errCode);
-                break;
-        }
-    }
-}
+
 
 
 /**
@@ -585,5 +571,24 @@ static NSString * _company = nil;
 }
 
 
-
+/**
+ *  微信支付回调方法
+ *
+ *  @param resp <#resp description#>
+ */
+- (void)onResp:(BaseResp *)resp {
+    NSLog(@"xxxxxxxxxxxx");
+    if ([resp isKindOfClass:[PayResp class]]) {
+        PayResp *response = (PayResp *)resp;
+        switch (response.errCode) {
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                //                NSLog(@"支付成功");
+                break;
+            default:
+                //                NSLog(@"支付失败， retcode=%d",resp.errCode);
+                break;
+        }
+    }
+}
 @end
