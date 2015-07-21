@@ -38,6 +38,10 @@
 /**apns*/
 @property(nonatomic,strong) NSString * deviceToken;
 
+//是否已有通知显示
+@property(nonatomic, assign) BOOL isShowed;
+
+//存储通知信息
 @property(nonatomic, strong) NSMutableArray *notifationArray;
 
 
@@ -103,6 +107,9 @@ static NSString *message = @"有一条新消息";
         [self.window makeKeyAndVisible];
     }
     
+    
+    //初始化通知参数
+    self.isShowed = NO;
     self.notifationArray = [NSMutableArray array];
     
     if (launchOptions) {
@@ -449,6 +456,8 @@ static NSString *message = @"有一条新消息";
         if (buttonIndex == 0) {
             [self gotoDetailController];
         }
+        self.isShowed = NO;
+        [self showAlertView];
     }else if (alertView.tag == 102) {
         if (buttonIndex == 0) {
             [self gotoMessageCenter];
@@ -514,12 +523,18 @@ static NSString *message = @"有一条新消息";
                 break;
             case 4:
             {
-                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-                self.taskId = userInfo[@"data"];
-                NSLog(@"%@",self.taskId);
-                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-                ac.tag = 101;
-                [ac show];
+                if (self.isShowed == NO) {
+                    self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+                    self.taskId = userInfo[@"data"];
+                    UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+                    ac.tag = 101;
+                    
+                    self.isShowed = YES;
+                    [ac show];
+                    
+                }else {
+                    [self.notifationArray addObject:userInfo];
+                }
             }
                 break;
             case 5:
@@ -548,11 +563,18 @@ static NSString *message = @"有一条新消息";
 }
 //通知内容调用alert方法
 - (void)showAlertView {
-    self.titleString = self.notifationArray[0][@"aps"][@"alert"][@"title"];
-    self.taskId = self.notifationArray[0][@"data"];
-    UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-    ac.tag = 101;
-    [ac show];
+    if (self.notifationArray.count > 0) {
+        NSDictionary *userInfo = self.notifationArray[0];
+        self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+        self.taskId = userInfo[@"data"];
+        [self.notifationArray removeObject:userInfo];
+        UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+        self.isShowed = YES;
+        
+        ac.tag = 101;
+        
+        [ac show];
+    }
 }
 
 
