@@ -39,8 +39,10 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         
-        self.backgroundColor = [UIColor lightGrayColor];
-        self.layer.cornerRadius = 4;
+        self.backgroundColor = [UIColor colorWithWhite:0.945 alpha:1.000];
+        self.layer.cornerRadius = 6;
+        self.layer.borderWidth = 0.5;
+        self.layer.borderColor = self.backgroundColor.CGColor;
 //        self.contentView.layer.masksToBounds = YES;
         //1外部的view
         UIImageView * aview = [[UIImageView alloc] init];

@@ -11,9 +11,11 @@
 
 /**服务器地址*/
 
-#define  MainURL @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+#define  MainURL @"http://newtask.fanmore.cn/app"
 //@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//@"http://newtask.fanmore.cn/app"
+//
+//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+//
 //@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
 //
 //
