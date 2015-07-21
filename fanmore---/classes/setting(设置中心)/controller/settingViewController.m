@@ -53,7 +53,7 @@ static NSString * _num = nil;
 // 计算某个路径下的缓存文件大小
 - (long long)countCacheFileSizeInPath:(NSString *)path
 {
-    long long size = 0;
+    CGFloat size = 0.0;
     
     
     // 创建文件管理对象
@@ -64,7 +64,8 @@ static NSString * _num = nil;
     for (NSString *fileName in fileNames)
     {
         // 通过路径拼接出文件的路径
-        NSString *filePath = [NSString stringWithFormat:@"%@%@", path, fileName];
+        
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@", path, fileName];
         // 获取文件的相关信息
         NSDictionary *attrbutesDic = [manager attributesOfItemAtPath:filePath error:nil];
         long long fileSize = [attrbutesDic[NSFileSize] longLongValue];
@@ -78,16 +79,16 @@ static NSString * _num = nil;
 
 - (CGFloat)countCacheFileSize
 {
-    long long cache = 0;
+    float cache = 0;
     // 缓存主要存在于两个文件夹中
     // /Library/Caches/com.zhujiacong.TimeMovie/fsCachedData/  webView
     // /Library/Caches/com.hackemist.SDWebImageCache.default/  SDWebImage
     // 第一个文件夹
     // 获取沙盒路径
     NSString * shapath = NSHomeDirectory();
-    shapath = [shapath stringByAppendingString:@"/Library/Caches/com.hackemist.SDWebImageCache.default/"];
-    cache = [self countCacheFileSizeInPath:shapath];
-    CGFloat cacheSize = (CGFloat)cache / 1024 / 1024;
+    shapath = [shapath stringByAppendingString:@"/Library/Caches/default/com.hackemist.SDWebImageCache.default/"];
+       cache = [self countCacheFileSizeInPath:shapath];
+    CGFloat cacheSize = (CGFloat)cache / 1024.0 / 1024.0;
     return cacheSize;
 }
 
@@ -104,6 +105,7 @@ static NSString * _num = nil;
     GlobalData *glo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName]; //保存用户信息
     _num = glo.customerServicePhone;
     
+    //计算缓存
     CGFloat aa = [self countCacheFileSize];
     
     
