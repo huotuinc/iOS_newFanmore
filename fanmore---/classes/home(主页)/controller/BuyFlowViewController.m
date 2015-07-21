@@ -328,7 +328,13 @@ static NSString * _company = nil;
         params[@"notify_url"] = wxpayNotifyUri;  //接收微信支付异步通知回调地址
         params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
         params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
-        params[@"total_fee"] = @"1";  //订单总金额，只能为整数，详见支付金额
+        NSArray * aa = self.buyflay.purchases;
+        //商品价格
+        flayModel * bb = aa[self.selected.row];
+        NSString * a  = [NSString stringWithFormat:@"%.f",bb.price * 100];
+        
+        
+        params[@"total_fee"] = a;  //订单总金额，只能为整数，详见支付金额
         params[@"device_info"] = DeviceNo;
         
     
