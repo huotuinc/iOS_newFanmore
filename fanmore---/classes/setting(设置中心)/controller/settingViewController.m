@@ -208,13 +208,13 @@ static NSString * _num = nil;
             detailVc.title = @"关于我们";
             [self.navigationController pushViewController:detailVc  animated:YES];
             
-        }else if (indexPath.row == 4) {
+        }else if (indexPath.row == 3) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             WebController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
             detailVc.type = 1;
             detailVc.title = @"投放指南";
             [self.navigationController pushViewController:detailVc  animated:YES];
-        }else if(indexPath.row == 5){
+        }else if(indexPath.row == 4){
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             WebController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
             detailVc.type = 2;
