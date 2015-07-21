@@ -155,11 +155,11 @@
     NSMutableDictionary *parame = [NSMutableDictionary dictionary];
     parame[@"pagingSize"] = @(pageSize);
     parame[@"pagingTag"] = @"";
-    [MBProgressHUD showMessage:nil];
+//    [MBProgressHUD showMessage:nil];
     __weak MCController * wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
         //        NSLog(@"%@",json);
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
         NSMutableArray * aaframe = [NSMutableArray array];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
@@ -178,9 +178,9 @@
             
             
         }
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
     }];
     
 }
