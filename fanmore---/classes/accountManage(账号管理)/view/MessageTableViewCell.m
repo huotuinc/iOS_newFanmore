@@ -64,8 +64,8 @@
         
         //3时间
         UILabel * timeLabel = [[UILabel alloc] init];
-        timeLabel.textColor = [UIColor grayColor];
-        [timeLabel setTextColor:[UIColor blackColor]];
+        timeLabel.textColor = [UIColor colorWithWhite:0.600 alpha:1.000];
+//        [timeLabel setTextColor:[UIColor blackColor]];
         timeLabel.textAlignment = NSTextAlignmentCenter;
         timeLabel.font = [UIFont systemFontOfSize:13];
         self.timeLable = timeLabel;
