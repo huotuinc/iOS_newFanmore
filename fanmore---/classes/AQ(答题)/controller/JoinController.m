@@ -185,6 +185,7 @@
         self.answers = [NSMutableString stringWithFormat:@"%d:%@|%d:%@",task1.qid,self.field1.text,task2.qid,self.field2.text];
         params[@"answers"] = self.answers;
         [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
+//            NSLog(@"%@",json);
             if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 56001)
             {
                 [MBProgressHUD showError:@"账号在其它地方登入"];
@@ -207,10 +208,11 @@
                 show.totleQuestion = self.questions.count;
                 show.ritghtAnswer = 2;
                 show.answerType = answerResultType;
-                show.reward = [json[@"resultData"][@"chance"] intValue];
-                show.chance = [json[@"resultData"][@"reward"] intValue];
+                show.chance = [json[@"resultData"][@"chance"] intValue];
+                show.reward = [json[@"resultData"][@"reward"] intValue];
                 show.illgel = [json[@"resultData"][@"illgel"] intValue];
                 show.flay = self.flay;
+                show.taskId = self.taskId;
                 [self.navigationController pushViewController:show animated:YES];
             }else{
                 [self.navigationController  popToRootViewControllerAnimated:YES];

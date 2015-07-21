@@ -115,7 +115,6 @@ static NSString * _num = nil;
     
     
     MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们" destVcClass:[WebController class]];
-    MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
     MJSettingItem *guize = [MJSettingArrowItem itemWithIcon:nil title:@"投放指南" destVcClass:[WebController class]];
     MJSettingItem *gz = [MJSettingArrowItem itemWithIcon:nil title:@"规则说明" destVcClass:[WebController class]];
     MJSettingItem *touch = [MJSettingLabelItem itemWithTitle:@"客服热线" rightTitle:glo.customerServicePhone];
@@ -125,7 +124,7 @@ static NSString * _num = nil;
         [aaa show];
      };
     MJSettingGroup *group = [[MJSettingGroup alloc] init];
-    group.items = @[advice, cache, about,handShake,guize,gz,touch];
+    group.items = @[advice, cache, about,guize,gz,touch];
     [self.data addObject:group];
 }
 
@@ -142,6 +141,8 @@ static NSString * _num = nil;
 {
     [self initBackAndTitle:@"更多设置"];
 }
+
+
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -178,7 +179,6 @@ static NSString * _num = nil;
         
         
         MJSettingItem *about = [MJSettingArrowItem itemWithIcon:nil title:@"关于我们" destVcClass:[WebController class]];
-        MJSettingItem *handShake = [MJSettingLabelItem itemWithTitle:@"当前版本" rightTitle:AppVersion];
         MJSettingItem *guize = [MJSettingArrowItem itemWithIcon:nil title:@"投放指南" destVcClass:[WebController class]];
         MJSettingItem *gz = [MJSettingArrowItem itemWithIcon:nil title:@"规则说明" destVcClass:[WebController class]];
         MJSettingItem *touch = [MJSettingLabelItem itemWithTitle:@"客服热线" rightTitle:glo.customerServicePhone];
@@ -188,7 +188,7 @@ static NSString * _num = nil;
             [aaa show];
         };
         MJSettingGroup *group = [[MJSettingGroup alloc] init];
-        group.items = @[advice, cache, about,handShake,guize,gz,touch];
+        group.items = @[advice, cache, about,guize,gz,touch];
         [self.data removeAllObjects];
         [self.data addObject:group];
         
@@ -210,13 +210,13 @@ static NSString * _num = nil;
             detailVc.title = @"关于我们";
             [self.navigationController pushViewController:detailVc  animated:YES];
             
-        }else if (indexPath.row == 4) {
+        }else if (indexPath.row == 3) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             WebController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
             detailVc.type = 1;
             detailVc.title = @"投放指南";
             [self.navigationController pushViewController:detailVc  animated:YES];
-        }else if(indexPath.row == 5){
+        }else if(indexPath.row == 4){
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             WebController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"WebController"];
             detailVc.type = 2;

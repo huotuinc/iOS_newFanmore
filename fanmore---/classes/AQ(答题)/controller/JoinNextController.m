@@ -168,6 +168,7 @@
             show.chance = [json[@"resultData"][@"reward"] intValue];
             show.illgel = [json[@"resultData"][@"illgel"] intValue];
             show.flay = self.flay;
+            show.taskId = self.taskId;
             [self.navigationController pushViewController:show animated:YES];
         }else{
             [self.navigationController  popToRootViewControllerAnimated:YES];
