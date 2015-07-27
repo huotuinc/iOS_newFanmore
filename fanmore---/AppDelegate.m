@@ -211,6 +211,8 @@ static NSString *message = @"有一条新消息";
  */
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
+    NSLog(@"xxxxxxxxxx%@",url);
+    [WXApi handleOpenURL:url delegate:self];
     return [ShareSDK handleOpenURL:url wxDelegate:self];
 }
 
@@ -223,11 +225,14 @@ static NSString *message = @"有一条新消息";
  *
  */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    NSLog(@"xxxxxxxxxx%@",url);
     //如果极简开发包不可用,会跳转支付宝钱包进行支付,需要将支付宝钱包的支付结果回传给开 发包
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
                                                       NSLog(@"aliPay ----- result = %@",resultDic);
+                                                      [[NSNotificationCenter defaultCenter] postNotificationName:WeiXinPaySuccessPostNotification object:nil];
                                                   }]; }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
@@ -238,6 +243,30 @@ static NSString *message = @"有一条新消息";
     [WXApi handleOpenURL:url delegate:self];
     return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
     
+}
+
+
+/**
+ *  微信支付回调方法
+ *
+ *  @param resp <#resp description#>
+ */
+- (void)onResp:(BaseResp *)resp {
+    NSLog(@"xxxxxxxxxxxx");
+    if ([resp isKindOfClass:[PayResp class]]) {
+        PayResp *response = (PayResp *)resp;
+        switch (response.errCode) {
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"支付成功");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:WeiXinPaySuccessPostNotification object:nil];
+                break;
+            default:
+                NSLog(@"支付失败， retcode=%d",resp.errCode);
+                break;
+        }
+    }
 }
 
 /**

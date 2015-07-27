@@ -11,8 +11,9 @@
 
 /**服务器地址*/
 
-#define  MainURL @"http://newtask.fanmore.cn/app"
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+#define  MainURL @"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+//@"http://newtask.fanmore.cn/app"
+//
 //
 //@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
 //
@@ -116,6 +117,12 @@
 //通知
 #define RefreshHomeDate @"RefreshHomeDate"  //刷新home的数据
 #define RefreshHomeDateLeft @"RefreshHomeDateleft"  //刷新home的数据
+
+
+
+
+#define WeiXinPaySuccessPostNotification @"WeiXinPaySuccessPostNotification" //微信支付成功通知
+
 #endif
 
 
