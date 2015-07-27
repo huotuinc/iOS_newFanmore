@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 
 
+@protocol BuyFlowViewControllerDelegate <NSObject>
+
+@optional
+/**兑换流量成功*/
+- (void)successExchange:(NSString* ) userBalance;
+@end
+
 @interface BuyFlowViewController : UIViewController
+
+@property(nonatomic,weak) id<BuyFlowViewControllerDelegate> delegate;
 
 @end

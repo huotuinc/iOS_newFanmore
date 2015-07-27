@@ -160,8 +160,8 @@ static NSString * _company = nil;
     self.title = @"购买流量";
     
     
-    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
-    NSLog(@"wxRegistered:%d",wxRegistered);
+//    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
+//    NSLog(@"wxRegistered:%d",wxRegistered);
     
     
     
@@ -280,6 +280,8 @@ static NSString * _company = nil;
     order.seller = seller;    //2
     self.orderNo = [self caluTransactionCode];
     order.tradeNO = self.orderNo; //订单ID（由商家自行制定）//3
+    
+//    NSLog(@"----api%@",self.buyflay.alipayNotifyUri);
     order.notifyURL = self.buyflay.alipayNotifyUri;  //4 alipay回调地址
     order.productName = [NSString stringWithFormat:@"购买粉猫%dM流量包",bb.m]; //商品标题  //5
     order.productDescription = [NSString stringWithFormat:@"购买粉猫%dM流量包",bb.m]; //6商品或支付单简要描述
@@ -340,8 +342,9 @@ static NSString * _company = nil;
         params[@"nonce_str"] = noncestr; //随机字符串，不长于32位。推荐随机数生成算法
         params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
         params[@"body"] = [NSString stringWithFormat:@"购买粉猫%dM流量包",bb.m];; //商品或支付单简要描述
-        params[@"notify_url"] =self.buyflay.wxpayNotifyUri;  //接收微信支付异步通知回调地址
+        params[@"notify_url"] = self.buyflay.wxpayNotifyUri;  //接收微信支付异步通知回调地址
         self.orderNo = [self caluTransactionCode];
+        NSLog(@"orderno====%@",self.orderNo);
         params[@"out_trade_no"] = self.orderNo; //订单号
         params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
         
@@ -434,19 +437,24 @@ static NSString * _company = nil;
     
 }
 
-
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 /**
  *  产品购买成功后通知服务器接口
  */
 - (void)buyProductPaySuccessToServer{
     
+    NSLog(@"---------------------------------------");
     NSArray * aaM = self.buyflay.purchases;
     flayModel * flay = aaM[self.selected.row];
     NSString * url = [MainURL stringByAppendingPathComponent:@"deliverGood"];
     NSMutableDictionary * parames = [NSMutableDictionary dictionary];
-    parames[@"orderNo"] = [self caluTransactionCode];//self.orderNo;
+    parames[@"orderNo"] = self.orderNo;
     parames[@"productType"] = @"0";
     parames[@"productId"] = [NSString stringWithFormat:@"%d",flay.purchaseid];
+     __weak BuyFlowViewController *wself = self;
     [UserLoginTool loginRequestPost:url parame:parames success:^(id json) {
         if ([json[@"systemResultCode"] intValue] == 1) {
             
@@ -459,6 +467,10 @@ static NSString * _company = nil;
                 NSString * bs = [NSString xiaoshudianweishudeal:([localuser.balance floatValue] + flay.m)];
                 localuser.balance = bs;
                 [NSKeyedArchiver archiveRootObject:localuser toFile:fileName];
+                if ([wself.delegate respondsToSelector:@selector(successExchange:)]) {
+                    
+                    [wself.delegate successExchange:localuser.balance];
+                }
                 
             }
         }
