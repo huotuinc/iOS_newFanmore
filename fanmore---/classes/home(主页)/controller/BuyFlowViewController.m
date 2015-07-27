@@ -160,7 +160,7 @@ static NSString * _company = nil;
     self.title = @"购买流量";
     
     
-    BOOL wxRegistered = [WXApi registerApp:self.buyflay.wxpayAppId]; //像微信支付注册
+    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
     NSLog(@"wxRegistered:%d",wxRegistered);
     
     
