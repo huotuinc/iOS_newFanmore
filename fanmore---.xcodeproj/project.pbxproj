@@ -149,7 +149,6 @@
 		EFC86AF91B1EFD700081BBC8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AE01B1EFD700081BBC8 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		EFC86AFA1B1EFD700081BBC8 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AE21B1EFD700081BBC8 /* libWeiboSDK.a */; };
 		EFC86AFB1B1EFD700081BBC8 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AE31B1EFD700081BBC8 /* WeiboSDK.bundle */; };
-		EFC86AFC1B1EFD700081BBC8 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AE61B1EFD700081BBC8 /* libWeChatSDK.a */; };
 		EFC86AFD1B1EFD700081BBC8 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AE91B1EFD700081BBC8 /* ShareSDK.framework */; };
 		EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */; };
 		EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */; };
@@ -466,9 +465,6 @@
 		EFC86AE21B1EFD700081BBC8 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		EFC86AE31B1EFD700081BBC8 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		EFC86AE41B1EFD700081BBC8 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
-		EFC86AE61B1EFD700081BBC8 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		EFC86AE71B1EFD700081BBC8 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		EFC86AE81B1EFD700081BBC8 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		EFC86AE91B1EFD700081BBC8 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
 		EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
@@ -700,7 +696,6 @@
 				EFC86ABD1B1EFB4C0081BBC8 /* libicucore.dylib in Frameworks */,
 				EFC86ABB1B1EFB340081BBC8 /* CoreTelephony.framework in Frameworks */,
 				EFC86AFD1B1EFD700081BBC8 /* ShareSDK.framework in Frameworks */,
-				EFC86AFC1B1EFD700081BBC8 /* libWeChatSDK.a in Frameworks */,
 				EFC86AFA1B1EFD700081BBC8 /* libWeiboSDK.a in Frameworks */,
 				EFC86AB91B1EFB170081BBC8 /* QuartzCore.framework in Frameworks */,
 				EFF3D0DE1B2EBE6900B2F446 /* libcrypto.a in Frameworks */,
@@ -1478,7 +1473,6 @@
 			children = (
 				EFC86ADE1B1EFD700081BBC8 /* QQConnectSDK */,
 				EFC86AE11B1EFD700081BBC8 /* SinaWeiboSDK */,
-				EFC86AE51B1EFD700081BBC8 /* WeChatSDK */,
 			);
 			path = Extend;
 			sourceTree = "<group>";
@@ -1500,16 +1494,6 @@
 				EFC86AE41B1EFD700081BBC8 /* WeiboSDK.h */,
 			);
 			path = SinaWeiboSDK;
-			sourceTree = "<group>";
-		};
-		EFC86AE51B1EFD700081BBC8 /* WeChatSDK */ = {
-			isa = PBXGroup;
-			children = (
-				EFC86AE61B1EFD700081BBC8 /* libWeChatSDK.a */,
-				EFC86AE71B1EFD700081BBC8 /* WXApi.h */,
-				EFC86AE81B1EFD700081BBC8 /* WXApiObject.h */,
-			);
-			path = WeChatSDK;
 			sourceTree = "<group>";
 		};
 		EFC86AEA1B1EFD700081BBC8 /* UI */ = {
