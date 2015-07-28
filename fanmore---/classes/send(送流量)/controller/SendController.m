@@ -11,7 +11,7 @@
 #import "FriendCell.h"
 #import "PinYin4Objc.h"
 #import "BegController.h"
-
+#import "ResultContactInfo.h"
 
 @interface SendController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -34,6 +34,8 @@ NSString *frinedCellIdentifier = @"friend";
     
     self.personArray = [NSMutableArray array];
     
+    
+    self.userPhone = [[NSMutableString alloc] init];
     ABAddressBookRef addressBooks = nil;
     
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
@@ -73,15 +75,15 @@ NSString *frinedCellIdentifier = @"friend";
         
         ABRecordID reId = ABRecordGetRecordID(person);
         NSLog(@"%d", reId);
-        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
-        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
+        CFTypeRef firstName = ABRecordCopyValue(person, kABPersonFirstNameProperty); //姓
+        CFTypeRef lastName = ABRecordCopyValue(person, kABPersonLastNameProperty);//名
         CFStringRef abFullName = ABRecordCopyCompositeName(person);
-        NSString *nameString = (__bridge NSString *)abName;
-        NSString *lastNameString = (__bridge NSString *)abLastName;
+        NSString *nameString = (__bridge NSString *)firstName;//姓
+        NSString *lastNameString = (__bridge NSString *)lastName;//名
         if ((__bridge id)abFullName != nil) {
             nameString = (__bridge NSString *)abFullName;
         } else {
-            if ((__bridge id)abLastName != nil)
+            if ((__bridge id)lastName != nil)
             {
                 nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
             }
@@ -110,11 +112,13 @@ NSString *frinedCellIdentifier = @"friend";
                 switch (j) {
                     case 0: {// Phone number
 //                        NSLog(@"%@", (__bridge NSString*)value);
-                        [self.userPhone appendFormat:@"%d/r%@/t",reId,(__bridge NSString*)value];
+                        [self.userPhone appendFormat:@"%d\r%@\t",reId,(__bridge NSString*)value];
+                    
                         /**
                          生成一个model
                          */
                         FriendModel *model = [[FriendModel alloc] init];
+                        model.observationInfo = (__bridge void *)([NSString stringWithFormat:@"%d",reId]);
                         model.name = nameString;
                         model.phone = [NSString stringWithFormat:@"%@", (__bridge NSString*)value];
                         HanyuPinyinOutputFormat *outputFormat = [[HanyuPinyinOutputFormat alloc] init];
@@ -138,6 +142,28 @@ NSString *frinedCellIdentifier = @"friend";
         }
     }
     
+    NSLog(@"----%@",self.userPhone);
+    
+    //获取联系人流量信息
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"contactInfo"];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"contacts"] = self.userPhone;
+    
+    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
+        
+        NSLog(@"xxxx====%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1) {
+            if ([json[@"resultCode"] intValue] == 1) {
+                
+                NSArray * contactsInfo = [ResultContactInfo objectArrayWithKeyValuesArray:json[@"resultData"][@"contactInfo"]];
+            }
+            
+        }
+       
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error.description);
+    }];
 
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 44) ];
@@ -188,13 +214,6 @@ NSString *frinedCellIdentifier = @"friend";
     }
     
 }
-
-
-
-
-
-
-
 
 
 

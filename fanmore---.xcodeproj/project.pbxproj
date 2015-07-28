@@ -153,6 +153,7 @@
 		EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */; };
 		EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */; };
 		EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */; };
+		EFC89C511B677365008B6A63 /* ResultContactInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC89C501B677365008B6A63 /* ResultContactInfo.m */; };
 		EFC9B7D01B3E8BE300A09686 /* HAMineLoveCarDBOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */; };
 		EFCA6D081B428A2600F92B03 /* NSData+NSDataDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCA6D071B428A2600F92B03 /* NSData+NSDataDeal.m */; };
 		EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB460B1B214499005D5026 /* FeedBackViewController.m */; };
@@ -469,6 +470,8 @@
 		EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
 		EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
 		EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
+		EFC89C4F1B677365008B6A63 /* ResultContactInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultContactInfo.h; sourceTree = "<group>"; };
+		EFC89C501B677365008B6A63 /* ResultContactInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultContactInfo.m; sourceTree = "<group>"; };
 		EFC9B7CE1B3E8BE300A09686 /* HAMineLoveCarDBOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAMineLoveCarDBOperator.h; sourceTree = "<group>"; };
 		EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAMineLoveCarDBOperator.m; sourceTree = "<group>"; };
 		EFCA6D061B428A2600F92B03 /* NSData+NSDataDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NSDataDeal.h"; sourceTree = "<group>"; };
@@ -799,6 +802,8 @@
 				83E263E91B2EAEA700A2AC96 /* FriendModel.m */,
 				83A1503B1B58E48000AEC0DD /* ContactsModel.h */,
 				83A1503C1B58E48000AEC0DD /* ContactsModel.m */,
+				EFC89C4F1B677365008B6A63 /* ResultContactInfo.h */,
+				EFC89C501B677365008B6A63 /* ResultContactInfo.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2212,6 +2217,7 @@
 				83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */,
 				83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */,
 				EFEA0EA31B4FBCFE0027181A /* MMDrawerBarButtonItem.m in Sources */,
+				EFC89C511B677365008B6A63 /* ResultContactInfo.m in Sources */,
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
 				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
