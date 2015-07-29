@@ -117,6 +117,12 @@
 //通知
 #define RefreshHomeDate @"RefreshHomeDate"  //刷新home的数据
 #define RefreshHomeDateLeft @"RefreshHomeDateleft"  //刷新home的数据
+
+
+
+
+#define WeiXinPaySuccessPostNotification @"WeiXinPaySuccessPostNotification" //微信支付成功通知
+
 #endif
 
 
