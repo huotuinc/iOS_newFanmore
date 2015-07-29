@@ -559,12 +559,18 @@ static NSString *message = @"有一条新消息";
                 break;
             case 4:
             {
-                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-                self.taskId = userInfo[@"data"];
-//                NSLog(@"%@",self.taskId);
-                UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
-                ac.tag = 101;
-                [ac show];
+                if (self.isShowed == NO) {
+                    self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+                    self.taskId = userInfo[@"data"];
+                    UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@活动开始了", self.titleString] delegate:self cancelButtonTitle:@"去抢流量" otherButtonTitles:@"知道了", nil];
+                    ac.tag = 101;
+                    
+                    self.isShowed = YES;
+                    [ac show];
+                    
+                }else {
+                    [self.notifationArray addObject:userInfo];
+                }
             }
                 break;
             case 5:
