@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B56C822B3D3D6F344695E94 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83ED0B46534249FDED1AB9A4 /* libPods.a */; };
+		23CCD79A1B68CC7200D424A7 /* FriendMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CCD7991B68CC7200D424A7 /* FriendMessageModel.m */; };
 		830812401B28552200AC4E18 /* PICircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8308123F1B28552200AC4E18 /* PICircularProgressView.m */; };
 		830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D011B2194FC00BBE276 /* BPViewController.m */; };
 		830B4D061B2196DC00BBE276 /* BPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D041B2196DC00BBE276 /* BPCell.m */; };
@@ -16,7 +17,6 @@
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC76D1B2689A0008DA984 /* HobbyController.m */; };
 		83466BF21B4502910089A326 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83466BF11B4502910089A326 /* InfoPlist.strings */; };
-		8348683A1B660B78000CBD1A /* FriendMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 834868391B660B78000CBD1A /* FriendMessageModel.m */; };
 		8360169A1B37EF1D00B076DD /* ConversionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836016981B37EF1D00B076DD /* ConversionCell.m */; };
 		8360169B1B37EF1D00B076DD /* ConversionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836016991B37EF1D00B076DD /* ConversionCell.xib */; };
 		836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 836A0AA01B22E97600C8E765 /* 未命名.tiff */; };
@@ -229,6 +229,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23CCD7981B68CC7200D424A7 /* FriendMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendMessageModel.h; sourceTree = "<group>"; };
+		23CCD7991B68CC7200D424A7 /* FriendMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendMessageModel.m; sourceTree = "<group>"; };
 		4215C255FF8423CA4D63FB2E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8308123E1B28552200AC4E18 /* PICircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICircularProgressView.h; sourceTree = "<group>"; };
 		8308123F1B28552200AC4E18 /* PICircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICircularProgressView.m; sourceTree = "<group>"; };
@@ -244,8 +246,6 @@
 		833CC76C1B2689A0008DA984 /* HobbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HobbyController.h; sourceTree = "<group>"; };
 		833CC76D1B2689A0008DA984 /* HobbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HobbyController.m; sourceTree = "<group>"; };
 		83466BF11B4502910089A326 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		834868381B660B78000CBD1A /* FriendMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendMessageModel.h; sourceTree = "<group>"; };
-		834868391B660B78000CBD1A /* FriendMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendMessageModel.m; sourceTree = "<group>"; };
 		836016971B37EF1D00B076DD /* ConversionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversionCell.h; path = "classes/home(主页)/view/ConversionCell.h"; sourceTree = "<group>"; };
 		836016981B37EF1D00B076DD /* ConversionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConversionCell.m; path = "classes/home(主页)/view/ConversionCell.m"; sourceTree = "<group>"; };
 		836016991B37EF1D00B076DD /* ConversionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConversionCell.xib; path = "classes/home(主页)/view/ConversionCell.xib"; sourceTree = "<group>"; };
@@ -804,6 +804,8 @@
 		83AB708D1B2A75F800B2D09A /* model */ = {
 			isa = PBXGroup;
 			children = (
+				23CCD7981B68CC7200D424A7 /* FriendMessageModel.h */,
+				23CCD7991B68CC7200D424A7 /* FriendMessageModel.m */,
 				83E263E81B2EAEA700A2AC96 /* FriendModel.h */,
 				83E263E91B2EAEA700A2AC96 /* FriendModel.m */,
 				83A1503B1B58E48000AEC0DD /* ContactsModel.h */,
@@ -2215,7 +2217,6 @@
 				8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */,
 				EF565D431B17091F00FC2D6B /* LoginViewController.m in Sources */,
 				EFCCA4C71B12D6E400C015A7 /* MJMember.m in Sources */,
-				8348683A1B660B78000CBD1A /* FriendMessageModel.m in Sources */,
 				EFC84F851B3BBD2A00392A4B /* flayModel.m in Sources */,
 				EF565D451B17091F00FC2D6B /* UserRegisterViewController.m in Sources */,
 				83E263FA1B2F018500A2AC96 /* ChineseToPinyinResource.m in Sources */,
@@ -2232,6 +2233,7 @@
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EFF3D0D41B2EB4A800B2F446 /* openssl_wrapper.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
+				23CCD79A1B68CC7200D424A7 /* FriendMessageModel.m in Sources */,
 				83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */,
 				83CA8FB51B2932C2008D37C6 /* UITableView+CJ.m in Sources */,
 				EF565D071B16AA6000FC2D6B /* MJRefreshConst.m in Sources */,
