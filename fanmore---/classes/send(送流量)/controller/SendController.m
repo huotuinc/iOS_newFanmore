@@ -4,7 +4,7 @@
 //
 //  Created by HuoTu-Mac on 15/6/12.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  xxxxxxxxxxxxx
 
 #import "SendController.h"
 #import <AddressBookUI/AddressBookUI.h>
@@ -56,10 +56,7 @@ NSString *searchCellIdentifier = @"searchBar";
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
         
         
-    }
-    
-    else
-        
+    }else
     {
         addressBooks = ABAddressBookCreate();
     }
