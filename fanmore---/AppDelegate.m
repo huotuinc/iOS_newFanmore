@@ -44,6 +44,8 @@
 //存储通知信息
 @property(nonatomic, strong) NSMutableArray *notifationArray;
 
+//用于好友消息提醒
+@property(nonatomic, assign) BOOL getFriendBeg;
 
 @end
 
@@ -481,6 +483,7 @@ static NSString *message = @"有一条新消息";
             break;
         }
         case 2:
+            self.getFriendBeg = YES;
             break;
         case 3:
             break;
@@ -533,6 +536,7 @@ static NSString *message = @"有一条新消息";
                 break;
             }
             case 2:
+                self.getFriendBeg = YES;
                 break;
             case 3:
                 break;
