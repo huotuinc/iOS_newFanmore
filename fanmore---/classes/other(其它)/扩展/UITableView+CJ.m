@@ -19,4 +19,24 @@
     [self selectRowAtIndexPath:Nil animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 
+- (void)setClearBackground {
+    if (ScreenWidth == 375) {
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg750x1334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg1242x2208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x960"]];
+        }else {
+            self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x1136"]];
+        }
+    }
+}
+
+- (void)setWiteBackground {
+    self.backgroundColor = [UIColor whiteColor];
+}
+
 @end
