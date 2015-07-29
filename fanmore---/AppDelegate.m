@@ -44,6 +44,8 @@
 //存储通知信息
 @property(nonatomic, strong) NSMutableArray *notifationArray;
 
+//用于好友消息提醒
+@property(nonatomic, assign) BOOL getFriendBeg;
 
 @end
 
@@ -471,8 +473,17 @@ static NSString *message = @"有一条新消息";
     //        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
     switch ([num intValue]) {
         case 1:
+        {
+            //送流量消息
+            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+
             break;
+        }
         case 2:
+            self.getFriendBeg = YES;
             break;
         case 3:
             break;
@@ -516,13 +527,22 @@ static NSString *message = @"有一条新消息";
         NSNumber *num = userInfo[@"type"];
         switch ([num intValue]) {
             case 1:
+            {
+                //送流量消息
+                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
                 break;
+            }
             case 2:
+                self.getFriendBeg = YES;
                 break;
             case 3:
                 break;
             case 4:
             {
+                //任务推送
                 if (self.isShowed == NO) {
                     self.titleString = userInfo[@"aps"][@"alert"][@"title"];
                     self.taskId = userInfo[@"data"];
@@ -539,6 +559,7 @@ static NSString *message = @"有一条新消息";
                 break;
             case 5:
             {
+                //通知
                 NSString *title = userInfo[@"aps"][@"alert"][@"title"];
                 UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:title delegate:self cancelButtonTitle:@"去看看" otherButtonTitles:@"取消",nil];
                 ac.tag = 102;
@@ -547,7 +568,7 @@ static NSString *message = @"有一条新消息";
                 break;
             case 6:
             {
-                //通知
+                //消息
                 self.titleString = userInfo[@"aps"][@"alert"][@"title"];
             
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];

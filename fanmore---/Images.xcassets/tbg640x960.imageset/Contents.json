@@ -2,18 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "iconfont-xingbienv.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "iconfont-xingbienv32.png"
+      "filename" : "640x960.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "iconfont-xingbienv64.png"
+      "scale" : "3x"
     }
   ],
   "info" : {
