@@ -170,12 +170,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.buyButton.layer setMasksToBounds:YES];
     self.buyButton.layer.borderWidth = 0.5;
     self.buyButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.buyButton.layer.cornerRadius = 2;
+    self.buyButton.layer.cornerRadius = 6;
     
     [self.friendButton.layer setMasksToBounds:YES];
     self.friendButton.layer.borderWidth = 0.5;
     self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.friendButton.layer.cornerRadius = 2;
+    self.friendButton.layer.cornerRadius = 6;
 }
 
 
@@ -294,12 +294,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.buyButton.layer setMasksToBounds:YES];
     self.buyButton.layer.borderWidth = 0.5;
     self.buyButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.buyButton.layer.cornerRadius = 2;
+    self.buyButton.layer.cornerRadius = 6;
     
     [self.friendButton.layer setMasksToBounds:YES];
     self.friendButton.layer.borderWidth = 0.5;
     self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.friendButton.layer.cornerRadius = 2;
+    self.friendButton.layer.cornerRadius = 6;
     
     [self setWaringLabel];
 }

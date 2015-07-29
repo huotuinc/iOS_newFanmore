@@ -117,7 +117,7 @@ static NSString *BPCellidentify = @"BPCellId";
     
     
     __weak BPViewController * wself = self;
-    [MBProgressHUD showMessage:@""];
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
@@ -152,9 +152,9 @@ static NSString *BPCellidentify = @"BPCellId";
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"details"];
     
     __weak BPViewController * wself = self;
-    [MBProgressHUD showMessage:@""];
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        NSLog(@"%@",json);
+        NSLog(@"%@",json);
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -170,6 +170,7 @@ static NSString *BPCellidentify = @"BPCellId";
                 [wself.details removeAllObjects];
                 wself.details = [NSMutableArray arrayWithArray:taskArray];
                 [wself.tableView reloadData];    //刷新数据
+                NSLog(@"%@",self.details);
             }
         }
         

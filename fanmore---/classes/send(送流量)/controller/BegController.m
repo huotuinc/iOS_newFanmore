@@ -123,5 +123,20 @@
 }
 
 - (IBAction)begFlow:(UIButton *)sender {
+    
+    NSString * usrStr = [MainURL stringByAppendingPathComponent:@"makeRequest"];
+    
+    NSMutableDictionary *parame = [NSMutableDictionary dictionaryWithObject:@"18133768468" forKey:@"to"];
+    [parame setValue:@"带小抄" forKey:@"message"];
+    [parame setValue:@"1" forKey:@"fc"];
+    NSLog(@"%@", parame);
+    
+    [MBProgressHUD showMessage:nil];
+    [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
+        
+        [MBProgressHUD hideHUD];
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+    }];
 }
 @end
