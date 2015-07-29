@@ -12,6 +12,7 @@
 #import "PinYin4Objc.h"
 #import "BegController.h"
 #import "ResultContactInfo.h"
+#import "ContactGroup.h"
 
 @interface SendController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -20,7 +21,8 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *titleArray;
 
-
+/**联系人列表分组模型*/
+@property (nonatomic,strong) NSMutableArray * groupArray;
 
 
 @end
@@ -29,12 +31,14 @@
 
 NSString *frinedCellIdentifier = @"friend";
 
+NSString *searchCellIdentifier = @"searchBar";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.personArray = [NSMutableArray array];
     
-    
+    self.groupArray = [NSMutableArray array];
     self.userPhone = [[NSMutableString alloc] init];
     ABAddressBookRef addressBooks = nil;
     
@@ -74,7 +78,6 @@ NSString *frinedCellIdentifier = @"friend";
         ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
         
         ABRecordID reId = ABRecordGetRecordID(person);
-        NSLog(@"%d", reId);
         CFTypeRef firstName = ABRecordCopyValue(person, kABPersonFirstNameProperty); //姓
         CFTypeRef lastName = ABRecordCopyValue(person, kABPersonLastNameProperty);//名
         CFStringRef abFullName = ABRecordCopyCompositeName(person);
@@ -111,14 +114,14 @@ NSString *frinedCellIdentifier = @"friend";
                 CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
                 switch (j) {
                     case 0: {// Phone number
-//                        NSLog(@"%@", (__bridge NSString*)value);
                         [self.userPhone appendFormat:@"%d\r%@\t",reId,(__bridge NSString*)value];
                     
                         /**
                          生成一个model
                          */
                         FriendModel *model = [[FriendModel alloc] init];
-                        model.observationInfo = (__bridge void *)([NSString stringWithFormat:@"%d",reId]);
+                        
+                        model.originIdentify = (__bridge NSString *)((__bridge void *)([NSString stringWithFormat:@"%d",reId]));
                         model.name = nameString;
                         model.phone = [NSString stringWithFormat:@"%@", (__bridge NSString*)value];
                         HanyuPinyinOutputFormat *outputFormat = [[HanyuPinyinOutputFormat alloc] init];
@@ -142,20 +145,76 @@ NSString *frinedCellIdentifier = @"friend";
         }
     }
     
-    NSLog(@"----%@",self.userPhone);
     
     //获取联系人流量信息
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"contactInfo"];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"contacts"] = self.userPhone;
     
+    __weak SendController * wself = self;
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
         
-        NSLog(@"xxxx====%@",json);
         if ([json[@"systemResultCode"] intValue] == 1) {
             if ([json[@"resultCode"] intValue] == 1) {
                 
                 NSArray * contactsInfo = [ResultContactInfo objectArrayWithKeyValuesArray:json[@"resultData"][@"contactInfo"]];
+                NSMutableArray * effect = [NSMutableArray array];
+                for (int i = 0; i<wself.personArray.count; i++) {
+                    FriendModel *fd = wself.personArray[i];
+                    for (int j = 0; j < contactsInfo.count; j++) {
+                        
+                        ResultContactInfo * rs = contactsInfo[j];
+                        if ([fd.originIdentify isEqualToString:rs.originIdentify]) {//合法的
+                            
+                            fd.phone = rs.originMobile;
+                            fd.operatorLabel = rs.fanmoreTele;
+                            fd.fanmoreUsername = rs.fanmoreUsername;
+                            fd.teleBalance = rs.teleBalance;
+                            [effect addObject:fd];
+                            break;
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+
+                [wself.personArray removeAllObjects];
+                wself.personArray=effect;  //剔除无效数据
+                
+                [wself.personArray sortUsingComparator:^NSComparisonResult(FriendModel * obj1, FriendModel * obj2) {
+                    return [obj1.fristLetter compare:obj2.fristLetter] == NSOrderedDescending;
+                }];
+                FriendModel * aaas = [[FriendModel alloc] init];
+                ContactGroup * bbbs = [[ContactGroup alloc] init];
+                for (FriendModel * friend in wself.personArray) {
+                    if ([aaas.fristLetter isEqualToString:friend.fristLetter]) {//一样
+                        
+                        
+                        aaas = friend;
+                        
+                        
+                        [bbbs.friends addObject:friend];
+                        
+                        
+                        
+                    }else{//不一样
+                        
+                        aaas = friend;
+                        
+                        ContactGroup * group = [[ContactGroup alloc] init];
+                        
+                        group.firstLetter = friend.fristLetter;
+                        [group.friends addObject:friend];
+                        bbbs = group;
+                        [wself.groupArray addObject:group];
+                        
+                        
+                    }
+                }
+               
+                [wself.tableView reloadData];
             }
             
         }
@@ -189,8 +248,9 @@ NSString *frinedCellIdentifier = @"friend";
     self.searchDisplayController.searchResultsDataSource = self;
     // searchResultsDelegate 就是 UITableViewDelegate
     self.searchDisplayController.searchResultsDelegate = self;
-    
-    
+    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:searchCellIdentifier];
+    [self.searchDisplayController.searchResultsTableView removeSpaces];
+    self.searchDisplayController.searchResultsTableView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64);
     
 //    [self.tableView setHeaderHidden:YES];
     
@@ -222,7 +282,13 @@ NSString *frinedCellIdentifier = @"friend";
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
     if (tableView == self.tableView) {
-        return self.titleArray;
+        NSMutableArray *array = [NSMutableArray array];
+        for (ContactGroup * group in self.groupArray) {
+            [array addObject:group.firstLetter];
+        }
+        
+        self.titleArray = array;
+        return array;
     }else {
         return nil;
     }
@@ -249,18 +315,8 @@ NSString *frinedCellIdentifier = @"friend";
 {
     
     if (tableView == self.tableView) {
-        for (int j = 0 ; j < self.titleArray.count; j++) {
-            NSInteger i = 0;
-            for (FriendModel *model in self.personArray) {
-                if ([model.fristLetter isEqualToString:self.titleArray[j]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[j]]) {
-                    i++;
-                }
-            }
-            if (i == 0) {
-                [self.titleArray removeObject:self.titleArray[j]];
-            }
-        }
-        return self.titleArray.count;
+        return self.groupArray.count;
+
     }else {
         return 1;
     }
@@ -275,20 +331,8 @@ NSString *frinedCellIdentifier = @"friend";
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-//        for (int j = 0 ; j < 26; j++) {
-//            NSInteger i = 0;
-//            for (FriendModel *model in self.personArray) {
-//                if ([model.fristLetter isEqualToString:self.titleArray[section]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[section]]) {
-//                    i++;
-//                }
-//            }
-//            if (i == 0) {
-//                [self.titleArray removeObject:self.titleArray[j]];
-//            }
-//        }
-        
-        
-        return self.titleArray[section];
+        ContactGroup * aa = self.groupArray[section];
+        return aa.firstLetter;
     }else {
         return nil;
     }
@@ -296,14 +340,10 @@ NSString *frinedCellIdentifier = @"friend";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tableView) {
-        NSInteger i = 0;
-        for (FriendModel *model in self.personArray) {
-            if ([model.fristLetter isEqualToString:self.titleArray[section]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[section]]) {
-                i++;
-            }
-        }
-        NSLog(@"FriendModel%d",i);
-        return i;
+        
+        ContactGroup * aa = self.groupArray[section];
+        return aa.friends.count;
+
     }else {
         [self.searchArray removeAllObjects];
         NSString *str = [[NSString alloc] initWithFormat:@"%@",self.searchBar.text];
@@ -331,32 +371,26 @@ NSString *frinedCellIdentifier = @"friend";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:frinedCellIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"FriendCell" owner:nil options:nil] lastObject];
-    }
+    
+//    if (cell == nil) {
+//        cell = [[[NSBundle mainBundle] loadNibNamed:@"FriendCell" owner:nil options:nil] lastObject];
+//    }
     
     if (tableView == self.tableView) {
-        
-        NSMutableArray* tempArray = [NSMutableArray array];
-        for (FriendModel *model in self.personArray) {
-            if ([model.fristLetter isEqualToString:self.titleArray[indexPath.section]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[indexPath.section]]) {
-                
-                [tempArray addObject:model];
-                if (tempArray.count>indexPath.row){
-                    FriendModel *showModel = tempArray[indexPath.row];
-                    [cell setUserName:showModel.name AndUserPhone:showModel.phone];
-                    return cell;
-                }
-            }
-        }
+        FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:frinedCellIdentifier forIndexPath:indexPath];
+        ContactGroup * group = self.groupArray[indexPath.section];
+        FriendModel * friend = group.friends[indexPath.row];
+        [cell setUserName:friend.name AndUserPhone:friend.phone];
+        return cell;
     }else{
+        FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCellIdentifier forIndexPath:indexPath];
         FriendModel *model = self.searchArray[indexPath.row];
         
         cell.userName.text = model.name;
         cell.userPhone.text = model.phone;
+        return cell;
     }
-    return cell;
+    
 }
 
 
