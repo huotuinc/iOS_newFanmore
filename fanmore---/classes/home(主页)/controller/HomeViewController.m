@@ -36,6 +36,10 @@
 /**分组模型*/
 @property(nonatomic,strong) NSMutableArray *taskGroup;
 
+
+
+/**纪录下点击的组和行树*/
+@property(nonatomic,strong) NSIndexPath *myindexPath;
 @end
 
 
@@ -483,6 +487,7 @@ static int refreshCount = 0;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    self.myindexPath = indexPath;  //纪录点击的条目
     TaskGrouoModel * gmd =  self.taskGroup[indexPath.section];
     //设置cell样式
     taskData * task =gmd.tasks[indexPath.row];
@@ -660,6 +665,7 @@ static int refreshCount = 0;
     
     __weak HomeViewController * wself = self;
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
+        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -671,17 +677,11 @@ static int refreshCount = 0;
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             
             __block taskData *task = [taskData objectWithKeyValues:json[@"resultData"][@"task"]];
-            for (int index = 0; index < wself.taskDatas.count; index++) {
-                taskData * cc = wself.taskDatas[index];
-                if (task.taskId == cc.taskId) {
-                    
-                    wself.taskDatas[index] = task;
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
-                    [wself.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-                    break;
-                }
-            }
-           
+            
+            TaskGrouoModel * aa = self.taskGroup[self.myindexPath.section];
+            aa.tasks[self.myindexPath.row] = task;
+            [wself.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:self.myindexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+
             
         }
     } failure:^(NSError *error) {
