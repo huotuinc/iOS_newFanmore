@@ -31,8 +31,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="朱家聪" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xID-KN-c30">
-                        <rect key="frame" x="80" y="28" width="51" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="朱家聪" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xID-KN-c30">
+                        <rect key="frame" x="80" y="28" width="178" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -59,6 +59,7 @@
                     <constraint firstItem="xID-KN-c30" firstAttribute="leading" secondItem="6Vb-gP-aN9" secondAttribute="trailing" constant="10" id="Gtd-X6-qCH"/>
                     <constraint firstAttribute="trailing" secondItem="wt9-mU-h9f" secondAttribute="trailing" constant="10" id="Hhc-ir-bF8"/>
                     <constraint firstAttribute="centerY" secondItem="wt9-mU-h9f" secondAttribute="centerY" id="JeP-X7-phI"/>
+                    <constraint firstItem="wt9-mU-h9f" firstAttribute="leading" secondItem="xID-KN-c30" secondAttribute="trailing" constant="5" id="Rf1-Jx-PKF"/>
                     <constraint firstAttribute="centerY" secondItem="6Vb-gP-aN9" secondAttribute="centerY" id="awG-1M-Y0N"/>
                     <constraint firstItem="6Vb-gP-aN9" firstAttribute="bottom" secondItem="fBk-9J-ctv" secondAttribute="bottom" id="axK-43-Bls"/>
                     <constraint firstItem="6Vb-gP-aN9" firstAttribute="top" secondItem="nQv-2s-dRn" secondAttribute="top" id="dmN-wJ-GBU"/>

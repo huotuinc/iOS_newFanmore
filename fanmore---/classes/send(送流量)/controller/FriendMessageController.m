@@ -127,6 +127,8 @@ static NSString *friendMIdentify = @"FMCellId";
     
     self.tableView.tableHeaderView = [[UIView alloc] init];
     
+    [self setClearBackground];
+    
     [self.navigationItem.rightBarButtonItem = [UIBarButtonItem alloc] bk_initWithTitle:@"拒绝全部" style:UIBarButtonItemStylePlain handler:^(id sender) {
         if (self.array.count) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"要拒绝全部好友请求么？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
