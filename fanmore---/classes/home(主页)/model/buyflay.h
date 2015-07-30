@@ -11,8 +11,20 @@
 @interface buyflay : NSObject
 
 
+
+
+@property(nonatomic,strong) NSString * alipayNotifyUri;
+
+@property(nonatomic,strong) NSString * alipayPartner;
+
 @property(nonatomic,strong) NSString * mobileMsg;
 
 @property(nonatomic,strong) NSArray * purchases;
+
+@property(nonatomic,strong) NSString * wxpayAppId;
+
+@property(nonatomic,strong) NSString * wxpayMerchantId;
+
+@property(nonatomic,strong) NSString * wxpayNotifyUri;
 
 @end

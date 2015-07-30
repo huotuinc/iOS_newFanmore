@@ -18,14 +18,18 @@
 //@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
 //
 //
-
 //@"http://newtask.fanmore.cn/app"
+//
+//
 //@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
+//
+
 //@"http://newtask.fanmore.cn/app"
 //@"http://newtask.fanmore.cn/app"
 //
 //@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//@"http://192.168.0.23:8080/fanmoreweb/app"
+//
 
 /**微信支付*/
 //#define WeiXinAppID @"wxaeda2d5603b12302"

@@ -53,7 +53,7 @@
 //    NSLog(@"dasdasdas-------parame--get%@",paramsOption);
 //    manager.responseSerializer=[AFHTTPResponseSerializer serializer];
     [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject){
-//        NSLog(@"xxxxxxxx%@",operation);
+        NSLog(@"xxxxxxxx%@",operation);
     
         success(responseObject);
         
@@ -97,6 +97,7 @@
 //    NSLog(@"xxxxxx-----网络请求get参数parame%@",paramsOption);
 //    NSLog(@"网络请求－－－－post参数%@",paramsOption);
     [manager POST:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"-------%@",operation);
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

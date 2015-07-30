@@ -45,6 +45,7 @@
         if (block != nil) {
             block(drawerController,drawerSide,percentVisible);
         }
+
     }];
     
     [self setShowsShadow:NO];

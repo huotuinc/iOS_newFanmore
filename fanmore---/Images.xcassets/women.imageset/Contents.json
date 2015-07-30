@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "nv(1).png"
+      "filename" : "iconfont-xingbienv.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "nv@2x(1).png"
+      "filename" : "iconfont-xingbienv32.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "nv@3x(1).png"
+      "filename" : "iconfont-xingbienv64.png"
     }
   ],
   "info" : {

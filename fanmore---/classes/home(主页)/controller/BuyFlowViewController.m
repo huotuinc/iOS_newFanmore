@@ -17,6 +17,14 @@
 #import "buyflay.h"
 #import "flayModel.h"
 
+//#define WeiXinPayId @"wxd8c58460d0199dd5"
+#define WeiXinPayId @"wxaeda2d5603b12302"
+#define WeiXinPayMerchantId @"1251040401"
+#define wxpayNotifyUri @"http://newtask.fanmore.cn/callbackWxpay"
+//#define wxpayKey @"8c3b660de36a3b3fb678ca865e31f0f3"
+//#define wxpayKey @"10101010101010101010101010101010"
+//#define wxpayKey @"0db0d6908d6ae6a09b0a3727888f0da6"
+#define wxpayKey @"0db0d4908a6ae6a09b0a7727878f0ca6"
 
 @interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
 /**手机运行商*/
@@ -41,7 +49,6 @@
 @property(nonatomic,strong) NSArray * goods;
 
 
-
 @property(nonatomic,strong)buyflay * buyflay;
 /**购买按钮*/
 - (IBAction)buyButtonClick:(UIButton *)sender;
@@ -63,7 +70,7 @@ static NSString * _company = nil;
         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
-//            NSLog(@"购买流量明细%@",json);
+            NSLog(@"购买流量明细%@",json);
             if ([json[@"systemResultCode"] intValue] == 1) {
                 if ([json[@"resultCode"] intValue] == 56001) {
                     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -149,6 +156,10 @@ static NSString * _company = nil;
     
     [super viewDidLoad];
     self.title = @"购买流量";
+    
+    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
+    NSLog(@"wxRegistered:%d",wxRegistered);
+    
     _company = self.buyflay.mobileMsg;
     
     [self.currentPriceLable setTintColor:[UIColor redColor]];
@@ -190,20 +201,15 @@ static NSString * _company = nil;
 }
 
 
+/**
+ *  购买按钮点击
+ *
+ *  @param sender <#sender description#>
+ */
 - (IBAction)buyButtonClick:(id)sender {
-    
-//    UICollectionViewCell *scell = [self.collection cellForItemAtIndexPath:self.selected];
-//    if (scell.selected == YES) {
-//        
-//        NSString * good = self.goods[self.selected.row];
-////        NSLog(@"%@",good);
-//    }
     
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择支付方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"支付宝", @"微信",nil];
     [actionSheet showInView:self.view];
-    
-    
-//    NSLog(@"购买流量xxxxxxxxxxxxxxxxxxx");
 }
 
 
@@ -220,7 +226,7 @@ static NSString * _company = nil;
         [self PayByAlipay]; // 支付宝
     }
     if (buttonIndex == 1) {
-        [self PayByWeiXinParame]; // 微信支付
+        [self WeiChatPay]; // 微信支付
     }
 }
 
@@ -301,65 +307,81 @@ static NSString * _company = nil;
  */
 - (NSMutableDictionary *)PayByWeiXinParame{
     
-    
-    payRequsestHandler *payManager = [[payRequsestHandler alloc] init];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"appid"] = @"wx8888888888888888";
-    params[@"mch_id"] = @"1251040401";     //微信支付分配的商户号
-    params[@"device_info"] = @"APP-001"; //支付设备号或门店号
-    time_t now;
-    time(&now);
-    NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
-    NSString * nonce_str	= [WXUtil md5:time_stamp];
-    params[@"nonce_str"] = nonce_str; //随机字符串，不长于32位。推荐随机数生成算法
-    params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
-    params[@"body"] = @"wx8888888888888888"; //商品或支付单简要描述
-    params[@"notify_url"] = @"wx8888888888888888";  //接收微信支付异步通知回调地址
-    params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
-    params[@"spbill_create_ip"] = @"196.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
-    params[@"total_fee"] = @"wx8888888888888888";  //订单总金额，只能为整数，详见支付金额
-    
-    //获取prepayId（预支付交易会话标识）
-    NSString * prePayid = nil;
-    prePayid  = [payManager sendPrepay:params];
-    
-    
-    
-    if ( prePayid != nil) {
-        //获取到prepayid后进行第二次签名
+    payRequsestHandler * payManager = [[payRequsestHandler alloc] init];
+    [payManager setKey:wxpayKey];
+    BOOL isOk = [payManager init:WeiXinPayId mch_id:WeiXinPayMerchantId];
+    if (isOk) {
         
-        NSString    *package, *time_stamp, *nonce_str;
-        //设置支付参数
-        time_t now;
-        time(&now);
-        time_stamp  = [NSString stringWithFormat:@"%ld", now];
-        nonce_str	= [WXUtil md5:time_stamp];
-        //重新按提交格式组包，微信客户端暂只支持package=Sign=WXPay格式，须考虑升级后支持携带package具体参数的情况
-        //package       = [NSString stringWithFormat:@"Sign=%@",package];
-        package         = @"Sign=WXPay";
-        //第二次签名参数列表
-        NSMutableDictionary *signParams = [NSMutableDictionary dictionary];
-        [signParams setObject: @"1123213"        forKey:@"appid"];
-        [signParams setObject: nonce_str    forKey:@"noncestr"];
-        [signParams setObject: package      forKey:@"package"];
-        [signParams setObject: @"1233213"        forKey:@"partnerid"];
-        [signParams setObject: time_stamp   forKey:@"timestamp"];
-        [signParams setObject: prePayid     forKey:@"prepayid"];
-        //[signParams setObject: @"MD5"       forKey:@"signType"];
-        //生成签名
-        NSString *sign  = [payManager createMd5Sign:signParams];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
         
-        //添加签名
-        [signParams setObject: sign         forKey:@"sign"];
+        NSString *noncestr  = [NSString stringWithFormat:@"%d", rand()];
+        params[@"appid"] = WeiXinPayId;
+        params[@"mch_id"] = WeiXinPayMerchantId;     //微信支付分配的商户号
+//        params[@"device_info"] = @"APP-001"; //支付设备号或门店号
+//        time_t now;
+//        time(&now);
+//        NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
+//        NSString * nonce_str	= [WXUtil md5:time_stamp];
+        params[@"nonce_str"] = noncestr; //随机字符串，不长于32位。推荐随机数生成算法
+        params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
+        params[@"body"] = @"大三大四的"; //商品或支付单简要描述
+        params[@"notify_url"] = wxpayNotifyUri;  //接收微信支付异步通知回调地址
+        params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
+        params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
+        NSArray * aa = self.buyflay.purchases;
+        //商品价格
+        flayModel * bb = aa[self.selected.row];
+        NSString * a  = [NSString stringWithFormat:@"%.f",bb.price * 100];
         
-        [_debugInfo appendFormat:@"第二步签名成功，sign＝%@\n",sign];
         
-        //返回参数列表
-        return signParams;
+        params[@"total_fee"] = a;  //订单总金额，只能为整数，详见支付金额
+        params[@"device_info"] = DeviceNo;
         
-    }else{
-        [_debugInfo appendFormat:@"获取prepayid失败！\n"];
+    
+        
+//        params[@"sign"] = [payManager createMd5Sign:params];
+        
+        //获取prepayId（预支付交易会话标识）
+        NSString * prePayid = nil;
+        prePayid  = [payManager sendPrepay:params];
+    
+       
+        if ( prePayid != nil) {
+            //获取到prepayid后进行第二次签名
+            
+            NSString    *package, *time_stamp, *nonce_str;
+            //设置支付参数
+            time_t now;
+            time(&now);
+            time_stamp  = [NSString stringWithFormat:@"%ld", now];
+            nonce_str	= [WXUtil md5:time_stamp];
+            //重新按提交格式组包，微信客户端暂只支持package=Sign=WXPay格式，须考虑升级后支持携带package具体参数的情况
+            //package       = [NSString stringWithFormat:@"Sign=%@",package];
+            package         = @"Sign=WXPay";
+            //第二次签名参数列表
+            NSMutableDictionary *signParams = [NSMutableDictionary dictionary];
+            [signParams setObject: WeiXinPayId  forKey:@"appid"];
+            [signParams setObject: nonce_str    forKey:@"noncestr"];
+            [signParams setObject: package      forKey:@"package"];
+            [signParams setObject: WeiXinPayMerchantId   forKey:@"partnerid"];
+            [signParams setObject: time_stamp   forKey:@"timestamp"];
+            [signParams setObject: prePayid     forKey:@"prepayid"];
+            //[signParams setObject: @"MD5"       forKey:@"signType"];
+            //生成签名
+            NSString *sign  = [payManager createMd5Sign:signParams];
+            
+            //添加签名
+            [signParams setObject: sign         forKey:@"sign"];
+            
+            [_debugInfo appendFormat:@"第二步签名成功，sign＝%@\n",sign];
+            
+            //返回参数列表
+            return signParams;
+            
+        }else{
+            [_debugInfo appendFormat:@"获取prepayid失败！\n"];
+        }
+        
     }
     return nil;
 }
@@ -369,36 +391,31 @@ static NSString * _company = nil;
  *  微信pay
  */
 - (void)WeiChatPay{
-    //创建支付签名对象
-    payRequsestHandler *req = [[payRequsestHandler alloc] init];
-    //初始化支付签名对象
-    [req init:APP_ID mch_id:MCH_ID];
-    //设置密钥
-    [req setKey:PARTNER_ID];
+    
     
     //获取到实际调起微信支付的参数后，在app端调起支付
-    NSMutableDictionary *dict = [req sendPay_demo];
-    if(dict == nil){
-        //错误提示
-        NSString *debug = [req getDebugifo];
-        NSLog(@"%@\n\n",debug);
+    NSMutableDictionary *dict = [self PayByWeiXinParame];
+    if(dict != nil){
+        NSMutableString *retcode = [dict objectForKey:@"retcode"];
+        if (retcode.intValue == 0){
+            NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+            //调起微信支付
+            PayReq* req             = [[PayReq alloc] init];
+            req.openID              = [dict objectForKey:@"appid"];
+            req.partnerId           = [dict objectForKey:@"partnerid"];
+            req.prepayId            = [dict objectForKey:@"prepayid"];
+            req.nonceStr            = [dict objectForKey:@"noncestr"];
+            req.timeStamp           = stamp.intValue;
+            req.package             = [dict objectForKey:@"package"];
+            req.sign                = [dict objectForKey:@"sign"];
+            [WXApi sendReq:req];
+        }else{
+            NSLog(@"提示信息%@",[dict objectForKey:@"retmsg"]);
+        }
+        
     }else{
-        NSLog(@"%@\n\n",[req getDebugifo]);
-        //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
-        
-        NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
-        
-        //调起微信支付
-        PayReq* req             = [[PayReq alloc] init];
-        req.openID              = [dict objectForKey:@"appid"];
-        req.partnerId           = [dict objectForKey:@"partnerid"];
-        req.prepayId            = [dict objectForKey:@"prepayid"];
-        req.nonceStr            = [dict objectForKey:@"noncestr"];
-        req.timeStamp           = stamp.intValue;
-        req.package             = [dict objectForKey:@"package"];
-        req.sign                = [dict objectForKey:@"sign"];
-        
-        [WXApi sendReq:req];
+        NSLog(@"提示信息返回错误");
+
     }
 
     

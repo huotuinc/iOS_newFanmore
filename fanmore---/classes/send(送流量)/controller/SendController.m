@@ -4,14 +4,16 @@
 //
 //  Created by HuoTu-Mac on 15/6/12.
 //  Copyright (c) 2015年 HT. All rights reserved.
-//
+//  xxxxxxxxxxxxx
 
 #import "SendController.h"
 #import <AddressBookUI/AddressBookUI.h>
 #import "FriendCell.h"
 #import "PinYin4Objc.h"
 #import "BegController.h"
-
+#import "ResultContactInfo.h"
+#import "ContactGroup.h"
+#import <SDWebImageManager.h>
 
 @interface SendController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -20,7 +22,8 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *titleArray;
 
-
+/**联系人列表分组模型*/
+@property (nonatomic,strong) NSMutableArray * groupArray;
 
 
 @end
@@ -29,11 +32,15 @@
 
 NSString *frinedCellIdentifier = @"friend";
 
+NSString *searchCellIdentifier = @"searchBar";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.personArray = [NSMutableArray array];
     
+    self.groupArray = [NSMutableArray array];
+    self.userPhone = [[NSMutableString alloc] init];
     ABAddressBookRef addressBooks = nil;
     
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
@@ -50,10 +57,7 @@ NSString *frinedCellIdentifier = @"friend";
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
         
         
-    }
-    
-    else
-        
+    }else
     {
         addressBooks = ABAddressBookCreate();
     }
@@ -72,16 +76,15 @@ NSString *frinedCellIdentifier = @"friend";
         ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
         
         ABRecordID reId = ABRecordGetRecordID(person);
-        NSLog(@"%d", reId);
-        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
-        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
+        CFTypeRef firstName = ABRecordCopyValue(person, kABPersonFirstNameProperty); //姓
+        CFTypeRef lastName = ABRecordCopyValue(person, kABPersonLastNameProperty);//名
         CFStringRef abFullName = ABRecordCopyCompositeName(person);
-        NSString *nameString = (__bridge NSString *)abName;
-        NSString *lastNameString = (__bridge NSString *)abLastName;
+        NSString *nameString = (__bridge NSString *)firstName;//姓
+        NSString *lastNameString = (__bridge NSString *)lastName;//名
         if ((__bridge id)abFullName != nil) {
             nameString = (__bridge NSString *)abFullName;
         } else {
-            if ((__bridge id)abLastName != nil)
+            if ((__bridge id)lastName != nil)
             {
                 nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
             }
@@ -109,12 +112,14 @@ NSString *frinedCellIdentifier = @"friend";
                 CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
                 switch (j) {
                     case 0: {// Phone number
-//                        NSLog(@"%@", (__bridge NSString*)value);
-                        [self.userPhone appendFormat:@"%d/r%@/t",reId,(__bridge NSString*)value];
+                        [self.userPhone appendFormat:@"%d\r%@\t",reId,(__bridge NSString*)value];
+                    
                         /**
                          生成一个model
                          */
                         FriendModel *model = [[FriendModel alloc] init];
+                        
+                        model.originIdentify = (__bridge NSString *)((__bridge void *)([NSString stringWithFormat:@"%d",reId]));
                         model.name = nameString;
                         model.phone = [NSString stringWithFormat:@"%@", (__bridge NSString*)value];
                         HanyuPinyinOutputFormat *outputFormat = [[HanyuPinyinOutputFormat alloc] init];
@@ -138,6 +143,97 @@ NSString *frinedCellIdentifier = @"friend";
         }
     }
     
+    
+    //获取联系人流量信息
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"contactInfo"];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"contacts"] = self.userPhone;
+    
+    __weak SendController * wself = self;
+    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
+//        NSLog(@"%@",json);
+        if ([json[@"systemResultCode"] intValue] == 1) {
+            if ([json[@"resultCode"] intValue] == 1) {
+                
+                NSArray * contactsInfo = [ResultContactInfo objectArrayWithKeyValuesArray:json[@"resultData"][@"contactInfo"]];
+                NSMutableArray * effect = [NSMutableArray array];
+                for (int i = 0; i<wself.personArray.count; i++) {
+                    FriendModel *fd = wself.personArray[i];
+                    for (int j = 0; j < contactsInfo.count; j++) {
+                        
+                        ResultContactInfo * rs = contactsInfo[j];
+                        if ([fd.originIdentify isEqualToString:rs.originIdentify]) {//合法的
+                            
+                            fd.phone = rs.originMobile;
+                            fd.image = rs.fanmorePicUrl;
+                            fd.sex = rs.fanmoreSex;
+                            fd.teleBalance = rs.teleBalance;
+                            fd.flowLabel = [NSString stringWithFormat:@"%f", rs.fanmoreBalance];
+//                            fd.fanmoreBalance = rs.fanmoreBalance;
+                            fd.operatorLabel = rs.fanmoreTele;
+                            
+                            fd.fanmoreUsername = rs.fanmoreUsername;
+                            
+                            
+                            
+                            [effect addObject:fd];
+                            break;
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+
+                [wself.personArray removeAllObjects];
+                wself.personArray=effect;  //剔除无效数据
+                
+                [wself.personArray sortUsingComparator:^NSComparisonResult(FriendModel * obj1, FriendModel * obj2) {
+                    return [obj1.fristLetter compare:obj2.fristLetter] == NSOrderedDescending;
+                }];
+                FriendModel * aaas = [[FriendModel alloc] init];
+                ContactGroup * bbbs = [[ContactGroup alloc] init];
+                for (FriendModel * friend in wself.personArray) {
+                    if ([aaas.fristLetter isEqualToString:friend.fristLetter]) {//一样
+                        
+                        
+                        aaas = friend;
+                        
+                        
+                        [bbbs.friends addObject:friend];
+                        
+                        
+                        
+                    }else{//不一样
+                        
+                        aaas = friend;
+                        
+                        ContactGroup * group = [[ContactGroup alloc] init];
+                        
+                        group.firstLetter = friend.fristLetter;
+                        [group.friends addObject:friend];
+                        bbbs = group;
+                        [wself.groupArray addObject:group];
+                        
+                        
+                    }
+                }
+               
+                if (self.groupArray.count > 0) {
+                    [self setWiteBackground];
+                }else {
+                    [self setClearBackground];
+                }
+                [wself.tableView reloadData];
+            }
+            
+        }
+       
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error.description);
+    }];
 
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 44) ];
@@ -151,6 +247,9 @@ NSString *frinedCellIdentifier = @"friend";
     
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.frame.origin.y + self.searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44) style:UITableViewStyleGrouped];
+//    [self.tableView removeSpaces];
+    
+    [self setClearBackground];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:frinedCellIdentifier];
 
@@ -163,8 +262,9 @@ NSString *frinedCellIdentifier = @"friend";
     self.searchDisplayController.searchResultsDataSource = self;
     // searchResultsDelegate 就是 UITableViewDelegate
     self.searchDisplayController.searchResultsDelegate = self;
-    
-    
+    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:searchCellIdentifier];
+    [self.searchDisplayController.searchResultsTableView removeSpaces];
+    self.searchDisplayController.searchResultsTableView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64);
     
 //    [self.tableView setHeaderHidden:YES];
     
@@ -173,6 +273,7 @@ NSString *frinedCellIdentifier = @"friend";
     
     [self.tableView removeSpaces];
     [self.tableView setHeaderHidden:YES];
+    self.tableView.sectionIndexBackgroundColor = [UIColor colorWithWhite:0.961 alpha:1.000];
     
     [self.view addSubview:self.tableView];
     
@@ -181,20 +282,13 @@ NSString *frinedCellIdentifier = @"friend";
     self.titleArray = [[NSMutableArray alloc] init];
     self.searchArray = [[NSMutableArray alloc] init];
     
+    
     for (int i = 0; i < 26; i++) {
         NSString *str = [[NSString alloc] initWithFormat:@"%c", 65 + i];
         [self.titleArray addObject:str];
     }
-
     
 }
-
-
-
-
-
-
-
 
 
 
@@ -203,7 +297,13 @@ NSString *frinedCellIdentifier = @"friend";
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
     if (tableView == self.tableView) {
-        return self.titleArray;
+        NSMutableArray *array = [NSMutableArray array];
+        for (ContactGroup * group in self.groupArray) {
+            [array addObject:group.firstLetter];
+        }
+        
+        self.titleArray = array;
+        return array;
     }else {
         return nil;
     }
@@ -225,11 +325,12 @@ NSString *frinedCellIdentifier = @"friend";
 }
 
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
     if (tableView == self.tableView) {
-        return self.titleArray.count;
+        return self.groupArray.count;
+
     }else {
         return 1;
     }
@@ -244,7 +345,8 @@ NSString *frinedCellIdentifier = @"friend";
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-        return self.titleArray[section];
+        ContactGroup * aa = self.groupArray[section];
+        return aa.firstLetter;
     }else {
         return nil;
     }
@@ -252,13 +354,10 @@ NSString *frinedCellIdentifier = @"friend";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tableView) {
-        NSInteger i = 0;
-        for (FriendModel *model in self.personArray) {
-            if ([model.fristLetter isEqualToString:self.titleArray[section]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[section]]) {
-                i++;
-            }
-        }
-        return i;
+        
+        ContactGroup * aa = self.groupArray[section];
+        return aa.friends.count;
+
     }else {
         [self.searchArray removeAllObjects];
         NSString *str = [[NSString alloc] initWithFormat:@"%@",self.searchBar.text];
@@ -286,39 +385,76 @@ NSString *frinedCellIdentifier = @"friend";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:frinedCellIdentifier];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"FriendCell" owner:nil options:nil] lastObject];
-    }
+    
+//    if (cell == nil) {
+//        cell = [[[NSBundle mainBundle] loadNibNamed:@"FriendCell" owner:nil options:nil] lastObject];
+//    }
     
     if (tableView == self.tableView) {
+        FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:frinedCellIdentifier forIndexPath:indexPath];
         
-        NSMutableArray* tempArray = [NSMutableArray array];
-        for (FriendModel *model in self.personArray) {
-            if ([model.fristLetter isEqualToString:self.titleArray[indexPath.section]] || [model.fristLetter.uppercaseString isEqualToString:self.titleArray[indexPath.section]]) {
-                
-                [tempArray addObject:model];
-                if (tempArray.count>indexPath.row){
-                    FriendModel *showModel = tempArray[indexPath.row];
-                    [cell setUserName:showModel.name AndUserPhone:showModel.phone];
-                    return cell;
-                }
+        ContactGroup * group = self.groupArray[indexPath.section];
+        FriendModel * friend = group.friends[indexPath.row];
+        if (friend.image.length) {
+            
+            NSString *str = [NSString string];
+            CGFloat userFlow = [friend.flowLabel doubleValue];
+            if (userFlow - (int)userFlow > 0) {
+                str = [NSString stringWithFormat:@"%.1fM",[friend.flowLabel doubleValue]];
+            }else {
+                str = [NSString stringWithFormat:@"%.0fM",[friend.flowLabel doubleValue]];
             }
+            if (userFlow > 1024) {
+                str = [NSString stringWithFormat:@"%.3fG",[friend.flowLabel doubleValue] / 1024];
+            }
+            
+            [cell setUserPhone:friend.phone AndUserName:friend.name  AndSex:friend.sex AndFlow:str AndOperator:nil];
+
+            
+            SDWebImageManager * manager = [SDWebImageManager sharedManager];
+            NSURL * url = [NSURL URLWithString:friend.image];
+            [manager downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                
+                if (error == nil) {
+                    [cell.headImage setBackgroundImage:image forState:UIControlStateNormal];
+                    [cell.headImage setBackgroundImage:image forState:UIControlStateHighlighted];
+                }
+            }];
+            cell.backgroundColor = [UIColor whiteColor];
+        }else {
+            [cell setUserName:friend.name AndUserPhone:friend.phone];
+            cell.backgroundColor = [UIColor whiteColor];
         }
+        return cell;
     }else{
+        FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCellIdentifier forIndexPath:indexPath];
         FriendModel *model = self.searchArray[indexPath.row];
         
         cell.userName.text = model.name;
         cell.userPhone.text = model.phone;
+        return cell;
     }
-    return cell;
+    
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     BegController *beg = [storyboard instantiateViewControllerWithIdentifier:@"BegController"];
+    ContactGroup * group = self.groupArray[indexPath.section];
+    FriendModel * fmod = group.friends[indexPath.row];
+    beg.model = fmod;
+    
+    if (fmod.image.length) {
+        beg.isFanmoreUser = YES;
+    }else {
+        beg.isFanmoreUser = NO;
+    }
+    
     [self.navigationController pushViewController:beg animated:YES];
 }
 
@@ -363,6 +499,29 @@ NSString *frinedCellIdentifier = @"friend";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma 设置背景图片
+- (void)setClearBackground {
+    if (ScreenWidth == 375) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg750x1334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg1242x2208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x960"]];
+        }else {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x1136"]];
+        }
+    }
+}
+
+- (void)setWiteBackground {
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.961 alpha:1.000];
+}
+
 
 /*
 #pragma mark - Navigation

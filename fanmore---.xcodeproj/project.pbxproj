@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B56C822B3D3D6F344695E94 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83ED0B46534249FDED1AB9A4 /* libPods.a */; };
+		23CCD79A1B68CC7200D424A7 /* FriendMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CCD7991B68CC7200D424A7 /* FriendMessageModel.m */; };
 		830812401B28552200AC4E18 /* PICircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8308123F1B28552200AC4E18 /* PICircularProgressView.m */; };
 		830B4D021B2194FC00BBE276 /* BPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D011B2194FC00BBE276 /* BPViewController.m */; };
 		830B4D061B2196DC00BBE276 /* BPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B4D041B2196DC00BBE276 /* BPCell.m */; };
@@ -36,6 +37,7 @@
 		83A085981B31653E00FDFA2B /* WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A085971B31653E00FDFA2B /* WebController.m */; };
 		83A0E9FC1B155BCF009708FB /* InviteCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */; };
 		83A0E9FD1B155BCF009708FB /* InviteCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */; };
+		83A1503D1B58E48000AEC0DD /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A1503C1B58E48000AEC0DD /* ContactsModel.m */; };
 		83AB70911B2A762000B2D09A /* SendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AB70901B2A762000B2D09A /* SendController.m */; };
 		83B61B791B1713F000B027E0 /* TodayForesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B61B781B1713F000B027E0 /* TodayForesController.m */; };
 		83CA8FB51B2932C2008D37C6 /* UITableView+CJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA8FB41B2932C2008D37C6 /* UITableView+CJ.m */; };
@@ -148,12 +150,13 @@
 		EFC86AF91B1EFD700081BBC8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AE01B1EFD700081BBC8 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		EFC86AFA1B1EFD700081BBC8 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AE21B1EFD700081BBC8 /* libWeiboSDK.a */; };
 		EFC86AFB1B1EFD700081BBC8 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AE31B1EFD700081BBC8 /* WeiboSDK.bundle */; };
-		EFC86AFC1B1EFD700081BBC8 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AE61B1EFD700081BBC8 /* libWeChatSDK.a */; };
 		EFC86AFD1B1EFD700081BBC8 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AE91B1EFD700081BBC8 /* ShareSDK.framework */; };
 		EFC86AFE1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */; };
 		EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */; };
 		EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */; };
+		EFC89C511B677365008B6A63 /* ResultContactInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC89C501B677365008B6A63 /* ResultContactInfo.m */; };
 		EFC9B7D01B3E8BE300A09686 /* HAMineLoveCarDBOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */; };
+		EFCA3F8E1B686E9D00724425 /* ContactGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCA3F8D1B686E9D00724425 /* ContactGroup.m */; };
 		EFCA6D081B428A2600F92B03 /* NSData+NSDataDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCA6D071B428A2600F92B03 /* NSData+NSDataDeal.m */; };
 		EFCB460D1B214499005D5026 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCB460B1B214499005D5026 /* FeedBackViewController.m */; };
 		EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFCB460C1B214499005D5026 /* FeedBackViewController.xib */; };
@@ -226,6 +229,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23CCD7981B68CC7200D424A7 /* FriendMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendMessageModel.h; sourceTree = "<group>"; };
+		23CCD7991B68CC7200D424A7 /* FriendMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendMessageModel.m; sourceTree = "<group>"; };
 		4215C255FF8423CA4D63FB2E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8308123E1B28552200AC4E18 /* PICircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICircularProgressView.h; sourceTree = "<group>"; };
 		8308123F1B28552200AC4E18 /* PICircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICircularProgressView.m; sourceTree = "<group>"; };
@@ -276,6 +281,8 @@
 		83A0E9F91B155BCE009708FB /* InviteCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCodeCell.h; sourceTree = "<group>"; };
 		83A0E9FA1B155BCF009708FB /* InviteCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCodeCell.m; sourceTree = "<group>"; };
 		83A0E9FB1B155BCF009708FB /* InviteCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCodeCell.xib; sourceTree = "<group>"; };
+		83A1503B1B58E48000AEC0DD /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
+		83A1503C1B58E48000AEC0DD /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
 		83AB708F1B2A762000B2D09A /* SendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendController.h; sourceTree = "<group>"; };
 		83AB70901B2A762000B2D09A /* SendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendController.m; sourceTree = "<group>"; };
 		83B61B771B1713F000B027E0 /* TodayForesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayForesController.h; sourceTree = "<group>"; };
@@ -463,15 +470,16 @@
 		EFC86AE21B1EFD700081BBC8 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		EFC86AE31B1EFD700081BBC8 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		EFC86AE41B1EFD700081BBC8 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
-		EFC86AE61B1EFD700081BBC8 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		EFC86AE71B1EFD700081BBC8 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		EFC86AE81B1EFD700081BBC8 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		EFC86AE91B1EFD700081BBC8 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		EFC86AEB1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
 		EFC86AEC1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
 		EFC86AED1B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
+		EFC89C4F1B677365008B6A63 /* ResultContactInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultContactInfo.h; sourceTree = "<group>"; };
+		EFC89C501B677365008B6A63 /* ResultContactInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultContactInfo.m; sourceTree = "<group>"; };
 		EFC9B7CE1B3E8BE300A09686 /* HAMineLoveCarDBOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAMineLoveCarDBOperator.h; sourceTree = "<group>"; };
 		EFC9B7CF1B3E8BE300A09686 /* HAMineLoveCarDBOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAMineLoveCarDBOperator.m; sourceTree = "<group>"; };
+		EFCA3F8C1B686E9D00724425 /* ContactGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactGroup.h; sourceTree = "<group>"; };
+		EFCA3F8D1B686E9D00724425 /* ContactGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactGroup.m; sourceTree = "<group>"; };
 		EFCA6D061B428A2600F92B03 /* NSData+NSDataDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NSDataDeal.h"; sourceTree = "<group>"; };
 		EFCA6D071B428A2600F92B03 /* NSData+NSDataDeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NSDataDeal.m"; sourceTree = "<group>"; };
 		EFCB460A1B214499005D5026 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
@@ -697,7 +705,6 @@
 				EFC86ABD1B1EFB4C0081BBC8 /* libicucore.dylib in Frameworks */,
 				EFC86ABB1B1EFB340081BBC8 /* CoreTelephony.framework in Frameworks */,
 				EFC86AFD1B1EFD700081BBC8 /* ShareSDK.framework in Frameworks */,
-				EFC86AFC1B1EFD700081BBC8 /* libWeChatSDK.a in Frameworks */,
 				EFC86AFA1B1EFD700081BBC8 /* libWeiboSDK.a in Frameworks */,
 				EFC86AB91B1EFB170081BBC8 /* QuartzCore.framework in Frameworks */,
 				EFF3D0DE1B2EBE6900B2F446 /* libcrypto.a in Frameworks */,
@@ -797,8 +804,16 @@
 		83AB708D1B2A75F800B2D09A /* model */ = {
 			isa = PBXGroup;
 			children = (
+				23CCD7981B68CC7200D424A7 /* FriendMessageModel.h */,
+				23CCD7991B68CC7200D424A7 /* FriendMessageModel.m */,
 				83E263E81B2EAEA700A2AC96 /* FriendModel.h */,
 				83E263E91B2EAEA700A2AC96 /* FriendModel.m */,
+				83A1503B1B58E48000AEC0DD /* ContactsModel.h */,
+				83A1503C1B58E48000AEC0DD /* ContactsModel.m */,
+				EFC89C4F1B677365008B6A63 /* ResultContactInfo.h */,
+				EFC89C501B677365008B6A63 /* ResultContactInfo.m */,
+				EFCA3F8C1B686E9D00724425 /* ContactGroup.h */,
+				EFCA3F8D1B686E9D00724425 /* ContactGroup.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1473,7 +1488,6 @@
 			children = (
 				EFC86ADE1B1EFD700081BBC8 /* QQConnectSDK */,
 				EFC86AE11B1EFD700081BBC8 /* SinaWeiboSDK */,
-				EFC86AE51B1EFD700081BBC8 /* WeChatSDK */,
 			);
 			path = Extend;
 			sourceTree = "<group>";
@@ -1495,16 +1509,6 @@
 				EFC86AE41B1EFD700081BBC8 /* WeiboSDK.h */,
 			);
 			path = SinaWeiboSDK;
-			sourceTree = "<group>";
-		};
-		EFC86AE51B1EFD700081BBC8 /* WeChatSDK */ = {
-			isa = PBXGroup;
-			children = (
-				EFC86AE61B1EFD700081BBC8 /* libWeChatSDK.a */,
-				EFC86AE71B1EFD700081BBC8 /* WXApi.h */,
-				EFC86AE81B1EFD700081BBC8 /* WXApiObject.h */,
-			);
-			path = WeChatSDK;
 			sourceTree = "<group>";
 		};
 		EFC86AEA1B1EFD700081BBC8 /* UI */ = {
@@ -2175,6 +2179,7 @@
 				EF565D091B16AA6000FC2D6B /* MJRefreshHeaderView.m in Sources */,
 				EF2E543B1B2853F30060E965 /* Message.m in Sources */,
 				EF565D481B17091F00FC2D6B /* UserLoginTool.m in Sources */,
+				83A1503D1B58E48000AEC0DD /* ContactsModel.m in Sources */,
 				837E6DEA1B46382200C8DC7F /* MCController.m in Sources */,
 				EFC84F881B3BCA0000392A4B /* buyflay.m in Sources */,
 				EFE76B811B26DC4100C956A5 /* taskData.m in Sources */,
@@ -2222,11 +2227,13 @@
 				83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */,
 				83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */,
 				EFEA0EA31B4FBCFE0027181A /* MMDrawerBarButtonItem.m in Sources */,
+				EFC89C511B677365008B6A63 /* ResultContactInfo.m in Sources */,
 				EF565D4B1B1709AE00FC2D6B /* GlobalData.m in Sources */,
 				830B4D061B2196DC00BBE276 /* BPCell.m in Sources */,
 				EFCCA4C31B12D6E400C015A7 /* MJArgument.m in Sources */,
 				EFF3D0D41B2EB4A800B2F446 /* openssl_wrapper.m in Sources */,
 				EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */,
+				23CCD79A1B68CC7200D424A7 /* FriendMessageModel.m in Sources */,
 				83E72CD91B1C3EA800286735 /* DiscipleViewController.m in Sources */,
 				83CA8FB51B2932C2008D37C6 /* UITableView+CJ.m in Sources */,
 				EF565D071B16AA6000FC2D6B /* MJRefreshConst.m in Sources */,
@@ -2236,6 +2243,7 @@
 				83E490021B1D747900A44FC8 /* TrafficShowController.m in Sources */,
 				EF565D081B16AA6000FC2D6B /* MJRefreshFooterView.m in Sources */,
 				EF440E191B383A1400761A9C /* payRequsestHandler.mm in Sources */,
+				EFCA3F8E1B686E9D00724425 /* ContactGroup.m in Sources */,
 				EF565D541B170C2100FC2D6B /* userData.m in Sources */,
 				83E263FC1B2F018500A2AC96 /* NSString+PinYin4Cocoa.m in Sources */,
 				EFF3D0D01B2EB4A800B2F446 /* DataSigner.m in Sources */,
