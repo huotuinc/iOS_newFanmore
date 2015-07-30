@@ -665,7 +665,7 @@ static int refreshCount = 0;
     
     __weak HomeViewController * wself = self;
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
