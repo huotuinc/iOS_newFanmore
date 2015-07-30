@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *flowNumber;
 /**兑换流量选项*/
 @property(nonatomic,strong) NSArray * flays;
+
+@property (nonatomic, strong) UIView *redIcon;
+
 @end
 
 @implementation TrafficShowController
@@ -29,7 +32,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
 /**
  *  兑换流量选项
  *
- *  @return <#return value description#>
+ *  @return
  */
 //- (NSArray *)flays{
 //    
@@ -156,8 +159,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     
     
-    
-    
+    //初始化圆点
+    self.redIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 5, 5)];
+    self.redIcon.center = CGPointMake(self.friendButton.frame.origin.x + self.friendButton.frame.size.width, self.friendButton.frame.origin.y);
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
