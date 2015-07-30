@@ -17,11 +17,19 @@
 #import "buyflay.h"
 #import "flayModel.h"
 
+//#define WeiXinPayId @"wxd8c58460d0199dd5"
+#define WeiXinPayId @"wxaeda2d5603b12302"
+#define WeiXinPayMerchantId @"1251040401"
+//#define wxpayNotifyUri @"http://newtask.fanmore.cn/callbackWxpay"
+//#define wxpayKey @"8c3b660de36a3b3fb678ca865e31f0f3"
+//#define wxpayKey @"10101010101010101010101010101010"
+//#define wxpayKey @"0db0d6908d6ae6a09b0a3727888f0da6"
+#define wxpayKey @"0db0d4908a6ae6a09b0a7727878f0ca6"
 
 //#define WeiXinPayId @"wxd8c58460d0199dd5"
 #define WeiXinPayId @"wxaeda2d5603b12302"
 #define WeiXinPayMerchantId @"1251040401"
-#define wxpayNotifyUris @"apitest.51flashmall.com:8080/fanmoreweb/callbackWxpayTest" //@"http://newtask.fanmore.cn/callbackWxpay"
+//#define wxpayNotifyUris @"apitest.51flashmall.com:8080/fanmoreweb/callbackWxpayTest" //@"http://newtask.fanmore.cn/callbackWxpay"
 //#define wxpayKey @"8c3b660de36a3b3fb678ca865e31f0f3"
 //#define wxpayKey @"10101010101010101010101010101010"
 //#define wxpayKey @"0db0d6908d6ae6a09b0a3727888f0da6"
@@ -159,6 +167,8 @@ static NSString * _company = nil;
     [super viewDidLoad];
     self.title = @"购买流量";
     
+    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
+    NSLog(@"wxRegistered:%d",wxRegistered);
     
 //    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
 //    NSLog(@"wxRegistered:%d",wxRegistered);
@@ -329,26 +339,25 @@ static NSString * _company = nil;
         NSString *noncestr  = [NSString stringWithFormat:@"%d", rand()];
         params[@"appid"] = WeiXinPayId;
         params[@"mch_id"] = WeiXinPayMerchantId;     //微信支付分配的商户号
-//        params[@"device_info"] = @"APP-001"; //支付设备号或门店号
-//        time_t now;
-//        time(&now);
-//        NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
-//        NSString * nonce_str	= [WXUtil md5:time_stamp];
-        
+
         NSArray * aa = self.buyflay.purchases;
         //商品价格
         flayModel * bb = aa[self.selected.row];
+        NSString * a  = [NSString stringWithFormat:@"%.f",bb.price * 100];
         
+        //商品价格
+
         params[@"nonce_str"] = noncestr; //随机字符串，不长于32位。推荐随机数生成算法
         params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
         params[@"body"] = [NSString stringWithFormat:@"购买粉猫%dM流量包",bb.m];; //商品或支付单简要描述
+        
         params[@"notify_url"] = self.buyflay.wxpayNotifyUri;  //接收微信支付异步通知回调地址
         self.orderNo = [self caluTransactionCode];
         NSLog(@"orderno====%@",self.orderNo);
         params[@"out_trade_no"] = self.orderNo; //订单号
         params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
         
-        NSString * a  = [NSString stringWithFormat:@"%.f",bb.price * 100];
+
         
         
         params[@"total_fee"] = a;  //订单总金额，只能为整数，详见支付金额
