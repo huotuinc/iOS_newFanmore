@@ -38,6 +38,10 @@
 /**图片列表*/
 @property(nonatomic,strong) NSArray * images;
 
+//点击打开登陆
+@property(nonatomic, strong) UITapGestureRecognizer *loginGR;
+//点击打开详细
+@property(nonatomic, strong) UITapGestureRecognizer *showGR;
 
 /**当前是否登入*/
 @property(nonatomic,assign) BOOL isLogin;
@@ -92,16 +96,33 @@
     self.optionList.scrollEnabled = NO;
     self.optionList.tableFooterView = [[UIView alloc] init];
     self.optionList.tableHeaderView = [[UIView alloc] init];
-    
-    
-    
-  
 
     self.navigationController.delegate = self;
     
+    self.showGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTra)];
     
+    self.loginGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showLogin)];
 }
 
+- (void)showLogin {
+    LoginViewController * login = [[LoginViewController alloc] init];
+    UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
+    [self presentViewController:na animated:YES completion:nil];
+}
+
+- (void)showTra {
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+    traffic.userInfo = user;
+    
+    [self.navigationController pushViewController:traffic animated:YES];
+
+}
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -115,10 +136,13 @@
     [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
     
+    
     //1、判断是否要登录
     NSString * flag = [[NSUserDefaults standardUserDefaults] stringForKey:loginFlag];
     //    NSLog(@"========xxxxx====%@",flag);
     BOOL gl  = [flag isEqualToString:@"right"];
+    
+    
     
 //    NSLog(@"aaaaa%d",gl);
     if (gl) {//登入
@@ -140,13 +164,8 @@
         }];
         
         self.bgView.userInteractionEnabled = YES;
-        [self.bgView bk_whenTapped:^{
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
-            traffic.userInfo = user;
-            
-            [self.navigationController pushViewController:traffic animated:YES];
-        }];
+        [self.bgView removeGestureRecognizer:self.loginGR];
+        [self.bgView addGestureRecognizer:self.showGR];
         
         
         //2、设置用户登入头像
@@ -201,7 +220,7 @@
         
         [self.userProfileBtn setBackgroundImage:[UIImage imageNamed:@"mrtou_h"] forState:UIControlStateNormal];
         
-        self.userProfileBtn.userInteractionEnabled = YES;
+        self.userProfileBtn.userInteractionEnabled = NO;
         
         //隐藏label
         self.nameLable.hidden = YES;
@@ -213,7 +232,8 @@
         
         self.warningLabel.hidden = YES;
         
-        self.bgView.userInteractionEnabled = NO;
+        [self.bgView removeGestureRecognizer:self.showGR];
+        [self.bgView addGestureRecognizer:self.loginGR];
         
         //显示登录按钮
         self.loginLabel.hidden = NO;
