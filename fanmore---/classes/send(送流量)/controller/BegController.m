@@ -272,8 +272,18 @@
             //1、保存个人信息
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             userData* userInfo =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-            userInfo.balance = [NSString stringWithFormat:@"%.1f",([userInfo.balance floatValue] + [wself.flowField.text floatValue])];
+            userInfo.balance = [NSString stringWithFormat:@"%.1f",([userInfo.balance floatValue] - [wself.flowField.text floatValue])];
             [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
+            CGFloat userFlow = [self.userinfo.balance doubleValue];
+            if (userFlow - (int)userFlow > 0) {
+                self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.1fM",[userInfo.balance doubleValue]];
+            }else {
+                self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.0fM",[userInfo.balance doubleValue]];
+            }
+            if (userFlow > 1024) {
+                self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.3fG",[userInfo.balance doubleValue] / 1024];
+            }
+
             
         }
         if (type == 1 && self.isFanmoreUser == NO) {
