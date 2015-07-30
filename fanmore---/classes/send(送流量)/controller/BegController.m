@@ -198,6 +198,8 @@
  *  求流量
  */
 - (IBAction)begFlow:(UIButton *)sender {
+    
+    [self.flowField resignFirstResponder];
     if (![self judegeFlay]) {
         [MBProgressHUD showError:@"请输入正确的流量"];
         return;

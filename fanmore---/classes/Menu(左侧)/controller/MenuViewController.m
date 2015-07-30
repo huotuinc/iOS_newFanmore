@@ -138,6 +138,17 @@
             
             [self.navigationController pushViewController:traffic animated:YES];
         }];
+        
+        self.bgView.userInteractionEnabled = YES;
+        [self.bgView bk_whenTapped:^{
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            TrafficShowController *traffic = [storyboard instantiateViewControllerWithIdentifier:@"TrafficShowController"];
+            traffic.userInfo = user;
+            
+            [self.navigationController pushViewController:traffic animated:YES];
+        }];
+        
+        
         //2、设置用户登入头像
         SDWebImageManager * manager = [SDWebImageManager sharedManager];
         NSURL * url = [NSURL URLWithString:user.pictureURL];
@@ -201,6 +212,8 @@
         self.flowLable.userInteractionEnabled = NO;
         
         self.warningLabel.hidden = YES;
+        
+        self.bgView.userInteractionEnabled = NO;
         
         //显示登录按钮
         self.loginLabel.hidden = NO;
