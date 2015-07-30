@@ -295,16 +295,16 @@
             
         }
         if (type == 1 && self.isFanmoreUser == NO) {
-            
-            MFMessageComposeViewController * aa = [[MFMessageComposeViewController alloc] init];
-            aa.body = [NSString stringWithFormat:@"%@",json[@"resultData"][@"smsContent"]];
-            aa.recipients = @[wself.model.phone];
-            aa.messageComposeDelegate = wself;
-            [self presentViewController:aa animated:YES completion:nil];
-            
-            
-            
             [MBProgressHUD showSuccess:@"请求已发送"];
+            if ([MFMessageComposeViewController canSendText]) {
+                MFMessageComposeViewController * aa = [[MFMessageComposeViewController alloc] init];
+                aa.body = [NSString stringWithFormat:@"%@",json[@"resultData"][@"smsContent"]];
+                aa.recipients = @[wself.model.phone];
+                aa.messageComposeDelegate = wself;
+                [self presentViewController:aa animated:YES completion:nil];
+            }else {
+                [MBProgressHUD showError:@"设备没有短信功能"];
+            }   
         }
         
         
