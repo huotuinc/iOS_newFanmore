@@ -99,9 +99,9 @@
 
     self.navigationController.delegate = self;
     
-    self.showGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showLogin)];
+    self.showGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTra)];
     
-    self.loginGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTra)];
+    self.loginGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showLogin)];
 }
 
 - (void)showLogin {
