@@ -71,10 +71,18 @@
     NSLog(@"%f",self.begButton.frame.origin.y);
     if (sizesss < 0) {
         
-        [UIView animateWithDuration:0.15 animations:^{
-            
-            self.view.transform = CGAffineTransformMakeTranslation(0,(sizesss+80));
-        }];
+        if (IsIos7) {
+            [UIView animateWithDuration:0.15 animations:^{
+                
+                self.view.transform = CGAffineTransformMakeTranslation(0,(sizesss));
+            }];
+        }else {
+            [UIView animateWithDuration:0.15 animations:^{
+                
+                self.view.transform = CGAffineTransformMakeTranslation(0,(sizesss+80));
+            }];
+        }
+        
         
     }
 }
