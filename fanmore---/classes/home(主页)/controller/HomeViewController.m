@@ -21,6 +21,7 @@
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "TaskGrouoModel.h"
 
 #define pageSize 10
 
@@ -29,10 +30,11 @@
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
 @property(nonatomic,assign) BOOL isLogin;
-
-
 //失败
 @property(nonatomic,assign)SystemSoundID failureSound;
+
+/**分组模型*/
+@property(nonatomic,strong) TaskGrouoModel *taskGroup;
 
 @end
 
@@ -304,6 +306,17 @@ static int refreshCount = 0;
 
     }];
     
+}
+
+
+/**
+ *  把首页数据进行分组
+ */
+- (NSArray *)toGroupsByTime:(NSArray *)tasks{
+    
+    
+    
+    return nil;
 }
 
 /**
