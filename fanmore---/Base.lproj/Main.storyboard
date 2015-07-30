@@ -1952,8 +1952,8 @@
                                 <rect key="frame" x="35" y="204" width="235" height="307"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me6-UL-I5A">
-                                <rect key="frame" x="0.0" y="114" width="320" height="80"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Me6-UL-I5A">
+                                <rect key="frame" x="0.0" y="116" width="320" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90M" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hft-I8-uXn">
                                         <rect key="frame" x="122" y="24" width="76" height="32"/>
@@ -2110,6 +2110,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="backButton" destination="DPV-0E-Het" id="VpE-aJ-saV"/>
+                        <outlet property="bgView" destination="Me6-UL-I5A" id="wcd-BI-FIs"/>
                         <outlet property="flowLable" destination="Hft-I8-uXn" id="CkJ-Ko-ljr"/>
                         <outlet property="loginLabel" destination="mCq-KD-RGc" id="199-wL-K0t"/>
                         <outlet property="nameLable" destination="f5t-SA-sKB" id="6Ku-fl-hWn"/>
@@ -2487,8 +2488,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="73P-zJ-f3N"/>
                                         <exclude reference="2xu-jd-Qjt"/>
+                                        <exclude reference="73P-zJ-f3N"/>
                                     </mask>
                                 </variation>
                             </view>
