@@ -39,7 +39,6 @@
 /**分享标题*/
 @property(nonatomic,strong)NSString *pictureUrl;
 
-
 /**详情代理方法*/
 @property(nonatomic,weak)id <detailViewDelegate>delegate;
 

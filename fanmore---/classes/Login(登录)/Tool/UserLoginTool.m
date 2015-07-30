@@ -53,7 +53,7 @@
 //    NSLog(@"dasdasdas-------parame--get%@",paramsOption);
 //    manager.responseSerializer=[AFHTTPResponseSerializer serializer];
     [manager GET:urlStr parameters:paramsOption success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSLog(@"xxxxxxxx%@",operation);
+//        NSLog(@"xxxxxxxx%@",operation);
     
         success(responseObject);
         
