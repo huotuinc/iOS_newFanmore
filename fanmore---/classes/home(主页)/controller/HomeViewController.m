@@ -44,6 +44,15 @@
 static NSString * homeCellidentify = @"homeCellId";
 static int refreshCount = 0;
 
+- (NSMutableArray *)taskGroup
+{
+    if (_taskDatas == nil) {
+        
+        _taskDatas = [NSMutableArray array];
+    }
+    return _taskDatas;
+}
+
 
 - (BOOL)isLogin{
     
@@ -221,7 +230,8 @@ static int refreshCount = 0;
 //尾部刷新
 - (void)footerRereshing{  //加载更多数据数据
    
-    taskData * task = [self.taskDatas lastObject];
+    TaskGrouoModel * bbbs = [self.taskGroup lastObject];
+    taskData * task = [bbbs.tasks lastObject];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
 //    NSLog(@"尾部刷新%ld",task.taskOrder);
@@ -278,7 +288,7 @@ static int refreshCount = 0;
 //    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
 //        [MBProgressHUD hideHUD];
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -298,8 +308,8 @@ static int refreshCount = 0;
 //            [wself.taskDatas removeAllObjects];
             [wself.taskGroup removeAllObjects];
 //            wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
+            
             [wself toGroupsByTime:taskArray];
-            NSLog(@"xxxxxxxxxss%lu",(unsigned long)wself.taskGroup.count);
             refreshCount = (int)[taskArray count];
 //            [wself showHomeRefershCount];
             [wself.tableView reloadData];    //刷新数据
@@ -319,14 +329,14 @@ static int refreshCount = 0;
  */
 - (void)toGroupsByTime:(NSArray *)tasks{
     
-    NSLog(@"%@",tasks);
+   
     taskData * aaas = nil;
-    TaskGrouoModel * bbbs = nil;
-    for (taskData * task in tasks) {
-        NSLog(@"-------%@",aaas.turnTime);
+    TaskGrouoModel * bbbs = [self.taskGroup lastObject];
+       for (taskData * task in tasks) {
         if ([aaas.turnTime isEqualToString:task.turnTime]) {//一样
             aaas = task;
             [bbbs.tasks addObject:task];
+        
         }else{//不一样
             
             aaas = task;
@@ -334,15 +344,16 @@ static int refreshCount = 0;
             TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
             
             group.timeSectionTitle = task.turnTime;
+            
             [group.tasks addObject:task];
             bbbs = group;
             [self.taskGroup addObject:group];
             
-            
+          
         }
     }
     
-    NSLog(@"11112222xxxxxxxxxss%lu",(unsigned long)self.taskGroup.count);
+
 }
 
 /**
