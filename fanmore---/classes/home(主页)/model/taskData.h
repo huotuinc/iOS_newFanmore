@@ -55,4 +55,6 @@
 /**距离答题开始时间*/
 @property(nonatomic,strong) NSString * timeToStart;
 
+@property(nonatomic,copy) NSString * turnTime;
+
 @end

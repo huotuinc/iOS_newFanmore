@@ -21,6 +21,7 @@
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "TaskGrouoModel.h"
 
 #define pageSize 10
 
@@ -29,10 +30,11 @@
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
 @property(nonatomic,assign) BOOL isLogin;
-
-
 //失败
 @property(nonatomic,assign)SystemSoundID failureSound;
+
+/**分组模型*/
+@property(nonatomic,strong) NSMutableArray *taskGroup;
 
 @end
 
@@ -41,6 +43,15 @@
 
 static NSString * homeCellidentify = @"homeCellId";
 static int refreshCount = 0;
+
+- (NSMutableArray *)taskGroup
+{
+    if (_taskDatas == nil) {
+        
+        _taskDatas = [NSMutableArray array];
+    }
+    return _taskDatas;
+}
 
 
 - (BOOL)isLogin{
@@ -223,7 +234,8 @@ static int refreshCount = 0;
 //尾部刷新
 - (void)footerRereshing{  //加载更多数据数据
    
-    taskData * task = [self.taskDatas lastObject];
+    TaskGrouoModel * bbbs = [self.taskGroup lastObject];
+    taskData * task = [bbbs.tasks lastObject];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
 //    NSLog(@"尾部刷新%ld",task.taskOrder);
@@ -257,7 +269,8 @@ static int refreshCount = 0;
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             if (taskArray.count > 0) {
-                [wself.taskDatas addObjectsFromArray:taskArray];
+                [wself toGroupsByTime:taskArray];  //分组
+//                [wself.taskDatas addObjectsFromArray:taskArray];
                 [wself.tableView reloadData];    //刷新数据
             }
             
@@ -279,6 +292,7 @@ static int refreshCount = 0;
 //    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
 //        [MBProgressHUD hideHUD];
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -295,8 +309,11 @@ static int refreshCount = 0;
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             [MBProgressHUD hideHUD];
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            [wself.taskDatas removeAllObjects];
-            wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
+//            [wself.taskDatas removeAllObjects];
+            [wself.taskGroup removeAllObjects];
+//            wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
+            
+            [wself toGroupsByTime:taskArray];
             refreshCount = (int)[taskArray count];
 //            [wself showHomeRefershCount];
             if (self.taskDatas.count > 0) {
@@ -313,6 +330,39 @@ static int refreshCount = 0;
 
     }];
     
+}
+
+
+/**
+ *  把首页数据进行分组
+ */
+- (void)toGroupsByTime:(NSArray *)tasks{
+    
+   
+    taskData * aaas = nil;
+    TaskGrouoModel * bbbs = [self.taskGroup lastObject];
+       for (taskData * task in tasks) {
+        if ([aaas.turnTime isEqualToString:task.turnTime]) {//一样
+            aaas = task;
+            [bbbs.tasks addObject:task];
+        
+        }else{//不一样
+            
+            aaas = task;
+            
+            TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
+            
+            group.timeSectionTitle = task.turnTime;
+            
+            [group.tasks addObject:task];
+            bbbs = group;
+            [self.taskGroup addObject:group];
+            
+          
+        }
+    }
+    
+
 }
 
 /**
@@ -369,11 +419,23 @@ static int refreshCount = 0;
 {
     return 101;
 }
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.taskGroup.count;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.taskDatas.count;
+    TaskGrouoModel * gmd =  self.taskGroup[section];
+    return gmd.tasks.count;
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    TaskGrouoModel * aaaa = self.taskGroup[section];
+    return aaaa.timeSectionTitle;
+    
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -382,8 +444,11 @@ static int refreshCount = 0;
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeCell" owner:nil options:nil] lastObject];
     }
+    
+    TaskGrouoModel * gmd =  self.taskGroup[indexPath.section];
     //设置cell样式
-    taskData * task = self.taskDatas[indexPath.row];
+    taskData * task =gmd.tasks[indexPath.row];
+    
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[(task.publishDate) doubleValue]/1000.0];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
@@ -415,8 +480,12 @@ static int refreshCount = 0;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    TaskGrouoModel * gmd =  self.taskGroup[indexPath.section];
+    //设置cell样式
+    taskData * task =gmd.tasks[indexPath.row];
+    
     //传递参数
-    taskData * task = self.taskDatas[indexPath.row];
+//    taskData * task = self.taskDatas[indexPath.row];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];

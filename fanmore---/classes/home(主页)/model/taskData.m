@@ -10,4 +10,21 @@
 
 @implementation taskData
 
+
+
+
+/**
+ *  重写时间转化转换方法
+ *
+ *  @return <#return value description#>
+ */
+- (NSString *)turnTime{
+    
+    NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[(_publishDate) doubleValue]/1000.0];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
+    NSString * publishtime = [formatter stringFromDate:ptime];
+    return publishtime;
+
+}
 @end

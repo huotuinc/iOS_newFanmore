@@ -112,6 +112,7 @@
 		EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67301B0DD07E008B6909 /* MBProgressHUD+MJ.m */; };
 		EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */; };
 		EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */; };
+		EFAD7E6A1B69B7CF0040DAB1 /* TaskGrouoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAD7E691B69B7CF0040DAB1 /* TaskGrouoModel.m */; };
 		EFAEB3271B291DDD00855D25 /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAEB3261B291DDD00855D25 /* FSMediaPicker.m */; };
 		EFAEB32A1B29557100855D25 /* taskDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAEB3291B29557100855D25 /* taskDetail.m */; };
 		EFAEB32D1B2958F400855D25 /* answer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAEB32C1B2958F400855D25 /* answer.m */; };
@@ -422,6 +423,8 @@
 		EF8D67321B0DD07E008B6909 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EF8D673A1B0DE436008B6909 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		EFAD7E681B69B7CF0040DAB1 /* TaskGrouoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskGrouoModel.h; sourceTree = "<group>"; };
+		EFAD7E691B69B7CF0040DAB1 /* TaskGrouoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskGrouoModel.m; sourceTree = "<group>"; };
 		EFAEB3251B291DDD00855D25 /* FSMediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMediaPicker.h; sourceTree = "<group>"; };
 		EFAEB3261B291DDD00855D25 /* FSMediaPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMediaPicker.m; sourceTree = "<group>"; };
 		EFAEB3281B29557100855D25 /* taskDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taskDetail.h; sourceTree = "<group>"; };
@@ -1784,6 +1787,8 @@
 				EFC84F831B3BBD2A00392A4B /* flayModel.h */,
 				EFC84F861B3BCA0000392A4B /* buyflay.h */,
 				EFC84F871B3BCA0000392A4B /* buyflay.m */,
+				EFAD7E681B69B7CF0040DAB1 /* TaskGrouoModel.h */,
+				EFAD7E691B69B7CF0040DAB1 /* TaskGrouoModel.m */,
 			);
 			name = model;
 			path = "classes/home(主页)/model";
@@ -2201,6 +2206,7 @@
 				EFF3D0D51B2EB4A800B2F446 /* RSADataSigner.m in Sources */,
 				EFE837B91B12FA3C0093E14E /* app.m in Sources */,
 				EF565D411B17091F00FC2D6B /* findBackPwViewController.m in Sources */,
+				EFAD7E6A1B69B7CF0040DAB1 /* TaskGrouoModel.m in Sources */,
 				EF440E181B383A1400761A9C /* ApiXml.mm in Sources */,
 				EFF3D0D21B2EB4A800B2F446 /* MD5DataSigner.m in Sources */,
 				EFD02B471B155CDA00D11D6D /* MJSettingSwitchItem.m in Sources */,

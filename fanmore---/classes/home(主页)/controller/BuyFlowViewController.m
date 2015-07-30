@@ -17,16 +17,17 @@
 #import "buyflay.h"
 #import "flayModel.h"
 
+
 //#define WeiXinPayId @"wxd8c58460d0199dd5"
 #define WeiXinPayId @"wxaeda2d5603b12302"
 #define WeiXinPayMerchantId @"1251040401"
-#define wxpayNotifyUri @"http://newtask.fanmore.cn/callbackWxpay"
+#define wxpayNotifyUris @"apitest.51flashmall.com:8080/fanmoreweb/callbackWxpayTest" //@"http://newtask.fanmore.cn/callbackWxpay"
 //#define wxpayKey @"8c3b660de36a3b3fb678ca865e31f0f3"
 //#define wxpayKey @"10101010101010101010101010101010"
 //#define wxpayKey @"0db0d6908d6ae6a09b0a3727888f0da6"
 #define wxpayKey @"0db0d4908a6ae6a09b0a7727878f0ca6"
 
-@interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate>
+@interface BuyFlowViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIActionSheetDelegate,WXApiDelegate>
 /**手机运行商*/
 @property (weak, nonatomic) IBOutlet UILabel *phoneCompany;
 /**手机号*/
@@ -50,6 +51,12 @@
 
 
 @property(nonatomic,strong)buyflay * buyflay;
+
+
+/**商品订单号*/
+@property(nonatomic,strong) NSString * orderNo;
+
+
 /**购买按钮*/
 - (IBAction)buyButtonClick:(UIButton *)sender;
 
@@ -122,12 +129,7 @@ static NSString * _company = nil;
 - (UICollectionView *)collection{
     
     if (_collection == nil) {
-//        CGFloat collectionHeight = 0;
-//        if (self.goods.count / self.num) {
-//            collectionHeight = (self.goods.count / self.num + 1) * 65 + 5;
-//        }else {
-//            collectionHeight = self.goods.count / self.num * (60 + 5) + 5;
-//        }
+
         
         UICollectionViewFlowLayout *flowL = [[UICollectionViewFlowLayout alloc] init];
         [flowL setScrollDirection:UICollectionViewScrollDirectionVertical];
@@ -157,8 +159,11 @@ static NSString * _company = nil;
     [super viewDidLoad];
     self.title = @"购买流量";
     
-    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
-    NSLog(@"wxRegistered:%d",wxRegistered);
+    
+//    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
+//    NSLog(@"wxRegistered:%d",wxRegistered);
+    
+    
     
     _company = self.buyflay.mobileMsg;
     
@@ -173,6 +178,9 @@ static NSString * _company = nil;
     
     
     self.currentPriceLable.adjustsFontSizeToFitWidth = YES;
+    
+    //微信支付成功后的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(buyProductPaySuccessToServer) name:WeiXinPaySuccessPostNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -259,26 +267,30 @@ static NSString * _company = nil;
         [alert show];
         return;
     }
+    
+    NSArray * aa = self.buyflay.purchases;
+    //商品价格
+    flayModel * bb = aa[self.selected.row];
     /*
      *生成订单信息及签名
      */
     //将商品信息赋予AlixPayOrder的成员变量
     Order *order = [[Order alloc] init];
-    order.partner = partner;
-    order.seller = seller;
-    order.tradeNO = [self caluTransactionCode]; //订单ID（由商家自行制定）
-    order.productName = @"粉猫流量包"; //商品标题
-    order.productDescription = @"通过粉猫购买手机流量"; //商品描述
-    NSArray * aa = self.buyflay.purchases;
+    order.partner = partner;  //1
+    order.seller = seller;    //2
+    self.orderNo = [self caluTransactionCode];
+    order.tradeNO = self.orderNo; //订单ID（由商家自行制定）//3
     
-    //商品价格
-    flayModel * bb = aa[self.selected.row];
-    order.amount = [NSString stringWithFormat:@"%.2f",bb.price]; //商品价格
-    order.service = @"mobile.securitypay.pay";
-    order.paymentType = @"1";
-    order.inputCharset = @"utf-8";
-    order.itBPay = @"30m";
-    order.showUrl = @"m.alipay.com";
+//    NSLog(@"----api%@",self.buyflay.alipayNotifyUri);
+    order.notifyURL = self.buyflay.alipayNotifyUri;  //4 alipay回调地址
+    order.productName = [NSString stringWithFormat:@"购买粉猫%dM流量包",bb.m]; //商品标题  //5
+    order.productDescription = [NSString stringWithFormat:@"购买粉猫%dM流量包",bb.m]; //6商品或支付单简要描述
+    order.amount = [NSString stringWithFormat:@"%.2f",bb.price]; //7商品价格
+    order.service = @"mobile.securitypay.pay"; //8
+    order.paymentType = @"1"; //9
+    order.inputCharset = @"utf-8";//10
+    order.itBPay = @"30m";//11
+    order.showUrl = @"m.alipay.com";//12
     
     //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
     NSString *appScheme = @"newfanmore2015";
@@ -322,15 +334,20 @@ static NSString * _company = nil;
 //        time(&now);
 //        NSString * time_stamp  = [NSString stringWithFormat:@"%ld", now];
 //        NSString * nonce_str	= [WXUtil md5:time_stamp];
-        params[@"nonce_str"] = noncestr; //随机字符串，不长于32位。推荐随机数生成算法
-        params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
-        params[@"body"] = @"大三大四的"; //商品或支付单简要描述
-        params[@"notify_url"] = wxpayNotifyUri;  //接收微信支付异步通知回调地址
-        params[@"out_trade_no"] = [self caluTransactionCode]; //订单号
-        params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
+        
         NSArray * aa = self.buyflay.purchases;
         //商品价格
         flayModel * bb = aa[self.selected.row];
+        
+        params[@"nonce_str"] = noncestr; //随机字符串，不长于32位。推荐随机数生成算法
+        params[@"trade_type"] = @"APP";   //取值如下：JSAPI，NATIVE，APP，WAP,详细说明见参数规定
+        params[@"body"] = [NSString stringWithFormat:@"购买粉猫%dM流量包",bb.m];; //商品或支付单简要描述
+        params[@"notify_url"] = self.buyflay.wxpayNotifyUri;  //接收微信支付异步通知回调地址
+        self.orderNo = [self caluTransactionCode];
+        NSLog(@"orderno====%@",self.orderNo);
+        params[@"out_trade_no"] = self.orderNo; //订单号
+        params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
+        
         NSString * a  = [NSString stringWithFormat:@"%.f",bb.price * 100];
         
         
@@ -386,7 +403,6 @@ static NSString * _company = nil;
     return nil;
 }
 
-
 /**
  *  微信pay
  */
@@ -421,21 +437,48 @@ static NSString * _company = nil;
     
 }
 
-- (void)onResp:(BaseResp *)resp {
-    if ([resp isKindOfClass:[PayResp class]]) {
-        PayResp *response = (PayResp *)resp;
-        switch (response.errCode) {
-            case WXSuccess:
-                //服务器端查询支付通知或查询API返回的结果再提示成功
-//                NSLog(@"支付成功");
-                break;
-            default:
-//                NSLog(@"支付失败， retcode=%d",resp.errCode);
-                break;
-        }
-    }
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
+/**
+ *  产品购买成功后通知服务器接口
+ */
+- (void)buyProductPaySuccessToServer{
+    
+    NSLog(@"---------------------------------------");
+    NSArray * aaM = self.buyflay.purchases;
+    flayModel * flay = aaM[self.selected.row];
+    NSString * url = [MainURL stringByAppendingPathComponent:@"deliverGood"];
+    NSMutableDictionary * parames = [NSMutableDictionary dictionary];
+    parames[@"orderNo"] = self.orderNo;
+    parames[@"productType"] = @"0";
+    parames[@"productId"] = [NSString stringWithFormat:@"%d",flay.purchaseid];
+     __weak BuyFlowViewController *wself = self;
+    [UserLoginTool loginRequestPost:url parame:parames success:^(id json) {
+        if ([json[@"systemResultCode"] intValue] == 1) {
+            
+            if ([json[@"systemResultCode"] intValue] == 1) {
+                //初始化
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                //1、保存个人信息
+                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                userData * localuser = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+                NSString * bs = [NSString xiaoshudianweishudeal:([localuser.balance floatValue] + flay.m)];
+                localuser.balance = bs;
+                [NSKeyedArchiver archiveRootObject:localuser toFile:fileName];
+                if ([wself.delegate respondsToSelector:@selector(successExchange:)]) {
+                    
+                    [wself.delegate successExchange:localuser.balance];
+                }
+                
+            }
+        }
+    } failure:^(NSError *error) {
+//        NSLog(@"xxx----%@",error.description);
+    }];
+    
+}
 
 /**
  *  随即生成订单号
