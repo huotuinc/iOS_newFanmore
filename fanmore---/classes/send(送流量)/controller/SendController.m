@@ -185,6 +185,7 @@ NSString *searchCellIdentifier = @"searchBar";
                     
                 }
                 
+            
 
                 [wself.personArray removeAllObjects];
                 wself.personArray=effect;  //剔除无效数据
@@ -264,7 +265,7 @@ NSString *searchCellIdentifier = @"searchBar";
     self.searchDisplayController.searchResultsDelegate = self;
     [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:searchCellIdentifier];
     [self.searchDisplayController.searchResultsTableView removeSpaces];
-    self.searchDisplayController.searchResultsTableView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight - 64);
+//    self.searchDisplayController.searchResultsTableView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight);
     
 //    [self.tableView setHeaderHidden:YES];
     
@@ -363,21 +364,27 @@ NSString *searchCellIdentifier = @"searchBar";
         NSString *str = [[NSString alloc] initWithFormat:@"%@",self.searchBar.text];
         NSString *str1 = str.uppercaseString;
         NSString *str2 = str1.lowercaseString;
+        NSLog(@"%@",self.personArray);
         for (FriendModel *model in self.personArray) {
             if ([model.phone rangeOfString:str].location !=NSNotFound) {
                 [self.searchArray addObject:model];
+                continue;
             }
             if ([model.hanyupingyin rangeOfString:str].location != NSNotFound) {
                 [self.searchArray addObject:model];
+                continue;
             }
             if ([model.hanyupingyin rangeOfString:str2].location != NSNotFound) {
                 [self.searchArray addObject:model];
+                continue;
             }
             if ([model.name rangeOfString:str].location != NSNotFound) {
                 [self.searchArray addObject:model];
+                continue;
             }
             
         }
+        NSLog(@"%@", self.searchArray);
        
         
         return self.searchArray.count;
@@ -409,7 +416,9 @@ NSString *searchCellIdentifier = @"searchBar";
             }
             
             [cell setUserPhone:friend.phone AndUserName:friend.name  AndSex:friend.sex AndFlow:str AndOperator:nil];
-
+            
+            cell.flowLabel.hidden = NO;
+            cell.sexImage.hidden = NO;
             
             SDWebImageManager * manager = [SDWebImageManager sharedManager];
             NSURL * url = [NSURL URLWithString:friend.image];
@@ -422,6 +431,8 @@ NSString *searchCellIdentifier = @"searchBar";
             }];
             cell.backgroundColor = [UIColor whiteColor];
         }else {
+            cell.flowLabel.hidden = YES;
+            cell.sexImage.hidden = YES;
             [cell setUserName:friend.name AndUserPhone:friend.phone];
             cell.backgroundColor = [UIColor whiteColor];
         }
@@ -430,8 +441,37 @@ NSString *searchCellIdentifier = @"searchBar";
         FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCellIdentifier forIndexPath:indexPath];
         FriendModel *model = self.searchArray[indexPath.row];
         
-        cell.userName.text = model.name;
-        cell.userPhone.text = model.phone;
+        if (model.image.length) {
+            NSLog(@"!!!%@", model);
+            
+            NSString *str = [NSString string];
+            CGFloat userFlow = [model.flowLabel doubleValue];
+            if (userFlow - (int)userFlow > 0) {
+                str = [NSString stringWithFormat:@"%.1fM",[model.flowLabel doubleValue]];
+            }else {
+                str = [NSString stringWithFormat:@"%.0fM",[model.flowLabel doubleValue]];
+            }
+            if (userFlow > 1024) {
+                str = [NSString stringWithFormat:@"%.3fG",[model.flowLabel doubleValue] / 1024];
+            }
+            
+            [cell setUserPhone:model.phone AndUserName:model.name  AndSex:model.sex AndFlow:str AndOperator:nil];
+            
+            
+            SDWebImageManager * manager = [SDWebImageManager sharedManager];
+            NSURL * url = [NSURL URLWithString:model.image];
+            [manager downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                
+                if (error == nil) {
+                    [cell.headImage setBackgroundImage:image forState:UIControlStateNormal];
+                    [cell.headImage setBackgroundImage:image forState:UIControlStateHighlighted];
+                }
+            }];
+            cell.backgroundColor = [UIColor whiteColor];
+        }else {
+            [cell setUserName:model.name AndUserPhone:model.phone];
+            cell.backgroundColor = [UIColor whiteColor];
+        }
         return cell;
     }
     
@@ -445,15 +485,28 @@ NSString *searchCellIdentifier = @"searchBar";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     BegController *beg = [storyboard instantiateViewControllerWithIdentifier:@"BegController"];
-    ContactGroup * group = self.groupArray[indexPath.section];
-    FriendModel * fmod = group.friends[indexPath.row];
-    beg.model = fmod;
-    
-    if (fmod.image.length) {
-        beg.isFanmoreUser = YES;
+    if (self.tableView == tableView) {
+        ContactGroup * group = self.groupArray[indexPath.section];
+        FriendModel * fmod = group.friends[indexPath.row];
+        beg.model = fmod;
+        
+        if (fmod.image.length) {
+            beg.isFanmoreUser = YES;
+        }else {
+            beg.isFanmoreUser = NO;
+        }
     }else {
-        beg.isFanmoreUser = NO;
+        FriendModel * fmod = self.searchArray[indexPath.row];
+        beg.model = fmod;
+        
+        if (fmod.image.length) {
+            beg.isFanmoreUser = YES;
+        }else {
+            beg.isFanmoreUser = NO;
+        }
     }
+    
+
     
     [self.navigationController pushViewController:beg animated:YES];
 }

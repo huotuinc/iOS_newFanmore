@@ -185,6 +185,10 @@
         [MBProgressHUD showError:@"请求流量不能为空"];
         return;
     }
+    if ([self.userinfo.balance doubleValue] < [self.flowField.text doubleValue]) {
+        [MBProgressHUD showError:@"没那么多流量"];
+        return;
+    }
     UIAlertView * addMes = [[UIAlertView alloc] initWithTitle:nil message:@"向你的小伙伴说点什么" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
     addMes.alertViewStyle = UIAlertViewStylePlainTextInput;
     addMes.tag = 1; //送流量
@@ -222,7 +226,7 @@
     if (!self.flowField.text.length) {
         return NO;
     }else{
-        NSString *regex = @"^[1-9]*[1-9][1-9]*$";
+        NSString *regex = @"^[0-9]*[0-9][0-9]*$";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
         return [predicate evaluateWithObject:self.flowField.text];
     }
@@ -258,15 +262,29 @@
     NSString * urlStr = [MainURL stringByAppendingPathComponent:port];
     
     [MBProgressHUD showMessage:nil];
+    __weak BegController * wself = self;
     [UserLoginTool loginRequestGet:urlStr parame:parames success:^(NSDictionary* json) {
         [MBProgressHUD hideHUD];
+        
+        if (type == 1) {
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            
+            //1、保存个人信息
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            userData* userInfo =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+            userInfo.balance = [NSString stringWithFormat:@"%.1f",([userInfo.balance floatValue] + [wself.flowField.text floatValue])];
+            [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
+            
+        }
         if (type == 1 && self.isFanmoreUser == NO) {
             
             MFMessageComposeViewController * aa = [[MFMessageComposeViewController alloc] init];
             aa.body = [NSString stringWithFormat:@"%@",json[@"resultData"][@"smsContent"]];
-            aa.recipients = @[self.model.phone];
-            aa.messageComposeDelegate = self;
+            aa.recipients = @[wself.model.phone];
+            aa.messageComposeDelegate = wself;
             [self presentViewController:aa animated:YES completion:nil];
+            
+            
             
             [MBProgressHUD showSuccess:@"请求已发送"];
         }

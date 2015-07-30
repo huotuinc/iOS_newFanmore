@@ -253,6 +253,11 @@ static NSString *BPCellidentify = @"BPCellId";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma 设置背景图片
 - (void)setClearBackground {
     if (ScreenWidth == 375) {
