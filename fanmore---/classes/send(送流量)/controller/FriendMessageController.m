@@ -267,8 +267,11 @@ static NSString *friendMIdentify = @"FMCellId";
             NSArray * taskArray = [FriendMessageModel objectArrayWithKeyValuesArray:json[@"resultData"][@"requests"]];
             [wself.array removeAllObjects];
             wself.array = [NSMutableArray arrayWithArray:taskArray];
-            //            [wself showHomeRefershCount];
-            [wself.tableView reloadData];    //刷新数据
+            if (self.array.count > 0) {
+                [self setWiteBackground];
+            }else {
+                [self setClearBackground];
+            }            [wself.tableView reloadData];    //刷新数据
         }
         
         
@@ -367,6 +370,29 @@ static NSString *friendMIdentify = @"FMCellId";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma 设置背景图片
+- (void)setClearBackground {
+    if (ScreenWidth == 375) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg750x1334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg1242x2208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x960"]];
+        }else {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x1136"]];
+        }
+    }
+}
+
+- (void)setWiteBackground {
+    self.tableView.backgroundColor = [UIColor whiteColor];
+}
+
+
 
 /*
 #pragma mark - Navigation
