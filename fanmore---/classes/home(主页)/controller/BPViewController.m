@@ -41,6 +41,7 @@ static NSString *BPCellidentify = @"BPCellId";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"BPCell" bundle:nil] forCellReuseIdentifier:BPCellidentify];
     [self.tableView removeSpaces];
+    [self setClearBackground];
     //集成刷新控件
     [self setupRefresh];
     
@@ -52,6 +53,8 @@ static NSString *BPCellidentify = @"BPCellId";
     [super viewWillAppear:animated];
     
     [self saveControllerToAppDelegate:self];
+    
+    
 }
 
 
@@ -169,8 +172,15 @@ static NSString *BPCellidentify = @"BPCellId";
             if (taskArray.count > 0) {
                 [wself.details removeAllObjects];
                 wself.details = [NSMutableArray arrayWithArray:taskArray];
+                if (self.details.count > 0) {
+                    [self setWiteBackground];
+                }else {
+                    [self setClearBackground];
+                }
+                
                 [wself.tableView reloadData];    //刷新数据
-                NSLog(@"%@",self.details);
+                
+//                NSLog(@"%@",self.details);
             }
         }
         
@@ -243,7 +253,26 @@ static NSString *BPCellidentify = @"BPCellId";
     return cell;
 }
 
+#pragma 设置背景图片
+- (void)setClearBackground {
+    if (ScreenWidth == 375) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg750x1334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg1242x2208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x960"]];
+        }else {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x1136"]];
+        }
+    }
+}
 
+- (void)setWiteBackground {
+    self.tableView.backgroundColor = [UIColor whiteColor];
+}
 
 
 

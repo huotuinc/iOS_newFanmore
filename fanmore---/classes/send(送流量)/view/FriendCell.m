@@ -38,6 +38,8 @@
 - (void)setUserName:(NSString *)userName AndUserPhone:(NSString *)userPhone {
     self.userName.text = userName;
     self.userPhone.text = userPhone;
+    self.sexImage.hidden = YES;
+    self.flowLabel.hidden = YES;
 }
 
 

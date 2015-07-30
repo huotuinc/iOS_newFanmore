@@ -16,16 +16,16 @@
 //手机
 @property (nonatomic, copy) NSString *name;
 
-//1
+//1头像url
 @property (nonatomic, copy) NSString *image;
 
 //2
 @property (nonatomic, assign) int sex;
 
-//3
+//3 /**在粉猫平台的剩余流量*/
 @property (nonatomic, copy) NSString *flowLabel;
 
-//4
+//4 id
 @property (nonatomic,copy) NSString* originIdentify;
 
 //yun so
@@ -38,8 +38,8 @@
 
 
 
-/**在粉猫平台的剩余流量*/
-@property(nonatomic,assign) CGFloat fanmoreBalance;
+
+//@property(nonatomic,assign) CGFloat fanmoreBalance;
 
 /**运行商的剩余流量*/
 @property(nonatomic,assign) CGFloat  teleBalance;

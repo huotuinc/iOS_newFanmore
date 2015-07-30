@@ -13,6 +13,7 @@
 #import "BegController.h"
 #import "ResultContactInfo.h"
 #import "ContactGroup.h"
+#import <SDWebImageManager.h>
 
 @interface SendController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -150,7 +151,7 @@ NSString *searchCellIdentifier = @"searchBar";
     
     __weak SendController * wself = self;
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
-        
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1) {
             if ([json[@"resultCode"] intValue] == 1) {
                 
@@ -164,9 +165,17 @@ NSString *searchCellIdentifier = @"searchBar";
                         if ([fd.originIdentify isEqualToString:rs.originIdentify]) {//合法的
                             
                             fd.phone = rs.originMobile;
-                            fd.operatorLabel = rs.fanmoreTele;
-                            fd.fanmoreUsername = rs.fanmoreUsername;
+                            fd.image = rs.fanmorePicUrl;
+                            fd.sex = rs.fanmoreSex;
                             fd.teleBalance = rs.teleBalance;
+                            fd.flowLabel = [NSString stringWithFormat:@"%f", rs.fanmoreBalance];
+//                            fd.fanmoreBalance = rs.fanmoreBalance;
+                            fd.operatorLabel = rs.fanmoreTele;
+                            
+                            fd.fanmoreUsername = rs.fanmoreUsername;
+                            
+                            
+                            
                             [effect addObject:fd];
                             break;
                         }
@@ -211,6 +220,11 @@ NSString *searchCellIdentifier = @"searchBar";
                     }
                 }
                
+                if (self.groupArray.count > 0) {
+                    [self setWiteBackground];
+                }else {
+                    [self setClearBackground];
+                }
                 [wself.tableView reloadData];
             }
             
@@ -233,6 +247,9 @@ NSString *searchCellIdentifier = @"searchBar";
     
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.frame.origin.y + self.searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44) style:UITableViewStyleGrouped];
+//    [self.tableView removeSpaces];
+    
+    [self setClearBackground];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:frinedCellIdentifier];
 
@@ -256,6 +273,7 @@ NSString *searchCellIdentifier = @"searchBar";
     
     [self.tableView removeSpaces];
     [self.tableView setHeaderHidden:YES];
+    self.tableView.sectionIndexBackgroundColor = [UIColor colorWithWhite:0.961 alpha:1.000];
     
     [self.view addSubview:self.tableView];
     
@@ -305,7 +323,6 @@ NSString *searchCellIdentifier = @"searchBar";
 {
     return 1;
 }
-
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -375,9 +392,39 @@ NSString *searchCellIdentifier = @"searchBar";
     
     if (tableView == self.tableView) {
         FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:frinedCellIdentifier forIndexPath:indexPath];
+        
         ContactGroup * group = self.groupArray[indexPath.section];
         FriendModel * friend = group.friends[indexPath.row];
-        [cell setUserName:friend.name AndUserPhone:friend.phone];
+        if (friend.image.length) {
+            
+            NSString *str = [NSString string];
+            CGFloat userFlow = [friend.flowLabel doubleValue];
+            if (userFlow - (int)userFlow > 0) {
+                str = [NSString stringWithFormat:@"%.1fM",[friend.flowLabel doubleValue]];
+            }else {
+                str = [NSString stringWithFormat:@"%.0fM",[friend.flowLabel doubleValue]];
+            }
+            if (userFlow > 1024) {
+                str = [NSString stringWithFormat:@"%.3fG",[friend.flowLabel doubleValue] / 1024];
+            }
+            
+            [cell setUserPhone:friend.phone AndUserName:friend.name  AndSex:friend.sex AndFlow:str AndOperator:nil];
+
+            
+            SDWebImageManager * manager = [SDWebImageManager sharedManager];
+            NSURL * url = [NSURL URLWithString:friend.image];
+            [manager downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                
+                if (error == nil) {
+                    [cell.headImage setBackgroundImage:image forState:UIControlStateNormal];
+                    [cell.headImage setBackgroundImage:image forState:UIControlStateHighlighted];
+                }
+            }];
+            cell.backgroundColor = [UIColor whiteColor];
+        }else {
+            [cell setUserName:friend.name AndUserPhone:friend.phone];
+            cell.backgroundColor = [UIColor whiteColor];
+        }
         return cell;
     }else{
         FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCellIdentifier forIndexPath:indexPath];
@@ -393,8 +440,21 @@ NSString *searchCellIdentifier = @"searchBar";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     BegController *beg = [storyboard instantiateViewControllerWithIdentifier:@"BegController"];
+    ContactGroup * group = self.groupArray[indexPath.section];
+    FriendModel * fmod = group.friends[indexPath.row];
+    beg.model = fmod;
+    
+    if (fmod.image.length) {
+        beg.isFanmoreUser = YES;
+    }else {
+        beg.isFanmoreUser = NO;
+    }
+    
     [self.navigationController pushViewController:beg animated:YES];
 }
 
@@ -439,6 +499,29 @@ NSString *searchCellIdentifier = @"searchBar";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma 设置背景图片
+- (void)setClearBackground {
+    if (ScreenWidth == 375) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg750x1334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg1242x2208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x960"]];
+        }else {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x1136"]];
+        }
+    }
+}
+
+- (void)setWiteBackground {
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.961 alpha:1.000];
+}
+
 
 /*
 #pragma mark - Navigation

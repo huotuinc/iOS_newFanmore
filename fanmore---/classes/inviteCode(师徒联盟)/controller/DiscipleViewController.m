@@ -62,6 +62,9 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     [segment addTarget:self action:@selector(chanege:) forControlEvents:UIControlEventValueChanged];
     
     [self.tableView removeSpaces];
+    
+    
+    
     /**集成刷新控件*/
     [self setupRefresh];
 }
@@ -142,6 +145,13 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
             NSArray * plist =  [prenticeList objectArrayWithKeyValuesArray:json[@"resultData"][@"apps"]];
             
             wself.prentices  = [NSMutableArray arrayWithArray:plist];
+            
+            if (self.prentices.count > 0) {
+                [self setWiteBackground];
+            }else {
+                [self setClearBackground];
+            }
+            
             [wself.tableView reloadData];
         }
         
@@ -252,6 +262,27 @@ static NSString *discipleCellidentify = @"DiscipleCellid";
     //清楚远有数据
     [self.prentices removeAllObjects];
     [self getNewMoreData:params];
+}
+
+#pragma 设置背景图片
+- (void)setClearBackground {
+    if (ScreenWidth == 375) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg750x1334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg1242x2208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x960"]];
+        }else {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x1136"]];
+        }
+    }
+}
+
+- (void)setWiteBackground {
+    self.tableView.backgroundColor = [UIColor whiteColor];
 }
 
 

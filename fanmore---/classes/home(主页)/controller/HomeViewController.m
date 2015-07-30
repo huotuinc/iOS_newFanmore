@@ -150,6 +150,9 @@ static int refreshCount = 0;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
+    //设置tableView背景
+    [self setClearBackground];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeViewControllerGetNot) name:@"homeViewControllerShow" object:nil];
     
 
@@ -296,6 +299,11 @@ static int refreshCount = 0;
             wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
             refreshCount = (int)[taskArray count];
 //            [wself showHomeRefershCount];
+            if (self.taskDatas.count > 0) {
+                [self setWiteBackground];
+            }else {
+                [self setClearBackground];
+            }
             [wself.tableView reloadData];    //刷新数据
         }
         
@@ -310,8 +318,8 @@ static int refreshCount = 0;
 /**
  *  账号被顶掉
  *
- *  @param alertView   <#alertView description#>
- *  @param buttonIndex <#buttonIndex description#>
+ *  @param alertView
+ *  @param buttonIndex
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -609,9 +617,27 @@ static int refreshCount = 0;
         
     }];
     
-    
-    
-    
+}
+
+#pragma 设置背景图片
+- (void)setClearBackground {
+    if (ScreenWidth == 375) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg750x1334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg1242x2208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x960"]];
+        }else {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x1136"]];
+        }
+    }
+}
+
+- (void)setWiteBackground {
+    self.tableView.backgroundColor = [UIColor whiteColor];
 }
 
 @end

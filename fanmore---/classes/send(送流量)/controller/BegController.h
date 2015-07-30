@@ -7,17 +7,64 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FriendModel.h"
 
 @interface BegController : UIViewController
-@property (weak, nonatomic) IBOutlet UITextField *trafficField;
+
+/**
+ *  输入的流量
+ */
+@property (weak, nonatomic) IBOutlet UITextField *flowField;
+
+/**
+ *  头像
+ */
 @property (weak, nonatomic) IBOutlet UIButton *userHeadBtu;
 @property (weak, nonatomic) IBOutlet UIButton *friendHeadBtu;
+
+/**
+ *  用户流量
+ */
 @property (weak, nonatomic) IBOutlet UILabel *userFlow;
+
+/**
+ *  好友手机
+ */
 @property (weak, nonatomic) IBOutlet UILabel *friendPhone;
-@property (weak, nonatomic) IBOutlet UITextField *flowField;
+
+/**
+ *  发送
+ */
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
+/**
+ *  求流量
+ */
 @property (weak, nonatomic) IBOutlet UIButton *begButton;
+
+/**
+ *  送流量
+ *
+ *  @param sender <#sender description#>
+ */
 - (IBAction)sendFlow:(UIButton *)sender;
+
+/**
+ *  求流量
+ *
+ *  @param sender <#sender description#>
+ */
 - (IBAction)begFlow:(UIButton *)sender;
+
+/**
+ *  用户模型
+ */
+@property (nonatomic, strong) FriendModel *model;
+
+/**
+ *  是否是粉猫用户
+ */
+@property (nonatomic, assign) BOOL isFanmoreUser;
+
 
 @end

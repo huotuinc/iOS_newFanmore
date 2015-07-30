@@ -9,9 +9,10 @@
 #import <SDWebImageManager.h>
 #import "BegController.h"
 #import "userData.h"
+#import <MessageUI/MessageUI.h>
 
 
-@interface BegController ()
+@interface BegController ()<MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic, strong) userData *userinfo;
 
@@ -25,16 +26,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.trafficField.layer setMasksToBounds:YES];
-    self.trafficField.layer.borderWidth = 0.5;
-    self.trafficField.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.trafficField.layer.cornerRadius = 6;
+    [self.flowField.layer setMasksToBounds:YES];
+    self.flowField.layer.borderWidth = 0.5;
+    self.flowField.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
+    self.flowField.layer.cornerRadius = 6;
     
     self.begButton.layer.cornerRadius = 6;
     self.begButton.layer.borderWidth = 0.5;
     self.begButton.layer.borderColor = self.begButton.backgroundColor.CGColor;
     
+    
+    
     [self registerForKeyboardNotifications];
+    
 }
 
 - (void)registerForKeyboardNotifications
@@ -46,6 +50,14 @@
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    [self.flowField becomeFirstResponder];
+    
+    
+}
 /**
  *  键盘弹出
  *
@@ -56,12 +68,12 @@
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGFloat sizesss = CGRectGetMaxY(self.begButton.frame) - (ScreenHeight - kbSize.height);
-    
-    if (sizesss > 0) {
+    NSLog(@"%f",self.begButton.frame.origin.y);
+    if (sizesss < 0) {
         
         [UIView animateWithDuration:0.15 animations:^{
             
-            self.view.transform = CGAffineTransformMakeTranslation(0,-(sizesss));
+            self.view.transform = CGAffineTransformMakeTranslation(0,(sizesss+80));
         }];
         
     }
@@ -110,7 +122,46 @@
         [self.userHeadBtu setBackgroundImage:image forState:UIControlStateNormal];
     }];
     
-    [self.trafficField becomeFirstResponder];
+    /**
+     *  设置用户剩余流量
+     */
+    CGFloat userFlow = [self.userinfo.balance doubleValue];
+    if (userFlow - (int)userFlow > 0) {
+        self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.1fM",[self.userinfo.balance doubleValue]];
+    }else {
+        self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.0fM",[self.userinfo.balance doubleValue]];
+    }
+    if (userFlow > 1024) {
+        self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.3fG",[self.userinfo.balance doubleValue] / 1024];
+    }
+    
+    [self setFriendInformation];
+    
+    
+    if (!self.isFanmoreUser) {
+        self.begButton.hidden = YES;
+    }
+    
+}
+
+/**
+ *  设置好友信息
+ */
+- (void)setFriendInformation {
+    
+    //设置手机号
+    self.friendPhone.text = self.model.name;
+    
+    //设置用户头像
+    if (self.isFanmoreUser) {
+        SDWebImageManager * manager = [SDWebImageManager sharedManager];
+        NSURL * url = [NSURL URLWithString:self.model.image];
+        [manager downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            
+            [self.friendHeadBtu setBackgroundImage:image forState:UIControlStateNormal];
+        }];
+    }
+    NSLog(@"xcadasdasd");
 }
 /*
 #pragma mark - Navigation
@@ -128,6 +179,8 @@
  */
 - (IBAction)sendFlow:(UIButton *)sender {
     
+    [self.flowField resignFirstResponder];
+    
     if (![self judegeFlay]) {
         [MBProgressHUD showError:@"请求流量不能为空"];
         return;
@@ -137,6 +190,7 @@
     addMes.tag = 1; //送流量
     UITextField * aa = [addMes textFieldAtIndex:0];
     aa.placeholder = @"朕赏你点流量,还不谢恩";
+    
     [addMes show];
 }
 
@@ -191,19 +245,34 @@
     NSMutableDictionary *parames = [NSMutableDictionary dictionary];
     if (type == 1) {//1送流量
        port = @"makeProvide";
-       parames[@"originMobile"] = @"123";
+       parames[@"originMobile"] = self.model.phone;
     }else{//2求流量
        port = @"makeRequest";
-       parames[@"to"] = @"123";
+       parames[@"to"] = self.model.phone;
     }
+    parames[@"fc"] = self.flowField.text;
     parames[@"message"] = mess;
-    parames[@"message"] = self.flowField.text;
+    
     NSString * urlStr = [MainURL stringByAppendingPathComponent:port];
+    
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:urlStr parame:parames success:^(NSDictionary* json) {
+        [MBProgressHUD hideHUD];
+        if (type == 1 && self.isFanmoreUser == NO) {
+            
+            MFMessageComposeViewController * aa = [[MFMessageComposeViewController alloc] init];
+            aa.body = [NSString stringWithFormat:@"%@",json[@"resultData"][@"smsContent"]];
+            aa.recipients = @[self.model.phone];
+            aa.messageComposeDelegate = self;
+            [self presentViewController:aa animated:YES completion:nil];
+            
+            [MBProgressHUD showSuccess:@"请求已发送"];
+        }
         
         
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"粉猫服务器连接异常"];
     }];
 }
 
@@ -227,4 +296,18 @@
     [self.view endEditing:YES];
     
 }
+
+#pragma MFMessageComposeViewControllerDelegate 
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if (result == MessageComposeResultSent) {
+        [MBProgressHUD showSuccess:@"发送成功"];
+    }else if (result == MessageComposeResultFailed) {
+        [MBProgressHUD showError:@"发送失败"];
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
