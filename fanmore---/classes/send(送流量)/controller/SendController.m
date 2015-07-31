@@ -150,8 +150,10 @@ NSString *searchCellIdentifier = @"searchBar";
     params[@"contacts"] = self.userPhone;
     
     __weak SendController * wself = self;
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
 //        NSLog(@"%@",json);
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1) {
             if ([json[@"resultCode"] intValue] == 1) {
                 
@@ -233,7 +235,9 @@ NSString *searchCellIdentifier = @"searchBar";
        
         
     } failure:^(NSError *error) {
-        NSLog(@"%@",error.description);
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"连接服务器失败"];
+//        NSLog(@"%@",error.description);
     }];
 
     
@@ -250,7 +254,7 @@ NSString *searchCellIdentifier = @"searchBar";
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.frame.origin.y + self.searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44) style:UITableViewStyleGrouped];
 //    [self.tableView removeSpaces];
     
-    [self setClearBackground];
+//    [self setClearBackground];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:frinedCellIdentifier];
 
@@ -364,7 +368,7 @@ NSString *searchCellIdentifier = @"searchBar";
         NSString *str = [[NSString alloc] initWithFormat:@"%@",self.searchBar.text];
         NSString *str1 = str.uppercaseString;
         NSString *str2 = str1.lowercaseString;
-        NSLog(@"%@",self.personArray);
+//        NSLog(@"%@",self.personArray);
         for (FriendModel *model in self.personArray) {
             if ([model.phone rangeOfString:str].location !=NSNotFound) {
                 [self.searchArray addObject:model];
@@ -384,7 +388,7 @@ NSString *searchCellIdentifier = @"searchBar";
             }
             
         }
-        NSLog(@"%@", self.searchArray);
+//        NSLog(@"%@", self.searchArray);
        
         
         return self.searchArray.count;
@@ -442,7 +446,7 @@ NSString *searchCellIdentifier = @"searchBar";
         FriendModel *model = self.searchArray[indexPath.row];
         
         if (model.image.length) {
-            NSLog(@"!!!%@", model);
+//            NSLog(@"!!!%@", model);
             
             NSString *str = [NSString string];
             CGFloat userFlow = [model.flowLabel doubleValue];
@@ -471,6 +475,7 @@ NSString *searchCellIdentifier = @"searchBar";
         }else {
             [cell setUserName:model.name AndUserPhone:model.phone];
             cell.backgroundColor = [UIColor whiteColor];
+            [cell.headImage setBackgroundImage:[UIImage imageNamed:@"mrtou_h"] forState:UIControlStateNormal];
         }
         return cell;
     }
