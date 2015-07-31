@@ -138,7 +138,7 @@ static int refreshCount = 0;
     [self setupRefresh];
     [self.tableView removeSpaces];
     
-    [self setClearBackground];
+//    [self setClearBackground];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -169,7 +169,7 @@ static int refreshCount = 0;
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
     
     //设置tableView背景
-    [self setClearBackground];
+//    [self setClearBackground];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeViewControllerGetNot) name:@"homeViewControllerShow" object:nil];
     
@@ -296,10 +296,10 @@ static int refreshCount = 0;
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     __weak HomeViewController *wself = self;
-//    [MBProgressHUD showMessage:nil];
+    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        [MBProgressHUD hideHUD];
-//        NSLog(@"%@",json);
+        [MBProgressHUD hideHUD];
+        //        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -316,25 +316,28 @@ static int refreshCount = 0;
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             [MBProgressHUD hideHUD];
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-//            [wself.taskDatas removeAllObjects];
+            //            [wself.taskDatas removeAllObjects];
             [wself.taskGroup removeAllObjects];
-//            wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
+            //            wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
             
             [wself toGroupsByTime:taskArray];
             refreshCount = (int)[taskArray count];
-//            [wself showHomeRefershCount];
-            if (self.taskDatas.count > 0) {
+            //            [wself showHomeRefershCount];
+            if (taskArray.count > 0) {
                 [self setWiteBackground];
             }else {
-                [self setClearBackground];
+                [self setWiteBackground];
+                //                [self setClearBackground];
             }
+            [MBProgressHUD hideHUD];
             [wself.tableView reloadData];    //刷新数据
         }
         
-        
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showError:@"粉猫服务器连接异常"];
-
+        
     }];
     
 }
