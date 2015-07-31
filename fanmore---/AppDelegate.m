@@ -572,8 +572,12 @@ static NSString *message = @"有一条新消息";
                 break;
             }
             case 2:
+            {
                 self.getFriendBeg = YES;
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
                 break;
+            }
             case 3:
                 break;
             case 4:

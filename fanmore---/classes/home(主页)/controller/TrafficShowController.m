@@ -239,6 +239,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
 }
 
 - (IBAction)friendAction:(id)sender {
+    self.redCircle.hidden = YES;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FriendMessageController *fm = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
     [self.navigationController pushViewController:fm animated:YES];

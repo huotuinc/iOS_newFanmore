@@ -41,205 +41,8 @@ NSString *searchCellIdentifier = @"searchBar";
     
     self.groupArray = [NSMutableArray array];
     self.userPhone = [[NSMutableString alloc] init];
-    ABAddressBookRef addressBooks = nil;
     
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
-        
-    {
-        addressBooks =  ABAddressBookCreateWithOptions(NULL, NULL);
-        
-        //获取通讯录权限
-        
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-        
-        ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
-        
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        
-        
-    }else
-    {
-        addressBooks = ABAddressBookCreate();
-    }
-    
-    //获取通讯录中的所有人
-    
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
-    CFIndex nPeople = ABAddressBookGetPersonCount(addressBooks);
-    for (NSInteger i = 0; i < nPeople; i++) {
-        
-        
-        
-        //        TKAddressBook *addressBook = [[TKAddressBook alloc] init];
-        //唯一识别符号
-        
-        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
-        
-        ABRecordID reId = ABRecordGetRecordID(person);
-        CFTypeRef firstName = ABRecordCopyValue(person, kABPersonFirstNameProperty); //姓
-        CFTypeRef lastName = ABRecordCopyValue(person, kABPersonLastNameProperty);//名
-        CFStringRef abFullName = ABRecordCopyCompositeName(person);
-        NSString *nameString = (__bridge NSString *)firstName;//姓
-        NSString *lastNameString = (__bridge NSString *)lastName;//名
-        if ((__bridge id)abFullName != nil) {
-            nameString = (__bridge NSString *)abFullName;
-        } else {
-            if ((__bridge id)lastName != nil)
-            {
-                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
-            }
-        }
-
-        
-        ABPropertyID multiProperties[] = {
-            kABPersonPhoneProperty,
-            kABPersonEmailProperty
-        };
-        NSInteger multiPropertiesTotal = sizeof(multiProperties) / sizeof(ABPropertyID);
-        for (NSInteger j = 0; j < multiPropertiesTotal; j++) {
-            ABPropertyID property = multiProperties[j];
-            ABMultiValueRef valuesRef = ABRecordCopyValue(person, property);
-            NSInteger valuesCount = 0;
-            if (valuesRef != nil) valuesCount = ABMultiValueGetCount(valuesRef);
-            
-            if (valuesRef!=nil && valuesCount == 0) {
-                CFRelease(valuesRef);
-                continue;
-            }
-//            //获取电话号码和email
-//            
-            for (NSInteger k = 0; k < valuesCount; k++) {
-                CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
-                switch (j) {
-                    case 0: {// Phone number
-                        [self.userPhone appendFormat:@"%d\r%@\t",reId,(__bridge NSString*)value];
-                    
-                        /**
-                         生成一个model
-                         */
-                        FriendModel *model = [[FriendModel alloc] init];
-                        
-                        model.originIdentify = (__bridge NSString *)((__bridge void *)([NSString stringWithFormat:@"%d",reId]));
-                        model.name = nameString;
-                        model.phone = [NSString stringWithFormat:@"%@", (__bridge NSString*)value];
-                        HanyuPinyinOutputFormat *outputFormat = [[HanyuPinyinOutputFormat alloc] init];
-                        
-                        //姓名全部拼音
-                        NSString *str = [PinyinHelper toHanyuPinyinStringWithNSString:nameString withHanyuPinyinOutputFormat:outputFormat withNSString:@" "];
-                        model.hanyupingyin = str;
-                        
-                        //取出首字母
-                        NSString *first = [str substringWithRange:NSMakeRange(0, 1)];
-                        model.fristLetter = first;
-                        
-                        [self.personArray addObject:model];
-                        
-                        break;
-                    }
-                }
-                CFRelease(value);
-            }
-            CFRelease(valuesRef);
-        }
-    }
-    
-    
-    //获取联系人流量信息
-    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"contactInfo"];
-    NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    params[@"contacts"] = self.userPhone;
-    
-    __weak SendController * wself = self;
-    [MBProgressHUD showMessage:nil];
-    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
-//        NSLog(@"%@",json);
-        [MBProgressHUD hideHUD];
-        if ([json[@"systemResultCode"] intValue] == 1) {
-            if ([json[@"resultCode"] intValue] == 1) {
-                
-                NSArray * contactsInfo = [ResultContactInfo objectArrayWithKeyValuesArray:json[@"resultData"][@"contactInfo"]];
-                NSMutableArray * effect = [NSMutableArray array];
-                for (int i = 0; i<wself.personArray.count; i++) {
-                    FriendModel *fd = wself.personArray[i];
-                    for (int j = 0; j < contactsInfo.count; j++) {
-                        
-                        ResultContactInfo * rs = contactsInfo[j];
-                        if ([fd.originIdentify isEqualToString:rs.originIdentify]) {//合法的
-                            
-                            fd.phone = rs.originMobile;
-                            fd.image = rs.fanmorePicUrl;
-                            fd.sex = rs.fanmoreSex;
-                            fd.teleBalance = rs.teleBalance;
-                            fd.flowLabel = [NSString stringWithFormat:@"%f", rs.fanmoreBalance];
-//                            fd.fanmoreBalance = rs.fanmoreBalance;
-                            fd.operatorLabel = rs.fanmoreTele;
-                            
-                            fd.fanmoreUsername = rs.fanmoreUsername;
-                            
-                            
-                            
-                            [effect addObject:fd];
-                            break;
-                        }
-                        
-                    }
-                    
-                    
-                }
-                
-            
-
-                [wself.personArray removeAllObjects];
-                wself.personArray=effect;  //剔除无效数据
-                
-                [wself.personArray sortUsingComparator:^NSComparisonResult(FriendModel * obj1, FriendModel * obj2) {
-                    return [obj1.fristLetter compare:obj2.fristLetter] == NSOrderedDescending;
-                }];
-                FriendModel * aaas = [[FriendModel alloc] init];
-                ContactGroup * bbbs = [[ContactGroup alloc] init];
-                for (FriendModel * friend in wself.personArray) {
-                    if ([aaas.fristLetter isEqualToString:friend.fristLetter]) {//一样
-                        
-                        
-                        aaas = friend;
-                        
-                        
-                        [bbbs.friends addObject:friend];
-                        
-                        
-                        
-                    }else{//不一样
-                        
-                        aaas = friend;
-                        
-                        ContactGroup * group = [[ContactGroup alloc] init];
-                        
-                        group.firstLetter = friend.fristLetter;
-                        [group.friends addObject:friend];
-                        bbbs = group;
-                        [wself.groupArray addObject:group];
-                        
-                        
-                    }
-                }
-               
-                if (self.groupArray.count > 0) {
-                    [self setWiteBackground];
-                }else {
-                    [self setClearBackground];
-                }
-                [wself.tableView reloadData];
-            }
-            
-        }
-       
-        
-    } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:@"连接服务器失败"];
-//        NSLog(@"%@",error.description);
-    }];
-
+    [self readFromaddProbook];
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 44) ];
     self.searchBar.placeholder = @"搜索";
@@ -296,6 +99,237 @@ NSString *searchCellIdentifier = @"searchBar";
 }
 
 
+/**
+ *  读取通讯录
+ */
+- (void)readFromaddProbook{
+    
+    ABAddressBookRef addressBooks = nil;
+    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
+        
+    {
+        addressBooks =  ABAddressBookCreateWithOptions(NULL, NULL);
+        
+        //获取通讯录权限
+        
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        
+        ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
+        
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        
+        
+    }else
+    {
+        addressBooks = ABAddressBookCreate();
+    }
+    
+    //获取通讯录中的所有人
+    
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
+    CFIndex nPeople = ABAddressBookGetPersonCount(addressBooks);
+    for (NSInteger i = 0; i < nPeople; i++) {
+        
+        
+        
+        //        TKAddressBook *addressBook = [[TKAddressBook alloc] init];
+        //唯一识别符号
+        
+        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+        
+        ABRecordID reId = ABRecordGetRecordID(person);
+        CFTypeRef firstName = ABRecordCopyValue(person, kABPersonFirstNameProperty); //姓
+        CFTypeRef lastName = ABRecordCopyValue(person, kABPersonLastNameProperty);//名
+        CFStringRef abFullName = ABRecordCopyCompositeName(person);
+        NSString *nameString = (__bridge NSString *)firstName;//姓
+        NSString *lastNameString = (__bridge NSString *)lastName;//名
+        if ((__bridge id)abFullName != nil) {
+            nameString = (__bridge NSString *)abFullName;
+        } else {
+            if ((__bridge id)lastName != nil)
+            {
+                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
+            }
+        }
+        
+        
+        ABPropertyID multiProperties[] = {
+            kABPersonPhoneProperty,
+            kABPersonEmailProperty
+        };
+        NSInteger multiPropertiesTotal = sizeof(multiProperties) / sizeof(ABPropertyID);
+        for (NSInteger j = 0; j < multiPropertiesTotal; j++) {
+            ABPropertyID property = multiProperties[j];
+            ABMultiValueRef valuesRef = ABRecordCopyValue(person, property);
+            NSInteger valuesCount = 0;
+            if (valuesRef != nil) valuesCount = ABMultiValueGetCount(valuesRef);
+            
+            if (valuesRef!=nil && valuesCount == 0) {
+                CFRelease(valuesRef);
+                continue;
+            }
+            //            //获取电话号码和email
+            //
+            for (NSInteger k = 0; k < valuesCount; k++) {
+                CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
+                switch (j) {
+                    case 0: {// Phone number
+                        [self.userPhone appendFormat:@"%d\r%@\t",reId,(__bridge NSString*)value];
+                        
+                        /**
+                         生成一个model
+                         */
+                        FriendModel *model = [[FriendModel alloc] init];
+                        
+                        model.originIdentify = (__bridge NSString *)((__bridge void *)([NSString stringWithFormat:@"%d",reId]));
+                        model.name = nameString;
+                        model.phone = [NSString stringWithFormat:@"%@", (__bridge NSString*)value];
+                        HanyuPinyinOutputFormat *outputFormat = [[HanyuPinyinOutputFormat alloc] init];
+                        
+                        //姓名全部拼音
+                        NSString *str = [PinyinHelper toHanyuPinyinStringWithNSString:nameString withHanyuPinyinOutputFormat:outputFormat withNSString:@" "];
+                        model.hanyupingyin = str;
+                        
+                        //取出首字母
+                        NSString *first = [str substringWithRange:NSMakeRange(0, 1)];
+                        model.fristLetter = first;
+                        
+                        [self.personArray addObject:model];
+                        
+                        break;
+                    }
+                }
+                CFRelease(value);
+            }
+            CFRelease(valuesRef);
+        }
+    }
+    
+    
+    //获取联系人流量信息
+    NSString * urlStr = [MainURL stringByAppendingPathComponent:@"contactInfo"];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    params[@"contacts"] = self.userPhone;
+    
+    __weak SendController * wself = self;
+    [MBProgressHUD showMessage:nil];
+    [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
+        //        NSLog(@"%@",json);
+        [MBProgressHUD hideHUD];
+        if ([json[@"systemResultCode"] intValue] == 1) {
+            
+            if ([json[@"resultCode"] intValue]==56001){
+                [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
+                [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
+                UIAlertView * aaa = [[UIAlertView alloc] initWithTitle:@"账号提示" message:@"当前账号被登录，是否重新登录?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                [aaa show];
+                return ;
+            }
+            
+            if ([json[@"resultCode"] intValue] == 1) {
+                
+                NSArray * contactsInfo = [ResultContactInfo objectArrayWithKeyValuesArray:json[@"resultData"][@"contactInfo"]];
+                NSMutableArray * effect = [NSMutableArray array];
+                for (int i = 0; i<wself.personArray.count; i++) {
+                    FriendModel *fd = wself.personArray[i];
+                    for (int j = 0; j < contactsInfo.count; j++) {
+                        
+                        ResultContactInfo * rs = contactsInfo[j];
+                        if ([fd.originIdentify isEqualToString:rs.originIdentify]) {//合法的
+                            
+                            fd.phone = rs.originMobile;
+                            fd.image = rs.fanmorePicUrl;
+                            fd.sex = rs.fanmoreSex;
+                            fd.teleBalance = rs.teleBalance;
+                            fd.flowLabel = [NSString stringWithFormat:@"%f", rs.fanmoreBalance];
+                            //                            fd.fanmoreBalance = rs.fanmoreBalance;
+                            fd.operatorLabel = rs.fanmoreTele;
+                            
+                            fd.fanmoreUsername = rs.fanmoreUsername;
+                            
+                            
+                            
+                            [effect addObject:fd];
+                            break;
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+                
+                
+                [wself.personArray removeAllObjects];
+                wself.personArray=effect;  //剔除无效数据
+                
+                [wself.personArray sortUsingComparator:^NSComparisonResult(FriendModel * obj1, FriendModel * obj2) {
+                    return [obj1.fristLetter compare:obj2.fristLetter] == NSOrderedDescending;
+                }];
+                FriendModel * aaas = [[FriendModel alloc] init];
+                ContactGroup * bbbs = [[ContactGroup alloc] init];
+                for (FriendModel * friend in wself.personArray) {
+                    if ([aaas.fristLetter isEqualToString:friend.fristLetter]) {//一样
+                        
+                        
+                        aaas = friend;
+                        
+                        
+                        [bbbs.friends addObject:friend];
+                        
+                        
+                        
+                    }else{//不一样
+                        
+                        aaas = friend;
+                        
+                        ContactGroup * group = [[ContactGroup alloc] init];
+                        
+                        group.firstLetter = friend.fristLetter;
+                        [group.friends addObject:friend];
+                        bbbs = group;
+                        [wself.groupArray addObject:group];
+                        
+                        
+                    }
+                }
+                
+                if (self.groupArray.count > 0) {
+                    [self setWiteBackground];
+                }else {
+                    [self setClearBackground];
+                }
+                [wself.tableView reloadData];
+            }
+            
+        }
+        
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"连接服务器失败"];
+        //        NSLog(@"%@",error.description);
+    }];
+}
+/**
+ *  账号被顶掉
+ *
+ *  @param alertView
+ *  @param buttonIndex
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        
+        LoginViewController * aa = [[LoginViewController alloc] init];
+        UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
+        [self presentViewController:bb animated:YES completion:^{
+            [self readFromaddProbook];
+            
+        }];
+    }
+}
 
 #pragma mark tableView
 

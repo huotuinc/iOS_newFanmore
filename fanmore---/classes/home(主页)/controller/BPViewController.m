@@ -41,7 +41,7 @@ static NSString *BPCellidentify = @"BPCellId";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"BPCell" bundle:nil] forCellReuseIdentifier:BPCellidentify];
     [self.tableView removeSpaces];
-    [self setClearBackground];
+//    [self setClearBackground];
     //集成刷新控件
     [self setupRefresh];
     
