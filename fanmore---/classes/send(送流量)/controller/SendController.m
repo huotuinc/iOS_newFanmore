@@ -438,6 +438,7 @@ NSString *searchCellIdentifier = @"searchBar";
             cell.flowLabel.hidden = YES;
             cell.sexImage.hidden = YES;
             [cell setUserName:friend.name AndUserPhone:friend.phone];
+            [cell.headImage setBackgroundImage:[UIImage imageNamed:@"mrtou_h"] forState:UIControlStateNormal];
             cell.backgroundColor = [UIColor whiteColor];
         }
         return cell;
@@ -475,7 +476,7 @@ NSString *searchCellIdentifier = @"searchBar";
         }else {
             [cell setUserName:model.name AndUserPhone:model.phone];
             cell.backgroundColor = [UIColor whiteColor];
-            [cell.headImage setBackgroundImage:[UIImage imageNamed:@"mrtou_h"] forState:UIControlStateNormal];
+            
         }
         return cell;
     }
