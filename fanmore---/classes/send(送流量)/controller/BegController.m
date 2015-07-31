@@ -273,39 +273,42 @@
     __weak BegController * wself = self;
     [UserLoginTool loginRequestGet:urlStr parame:parames success:^(NSDictionary* json) {
         [MBProgressHUD hideHUD];
+        if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue] == 1) {
+            if (type == 1) {
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                
+                //1、保存个人信息
+                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                userData* userInfo =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+                userInfo.balance = [NSString stringWithFormat:@"%.1f",([userInfo.balance floatValue] - [wself.flowField.text floatValue])];
+                [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
+                CGFloat userFlow = [self.userinfo.balance doubleValue];
+                if (userFlow - (int)userFlow > 0) {
+                    self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.1fM",[userInfo.balance doubleValue]];
+                }else {
+                    self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.0fM",[userInfo.balance doubleValue]];
+                }
+                if (userFlow > 1024) {
+                    self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.3fG",[userInfo.balance doubleValue] / 1024];
+                }
+                [MBProgressHUD showSuccess:@"赠送流量成功"];
+                
+            }
+            if (type == 1 && self.isFanmoreUser == NO) {
+                [MBProgressHUD showSuccess:@"请求已发送"];
+                if ([MFMessageComposeViewController canSendText]) {
+                    MFMessageComposeViewController * aa = [[MFMessageComposeViewController alloc] init];
+                    aa.body = [NSString stringWithFormat:@"%@",json[@"resultData"][@"smsContent"]];
+                    aa.recipients = @[wself.model.phone];
+                    aa.messageComposeDelegate = wself;
+                    [self presentViewController:aa animated:YES completion:nil];
+                }else {
+                    [MBProgressHUD showError:@"设备没有短信功能"];
+                }   
+            }
+            
+        }
         
-        if (type == 1) {
-            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-            
-            //1、保存个人信息
-            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
-            userData* userInfo =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-            userInfo.balance = [NSString stringWithFormat:@"%.1f",([userInfo.balance floatValue] - [wself.flowField.text floatValue])];
-            [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
-            CGFloat userFlow = [self.userinfo.balance doubleValue];
-            if (userFlow - (int)userFlow > 0) {
-                self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.1fM",[userInfo.balance doubleValue]];
-            }else {
-                self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.0fM",[userInfo.balance doubleValue]];
-            }
-            if (userFlow > 1024) {
-                self.userFlow.text = [NSString stringWithFormat:@"我的流量：%.3fG",[userInfo.balance doubleValue] / 1024];
-            }
-
-            
-        }
-        if (type == 1 && self.isFanmoreUser == NO) {
-            [MBProgressHUD showSuccess:@"请求已发送"];
-            if ([MFMessageComposeViewController canSendText]) {
-                MFMessageComposeViewController * aa = [[MFMessageComposeViewController alloc] init];
-                aa.body = [NSString stringWithFormat:@"%@",json[@"resultData"][@"smsContent"]];
-                aa.recipients = @[wself.model.phone];
-                aa.messageComposeDelegate = wself;
-                [self presentViewController:aa animated:YES completion:nil];
-            }else {
-                [MBProgressHUD showError:@"设备没有短信功能"];
-            }   
-        }
         
         
     } failure:^(NSError *error) {
