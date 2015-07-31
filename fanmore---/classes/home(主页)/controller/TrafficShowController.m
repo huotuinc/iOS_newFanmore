@@ -24,46 +24,13 @@
 @property(nonatomic,strong) NSArray * flays;
 
 @property (nonatomic, strong) UIView *redIcon;
+@property (weak, nonatomic) IBOutlet UIView *redCircle;
 
 @end
 
 @implementation TrafficShowController
 static NSString *collectionViewidentifier = @"collectionCell";
-/**
- *  兑换流量选项
- *
- *  @return
- */
-//- (NSArray *)flays{
-//    
-//    if (_flays == nil) {
-//        _flays = [NSArray array];
-//        [MBProgressHUD showMessage:nil];
-//        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
-//        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-//            
-//            [MBProgressHUD hideHUD];
-//            NSLog(@"xxxxxxxxx%@",json);
-//            if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
-//                
-//                _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
-//                
-//            }
-//            
-//            [self setWaringLabel];
-//
-//        } failure:^(NSError *error) {
-//             [MBProgressHUD hideHUD];
-//        }];
-//    }
-//    _flays = [_flays sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//        
-//        return [obj1 compare:obj2];
-//    }];
-//    
-//    
-//    return _flays;
-//}
+
 
 - (void)flaysFromeWeb {
     _flays = [NSArray array];
@@ -128,6 +95,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     self.title = @"流量兑换";
     
+    
+    self.redCircle.layer.cornerRadius = self.redCircle.frame.size.width /2.0;
+    self.redCircle.layer.masksToBounds = YES;
     self.promptLabel.adjustsFontSizeToFitWidth = YES;
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
