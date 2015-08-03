@@ -584,7 +584,7 @@ static NSString *message = @"有一条新消息";
                 NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 userData* user =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-                user.balance = [NSString stringWithFormat:@"%.1f", [user.balance doubleValue] - [type doubleValue]];
+                user.balance = [NSString stringWithFormat:@"%.1f", [user.balance doubleValue] + [type doubleValue]];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
                 
                 if ([self.currentVC isKindOfClass:[MenuViewController class]]) {
