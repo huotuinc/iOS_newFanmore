@@ -509,15 +509,15 @@ static NSString *message = @"有一条新消息";
 // 点击通知进入APP应用
 - (void)getRemoteNotifocationFristLauchWithUserInfo:(NSDictionary *)userInfo {
     NSNumber *num = userInfo[@"type"];
-    //        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
+    NSLog(@"WWWWWWWWWWW");
     switch ([num intValue]) {
         case 1:
         {
+            NSLog(@"FFFFFFFFF");
+            
             //送流量消息
             self.titleString = userInfo[@"aps"][@"alert"][@"title"];
-            
             NSString *type = [NSString stringWithFormat:@"%@", userInfo[@"data"]];
-            
             //本地流量进行修改
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
@@ -584,7 +584,7 @@ static NSString *message = @"有一条新消息";
                 NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 userData* user =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-                user.balance = [NSString stringWithFormat:@"%.1f", [user.balance doubleValue] - [type doubleValue]];
+                user.balance = [NSString stringWithFormat:@"%.1f", [user.balance doubleValue] + [type doubleValue]];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
                 
                 if ([self.currentVC isKindOfClass:[MenuViewController class]]) {
