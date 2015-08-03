@@ -150,6 +150,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.friendButton.layer.borderWidth = 0.5;
     self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
     self.friendButton.layer.cornerRadius = 6;
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (app.getFriendBeg == YES) {
+        self.redCircle.hidden = NO;
+    }
 }
 
 
@@ -210,11 +216,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     [self saveControllerToAppDelegate:self];
     
-    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    if (app.getFriendBeg == YES) {
-        self.redCircle.hidden = NO;
-    }
     
 
 }
