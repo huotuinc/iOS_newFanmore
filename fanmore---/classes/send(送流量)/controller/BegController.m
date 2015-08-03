@@ -189,7 +189,7 @@
  */
 - (IBAction)sendFlow:(UIButton *)sender {
     
-    [self.flowField resignFirstResponder];
+    [self.view endEditing:YES];
     
     if (![self judegeFlay]) {
         [MBProgressHUD showError:@"请求流量不能为空"];
@@ -213,7 +213,7 @@
  */
 - (IBAction)begFlow:(UIButton *)sender {
     
-    [self.flowField resignFirstResponder];
+    [self.view endEditing:YES];
     if (![self judegeFlay]) {
         [MBProgressHUD showError:@"请输入正确的流量"];
         return;
