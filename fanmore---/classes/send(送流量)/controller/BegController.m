@@ -67,24 +67,20 @@
     
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGFloat sizesss = CGRectGetMaxY(self.begButton.frame) - (ScreenHeight - kbSize.height);
-    NSLog(@"%f",self.begButton.frame.origin.y);
-    if (sizesss < 0) {
+    CGPoint size = self.begButton.frame.origin;
+    NSLog(@"%f",(ScreenHeight - kbSize.height));
+    CGFloat sizesss = 180 + 200 + 60 - (ScreenHeight - kbSize.height);
+    
+    if (sizesss > 0) {
         
-        if (IsIos7) {
-            [UIView animateWithDuration:0.15 animations:^{
-                
-                self.view.transform = CGAffineTransformMakeTranslation(0,(sizesss));
-            }];
-        }else {
-            [UIView animateWithDuration:0.15 animations:^{
-                
-                self.view.transform = CGAffineTransformMakeTranslation(0,(sizesss+80));
-            }];
-        }
-        
+        [UIView animateWithDuration:0.15 animations:^{
+            
+            self.view.transform = CGAffineTransformMakeTranslation(0,-(sizesss));
+        }];
         
     }
+    
+    
 }
 
 /**

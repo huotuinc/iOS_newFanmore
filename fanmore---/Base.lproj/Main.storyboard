@@ -2524,24 +2524,17 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入流量" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-DV-t0d">
                                         <rect key="frame" x="20" y="20" width="280" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="97" id="kdy-bT-SQI"/>
-                                            <constraint firstAttribute="height" constant="30" id="xQS-zs-Wjz"/>
+                                            <constraint firstAttribute="width" constant="280" id="dUF-6z-Wxa"/>
+                                            <constraint firstAttribute="height" constant="40" id="w2J-cT-riE"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="kdy-bT-SQI"/>
-                                                <exclude reference="xQS-zs-Wjz"/>
-                                            </mask>
-                                        </variation>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPv-H9-gxt" customClass="FMButton">
                                         <rect key="frame" x="20" y="80" width="280" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="CfD-uP-LGX"/>
-                                            <constraint firstAttribute="width" constant="280" id="K6Z-Va-rNR"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="rvO-6z-X80"/>
+                                            <constraint firstAttribute="width" constant="280" id="2yR-OC-d3b"/>
+                                            <constraint firstAttribute="height" constant="40" id="qJR-m5-RfQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="送流量">
@@ -2555,7 +2548,8 @@
                                         <rect key="frame" x="20" y="140" width="280" height="40"/>
                                         <color key="backgroundColor" red="1" green="0.32191954041509441" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="2Xu-PU-5av"/>
+                                            <constraint firstAttribute="height" constant="40" id="2GB-xO-jDA"/>
+                                            <constraint firstAttribute="width" constant="280" id="kPC-Ep-Cb5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="求流量">
@@ -2569,46 +2563,25 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="6Z0-nI-Shg" secondAttribute="trailing" constant="20" id="4aV-qu-hvx"/>
-                                    <constraint firstItem="6Z0-nI-Shg" firstAttribute="top" secondItem="tPv-H9-gxt" secondAttribute="bottom" constant="20" id="A2a-sq-V9f"/>
-                                    <constraint firstAttribute="trailing" secondItem="tPv-H9-gxt" secondAttribute="trailing" constant="20" id="Ax1-9f-vaR"/>
-                                    <constraint firstAttribute="centerX" secondItem="tPv-H9-gxt" secondAttribute="centerX" id="Btl-6B-Cva"/>
-                                    <constraint firstItem="tPv-H9-gxt" firstAttribute="top" secondItem="Eyl-DV-t0d" secondAttribute="bottom" constant="20" id="H2w-9a-DoL"/>
-                                    <constraint firstAttribute="centerX" secondItem="6Z0-nI-Shg" secondAttribute="centerX" id="KLE-Nm-iJK"/>
-                                    <constraint firstItem="Eyl-DV-t0d" firstAttribute="height" secondItem="tPv-H9-gxt" secondAttribute="height" id="MXK-GM-2lh"/>
-                                    <constraint firstAttribute="centerY" secondItem="tPv-H9-gxt" secondAttribute="centerY" id="QAw-hp-Z2o"/>
-                                    <constraint firstItem="6Z0-nI-Shg" firstAttribute="width" secondItem="tPv-H9-gxt" secondAttribute="width" id="QNd-r5-Brq"/>
-                                    <constraint firstItem="6Z0-nI-Shg" firstAttribute="leading" secondItem="ZWp-zy-kum" secondAttribute="leading" constant="20" id="QbX-gQ-pBH"/>
-                                    <constraint firstItem="Eyl-DV-t0d" firstAttribute="width" secondItem="tPv-H9-gxt" secondAttribute="width" id="XVd-X5-dAx"/>
-                                    <constraint firstAttribute="centerX" secondItem="Eyl-DV-t0d" secondAttribute="centerX" id="b5Y-ij-Iwk"/>
-                                    <constraint firstItem="tPv-H9-gxt" firstAttribute="leading" secondItem="ZWp-zy-kum" secondAttribute="leading" constant="20" id="iCE-K6-moO"/>
+                                    <constraint firstItem="Eyl-DV-t0d" firstAttribute="top" secondItem="ZWp-zy-kum" secondAttribute="top" constant="20" id="0cR-vm-IYl"/>
+                                    <constraint firstAttribute="centerX" secondItem="tPv-H9-gxt" secondAttribute="centerX" id="5bX-mY-T1z"/>
+                                    <constraint firstAttribute="centerX" secondItem="Eyl-DV-t0d" secondAttribute="centerX" id="VOD-LE-Lun"/>
+                                    <constraint firstAttribute="centerX" secondItem="6Z0-nI-Shg" secondAttribute="centerX" id="bl6-AN-QZg"/>
+                                    <constraint firstItem="tPv-H9-gxt" firstAttribute="top" secondItem="Eyl-DV-t0d" secondAttribute="bottom" constant="20" id="dCB-60-t9X"/>
+                                    <constraint firstItem="6Z0-nI-Shg" firstAttribute="top" secondItem="tPv-H9-gxt" secondAttribute="bottom" constant="20" id="rjy-AY-naB"/>
                                     <constraint firstAttribute="height" constant="200" id="ucb-Xl-5dh"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="4aV-qu-hvx"/>
-                                        <exclude reference="QbX-gQ-pBH"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="m0X-dH-x9G" firstAttribute="leading" secondItem="0hx-vO-8G0" secondAttribute="leading" id="6yP-x4-aub"/>
                             <constraint firstItem="m0X-dH-x9G" firstAttribute="top" secondItem="3Og-o2-Qhi" secondAttribute="bottom" id="7LK-rQ-ue8"/>
-                            <constraint firstItem="ZWp-zy-kum" firstAttribute="height" secondItem="0hx-vO-8G0" secondAttribute="height" multiplier="0.5" id="7uU-yz-aIj"/>
-                            <constraint firstItem="m0X-dH-x9G" firstAttribute="height" secondItem="0hx-vO-8G0" secondAttribute="height" multiplier="0.35" id="Kt3-7c-t7f"/>
                             <constraint firstAttribute="trailing" secondItem="ZWp-zy-kum" secondAttribute="trailing" id="b15-tV-6ve"/>
                             <constraint firstAttribute="trailing" secondItem="m0X-dH-x9G" secondAttribute="trailing" id="dEC-2n-2AS"/>
                             <constraint firstItem="ZWp-zy-kum" firstAttribute="leading" secondItem="0hx-vO-8G0" secondAttribute="leading" id="fby-y3-eFF"/>
                             <constraint firstItem="ZWp-zy-kum" firstAttribute="top" secondItem="m0X-dH-x9G" secondAttribute="bottom" id="m4Y-19-ssd"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Kt3-7c-t7f"/>
-                                <exclude reference="7uU-yz-aIj"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
