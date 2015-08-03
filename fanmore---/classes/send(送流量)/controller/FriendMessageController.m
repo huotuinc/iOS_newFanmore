@@ -80,12 +80,14 @@ static NSString *friendMIdentify = @"FMCellId";
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.seIndexpath = indexPath;
+
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.getFriendBeg = NO;
     
     FriendMessageModel *model = self.array[indexPath.row];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"送'ta'%@M流量", model.fee] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
     alert.tag = 102;
-    
     [alert show];
     
 }
@@ -320,11 +322,30 @@ static NSString *friendMIdentify = @"FMCellId";
     parame[@"infoId"] = model.infoId;
     
 //    NSLog(@"%@", parame);
+    
+    __weak FriendMessageController * wself = self;
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
 //        NSLog(@"%@",json);
-        [self.array removeObjectAtIndex:self.seIndexpath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.seIndexpath] withRowAnimation:UITableViewRowAnimationLeft];
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {
+            [self.array removeObjectAtIndex:self.seIndexpath.row];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.seIndexpath] withRowAnimation:UITableViewRowAnimationLeft];
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            //1、保存全局信息
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            
+            userData * userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+            NSString * aa = [NSString stringWithFormat:@"%.1f",([userInfo.balance floatValue] - [model.fee floatValue])];
+            userInfo.balance = aa;
+            [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
+            
+            if ([wself.delegate respondsToSelector:@selector(successExchange:)]) {
+                
+                [wself.delegate successExchange:userInfo.balance];
+                
+            }
+        }
+        
         [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUD];
@@ -359,7 +380,7 @@ static NSString *friendMIdentify = @"FMCellId";
         if (buttonIndex == 0) {
             [self cleanFriendMessage];
         }
-    }else if(alertView.tag == 102) {
+    }else if(alertView.tag == 102) {//送人流量
         if (buttonIndex == 0) {
             [self sendFriendFlow];
         }

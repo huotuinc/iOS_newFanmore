@@ -15,7 +15,7 @@
 
 
 #define FLAYSMESSAGE @"flaymess"
-@interface TrafficShowController ()<ExchangeControllerdelegate>
+@interface TrafficShowController ()<ExchangeControllerdelegate,FriendMessageControllerDelegate>
 
 @property (assign, nonatomic) int num;
 /**已赚取的流量*/
@@ -152,7 +152,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.friendButton.layer.cornerRadius = 6;
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
+    NSLog(@"dadad%d",app.getFriendBeg);
     if (app.getFriendBeg == YES) {
         self.redCircle.hidden = NO;
     }
@@ -251,6 +251,7 @@ static NSString *collectionViewidentifier = @"collectionCell";
     self.redCircle.hidden = YES;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FriendMessageController *fm = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
+    fm.delegate = self;
     [self.navigationController pushViewController:fm animated:YES];
 }
 
