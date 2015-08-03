@@ -160,7 +160,7 @@ static NSString *message = @"有一条新消息";
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     
-
+    
     [self getRemoteNotificationWithUserInfo:userInfo];
     
     completionHandler(UIBackgroundFetchResultNewData);
@@ -173,6 +173,7 @@ static NSString *message = @"有一条新消息";
  *  @param userInfo    <#userInfo description#>
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    
     
     [self getRemoteNotificationWithUserInfo:userInfo];
     
