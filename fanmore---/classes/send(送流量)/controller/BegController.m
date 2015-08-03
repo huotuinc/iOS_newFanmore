@@ -19,6 +19,9 @@
 
 /**求流量赠流量的附加信息*/
 @property(nonatomic,strong) NSString * addMessage;
+
+
+//@property(nonatomic,strong) UILabel * 
 @end
 
 @implementation BegController

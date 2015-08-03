@@ -129,7 +129,7 @@ static NSString *friendMIdentify = @"FMCellId";
     
     self.tableView.tableHeaderView = [[UIView alloc] init];
     
-    [self setClearBackground];
+//    [self setClearBackground];
     
     [self.navigationItem.rightBarButtonItem = [UIBarButtonItem alloc] bk_initWithTitle:@"拒绝全部" style:UIBarButtonItemStylePlain handler:^(id sender) {
         if (self.array.count) {
