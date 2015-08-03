@@ -20,6 +20,9 @@
 /**求流量赠流量的附加信息*/
 @property(nonatomic,strong) NSString * addMessage;
 
+/**两个按钮都显示的lable*/
+@property (weak, nonatomic) IBOutlet UILabel *twoLable;
+@property (weak, nonatomic) IBOutlet UILabel *oneLable;
 
 //@property(nonatomic,strong) UILabel * 
 @end
@@ -39,11 +42,27 @@
     self.begButton.layer.borderColor = self.begButton.backgroundColor.CGColor;
     
     
-    
+    [self toAddTipLable];
     [self registerForKeyboardNotifications];
     
 }
 
+/**
+ *  处理两个提示lable
+ */
+- (void)toAddTipLable{
+    
+    if(self.isFanmoreUser){
+        self.twoLable.hidden = NO;
+        self.twoLable.lineBreakMode = NSLineBreakByWordWrapping;
+//        self.twoLable.numberOfLines = 2;
+    }else{
+        
+        self.oneLable.hidden = NO;
+        self.twoLable.hidden = YES;
+    }
+    
+}
 - (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -70,7 +89,6 @@
     
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGPoint size = self.begButton.frame.origin;
     CGFloat sizesss = 180 + 200 + 60 - (ScreenHeight - kbSize.height);
     
     if (sizesss > 0) {

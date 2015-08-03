@@ -2560,28 +2560,64 @@
                                             <action selector="begFlow:" destination="xgT-hq-atK" eventType="touchUpInside" id="SR0-2n-UcZ"/>
                                         </connections>
                                     </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对未安装粉猫的好友送流量，填写你的邀请码注册后可领得流量，并建立师徒关系，好友每完成一次任务你可获得5%的额外奖励。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87T-81-equ">
+                                        <rect key="frame" x="20" y="140" width="280" height="82"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Eyl-DV-t0d" firstAttribute="top" secondItem="ZWp-zy-kum" secondAttribute="top" constant="20" id="0cR-vm-IYl"/>
                                     <constraint firstAttribute="centerX" secondItem="tPv-H9-gxt" secondAttribute="centerX" id="5bX-mY-T1z"/>
+                                    <constraint firstItem="87T-81-equ" firstAttribute="leading" secondItem="ZWp-zy-kum" secondAttribute="leading" constant="20" id="7zm-29-aXl"/>
+                                    <constraint firstItem="87T-81-equ" firstAttribute="top" secondItem="tPv-H9-gxt" secondAttribute="bottom" constant="20" id="Jxe-f3-EeQ"/>
                                     <constraint firstAttribute="centerX" secondItem="Eyl-DV-t0d" secondAttribute="centerX" id="VOD-LE-Lun"/>
+                                    <constraint firstAttribute="trailing" secondItem="87T-81-equ" secondAttribute="trailing" constant="20" id="YRZ-5l-hEs"/>
                                     <constraint firstAttribute="centerX" secondItem="6Z0-nI-Shg" secondAttribute="centerX" id="bl6-AN-QZg"/>
                                     <constraint firstItem="tPv-H9-gxt" firstAttribute="top" secondItem="Eyl-DV-t0d" secondAttribute="bottom" constant="20" id="dCB-60-t9X"/>
                                     <constraint firstItem="6Z0-nI-Shg" firstAttribute="top" secondItem="tPv-H9-gxt" secondAttribute="bottom" constant="20" id="rjy-AY-naB"/>
                                     <constraint firstAttribute="height" constant="200" id="ucb-Xl-5dh"/>
                                 </constraints>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对未安装粉猫的好友送流量，填写你的邀请码注册后可领得流量，并建立师徒关系，好友每完成一次任务你可获得5%的额外奖励。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63U-Fh-KrC">
+                                <rect key="frame" x="29" y="405" width="270" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="6rq-Dd-WBY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="6rq-Dd-WBY"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="m0X-dH-x9G" firstAttribute="leading" secondItem="0hx-vO-8G0" secondAttribute="leading" id="6yP-x4-aub"/>
                             <constraint firstItem="m0X-dH-x9G" firstAttribute="top" secondItem="3Og-o2-Qhi" secondAttribute="bottom" id="7LK-rQ-ue8"/>
+                            <constraint firstItem="63U-Fh-KrC" firstAttribute="leading" secondItem="0hx-vO-8G0" secondAttribute="leading" constant="29" id="Fub-CX-Dy6"/>
+                            <constraint firstItem="63U-Fh-KrC" firstAttribute="top" secondItem="ZWp-zy-kum" secondAttribute="bottom" constant="5" id="MMm-SD-Tq4"/>
+                            <constraint firstItem="63U-Fh-KrC" firstAttribute="leading" secondItem="0hx-vO-8G0" secondAttribute="leading" constant="29" id="PlN-o0-GjZ"/>
                             <constraint firstAttribute="trailing" secondItem="ZWp-zy-kum" secondAttribute="trailing" id="b15-tV-6ve"/>
                             <constraint firstAttribute="trailing" secondItem="m0X-dH-x9G" secondAttribute="trailing" id="dEC-2n-2AS"/>
                             <constraint firstItem="ZWp-zy-kum" firstAttribute="leading" secondItem="0hx-vO-8G0" secondAttribute="leading" id="fby-y3-eFF"/>
+                            <constraint firstItem="63U-Fh-KrC" firstAttribute="top" secondItem="ZWp-zy-kum" secondAttribute="bottom" constant="23" id="i8a-bM-RXA"/>
                             <constraint firstItem="ZWp-zy-kum" firstAttribute="top" secondItem="m0X-dH-x9G" secondAttribute="bottom" id="m4Y-19-ssd"/>
+                            <constraint firstAttribute="trailing" secondItem="63U-Fh-KrC" secondAttribute="trailing" constant="21" id="oBn-JX-oJI"/>
+                            <constraint firstAttribute="trailing" secondItem="63U-Fh-KrC" secondAttribute="trailing" constant="21" id="wUe-lr-ccy"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="PlN-o0-GjZ"/>
+                                <exclude reference="i8a-bM-RXA"/>
+                                <exclude reference="oBn-JX-oJI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -2589,7 +2625,9 @@
                         <outlet property="flowField" destination="Eyl-DV-t0d" id="duV-iq-uI1"/>
                         <outlet property="friendHeadBtu" destination="apf-RA-DY9" id="sDl-KT-XZK"/>
                         <outlet property="friendPhone" destination="9io-VG-kNp" id="x32-vb-Qev"/>
+                        <outlet property="oneLable" destination="87T-81-equ" id="zSS-t3-4gg"/>
                         <outlet property="sendButton" destination="tPv-H9-gxt" id="Lps-hY-Ioj"/>
+                        <outlet property="twoLable" destination="63U-Fh-KrC" id="hlN-cN-iF5"/>
                         <outlet property="userFlow" destination="5ib-e1-O02" id="TkK-PQ-CBn"/>
                         <outlet property="userHeadBtu" destination="5EY-BP-feA" id="Smn-By-q1i"/>
                     </connections>
