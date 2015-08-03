@@ -85,7 +85,7 @@ static NSString * _company = nil;
         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
-            NSLog(@"购买流量明细%@",json);
+//            NSLog(@"购买流量明细%@",json);
             if ([json[@"systemResultCode"] intValue] == 1) {
                 if ([json[@"resultCode"] intValue] == 56001) {
                     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -168,7 +168,7 @@ static NSString * _company = nil;
     self.title = @"购买流量";
     
     BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
-    NSLog(@"wxRegistered:%d",wxRegistered);
+//    NSLog(@"wxRegistered:%d",wxRegistered);
     
 //    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
 //    NSLog(@"wxRegistered:%d",wxRegistered);
@@ -307,7 +307,7 @@ static NSString * _company = nil;
     
     //将商品信息拼接成字符串
     NSString *orderSpec = [order description];
-    NSLog(@"orderSpec = %@",orderSpec);
+//    NSLog(@"orderSpec = %@",orderSpec);
     
     //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
     id<DataSigner> signer = CreateRSADataSigner(privateKey);
@@ -353,7 +353,7 @@ static NSString * _company = nil;
         
         params[@"notify_url"] = self.buyflay.wxpayNotifyUri;  //接收微信支付异步通知回调地址
         self.orderNo = [self caluTransactionCode];
-        NSLog(@"orderno====%@",self.orderNo);
+//        NSLog(@"orderno====%@",self.orderNo);
         params[@"out_trade_no"] = self.orderNo; //订单号
         params[@"spbill_create_ip"] = @"192.168.1.1"; //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
         
@@ -435,11 +435,11 @@ static NSString * _company = nil;
             req.sign                = [dict objectForKey:@"sign"];
             [WXApi sendReq:req];
         }else{
-            NSLog(@"提示信息%@",[dict objectForKey:@"retmsg"]);
+//            NSLog(@"提示信息%@",[dict objectForKey:@"retmsg"]);
         }
         
     }else{
-        NSLog(@"提示信息返回错误");
+//        NSLog(@"提示信息返回错误");
 
     }
 
@@ -455,7 +455,7 @@ static NSString * _company = nil;
  */
 - (void)buyProductPaySuccessToServer{
     
-    NSLog(@"---------------------------------------");
+//    NSLog(@"---------------------------------------");
     NSArray * aaM = self.buyflay.purchases;
     flayModel * flay = aaM[self.selected.row];
     NSString * url = [MainURL stringByAppendingPathComponent:@"deliverGood"];

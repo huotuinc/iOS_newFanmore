@@ -105,7 +105,7 @@ static NSString *friendMIdentify = @"FMCellId";
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
             [MBProgressHUD hideHUD];
         } failure:^(NSError *error) {
-            NSLog(@"%@",error);
+//            NSLog(@"%@",error);
             [MBProgressHUD hideHUD];
         }];
     }
@@ -265,7 +265,7 @@ static NSString *friendMIdentify = @"FMCellId";
         }
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             [MBProgressHUD hideHUD];
-            NSLog(@"%@",json);
+//            NSLog(@"%@",json);
             NSArray * taskArray = [FriendMessageModel objectArrayWithKeyValuesArray:json[@"resultData"][@"requests"]];
             [wself.array removeAllObjects];
             wself.array = [NSMutableArray arrayWithArray:taskArray];
@@ -319,10 +319,10 @@ static NSString *friendMIdentify = @"FMCellId";
     parame[@"fc"] = [NSString stringWithFormat:@"%d",[model.fee intValue]];
     parame[@"infoId"] = model.infoId;
     
-    NSLog(@"%@", parame);
+//    NSLog(@"%@", parame);
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:parame success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         [self.array removeObjectAtIndex:self.seIndexpath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.seIndexpath] withRowAnimation:UITableViewRowAnimationLeft];
         [MBProgressHUD hideHUD];
@@ -341,7 +341,7 @@ static NSString *friendMIdentify = @"FMCellId";
         
         [MBProgressHUD showMessage:nil];
         [UserLoginTool loginRequestGet:usrStr parame:nil success:^(id json) {
-            NSLog(@"%@",json);
+//            NSLog(@"%@",json);
             [self.array removeAllObjects];
             [self.tableView reloadData];
             [MBProgressHUD hideHUD];

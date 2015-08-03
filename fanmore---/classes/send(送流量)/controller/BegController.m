@@ -68,7 +68,6 @@
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGPoint size = self.begButton.frame.origin;
-    NSLog(@"%f",(ScreenHeight - kbSize.height));
     CGFloat sizesss = 180 + 200 + 60 - (ScreenHeight - kbSize.height);
     
     if (sizesss > 0) {
@@ -165,7 +164,6 @@
             [self.friendHeadBtu setBackgroundImage:image forState:UIControlStateNormal];
         }];
     }
-    NSLog(@"xcadasdasd");
 }
 /*
 #pragma mark - Navigation

@@ -157,7 +157,7 @@ static NSString *BPCellidentify = @"BPCellId";
     __weak BPViewController * wself = self;
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];

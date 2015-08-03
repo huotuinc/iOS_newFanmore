@@ -281,7 +281,7 @@ static NSString *message = @"有一条新消息";
                 [[NSNotificationCenter defaultCenter] postNotificationName:WeiXinPaySuccessPostNotification object:nil];
                 break;
             default:
-                NSLog(@"支付失败， retcode=%d",resp.errCode);
+//                NSLog(@"支付失败， retcode=%d",resp.errCode);
                 break;
         }
     }
