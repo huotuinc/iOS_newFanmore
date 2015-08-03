@@ -128,6 +128,7 @@ static NSString *message = @"有一条新消息";
         if (dicRemote) {
             if (IsIos8) {
                 self.isLauching = YES;
+                [self getRemoteNotifocationFristLauchWithUserInfo:dicRemote];
             }else {
               [self getRemoteNotifocationFristLauchWithUserInfo:dicRemote];
             }
@@ -136,10 +137,10 @@ static NSString *message = @"有一条新消息";
     }
     
     
-    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
-    {
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-    }
+//    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
+//    {
+//        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+//    }
     
     //APNS
     [self registRemoteNotification:application];
@@ -157,14 +158,14 @@ static NSString *message = @"有一条新消息";
  *  @param userInfo          <#userInfo description#>
  *  @param completionHandler <#completionHandler description#>
  */
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-    
-    
-    [self getRemoteNotificationWithUserInfo:userInfo];
-    
-    completionHandler(UIBackgroundFetchResultNewData);
-}
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+//{
+//    
+//    
+//    [self getRemoteNotificationWithUserInfo:userInfo];
+//    
+//    completionHandler(UIBackgroundFetchResultNewData);
+//}
 
 /**
  *  ios7 远程通知方法
@@ -174,7 +175,7 @@ static NSString *message = @"有一条新消息";
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     
-    
+    NSLog(@"RRRRRRRRRR");
     [self getRemoteNotificationWithUserInfo:userInfo];
     
 }
@@ -551,7 +552,7 @@ static NSString *message = @"有一条新消息";
         case 6:
         {
             //消息
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:userInfo[@"aps"][@"alert"][@"title"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
+            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:userInfo[@"aps"][@"alert"][@"title"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [ac show];
             
         }
