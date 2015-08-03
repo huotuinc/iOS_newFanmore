@@ -44,7 +44,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView removeSpaces];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
-    [self setClearBackground];
+//    [self setClearBackground];
 }
 
 - (void)viewWillAppear:(BOOL)animated

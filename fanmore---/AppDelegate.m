@@ -78,12 +78,7 @@ static NSString *message = @"有一条新消息";
     
     //集成第三方
     [self setupThreeApp];
-    
-    
-    //定位功能
-//    [self setupLocal];
-   
-    
+
     //进行初始化借口调用
     [self setupInit];
     
