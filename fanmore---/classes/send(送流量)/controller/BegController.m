@@ -323,14 +323,14 @@
     if (alertView.tag==1) {//送流量
         if (!buttonIndex) {
             NSString *mess = [self getTextFieldMessage:alertView];
-            NSLog(@"xxx%@",mess);
+//            NSLog(@"xxx%@",mess);
             [self toMutualWithServer:alertView.tag andStrin:mess];
         }
     }else if(alertView.tag == 2){//求流量
         if (!buttonIndex) {
             NSString *mess = [self getTextFieldMessage:alertView];
             [self toMutualWithServer:alertView.tag andStrin:mess];
-            NSLog(@"xxx%@",mess);
+//            NSLog(@"xxx%@",mess);
         }
     }
     

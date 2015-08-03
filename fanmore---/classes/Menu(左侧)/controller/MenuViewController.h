@@ -15,5 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
-
+@property (weak, nonatomic) IBOutlet UILabel *flowLable;
 @end

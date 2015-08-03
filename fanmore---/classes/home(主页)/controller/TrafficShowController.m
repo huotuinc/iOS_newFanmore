@@ -24,7 +24,7 @@
 @property(nonatomic,strong) NSArray * flays;
 
 @property (nonatomic, strong) UIView *redIcon;
-@property (weak, nonatomic) IBOutlet UIView *redCircle;
+
 
 @end
 
@@ -209,6 +209,13 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self flaysFromeWeb];
     
     [self saveControllerToAppDelegate:self];
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (app.getFriendBeg == YES) {
+        self.redCircle.hidden = NO;
+    }
+    
 
 }
 

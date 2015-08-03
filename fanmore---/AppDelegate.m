@@ -10,11 +10,13 @@
 #import "MobClick.h"
 #import <INTULocationManager.h>//定位
 #import "LoginResultData.h"
+#import "MenuViewController.h"
 #import "detailViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
+#import "TrafficShowController.h"
 //#import "WeiboApi.h"
 #import "WeiboSDK.h"
 //#import <RennSDK/RennSDK.h>
@@ -22,6 +24,8 @@
 #import "LWNewFeatureController.h"
 #import <CoreLocation/CoreLocation.h> //定位
 #import "NSData+NSDataDeal.h"
+
+
 
 
 #define WeiXinPayId @"wxaeda2d5603b12302"
@@ -44,8 +48,7 @@
 //存储通知信息
 @property(nonatomic, strong) NSMutableArray *notifationArray;
 
-//用于好友消息提醒
-@property(nonatomic, assign) BOOL getFriendBeg;
+
 
 @end
 
@@ -67,8 +70,7 @@ static NSString *message = @"有一条新消息";
     //定位
     [self test];
     
-    //测试
-//    self.goMessage = YES;
+
     
     application.applicationIconBadgeNumber = 0;
     
@@ -112,6 +114,9 @@ static NSString *message = @"有一条新消息";
     
     //初始化通知参数
     self.isShowed = NO;
+    self.firstFriendBeg = NO;
+    self.getSendMes = NO;
+    self.getFriendBeg = NO;
     self.notifationArray = [NSMutableArray array];
     
     if (launchOptions) {
@@ -159,6 +164,7 @@ static NSString *message = @"有一条新消息";
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
+    
 
     [self getRemoteNotificationWithUserInfo:userInfo];
     
@@ -513,13 +519,21 @@ static NSString *message = @"有一条新消息";
             //送流量消息
             self.titleString = userInfo[@"aps"][@"alert"][@"title"];
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
-
+            NSString *type = [NSString stringWithFormat:@"%@", userInfo[@"data"]];
+            
+            //本地流量进行修改
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            userData* user =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+            user.balance = [NSString stringWithFormat:@"%.1f", [user.balance doubleValue] - [type doubleValue]];
+            
+            self.getSendMes = YES;
+            
             break;
         }
         case 2:
             self.getFriendBeg = YES;
+            self.firstFriendBeg = YES;
             break;
         case 3:
             break;
@@ -567,15 +581,40 @@ static NSString *message = @"有一条新消息";
                 //送流量消息
                 self.titleString = userInfo[@"aps"][@"alert"][@"title"];
                 
+                NSString *type = [NSString stringWithFormat:@"%@", userInfo[@"data"]];
+                
+                //本地流量进行修改
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                userData* user =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+                user.balance = [NSString stringWithFormat:@"%.1f", [user.balance doubleValue] - [type doubleValue]];
+                
+                if ([self.currentVC isKindOfClass:[MenuViewController class]]) {
+                    MenuViewController *menu  = (MenuViewController *)self.currentVC;
+                    CGFloat userFlow = [user.balance doubleValue];
+                    if (userFlow - (int)userFlow > 0) {
+                        menu.flowLable.text = [NSString stringWithFormat:@"%.1fM",[user.balance doubleValue]];
+                    }else {
+                        menu.flowLable.text = [NSString stringWithFormat:@"%.0fM",[user.balance doubleValue]];
+                    }
+                    if (userFlow > 1024) {
+                        menu.flowLable.text = [NSString stringWithFormat:@"%.3fG",[user.balance doubleValue] / 1024];
+                    }
+                }
+                
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                
+                
                 [alert show];
                 break;
             }
             case 2:
             {
                 self.getFriendBeg = YES;
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
+                if ([self.currentVC isKindOfClass:[TrafficShowController class]]) {
+                    TrafficShowController *tra = (TrafficShowController *)self.currentVC;
+                    tra.redCircle.hidden = NO;
+                }
                 break;
             }
             case 3:

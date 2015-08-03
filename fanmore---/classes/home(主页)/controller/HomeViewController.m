@@ -22,6 +22,8 @@
 #import "WebController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "TaskGrouoModel.h"
+#import "BPViewController.h"
+#import "FriendMessageController.h"
 
 #define pageSize 10
 
@@ -113,6 +115,20 @@ static int refreshCount = 0;
             MCController *mcc = [storyboard instantiateViewControllerWithIdentifier:@"MCController"];
             [self.navigationController pushViewController:mcc animated:YES];
         }
+    }
+    
+    if (app.getSendMes) {
+        app.getSendMes = NO;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        BPViewController *bp = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
+        [self.navigationController pushViewController:bp animated:YES];
+    }
+    
+    if (app.firstFriendBeg) {
+        app.firstFriendBeg = NO;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FriendMessageController *friend = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
+        [self.navigationController pushViewController:friend animated:YES];
     }
     
     [self.navigationController setNavigationBarHidden:NO];

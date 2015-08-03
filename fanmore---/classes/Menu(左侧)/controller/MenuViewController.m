@@ -27,7 +27,7 @@
  */
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLable;
-@property (weak, nonatomic) IBOutlet UILabel *flowLable;
+
 @property (weak, nonatomic) IBOutlet UITableView *optionList;
 
 /**用户登入头像*/
