@@ -17,7 +17,6 @@
 		8339BD631B18510E00FAC712 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8339BD621B18510E00FAC712 /* ChangePasswordController.m */; };
 		833CC76E1B2689A0008DA984 /* HobbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833CC76D1B2689A0008DA984 /* HobbyController.m */; };
 		83466BF21B4502910089A326 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83466BF11B4502910089A326 /* InfoPlist.strings */; };
-		83530FF31B6F028B0074E5D0 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 83530FF21B6F028B0074E5D0 /* Foundation+Log.m */; };
 		8360169A1B37EF1D00B076DD /* ConversionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836016981B37EF1D00B076DD /* ConversionCell.m */; };
 		8360169B1B37EF1D00B076DD /* ConversionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836016991B37EF1D00B076DD /* ConversionCell.xib */; };
 		836A0AA11B22E97600C8E765 /* 未命名.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 836A0AA01B22E97600C8E765 /* 未命名.tiff */; };
@@ -248,7 +247,6 @@
 		833CC76C1B2689A0008DA984 /* HobbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HobbyController.h; sourceTree = "<group>"; };
 		833CC76D1B2689A0008DA984 /* HobbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HobbyController.m; sourceTree = "<group>"; };
 		83466BF11B4502910089A326 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		83530FF21B6F028B0074E5D0 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		836016971B37EF1D00B076DD /* ConversionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversionCell.h; path = "classes/home(主页)/view/ConversionCell.h"; sourceTree = "<group>"; };
 		836016981B37EF1D00B076DD /* ConversionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConversionCell.m; path = "classes/home(主页)/view/ConversionCell.m"; sourceTree = "<group>"; };
 		836016991B37EF1D00B076DD /* ConversionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConversionCell.xib; path = "classes/home(主页)/view/ConversionCell.xib"; sourceTree = "<group>"; };
@@ -1173,7 +1171,6 @@
 		EF49ECE21B0D81A40038A203 = {
 			isa = PBXGroup;
 			children = (
-				83530FF21B6F028B0074E5D0 /* Foundation+Log.m */,
 				EF49ECED1B0D81A40038A203 /* fanmore--- */,
 				EF49ED071B0D81A40038A203 /* fanmore---Tests */,
 				EF49ECEC1B0D81A40038A203 /* Products */,
@@ -2233,7 +2230,6 @@
 				83F875F51B27E2C00089C6F5 /* (null) in Sources */,
 				EFCCA4CB1B12D6E400C015A7 /* NSObject+MJCoding.m in Sources */,
 				83AB70911B2A762000B2D09A /* SendController.m in Sources */,
-				83530FF31B6F028B0074E5D0 /* Foundation+Log.m in Sources */,
 				83E72CDF1B1C3EBE00286735 /* asignViewController.m in Sources */,
 				83DBD8E61B12FE1600B62830 /* HomeViewController.m in Sources */,
 				EFEA0EA31B4FBCFE0027181A /* MMDrawerBarButtonItem.m in Sources */,

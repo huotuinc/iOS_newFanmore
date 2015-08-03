@@ -105,7 +105,6 @@ static NSString *friendMIdentify = @"FMCellId";
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
             [MBProgressHUD hideHUD];
         } failure:^(NSError *error) {
-            NSLog(@"%@",error);
             [MBProgressHUD hideHUD];
         }];
     }

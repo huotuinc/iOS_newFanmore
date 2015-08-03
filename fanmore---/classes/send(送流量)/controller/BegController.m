@@ -169,7 +169,6 @@
             [self.friendHeadBtu setBackgroundImage:image forState:UIControlStateNormal];
         }];
     }
-    NSLog(@"xcadasdasd");
 }
 /*
 #pragma mark - Navigation
