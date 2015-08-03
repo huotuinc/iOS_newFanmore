@@ -10,8 +10,10 @@
 
 @implementation DiscipleCell
 
+
 - (void)setHeadImage:(NSString *)headUrl AndUserPhone:(NSString *) userPhone AndeTime:(long long) time AndFlow:(NSString *) flow AndDiscople:(NSString *) disciple {
     
+    self.flowLabel.adjustsFontSizeToFitWidth = YES;
     NSURL *url = [NSURL URLWithString:headUrl];
     SDWebImageManager * manager = [SDWebImageManager sharedManager];
     [manager downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {

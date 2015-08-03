@@ -322,7 +322,9 @@ static int refreshCount = 0;
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     __weak HomeViewController *wself = self;
-    [MBProgressHUD showMessage:nil];
+    if (IsIos8) {
+      [MBProgressHUD showMessage:nil];
+    }
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
         //        NSLog(@"%@",json);

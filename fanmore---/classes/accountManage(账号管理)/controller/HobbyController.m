@@ -79,9 +79,13 @@ static NSString *hobbyIdentify = @"hobbyCellId";
     twoOption *str  = self.favs[indexPath.row];
     cell.textLabel.text = str.name;
     
-    if ([self.userHobby rangeOfString:cell.textLabel.text].location != NSNotFound) {
+    NSString * cc = [NSString stringWithFormat:@"%d",str.value];
+    if ([self.userHobby rangeOfString:cc].location != NSNotFound) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [self.userSelected addObject:@(indexPath.row)];
+    }else{
+        
+        cell.accessoryType  = UITableViewCellAccessoryNone;
     }
     return cell;
 }
