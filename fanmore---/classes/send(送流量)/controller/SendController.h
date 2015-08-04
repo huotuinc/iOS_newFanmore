@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSMutableArray *searchArray;
 
 
-@property (strong, nonatomic) UITableView *ResultsTableView;
+
 
 /**
  *  用于用户数据返回服务器
