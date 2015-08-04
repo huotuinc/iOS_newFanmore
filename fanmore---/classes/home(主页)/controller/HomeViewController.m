@@ -84,11 +84,8 @@ static int refreshCount = 0;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    NSLog(@"EEEEEEEE");
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (app.goDetail) {
-        NSLog(@"EEEEEEEE1");
         app.goDetail = NO;
         UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
@@ -99,7 +96,6 @@ static int refreshCount = 0;
     }
     if (app.getMessage) {
         app.getMessage = NO;
-        NSLog(@"EEEEEEEE2");
         if (![self isLogin]) {
             LoginViewController * aa = [[LoginViewController alloc] init];
             UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
@@ -114,14 +110,12 @@ static int refreshCount = 0;
     
     if (app.getSendMes) {
         app.getSendMes = NO;
-        NSLog(@"EEEEEEEE3");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         BPViewController *bp = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
         [self.navigationController pushViewController:bp animated:YES];
     }
     
     if (app.firstFriendBeg) {
-        NSLog(@"EEEEEEEE4");
         app.firstFriendBeg = NO;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendMessageController *friend = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
@@ -152,9 +146,6 @@ static int refreshCount = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"粉猫流量宝";
-    
-//    [self _initView];
-    
 
     [self _initNav];
     
@@ -163,9 +154,6 @@ static int refreshCount = 0;
     //集成刷新控件
     [self setupRefresh];
     [self.tableView removeSpaces];
-    
-//    [self setClearBackground];
-    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -193,9 +181,7 @@ static int refreshCount = 0;
     
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
-    
-    //设置tableView背景
-//    [self setClearBackground];
+ 
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeViewControllerGetNot) name:@"homeViewControllerShow" object:nil];
     
@@ -303,7 +289,6 @@ static int refreshCount = 0;
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             if (taskArray.count > 0) {
                 [wself toGroupsByTime:taskArray];  //分组
-//                [wself.taskDatas addObjectsFromArray:taskArray];
                 [wself.tableView reloadData];    //刷新数据
             }
             
@@ -311,7 +296,6 @@ static int refreshCount = 0;
         
     } failure:^(NSError *error) {
        [MBProgressHUD showError:@"粉猫服务器连接异常"];
-//        NSLog(@"%@",[error description]);
     }];
     
 }
@@ -344,9 +328,7 @@ static int refreshCount = 0;
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             [MBProgressHUD hideHUD];
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            //            [wself.taskDatas removeAllObjects];
             [wself.taskGroup removeAllObjects];
-            //            wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
             
             [wself toGroupsByTime:taskArray];
             refreshCount = (int)[taskArray count];
@@ -355,7 +337,6 @@ static int refreshCount = 0;
                 [self setWiteBackground];
             }else {
                 [self setWiteBackground];
-                //                [self setClearBackground];
             }
             [MBProgressHUD hideHUD];
             [wself.tableView reloadData];    //刷新数据
@@ -565,7 +546,6 @@ static int refreshCount = 0;
         
         NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
         [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
-//            NSLog(@"%@",json);
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:@"今日已签到，请明天来签到"];
