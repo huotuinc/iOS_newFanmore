@@ -21,6 +21,8 @@
 @implementation MessageTableViewCell
 
 
+
+
 + (instancetype) cellWithTableView:(UITableView *)tableView{
     
     static NSString * ID = @"dadadasdasda";
@@ -35,10 +37,10 @@
 
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-
+     UIWebView
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        
+        NSLog(@"ssssssss2");
         self.backgroundColor = [UIColor colorWithWhite:0.945 alpha:1.000];
         self.layer.cornerRadius = 6;
         self.layer.borderWidth = 0.5;
