@@ -19,6 +19,12 @@
 
 /**求流量赠流量的附加信息*/
 @property(nonatomic,strong) NSString * addMessage;
+
+/**两个按钮都显示的lable*/
+@property (weak, nonatomic) IBOutlet UILabel *twoLable;
+@property (weak, nonatomic) IBOutlet UILabel *oneLable;
+
+//@property(nonatomic,strong) UILabel * 
 @end
 
 @implementation BegController
@@ -36,11 +42,27 @@
     self.begButton.layer.borderColor = self.begButton.backgroundColor.CGColor;
     
     
-    
+    [self toAddTipLable];
     [self registerForKeyboardNotifications];
     
 }
 
+/**
+ *  处理两个提示lable
+ */
+- (void)toAddTipLable{
+    
+    if(self.isFanmoreUser){
+        self.twoLable.hidden = NO;
+        self.twoLable.lineBreakMode = NSLineBreakByWordWrapping;
+//        self.twoLable.numberOfLines = 2;
+    }else{
+        
+        self.oneLable.hidden = NO;
+        self.twoLable.hidden = YES;
+    }
+    
+}
 - (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -67,7 +89,6 @@
     
     NSDictionary* info = [note userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGPoint size = self.begButton.frame.origin;
     CGFloat sizesss = 180 + 200 + 60 - (ScreenHeight - kbSize.height);
     
     if (sizesss > 0) {
@@ -189,7 +210,7 @@
  */
 - (IBAction)sendFlow:(UIButton *)sender {
     
-    [self.flowField resignFirstResponder];
+    [self.view endEditing:YES];
     
     if (![self judegeFlay]) {
         [MBProgressHUD showError:@"请求流量不能为空"];
@@ -213,7 +234,7 @@
  */
 - (IBAction)begFlow:(UIButton *)sender {
     
-    [self.flowField resignFirstResponder];
+    [self.view endEditing:YES];
     if (![self judegeFlay]) {
         [MBProgressHUD showError:@"请输入正确的流量"];
         return;

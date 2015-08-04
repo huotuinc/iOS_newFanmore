@@ -366,6 +366,7 @@
         if (indexPath.row == 2) { //爱好
             HobbyController *pro = [storyboard instantiateViewControllerWithIdentifier:@"HobbyController"];
             pro.delegate = self;
+//            NSLog(@"xxx---%@",self.userinfo.favs);
             pro.userHobby = self.userinfo.favs;
             [self.navigationController pushViewController:pro animated:YES];
         }
