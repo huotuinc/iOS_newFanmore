@@ -269,7 +269,7 @@ NSString *searchCellIdentifier = @"searchBar";
                 wself.personArray=effect;  //剔除无效数据
                 
                 [wself.personArray sortUsingComparator:^NSComparisonResult(FriendModel * obj1, FriendModel * obj2) {
-                    return [obj1.fristLetter compare:obj2.fristLetter] == NSOrderedDescending;
+                    return [[obj1.fristLetter uppercaseString] compare:[obj2.fristLetter uppercaseString]] == NSOrderedDescending;
                 }];
                 FriendModel * aaas = [[FriendModel alloc] init];
                 ContactGroup * bbbs = [[ContactGroup alloc] init];
@@ -346,6 +346,7 @@ NSString *searchCellIdentifier = @"searchBar";
         }
         
         self.titleArray = array;
+        [array insertObject:@"🔍" atIndex:0];
         return array;
     }else {
         return nil;
