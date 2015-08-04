@@ -552,7 +552,7 @@ NSString *searchCellIdentifier = @"searchBar";
 }
 
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+- (BOOL):(UISearchBar *)searchBar
 {
     searchBar.frame = CGRectMake(0, 20, ScreenWidth, 44);
     self.tableView.frame = CGRectMake(0, searchBar.frame.origin.y + searchBar.frame.size.height, ScreenWidth, ScreenHeight - 44 - 20);

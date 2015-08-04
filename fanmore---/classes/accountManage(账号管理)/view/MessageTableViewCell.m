@@ -37,7 +37,7 @@
 
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-     UIWebView
+    
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         NSLog(@"ssssssss2");
