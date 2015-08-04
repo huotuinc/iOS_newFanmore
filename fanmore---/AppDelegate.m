@@ -175,7 +175,6 @@ static NSString *message = @"有一条新消息";
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     
-    NSLog(@"RRRRRRRRRR");
     [self getRemoteNotificationWithUserInfo:userInfo];
     
 }
@@ -509,11 +508,11 @@ static NSString *message = @"有一条新消息";
 // 点击通知进入APP应用
 - (void)getRemoteNotifocationFristLauchWithUserInfo:(NSDictionary *)userInfo {
     NSNumber *num = userInfo[@"type"];
-    NSLog(@"WWWWWWWWWWW");
+
     switch ([num intValue]) {
         case 1:
         {
-            NSLog(@"FFFFFFFFF");
+
             
             //送流量消息
             self.titleString = userInfo[@"aps"][@"alert"][@"title"];

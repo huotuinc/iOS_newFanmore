@@ -13,14 +13,18 @@
 #import "BegController.h"
 #import "ResultContactInfo.h"
 #import "ContactGroup.h"
+#import <BlocksKit+UIKit.h>
 #import <SDWebImageManager.h>
 
-@interface SendController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface SendController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,UISearchDisplayDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UISearchDisplayController *searchDisplay;
+
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *titleArray;
+
+@property (nonatomic, strong) UIBarButtonItem *right;
 
 /**联系人列表分组模型*/
 @property (nonatomic,strong) NSMutableArray * groupArray;
@@ -44,37 +48,15 @@ NSString *searchCellIdentifier = @"searchBar";
     
     [self readFromaddProbook];
     
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 44) ];
-    self.searchBar.placeholder = @"搜索";
-//    self.searchBar.barStyle = UISearchBarStyleProminent;
-    self.searchBar.delegate = self;
-//    self.searchBar.showsSearchResultsButton = YES;
-    
     [self.view addSubview:self.searchBar];
     
+    self.navigationItem.rightBarButtonItem = self.right;
     
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.frame.origin.y + self.searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44) style:UITableViewStyleGrouped];
-//    [self.tableView removeSpaces];
-    
-//    [self setClearBackground];
-    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStyleGrouped];
+ 
     [self.tableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:frinedCellIdentifier];
+    
 
-    
-    // 用 searchbar 初始化 SearchDisplayController
-    // 并把 searchDisplayController 和当前 controller 关联起来
-    self.searchDisplay = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
-    
-    // searchResultsDataSource 就是 UITableViewDataSource
-    self.searchDisplayController.searchResultsDataSource = self;
-    // searchResultsDelegate 就是 UITableViewDelegate
-    self.searchDisplayController.searchResultsDelegate = self;
-    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:searchCellIdentifier];
-    [self.searchDisplayController.searchResultsTableView removeSpaces];
-//    self.searchDisplayController.searchResultsTableView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight);
-    
-//    [self.tableView setHeaderHidden:YES];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -86,6 +68,8 @@ NSString *searchCellIdentifier = @"searchBar";
     [self.view addSubview:self.tableView];
     
     
+    [self _initSearchDisplayController];
+    
     
     self.titleArray = [[NSMutableArray alloc] init];
     self.searchArray = [[NSMutableArray alloc] init];
@@ -96,6 +80,26 @@ NSString *searchCellIdentifier = @"searchBar";
         [self.titleArray addObject:str];
     }
     
+}
+
+- (void)_initSearchDisplayController
+{
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 44) ];
+    self.searchBar.placeholder = @"搜索";
+    [self.searchBar sizeToFit];
+    self.searchBar.delegate = self;
+    
+    self.tableView.tableHeaderView = self.searchBar;
+    
+    UISearchDisplayController *searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
+    searchDisplayController.delegate = self;
+    searchDisplayController.searchResultsDataSource = self;
+    searchDisplayController.searchResultsDelegate = self;
+    
+    [searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:searchCellIdentifier];
+    [searchDisplayController.searchResultsTableView removeSpaces];
+    
+    self.searchDisplay = searchDisplayController;
 }
 
 
@@ -559,22 +563,10 @@ NSString *searchCellIdentifier = @"searchBar";
     return YES;
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
 {
-    searchBar.frame = CGRectMake(0, 64, ScreenWidth, 44);
-    self.tableView.frame = CGRectMake(0, searchBar.frame.origin.y + searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44);
+    
 }
-
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-    if (searchBar.text.length == 0) {
-        searchBar.frame = CGRectMake(0, 64, ScreenWidth, 44);
-        self.tableView.frame = CGRectMake(0, searchBar.frame.origin.y + searchBar.frame.size.height, ScreenWidth, ScreenHeight - 64 - 44);
-    }
-
-    return YES;
-}
-
-
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -592,7 +584,41 @@ NSString *searchCellIdentifier = @"searchBar";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma searchDisplayControllerWillBeginSearch
+//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+//{
+//    [UIView animateWithDuration:0.25 animations:^{
+//        self.searchBar.frame = CGRectMake(0, 20, ScreenWidth, 44);
+//        self.tableView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeight - 108);
+//    }];
+//    return YES;
+//}
+//
+//- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+//{
+//    if (searchBar.text.length == 0) {
+//        searchBar.frame = CGRectMake(0, 64, ScreenWidth, 44);
+//        self.tableView.frame = CGRectMake(0, 108, ScreenWidth, ScreenHeight - 64 - 44);
+//    }else {
+//        self.searchBar.frame = CGRectMake(0, 64, ScreenWidth, 44);
+//    }
+//    return YES;
+//}
+//
+//
+//
+//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+//{
+//    [UIView animateWithDuration:0.25 animations:^{
+//        self.searchBar.frame = CGRectMake(0, 64, ScreenWidth, 44);
+//        self.tableView.frame = CGRectMake(0, 108, ScreenWidth, ScreenHeight - 108 + 64);
+//    }];
+//}
+//
+//- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+//{
+//    return YES;
+//}
 
 #pragma 设置背景图片
 - (void)setClearBackground {

@@ -84,8 +84,11 @@ static int refreshCount = 0;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (app.goDetail) {
+
         app.goDetail = NO;
         UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
@@ -96,6 +99,7 @@ static int refreshCount = 0;
     }
     if (app.getMessage) {
         app.getMessage = NO;
+
         if (![self isLogin]) {
             LoginViewController * aa = [[LoginViewController alloc] init];
             UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
@@ -110,12 +114,14 @@ static int refreshCount = 0;
     
     if (app.getSendMes) {
         app.getSendMes = NO;
+
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         BPViewController *bp = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
         [self.navigationController pushViewController:bp animated:YES];
     }
     
     if (app.firstFriendBeg) {
+
         app.firstFriendBeg = NO;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendMessageController *friend = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
