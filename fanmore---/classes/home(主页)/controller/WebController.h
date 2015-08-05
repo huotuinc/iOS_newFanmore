@@ -49,5 +49,5 @@
 /**游戏外链*/
 @property(nonatomic,copy) NSString * relexUrl;
 
-@property(nonatomic,strong) id <WebControllerDelegate> delegate;
+@property(nonatomic,weak) id <WebControllerDelegate> delegate;
 @end

@@ -22,5 +22,5 @@
 
 @property (nonatomic, strong) NSString *name;
 
-@property(nonatomic,strong) id<NameControllerdelegate> delegate;
+@property(nonatomic,weak) id<NameControllerdelegate> delegate;
 @end

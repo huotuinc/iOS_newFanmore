@@ -40,6 +40,6 @@
 @property (nonatomic,strong) NSString * currentCareer;
 
 
-@property(strong,nonatomic) id<ProfessionalControllerDelegate> delegate;
+@property(weak,nonatomic) id<ProfessionalControllerDelegate> delegate;
 
 @end
