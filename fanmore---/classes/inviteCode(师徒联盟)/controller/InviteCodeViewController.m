@@ -154,10 +154,12 @@
     userData *  user = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
 
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:[NSString stringWithFormat:@"粉猫师徒验证吗%@",user.invCode] image:[ShareSDK imageWithPath:imagePath] title:self.shareDes url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:[NSString stringWithFormat:@"粉猫师徒验证码%@",user.invCode] image:[ShareSDK imageWithPath:imagePath] title:self.shareDes url:self.shareUrl description:nil mediaType:SSPublishContentMediaTypeNews];
+    [publishContent addSinaWeiboUnitWithContent:self.shareUrl image:INHERIT_VALUE locationCoordinate:nil];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     
+   
     //弹出分享菜单
     [ShareSDK showShareActionSheet:container shareList:nil content:publishContent statusBarTips:YES authOptions:nil shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
         
