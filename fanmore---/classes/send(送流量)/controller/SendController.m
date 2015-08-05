@@ -450,7 +450,7 @@ NSString *searchCellIdentifier = @"searchBar";
             NSString *str = [NSString string];
             CGFloat userFlow = [friend.flowLabel doubleValue];
             if (userFlow - (int)userFlow > 0) {
-                str = [NSString stringWithFormat:@"%.1fM",[friend.flowLabel doubleValue]];
+                str = [NSString stringWithFormat:@"%.0fM",[friend.flowLabel doubleValue]];
             }else {
                 str = [NSString stringWithFormat:@"%.0fM",[friend.flowLabel doubleValue]];
             }
@@ -491,7 +491,7 @@ NSString *searchCellIdentifier = @"searchBar";
             NSString *str = [NSString string];
             CGFloat userFlow = [model.flowLabel doubleValue];
             if (userFlow - (int)userFlow > 0) {
-                str = [NSString stringWithFormat:@"%.1fM",[model.flowLabel doubleValue]];
+                str = [NSString stringWithFormat:@"%.0fM",[model.flowLabel doubleValue]];
             }else {
                 str = [NSString stringWithFormat:@"%.0fM",[model.flowLabel doubleValue]];
             }
