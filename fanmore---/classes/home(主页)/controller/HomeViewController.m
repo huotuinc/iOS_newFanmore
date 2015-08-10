@@ -367,7 +367,7 @@ static int refreshCount = 0;
     NSMutableArray * aaa  = [NSMutableArray arrayWithArray:tasks];
     NSMutableArray *topArray = [NSMutableArray array];
     for (taskData * task in aaa) {
-        if (task.top == 1) {
+        if (task.top == 1||task.top == 2) {
             [topArray addObject:task];
             [aaa removeObject:tasks];
         }else{
@@ -379,8 +379,8 @@ static int refreshCount = 0;
     group.tasks = topArray;
     [self toGroupsByTime:aaa];
 
-    
 }
+
 
 /**
  *  把首页数据进行分组

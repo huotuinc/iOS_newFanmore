@@ -40,7 +40,7 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        NSLog(@"ssssssss2");
+        
         self.backgroundColor = [UIColor colorWithWhite:0.945 alpha:1.000];
         self.layer.cornerRadius = 6;
         self.layer.borderWidth = 0.5;
