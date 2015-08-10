@@ -57,4 +57,7 @@
 
 @property(nonatomic,copy) NSString * turnTime;
 
+/**任务是否置顶标志*/
+@property(nonatomic,assign) int top;
+
 @end
