@@ -356,7 +356,7 @@ static NSString *message = @"有一条新消息";
     
     //    *友盟*
     [MobClick startWithAppkey:UMAppKey reportPolicy:BATCH channelId:nil];
-    [MobClick setCrashReportEnabled:YES];
+//    [MobClick setCrashReportEnabled:YES];
     //    *友盟注册*
     
     /**shareSdK*/

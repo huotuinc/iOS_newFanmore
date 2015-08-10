@@ -172,7 +172,6 @@
 		EFCCA4CD1B12D6E400C015A7 /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4C21B12D6E400C015A7 /* NSObject+MJMember.m */; };
 		EFCCA4DD1B12EB6D00C015A7 /* detail.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCCA4DC1B12EB6D00C015A7 /* detail.m */; };
 		EFCDC8251B17F59700D28DB1 /* NSString+EXTERN.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */; };
-		EFCDC82A1B17F63100D28DB1 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */; };
 		EFCFB7761B3A5BA200D3A47D /* prenticeList.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCFB7751B3A5BA200D3A47D /* prenticeList.m */; };
 		EFD02B2D1B1552E400D11D6D /* protect.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD02B2C1B1552E400D11D6D /* protect.html */; };
 		EFD02B421B155CDA00D11D6D /* MJBaseSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B311B155CDA00D11D6D /* MJBaseSettingViewController.m */; };
@@ -183,6 +182,7 @@
 		EFD02B471B155CDA00D11D6D /* MJSettingSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B3E1B155CDA00D11D6D /* MJSettingSwitchItem.m */; };
 		EFD02B481B155CDA00D11D6D /* MJSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B411B155CDA00D11D6D /* MJSettingCell.m */; };
 		EFD02B4B1B155D1E00D11D6D /* settingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD02B4A1B155D1E00D11D6D /* settingViewController.m */; };
+		EFD1F8061B78BAAB009551F5 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFD1F8031B78BAAB009551F5 /* libMobClickLibrary.a */; };
 		EFD4B6411B4BD19000CE94B9 /* Master.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD4B6401B4BD19000CE94B9 /* Master.m */; };
 		EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */ = {isa = PBXBuildFile; fileRef = EFD7A9C31B1D9DE30004A9A4 /* view-new.html */; };
 		EFD8C4E81B2EA265002D2CB2 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFD8C4E61B2EA265002D2CB2 /* AlipaySDK.bundle */; };
@@ -507,9 +507,6 @@
 		EFCCA4DC1B12EB6D00C015A7 /* detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detail.m; sourceTree = "<group>"; };
 		EFCDC8231B17F59700D28DB1 /* NSString+EXTERN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EXTERN.h"; sourceTree = "<group>"; };
 		EFCDC8241B17F59700D28DB1 /* NSString+EXTERN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EXTERN.m"; sourceTree = "<group>"; };
-		EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
-		EFCDC8281B17F63100D28DB1 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
-		EFCDC8291B17F63100D28DB1 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		EFCFB7741B3A5BA200D3A47D /* prenticeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prenticeList.h; sourceTree = "<group>"; };
 		EFCFB7751B3A5BA200D3A47D /* prenticeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = prenticeList.m; sourceTree = "<group>"; };
 		EFD02B2C1B1552E400D11D6D /* protect.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = protect.html; sourceTree = "<group>"; };
@@ -529,6 +526,9 @@
 		EFD02B411B155CDA00D11D6D /* MJSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJSettingCell.m; sourceTree = "<group>"; };
 		EFD02B491B155D1E00D11D6D /* settingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingViewController.h; sourceTree = "<group>"; };
 		EFD02B4A1B155D1E00D11D6D /* settingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingViewController.m; sourceTree = "<group>"; };
+		EFD1F8031B78BAAB009551F5 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		EFD1F8041B78BAAB009551F5 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		EFD1F8051B78BAAB009551F5 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		EFD4B63F1B4BD19000CE94B9 /* Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Master.h; sourceTree = "<group>"; };
 		EFD4B6401B4BD19000CE94B9 /* Master.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Master.m; sourceTree = "<group>"; };
 		EFD7A9C31B1D9DE30004A9A4 /* view-new.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "view-new.html"; sourceTree = "<group>"; };
@@ -680,6 +680,7 @@
 				EFC86ACB1B1EFBF80081BBC8 /* Social.framework in Frameworks */,
 				EFC86AFF1B1EFD700081BBC8 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				EFC86AC91B1EFBD50081BBC8 /* libsqlite3.0.dylib in Frameworks */,
+				EFD1F8061B78BAAB009551F5 /* libMobClickLibrary.a in Frameworks */,
 				EFC86AF71B1EFD700081BBC8 /* ShareSDKCoreService.framework in Frameworks */,
 				EFC86AF11B1EFD700081BBC8 /* SinaWeiboConnection.framework in Frameworks */,
 				EFC86AF01B1EFD700081BBC8 /* QZoneConnection.framework in Frameworks */,
@@ -703,7 +704,6 @@
 				EFF3D0DE1B2EBE6900B2F446 /* libcrypto.a in Frameworks */,
 				EFC86B001B1EFD700081BBC8 /* ShareSDKShareActionSheet.framework in Frameworks */,
 				1B56C822B3D3D6F344695E94 /* libPods.a in Frameworks */,
-				EFCDC82A1B17F63100D28DB1 /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1371,10 +1371,10 @@
 		EF8D672D1B0DD07E008B6909 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				EFD1F8021B78BAAB009551F5 /* UMAnalytics_Sdk_3.5.10 */,
 				83E263EB1B2F018500A2AC96 /* PinYin4Objc */,
 				EFAEB3211B291D6600855D25 /* FSMediaPicker */,
 				EFC86ACE1B1EFD700081BBC8 /* ShareSDK */,
-				EFCDC8261B17F63100D28DB1 /* UMAnalytics_Sdk_3.5.8 */,
 				EF565CF41B16AA6000FC2D6B /* MJRefresh */,
 				EF35542D1B15C3AA00324D89 /* other */,
 				EFE837C81B12FEFF0093E14E /* ViewDeck */,
@@ -1619,16 +1619,6 @@
 			path = detail;
 			sourceTree = "<group>";
 		};
-		EFCDC8261B17F63100D28DB1 /* UMAnalytics_Sdk_3.5.8 */ = {
-			isa = PBXGroup;
-			children = (
-				EFCDC8271B17F63100D28DB1 /* libMobClickLibrary.a */,
-				EFCDC8281B17F63100D28DB1 /* MobClick.h */,
-				EFCDC8291B17F63100D28DB1 /* MobClickSocialAnalytics.h */,
-			);
-			path = UMAnalytics_Sdk_3.5.8;
-			sourceTree = "<group>";
-		};
 		EFCE01EB1B1401A2008C6FA2 /* signView(签到中心) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1738,6 +1728,16 @@
 			);
 			name = VIew;
 			path = ../VIew;
+			sourceTree = "<group>";
+		};
+		EFD1F8021B78BAAB009551F5 /* UMAnalytics_Sdk_3.5.10 */ = {
+			isa = PBXGroup;
+			children = (
+				EFD1F8031B78BAAB009551F5 /* libMobClickLibrary.a */,
+				EFD1F8041B78BAAB009551F5 /* MobClick.h */,
+				EFD1F8051B78BAAB009551F5 /* MobClickSocialAnalytics.h */,
+			);
+			path = UMAnalytics_Sdk_3.5.10;
 			sourceTree = "<group>";
 		};
 		EFD7A9C21B1D9DE30004A9A4 /* Htmlresource(网页资源) */ = {
@@ -2463,6 +2463,7 @@
 					"$(PROJECT_DIR)/fanmore---",
 					"$(PROJECT_DIR)/fanmore---/WeiXinPay",
 					"$(PROJECT_DIR)/fanmore---/SDKExport",
+					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/UMAnalytics_Sdk_3.5.10",
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2524,6 +2525,7 @@
 					"$(PROJECT_DIR)/fanmore---",
 					"$(PROJECT_DIR)/fanmore---/WeiXinPay",
 					"$(PROJECT_DIR)/fanmore---/SDKExport",
+					"$(PROJECT_DIR)/fanmore---/classes/other(其它)/lib/UMAnalytics_Sdk_3.5.10",
 				);
 				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
