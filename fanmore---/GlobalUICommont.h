@@ -41,14 +41,14 @@
 
 //有盟appKey
 #define UMAppKey @"52faffcf56240bc21a023179"
-
-
 /**shareSDK */
 #define ShareSDKAppKey @"19b4b4d45192"
+
 /**新浪微博*/
 #define XinLangAppkey @"1994677353"
 #define XinLangAppSecret @"0783d8dd1f0eb5a45687cde79aa10108"
 #define XinLangRedirectUri @"https://api.weibo.com/oauth2/default.html"
+
 /**QQ**/
 #define QQAppKey @"101066212"
 #define QQappSecret @"09ef5bfed097b682a83b147d46e46a5a"

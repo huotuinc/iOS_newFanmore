@@ -367,25 +367,22 @@ static int refreshCount = 0;
     taskData * aaas = nil;
     TaskGrouoModel * bbbs = [self.taskGroup lastObject];
        for (taskData * task in tasks) {
-//           NSLog(@"----%@----%@",task.turnTime,bbbs.timeSectionTitle);
-        if ([bbbs.timeSectionTitle isEqualToString:task.turnTime]) {//一样
-            aaas = task;
-            [bbbs.tasks addObject:task];
+           if (task.top == 1) {
+               
+           }else{
+               if ([bbbs.timeSectionTitle isEqualToString:task.turnTime]) {//一样
+                   aaas = task;
+                   [bbbs.tasks addObject:task];
+               }else{//不一样
+                   aaas = task;
+                   TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
+                   group.timeSectionTitle = task.turnTime;
+                   [group.tasks addObject:task];
+                   bbbs = group;
+                   [self.taskGroup addObject:group];
+               }
+           }
         
-        }else{//不一样
-            
-            aaas = task;
-            
-            TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
-            
-            group.timeSectionTitle = task.turnTime;
-            
-            [group.tasks addObject:task];
-            bbbs = group;
-            [self.taskGroup addObject:group];
-            
-          
-        }
     }
     
 
