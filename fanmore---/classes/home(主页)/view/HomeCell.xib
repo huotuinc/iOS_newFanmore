@@ -147,6 +147,13 @@
                             <constraint firstAttribute="height" constant="70" id="dGu-Rv-JE4"/>
                         </constraints>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-Gk-EiQ">
+                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="Cgm-8b-RCf"/>
+                            <constraint firstAttribute="height" constant="70" id="H16-4a-h5v"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
@@ -156,6 +163,7 @@
                     <constraint firstItem="0jK-cX-QNi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2VK-yK-c5Q"/>
                     <constraint firstItem="ZKy-Gw-2hj" firstAttribute="leading" secondItem="0jK-cX-QNi" secondAttribute="trailing" constant="5" id="2c1-JG-iyD"/>
                     <constraint firstItem="UFQ-QQ-8uU" firstAttribute="top" secondItem="nGH-4D-mst" secondAttribute="bottom" id="4HG-mS-hFQ"/>
+                    <constraint firstItem="9Hq-Gk-EiQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4aR-PY-Y9x"/>
                     <constraint firstAttribute="centerY" secondItem="Q5K-0f-mjo" secondAttribute="centerY" constant="10" id="5Xd-mp-HP2"/>
                     <constraint firstAttribute="trailing" secondItem="wf1-Ei-z0c" secondAttribute="trailing" id="6ya-gu-Tep"/>
                     <constraint firstAttribute="bottom" secondItem="ZKy-Gw-2hj" secondAttribute="bottom" constant="10" id="8Zr-r3-ytU"/>
@@ -165,6 +173,7 @@
                     <constraint firstAttribute="trailing" secondItem="XbP-Z9-ED8" secondAttribute="trailing" id="CFh-r0-GjS"/>
                     <constraint firstItem="UFQ-QQ-8uU" firstAttribute="leading" secondItem="0jK-cX-QNi" secondAttribute="trailing" constant="5" id="DMT-u0-HoU"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="top" secondItem="RRN-9z-gCd" secondAttribute="bottom" id="GWE-Vc-6vv"/>
+                    <constraint firstItem="9Hq-Gk-EiQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="H2P-k6-ZxH"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="bottom" secondItem="0jK-cX-QNi" secondAttribute="bottom" constant="5" id="Ig7-WJ-LFL"/>
                     <constraint firstItem="UFQ-QQ-8uU" firstAttribute="leading" secondItem="0jK-cX-QNi" secondAttribute="trailing" constant="5" id="NEy-Yt-g1B"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="bottom" secondItem="0jK-cX-QNi" secondAttribute="bottom" id="OOJ-it-reQ"/>
@@ -222,6 +231,7 @@
                 <outlet property="receiveLabel" destination="Q5K-0f-mjo" id="hf1-PX-uyn"/>
                 <outlet property="showImage" destination="0jK-cX-QNi" id="rl1-Fy-cEj"/>
                 <outlet property="timeLabel" destination="UFQ-QQ-8uU" id="cED-WZ-456"/>
+                <outlet property="topImage" destination="9Hq-Gk-EiQ" id="SNu-KT-e1m"/>
             </connections>
             <point key="canvasLocation" x="211" y="328"/>
         </tableViewCell>
