@@ -45,6 +45,9 @@
         self.layer.cornerRadius = 6;
         self.layer.borderWidth = 0.5;
         self.layer.borderColor = self.backgroundColor.CGColor;
+        if (IsIos7) {
+             self.contentView.layer.masksToBounds = YES;
+        }
 //        self.contentView.layer.masksToBounds = YES;
         //1外部的view
         UIImageView * aview = [[UIImageView alloc] init];
@@ -63,8 +66,8 @@
         
         //3时间
         UILabel * timeLabel = [[UILabel alloc] init];
-//        timeLabel.backgroundColor = [UIColor redColor];
-        [timeLabel setTextColor:[UIColor blackColor]];
+        timeLabel.textColor = [UIColor colorWithWhite:0.600 alpha:1.000];
+//        [timeLabel setTextColor:[UIColor blackColor]];
         timeLabel.textAlignment = NSTextAlignmentCenter;
         timeLabel.font = [UIFont systemFontOfSize:13];
         self.timeLable = timeLabel;
