@@ -336,7 +336,7 @@ static int refreshCount = 0;
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             [wself.taskGroup removeAllObjects];
             
-            [wself toGroupsByTime:taskArray];
+            [wself toGroupWithTopTask:taskArray];
             refreshCount = (int)[taskArray count];
             //            [wself showHomeRefershCount];
             if (taskArray.count > 0) {
@@ -357,35 +357,52 @@ static int refreshCount = 0;
     
 }
 
+/**
+ *  加入置顶任务
+ *
+ *  @param tasks <#tasks description#>
+ */
+- (void)toGroupWithTopTask:(NSArray *)tasks{
+    
+    NSMutableArray * aaa  = [NSMutableArray arrayWithArray:tasks];
+    NSMutableArray *topArray = [NSMutableArray array];
+    for (taskData * task in aaa) {
+        if (task.top == 1) {
+            [topArray addObject:task];
+            [aaa removeObject:tasks];
+        }else{
+            break;
+        }
+
+    }
+    TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
+    group.tasks = topArray;
+    [self toGroupsByTime:aaa];
+
+    
+}
 
 /**
  *  把首页数据进行分组
  */
 - (void)toGroupsByTime:(NSArray *)tasks{
-    
-   
     taskData * aaas = nil;
     TaskGrouoModel * bbbs = [self.taskGroup lastObject];
-       for (taskData * task in tasks) {
-           if (task.top == 1) {
-               
-           }else{
-               if ([bbbs.timeSectionTitle isEqualToString:task.turnTime]) {//一样
-                   aaas = task;
-                   [bbbs.tasks addObject:task];
-               }else{//不一样
-                   aaas = task;
-                   TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
-                   group.timeSectionTitle = task.turnTime;
-                   [group.tasks addObject:task];
-                   bbbs = group;
-                   [self.taskGroup addObject:group];
-               }
-           }
-        
+    for (taskData * task in tasks) {
+       
+       if ([bbbs.timeSectionTitle isEqualToString:task.turnTime]) {//一样
+           aaas = task;
+           [bbbs.tasks addObject:task];
+       }else{//不一样
+           aaas = task;
+           TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
+           group.timeSectionTitle = task.turnTime;
+           [group.tasks addObject:task];
+           bbbs = group;
+           [self.taskGroup addObject:group];
+       }
     }
     
-
 }
 
 /**
