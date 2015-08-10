@@ -148,7 +148,7 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-Gk-EiQ">
-                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                        <rect key="frame" x="0.0" y="2" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="Cgm-8b-RCf"/>
                             <constraint firstAttribute="height" constant="70" id="H16-4a-h5v"/>
@@ -173,7 +173,7 @@
                     <constraint firstAttribute="trailing" secondItem="XbP-Z9-ED8" secondAttribute="trailing" id="CFh-r0-GjS"/>
                     <constraint firstItem="UFQ-QQ-8uU" firstAttribute="leading" secondItem="0jK-cX-QNi" secondAttribute="trailing" constant="5" id="DMT-u0-HoU"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="top" secondItem="RRN-9z-gCd" secondAttribute="bottom" id="GWE-Vc-6vv"/>
-                    <constraint firstItem="9Hq-Gk-EiQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="H2P-k6-ZxH"/>
+                    <constraint firstItem="9Hq-Gk-EiQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="H2P-k6-ZxH"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="bottom" secondItem="0jK-cX-QNi" secondAttribute="bottom" constant="5" id="Ig7-WJ-LFL"/>
                     <constraint firstItem="UFQ-QQ-8uU" firstAttribute="leading" secondItem="0jK-cX-QNi" secondAttribute="trailing" constant="5" id="NEy-Yt-g1B"/>
                     <constraint firstItem="Ojb-Eg-SxG" firstAttribute="bottom" secondItem="0jK-cX-QNi" secondAttribute="bottom" id="OOJ-it-reQ"/>
