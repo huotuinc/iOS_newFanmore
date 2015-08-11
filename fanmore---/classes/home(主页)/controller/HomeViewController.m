@@ -317,7 +317,6 @@ static int refreshCount = 0;
     }
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
         [MBProgressHUD hideHUD];
-        //        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -366,17 +365,19 @@ static int refreshCount = 0;
     
     NSMutableArray * aaa  = [NSMutableArray arrayWithArray:tasks];
     NSMutableArray *topArray = [NSMutableArray array];
-    for (taskData * task in aaa) {
-        if (task.top == 1||task.top == 2) {
+    
+    
+    for (taskData * task in tasks) {
+        if (task.top  == 1) {
             [topArray addObject:task];
-            [aaa removeObject:tasks];
+            [aaa removeObject:task];
         }else{
             break;
         }
-
     }
     TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
     group.tasks = topArray;
+    [self.taskGroup addObject:group];
     [self toGroupsByTime:aaa];
 
 }
