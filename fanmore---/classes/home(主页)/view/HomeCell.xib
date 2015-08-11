@@ -148,10 +148,10 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-Gk-EiQ">
-                        <rect key="frame" x="0.0" y="2" width="70" height="70"/>
+                        <rect key="frame" x="0.0" y="2" width="53" height="53"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="Cgm-8b-RCf"/>
-                            <constraint firstAttribute="height" constant="70" id="H16-4a-h5v"/>
+                            <constraint firstAttribute="width" constant="53" id="Cgm-8b-RCf"/>
+                            <constraint firstAttribute="height" constant="53" id="H16-4a-h5v"/>
                         </constraints>
                     </imageView>
                 </subviews>
