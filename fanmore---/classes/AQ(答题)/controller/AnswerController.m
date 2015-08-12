@@ -68,10 +68,20 @@ int _rightQuest = 0;  //纪录正确的答题数
     return _ans;
 }
 
+
+- (void)aaaaaa{
+    
+    [self.AButton setExclusiveTouch:YES];
+    [self.BButton setExclusiveTouch:YES];
+    [self.CButton setExclusiveTouch:YES];
+    [self.DButton setExclusiveTouch:YES];
+    
+}
 - (void)viewDidLoad{
     
     [super viewDidLoad];
     self.title = @"答题";
+    [self aaaaaa];
     _qindex = 0;
     _rightQuest = 0;
     self.qusImageView.contentMode = UIViewContentModeScaleAspectFit;  //图片自动适配
