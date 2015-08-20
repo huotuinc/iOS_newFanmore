@@ -82,7 +82,7 @@ static NSString *message = @"有一条新消息";
     //进行初始化借口调用
     [self setupInit];
     
-    
+    //版本新特性
     NSString * appVersion = [[NSUserDefaults standardUserDefaults] stringForKey:LocalAppVersion];
     if (appVersion) {
         
@@ -92,7 +92,7 @@ static NSString *message = @"有一条新消息";
             [self.window makeKeyAndVisible];
             
         }else{//不相等
-            [[NSUserDefaults standardUserDefaults] setObject:appVersion forKey:LocalAppVersion];
+            [[NSUserDefaults standardUserDefaults] setObject:AppVersion forKey:LocalAppVersion];
             LWNewFeatureController *new = [[LWNewFeatureController alloc] init];
             self.window.rootViewController = new;
             [self.window makeKeyAndVisible];
@@ -118,7 +118,6 @@ static NSString *message = @"有一条新消息";
         
         NSNotification *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dicLocal) {
-//            NSLog(@"%@",dicLocal);
             self.titleString = dicLocal.userInfo[@"title"];
             self.taskId = dicLocal.userInfo[@"id"];
             self.goDetail = YES;

@@ -175,7 +175,7 @@
     //发送网络请求
     
     __weak LoginViewController * wself = self;
-    [MBProgressHUD showMessage:nil];
+    [MBProgressHUD showMessage:@"账号登录中。。。"];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
 //        NSLog(@"login========%@",json);
         [MBProgressHUD hideHUD];
@@ -232,9 +232,12 @@
                 }
                 if (![userInfo.welcomeTip isEqualToString:@""]) {
                     [MBProgressHUD showSuccess:userInfo.welcomeTip];
+                }else{
+                    
+                   [MBProgressHUD showSuccess:@"登录成功"];
                 }
                 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self dismissViewControllerAnimated:YES completion:nil];
                 });
             }
