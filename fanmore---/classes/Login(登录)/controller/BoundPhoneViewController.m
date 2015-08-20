@@ -233,22 +233,30 @@
     __weak BoundPhoneViewController * wself = self;
     [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestPost:urlStr parame:params success:^(id json) {
-       //绑定手机成功
-//        RootViewController * roots = [[RootViewController alloc] init];
-//        UIWindow * mainWindow = [UIApplication sharedApplication].keyWindow;
-//        mainWindow.rootViewController = roots;
+        
+        [MBProgressHUD hideHUD];
+
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1){
             NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
             //1、保存个人信息
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:json[@"resuledate"][@"user"] toFile:fileName]; //保存用户信息
+            [MBProgressHUD showSuccess:@"手机绑定成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if ([wself.delegate respondsToSelector:@selector(BoundPhoneViewControllerToBoundPhoneNumber)]) {
+                    
+                    [wself.delegate BoundPhoneViewControllerToBoundPhoneNumber];
+                }
+            });
+            
+            
+        }else{
+            
+            [MBProgressHUD showError:@"手机绑定失败"];
         }
         
-        [MBProgressHUD hideHUD];
-        if ([wself.delegate respondsToSelector:@selector(BoundPhoneViewControllerToBoundPhoneNumber)]) {
-            
-            [wself.delegate BoundPhoneViewControllerToBoundPhoneNumber];
-        }
+        
+        
         
     } failure:^(NSError *error) {
          [MBProgressHUD hideHUD];

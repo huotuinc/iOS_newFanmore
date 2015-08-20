@@ -125,10 +125,15 @@
 
     //设置尺寸
     CGFloat centerX = imageView.frame.size.width*0.5;
-    CGFloat centerY = imageView.frame.size.height*0.9;
+    CGFloat centerY = imageView.frame.size.height*0.6;
     startButton.center = CGPointMake(centerX,centerY);
+//    startButton.layer.borderWidth = 1;
+    startButton.layer.cornerRadius = 5;
+    startButton.layer.masksToBounds =YES;
+    startButton.backgroundColor = [UIColor colorWithRed:0.218 green:0.340 blue:0.788 alpha:1.000];
+    startButton.layer.borderColor = [UIColor blackColor].CGColor;
     [startButton becomeFirstResponder];
-    startButton.bounds = (CGRect){CGPointZero,{ScreenWidth*2/3,40}};
+    startButton.bounds = (CGRect){CGPointZero,{ScreenWidth*2/3,44}};
     [startButton addTarget:self action:@selector(startButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
     //设置文字
