@@ -41,6 +41,9 @@
 //失败
 @property(nonatomic,assign)SystemSoundID failureSound;
 
+/**
+ *  服务器读取的签到规则
+ */
 @property (weak, nonatomic) IBOutlet UILabel *asignLabel;
 
 /**签到的按钮的点击*/
