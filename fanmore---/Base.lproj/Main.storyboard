@@ -2324,7 +2324,7 @@
                                     <action selector="asignBtnClick:" destination="Ssb-Gr-rk4" eventType="touchUpInside" id="g8L-9z-3uz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="连续签到一周奖励5M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tG-ib-Yxd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="连续签到7天奖励5M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tG-ib-Yxd">
                                 <rect key="frame" x="0.0" y="429" width="600" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Zo8-dD-I1b"/>
