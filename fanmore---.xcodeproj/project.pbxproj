@@ -194,6 +194,7 @@
 		EFD9317F1B0EF93D0058F525 /* Base64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD931791B0EF93D0058F525 /* Base64Util.m */; };
 		EFD931801B0EF93D0058F525 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317B1B0EF93D0058F525 /* GTMBase64.m */; };
 		EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD9317E1B0EF93D0058F525 /* MD5Encryption.m */; };
+		EFDD41E11B86BBF000FD7EC5 /* optionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDD41E01B86BBF000FD7EC5 /* optionView.m */; };
 		EFE76B7D1B26D6D700C956A5 /* HomeTaskResult.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE76B7C1B26D6D700C956A5 /* HomeTaskResult.m */; };
 		EFE76B811B26DC4100C956A5 /* taskData.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE76B801B26DC4100C956A5 /* taskData.m */; };
 		EFE837B51B12F62A0093E14E /* purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE837B41B12F62A0093E14E /* purchase.m */; };
@@ -553,6 +554,8 @@
 		EFD9317C1B0EF93D0058F525 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		EFD9317D1B0EF93D0058F525 /* MD5Encryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Encryption.h; sourceTree = "<group>"; };
 		EFD9317E1B0EF93D0058F525 /* MD5Encryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5Encryption.m; sourceTree = "<group>"; };
+		EFDD41DF1B86BBF000FD7EC5 /* optionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = optionView.h; path = "classes/home(主页)/view/optionView.h"; sourceTree = "<group>"; };
+		EFDD41E01B86BBF000FD7EC5 /* optionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = optionView.m; path = "classes/home(主页)/view/optionView.m"; sourceTree = "<group>"; };
 		EFE76B7B1B26D6D700C956A5 /* HomeTaskResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTaskResult.h; sourceTree = "<group>"; };
 		EFE76B7C1B26D6D700C956A5 /* HomeTaskResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTaskResult.m; sourceTree = "<group>"; };
 		EFE76B7F1B26DC4100C956A5 /* taskData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taskData.h; sourceTree = "<group>"; };
@@ -1091,6 +1094,8 @@
 				836016971B37EF1D00B076DD /* ConversionCell.h */,
 				836016981B37EF1D00B076DD /* ConversionCell.m */,
 				836016991B37EF1D00B076DD /* ConversionCell.xib */,
+				EFDD41DF1B86BBF000FD7EC5 /* optionView.h */,
+				EFDD41E01B86BBF000FD7EC5 /* optionView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2268,6 +2273,7 @@
 				EFF3D0D31B2EB4A800B2F446 /* NSDataEx.m in Sources */,
 				EF565D211B16E7C500FC2D6B /* UITextField+HT.m in Sources */,
 				EFE76B7D1B26D6D700C956A5 /* HomeTaskResult.m in Sources */,
+				EFDD41E11B86BBF000FD7EC5 /* optionView.m in Sources */,
 				EFC249851B256D1F00CD6DCD /* TaskDataCeach.m in Sources */,
 				EFD931811B0EF93D0058F525 /* MD5Encryption.m in Sources */,
 				EFF3D00A1B2EAE2A00B2F446 /* Order.m in Sources */,

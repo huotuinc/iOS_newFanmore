@@ -24,6 +24,8 @@
 #import "TaskGrouoModel.h"
 #import "BPViewController.h"
 #import "FriendMessageController.h"
+#import "optionView.h"
+
 
 #define pageSize 10
 
@@ -566,9 +568,28 @@ static int refreshCount = 0;
         
         NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
         [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
+            NSLog(@"%@",json);
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
                 [MBProgressHUD hideHUD];
-                [MBProgressHUD showError:@"今日已签到，请明天来签到"];
+                
+                optionView * alert = [[optionView alloc] init];
+                alert.center = self.view.center;
+                [alert setdistanceDays:(7-[self continuouSignDay])];
+                alert.bounds = CGRectMake(0, 0, self.view.frame.size.width * 0.65, self.view.frame.size.height * 0.15);
+                
+                [UIView animateWithDuration:3 animations:^{
+                    [self.tableView addSubview:alert];
+                }];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    [UIView animateWithDuration:3 animations:^{
+                        [alert removeFromSuperview];
+                    }];
+                    
+                });
+               
+//              [MBProgressHUD showError:@"今日已签到，请明天来签到"];
                 return ;
             }
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==1) {
@@ -583,7 +604,22 @@ static int refreshCount = 0;
                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量", user.signtoday]];
                 }else {
                     AudioServicesPlayAlertSound(self.failureSound);
-                    [MBProgressHUD showSuccess:@"签到成功"];
+                    optionView * alert = [[optionView alloc] init];
+                    alert.center = self.view.center;
+                    [alert setdistanceDays:6];
+                    alert.bounds = CGRectMake(0, 0, self.view.frame.size.width * 0.65, self.view.frame.size.height * 0.15);
+                    
+                    [UIView animateWithDuration:3 animations:^{
+                        [self.tableView addSubview:alert];
+                    }];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        
+                        [UIView animateWithDuration:3 animations:^{
+                            [alert removeFromSuperview];
+                        }];
+                        
+                    });
                 }
             }
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -597,6 +633,42 @@ static int refreshCount = 0;
     }
 }
 
+
+
+- (NSInteger)continuouSignDay{
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //1、保存个人信息
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData *userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    NSInteger a = 0;
+    int d = userinfo.signInfo;
+    while (((d&1)%2)>0) {
+        a++;
+        d = d>>1;
+    }
+    
+    if (d==0) {
+        return a;
+    }else{
+        d = userinfo.signInfo;
+        int c = 0;
+        while (d>0) {
+            c++;
+            d = d>>1;
+        }
+        d = userinfo.signInfo;
+        for (int i = 0; i<c; i++) {
+            if (((d&1)%2)>0) {
+                a++;
+            }else{
+                a = 0;
+            }
+            d=d>>1;
+        }
+        return a;
+    }
+}
 /**
  *  获取今天是周几
  *
