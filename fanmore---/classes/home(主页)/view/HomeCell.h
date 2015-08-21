@@ -20,6 +20,7 @@
  *  joinLabel 参与人数
  *  introduceLabel 店铺简介
  *  getImage 领取标识图片
+ *  topImage 置顶标签
  */
 @property (weak, nonatomic) IBOutlet UIImageView *showImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -36,7 +37,7 @@
 @property (assign, nonatomic) int selection;
 
 
-- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *) time andReceiveLabel:(NSString *) receiveLabel andJoinLabel:(NSString *) join andIntroduceLabel:(NSString *) introduce andGetImage:(int) selection;
+- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *) time andReceiveLabel:(NSString *) receiveLabel andJoinLabel:(NSString *) join andIntroduceLabel:(NSString *) introduce andGetImage:(int) selection andTopImage:(int) topImage;
 
 - (void)setGetimageWithSection: (int) selection;
 

@@ -249,7 +249,8 @@
         
     }else{
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:nil defaultContent:@"分享得链接得粉猫流量" image:[ShareSDK imageWithUrl:self.sampleData.pictureURL] title:self.sampleData.title url:self.sampleData.shareURL description:nil mediaType:SSPublishContentMediaTypeNews];
+    id<ISSContent> publishContent = [ShareSDK content:self.sampleData.shareURL defaultContent:@"分享得链接得粉猫流量" image:[ShareSDK imageWithUrl:self.sampleData.pictureURL] title:self.sampleData.title url:self.sampleData.shareURL description:nil mediaType:SSPublishContentMediaTypeNews];
+    [publishContent addSinaWeiboUnitWithContent:self.sampleData.shareURL image:INHERIT_VALUE locationCoordinate:nil];
      //创建弹出菜单容器
      id<ISSContainer> container = [ShareSDK container];
                                                                                    

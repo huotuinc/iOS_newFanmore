@@ -10,11 +10,13 @@
 #import "MobClick.h"
 #import <INTULocationManager.h>//定位
 #import "LoginResultData.h"
+#import "MenuViewController.h"
 #import "detailViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
+#import "TrafficShowController.h"
 //#import "WeiboApi.h"
 #import "WeiboSDK.h"
 //#import <RennSDK/RennSDK.h>
@@ -26,8 +28,10 @@
 
 
 
+#define WeiXinPayId @"wxaeda2d5603b12302"
 
-@interface AppDelegate () <CLLocationManagerDelegate>
+
+@interface AppDelegate () <CLLocationManagerDelegate,WXApiDelegate>
 
 @property(nonatomic,strong) CLLocationManager *mgr;
 
@@ -43,6 +47,7 @@
 
 //存储通知信息
 @property(nonatomic, strong) NSMutableArray *notifationArray;
+
 
 
 @end
@@ -65,8 +70,7 @@ static NSString *message = @"有一条新消息";
     //定位
     [self test];
     
-    //测试
-//    self.goMessage = YES;
+
     
     application.applicationIconBadgeNumber = 0;
     
@@ -74,16 +78,11 @@ static NSString *message = @"有一条新消息";
     
     //集成第三方
     [self setupThreeApp];
-    
-    
-    //定位功能
-//    [self setupLocal];
-   
-    
+
     //进行初始化借口调用
     [self setupInit];
     
-    
+    //版本新特性
     NSString * appVersion = [[NSUserDefaults standardUserDefaults] stringForKey:LocalAppVersion];
     if (appVersion) {
         
@@ -93,7 +92,7 @@ static NSString *message = @"有一条新消息";
             [self.window makeKeyAndVisible];
             
         }else{//不相等
-            [[NSUserDefaults standardUserDefaults] setObject:appVersion forKey:LocalAppVersion];
+            [[NSUserDefaults standardUserDefaults] setObject:AppVersion forKey:LocalAppVersion];
             LWNewFeatureController *new = [[LWNewFeatureController alloc] init];
             self.window.rootViewController = new;
             [self.window makeKeyAndVisible];
@@ -110,13 +109,15 @@ static NSString *message = @"有一条新消息";
     
     //初始化通知参数
     self.isShowed = NO;
+    self.firstFriendBeg = NO;
+    self.getSendMes = NO;
+    self.getFriendBeg = NO;
     self.notifationArray = [NSMutableArray array];
     
     if (launchOptions) {
         
         NSNotification *dicLocal = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (dicLocal) {
-//            NSLog(@"%@",dicLocal);
             self.titleString = dicLocal.userInfo[@"title"];
             self.taskId = dicLocal.userInfo[@"id"];
             self.goDetail = YES;
@@ -126,6 +127,7 @@ static NSString *message = @"有一条新消息";
         if (dicRemote) {
             if (IsIos8) {
                 self.isLauching = YES;
+                [self getRemoteNotifocationFristLauchWithUserInfo:dicRemote];
             }else {
               [self getRemoteNotifocationFristLauchWithUserInfo:dicRemote];
             }
@@ -134,10 +136,10 @@ static NSString *message = @"有一条新消息";
     }
     
     
-    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
-    {
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-    }
+//    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
+//    {
+//        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+//    }
     
     //APNS
     [self registRemoteNotification:application];
@@ -155,13 +157,14 @@ static NSString *message = @"有一条新消息";
  *  @param userInfo          <#userInfo description#>
  *  @param completionHandler <#completionHandler description#>
  */
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-
-    [self getRemoteNotificationWithUserInfo:userInfo];
-    
-    completionHandler(UIBackgroundFetchResultNewData);
-}
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+//{
+//    
+//    
+//    [self getRemoteNotificationWithUserInfo:userInfo];
+//    
+//    completionHandler(UIBackgroundFetchResultNewData);
+//}
 
 /**
  *  ios7 远程通知方法
@@ -220,6 +223,9 @@ static NSString *message = @"有一条新消息";
  */
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
+    if ([url.host isEqualToString:@"pay"]) {
+        [WXApi handleOpenURL:url delegate:self];
+    }
     return [ShareSDK handleOpenURL:url wxDelegate:self];
 }
 
@@ -232,20 +238,52 @@ static NSString *message = @"有一条新消息";
  *
  */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+//    NSLog(@"xxxxxxxxxx%@",url.host);
     //如果极简开发包不可用,会跳转支付宝钱包进行支付,需要将支付宝钱包的支付结果回传给开 发包
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
-                                                      NSLog(@"aliPay ----- result = %@",resultDic);
+//                                                      NSLog(@"aliPay ----- result = %@",resultDic);
+                                                      [[NSNotificationCenter defaultCenter] postNotificationName:WeiXinPaySuccessPostNotification object:nil];
                                                   }]; }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"aliPay ----- result = %@",resultDic);
+//            NSLog(@"aliPay ----- result = %@",resultDic);
+            [[NSNotificationCenter defaultCenter] postNotificationName:WeiXinPaySuccessPostNotification object:nil];
         }];
+    }
+    
+    if ([url.host isEqualToString:@"pay"]) {
+        [WXApi handleOpenURL:url delegate:self];
     }
     
     return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
     
+}
+
+
+/**
+ *  微信支付回调方法
+ *
+ *  @param resp <#resp description#>
+ */
+- (void)onResp:(BaseResp *)resp {
+//    NSLog(@"xxxxxxxxxxxx");
+    if ([resp isKindOfClass:[PayResp class]]) {
+        PayResp *response = (PayResp *)resp;
+        switch (response.errCode) {
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+//                NSLog(@"aaaasssss支付成功");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:WeiXinPaySuccessPostNotification object:nil];
+                break;
+            default:
+//                NSLog(@"支付失败， retcode=%d",resp.errCode);
+                break;
+        }
+    }
 }
 
 /**
@@ -352,7 +390,8 @@ static NSString *message = @"有一条新消息";
 - (void)setupThreeApp{
     
     /**微信支付*/
-//    [WXApi registerApp:WeiXinAppID withDescription:@"fanmore--3.0.0"]; //像微信支付注册
+    
+    [WXApi registerApp:WeiXinPayId withDescription:[NSString stringWithFormat:@"fanmore--%@",AppVersion]]; //像微信支付注册
     
     //    *友盟*
     [MobClick startWithAppkey:UMAppKey reportPolicy:BATCH channelId:nil];
@@ -468,11 +507,28 @@ static NSString *message = @"有一条新消息";
 // 点击通知进入APP应用
 - (void)getRemoteNotifocationFristLauchWithUserInfo:(NSDictionary *)userInfo {
     NSNumber *num = userInfo[@"type"];
-    //        NSLog(@"didReceiveRemoteNotification:%@", userInfo);
+
     switch ([num intValue]) {
         case 1:
+        {
+
+            
+            //送流量消息
+            self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+            NSString *type = [NSString stringWithFormat:@"%@", userInfo[@"data"]];
+            //本地流量进行修改
+            NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+            userData* user =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+            user.balance = [NSString stringWithFormat:@"%.1f", [user.balance doubleValue] + [type doubleValue]];
+            [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+            self.getSendMes = YES;
+            
             break;
+        }
         case 2:
+            self.getFriendBeg = YES;
+            self.firstFriendBeg = YES;
             break;
         case 3:
             break;
@@ -494,7 +550,7 @@ static NSString *message = @"有一条新消息";
         case 6:
         {
             //消息
-            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:userInfo[@"aps"][@"alert"][@"title"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消",nil];
+            UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:userInfo[@"aps"][@"alert"][@"title"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [ac show];
             
         }
@@ -516,13 +572,52 @@ static NSString *message = @"有一条新消息";
         NSNumber *num = userInfo[@"type"];
         switch ([num intValue]) {
             case 1:
+            {
+                //送流量消息
+                self.titleString = userInfo[@"aps"][@"alert"][@"title"];
+                
+                NSString *type = [NSString stringWithFormat:@"%@", userInfo[@"data"]];
+                
+                //本地流量进行修改
+                NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+                userData* user =  [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+                user.balance = [NSString stringWithFormat:@"%.1f", [user.balance doubleValue] + [type doubleValue]];
+                [NSKeyedArchiver archiveRootObject:user toFile:fileName];
+                
+                if ([self.currentVC isKindOfClass:[MenuViewController class]]) {
+                    MenuViewController *menu  = (MenuViewController *)self.currentVC;
+                    CGFloat userFlow = [user.balance doubleValue];
+                    if (userFlow - (int)userFlow > 0) {
+                        menu.flowLable.text = [NSString stringWithFormat:@"%.1fM",[user.balance doubleValue]];
+                    }else {
+                        menu.flowLable.text = [NSString stringWithFormat:@"%.0fM",[user.balance doubleValue]];
+                    }
+                    if (userFlow > 1024) {
+                        menu.flowLable.text = [NSString stringWithFormat:@"%.3fG",[user.balance doubleValue] / 1024];
+                    }
+                }
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                
+                
+                [alert show];
                 break;
+            }
             case 2:
+            {
+                self.getFriendBeg = YES;
+                if ([self.currentVC isKindOfClass:[TrafficShowController class]]) {
+                    TrafficShowController *tra = (TrafficShowController *)self.currentVC;
+                    tra.redCircle.hidden = NO;
+                }
                 break;
+            }
             case 3:
                 break;
             case 4:
             {
+                //任务推送
                 if (self.isShowed == NO) {
                     self.titleString = userInfo[@"aps"][@"alert"][@"title"];
                     self.taskId = userInfo[@"data"];
@@ -539,6 +634,7 @@ static NSString *message = @"有一条新消息";
                 break;
             case 5:
             {
+                //通知
                 NSString *title = userInfo[@"aps"][@"alert"][@"title"];
                 UIAlertView * ac = [[UIAlertView alloc] initWithTitle:nil message:title delegate:self cancelButtonTitle:@"去看看" otherButtonTitles:@"取消",nil];
                 ac.tag = 102;
@@ -547,7 +643,7 @@ static NSString *message = @"有一条新消息";
                 break;
             case 6:
             {
-                //通知
+                //消息
                 self.titleString = userInfo[@"aps"][@"alert"][@"title"];
             
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:self.titleString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -624,5 +720,8 @@ static NSString *message = @"有一条新消息";
     }
 
 }
+
+
+
 
 @end

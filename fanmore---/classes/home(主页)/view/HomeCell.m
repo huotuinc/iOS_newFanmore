@@ -10,9 +10,9 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 @implementation HomeCell
 
-- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *)time andReceiveLabel:(NSString *)receive andJoinLabel:(NSString *)join andIntroduceLabel:(NSString *)introduce andGetImage:(int) selection
+- (void)setImage:(NSString *)imageStr andNameLabel:(NSString *)name andTimeLabel:(NSString *)time andReceiveLabel:(NSString *)receive andJoinLabel:(NSString *)join andIntroduceLabel:(NSString *)introduce andGetImage:(int) selection andTopImage:(int) topImage
 {
-    [self.showImage sd_setImageWithPreviousCachedImageWithURL:[NSURL URLWithString:imageStr] andPlaceholderImage:[UIImage imageNamed:@"mrtou_b"] options:SDWebImageRetryFailed progress:nil completed:nil];
+    [self.showImage sd_setImageWithPreviousCachedImageWithURL:[NSURL URLWithString:imageStr] andPlaceholderImage:[UIImage imageNamed:@"mrtou_b"] options:SDWebImageProgressiveDownload progress:nil completed:nil];
     self.nameLabel.text = name;
     self.timeLabel.text = time;
     self.receiveLabel.text = receive;
@@ -25,6 +25,14 @@
         self.getImage.image = [UIImage imageNamed:@"received"];
     }else if (selection == 2) {
         self.getImage.image = [UIImage imageNamed:@"broughtOut"];
+    }
+    
+    if (topImage == 0) {
+        self.topImage.image = nil;
+    }else if (topImage == 1) {
+        self.topImage.image = [UIImage imageNamed:@"top"];
+    }else if (topImage == 2) {
+        self.topImage.image = [UIImage imageNamed:@"new"];
     }
 }
 

@@ -175,7 +175,7 @@
     //发送网络请求
     
     __weak LoginViewController * wself = self;
-    [MBProgressHUD showMessage:nil];
+    [MBProgressHUD showMessage:@"账号登录中。。。"];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
 //        NSLog(@"login========%@",json);
         [MBProgressHUD hideHUD];
@@ -232,9 +232,12 @@
                 }
                 if (![userInfo.welcomeTip isEqualToString:@""]) {
                     [MBProgressHUD showSuccess:userInfo.welcomeTip];
+                }else{
+                    
+                   [MBProgressHUD showSuccess:@"登录成功"];
                 }
                 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self dismissViewControllerAnimated:YES completion:nil];
                 });
             }
@@ -302,7 +305,7 @@
  *  验证手机号的正则表达式
  */
 -(BOOL) checkTel:(NSString *) phoneNumber{
-    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    NSString *regex = @"^(1)\\d{10}$";
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     

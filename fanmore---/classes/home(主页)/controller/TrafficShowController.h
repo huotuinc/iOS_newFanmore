@@ -11,6 +11,8 @@
 
 @class userData;
 
+
+
 @interface TrafficShowController : UIViewController
 
 /**
@@ -50,5 +52,8 @@
 
 /**用户个人信息*/
 @property(nonatomic,strong) userData * userInfo;
+
+
+@property (weak, nonatomic) IBOutlet UIView *redCircle;
 
 @end

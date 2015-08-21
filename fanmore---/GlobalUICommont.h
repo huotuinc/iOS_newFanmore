@@ -12,25 +12,7 @@
 /**服务器地址*/
 
 #define  MainURL @"http://newtask.fanmore.cn/app"
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//
-//
-//
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//
-//
 
-//@"http://newtask.fanmore.cn/app"
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//@"http://newtask.fanmore.cn/app"
-//@"http://newtask.fanmore.cn/app"
-//
-//@"http://apitest.51flashmall.com:8080/fanmoreweb/app"
-//@"http://192.168.0.23:8080/fanmoreweb/app"
 
 /**微信支付*/
 //#define WeiXinAppID @"wxaeda2d5603b12302"
@@ -42,14 +24,14 @@
 
 //有盟appKey
 #define UMAppKey @"52faffcf56240bc21a023179"
-
-
 /**shareSDK */
 #define ShareSDKAppKey @"19b4b4d45192"
+
 /**新浪微博*/
 #define XinLangAppkey @"1994677353"
 #define XinLangAppSecret @"0783d8dd1f0eb5a45687cde79aa10108"
 #define XinLangRedirectUri @"https://api.weibo.com/oauth2/default.html"
+
 /**QQ**/
 #define QQAppKey @"101066212"
 #define QQappSecret @"09ef5bfed097b682a83b147d46e46a5a"
@@ -120,6 +102,12 @@
 //通知
 #define RefreshHomeDate @"RefreshHomeDate"  //刷新home的数据
 #define RefreshHomeDateLeft @"RefreshHomeDateleft"  //刷新home的数据
+
+
+
+
+#define WeiXinPaySuccessPostNotification @"WeiXinPaySuccessPostNotification" //微信支付成功通知
+
 #endif
 
 

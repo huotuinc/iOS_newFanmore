@@ -66,7 +66,7 @@
 -(void)keyboardWasShown:(NSNotification *) note{
     
     NSDictionary* info = [note userInfo];
-    NSLog(@"%@",info);
+//    NSLog(@"%@",info);
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGFloat sizesss = CGRectGetMaxY(self.nextButton.frame) - (ScreenHeight - kbSize.height);
     

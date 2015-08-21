@@ -169,7 +169,7 @@
             
             notification.userInfo = @{@"id":@(self.task.taskId),@"title":self.task.title};
             
-            NSLog(@"%@",notification.userInfo);
+//            NSLog(@"%@",notification.userInfo);
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             self.isWarning = !self.isWarning;
             [MBProgressHUD showSuccess:@"提醒设置成功"];

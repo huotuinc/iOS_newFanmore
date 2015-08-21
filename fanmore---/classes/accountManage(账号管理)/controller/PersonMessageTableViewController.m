@@ -366,6 +366,7 @@
         if (indexPath.row == 2) { //爱好
             HobbyController *pro = [storyboard instantiateViewControllerWithIdentifier:@"HobbyController"];
             pro.delegate = self;
+//            NSLog(@"xxx---%@",self.userinfo.favs);
             pro.userHobby = self.userinfo.favs;
             [self.navigationController pushViewController:pro animated:YES];
         }
@@ -399,6 +400,7 @@
         
         data = UIImagePNGRepresentation(photoImage);
     }
+    
     NSString * imagefile = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     [picker dismissViewControllerAnimated:YES completion:^{
         NSMutableDictionary * params = [NSMutableDictionary dictionary];
@@ -406,7 +408,7 @@
         params[@"profileData"] = imagefile;
         [MBProgressHUD showMessage:@"头像上传中，请稍候"];
         NSString * urlStr = [MainURL stringByAppendingPathComponent:@"updateProfile"];
-        [UserLoginTool loginRequestPost:urlStr parame:params success:^(NSDictionary* json) {
+        [UserLoginTool loginRequestPostWithFile:urlStr parame:params success:^(id json) {
             [MBProgressHUD hideHUD];
             if ([json[@"systemResultCode"] intValue] ==1&&[json[@"resultCode"] intValue] == 1) {
                 userData * user = [userData objectWithKeyValues:json[@"resultData"][@"user"]];
@@ -419,8 +421,10 @@
             [self setupPersonMessage];
         } failure:^(NSError *error) {
             [MBProgressHUD hideHUD];
-//            NSLog(@"%@",error.description);
-        }];
+            [MBProgressHUD showError:@"头像上传失败"];
+            NSLog(@"%@",error.description);
+        } withFileKey:@"profileData"];
+
         
     }];
 }

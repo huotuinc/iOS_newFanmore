@@ -35,6 +35,14 @@
 /**题目名字**/
 @property (nonatomic, strong) NSString *titleString;
 
+//用于好友请求消息提醒
+@property(nonatomic, assign) BOOL getFriendBeg;
+
+//点击求流量推送进APP
+@property(nonatomic, assign) BOOL firstFriendBeg;
+
+//好友送流量
+@property(nonatomic, assign) BOOL getSendMes;
 
 @end
 

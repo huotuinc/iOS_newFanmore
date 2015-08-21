@@ -10,6 +10,10 @@
 
 @interface taskData : NSObject
 
+
+/**任务是否置顶标志*/
+@property(nonatomic,assign) int top;
+
 /**任务倒记时时间读秒*/
 @property(nonatomic,assign) int  backTime;
 /**任务编号*/
@@ -54,5 +58,9 @@
 
 /**距离答题开始时间*/
 @property(nonatomic,strong) NSString * timeToStart;
+
+@property(nonatomic,copy) NSString * turnTime;
+
+
 
 @end

@@ -15,52 +15,22 @@
 
 
 #define FLAYSMESSAGE @"flaymess"
-@interface TrafficShowController ()<ExchangeControllerdelegate>
+@interface TrafficShowController ()<ExchangeControllerdelegate,FriendMessageControllerDelegate>
 
 @property (assign, nonatomic) int num;
 /**已赚取的流量*/
 @property (weak, nonatomic) IBOutlet UILabel *flowNumber;
 /**兑换流量选项*/
 @property(nonatomic,strong) NSArray * flays;
+
+@property (nonatomic, strong) UIView *redIcon;
+
+
 @end
 
 @implementation TrafficShowController
 static NSString *collectionViewidentifier = @"collectionCell";
-/**
- *  兑换流量选项
- *
- *  @return <#return value description#>
- */
-//- (NSArray *)flays{
-//    
-//    if (_flays == nil) {
-//        _flays = [NSArray array];
-//        [MBProgressHUD showMessage:nil];
-//        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"prepareCheckout"];
-//        [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
-//            
-//            [MBProgressHUD hideHUD];
-//            NSLog(@"xxxxxxxxx%@",json);
-//            if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue]==1) {
-//                
-//                _flays = [NSArray arrayWithArray:json[@"resultData"][@"targets"]];
-//                
-//            }
-//            
-//            [self setWaringLabel];
-//
-//        } failure:^(NSError *error) {
-//             [MBProgressHUD hideHUD];
-//        }];
-//    }
-//    _flays = [_flays sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//        
-//        return [obj1 compare:obj2];
-//    }];
-//    
-//    
-//    return _flays;
-//}
+
 
 - (void)flaysFromeWeb {
     _flays = [NSArray array];
@@ -125,6 +95,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     self.title = @"流量兑换";
     
+    
+    self.redCircle.layer.cornerRadius = self.redCircle.frame.size.width /2.0;
+    self.redCircle.layer.masksToBounds = YES;
     self.promptLabel.adjustsFontSizeToFitWidth = YES;
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
@@ -156,8 +129,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
     
     
     
-    
-    
+    //初始化圆点
+    self.redIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 5, 5)];
+    self.redIcon.center = CGPointMake(self.friendButton.frame.origin.x + self.friendButton.frame.size.width, self.friendButton.frame.origin.y);
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"明细" style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -170,12 +144,18 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.buyButton.layer setMasksToBounds:YES];
     self.buyButton.layer.borderWidth = 0.5;
     self.buyButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.buyButton.layer.cornerRadius = 2;
+    self.buyButton.layer.cornerRadius = 6;
     
     [self.friendButton.layer setMasksToBounds:YES];
     self.friendButton.layer.borderWidth = 0.5;
     self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.friendButton.layer.cornerRadius = 2;
+    self.friendButton.layer.cornerRadius = 6;
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSLog(@"dadad%d",app.getFriendBeg);
+    if (app.getFriendBeg == YES) {
+        self.redCircle.hidden = NO;
+    }
 }
 
 
@@ -235,6 +215,9 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self flaysFromeWeb];
     
     [self saveControllerToAppDelegate:self];
+    
+    
+    
 
 }
 
@@ -265,8 +248,10 @@ static NSString *collectionViewidentifier = @"collectionCell";
 }
 
 - (IBAction)friendAction:(id)sender {
+    self.redCircle.hidden = YES;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FriendMessageController *fm = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
+    fm.delegate = self;
     [self.navigationController pushViewController:fm animated:YES];
 }
 
@@ -294,12 +279,12 @@ static NSString *collectionViewidentifier = @"collectionCell";
     [self.buyButton.layer setMasksToBounds:YES];
     self.buyButton.layer.borderWidth = 0.5;
     self.buyButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.buyButton.layer.cornerRadius = 2;
+    self.buyButton.layer.cornerRadius = 6;
     
     [self.friendButton.layer setMasksToBounds:YES];
     self.friendButton.layer.borderWidth = 0.5;
     self.friendButton.layer.borderColor = [UIColor colorWithRed:0.000 green:0.588 blue:1.000 alpha:1.000].CGColor;
-    self.friendButton.layer.cornerRadius = 2;
+    self.friendButton.layer.cornerRadius = 6;
     
     [self setWaringLabel];
 }

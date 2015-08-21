@@ -21,6 +21,8 @@
 @implementation MessageTableViewCell
 
 
+
+
 + (instancetype) cellWithTableView:(UITableView *)tableView{
     
     static NSString * ID = @"dadadasdasda";
@@ -35,7 +37,7 @@
 
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-
+    
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         

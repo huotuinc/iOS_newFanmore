@@ -21,6 +21,9 @@
 #import "MBProgressHUD+MJ.h"
 #import "WebController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "TaskGrouoModel.h"
+#import "BPViewController.h"
+#import "FriendMessageController.h"
 
 #define pageSize 10
 
@@ -29,11 +32,16 @@
 @property(nonatomic,strong)NSMutableArray * taskDatas;
 /**当前是否登入*/
 @property(nonatomic,assign) BOOL isLogin;
-
-
 //失败
 @property(nonatomic,assign)SystemSoundID failureSound;
 
+/**分组模型*/
+@property(nonatomic,strong) NSMutableArray *taskGroup;
+
+
+
+/**纪录下点击的组和行树*/
+@property(nonatomic,strong) NSIndexPath *myindexPath;
 @end
 
 
@@ -41,6 +49,15 @@
 
 static NSString * homeCellidentify = @"homeCellId";
 static int refreshCount = 0;
+
+- (NSMutableArray *)taskGroup
+{
+    if (_taskDatas == nil) {
+        
+        _taskDatas = [NSMutableArray array];
+    }
+    return _taskDatas;
+}
 
 
 - (BOOL)isLogin{
@@ -64,19 +81,14 @@ static int refreshCount = 0;
     return _taskDatas;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    
-    
-    RootViewController * root = (RootViewController *)self.mm_drawerController;
-    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-    
-    [self saveControllerToAppDelegate:self];
-    
+
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (app.goDetail) {
+
         app.goDetail = NO;
         UIStoryboard *storyboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         detailViewController *detail = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
@@ -87,7 +99,7 @@ static int refreshCount = 0;
     }
     if (app.getMessage) {
         app.getMessage = NO;
-        
+
         if (![self isLogin]) {
             LoginViewController * aa = [[LoginViewController alloc] init];
             UINavigationController * bb = [[UINavigationController alloc] initWithRootViewController:aa];
@@ -100,7 +112,36 @@ static int refreshCount = 0;
         }
     }
     
-    [self.navigationController setNavigationBarHidden:NO];
+    if (app.getSendMes) {
+        app.getSendMes = NO;
+
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        BPViewController *bp = [storyboard instantiateViewControllerWithIdentifier:@"BPViewController"];
+        [self.navigationController pushViewController:bp animated:YES];
+    }
+    
+    if (app.firstFriendBeg) {
+
+        app.firstFriendBeg = NO;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FriendMessageController *friend = [storyboard instantiateViewControllerWithIdentifier:@"FriendMessageController"];
+        [self.navigationController pushViewController:friend animated:YES];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    RootViewController * root = (RootViewController *)self.mm_drawerController;
+    [root setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    
+    [self saveControllerToAppDelegate:self];
+    
+    
+    
 }
 
 
@@ -111,9 +152,6 @@ static int refreshCount = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"粉猫流量宝";
-    
-//    [self _initView];
-    
 
     [self _initNav];
     
@@ -122,6 +160,7 @@ static int refreshCount = 0;
     //集成刷新控件
     [self setupRefresh];
     [self.tableView removeSpaces];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
@@ -148,6 +187,7 @@ static int refreshCount = 0;
     
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeCell" bundle:nil] forCellReuseIdentifier:homeCellidentify];
+ 
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(homeViewControllerGetNot) name:@"homeViewControllerShow" object:nil];
     
@@ -219,7 +259,8 @@ static int refreshCount = 0;
 //尾部刷新
 - (void)footerRereshing{  //加载更多数据数据
    
-    taskData * task = [self.taskDatas lastObject];
+    TaskGrouoModel * bbbs = [self.taskGroup lastObject];
+    taskData * task = [bbbs.tasks lastObject];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     params[@"pagingTag"] =[NSString stringWithFormat:@"%lld",task.taskOrder];
 //    NSLog(@"尾部刷新%ld",task.taskOrder);
@@ -240,7 +281,6 @@ static int refreshCount = 0;
 //    [MBProgressHUD showMessage:nil];
     __weak HomeViewController *wself = self;
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
@@ -253,7 +293,7 @@ static int refreshCount = 0;
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             if (taskArray.count > 0) {
-                [wself.taskDatas addObjectsFromArray:taskArray];
+                [wself toGroupsByTime:taskArray];  //分组
                 [wself.tableView reloadData];    //刷新数据
             }
             
@@ -261,7 +301,6 @@ static int refreshCount = 0;
         
     } failure:^(NSError *error) {
        [MBProgressHUD showError:@"粉猫服务器连接异常"];
-//        NSLog(@"%@",[error description]);
     }];
     
 }
@@ -272,9 +311,11 @@ static int refreshCount = 0;
     
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"taskList"];
     __weak HomeViewController *wself = self;
-//    [MBProgressHUD showMessage:nil];
+    if (IsIos8) {
+      [MBProgressHUD showMessage:nil];
+    }
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
-//        [MBProgressHUD hideHUD];
+        [MBProgressHUD hideHUD];
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -291,26 +332,84 @@ static int refreshCount = 0;
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             [MBProgressHUD hideHUD];
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
-            [wself.taskDatas removeAllObjects];
-            wself.taskDatas = [NSMutableArray arrayWithArray:taskArray];
+            [wself.taskGroup removeAllObjects];
+            
+            [wself toGroupWithTopTask:taskArray];
             refreshCount = (int)[taskArray count];
-//            [wself showHomeRefershCount];
+            //            [wself showHomeRefershCount];
+            if (taskArray.count > 0) {
+                [self setWiteBackground];
+            }else {
+                [self setWiteBackground];
+            }
+            [MBProgressHUD hideHUD];
             [wself.tableView reloadData];    //刷新数据
         }
         
-        
+        [MBProgressHUD hideHUD];
     } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
         [MBProgressHUD showError:@"粉猫服务器连接异常"];
-
+        
     }];
+    
+}
+
+/**
+ *  加入置顶任务
+ *
+ *  @param tasks <#tasks description#>
+ */
+- (void)toGroupWithTopTask:(NSArray *)tasks{
+    
+    NSMutableArray * aaa  = [NSMutableArray arrayWithArray:tasks];
+    NSMutableArray *topArray = [NSMutableArray array];
+    
+    
+    for (taskData * task in tasks) {
+        if (task.top  == 1) {
+            [topArray addObject:task];
+            [aaa removeObject:task];
+        }else{
+            break;
+        }
+    }
+    TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
+    group.tasks = topArray;
+    [self.taskGroup addObject:group];
+    [self toGroupsByTime:aaa];
+
+}
+
+
+/**
+ *  把首页数据进行分组
+ */
+- (void)toGroupsByTime:(NSArray *)tasks{
+    taskData * aaas = nil;
+    TaskGrouoModel * bbbs = [self.taskGroup lastObject];
+    for (taskData * task in tasks) {
+       
+       if ([bbbs.timeSectionTitle isEqualToString:task.turnTime]) {//一样
+           aaas = task;
+           [bbbs.tasks addObject:task];
+       }else{//不一样
+           aaas = task;
+           TaskGrouoModel * group = [[TaskGrouoModel alloc] init];
+           group.timeSectionTitle = task.turnTime;
+           [group.tasks addObject:task];
+           bbbs = group;
+           [self.taskGroup addObject:group];
+       }
+    }
     
 }
 
 /**
  *  账号被顶掉
  *
- *  @param alertView   <#alertView description#>
- *  @param buttonIndex <#buttonIndex description#>
+ *  @param alertView
+ *  @param buttonIndex
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -360,11 +459,23 @@ static int refreshCount = 0;
 {
     return 101;
 }
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.taskGroup.count;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.taskDatas.count;
+    TaskGrouoModel * gmd =  self.taskGroup[section];
+    return gmd.tasks.count;
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    TaskGrouoModel * aaaa = self.taskGroup[section];
+    return aaaa.timeSectionTitle;
+    
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -373,8 +484,11 @@ static int refreshCount = 0;
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeCell" owner:nil options:nil] lastObject];
     }
+    
+    TaskGrouoModel * gmd =  self.taskGroup[indexPath.section];
     //设置cell样式
-    taskData * task = self.taskDatas[indexPath.row];
+    taskData * task =gmd.tasks[indexPath.row];
+    
     NSDate * ptime = [NSDate dateWithTimeIntervalSince1970:[(task.publishDate) doubleValue]/1000.0];
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
@@ -389,12 +503,12 @@ static int refreshCount = 0;
     int a = 0;
     if (task.reward > 0 || task.taskFailed > 0) {
         a = 1;
-        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a andTopImage:task.top];
     }else if(task.last<=0){
         a = 2;
-        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a andTopImage:task.top];
     }else {
-        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a];
+        [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a andTopImage:task.top];
     }
     //设置cell样式
     
@@ -407,8 +521,13 @@ static int refreshCount = 0;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    self.myindexPath = indexPath;  //纪录点击的条目
+    TaskGrouoModel * gmd =  self.taskGroup[indexPath.section];
+    //设置cell样式
+    taskData * task =gmd.tasks[indexPath.row];
+    
     //传递参数
-    taskData * task = self.taskDatas[indexPath.row];
+//    taskData * task = self.taskDatas[indexPath.row];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     detailViewController *detailVc = [storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
@@ -448,7 +567,6 @@ static int refreshCount = 0;
         
         NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
         [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
-//            NSLog(@"%@",json);
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showError:@"今日已签到，请明天来签到"];
@@ -580,6 +698,7 @@ static int refreshCount = 0;
     
     __weak HomeViewController * wself = self;
     [UserLoginTool loginRequestGet:url parame:params success:^(id json) {
+//        NSLog(@"%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==56001){
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:AppToken];
             [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
@@ -591,17 +710,11 @@ static int refreshCount = 0;
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             
             __block taskData *task = [taskData objectWithKeyValues:json[@"resultData"][@"task"]];
-            for (int index = 0; index < wself.taskDatas.count; index++) {
-                taskData * cc = wself.taskDatas[index];
-                if (task.taskId == cc.taskId) {
-                    
-                    wself.taskDatas[index] = task;
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
-                    [wself.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-                    break;
-                }
-            }
-           
+            
+            TaskGrouoModel * aa = self.taskGroup[self.myindexPath.section];
+            aa.tasks[self.myindexPath.row] = task;
+            [wself.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:self.myindexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+
             
         }
     } failure:^(NSError *error) {
@@ -609,9 +722,27 @@ static int refreshCount = 0;
         
     }];
     
-    
-    
-    
+}
+
+#pragma 设置背景图片
+- (void)setClearBackground {
+    if (ScreenWidth == 375) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg750x1334"]];
+    }
+    if (ScreenWidth == 414) {
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg1242x2208"]];
+    }
+    if (ScreenWidth == 320) {
+        if (ScreenHeight <= 480) {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x960"]];
+        }else {
+            self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tbg640x1136"]];
+        }
+    }
+}
+
+- (void)setWiteBackground {
+    self.tableView.backgroundColor = [UIColor whiteColor];
 }
 
 @end
