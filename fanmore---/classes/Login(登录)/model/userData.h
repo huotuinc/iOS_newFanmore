@@ -19,6 +19,10 @@
 @property(nonatomic,strong) NSString * invCode;
 /**签到*/
 @property(nonatomic,assign) int signInfo;
+/**已连续签到日数包括今天*/
+@property(nonatomic,assign) int signingDays;
+/**连续7天，可获得的奖励App端因该显示这个到客户端*/
+@property(nonatomic,assign) int rewardForSign;
 /**今日签到获取流量*/
 @property(nonatomic,strong) NSNumber * signtoday;
 /**姓名*/

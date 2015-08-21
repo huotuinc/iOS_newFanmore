@@ -320,7 +320,7 @@ static NSString *message = @"有一条新消息";
     __block LoginResultData * resultData = [[LoginResultData alloc] init];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
         
-//        NSLog(@"%@",responseObject);
+        NSLog(@"%@",responseObject);
         if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {//返回数据成功
             
             

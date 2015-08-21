@@ -32,6 +32,8 @@
     if (self = [super initWithFrame:frame]) {
         
         self.backgroundColor = [UIColor blackColor];
+        self.layer.cornerRadius = 5;
+        self.layer.masksToBounds = YES;
         self.alpha = 0.8;
         //签到标签
         UILabel * asinLable = [[UILabel alloc] init];
