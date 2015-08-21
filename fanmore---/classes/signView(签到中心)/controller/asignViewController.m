@@ -41,6 +41,8 @@
 //失败
 @property(nonatomic,assign)SystemSoundID failureSound;
 
+@property (weak, nonatomic) IBOutlet UILabel *asignLabel;
+
 /**签到的按钮的点击*/
 - (IBAction)asignBtnClick:(id)sender;
 
