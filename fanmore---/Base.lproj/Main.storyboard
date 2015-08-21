@@ -2357,6 +2357,7 @@
                         <outlet property="Tuesday" destination="w4O-0R-O8L" id="Z3N-81-bvL"/>
                         <outlet property="Wednesday" destination="2AD-6Z-EU1" id="sUy-x1-0jg"/>
                         <outlet property="asignBtn" destination="Z5P-k9-EZj" id="Iu9-I1-Dds"/>
+                        <outlet property="asignLabel" destination="0tG-ib-Yxd" id="thf-jI-eI6"/>
                         <outlet property="btnView" destination="td5-fN-hED" id="tom-PK-Emc"/>
                         <outlet property="monday" destination="ShI-RB-TwX" id="g8X-JP-MjE"/>
                     </connections>
