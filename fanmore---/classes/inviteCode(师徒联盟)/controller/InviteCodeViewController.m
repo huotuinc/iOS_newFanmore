@@ -73,6 +73,46 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(setButtonRed) userInfo:nil repeats:YES];
+    
+    [timer fire];
+    
+    
+
+    
+    
+}
+
+- (void)setButtonRed {
+    //动画 背景变红
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2];
+    [UIView setAnimationDelegate:self];
+    
+    [UIView setAnimationDidStopSelector:@selector(setButtonBlue)];
+    
+//    self.shareButton.layer.borderColor = [UIColor colorWithRed:0.919 green:0.288 blue:0.144 alpha:1.000].CGColor;
+    self.shareButton.backgroundColor = [UIColor colorWithRed:0.000 green:0.279 blue:0.711 alpha:1.000]
+    ;
+    
+    [UIView commitAnimations];
+}
+
+- (void)setButtonBlue {
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2];
+    
+//    self.shareButton.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000].CGColor;
+    self.shareButton.backgroundColor = [UIColor colorWithRed:0.004 green:0.553 blue:1.000 alpha:1.000];
+    
+    [UIView commitAnimations];
+}
+
 
 - (void)setupLables{
     
