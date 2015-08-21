@@ -513,7 +513,8 @@ static int refreshCount = 0;
         [cell setImage:task.pictureURL andNameLabel:task.title andTimeLabel:publishtime andReceiveLabel:ml andJoinLabel:[NSString stringWithFormat:@"%@人",task.luckies] andIntroduceLabel:[NSString stringWithFormat:@"由【%@】提供",task.merchantTitle] andGetImage:a andTopImage:task.top];
     }
     //设置cell样式
-   
+    
+    [cell setLast:task.last];
     
      return cell;
 }

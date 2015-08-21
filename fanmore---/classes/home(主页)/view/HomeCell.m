@@ -36,6 +36,13 @@
     }
 }
 
+- (void)setLast:(CGFloat) last
+{
+    if (last > 0) {
+        self.lastLabel.text = [NSString stringWithFormat:@"参与,任务剩余%.0fM流量", last];
+    }
+}
+
 
 -(void) layoutSubviews{
     [super layoutSubviews];

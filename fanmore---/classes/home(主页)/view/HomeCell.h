@@ -30,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *introduceLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *getImage;
 @property (weak, nonatomic) IBOutlet UIImageView *topImage;
+@property (weak, nonatomic) IBOutlet UILabel *lastLabel;
+
 
 /**
  *  selection 右下角领取状态标签：0：没选择 1:已领取 2:已领完
@@ -42,5 +44,7 @@
 - (void)setGetimageWithSection: (int) selection;
 
 - (void)setSelection:(int)selection;
+
+- (void)setLast:(CGFloat) last;
 
 @end
