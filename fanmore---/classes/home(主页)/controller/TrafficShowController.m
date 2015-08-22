@@ -25,7 +25,6 @@
 
 @property (nonatomic, strong) UIView *redIcon;
 
-
 @end
 
 @implementation TrafficShowController

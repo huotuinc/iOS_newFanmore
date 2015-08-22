@@ -82,6 +82,8 @@ static NSString * _company = nil;
 - (buyflay *)buyflay{
     if (_buyflay == nil) {
         
+        
+        __weak BuyFlowViewController * wself = self;
         NSString *urlStr = [MainURL stringByAppendingPathComponent:@"prepareBuy"];
         [UserLoginTool loginRequestGet:urlStr parame:nil success:^(id json) {
             
@@ -95,6 +97,7 @@ static NSString * _company = nil;
                     return ;
                 }else if([json[@"resultCode"] intValue] == 1){
                     _buyflay = [buyflay objectWithKeyValues:json[@"resultData"]];
+                    wself.phoneCompany.text = _buyflay.mobileMsg;
                     [_collection reloadData];
                 }
             }
@@ -167,7 +170,7 @@ static NSString * _company = nil;
     [super viewDidLoad];
     self.title = @"购买流量";
     
-    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
+     [WXApi registerApp:WeiXinPayId]; //像微信支付注册
 //    NSLog(@"wxRegistered:%d",wxRegistered);
     
 //    BOOL wxRegistered = [WXApi registerApp:WeiXinPayId]; //像微信支付注册
@@ -201,7 +204,7 @@ static NSString * _company = nil;
     [root setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     
     
-//    self.phoneCompany.text = self.buyflay.mobileMsg;
+    self.phoneCompany.text = self.buyflay.mobileMsg;
     if (ScreenWidth - 40 - 20 > 25 + 4 * 80 ) {
         self.num = 4;
     }else {
