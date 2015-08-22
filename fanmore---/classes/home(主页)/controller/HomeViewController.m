@@ -572,7 +572,7 @@ static int refreshCount = 0;
             NSLog(@"%@",json);
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
                 [MBProgressHUD hideHUD];
-                
+#warning 修改了签到
                 optionView * alert = [[optionView alloc] init];
                 alert.center = self.view.center;
                 [alert setdistanceDays:(7-[self continuouSignDay])];
@@ -589,8 +589,6 @@ static int refreshCount = 0;
                     }];
                     
                 });
-               
-//              [MBProgressHUD showError:@"今日已签到，请明天来签到"];
                 return ;
             }
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==1) {
@@ -600,9 +598,10 @@ static int refreshCount = 0;
                 //1、保存个人信息
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-                if ([self getWeek] == 7 && user.signInfo == 127) {
-                    AudioServicesPlayAlertSound(self.failureSound);
-                    [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%@M流量", user.signtoday]];
+//                if ([self getWeek] == 7 && user.signInfo == 127) {//已成功签到7天
+                if (user.signingDays == 7) {
+                    AudioServicesPlayAlertSound(self.failureSound);                
+                    [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%.1fMf流量", user.rewardForSign]];
                 }else {
                     AudioServicesPlayAlertSound(self.failureSound);
                     optionView * alert = [[optionView alloc] init];
@@ -642,33 +641,7 @@ static int refreshCount = 0;
     //1、保存个人信息
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData *userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-    NSInteger a = 0;
-    int d = userinfo.signInfo;
-    while (((d&1)%2)>0) {
-        a++;
-        d = d>>1;
-    }
-    
-    if (d==0) {
-        return a;
-    }else{
-        d = userinfo.signInfo;
-        int c = 0;
-        while (d>0) {
-            c++;
-            d = d>>1;
-        }
-        d = userinfo.signInfo;
-        for (int i = 0; i<c; i++) {
-            if (((d&1)%2)>0) {
-                a++;
-            }else{
-                a = 0;
-            }
-            d=d>>1;
-        }
-        return a;
-    }
+    return userinfo.signingDays;
 }
 /**
  *  获取今天是周几

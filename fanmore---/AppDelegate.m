@@ -135,12 +135,6 @@ static NSString *message = @"有一条新消息";
         
     }
     
-    
-//    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
-//    {
-//        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-//    }
-    
     //APNS
     [self registRemoteNotification:application];
     
@@ -150,21 +144,6 @@ static NSString *message = @"有一条新消息";
     
 }
 
-/**
- *  ios8 远程通知方法
- *
- *  @param application       <#application description#>
- *  @param userInfo          <#userInfo description#>
- *  @param completionHandler <#completionHandler description#>
- */
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-//{
-//    
-//    
-//    [self getRemoteNotificationWithUserInfo:userInfo];
-//    
-//    completionHandler(UIBackgroundFetchResultNewData);
-//}
 
 /**
  *  ios7 远程通知方法
@@ -177,7 +156,6 @@ static NSString *message = @"有一条新消息";
     [self getRemoteNotificationWithUserInfo:userInfo];
     
 }
-
 
 
 /**     
@@ -292,7 +270,6 @@ static NSString *message = @"有一条新消息";
  *  @return falure 就token不通
  */
 - (void)setupInit{
-    
     //出使化网络
     AFHTTPRequestOperationManager * manager  = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
@@ -300,7 +277,6 @@ static NSString *message = @"有一条新消息";
     params[@"appKey"] = APPKEY;
     NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
     NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-//    NSLog(@"lat = %@  log = %@",lat,lng);
     params[@"lat"] = ([lat isEqualToString:@""]?(@(116.0)):(@([lat floatValue])));
     params[@"lng"] = ([lng isEqualToString:@""]?(@(116.0)):(@([lng floatValue])));
     params[@"timestamp"] = apptimesSince1970;
@@ -313,24 +289,15 @@ static NSString *message = @"有一条新消息";
     params[@"cpaCode"] = @"default";
     params[@"sign"] = [NSDictionary asignWithMutableDictionary:params];
     [params removeObjectForKey:@"appSecret"];
-    
-    
     //网络请求借口
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"init"];
     __block LoginResultData * resultData = [[LoginResultData alloc] init];
     [manager GET:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary * responseObject) {
-        
-        NSLog(@"%@",responseObject);
-        if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {//返回数据成功
-            
-            
-            
+       if ([responseObject[@"systemResultCode"] intValue] == 1 && [responseObject[@"resultCode"] intValue] == 1) {//返回数据成功
             resultData = [LoginResultData objectWithKeyValues:responseObject[@"resultData"]];//数据对象话
-            
             //保存答题能阅读的时间
             [[NSUserDefaults standardUserDefaults] setObject: @(resultData.global.lessReadSeconds) forKey:AppReadSeconds];
-
-            //取出本地token
+           //取出本地token
             NSString *localToken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
             if (![localToken isEqualToString:resultData.user.token]) {
                 //保存新的token
@@ -339,14 +306,10 @@ static NSString *message = @"有一条新消息";
                 [[NSUserDefaults standardUserDefaults] setObject:flag forKey:loginFlag];
                 
                 NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-                
                 //1、保存全局信息
                 NSString *fileName = [path stringByAppendingPathComponent:InitGlobalDate];
                 [NSKeyedArchiver archiveRootObject:resultData.global toFile:fileName]; //保存用户信息
-                
-              
-                
-                //1、保存个人信息
+                //2、保存个人信息
                 fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:nil toFile:fileName]; //保存用户信息
                 
@@ -372,7 +335,7 @@ static NSString *message = @"有一条新消息";
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        NSLog(@"error == init %@",error.description);
        
     }];
 

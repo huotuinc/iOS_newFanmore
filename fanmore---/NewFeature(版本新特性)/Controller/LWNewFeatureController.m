@@ -9,7 +9,7 @@
 #import "LWNewFeatureController.h"
 
 
-#define LWNewFeatureImageCount 3
+#define LWNewFeatureImageCount 5
 @interface LWNewFeatureController ()<UIScrollViewDelegate>
 
 
