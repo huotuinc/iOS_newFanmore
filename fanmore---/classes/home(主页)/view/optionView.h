@@ -12,4 +12,6 @@
 
 - (void)setdistanceDays:(NSInteger) dayNumber;
 
+
+- (instancetype) initWithFloy:(CGFloat) aa;
 @end

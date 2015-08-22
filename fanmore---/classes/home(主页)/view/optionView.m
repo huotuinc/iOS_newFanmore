@@ -26,7 +26,19 @@
 
 @implementation optionView
 
-
+- (instancetype) initWithFloy:(CGFloat) aa{
+    
+    NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //1、保存个人信息
+    NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
+    userData *userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
+    optionView * ac = [[optionView alloc] init];
+    
+    NSString * aass = [ac.sssLable.text stringByAppendingFormat:@"%@M",[NSString xiaoshudianweishudeal:userinfo.rewardForSign]];
+    ac.sssLable.text = aass;
+    return ac;
+    
+}
 - (instancetype)initWithFrame:(CGRect)frame{
     
     if (self = [super initWithFrame:frame]) {
@@ -55,7 +67,7 @@
         UILabel * asinLable2 = [[UILabel alloc] init];
         asinLable2.textColor = [UIColor whiteColor];
         asinLable2.textAlignment = NSTextAlignmentCenter;
-        asinLable2.text = @"就可以获得5M流量";
+        asinLable2.text = @"就可以获得";
         self.sssLable = asinLable2;
         [self addSubview:asinLable2];
         

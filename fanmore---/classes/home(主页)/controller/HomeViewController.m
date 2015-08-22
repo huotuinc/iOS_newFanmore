@@ -569,11 +569,9 @@ static int refreshCount = 0;
         
         NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
         [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
-            NSLog(@"%@",json);
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
                 [MBProgressHUD hideHUD];
-#warning 修改了签到
-                optionView * alert = [[optionView alloc] init];
+                optionView * alert = [[optionView alloc] initWithFloy:11];
                 alert.center = self.view.center;
                 [alert setdistanceDays:(7-[self continuouSignDay])];
                 alert.bounds = CGRectMake(0, 0, self.view.frame.size.width * 0.65, self.view.frame.size.height * 0.15);

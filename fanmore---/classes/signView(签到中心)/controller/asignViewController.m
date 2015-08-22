@@ -232,12 +232,8 @@
             //1、保存个人信息
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-//            if ([self getWeek] == 7 && user.signInfo == 127) {
-#warning 修改了签到
             if (user.signingDays == 7) {
                 AudioServicesPlayAlertSound(self.failureSound);
-                #warning 修改了签到
-                
                 [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%.f流量",user.rewardForSign]];
             }else {
                 AudioServicesPlayAlertSound(self.failureSound);
