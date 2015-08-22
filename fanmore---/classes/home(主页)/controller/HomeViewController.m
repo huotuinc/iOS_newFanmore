@@ -567,6 +567,7 @@ static int refreshCount = 0;
         });
     }else {
         
+        __weak HomeViewController * wself = self;
         NSString * url = [MainURL stringByAppendingPathComponent:@"signin"];
         [UserLoginTool loginRequestPost:url parame:nil success:^(id json) {
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
@@ -577,7 +578,7 @@ static int refreshCount = 0;
                 alert.bounds = CGRectMake(0, 0, self.view.frame.size.width * 0.65, self.view.frame.size.height * 0.15);
                 
                 [UIView animateWithDuration:3 animations:^{
-                    [self.tableView addSubview:alert];
+                    [wself.tableView addSubview:alert];
                 }];
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -602,9 +603,9 @@ static int refreshCount = 0;
                     [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%.1fMf流量", user.rewardForSign]];
                 }else {
                     AudioServicesPlayAlertSound(self.failureSound);
-                    optionView * alert = [[optionView alloc] init];
+                    optionView * alert = [[optionView alloc] initWithFloy:11];
                     alert.center = self.view.center;
-                    [alert setdistanceDays:6];
+                    [alert setdistanceDays:(7-[self continuouSignDay])];
                     alert.bounds = CGRectMake(0, 0, self.view.frame.size.width * 0.65, self.view.frame.size.height * 0.15);
                     
                     [UIView animateWithDuration:3 animations:^{
