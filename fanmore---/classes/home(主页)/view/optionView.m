@@ -34,7 +34,7 @@
     userData *userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
     optionView * ac = [[optionView alloc] init];
     
-    NSString * aass = [ac.sssLable.text stringByAppendingFormat:@"%@M",[NSString xiaoshudianweishudeal:userinfo.rewardForSign]];
+    NSString * aass = [ac.sssLable.text stringByAppendingFormat:@"%@M",[NSString xiaoshudianweishudeal:[userinfo.rewardForSign floatValue]]];
     ac.sssLable.text = aass;
     return ac;
     

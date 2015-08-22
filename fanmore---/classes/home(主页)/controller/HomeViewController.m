@@ -573,7 +573,7 @@ static int refreshCount = 0;
             if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
                 [MBProgressHUD hideHUD];
                 optionView * alert = [[optionView alloc] initWithFloy:11];
-                alert.center = self.view.center;
+                alert.center = wself.view.center;
                 [alert setdistanceDays:(7-[self continuouSignDay])];
                 alert.bounds = CGRectMake(0, 0, self.view.frame.size.width * 0.65, self.view.frame.size.height * 0.15);
                 
@@ -598,18 +598,19 @@ static int refreshCount = 0;
                 NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
                 [NSKeyedArchiver archiveRootObject:user toFile:fileName];
 //                if ([self getWeek] == 7 && user.signInfo == 127) {//已成功签到7天
-                if (user.signingDays == 7) {
-                    AudioServicesPlayAlertSound(self.failureSound);                
-                    [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%.1fMf流量", user.rewardForSign]];
+                if ([user.signingDays integerValue] == 7) {
+                    AudioServicesPlayAlertSound(wself.failureSound);
+                    
+                    [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%.1fMf流量", [user.rewardForSign floatValue]]];
                 }else {
-                    AudioServicesPlayAlertSound(self.failureSound);
+                    AudioServicesPlayAlertSound(wself.failureSound);
                     optionView * alert = [[optionView alloc] initWithFloy:11];
-                    alert.center = self.view.center;
-                    [alert setdistanceDays:(7-[self continuouSignDay])];
-                    alert.bounds = CGRectMake(0, 0, self.view.frame.size.width * 0.65, self.view.frame.size.height * 0.15);
+                    alert.center = wself.view.center;
+                    [alert setdistanceDays:(7-[wself continuouSignDay])];
+                    alert.bounds = CGRectMake(0, 0, wself.view.frame.size.width * 0.65, self.view.frame.size.height * 0.15);
                     
                     [UIView animateWithDuration:3 animations:^{
-                        [self.tableView addSubview:alert];
+                        [wself.tableView addSubview:alert];
                     }];
                     
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -640,7 +641,7 @@ static int refreshCount = 0;
     //1、保存个人信息
     NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
     userData *userinfo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName];
-    return userinfo.signingDays;
+    return [userinfo.signingDays integerValue];
 }
 /**
  *  获取今天是周几

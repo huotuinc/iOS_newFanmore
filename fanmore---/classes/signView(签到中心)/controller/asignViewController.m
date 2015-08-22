@@ -231,13 +231,13 @@
             //1、保存个人信息
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:user toFile:fileName];
-            if (user.signingDays == 7) {
+            if ([user.signingDays integerValue] == 7) {
                 AudioServicesPlayAlertSound(self.failureSound);
-                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%.f流量",user.rewardForSign]];
+                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"签到成功 获得%.1f流量",[user.rewardForSign floatValue]]];
             }else {
                 AudioServicesPlayAlertSound(self.failureSound);
                 //修改提示
-                [self signTipView:user.signingDays];
+                [self signTipView:[user.signingDays intValue]];
             }
             [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
             self.asignBtn.backgroundColor = LWColor(163, 163, 163);
