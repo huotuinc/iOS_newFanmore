@@ -222,7 +222,6 @@ static NSString *message = @"有一条新消息";
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
-//                                                      NSLog(@"aliPays ----- result = %@",resultDic);
                                                       if([resultDic[@"resultStatus"] intValue] == 9000){
                                                            [[NSNotificationCenter defaultCenter] postNotificationName:WeiXinPaySuccessPostNotification object:nil];
                                                       }
@@ -230,8 +229,7 @@ static NSString *message = @"有一条新消息";
                                                   }]; }
     if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-//            NSLog(@"aliPaysa ----- result = %@",resultDic);
-//            [[NSNotificationCenter defaultCenter] postNotificationName:WeiXinPaySuccessPostNotification object:nil];
+            
         }];
     }
     

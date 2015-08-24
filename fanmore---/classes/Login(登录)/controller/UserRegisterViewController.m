@@ -95,19 +95,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWasShown:)
-//                                                 name:UIKeyboardWillShowNotification object:self.secondPassword];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillBeHidden:)
-//                                                 name:UIKeyboardWillHideNotification object:self.secondPassword];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWasShown:)
-//                                                 name:UIKeyboardWillShowNotification object:self.InvitationCode];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillBeHidden:)
-//                                                 name:UIKeyboardWillHideNotification object:self.InvitationCode];
 }
 /**
  *  键盘弹出
@@ -179,17 +166,17 @@
     if (!self.phoneNumber.text.length) {//手机号不能为空
         
         [MBProgressHUD showError:@"手机号不能为空"];
-//        return;
+        return;
     }
     if (!self.verificationCode.text.length) {//验证码不能为空
         
         [MBProgressHUD showError:@"验证码不能为空"];
-//        return;
+        return;
     }
     if (!self.firstPassword.text.length||!self.secondPassword.text.length) {//手机号不能为空
         
         [MBProgressHUD showError:@"密码不能为空"];
-//        return;
+        return;
     }
     if (![self.firstPassword.text isEqualToString:self.secondPassword.text]) {
         
@@ -205,32 +192,26 @@
     parame[@"authcode"] = self.verificationCode.text;
     self.InvitationCode.text.length?(parame[@"invcode"] = self.InvitationCode.text):(parame[@"invcode"] = [NSString stringWithFormat:@""]);
     //发送网络请求
-    
-//    NSLog(@"par======xxxxxxxxxxx================%@",parame);
+
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"reg"];
     __weak UserRegisterViewController *wself = self;
     [UserLoginTool loginRequestPost:urlStr parame:parame success:^(NSDictionary* json) {
-        
-//        NSLog(@"注册＝＝＝＝＝＝%@",json);
-        
         //手机号是否被注册
         if ([json[@"systemResultCode"] intValue]==1&&[json[@"resultCode"] intValue] ==  54004) {
-            
-            [MBProgressHUD showSuccess:@"手机已经注册,请直接登录"];
-//            return ;
+            [MBProgressHUD showError:[NSString stringWithFormat:@"%@", json[@"resultDescription"]]];
+            return ;
         }
         //验证码错误
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] ==  53007) {
             
-            [MBProgressHUD showSuccess:@"验证码错误"];
-//            return ;
+            [MBProgressHUD showError:[NSString stringWithFormat:@"%@", json[@"resultDescription"]]];
+            return ;
         }
-        
-        RootViewController * roots = [[RootViewController alloc] init];
-        [UIApplication sharedApplication].keyWindow.rootViewController =  roots;
         //注册成功
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
+            RootViewController * roots = [[RootViewController alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController =  roots;
             //保存用户名
             [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:loginUserName];
             [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:passwd] forKey:loginPassword];
@@ -289,14 +270,13 @@
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
         
-//        NSLog(@"dasdasd%@",json);
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==53014) {
-            
+           
             [MBProgressHUD showError:json[@"resultDescription"]];
             return ;
         }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==54001) {
             
-            [MBProgressHUD showError:json[@"resultDescription"]];
+            [MBProgressHUD showError:@"该账号已被注册"];
             return ;
         }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==55001){
             
@@ -307,14 +287,11 @@
             
             
         }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1){
-            
-//            NSLog(@"%@",json);
             [self settime];
         }
         
     } failure:^(NSError *error) {
         
-//        NSLog(@"%@",[error description]);
     }];
 
     
