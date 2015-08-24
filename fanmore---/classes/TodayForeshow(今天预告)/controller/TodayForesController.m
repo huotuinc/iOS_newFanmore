@@ -126,6 +126,8 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
 
 
 - (void)getMoreData:(NSMutableDictionary *) params{
+    
+    __weak TodayForesController * wself = self;
     NSString * usrStr = [MainURL stringByAppendingPathComponent:@"previewTaskList"];
 //    [MBProgressHUD showMessage:nil];
     [UserLoginTool loginRequestGet:usrStr parame:params success:^(id json) {
@@ -141,8 +143,8 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1) {//访问成果
             NSArray * taskArray = [taskData objectArrayWithKeyValuesArray:json[@"resultData"][@"task"]];
             if (taskArray.count) {
-                [self.Notices addObjectsFromArray:taskArray];
-                [self.tableView reloadData];    //刷新数据
+                [wself.Notices addObjectsFromArray:taskArray];
+                [wself.tableView reloadData];    //刷新数据
             }else{
                 [MBProgressHUD showSuccess:@"加载成功,没有更多数据"];
             }
@@ -182,10 +184,10 @@ static NSString *homeCellidentify = @"ForeshowTableViewCell.h";
             [wself.Notices removeAllObjects];
             wself.Notices = [NSMutableArray arrayWithArray:taskArray];
             
-            if (self.Notices.count > 0) {
-                [self setWiteBackground];
+            if (wself.Notices.count > 0) {
+                [wself setWiteBackground];
             }else {
-                [self setClearBackground];
+                [wself setClearBackground];
             }
             
             [wself.tableView reloadData];    //刷新数据

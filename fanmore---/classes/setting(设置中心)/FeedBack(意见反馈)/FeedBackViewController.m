@@ -49,7 +49,8 @@
 }
 
 - (IBAction)FeedBackButton:(id)sender {
-//    NSLog(@"xxxxxxxxxxxxxxxxx");
+
+    __weak FeedBackViewController * wself = self;
     if ([self.feedBackTextView.text isEqualToString:@"请输入你的宝贵意见"]) {
         
         [MBProgressHUD showError:@"请输入你的反馈意见"];
@@ -80,7 +81,7 @@
         if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue] == 1) {
             
             [MBProgressHUD showSuccess:@"提交意见成功"];
-            [self.navigationController popViewControllerAnimated:YES];
+            [wself.navigationController popViewControllerAnimated:YES];
         }
         
     } failure:^(NSError *error) {
