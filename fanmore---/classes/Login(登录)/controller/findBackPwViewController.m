@@ -121,15 +121,41 @@
 //    NSLog(@"sssssss====%@",urlStr);
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {
         
-//        NSLog(@"忘记密码请求成功%@",json);
-        //验证码的倒计时
-        [self settime];
-    } failure:^(NSError *error) {
+        if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==55001){
+            
+            if ([json[@"resultData"][@"voiceAble"] intValue]) {
+                UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                [a show];
+            }
+            
+        }else if([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==55001){
+            [self settime];
+
+        }
+
+            } failure:^(NSError *error) {
         
 //        NSLog(@"注册失败%@",[error localizedDescription]);
     }];
     
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        //网络请求获取验证码
+        NSMutableDictionary * params = [NSMutableDictionary dictionary];
+        params[@"phone"] = self.phoneNumber.text;
+        params[@"type"] = @"1";
+        params[@"codeType"] = @(1);
+        NSString * urlStr = [MainURL stringByAppendingPathComponent:@"sendSMS"];
+        [UserLoginTool loginRequestGet:urlStr parame:params success:^(NSDictionary * json) {
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+}
+
 
 /**
  * 设置验证码的倒计时
