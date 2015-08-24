@@ -33,7 +33,8 @@
     NSString * token = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
     paramsOption[@"token"] = token?token:@"";
     paramsOption[@"imei"] = DeviceNo;
-    paramsOption[@"cityCode"] = @"1372";
+    NSString * cityCode = [[NSUserDefaults standardUserDefaults] objectForKey:BaiDuCityCode];
+    paramsOption[@"cityCode"] = (cityCode.length?cityCode:@"179");
     paramsOption[@"cpaCode"] = @"default";
     if (params != nil) { //传入参数不为空
        [paramsOption addEntriesFromDictionary:params];
@@ -80,7 +81,8 @@
     NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
     paramsOption[@"token"] = token?token:@"";
     paramsOption[@"imei"] = DeviceNo;
-    paramsOption[@"cityCode"] = @"1372";
+    NSString * cityCode = [[NSUserDefaults standardUserDefaults] objectForKey:BaiDuCityCode];
+    paramsOption[@"cityCode"] = (cityCode.length?cityCode:@"179");
     paramsOption[@"cpaCode"] = @"default";
     if (params != nil) { //传入参数不为空
         [paramsOption addEntriesFromDictionary:params];
@@ -124,7 +126,8 @@
     NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
     paramsOption[@"token"] = token?token:@"";
     paramsOption[@"imei"] = DeviceNo;
-    paramsOption[@"cityCode"] = @"1372";
+     NSString * cityCode = [[NSUserDefaults standardUserDefaults] objectForKey:BaiDuCityCode];
+    paramsOption[@"cityCode"] = (cityCode.length?cityCode:@"179");
     paramsOption[@"cpaCode"] = @"default";
     if (params != nil) { //传入参数不为空
         [paramsOption addEntriesFromDictionary:params];

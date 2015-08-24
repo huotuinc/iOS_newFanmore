@@ -102,6 +102,8 @@
  */
 - (IBAction)codeButton:(id)sender {
    
+    
+    __weak BoundPhoneViewController * wself = self;
     //绑定手机号
     if (![NSString checkTel:self.phoneNumber.text]) {
         [MBProgressHUD showError:@"请输入正确的手机号"];
@@ -127,7 +129,7 @@
         }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==55001){
             
             if ([json[@"resultData"][@"voiceAble"] intValue]) {
-                UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:wself cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
                 [a show];
             }
             
@@ -135,7 +137,7 @@
         }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==1){
             
             //            NSLog(@"%@",json);
-            [self settime];
+            [wself settime];
         }
        
     } failure:^(NSError *error) {
@@ -169,6 +171,7 @@
  */
 - (void)settime{
     
+    BoundPhoneViewController * wself = self;
     /*************倒计时************/
     __block int timeout=59; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -179,10 +182,10 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                [self.codeButton setTitle:@"验证码" forState:UIControlStateNormal];
+                [wself.codeButton setTitle:@"验证码" forState:UIControlStateNormal];
                 //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
-                self.codeButton.userInteractionEnabled = YES;
+                wself.codeButton.userInteractionEnabled = YES;
             });
         }else{
             //            int minutes = timeout / 60;
@@ -191,8 +194,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
 //                NSLog(@"____%@",strTime);
-                [self.codeButton setTitle:[NSString stringWithFormat:@"%@秒重新发送",strTime] forState:UIControlStateNormal];
-                self.codeButton.userInteractionEnabled = NO;
+                [wself.codeButton setTitle:[NSString stringWithFormat:@"%@秒重新发送",strTime] forState:UIControlStateNormal];
+                wself.codeButton.userInteractionEnabled = NO;
                 
             });
             timeout--;

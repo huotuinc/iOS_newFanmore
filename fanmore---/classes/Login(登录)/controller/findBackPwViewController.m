@@ -178,6 +178,15 @@
 
 - (IBAction)saveBtnClick:(id)sender {
     
+    NSLog(@"sssss");
+    if (!self.phoneNumber.text.length) {
+        [MBProgressHUD showError:@"手机号不能为空"];
+        return;
+    }
+    if (!self.verificationTextfiled.text.length) {
+        [MBProgressHUD showError:@"验证码不能为空"];
+        return;
+    }
     if (![self.password2Textfield.text isEqualToString:self.passwork1Textfield.text]) {
         [MBProgressHUD showError:@"两次输入的密码不相同"];
         return;
@@ -190,7 +199,7 @@
     
     NSString * urlStr = [MainURL stringByAppendingPathComponent:@"forgetPassword"];
     //发送网络请求
-//    NSLog(@"sssssss====%@",urlStr);
+
     __weak findBackPwViewController *wself = self;
     
     [UserLoginTool loginRequestGet:urlStr parame:params success:^(id json) {

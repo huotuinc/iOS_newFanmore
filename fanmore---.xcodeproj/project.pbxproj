@@ -109,6 +109,7 @@
 		EF565D571B170D5500FC2D6B /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D561B170D5500FC2D6B /* Result.m */; };
 		EF565D5A1B17146300FC2D6B /* twoOption.m in Sources */ = {isa = PBXBuildFile; fileRef = EF565D591B17146300FC2D6B /* twoOption.m */; };
 		EF72EAD21B3835F000872BA5 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF72EACF1B3835F000872BA5 /* libWeChatSDK.a */; };
+		EF7C2DBB1B8AB67C0077CFC5 /* cityCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF7C2DBA1B8AB67C0077CFC5 /* cityCode.plist */; };
 		EF8D67341B0DD07E008B6909 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67301B0DD07E008B6909 /* MBProgressHUD+MJ.m */; };
 		EF8D67351B0DD07E008B6909 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */; };
 		EF8D67361B0DD07E008B6909 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D67331B0DD07E008B6909 /* MBProgressHUD.m */; };
@@ -418,6 +419,7 @@
 		EF72EACF1B3835F000872BA5 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		EF72EAD01B3835F000872BA5 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		EF72EAD11B3835F000872BA5 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		EF7C2DBA1B8AB67C0077CFC5 /* cityCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cityCode.plist; sourceTree = "<group>"; };
 		EF8D672F1B0DD07E008B6909 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		EF8D67301B0DD07E008B6909 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 		EF8D67311B0DD07E008B6909 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
@@ -1205,6 +1207,7 @@
 				EF49ECF31B0D81A40038A203 /* AppDelegate.m */,
 				EF49ECF51B0D81A40038A203 /* ViewController.h */,
 				EF49ECF61B0D81A40038A203 /* ViewController.m */,
+				EF7C2DBA1B8AB67C0077CFC5 /* cityCode.plist */,
 				EF49ECF81B0D81A40038A203 /* Main.storyboard */,
 				EF49ECFB1B0D81A40038A203 /* Images.xcassets */,
 				EF49ECFD1B0D81A40038A203 /* LaunchScreen.xib */,
@@ -2073,6 +2076,7 @@
 				EFCB460E1B214499005D5026 /* FeedBackViewController.xib in Resources */,
 				EFD02B2D1B1552E400D11D6D /* protect.html in Resources */,
 				EFD7A9C41B1D9DE30004A9A4 /* view-new.html in Resources */,
+				EF7C2DBB1B8AB67C0077CFC5 /* cityCode.plist in Resources */,
 				EFD8C4E81B2EA265002D2CB2 /* AlipaySDK.bundle in Resources */,
 				839C30E81B2E6CF4000EE05A /* FriendCell.xib in Resources */,
 				EFC46B491B4175180060DB5C /* success.wav in Resources */,

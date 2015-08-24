@@ -286,7 +286,8 @@ static NSString *message = @"有一条新消息";
     NSString * aaatoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
     params[@"token"] = aaatoken?aaatoken:@"";
     params[@"imei"] = DeviceNo;
-    params[@"cityCode"] = @"123";
+    NSString * cityCode = [[NSUserDefaults standardUserDefaults] objectForKey:BaiDuCityCode];
+    params[@"cityCode"] = (cityCode.length?cityCode:@"179");
     params[@"cpaCode"] = @"default";
     params[@"sign"] = [NSDictionary asignWithMutableDictionary:params];
     [params removeObjectForKey:@"appSecret"];
@@ -686,6 +687,37 @@ static NSString *message = @"有一条新消息";
 }
 
 
-
+/**
+ *  反地理编码
+ *
+ *  @param loc ;
+ */
+- (void)reverseGeocode{
+    
+    
+    __block NSString * cityCode = nil;
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"cityCode" ofType:@"plist"];
+    NSArray *array = [[NSArray alloc] initWithContentsOfFile:plistPath];
+    
+    CGFloat longs =  [[[NSUserDefaults standardUserDefaults] stringForKey:DWLongitude] floatValue];
+    CGFloat weis = [[[NSUserDefaults standardUserDefaults] stringForKey:DWLatitude] floatValue];
+    CLLocation * locs = [[CLLocation alloc] initWithLatitude:weis longitude:longs];
+    
+    
+    CLGeocoder * clg = [[CLGeocoder alloc] init];
+    //    NSLog(@"%f ---sssss-- %f" ,loc.coordinate.longitude ,loc.coordinate.latitude);
+    [clg reverseGeocodeLocation:locs completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        CLPlacemark *pm = [placemarks firstObject];
+        NSLog(@"%@",pm.locality);
+        for (NSDictionary * dict in array) {
+            if ([dict[@"Value"] isEqualToString:pm.locality]) {
+                cityCode = dict[@"Key"];
+                [[NSUserDefaults standardUserDefaults] setObject:cityCode forKey:BaiDuCityCode];
+            }
+        }
+        
+    }];
+}
 
 @end

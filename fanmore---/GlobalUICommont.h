@@ -61,7 +61,7 @@
 
 #define DWLongitude @"dwLong" //定位精度
 #define DWLatitude @"dwLat"   //定位纬度
-
+#define BaiDuCityCode @"BaiDuCityCode" //百度citycode
 #define loginUserName  @"username" //用户名
 #define loginPassword @"password"  //密码
 #define loginFlag @"loginFlag"  // 是否需要登录标志

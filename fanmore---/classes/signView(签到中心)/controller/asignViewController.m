@@ -193,6 +193,7 @@
 - (IBAction)asignBtnClick:(UIButton *)sender {
     
    
+    __weak asignViewController * wself =self;
 //    AudioServicesPlayAlertSound(self.failureSound);
     NSInteger week = [self getWeek];
     for (UIButton * btn in self.buttons) { //遍历今天是周几
@@ -215,13 +216,13 @@
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==54006) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"今日已签到，请明天来签到"];
-            [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
-            self.asignBtn.backgroundColor = LWColor(163, 163, 163);
-            self.asignBtn.layer.cornerRadius = 6;
-            self.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
-            self.asignBtn.layer.borderWidth = 0.5;
-            [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            self.asignBtn.userInteractionEnabled = NO;
+            [wself.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
+            wself.asignBtn.backgroundColor = LWColor(163, 163, 163);
+            wself.asignBtn.layer.cornerRadius = 6;
+            wself.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+            wself.asignBtn.layer.borderWidth = 0.5;
+            [wself.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            wself.asignBtn.userInteractionEnabled = NO;
             return ;
         }
         if ([json[@"systemResultCode"] intValue]==1 && [json[@"resultCode"] intValue]==1) {
@@ -237,15 +238,15 @@
             }else {
                 AudioServicesPlayAlertSound(self.failureSound);
                 //修改提示
-                [self signTipView:[user.signingDays intValue]];
+                [wself signTipView:[user.signingDays intValue]];
             }
-            [self.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
-            self.asignBtn.backgroundColor = LWColor(163, 163, 163);
-            self.asignBtn.layer.cornerRadius = 6;
-            self.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
-            self.asignBtn.layer.borderWidth = 0.5;
-            [self.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            self.asignBtn.userInteractionEnabled = NO;
+            [wself.asignBtn setTitle:[NSString stringWithFormat:@"今日已签到"] forState:UIControlStateNormal];
+            wself.asignBtn.backgroundColor = LWColor(163, 163, 163);
+            wself.asignBtn.layer.cornerRadius = 6;
+            wself.asignBtn.layer.borderColor = LWColor(163, 163, 163).CGColor;
+            wself.asignBtn.layer.borderWidth = 0.5;
+            [wself.asignBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            wself.asignBtn.userInteractionEnabled = NO;
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];

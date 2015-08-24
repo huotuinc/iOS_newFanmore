@@ -429,74 +429,76 @@
     }];
 }
 
-
-/**
- *  头像上传
- *
- *  @param parame <#parame description#>
- */
-- (void)updatefile:(NSMutableDictionary *)parame{
-    
-    NSURL *url = [NSURL URLWithString:@"http://apitest.51flashmall.com:8080/fanmoreweb/app/updateProfile"];
-    
-    //第二步，创建请求
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    [request setHTTPMethod:@"POST"];
-    NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
-    paramsOption[@"appKey"] = APPKEY;
-    paramsOption[@"appSecret"] = HuoToAppSecret;
-    NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
-    NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
-    paramsOption[@"lat"] = lat?lat:@(40.0);
-    paramsOption[@"lng"] = lng?lng:@(116.0);;
-    paramsOption[@"timestamp"] = apptimesSince1970;;
-    paramsOption[@"operation"] = OPERATION_parame;
-    paramsOption[@"version"] = AppVersion;
-    NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
-    paramsOption[@"token"] = token?token:@"";
-    paramsOption[@"imei"] = DeviceNo;
-    paramsOption[@"cityCode"] = @"1372";
-    paramsOption[@"cpaCode"] = @"default";
-    if (parame != nil) { //传入参数不为空
-        [paramsOption addEntriesFromDictionary:parame];
-    }
-    paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
-    [paramsOption removeObjectForKey:@"appSecret"];
-    
-    NSArray *bodyStr = [paramsOption allKeys];
-    NSMutableString * aa = [NSMutableString string];
-    for (NSString * key in bodyStr) {
-        
-        [aa appendString:[NSString stringWithFormat:@"%@=%@&",key,[paramsOption objectForKey:key]]];
-    }
-//    NSLog(@"%@",aa);
-    NSData *data = [[aa substringToIndex:aa.length -1] dataUsingEncoding:NSUTF8StringEncoding];
-    
-    
-    [request setHTTPBody:data];
-    
-//    [MBProgressHUD showMessage:@"头像上传中"];
-    NSOperationQueue *queue = [NSOperationQueue mainQueue];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        
-        if (connectionError||data==nil) {
-            [MBProgressHUD showError:@"请求失败"];
-            return ;
-        }
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-//        NSLog(@"服务返回数据%@",dict);
-        NSString *error = dict[@"error"];
-        if(error){
-            
-            [MBProgressHUD showError:@"头像上传失败"];
-        }else{
-            NSString * success = dict[@"success"];
-            [MBProgressHUD showSuccess:success];
-        }
-    }];
-    
-}
+//
+///**
+// *  头像上传
+// *
+// *  @param parame <#parame description#>
+// */
+//- (void)updatefile:(NSMutableDictionary *)parame{
+//    
+//    
+//    [MainURL stringByAppendingPathComponent:@"updateProfile"];
+//    NSURL *url = [NSURL URLWithString:@"http://apitest.51flashmall.com:8080/fanmoreweb/app/updateProfile"];
+//    
+//    //第二步，创建请求
+//    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+//    [request setHTTPMethod:@"POST"];
+//    NSMutableDictionary * paramsOption = [NSMutableDictionary dictionary];
+//    paramsOption[@"appKey"] = APPKEY;
+//    paramsOption[@"appSecret"] = HuoToAppSecret;
+//    NSString * lat = [[NSUserDefaults standardUserDefaults] objectForKey:DWLatitude];
+//    NSString * lng = [[NSUserDefaults standardUserDefaults] objectForKey:DWLongitude];
+//    paramsOption[@"lat"] = lat?lat:@(40.0);
+//    paramsOption[@"lng"] = lng?lng:@(116.0);;
+//    paramsOption[@"timestamp"] = apptimesSince1970;;
+//    paramsOption[@"operation"] = OPERATION_parame;
+//    paramsOption[@"version"] = AppVersion;
+//    NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AppToken];
+//    paramsOption[@"token"] = token?token:@"";
+//    paramsOption[@"imei"] = DeviceNo;
+//    paramsOption[@"cityCode"] = @"1372";
+//    paramsOption[@"cpaCode"] = @"default";
+//    if (parame != nil) { //传入参数不为空
+//        [paramsOption addEntriesFromDictionary:parame];
+//    }
+//    paramsOption[@"sign"] = [NSDictionary asignWithMutableDictionary:paramsOption];  //计算asign
+//    [paramsOption removeObjectForKey:@"appSecret"];
+//    
+//    NSArray *bodyStr = [paramsOption allKeys];
+//    NSMutableString * aa = [NSMutableString string];
+//    for (NSString * key in bodyStr) {
+//        
+//        [aa appendString:[NSString stringWithFormat:@"%@=%@&",key,[paramsOption objectForKey:key]]];
+//    }
+////    NSLog(@"%@",aa);
+//    NSData *data = [[aa substringToIndex:aa.length -1] dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    
+//    [request setHTTPBody:data];
+//    
+////    [MBProgressHUD showMessage:@"头像上传中"];
+//    NSOperationQueue *queue = [NSOperationQueue mainQueue];
+//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//        
+//        if (connectionError||data==nil) {
+//            [MBProgressHUD showError:@"请求失败"];
+//            return ;
+//        }
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+////        NSLog(@"服务返回数据%@",dict);
+//        NSString *error = dict[@"error"];
+//        if(error){
+//            
+//            [MBProgressHUD showError:@"头像上传失败"];
+//        }else{
+//            NSString * success = dict[@"success"];
+//            [MBProgressHUD showSuccess:success];
+//        }
+//    }];
+//    
+//}
 
 
 /**

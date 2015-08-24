@@ -14,8 +14,6 @@
 
 
 + (NSArray *) GetHomeDate{
-    
-    
     return nil;
 }
 @end

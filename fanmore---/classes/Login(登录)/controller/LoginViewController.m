@@ -210,8 +210,8 @@
             NSString *fileName = [path stringByAppendingPathComponent:LocalUserDate];
             [NSKeyedArchiver archiveRootObject:userInfo toFile:fileName];
             //2、保存手机号和密码
-            [[NSUserDefaults standardUserDefaults] setObject:self.userNameTextFiled.text forKey:loginUserName];
-            [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:self.passwdTextField.text] forKey:loginPassword];
+            [[NSUserDefaults standardUserDefaults] setObject:wself.userNameTextFiled.text forKey:loginUserName];
+            [[NSUserDefaults standardUserDefaults] setObject:[MD5Encryption md5by32:wself.passwdTextField.text] forKey:loginPassword];
             //3、保存登录token
             NSString * apptoken = [[NSUserDefaults standardUserDefaults] stringForKey:AppToken];
             if (![apptoken isEqualToString:userInfo.token]) { //当前token和原先的token不同
@@ -222,13 +222,13 @@
             if ([json[@"resultData"][@"requireMobile"] intValue] == 1) {
                 [[NSUserDefaults standardUserDefaults] setObject:@"wrong" forKey:loginFlag];
                 BoundPhoneViewController * bdVc = [[BoundPhoneViewController alloc] init];
-                [self.navigationController pushViewController:bdVc animated:YES];
+                [wself.navigationController pushViewController:bdVc animated:YES];
             }else{
                 [[NSUserDefaults standardUserDefaults] setObject:@"right" forKey:loginFlag];
                 
                 if ([wself.delegate respondsToSelector:@selector(LoginViewDelegate:)]) {
                     
-                    [wself.delegate LoginViewDelegate:self.loginType];
+                    [wself.delegate LoginViewDelegate:wself.loginType];
                 }
                 if (![userInfo.welcomeTip isEqualToString:@""]) {
                     [MBProgressHUD showSuccess:userInfo.welcomeTip];
@@ -238,7 +238,7 @@
                 }
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [wself dismissViewControllerAnimated:YES completion:nil];
                 });
             }
             

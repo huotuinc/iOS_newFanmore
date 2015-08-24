@@ -321,6 +321,7 @@
  */
 - (void)settime{
     
+    __weak UserRegisterViewController * wself = self;
     /*************倒计时************/
     __block int timeout=59; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);//串行队列
@@ -331,12 +332,12 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                self.verification.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1].CGColor;
-                [self.verification setTitle:@"验证码" forState:UIControlStateNormal];
+                wself.verification.layer.borderColor = [UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1].CGColor;
+                [wself.verification setTitle:@"验证码" forState:UIControlStateNormal];
                 //                [captchaBtn setTitle:@"" forState:UIControlStateNormal];
                 //                [captchaBtn setBackgroundImage:[UIImage imageNamed:@"resent_icon"] forState:UIControlStateNormal];
-                self.verification.userInteractionEnabled = YES;
-                [self.verification setBackgroundColor:[UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1]];
+                wself.verification.userInteractionEnabled = YES;
+                [wself.verification setBackgroundColor:[UIColor colorWithRed:0.004 green:0.553 blue:1 alpha:1]];
                 UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
                 [a show];
             });
@@ -348,10 +349,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
 //                NSLog(@"____%@",strTime);
-                [self.verification setBackgroundColor:[UIColor grayColor]];
-                [self.verification setTitle:[NSString stringWithFormat:@"%@秒重新获取",strTime] forState:UIControlStateNormal];
-                self.verification.userInteractionEnabled = NO;
-                self.verification.layer.borderColor = [UIColor grayColor].CGColor;
+                [wself.verification setBackgroundColor:[UIColor grayColor]];
+                [wself.verification setTitle:[NSString stringWithFormat:@"%@秒重新获取",strTime] forState:UIControlStateNormal];
+                wself.verification.userInteractionEnabled = NO;
+                wself.verification.layer.borderColor = [UIColor grayColor].CGColor;
                 
             });
             timeout--;
