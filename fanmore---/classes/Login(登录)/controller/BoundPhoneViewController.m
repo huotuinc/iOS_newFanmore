@@ -129,7 +129,7 @@
         }else if ([json[@"systemResultCode"] intValue] == 1 && [json[@"resultCode"] intValue]==55001){
             
             if ([json[@"resultData"][@"voiceAble"] intValue]) {
-                UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:wself cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                UIAlertView * a = [[UIAlertView alloc] initWithTitle:@"验证码提示" message:@"短信通到不稳定，是否尝试语言通道" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
                 [a show];
             }
             
