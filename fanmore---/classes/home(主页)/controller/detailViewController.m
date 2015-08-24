@@ -361,6 +361,7 @@
         answer.questions = self.detailTasks;
         answer.type = @(3);
         answer.taskId = self.taskId;
+        answer.flay = self.sampleData.maxBonus;
         [self.navigationController pushViewController:answer animated:YES];
     }
     
