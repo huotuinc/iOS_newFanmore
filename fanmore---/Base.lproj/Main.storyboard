@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G6m-2i-sQT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1868" y="316"/>
+            <point key="canvasLocation" x="-2193" y="309"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wr5-rV-eir">
@@ -114,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvc-Bn-T17" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2498" y="316"/>
+            <point key="canvasLocation" x="-2926" y="309"/>
         </scene>
         <!--Sex Controller-->
         <scene sceneID="K7v-DX-1Ex">
@@ -2570,7 +2570,7 @@
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对未安装粉猫的好友送流量，填写你的邀请码注册后可领得流量，并建立师徒关系，好友每完成一次任务你可获得5%的额外奖励。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87T-81-equ">
                                         <rect key="frame" x="20" y="140" width="280" height="82"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -2594,7 +2594,7 @@
                                     <constraint firstAttribute="height" constant="32" id="6rq-Dd-WBY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">

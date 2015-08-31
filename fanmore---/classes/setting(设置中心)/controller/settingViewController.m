@@ -168,6 +168,13 @@ static NSString * _num = nil;
         [[SDImageCache sharedImageCache] clearDisk];
         
         NSString * path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        
+        NSString * dataPath = [path stringByAppendingPathComponent:@"taskID"];
+        if (dataPath) {
+            
+            NSFileManager * fileManager = [NSFileManager defaultManager];
+            [fileManager removeItemAtPath:dataPath error:nil];
+        }
         //1、保存全局信息
         NSString *fileName = [path stringByAppendingPathComponent:InitGlobalDate];
         GlobalData *glo = [NSKeyedUnarchiver unarchiveObjectWithFile:fileName]; //保存用户信息
